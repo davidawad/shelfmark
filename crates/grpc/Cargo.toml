@@ -1,0 +1,25 @@
+[package]
+name = "shelfmark-grpc"
+description = "gRPC transport for shelfmark: a tonic server and client over any Service"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+shelfmark-core.workspace = true
+serde_json.workspace = true
+# tonic 0.13 / prost 0.13 keep the workspace MSRV (1.82); 0.14 needs 1.88.
+tonic = { version = "0.13", default-features = false, features = ["transport", "router", "codegen", "prost"] }
+prost = "0.13"
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "net", "sync"] }
+tokio-stream = { version = "0.1", features = ["net"] }
+
+[build-dependencies]
+# protox compiles the proto in pure Rust, so no protoc is needed.
+protox = "0.8"
+tonic-build = { version = "0.13", default-features = false, features = ["prost", "transport"] }
+
+[dev-dependencies]
+shelfmark-core = { workspace = true, features = ["testkit"] }
