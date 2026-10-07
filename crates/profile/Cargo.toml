@@ -1,0 +1,23 @@
+[package]
+name = "shelfmark-profile"
+description = "Built-in shelfmark profiles, machine capability, semantic tier stubs and the profile-to-cascade builder"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+shelfmark-core.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+# Total RAM on macOS, Linux and Windows. 0.33 keeps the workspace MSRV.
+sysinfo = { version = "0.33", default-features = false, features = ["system"] }
+
+[dev-dependencies]
+shelfmark-core = { workspace = true, features = ["testkit"] }
+
+[features]
+# Semantic tier stubs (plan PD4). Both report tier_unavailable in v1.
+semantic-shortlist = []
+semantic-rerank = []
