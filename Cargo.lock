@@ -614,6 +614,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "shelfmark-scheme"
+version = "0.1.0"
+dependencies = [
+ "jsonschema",
+ "regex",
+ "serde",
+ "serde_json",
+ "shelfmark-core",
+]
+
+[[package]]
 name = "smallvec"
 version = "1.16.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
