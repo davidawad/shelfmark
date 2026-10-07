@@ -1006,6 +1006,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "shelfmark-naming"
+version = "0.1.0"
+dependencies = [
+ "serde",
+ "serde_json",
+ "shelfmark-core",
+ "unicode-normalization",
+]
+
+[[package]]
 name = "shelfmark-profile"
 version = "0.1.0"
 dependencies = [
