@@ -27,10 +27,13 @@ pub enum Verb {
     SchemeBrowse,
     SchemeSearch,
     SchemeValidate,
+    Eval,
+    Link,
+    Name,
 }
 
 impl Verb {
-    pub const ALL: [Verb; 13] = [
+    pub const ALL: [Verb; 16] = [
         Verb::Describe,
         Verb::Status,
         Verb::Resolve,
@@ -44,6 +47,9 @@ impl Verb {
         Verb::SchemeBrowse,
         Verb::SchemeSearch,
         Verb::SchemeValidate,
+        Verb::Eval,
+        Verb::Link,
+        Verb::Name,
     ];
 
     pub fn as_str(self) -> &'static str {
@@ -61,13 +67,23 @@ impl Verb {
             Verb::SchemeBrowse => "scheme-browse",
             Verb::SchemeSearch => "scheme-search",
             Verb::SchemeValidate => "scheme-validate",
+            Verb::Eval => "eval",
+            Verb::Link => "link",
+            Verb::Name => "name",
         }
     }
 
     /// Mutating verbs preview by default and commit only with
-    /// `mode: commit` (and `expected_revision` where the store has one).
+    /// `mode: commit` plus `expected_revision` (`PlacementLog::revision`).
+    /// `classify` is not one: it appends machine claims as an idempotent,
+    /// memoized cache and never moves files or changes a confirmed claim.
+    /// `eval` writes only its own summary and calibration. `name` previews
+    /// a path; moving files is the kb resource's job.
     pub fn mutates(self) -> bool {
-        matches!(self, Verb::Confirm | Verb::Correct | Verb::SchemeCompile)
+        matches!(
+            self,
+            Verb::Confirm | Verb::Correct | Verb::Link | Verb::SchemeCompile
+        )
     }
 }
 

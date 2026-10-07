@@ -11,6 +11,7 @@ use std::str::FromStr;
 
 use serde::{de, Deserialize, Deserializer, Serialize, Serializer};
 use sha2::{Digest as _, Sha256};
+use unicode_normalization::UnicodeNormalization;
 
 /// The noun an ID names.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Serialize, Deserialize)]
@@ -71,12 +72,13 @@ pub enum IdError {
     },
 }
 
-/// Normalization v1 for Work IDs (plan PD2): lowercase, every run of
-/// non-alphanumeric characters becomes one space, trimmed.
+/// Normalization v1 for Work IDs (plan PD2): Unicode NFKC (so NFD
+/// accents and PDF ligatures match their composed forms), lowercase, every
+/// run of non-alphanumeric characters becomes one space, trimmed.
 pub fn normalize_text_v1(text: &str) -> String {
     let mut out = String::with_capacity(text.len());
     let mut gap = false;
-    for ch in text.chars() {
+    for ch in text.nfkc() {
         if ch.is_alphanumeric() {
             if gap && !out.is_empty() {
                 out.push(' ');

@@ -3,7 +3,8 @@
 use shelfmark_core::error::Error;
 use shelfmark_core::id::sha256_hex;
 use shelfmark_core::placement::{
-    current, AuthorKind, InputHashes, Placement, PlacementLog, Provenance, Status, Trace,
+    current, effective_status, superseded_ids, AuthorKind, InputHashes, Placement, PlacementLog,
+    Provenance, Status, Trace,
 };
 use shelfmark_core::tier::Cost;
 use shelfmark_core::{ClassId, PlacementId, ProfileId, SchemeId, WorkId};
@@ -72,20 +73,43 @@ fn placement_json_round_trips() {
     assert_eq!(back.compute_id(), a.id);
 }
 
+fn superseding(code: &str, status: Status, author: AuthorKind, old: &Placement) -> Placement {
+    let mut p = claim(code, status, author);
+    p.supersedes = Some(old.id.clone());
+    p.seal()
+}
+
 #[test]
 fn human_confirmation_outranks_later_machine_claims() {
     let machine = claim("H", Status::Machine, AuthorKind::Tool);
-    let confirmed = claim("K", Status::Confirmed, AuthorKind::Human);
+    let confirmed = superseding("K", Status::Confirmed, AuthorKind::Human, &machine);
     let later_machine = claim("QA", Status::Machine, AuthorKind::Tool);
-    let log = [machine, confirmed.clone(), later_machine.clone()];
+    let log = [machine.clone(), confirmed.clone(), later_machine.clone()];
     assert_eq!(current(&log).unwrap().id, confirmed.id);
-    let flagged = claim("H", Status::Flagged, AuthorKind::Tool);
+    let superseded = superseded_ids(&log);
+    assert_eq!(effective_status(&machine, &superseded), Status::Superseded);
     assert_eq!(
-        current(&[flagged, later_machine.clone()]).unwrap().id,
-        later_machine.id
+        effective_status(&later_machine, &superseded),
+        Status::Machine
     );
-    let superseded = claim("H", Status::Superseded, AuthorKind::Tool);
-    assert!(current(&[superseded]).is_none());
+}
+
+#[test]
+fn a_flagged_rerun_replaces_a_stale_machine_claim() {
+    let old = claim("H", Status::Machine, AuthorKind::Tool);
+    let rerun = superseding("K", Status::Flagged, AuthorKind::Tool, &old);
+    assert_eq!(current(&[old.clone(), rerun.clone()]).unwrap().id, rerun.id);
+    assert_eq!(current(std::slice::from_ref(&old)).unwrap().id, old.id);
+}
+
+#[test]
+fn ids_survive_a_write_and_read_with_awkward_floats() {
+    let mut p = claim("H", Status::Machine, AuthorKind::Tool);
+    p.confidence = 0.9856906946328695;
+    p.trace.target = 0.1 + 0.2;
+    let p = p.seal();
+    let back: Placement = serde_json::from_str(&serde_json::to_string(&p).unwrap()).unwrap();
+    assert_eq!(back.compute_id(), p.id);
 }
 
 #[test]
@@ -141,5 +165,19 @@ fn log_default_methods_memoize_machine_claims_only() {
             .unwrap()
             .len(),
         2
+    );
+
+    let before = log.revision().unwrap();
+    let correction = superseding("K", Status::Confirmed, AuthorKind::Human, &machine);
+    log.append(&correction).unwrap();
+    assert_ne!(
+        log.revision().unwrap(),
+        before,
+        "revision changes on append"
+    );
+    assert_eq!(
+        log.memo(&machine.inputs).unwrap(),
+        None,
+        "superseded claims are not memo hits"
     );
 }

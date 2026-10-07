@@ -32,6 +32,9 @@ enum Verb {
   VERB_SCHEME_BROWSE = 11;
   VERB_SCHEME_SEARCH = 12;
   VERB_SCHEME_VALIDATE = 13;
+  VERB_EVAL = 14;
+  VERB_LINK = 15;
+  VERB_NAME = 16;
 }
 
 enum Mode {

@@ -87,3 +87,11 @@ fn rejections_name_the_problem() {
         .is_err());
     assert!("profile:a b@1".parse::<ProfileId>().is_err());
 }
+
+#[test]
+fn nfkc_makes_decomposed_accents_and_ligatures_match() {
+    let nfc = "R\u{e9}sum\u{e9} of the \u{fb01}eld";
+    let nfd = "Re\u{301}sume\u{301} of the field";
+    assert_eq!(normalize_text_v1(nfc), "résumé of the field");
+    assert_eq!(WorkId::from_text(nfc), WorkId::from_text(nfd));
+}

@@ -79,8 +79,11 @@ pub enum Evidence {
     },
 }
 
-/// One scored class from one tier. `score` is the tier's calibrated
-/// confidence in [0, 1].
+/// One scored class from one tier. `score` is the tier's raw score in
+/// [0, 1] (finite; anything else is an `internal` error); the cascade
+/// applies the fitted calibration, if any, before comparing it with the
+/// target. A tier may list a class more than once; the cascade merges
+/// them.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Candidate {
     pub class: ClassId,

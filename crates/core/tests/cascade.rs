@@ -2,11 +2,12 @@
 
 use std::collections::BTreeMap;
 
+use shelfmark_core::calibration::{Calibration, TierCalibration};
 use shelfmark_core::cascade::{self, Decision};
 use shelfmark_core::placement::{Status, TierRunState};
 use shelfmark_core::testkit::{FixedTier, MemIndex};
 use shelfmark_core::tier::{ClassifyInput, Profile, Tier};
-use shelfmark_core::{ErrorCode, ProfileId};
+use shelfmark_core::{ErrorCode, ProfileId, SchemeId};
 
 fn profile(tiers: &[&str]) -> Profile {
     Profile {
@@ -35,6 +36,7 @@ fn run(
         &MemIndex::sample(),
         &ClassifyInput::default(),
         target,
+        None,
     )
 }
 
@@ -135,4 +137,73 @@ fn no_candidates_is_not_found_with_a_next_command() {
         .next_command
         .unwrap()
         .starts_with("shelfmark scheme search scheme:test@1"));
+}
+
+#[test]
+fn ae1_one_class_named_twice_by_a_tier_is_not_a_zero_margin() {
+    let ids = FixedTier::new("identifier", &[("QA76", 1.0), ("QA76", 1.0)]);
+    let d = run(&profile(&["identifier"]), &[&ids], None).unwrap();
+    assert_eq!(d.status, Status::Machine);
+    assert_eq!(d.trace.margin, 1.0);
+    assert_eq!(d.trace.candidates.len(), 1);
+}
+
+#[test]
+fn trace_margin_is_the_deciding_tiers_own() {
+    let lexical = FixedTier::new("vocab", &[("H", 0.97), ("K", 0.96)]);
+    let rerank = FixedTier::new("rerank", &[("K", 0.9), ("H", 0.1)]);
+    let d = run(&profile(&["vocab", "rerank"]), &[&lexical, &rerank], None).unwrap();
+    assert_eq!(d.class.code, "K");
+    assert!((d.trace.margin - 0.8).abs() < 1e-9);
+}
+
+#[test]
+fn non_finite_or_out_of_range_scores_and_targets_are_rejected() {
+    for bad in [f64::NAN, 1.5, -0.1] {
+        let t = FixedTier::new("vocab", &[("H", bad)]);
+        let e = run(&profile(&["vocab"]), &[&t], None).unwrap_err();
+        assert_eq!(e.code, ErrorCode::Internal, "score {bad}");
+    }
+    let ok = FixedTier::new("vocab", &[("H", 0.9)]);
+    for bad in [f64::NAN, 1.01] {
+        let e = run(&profile(&["vocab"]), &[&ok], Some(bad)).unwrap_err();
+        assert_eq!(e.code, ErrorCode::InvalidRequest, "target {bad}");
+    }
+}
+
+#[test]
+fn calibration_maps_raw_scores_before_the_target_check() {
+    let t = FixedTier::new("vocab", &[("H", 0.95)]);
+    let mut tiers = std::collections::BTreeMap::new();
+    tiers.insert(
+        "vocab".to_string(),
+        TierCalibration {
+            bins: vec![0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.5, 0.6, 0.6, 0.7],
+            support: 40,
+        },
+    );
+    let cal = Calibration {
+        scheme: SchemeId::new("test", "1"),
+        gold_hash: "s256:x".into(),
+        gold_count: 40,
+        fitted_at: "2026-10-07T00:00:00Z".into(),
+        tiers,
+    };
+    let map: BTreeMap<String, &dyn Tier> = [("vocab".to_string(), &t as &dyn Tier)].into();
+    let p = profile(&["vocab"]);
+    let d = cascade::run(
+        &p,
+        &map,
+        &MemIndex::sample(),
+        &ClassifyInput::default(),
+        None,
+        Some(&cal),
+    )
+    .unwrap();
+    assert_eq!(d.confidence, 0.7);
+    assert_eq!(
+        d.status,
+        Status::Flagged,
+        "calibrated 0.7 misses target 0.8"
+    );
 }

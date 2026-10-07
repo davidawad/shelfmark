@@ -4,6 +4,8 @@
 //! records its inputs' hashes (memoization and staleness), a full trace,
 //! and a provenance block in the same shape the `kd` resource uses.
 
+use std::collections::BTreeSet;
+
 use serde::{Deserialize, Serialize};
 
 use crate::error::Error;
@@ -11,7 +13,10 @@ use crate::id::{sha256_hex, ClassId, PlacementId, ProfileId, SchemeId, WorkId};
 use crate::tier::{Cost, Evidence};
 
 /// Claim status. Aligned with `kd`'s lattice (machine/flagged ~ staged,
-/// confirmed ~ promoted, superseded ~ superseded).
+/// confirmed ~ promoted, superseded ~ superseded). Claims are written
+/// as `Machine`, `Flagged` or `Confirmed`; `Superseded` is derived (see
+/// [`effective_status`]) once a later claim names this one in
+/// `supersedes`, so nothing is ever rewritten.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum Status {
@@ -19,19 +24,6 @@ pub enum Status {
     Flagged,
     Confirmed,
     Superseded,
-}
-
-impl Status {
-    /// Rank for deriving the current placement: a person's confirmation
-    /// outranks any machine claim; superseded claims never win (R12).
-    pub fn rank(self) -> u8 {
-        match self {
-            Status::Superseded => 0,
-            Status::Flagged => 1,
-            Status::Machine => 2,
-            Status::Confirmed => 3,
-        }
-    }
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
@@ -128,9 +120,14 @@ pub struct TierRun {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Trace {
     pub target: f64,
-    /// Ranked best first.
+    /// Every tier's candidates merged per class (best score across
+    /// tiers), ranked best first. When a later tier decided, its class may
+    /// rank below an earlier tier's undecided top; `deciding_tier` and the
+    /// placement's `class` are authoritative.
     pub candidates: Vec<TraceCandidate>,
-    /// Top score minus runner-up score (1.0 with a single candidate).
+    /// The margin that governed the outcome: the deciding tier's own top
+    /// minus runner-up, or, when flagged, the same over `candidates`
+    /// (1.0 with a single candidate).
     pub margin: f64,
     /// The tier that decided, or `None` when no tier reached the target
     /// and the top-ranked class was taken flagged.
@@ -221,19 +218,42 @@ pub fn canonical_json(v: &serde_json::Value) -> String {
     }
 }
 
-/// Pick the current placement of one Work in one scheme from its claims
-/// (R12): highest status rank, then latest in log order.
-pub fn current<'a>(claims: impl IntoIterator<Item = &'a Placement>) -> Option<&'a Placement> {
-    let mut best: Option<&Placement> = None;
-    for p in claims {
-        if p.status == Status::Superseded {
-            continue;
-        }
-        if best.is_none_or(|b| p.status.rank() >= b.status.rank()) {
-            best = Some(p);
-        }
+/// Claims named in some other claim's `supersedes`.
+pub fn superseded_ids<'a>(
+    claims: impl IntoIterator<Item = &'a Placement>,
+) -> BTreeSet<PlacementId> {
+    claims
+        .into_iter()
+        .filter_map(|p| p.supersedes.clone())
+        .collect()
+}
+
+/// A claim's status as of this log: `Superseded` once another claim
+/// names it, else its written status.
+pub fn effective_status(p: &Placement, superseded: &BTreeSet<PlacementId>) -> Status {
+    if superseded.contains(&p.id) {
+        Status::Superseded
+    } else {
+        p.status
     }
-    best
+}
+
+/// Pick the current placement of one Work in one scheme from its claims
+/// in log order (R12). Superseded claims never win; the latest live
+/// `Confirmed` claim wins over everything; otherwise the latest live
+/// machine claim (`Machine` or `Flagged`), so a re-run after a scheme
+/// change replaces the stale claim even when it comes back flagged.
+pub fn current(claims: &[Placement]) -> Option<&Placement> {
+    let superseded = superseded_ids(claims);
+    let live = || {
+        claims
+            .iter()
+            .rev()
+            .filter(|p| effective_status(p, &superseded) != Status::Superseded)
+    };
+    live()
+        .find(|p| p.status == Status::Confirmed)
+        .or_else(|| live().next())
 }
 
 /// The append-only claim store (implemented by the store crate, plan PD6).
@@ -251,13 +271,24 @@ pub trait PlacementLog {
             .filter(|p| &p.work == work && &p.scheme == scheme)
             .collect())
     }
-    /// A claim whose inputs match, for memoization (R14).
+    /// The latest live machine claim whose inputs match, for memoization
+    /// (R14). Human and superseded claims are never memo hits.
     fn memo(&self, inputs: &InputHashes) -> Result<Option<Placement>, Error> {
         let key = inputs.memo_key();
-        Ok(self
-            .claims()?
-            .into_iter()
-            .rev()
-            .find(|p| p.provenance.author_kind != AuthorKind::Human && p.inputs.memo_key() == key))
+        let claims = self.claims()?;
+        let superseded = superseded_ids(&claims);
+        Ok(claims.into_iter().rev().find(|p| {
+            p.provenance.author_kind != AuthorKind::Human
+                && !superseded.contains(&p.id)
+                && p.inputs.memo_key() == key
+        }))
+    }
+    /// Opaque revision of the whole log for preview/commit: changes on
+    /// every successful append. The default hashes every claim ID in order;
+    /// stores may override with something cheaper but must keep that
+    /// property.
+    fn revision(&self) -> Result<String, Error> {
+        let ids: Vec<String> = self.claims()?.iter().map(|p| p.id.to_string()).collect();
+        Ok(format!("s256:{}", sha256_hex(ids.join("\n").as_bytes())))
     }
 }
