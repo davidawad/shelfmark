@@ -1,0 +1,23 @@
+[package]
+name = "shelfmark-core"
+description = "Shared contracts for shelfmark: typed IDs, scheme model, tiers, cascade, placements, envelope"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+thiserror.workspace = true
+
+[dev-dependencies]
+jsonschema.workspace = true
+# Integration tests use the testkit doubles.
+shelfmark-core = { path = ".", features = ["testkit"] }
+
+[features]
+# In-memory CompiledIndex and fixed-score Tier for other crates' tests.
+testkit = []

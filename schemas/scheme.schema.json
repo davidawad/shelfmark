@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shelfmark.dev/schemas/scheme/v1.json",
+  "title": "shelfmark classification scheme",
+  "description": "One classification scheme as data: classes, hierarchy, code grammar, ranges, labels, vocabulary links and a version (R4). Mirrored by shelfmark_core::scheme::SchemeDoc.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "version", "title", "code_grammar", "classes"],
+  "properties": {
+    "$schema": {"type": "string"},
+    "name": {"$ref": "#/$defs/token", "description": "Short scheme name, e.g. lcc."},
+    "version": {"$ref": "#/$defs/token", "description": "Scheme version; part of every class ID."},
+    "title": {"type": "string", "minLength": 1},
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["description"],
+      "properties": {
+        "description": {"type": "string"},
+        "url": {"type": "string"},
+        "license": {"type": "string"}
+      }
+    },
+    "code_grammar": {"type": "string", "minLength": 1, "description": "Regex every class code must match (anchored by the validator)."},
+    "classes": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/class"}}
+  },
+  "$defs": {
+    "token": {"type": "string", "pattern": "^[A-Za-z0-9._-]+$"},
+    "code": {"type": "string", "pattern": "^\\S+$"},
+    "class": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "label"],
+      "properties": {
+        "code": {"$ref": "#/$defs/code"},
+        "label": {"type": "string", "minLength": 1},
+        "parent": {"$ref": "#/$defs/code"},
+        "range": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["start", "end"],
+          "properties": {"start": {"$ref": "#/$defs/code"}, "end": {"$ref": "#/$defs/code"}}
+        },
+        "vocab": {"type": "array", "items": {"$ref": "#/$defs/vocab"}},
+        "note": {"type": "string"}
+      }
+    },
+    "vocab": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["term", "source"],
+      "properties": {
+        "term": {"type": "string", "minLength": 1},
+        "source": {"$ref": "#/$defs/token"},
+        "source_id": {"type": "string"},
+        "weight": {"type": "number", "exclusiveMinimum": 0, "maximum": 1}
+      }
+    }
+  }
+}
