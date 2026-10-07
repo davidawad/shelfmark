@@ -1,0 +1,18 @@
+[package]
+name = "shelfmark-store"
+description = "Append-only placement store for shelfmark: claim log, gold set, memo index, stale listing"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+shelfmark-core.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+fs2 = "0.4"
+
+[dev-dependencies]
+shelfmark-core = { workspace = true, features = ["testkit"] }
+tempfile = "3"
