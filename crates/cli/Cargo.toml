@@ -1,0 +1,23 @@
+[package]
+name = "shelfmark-cli"
+description = "The shelfmark command line and the Service every surface shares"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[[bin]]
+name = "shelfmark"
+path = "src/main.rs"
+
+[dependencies]
+# `testkit` backs the fakes in `wiring` until the real crates land (U13
+# swaps them in and drops the feature).
+shelfmark-core = { workspace = true, features = ["testkit"] }
+serde.workspace = true
+serde_json.workspace = true
+clap = { version = "4.5", features = ["derive", "env"] }
+
+[dev-dependencies]
+shelfmark-core = { workspace = true, features = ["testkit"] }
