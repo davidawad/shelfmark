@@ -1,0 +1,18 @@
+[package]
+name = "shelfmark-tier-lexical"
+description = "Lexical tiers for shelfmark: scheme vocabulary match and configured rules"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+shelfmark-core.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+aho-corasick = "1"
+regex = "1"
+
+[dev-dependencies]
+shelfmark-core = { workspace = true, features = ["testkit"] }
