@@ -1,0 +1,18 @@
+[package]
+name = "shelfmark-tier-identifier"
+description = "Identifier tier for shelfmark: ISBN, LCCN, DOI, arXiv and URL-domain lookup in JSONL tables"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+shelfmark-core.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+regex = "1"
+
+[dev-dependencies]
+shelfmark-core = { workspace = true, features = ["testkit"] }

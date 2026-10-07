@@ -1,0 +1,8 @@
+{"id":"isbn:9780262033848","class":"QA76.6","note":"Cormen et al., Introduction to Algorithms, 3rd ed."}
+{"id":"isbn:0-201-63361-2","class":"QA76.64","note":"Gamma et al., Design Patterns (ISBN-10 row, normalized to 13)"}
+{"id":"isbn:9780306406157","class":"PZ7","note":"class outside mini-lcc: dropped"}
+{"id":"lccn:2001-000002","class":"HB171","note":"LCCN written with a hyphen"}
+{"id":"doi:10.1145/359576.359579","class":"QA76.9","note":"Rivest, Shamir, Adleman 1978"}
+{"id":"arxiv:1706.03762","class":"Q325.5","note":"Attention Is All You Need"}
+{"id":"arxiv:hep-th/9711200","class":"QC174.12","note":"Maldacena 1997, old-style ID"}
+{"id":"domain:law.cornell.edu","class":"KF","note":"Legal Information Institute"}
