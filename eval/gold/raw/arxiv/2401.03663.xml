@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/eywJvIMYw6gpZlTjS0SEhfxcIC4</id>
+  <title>arXiv Query: search_query=&amp;id_list=2401.03663&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-07T20:36:21Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2401.03663" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2401.03663v3</id>
+    <title>Congruence properties modulo prime powers for a class of partition functions</title>
+    <updated>2026-02-11T03:41:24Z</updated>
+    <link href="https://arxiv.org/abs/2401.03663v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.03663v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let $p$ be prime, and let $p_{[1,p]}(n)$ denote the function whose generating function is $\prod (1-q^n)^{-1}(1 - q^{pn})^{-1}$. This function and its generalizations $p_{[c^{\ell}, d^m]}(n)$ are the subject of study in several recent papers. Let $\ell\geq 5$, let $j\geq 1$, and let $p \in \{2, 3, 5\}$. In this paper, we prove that the generating function for $p_{[1, p]}(n)$ in the progression $β_{p, \ell, j}$ modulo $\ell^j$ with $24β_{p, \ell, j} \equiv p + 1 \pmod{\ell^j}$ lies in a Hecke-invariant subspace of type $\{η(Dz)η(Dpz)F(Dz) : F(z) \in M_{s}(Γ_0(p), χ)\}$ for suitable $D\geq 1$, $s\geq 0$, and character~$χ$. When $p\in \{2, 3, 5\}$, we use the Hecke-invariance of these subspaces proved in [21] to prove, for distinct primes $\ell$ and $m\geq 5$ and $j\geq 1$, congruences of the form \[ p_{[1, p]}\left(\frac{\ell^jm^k n + 1}{D}\right)\equiv 0 \pmod{\ell^j} \] for all $n\geq 1$ with $m\nmid n$, where $k$ is explicitly computable and depends on the forms in the invariant subspace. Our proofs require adapting and extending analogous level one results on $p(n)$ in [1] and [22] to level $p$.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-08T04:30:15Z</published>
+    <arxiv:comment>Simplified Thm. 1.3, added Thm. 3.3 and Prop. 3.4, and revised proof of Thm. 1.3. To appear in Research in Number Theory</arxiv:comment>
+    <arxiv:primary_category term="math.NT"/>
+    <author>
+      <name>Matthew Boylan</name>
+    </author>
+    <author>
+      <name> Swati</name>
+    </author>
+  </entry>
+</feed>

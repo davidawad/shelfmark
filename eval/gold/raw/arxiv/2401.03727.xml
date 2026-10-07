@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/xEpY3TNOrfjQuP6Dbl1ss2LCCvU</id>
+  <title>arXiv Query: search_query=&amp;id_list=2401.03727&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-07T20:36:41Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2401.03727" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2401.03727v1</id>
+    <title>Low-cost, portable, easy-to-use kiosks to facilitate home-cage testing of non-human primates during vision-based behavioral tasks</title>
+    <updated>2024-01-08T08:22:05Z</updated>
+    <link href="https://arxiv.org/abs/2401.03727v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.03727v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Non-human primates (NHPs), especially rhesus macaques, have played a significant role in our current understanding of the neural computations underlying human vision. Apart from the established homologies in the visual brain areas between these two species, and our extended abilities to probe detailed neural mechanisms in monkeys at multiple scales, one major factor that makes NHPs an extremely appealing animal model of human-vision is their ability to perform human-like visual behavior. Traditionally, such behavioral studies have been conducted in controlled laboratory settings. Such in-lab studies offer the experimenter a tight control over many experimental variables like overall luminance, eye movements (via eye tracking), auditory interference etc. However, there are several constraints related to such experiments. These include, 1) limited total experimental time, 2) requirement of dedicated human experimenters for the NHPs, 3) requirement of additional lab-space for the experiments, 4) NHPs often need to undergo invasive surgeries for a head-post implant, 5) additional time and training required for chairing and head restraints of monkeys. To overcome these limitations, many laboratories are now adapting home-cage behavioral training and testing of NHPs. Home-cage behavioral testing enables the administering of many vision-based behavioral tasks simultaneously across multiple monkeys with much reduced human personnel requirements, no NHP head restraint, and provide NHPs access to the experiments without specific time constraints. To enable more open-source development of this technology, here we provide the details of operating and building a portable, easy-to-use kiosk for conducting home-cage vision-based behavioral tasks in NHPs.</summary>
+    <category term="q-bio.NC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-08T08:22:05Z</published>
+    <arxiv:comment>Another earlier version available at https://osf.io/preprints/osf/csdzv</arxiv:comment>
+    <arxiv:primary_category term="q-bio.NC"/>
+    <author>
+      <name>Hamidreza Ramezanpour</name>
+    </author>
+    <author>
+      <name>Christopher Giverin</name>
+    </author>
+    <author>
+      <name>Kohitij Kar</name>
+    </author>
+  </entry>
+</feed>

@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/6TfbWg4sUQEApzltpNHrMEXLN8o</id>
+  <title>arXiv Query: search_query=&amp;id_list=2401.03726&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-07T20:36:01Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2401.03726" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2401.03726v3</id>
+    <title>UAV-enabled Integrated Sensing and Communication: Tracking Design and Optimization</title>
+    <updated>2024-04-16T11:46:01Z</updated>
+    <link href="https://arxiv.org/abs/2401.03726v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.03726v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Integrated sensing and communications (ISAC) enabled by unmanned aerial vehicles (UAVs) is a promising technology to facilitate target tracking applications. In contrast to conventional UAV-based ISAC system designs that mainly focus on estimating the target position, the target velocity estimation also needs to be considered due to its crucial impacts on link maintenance and real-time response, which requires new designs on resource allocation and tracking scheme. In this paper, we propose an extended Kalman filtering-based tracking scheme for a UAV-enabled ISAC system where a UAV tracks a moving object and also communicates with a device attached to the object. Specifically, a weighted sum of predicted posterior Cramér-Rao bound (PCRB) for object relative position and velocity estimation is minimized by optimizing the UAV trajectory, where an efficient solution is obtained based on the successive convex approximation method. Furthermore, under a special case with the measurement mean square error (MSE), the optimal relative motion state is obtained and proved to keep a fixed elevation angle and zero relative velocity. Numerical results validate that the obtained solution to the predicted PCRB minimization can be approximated by the optimal relative motion state when predicted measurement MSE dominates the predicted PCRBs, as well as the effectiveness of the proposed tracking scheme. Moreover, three interesting trade-offs on system performance resulted from the fixed elevation angle are illustrated.</summary>
+    <category term="eess.SP" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-08T08:18:40Z</published>
+    <arxiv:comment>3 figures, 5 pages, Accepted by IEEE Communications Letters</arxiv:comment>
+    <arxiv:primary_category term="eess.SP"/>
+    <author>
+      <name>Yifan Jiang</name>
+    </author>
+    <author>
+      <name>Qingqing Wu</name>
+    </author>
+    <author>
+      <name>Wen Chen</name>
+    </author>
+    <author>
+      <name>Kaitao Meng</name>
+    </author>
+    <arxiv:doi>10.1109/LCOMM.2024.3379504</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/LCOMM.2024.3379504" title="doi"/>
+  </entry>
+</feed>

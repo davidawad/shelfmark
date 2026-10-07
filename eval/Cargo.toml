@@ -1,0 +1,21 @@
+[package]
+name = "mc-eval"
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+description = "Evaluation harness for the materials classifier: gold sets, predictions, per-level accuracy, calibration, risk-coverage and bootstrap intervals."
+publish = false
+
+# Standalone on purpose (R14): this crate has no path into the surrounding
+# repo, and declares its own workspace so it builds wherever it is split out.
+[workspace]
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+
+[[bin]]
+name = "mc-eval"
+path = "src/bin/mc-eval.rs"

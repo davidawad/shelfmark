@@ -1,0 +1,462 @@
+{
+ "schema": "mc-eval/gold-manifest@1",
+ "name": "starter-v1",
+ "crosswalk": "arxiv-lcc-crosswalk.json",
+ "selection": {
+  "openlibrary": "well-known books chosen by hand to spread across LCC classes, pinned by ISBN; kept only editions whose own record has lc_classifications (fetched via openlibrary.org/isbn/<isbn>.json on 2026-10-07)",
+  "arxiv": "for each crosswalked category, the first two papers by submission date whose primary category is that category, from arXiv API query cat:<c> AND submittedDate:[202401080000 TO 202401122359]",
+  "wikipedia": "from a Wikidata query for items with P1149 and an English article, the lowest-QID topical articles per LCC main class, skipping biographies, places and items whose only P1149 value is a bibliography (Z5000+) or statistics (HA) number"
+ },
+ "sources": [
+  {
+   "kind": "openlibrary",
+   "record": "OL980232M",
+   "isbn": "0262011530"
+  },
+  {
+   "kind": "openlibrary",
+   "record": "OL2030445M",
+   "isbn": "0131103628"
+  },
+  {
+   "kind": "openlibrary",
+   "record": "OL85373M",
+   "isbn": "0465026567"
+  },
+  {
+   "kind": "openlibrary",
+   "record": "OL24219315M",
+   "isbn": "0192860925"
+  },
+  {
+   "kind": "openlibrary",
+   "record": "OL39467240M",
+   "isbn": "0393317552"
+  },
+  {
+   "kind": "openlibrary",
+   "record": "OL7280507M",
+   "isbn": "006073132X"
+  },
+  {
+   "kind": "openlibrary",
+   "record": "OL24896701M",
+   "isbn": "0374275637"
+  },
+  {
+   "kind": "openlibrary",
+   "record": "OL976099M",
+   "isbn": "0226458083"
+  },
+  {
+   "kind": "openlibrary",
+   "record": "OL3670355M",
+   "isbn": "0618249060"
+  },
+  {
+   "kind": "openlibrary",
+   "record": "OL23244822M",
+   "isbn": "020530902X"
+  },
+  {
+   "kind": "openlibrary",
+   "record": "OL1637601M",
+   "isbn": "0465069347"
+  },
+  {
+   "kind": "openlibrary",
+   "record": "OL3700118M",
+   "isbn": "0140449159"
+  },
+  {
+   "kind": "openlibrary",
+   "record": "OL5300355M",
+   "isbn": "0671212095"
+  },
+  {
+   "kind": "openlibrary",
+   "record": "OL6781966M",
+   "isbn": "0826412769"
+  },
+  {
+   "kind": "openlibrary",
+   "record": "OL22114394M",
+   "isbn": "0714832472"
+  },
+  {
+   "kind": "openlibrary",
+   "record": "OL5059163M",
+   "isbn": "0195019199"
+  },
+  {
+   "kind": "openlibrary",
+   "record": "OL17216076M",
+   "isbn": "0743246268"
+  },
+  {
+   "kind": "openlibrary",
+   "record": "OL25726927M",
+   "isbn": "0465050654"
+  },
+  {
+   "kind": "openlibrary",
+   "record": "OL3431041M",
+   "isbn": "1594200823"
+  },
+  {
+   "kind": "openlibrary",
+   "record": "OL3421630M",
+   "isbn": "0743226712"
+  },
+  {
+   "kind": "openlibrary",
+   "record": "OL24613971M",
+   "isbn": "1439107955"
+  },
+  {
+   "kind": "openlibrary",
+   "record": "OL8845946M",
+   "isbn": "1590302257"
+  },
+  {
+   "kind": "openlibrary",
+   "record": "OL2060992M",
+   "isbn": "0679723129"
+  },
+  {
+   "kind": "openlibrary",
+   "record": "OL1742994M",
+   "isbn": "067974195X"
+  },
+  {
+   "kind": "openlibrary",
+   "record": "OL26502529M",
+   "isbn": "1476740186"
+  },
+  {
+   "kind": "openlibrary",
+   "record": "OL22709597M",
+   "isbn": "0881792063"
+  },
+  {
+   "kind": "openlibrary",
+   "record": "OL6789552M",
+   "isbn": "0060652926"
+  },
+  {
+   "kind": "openlibrary",
+   "record": "OL1865807M",
+   "isbn": "0385418868"
+  },
+  {
+   "kind": "openlibrary",
+   "record": "OL8020853M",
+   "isbn": "0812968255"
+  },
+  {
+   "kind": "openlibrary",
+   "record": "OL7944580M",
+   "isbn": "0807014273"
+  },
+  {
+   "kind": "openlibrary",
+   "record": "OL7771134M",
+   "isbn": "0525949690"
+  },
+  {
+   "kind": "openlibrary",
+   "record": "OL8348714M",
+   "isbn": "0871568772"
+  },
+  {
+   "kind": "openlibrary",
+   "record": "OL34124187M",
+   "isbn": "0805095152"
+  },
+  {
+   "kind": "openlibrary",
+   "record": "OL7355422M",
+   "isbn": "0140447938"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.03802"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.04096"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.03681"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.03712"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.06790"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.03642"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.03675"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.03703"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2402.00033"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.03637"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.04022"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.04323"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.04509"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.04714"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.04836"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.09474"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2402.00032"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.03629"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.03990"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.04050"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.03626"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.03726"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.03766"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.03879"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.03645"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.03663"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.03647"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.03668"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.03746"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.09466"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.03639"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.03727"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.04095"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.04444"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.05080"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.05264"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.03616"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.03674"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.03649"
+  },
+  {
+   "kind": "arxiv",
+   "record": "2401.03834"
+  },
+  {
+   "kind": "wikipedia",
+   "record": "Q955824"
+  },
+  {
+   "kind": "wikipedia",
+   "record": "Q618779"
+  },
+  {
+   "kind": "wikipedia",
+   "record": "Q8"
+  },
+  {
+   "kind": "wikipedia",
+   "record": "Q748"
+  },
+  {
+   "kind": "wikipedia",
+   "record": "Q47307"
+  },
+  {
+   "kind": "wikipedia",
+   "record": "Q166118"
+  },
+  {
+   "kind": "wikipedia",
+   "record": "Q362"
+  },
+  {
+   "kind": "wikipedia",
+   "record": "Q8676"
+  },
+  {
+   "kind": "wikipedia",
+   "record": "Q351"
+  },
+  {
+   "kind": "wikipedia",
+   "record": "Q847"
+  },
+  {
+   "kind": "wikipedia",
+   "record": "Q2736"
+  },
+  {
+   "kind": "wikipedia",
+   "record": "Q1368"
+  },
+  {
+   "kind": "wikipedia",
+   "record": "Q6206"
+  },
+  {
+   "kind": "wikipedia",
+   "record": "Q1889"
+  },
+  {
+   "kind": "wikipedia",
+   "record": "Q6223"
+  },
+  {
+   "kind": "wikipedia",
+   "record": "Q8458"
+  },
+  {
+   "kind": "wikipedia",
+   "record": "Q59157"
+  },
+  {
+   "kind": "wikipedia",
+   "record": "Q3071"
+  },
+  {
+   "kind": "wikipedia",
+   "record": "Q11634"
+  },
+  {
+   "kind": "wikipedia",
+   "record": "Q7094"
+  },
+  {
+   "kind": "wikipedia",
+   "record": "Q2840"
+  },
+  {
+   "kind": "wikipedia",
+   "record": "Q11451"
+  },
+  {
+   "kind": "wikipedia",
+   "record": "Q12004"
+  },
+  {
+   "kind": "wikipedia",
+   "record": "Q47528"
+  },
+  {
+   "kind": "wikipedia",
+   "record": "Q45621"
+  },
+  {
+   "kind": "wikipedia",
+   "record": "Q57821"
+  },
+  {
+   "kind": "wikipedia",
+   "record": "Q4508"
+  },
+  {
+   "kind": "wikipedia",
+   "record": "Q906512"
+  },
+  {
+   "kind": "wikipedia",
+   "record": "Q37260"
+  },
+  {
+   "kind": "wikipedia",
+   "record": "Q36524"
+  }
+ ]
+}

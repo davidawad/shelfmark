@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/il2LTDFo7gF4J1qsDwkhnhRadNM</id>
+  <title>arXiv Query: search_query=&amp;id_list=2401.03668&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-07T20:36:27Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2401.03668" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2401.03668v1</id>
+    <title>Analyzing dynamics and average case complexity in the spherical Sherrington-Kirkpatrick model: a focus on extreme eigenvectors</title>
+    <updated>2024-01-08T05:16:26Z</updated>
+    <link href="https://arxiv.org/abs/2401.03668v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.03668v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We explore Langevin dynamics in the spherical Sherrington-Kirkpatrick model, delving into the asymptotic energy limit. Our approach involves integro-differential equations, incorporating the Crisanti-Horner-Sommers-Cugliandolo-Kurchan equation from spin glass literature, to analyze the system's size and its temperature-dependent phase transition. Additionally, we conduct an average case complexity analysis, establishing hitting time bounds for the bottom eigenvector of a Wigner matrix. Our investigation also includes the power iteration algorithm, examining its average case complexity in identifying the top eigenvector overlap, with comprehensive complexity bounds.</summary>
+    <category term="math.PR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.NA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-08T05:16:26Z</published>
+    <arxiv:primary_category term="math.PR"/>
+    <author>
+      <name>Tingzhou Yu</name>
+    </author>
+  </entry>
+</feed>

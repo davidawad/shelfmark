@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/Ju7zoYnIj+VvpA5fU6f4qO5MLwY</id>
+  <title>arXiv Query: search_query=&amp;id_list=2401.03645&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-07T20:36:17Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2401.03645" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2401.03645v1</id>
+    <title>On the regularized products of some Dirichlet series</title>
+    <updated>2024-01-08T03:19:21Z</updated>
+    <link href="https://arxiv.org/abs/2401.03645v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.03645v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we show that the regularized determinants of some Dirichlet series are multiplicative. As an application, we give generalizations of Lerch's formula for the classical gamma function and we determine the sum of some Dirichlet series generalizing Euler's formula on the sum of the reciprocal of squares. We recover the results of Kurokawa and Wakayama, and give a new proof for some Euler's formulas.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-08T03:19:21Z</published>
+    <arxiv:primary_category term="math.NT"/>
+    <author>
+      <name>Mounir Hajli</name>
+    </author>
+  </entry>
+</feed>

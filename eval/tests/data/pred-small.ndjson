@@ -1,0 +1,5 @@
+{"item":"g1","profile":"p","tier":"identifier","candidates":[{"class":"class:lcc@2024:QA76.73.C15","score":0.9}],"latency_ms":1,"fast":["c (computer program language)","Programming"]}
+{"item":"item:sha256-0002","profile":"p","tier":"vocabulary","candidates":[{"class":"QC174","score":0.6},{"class":"QB981","score":0.3}],"flagged":true,"latency_ms":3}
+{"item":"g3","profile":"p","tier":"vocabulary","candidates":[{"class":"HB501","score":0.8}],"latency_ms":5}
+{"item":"nope","profile":"p","candidates":[]}
+{"item":"g1","profile":"experimental:laya-decision","tier":"laya","candidates":[{"class":"QA76"}],"confidence":0.5}

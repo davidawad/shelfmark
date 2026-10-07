@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/SIITIEDQi9ynSfZo7+0y1CSjuP8</id>
+  <title>arXiv Query: search_query=&amp;id_list=2401.03681&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-07T20:34:59Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2401.03681" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2401.03681v2</id>
+    <title>Intra-night optical variability of peculiar narrow-line Seyfert 1 galaxies with enigmatic jet behavior</title>
+    <updated>2024-01-20T16:21:51Z</updated>
+    <link href="https://arxiv.org/abs/2401.03681v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.03681v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Variability studies of active galactic nuclei are a powerful diagnostic tool in understanding the physical processes occurring in disk-jet regions, unresolved by direct imaging with currently available techniques. Here, we report the first attempt to systematically characterize intra-night optical variability (INOV) for a sample of seven apparently radio-quiet narrow-line Seyfert 1 galaxies (RQNLSy1s) that had shown recurring flaring at 37 GHz in the radio observations at Metsahovi Radio Observatory (MRO), indicating the presence of relativistic jets in them, but no evidence for relativistic jets in the recent radio observations of Karl G. Jansky Very Large Array (JVLA) at 1.6, 5.2, and 9.0 GHz. We have conducted a total of 28 intra-night sessions, each lasting $\geq$ 3 hrs for this sample, resulting in an INOV duty cycle ($\overline{DC} ~\sim$20%) similar to that reported for $γ$-ray-NLSy1s (DC $\sim$25% - 30%), that display blazar-like INOV. This in turn infers the presence of relativistic jet in our sample sources. Thus, it appears that even lower-mass (M$_{BH} \sim$10$^{6}$ M$_{\odot}$) RQNLSy1 galaxies can maintain blazar-like activities. However, we note that the magnetic reconnection in the magnetosphere of the black hole can also be a viable mechanism to give rise to the INOV from these sources.</summary>
+    <category term="astro-ph.GA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph.HE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-08T06:10:23Z</published>
+    <arxiv:comment>5 pages, 4 figures, accepted for publication in MNRAS Letter</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.GA"/>
+    <author>
+      <name>Vineet Ojha</name>
+    </author>
+    <author>
+      <name>Veeresh Singh</name>
+    </author>
+    <author>
+      <name>M. Berton</name>
+    </author>
+    <author>
+      <name>E. Jarvela</name>
+    </author>
+  </entry>
+</feed>

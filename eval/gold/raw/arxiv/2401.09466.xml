@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/fIuJV507xkvWpK5MDrmIy+1bQA4</id>
+  <title>arXiv Query: search_query=&amp;id_list=2401.09466&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-07T20:36:34Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2401.09466" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2401.09466v1</id>
+    <title>Self Supervised Vision for Climate Downscaling</title>
+    <updated>2024-01-09T10:20:49Z</updated>
+    <link href="https://arxiv.org/abs/2401.09466v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.09466v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Climate change is one of the most critical challenges that our planet is facing today. Rising global temperatures are already bringing noticeable changes to Earth's weather and climate patterns with an increased frequency of unpredictable and extreme weather events. Future projections for climate change research are based on Earth System Models (ESMs), the computer models that simulate the Earth's climate system. ESMs provide a framework to integrate various physical systems, but their output is bound by the enormous computational resources required for running and archiving higher-resolution simulations. For a given resource budget, the ESMs are generally run on a coarser grid, followed by a computationally lighter $downscaling$ process to obtain a finer-resolution output. In this work, we present a deep-learning model for downscaling ESM simulation data that does not require high-resolution ground truth data for model optimization. This is realized by leveraging salient data distribution patterns and the hidden dependencies between weather variables for an $\textit{individual}$ data point at $\textit{runtime}$. Extensive evaluation with $2$x, $3$x, and $4$x scaling factors demonstrates that the proposed model consistently obtains superior performance over that of various baselines. The improved downscaling performance and no dependence on high-resolution ground truth data make the proposed method a valuable tool for climate research and mark it as a promising direction for future research.</summary>
+    <category term="physics.ao-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-09T10:20:49Z</published>
+    <arxiv:primary_category term="physics.ao-ph"/>
+    <author>
+      <name>Karandeep Singh</name>
+    </author>
+    <author>
+      <name>Chaeyoon Jeong</name>
+    </author>
+    <author>
+      <name>Naufal Shidqi</name>
+    </author>
+    <author>
+      <name>Sungwon Park</name>
+    </author>
+    <author>
+      <name>Arjun Nellikkattil</name>
+    </author>
+    <author>
+      <name>Elke Zeller</name>
+    </author>
+    <author>
+      <name>Meeyoung Cha</name>
+    </author>
+  </entry>
+</feed>

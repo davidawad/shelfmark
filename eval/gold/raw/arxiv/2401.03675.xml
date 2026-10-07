@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/SZdg1EERQbrKSuJ4klUGpvUR+QU</id>
+  <title>arXiv Query: search_query=&amp;id_list=2401.03675&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-07T20:35:12Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2401.03675" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2401.03675v1</id>
+    <title>A Study on the Security Requirements Analysis to build a Zero Trust-based Remote Work Environment</title>
+    <updated>2024-01-08T05:50:20Z</updated>
+    <link href="https://arxiv.org/abs/2401.03675v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.03675v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recently, the usage of cloud services has been increasing annually, and with remote work becoming one of the new forms of employment within enterprises, the security of cloud-based remote work environments has become important. The existing work environment relies on a perimeter security model, where accessing one's resources is based on the assumption that everything within the internal network is secure. However, due to the limitations of the perimeter security model, which assumes the safety of everything within the internal network, the adoption of Zero Trust is now being demanded. Accordingly, NIST and DoD have published guidelines related to Zero Trust architecture. However, these guidelines describe security requirements at an abstract level, focusing on logical architecture. In this paper, we conduct a threat modeling for OpenStack cloud to propose more detailed security requirements compared to NIST and DoD guidelines. Subsequently, we perform a security analysis of commercial cloud services such as Microsoft Azure, Amazon Web Service, and Google Cloud to validate these requirements. The security analysis results identify security requirements that each cloud service fails to satisfy, indicating potential exposure to threats. This paper proposes detailed security requirements based on the Zero Trust model and conducts security analyses of various cloud services accordingly. As a result of the security analysis, we proposed potential threats and countermeasures for cloud services with Zero Trust, and this is intended to help build a secure Zero Trust-based remote work environment.</summary>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-08T05:50:20Z</published>
+    <arxiv:comment>60 pages, 6 figures, 12 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.CR"/>
+    <author>
+      <name>Haena Kim</name>
+    </author>
+    <author>
+      <name>Yejun Kim</name>
+    </author>
+    <author>
+      <name>Seungjoo Kim</name>
+    </author>
+  </entry>
+</feed>

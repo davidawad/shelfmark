@@ -1,0 +1,27 @@
+{
+  "schema": "mc-eval/arxiv-lcc-crosswalk@1",
+  "version": "1",
+  "note": "Hand-authored mapping from an arXiv primary category to the LCC class numbers or caption ranges a correct placement may land in. Ranges follow the LCC schedules' captions as recalled by the author (2026-10-07) and are not yet checked line by line against the FreeLCC PDFs; correct them here and rebuild. A paper is labelled from its primary category only.",
+  "categories": {
+    "astro-ph.CO": ["QB980-QB991"],
+    "astro-ph.GA": ["QB856-QB858.42"],
+    "cs.CL": ["P98-P98.5", "QA76.9.N38"],
+    "cs.CR": ["QA76.9.A25"],
+    "cs.CV": ["TA1634", "TA1637"],
+    "cs.DL": ["ZA4080-ZA4085", "Z669.8"],
+    "cs.DS": ["QA76.9.D35", "QA76.9.A43"],
+    "cs.PL": ["QA76.7-QA76.73"],
+    "cs.RO": ["TJ210.2-TJ211.495"],
+    "econ.EM": ["HB139-HB141.5"],
+    "eess.SP": ["TK5102.9"],
+    "hep-th": ["QC793-QC793.5", "QC174.45-QC174.52"],
+    "math.NT": ["QA241-QA247.5"],
+    "math.PR": ["QA273-QA274.9"],
+    "physics.ao-ph": ["QC851-QC999"],
+    "q-bio.NC": ["QP351-QP495"],
+    "q-bio.PE": ["QH359-QH425", "QH352"],
+    "q-fin.PM": ["HG4529.5"],
+    "quant-ph": ["QC173.96-QC174.52", "QA76.889"],
+    "stat.ME": ["QA276-QA280"]
+  }
+}

@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/KLDrO6QFNBBCLIw4pOLELm85lMw</id>
+  <title>arXiv Query: search_query=&amp;id_list=2401.03626&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-07T19:59:37Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2401.03626" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2401.03626v1</id>
+    <title>Hybrid Vector Message Passing for Generalized Bilinear Factorization</title>
+    <updated>2024-01-08T02:08:54Z</updated>
+    <link href="https://arxiv.org/abs/2401.03626v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.03626v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we propose a new message passing algorithm that utilizes hybrid vector message passing (HVMP) to solve the generalized bilinear factorization (GBF) problem. The proposed GBF-HVMP algorithm integrates expectation propagation (EP) and variational message passing (VMP) via variational free energy minimization, yielding tractable Gaussian messages. Furthermore, GBF-HVMP enables vector/matrix variables rather than scalar ones in message passing, resulting in a loop-free Bayesian network that improves convergence. Numerical results show that GBF-HVMP significantly outperforms state-of-the-art methods in terms of NMSE performance and computational complexity.</summary>
+    <category term="eess.SP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-08T02:08:54Z</published>
+    <arxiv:primary_category term="eess.SP"/>
+    <author>
+      <name>Hao Jiang</name>
+    </author>
+    <author>
+      <name>Xiaojun Yuan</name>
+    </author>
+    <author>
+      <name>Qinghua Guo</name>
+    </author>
+  </entry>
+</feed>

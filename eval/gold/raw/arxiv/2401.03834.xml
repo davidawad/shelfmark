@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/a5EyS/9DTZDJiHMcrlNmXbdsaew</id>
+  <title>arXiv Query: search_query=&amp;id_list=2401.03834&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-07T20:37:07Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2401.03834" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2401.03834v4</id>
+    <title>On the error control of invariant causal prediction</title>
+    <updated>2026-05-20T16:57:43Z</updated>
+    <link href="https://arxiv.org/abs/2401.03834v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.03834v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Invariant causal prediction provides a useful framework for identifying causal predictors of a response using heterogeneous data from multiple environments. One valuable property of the original invariant causal prediction method is that it guarantees no false causal discoveries with high probability. Such a guarantee, however, can be overly conservative in some applications, resulting in few or no causal discoveries. This raises a natural question: can invariant causal prediction be equipped with less conservative error guarantees and thereby extract more causal information from the data? In this paper, we address this question by focusing on two widely used and more liberal guarantees: false discovery rate control and simultaneous true discovery bounds. A key step in our approach is to reformulate invariant causal prediction as a multiple testing problem. We then adopt the e-Closure principle to obtain (simultaneous) false discovery rate control, together with new p-to-e calibrators tailored to this setting. We also derive simultaneous true discovery bounds via closed testing, which provide additional causal information without requiring extra assumptions and retain all discoveries from the original invariant causal prediction method. Through simulations and a real data application on educational attainment of teenagers in the United States, we show that these more liberal error control guarantees can improve the practical usefulness of invariant causal prediction.</summary>
+    <category term="stat.ME" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-08T11:46:20Z</published>
+    <arxiv:primary_category term="stat.ME"/>
+    <author>
+      <name>Jinzhou Li</name>
+    </author>
+    <author>
+      <name>Jelle J Goeman</name>
+    </author>
+  </entry>
+</feed>

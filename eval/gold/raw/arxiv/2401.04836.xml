@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/Ok3hksDlZDscEhw7HNlKvkh2H0M</id>
+  <title>arXiv Query: search_query=&amp;id_list=2401.04836&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-07T20:35:38Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2401.04836" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2401.04836v1</id>
+    <title>CoNST: Code Generator for Sparse Tensor Networks</title>
+    <updated>2024-01-09T22:00:15Z</updated>
+    <link href="https://arxiv.org/abs/2401.04836v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.04836v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Sparse tensor networks are commonly used to represent contractions over sparse tensors. Tensor contractions are higher-order analogs of matrix multiplication. Tensor networks arise commonly in many domains of scientific computing and data science. After a transformation into a tree of binary contractions, the network is implemented as a sequence of individual contractions. Several critical aspects must be considered in the generation of efficient code for a contraction tree, including sparse tensor layout mode order, loop fusion to reduce intermediate tensors, and the interdependence of loop order, mode order, and contraction order. We propose CoNST, a novel approach that considers these factors in an integrated manner using a single formulation. Our approach creates a constraint system that encodes these decisions and their interdependence, while aiming to produce reduced-order intermediate tensors via fusion. The constraint system is solved by the Z3 SMT solver and the result is used to create the desired fused loop structure and tensor mode layouts for the entire contraction tree. This structure is lowered to the IR of the TACO compiler, which is then used to generate executable code. Our experimental evaluation demonstrates very significant (sometimes orders of magnitude) performance improvements over current state-of-the-art sparse tensor compiler/library alternatives.</summary>
+    <category term="cs.PL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.PF" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-09T22:00:15Z</published>
+    <arxiv:primary_category term="cs.PL"/>
+    <author>
+      <name>Saurabh Raje</name>
+    </author>
+    <author>
+      <name>Yufan Xu</name>
+    </author>
+    <author>
+      <name>Atanas Rountev</name>
+    </author>
+    <author>
+      <name>Edward F. Valeev</name>
+    </author>
+    <author>
+      <name>Saday Sadayappan</name>
+    </author>
+  </entry>
+</feed>

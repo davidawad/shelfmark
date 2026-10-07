@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/2JTKYvvZPje9SgP6L4Y4S1tOyug</id>
+  <title>arXiv Query: search_query=&amp;id_list=2401.03616&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-07T20:36:57Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2401.03616" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2401.03616v3</id>
+    <title>An improved Quantum Max Cut approximation via matching</title>
+    <updated>2026-02-16T12:51:26Z</updated>
+    <link href="https://arxiv.org/abs/2401.03616v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.03616v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Finding a high (or low) energy state of a given quantum Hamiltonian is a potential area to gain a provable and practical quantum advantage. A line of recent studies focuses on Quantum Max Cut, where one is asked to find a high energy state of a given antiferromagnetic Heisenberg Hamiltonian. In this work, we present a classical approximation algorithm for Quantum Max Cut that achieves an approximation ratio of 0.595, outperforming the previous best algorithms of Lee [Lee, 2022] (0.562, generic input graph) and King [King, 2023] (0.582, triangle-free input graph). The algorithm is based on finding the maximum weighted matching of an input graph and outputs a product of at most 2-qubit states, which is simpler than the fully entangled output states of the previous best algorithms.</summary>
+    <category term="quant-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-08T00:36:32Z</published>
+    <arxiv:primary_category term="quant-ph"/>
+    <author>
+      <name>Eunou Lee</name>
+    </author>
+    <author>
+      <name>Ojas Parekh</name>
+    </author>
+  </entry>
+</feed>

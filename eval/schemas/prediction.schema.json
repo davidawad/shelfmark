@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mc-eval/prediction@1",
+  "title": "Prediction (one NDJSON line per item and profile)",
+  "type": "object",
+  "required": ["item"],
+  "properties": {
+    "item": {"type": "string", "description": "Gold id or L0 item: ID."},
+    "profile": {"type": "string", "default": "default", "description": "e.g. lexical@0.1; experimental:<name> marks a comparison."},
+    "tier": {"type": "string", "description": "The tier that decided (identifier, vocabulary, rules, shortlist, rerank, ...)."},
+    "candidates": {
+      "type": "array",
+      "description": "Ranked best first; empty means abstained.",
+      "items": {
+        "type": "object",
+        "required": ["class"],
+        "properties": {
+          "class": {"type": "string", "description": "LCC code, range, or typed class ID class:lcc@<version>:<code>."},
+          "score": {"type": "number"}
+        }
+      }
+    },
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1, "description": "Confidence in the top candidate; defaults to its score, else 0."},
+    "flagged": {"type": "boolean", "default": false},
+    "latency_ms": {"type": "number", "minimum": 0},
+    "fast": {"type": "array", "items": {"type": "string"}}
+  }
+}

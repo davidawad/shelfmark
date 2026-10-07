@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/+FL25exuhelNws8+ORfmv/ohH34</id>
+  <title>arXiv Query: search_query=&amp;id_list=2401.03674&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-07T20:37:00Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2401.03674" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2401.03674v2</id>
+    <title>Efficient Detection of Preparing Quantum Remote States Using Coherence Quantum Benefits</title>
+    <updated>2024-01-15T08:25:15Z</updated>
+    <link href="https://arxiv.org/abs/2401.03674v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.03674v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A sender can prepare a quantum state for a remote receiver using preshared entangled pairs, only the sender's single-qubit measurement, and the receiver's simple correction informed by the sender. It provides resource-efficient advantages over quantum teleportation for quantum information. Here, we propose the most efficient approach to detect the remote state preparation (RSP) based on the quantum benefits powered by quantum coherence's static resources of the shared pairs and the dynamic resources both the RSP participants input. It requires only the receiver's minimum of one additional coherence creation operation to verify RSP. Experimentally, we implement the introduced RSP assessment using different photon pair states generated from a high-quality polarization Sagnac interferometer, confirming the necessary and sufficient role played by the static and dynamic quantum coherence resources and demonstrating efficient RSP verification. Our results provide a route to efficiently assess RSP in practical scenarios such as quantum information in quantum networks.</summary>
+    <category term="quant-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-08T05:48:30Z</published>
+    <arxiv:primary_category term="quant-ph"/>
+    <author>
+      <name>Yuan-Sung Liu</name>
+    </author>
+    <author>
+      <name>Shih-Hsuan Chen</name>
+    </author>
+    <author>
+      <name>Bing-Yuan Lee</name>
+    </author>
+    <author>
+      <name>Chan Hsu</name>
+    </author>
+    <author>
+      <name>Guang-Yin Chen</name>
+    </author>
+    <author>
+      <name>Yueh-Nan Chen</name>
+    </author>
+    <author>
+      <name>Che-Ming Li</name>
+    </author>
+  </entry>
+</feed>

@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/11I8QEZlKr5kuaZ9gYIOm0gdDoE</id>
+  <title>arXiv Query: search_query=&amp;id_list=2401.03712&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-07T20:35:02Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2401.03712" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2401.03712v2</id>
+    <title>Cosmic evolution of black hole-spin and galaxy orientations: clues from the NewHorizon and Galactica simulations</title>
+    <updated>2024-03-26T01:31:45Z</updated>
+    <link href="https://arxiv.org/abs/2401.03712v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.03712v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>(Reduced) Using the recent cosmological high-resolution zoom-in simulations, NewHorizon and Galactica, in which the evolution of black hole spin is followed on the fly, we have tracked the cosmic history of a hundred of black holes (BHs) with a mass greater than 2x10^4 Ms. For each of them, we have studied the variations of the three dimensional angle (Psi) subtended between the BH spins and the angular momentum vectors of their host galaxies. The analysis of the individual evolution of the most massive BHs suggests that they are generally passing by three different regimes. First, for a short period after their birth, low mass BHs (&lt;3x10^4 Ms) are rapidly spun up by gas accretion and their spin tends to be aligned with their host galaxy spin. Then follows a second phase in which the accretion of gas onto low mass BHs (&lt;10^5 Ms) is quite chaotic and inefficient, reflecting the complex and disturbed morphologies of forming proto-galaxies at high redshifts. The variations of Psi are rather erratic during this phase and are mainly driven by the rapid changes of the direction of the galaxy angular momentum. Then, in a third and long phase, BHs are generally well settled in the center of galaxies around which the gas accretion becomes much more coherent (&gt;10^5 Ms). In this case, the BH spins tend to be well aligned with the angular momentum of their host galaxy and this configuration is generally stable even though BH merger episodes can temporally induce misalignment. We have also derived the distributions of cos(Psi) at different redshifts and found that BHs and galaxy spins are generally aligned. Finally, based on a Monte Carlo method, we also predict statistics for the 2-d projected spin-orbit angles lambda. In particular, the distribution of lambda traces well the alignment tendency in the 3-d analysis. Such predictions provide an interesting background for future observational analyses.</summary>
+    <category term="astro-ph.GA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-08T07:47:14Z</published>
+    <arxiv:comment>Accepted for publication in A&amp;A (12/03/2024)</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.GA"/>
+    <arxiv:journal_ref>A&amp;A 686, A233 (2024)</arxiv:journal_ref>
+    <author>
+      <name>Sebastien Peirani</name>
+    </author>
+    <author>
+      <name>Yasushi Suto</name>
+    </author>
+    <author>
+      <name>Ricarda S. Beckmann</name>
+    </author>
+    <author>
+      <name>Marta Volonteri</name>
+    </author>
+    <author>
+      <name>Yen-Ting Lin</name>
+    </author>
+    <author>
+      <name>Yohan Dubois</name>
+    </author>
+    <author>
+      <name>Sukyoung K. Yi</name>
+    </author>
+    <author>
+      <name>Christophe Pichon</name>
+    </author>
+    <author>
+      <name>Katarina Kraljic</name>
+    </author>
+    <author>
+      <name>Minjung Park</name>
+    </author>
+    <author>
+      <name>Julien Devriendt</name>
+    </author>
+    <author>
+      <name>San Han</name>
+    </author>
+    <author>
+      <name>Wei-Huai Chen</name>
+    </author>
+    <arxiv:doi>10.1051/0004-6361/202349101</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1051/0004-6361/202349101" title="doi"/>
+  </entry>
+</feed>

@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/IFV+KeUsQR6uOSH0XpHibyEkYvs</id>
+  <title>arXiv Query: search_query=&amp;id_list=2402.00032&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-07T20:35:45Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2402.00032" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2402.00032v1</id>
+    <title>Multi-objective Generative Design Framework and Realization for Quasi-serial Manipulator: Considering Kinematic and Dynamic Performance</title>
+    <updated>2024-01-08T01:14:21Z</updated>
+    <link href="https://arxiv.org/abs/2402.00032v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.00032v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper proposes a framework that optimizes the linkage mechanism of the quasi-serial manipulator for target tasks. This process is explained through a case study of 2-degree-of-freedom linkage mechanisms, which significantly affect the workspace of the quasi-serial manipulator. First, a vast quasi-serial mechanism is generated with a workspace satisfying a target task and it converts it into a 3D CAD model. Then, the workspace and required torque performance of each mechanism are evaluated through kinematic and dynamic analysis. A deep learning-based surrogate model is leveraged to efficiently predict mechanisms and performance during the optimization process. After model training, a multi-objective optimization problem is formulated under the mechanical and dynamic conditions of the manipulator. The design goal of the manipulator is to recommend quasi-serial mechanisms with optimized kinematic (workspace) and dynamic (joint torque) performance that satisfies the target task. To investigate the underlying physics from the obtained Pareto solutions, various data mining techniques are performed to extract design rules that can provide practical design guidance. Finally, the manipulator was designed in detail for realization with 3D printed parts, including topology optimization. Also, the task-based optimized manipulator is verified through a payload test. Based on these results, the proposed framework has the potential for other real applications as realized cases and provides a reasonable design plan through the design rule extraction.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-08T01:14:21Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Sumin Lee</name>
+    </author>
+    <author>
+      <name>Sunwoong Yang</name>
+    </author>
+    <author>
+      <name>Namwoo Kang</name>
+    </author>
+  </entry>
+</feed>

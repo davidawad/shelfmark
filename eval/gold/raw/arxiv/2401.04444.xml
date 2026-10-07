@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/F+zHM7sI8md8qZQTiTt+WkVVloM</id>
+  <title>arXiv Query: search_query=&amp;id_list=2401.04444&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-07T20:36:47Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2401.04444" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2401.04444v2</id>
+    <title>Quasi-equilibrium states and phase transitions in biological evolution</title>
+    <updated>2024-02-22T01:23:14Z</updated>
+    <link href="https://arxiv.org/abs/2401.04444v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.04444v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We develop a macroscopic description of the evolutionary dynamics by following the temporal dynamics of the total Shannon entropy of sequences, denoted by $S$, and the average Hamming distance between them, denoted by $H$. We argue that a biological system can persist in the so-called quasi-equilibrium state for an extended period, characterized by strong correlations between $S$ and $H$, before undergoing a phase transition to another quasi-equilibrium state. To demonstrate the results, we conducted a statistical analysis of SARS-CoV-2 data from the United Kingdom during the period between March, 2020 and December, 2023. From a purely theoretical perspective, this allows us to systematically study various types of phase transitions described by a discontinuous change in the thermodynamic parameters. From a more practical point of view, the analysis can be used, for example, as an early warning system for pandemics.</summary>
+    <category term="q-bio.PE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-09T09:17:16Z</published>
+    <arxiv:comment>20 pages, 10 figures, 2 tables, accepted for publication in Entropy</arxiv:comment>
+    <arxiv:primary_category term="q-bio.PE"/>
+    <author>
+      <name>Artem Romanenko</name>
+    </author>
+    <author>
+      <name>Vitaly Vanchurin</name>
+    </author>
+  </entry>
+</feed>
