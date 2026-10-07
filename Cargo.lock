@@ -614,6 +614,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "shelfmark-tier-lexical"
+version = "0.1.0"
+dependencies = [
+ "aho-corasick",
+ "regex",
+ "serde",
+ "serde_json",
+ "shelfmark-core",
+]
+
+[[package]]
 name = "smallvec"
 version = "1.16.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
