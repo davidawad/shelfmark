@@ -1,0 +1,26 @@
+[package]
+name = "shelfmark-identity"
+description = "Work/Item ID minting, text extraction, item-to-work links and near-duplicate proposals for shelfmark"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+shelfmark-core.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+fs4 = { version = "1", default-features = false, features = ["sync"] }
+pulldown-cmark = { version = "0.13", default-features = false }
+pdf-extract = { version = "0.12", optional = true }
+
+[dev-dependencies]
+shelfmark-core = { workspace = true, features = ["testkit"] }
+tempfile = "3"
+
+[features]
+# PDF text extraction through the pure-Rust `pdf-extract` crate. Without
+# it a .pdf input fails with `input_unreadable` and reason
+# `unsupported_format`.
+pdf = ["dep:pdf-extract"]
