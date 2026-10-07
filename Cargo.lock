@@ -614,6 +614,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "shelfmark-naming"
+version = "0.1.0"
+dependencies = [
+ "serde",
+ "serde_json",
+ "shelfmark-core",
+ "unicode-normalization",
+]
+
+[[package]]
 name = "smallvec"
 version = "1.16.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
