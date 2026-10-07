@@ -104,6 +104,9 @@ fn invalid_target(target: f64) -> Error {
 /// a name with no implementation is reported `unavailable`, as is a tier
 /// that returns `tier_unavailable`. Any other tier error aborts. Without a
 /// calibration, raw tier scores are used as confidences.
+// Frozen U0 contract: splitting it is a core change, so the size lint is
+// waived here rather than refactored during integration.
+#[allow(clippy::too_many_lines)]
 pub fn run(
     profile: &Profile,
     tiers: &BTreeMap<String, &dyn Tier>,

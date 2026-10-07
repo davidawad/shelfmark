@@ -1,32 +1,35 @@
-//! What backs the service: compiled schemes, the scheme compiler, tiers,
-//! profiles, naming, the eval and the store.
+//! What backs the service: the real crates (plan U13).
 //!
-//! Everything here is a stand-in until the real crates land: schemes
-//! compile into the core testkit's `MemIndex` (U1), tiers are the fakes in
-//! [`fake_tiers`] (U3, U4), profiles are declared here (U5), the store is
-//! [`fake_store::FsStore`] (U6, U7), naming is a plain join (U8), and
-//! there is no eval (U10). U13 replaces this module; nothing else in the
-//! crate names a fake.
+//! Schemes compile through `shelfmark-scheme` (U1). The tiers are U3's
+//! identifier lookup and U4's vocabulary and rules tiers, the profiles
+//! are U5's built-ins, and naming is U8's template with Cutter ordering.
+//! The store directory ([`dir_store::DirStore`]) is U6's placement log
+//! plus U7's identity links. There is no eval: the harness (U10) lives
+//! outside this workspace for now.
+//!
+//! Per-store data the tiers read (plan PD5), both optional:
+//! `<store>/tables/*.jsonl` identifier tables and `<store>/rules.json`.
 
-pub mod fake_store;
-pub mod fake_tiers;
+pub mod dir_store;
+mod tiers;
 
-use std::collections::{BTreeMap, BTreeSet};
+use std::collections::BTreeMap;
 use std::path::Path;
 use std::sync::Arc;
 
 use shelfmark_core::calibration::{EvalSummary, GoldExample};
-use shelfmark_core::scheme::{ClassRecord, CompiledIndex, SchemeDoc};
-use shelfmark_core::testkit::MemIndex;
+use shelfmark_core::scheme::{CompiledIndex, SchemeDoc};
 use shelfmark_core::tier::{Profile, Tier};
-use shelfmark_core::{Error, ErrorCode, ProfileId, SchemeId};
+use shelfmark_core::{ClassId, Error, SchemeId};
+use shelfmark_naming::{Naming, NamingOptions, Work, DEFAULT_TEMPLATE};
 
 use crate::service::Shelfmark;
 
+pub use tiers::{parse_identifier, url_domain, RULES_FILE, TABLES_DIR};
+
 pub type Compiler = fn(&SchemeDoc) -> Result<Arc<dyn CompiledIndex>, Error>;
-/// Folder path and filename for a class (ancestors, top level first), a
-/// title and an extension (R22).
-pub type Namer = fn(&[ClassRecord], &str, &str) -> String;
+/// Folder path and filename for a class, a title and an extension (R22).
+pub type Namer = fn(&dyn CompiledIndex, &ClassId, &str, &str) -> Result<String, Error>;
 pub type Evaluator = fn(&[GoldExample], &[Profile]) -> Result<EvalSummary, Error>;
 
 pub struct Wiring {
@@ -44,117 +47,46 @@ pub struct Wiring {
     pub eval: Option<Evaluator>,
 }
 
-/// The bundled test scheme until the LCC outline (U2) lands.
+/// The bundled scheme until the LCC outline (U2) lands.
 const MINI_LCC: &str = include_str!("../../../../fixtures/schemes/mini-lcc.json");
 
-/// A service over the fakes, with its store in `dir`.
+/// A service over the real crates, with its store in `dir`.
 pub fn open(dir: &Path) -> Shelfmark {
-    Shelfmark::new(fake(), Box::new(fake_store::FsStore::new(dir)))
+    Shelfmark::new(wiring(dir), Box::new(dir_store::DirStore::new(dir)))
 }
 
-pub fn fake() -> Wiring {
+/// The wiring for a store in `dir`: its tables and rules feed the tiers.
+pub fn wiring(dir: &Path) -> Wiring {
     let doc: SchemeDoc = serde_json::from_str(MINI_LCC).expect("bundled scheme parses");
-    let mut table = BTreeMap::new();
-    table.insert("isbn:9780262033848".to_string(), "QA76".to_string());
-    let tiers: [(&str, Arc<dyn Tier>); 3] = [
-        ("identifier", Arc::new(fake_tiers::IdentifierTier { table })),
-        ("vocab", Arc::new(fake_tiers::VocabTier)),
-        ("rules", Arc::new(fake_tiers::RulesTier)),
-    ];
     Wiring {
         schemes: vec![compile(&doc).expect("bundled scheme compiles")],
         known: vec![(SchemeId::new("lcc", "2024"), None)],
         compile,
-        profiles: profiles(),
-        tiers: tiers.into_iter().map(|(n, t)| (n.to_string(), t)).collect(),
+        profiles: shelfmark_profile::builtins(),
+        tiers: tiers::registry(dir),
         name: name_path,
         eval: None,
     }
 }
 
-fn profile(name: &str, desc: &str, tiers: &[&str], mem: u32, micros: u64) -> Profile {
-    Profile {
-        id: ProfileId::new(name, "1"),
-        description: desc.into(),
-        tiers: tiers.iter().map(|t| (*t).into()).collect(),
-        default_target: 0.8,
-        min_margin: 0.1,
-        expected_memory_mb: mem,
-        expected_micros_per_item: micros,
-    }
-}
-
-/// The three v1 profiles (R8, PD4); U5 owns the real declarations.
-pub fn profiles() -> Vec<Profile> {
-    let lexical = ["identifier", "vocab", "rules"];
-    vec![
-        profile(
-            "lexical",
-            "Identifiers, scheme vocabulary and rules; no model",
-            &lexical,
-            64,
-            2_000,
-        ),
-        profile(
-            "shortlist",
-            "Lexical, then an embedding shortlist",
-            &[&lexical[..], &["shortlist"]].concat(),
-            1_200,
-            40_000,
-        ),
-        profile(
-            "rerank",
-            "Lexical, embedding shortlist, then a cross-encoder rerank",
-            &[&lexical[..], &["shortlist", "rerank"]].concat(),
-            2_400,
-            250_000,
-        ),
-    ]
-}
-
-/// Structural checks only: codes unique and non-empty, parents defined.
-/// U1 adds JSON Schema validation and the code grammar.
+/// Full JSON Schema validation and compile (U1). The content hash is over
+/// the document's canonical JSON, so a scheme hashes the same whether it
+/// came from a file or from the store.
 pub fn compile(doc: &SchemeDoc) -> Result<Arc<dyn CompiledIndex>, Error> {
-    let mut seen = BTreeSet::new();
-    let mut problems = Vec::new();
-    for c in &doc.classes {
-        if c.code.trim().is_empty() {
-            problems.push(format!("class `{}` has an empty code", c.label));
-        } else if !seen.insert(c.code.as_str()) {
-            problems.push(format!("code `{}` is defined twice", c.code));
-        }
-    }
-    for c in &doc.classes {
-        if let Some(p) = &c.parent {
-            if !seen.contains(p.as_str()) {
-                problems.push(format!("`{}` names undefined parent `{p}`", c.code));
-            }
-        }
-    }
-    if !problems.is_empty() {
-        return Err(Error::new(
-            ErrorCode::SchemeInvalid,
-            format!("{} does not validate: {}", doc.id(), problems.join("; ")),
-        )
-        .details(serde_json::json!({ "problems": problems })));
-    }
-    Ok(Arc::new(MemIndex::new(doc)))
+    let bytes = serde_json::to_vec(doc).map_err(|e| Error::internal(e.to_string()))?;
+    let index = shelfmark_scheme::compile_bytes(&bytes, &doc.id().to_string())?;
+    Ok(Arc::new(index))
 }
 
-/// `QA/QA76/<title>.<ext>`, with path separators and reserved characters
-/// in the title replaced.
-pub fn name_path(ancestors: &[ClassRecord], title: &str, ext: &str) -> String {
-    let clean: String = title
-        .chars()
-        .map(|c| {
-            if "/\\:*?\"<>|".contains(c) || c.is_control() {
-                '_'
-            } else {
-                c
-            }
-        })
-        .collect();
-    let mut parts: Vec<String> = ancestors.iter().map(|r| r.id.code.clone()).collect();
-    parts.push(format!("{}.{ext}", clean.trim()));
-    parts.join("/")
+/// U8's default template: `QA Mathematics/QA76 Computer software/A36 Compilers.pdf`.
+pub fn name_path(
+    index: &dyn CompiledIndex,
+    class: &ClassId,
+    title: &str,
+    ext: &str,
+) -> Result<String, Error> {
+    let naming = Naming::new(DEFAULT_TEMPLATE, NamingOptions::default())?;
+    let mut work = Work::new(class.clone(), title);
+    work.ext = Some(ext.to_string());
+    Ok(naming.preview(index, &work)?.to_string())
 }

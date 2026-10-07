@@ -3,8 +3,8 @@
 
 use serde_json::{json, Value};
 use shelfmark_core::id::{AnyId, Kind};
-use shelfmark_core::placement::{effective_status, superseded_ids, AuthorKind, Placement, Status};
-use shelfmark_core::{Error, ErrorCode, ProfileId, SchemeId, Verb};
+use shelfmark_core::placement::{effective_status, superseded_ids, Placement, Status};
+use shelfmark_core::{Error, ErrorCode, SchemeId, Verb};
 
 use super::{find_placement, Shelfmark};
 use crate::args::{bad, Args};
@@ -191,8 +191,8 @@ impl Shelfmark {
                     .find(|(li, _)| li == i)
                     .map(|(_, w)| w);
                 let work = work.ok_or_else(|| {
-                    Error::new(ErrorCode::NotFound, format!("{i} is not linked to a Work"))
-                        .next(format!("shelfmark link --item {i} --work <work-id>"))
+                    Error::new(ErrorCode::NotFound, format!("{i} has not been ingested"))
+                        .next("shelfmark classify --file <the file>")
                 })?;
                 json!({ "work": work })
             }
@@ -288,50 +288,6 @@ impl Shelfmark {
             }))
             .collect();
         Ok(json!({ "total": total, "flagged": items }))
-    }
-
-    pub(super) fn stale(&self, args: &Args) -> Result<Value, Error> {
-        let scheme = args.id::<SchemeId>("scheme")?;
-        let profile = args.id::<ProfileId>("profile")?;
-        let store = self.store()?;
-        let stale = self.stale_list(store.as_ref(), scheme.as_ref(), profile.as_ref())?;
-        Ok(json!({ "total": stale.len(), "stale": stale }))
-    }
-
-    /// Current placements whose recorded scheme or profile hash no longer
-    /// matches what this build would use (R14, AE6).
-    fn stale_list(
-        &self,
-        store: &dyn Store,
-        scheme: Option<&SchemeId>,
-        profile: Option<&ProfileId>,
-    ) -> Result<Vec<Value>, Error> {
-        let indexes = self.indexes(store)?;
-        let mut out = Vec::new();
-        for p in Self::currents(&store.claims()?) {
-            if scheme.is_some_and(|s| s != &p.scheme) || profile.is_some_and(|q| q != &p.profile) {
-                continue;
-            }
-            let mut reasons = Vec::new();
-            match indexes.iter().find(|i| i.scheme() == &p.scheme) {
-                None => reasons.push("scheme is not compiled"),
-                Some(i) if i.content_hash() != p.inputs.scheme => reasons.push("scheme changed"),
-                Some(_) => {}
-            }
-            if p.provenance.author_kind != AuthorKind::Human {
-                match self.wiring.profiles.iter().find(|q| q.id == p.profile) {
-                    None => reasons.push("profile no longer exists"),
-                    Some(q) if self.profile_hash(q) != p.inputs.profile => {
-                        reasons.push("profile changed")
-                    }
-                    Some(_) => {}
-                }
-            }
-            if !reasons.is_empty() {
-                out.push(json!({"placement": p.id, "work": p.work, "class": p.class, "status": p.status, "reasons": reasons}));
-            }
-        }
-        Ok(out)
     }
 }
 

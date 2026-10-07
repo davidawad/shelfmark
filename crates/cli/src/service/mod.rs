@@ -5,6 +5,7 @@ mod classify;
 mod mutate;
 mod read;
 mod scheme;
+mod stale;
 
 use std::collections::BTreeMap;
 use std::sync::{Arc, Mutex, MutexGuard};

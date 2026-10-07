@@ -22,3 +22,6 @@ shelfmark-core = { path = ".", features = ["testkit"] }
 [features]
 # In-memory CompiledIndex and fixed-score Tier for other crates' tests.
 testkit = []
+
+[lints]
+workspace = true

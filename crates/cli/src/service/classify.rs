@@ -1,5 +1,7 @@
 //! `classify`: run a profile's cascade and append the claim, reusing a
-//! memoized claim when the inputs are unchanged (R7, R10, R11, R14).
+//! memoized claim when the inputs are unchanged (R7, R10, R11, R14). A
+//! file is minted and ingested first (R1-R3), so its Work is the one an
+//! accepted link points at and near-duplicates come back as proposals.
 
 use std::collections::BTreeMap;
 
@@ -8,18 +10,28 @@ use shelfmark_core::calibration::config_hash;
 use shelfmark_core::cascade;
 use shelfmark_core::placement::{current, AuthorKind, InputHashes, Placement, Provenance, Status};
 use shelfmark_core::tier::{ClassifyInput, Tier};
-use shelfmark_core::{Error, ErrorCode, ItemId, ProfileId, Verb, WorkId};
+use shelfmark_core::{Error, ProfileId, Verb, WorkId};
 
 use super::Shelfmark;
 use crate::args::{bad, Args};
-use crate::wiring::fake_tiers::{parse_identifier, url_domain};
+use shelfmark_identity::{Ingested, Minted};
+
+use crate::wiring::{parse_identifier, url_domain};
 
 impl Shelfmark {
     pub(super) fn classify(&self, args: &Args) -> Result<Value, Error> {
-        let (input, item) = classify_input(args)?;
+        let (mut input, minted) = classify_input(args)?;
         let profile = self.profile(args.id::<ProfileId>("profile")?.as_ref())?;
         let target = args.f64("target")?;
         let mut store = self.store()?;
+        let ingested = match &minted {
+            Some(m) => Some(store.ingest(m)?),
+            None => None,
+        };
+        if let Some(ing) = &ingested {
+            input.work = Some(ing.work.clone());
+        }
+        let item = ingested.as_ref().map(|i| i.item.clone());
         let index = self.scheme_arg(store.as_ref(), args)?;
         let calibration = store.calibration()?;
         let work = input.work.clone().expect("classify_input sets the work");
@@ -33,7 +45,9 @@ impl Shelfmark {
             })),
         };
         if let Some(hit) = store.memo(&inputs)? {
-            return Ok(json!({ "placement": hit, "memo_hit": true, "item": item }));
+            let mut out = json!({ "placement": hit, "memo_hit": true, "item": item });
+            add_ingest(&mut out, ingested.as_ref());
+            return Ok(out);
         }
         let tiers: BTreeMap<String, &dyn Tier> = self
             .wiring
@@ -83,37 +97,52 @@ impl Shelfmark {
         if placement.status == Status::Flagged {
             out["next_command"] = json!(format!("shelfmark explain {}", placement.id));
         }
+        add_ingest(&mut out, ingested.as_ref());
         Ok(out)
     }
 }
 
+/// What ingesting the file did, and the link command for the closest
+/// near-duplicate when there is one (R3).
+fn add_ingest(out: &mut Value, ingested: Option<&Ingested>) {
+    let Some(ing) = ingested else { return };
+    out["ingest"] = json!({
+        "new_item": ing.new_item,
+        "new_work": ing.new_work,
+        "minted_work": ing.minted_work,
+        "format": ing.format.as_str(),
+        "proposals": ing.proposals,
+    });
+    if let Some(p) = ing.proposals.first() {
+        if out.get("next_command").is_none() {
+            out["next_command"] = json!(format!(
+                "shelfmark link --item {} --work {}",
+                ing.item, p.work
+            ));
+        }
+    }
+}
+
 /// The classify input from `text`/`file`, `title`, `identifiers`, `url`
-/// and `headings`, with its Work ID (and Item ID for a file).
-pub(super) fn classify_input(args: &Args) -> Result<(ClassifyInput, Option<ItemId>), Error> {
-    let mut item = None;
+/// and `headings`, with its Work ID, plus the minted file if one was given.
+pub(super) fn classify_input(args: &Args) -> Result<(ClassifyInput, Option<Minted>), Error> {
+    let mut minted = None;
     let mut text = args.str("text")?.map(str::to_string);
     if let Some(path) = args.str("file")? {
         if text.is_some() {
             return Err(bad(Verb::Classify, "give `text` or `file`, not both"));
         }
-        let bytes = std::fs::read(path).map_err(|e| {
-            Error::new(
-                ErrorCode::InputUnreadable,
-                format!("cannot read {path}: {e}"),
-            )
-            .next(format!(
+        let m = Minted::from_path(std::path::Path::new(path)).map_err(|e| {
+            if e.next_command.is_some() {
+                return e;
+            }
+            e.next(format!(
                 "shelfmark classify --text <text of {}>",
                 crate::describe::shell_quote(path)
             ))
         })?;
-        item = Some(ItemId::from_bytes(&bytes));
-        text = Some(String::from_utf8(bytes).map_err(|_| {
-            Error::new(
-                ErrorCode::InputUnreadable,
-                format!("{path} is not UTF-8 text; text extraction from other formats is not built in yet"),
-            )
-            .next("shelfmark classify --text <extracted text>")
-        })?);
+        text = Some(m.text.clone());
+        minted = Some(m);
     }
     let mut identifiers = Vec::new();
     for s in args.strings("identifiers")? {
@@ -156,6 +185,6 @@ pub(super) fn classify_input(args: &Args) -> Result<(ClassifyInput, Option<ItemI
             work: Some(WorkId::from_text(&basis)),
             ..input
         },
-        item,
+        minted,
     ))
 }

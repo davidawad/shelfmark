@@ -106,20 +106,16 @@ impl Shelfmark {
             }
         };
         let index = self.index(store.as_ref(), Some(&placement.scheme))?;
-        let code = &placement.class.code;
-        let mut ancestors = index.ancestors(code);
-        if ancestors.is_empty() {
-            // A corrected code deeper than the scheme's classes files
-            // under the class that contains it.
-            if let CodeCheck::Within { class } = index.check_code(code) {
-                ancestors = index.ancestors(&class.code);
-            }
-        }
-        ancestors.reverse();
+        // A corrected code deeper than the scheme's classes files under
+        // the class that contains it.
+        let class = match index.check_code(&placement.class.code) {
+            CodeCheck::Within { class } => class,
+            _ => placement.class.clone(),
+        };
         let title = args.str("title")?.unwrap_or(&placement.class.code);
         let ext = args.str("ext")?.unwrap_or("pdf");
         Ok(json!({
-            "path": (self.wiring.name)(&ancestors, title, ext),
+            "path": (self.wiring.name)(index.as_ref(), &class, title, ext)?,
             "placement": placement.id, "class": placement.class,
         }))
     }

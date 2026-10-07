@@ -23,8 +23,20 @@ pub fn temp_dir(tag: &str) -> PathBuf {
     dir
 }
 
+/// A service over a fresh store seeded with the fixture identifier table.
 pub fn service(tag: &str) -> Shelfmark {
-    shelfmark_cli::wiring::open(&temp_dir(tag).join("store"))
+    let store = temp_dir(tag).join("store");
+    let tables = store.join(shelfmark_cli::wiring::TABLES_DIR);
+    std::fs::create_dir_all(&tables).unwrap();
+    std::fs::copy(
+        concat!(
+            env!("CARGO_MANIFEST_DIR"),
+            "/../../fixtures/tables/identifiers.jsonl"
+        ),
+        tables.join("identifiers.jsonl"),
+    )
+    .unwrap();
+    shelfmark_cli::wiring::open(&store)
 }
 
 pub fn call(s: &Shelfmark, verb: Verb, args: Value) -> Envelope {

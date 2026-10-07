@@ -178,13 +178,26 @@ fn scheme_compile_previews_commits_and_makes_old_placements_stale() {
 
 #[test]
 fn link_previews_commits_and_resolves_the_item() {
-    let s = service("link");
-    let c = data(call(&s, Verb::Classify, json!({"text": "law"})));
-    let work = c["placement"]["work"].as_str().unwrap();
-    let item = format!("item:s256:{}", "a".repeat(64));
-    let e = error(call(&s, Verb::Resolve, json!({"id": item})));
+    let dir = temp_dir("link");
+    let s = shelfmark_cli::wiring::open(&dir.join("store"));
+    let unknown = format!("item:s256:{}", "a".repeat(64));
+    let e = error(call(&s, Verb::Resolve, json!({"id": unknown})));
     assert_eq!(e.code, ErrorCode::NotFound);
-    assert!(e.next_command.unwrap().starts_with("shelfmark link --item"));
+    assert!(e
+        .next_command
+        .unwrap()
+        .starts_with("shelfmark classify --file"));
+
+    let classify = |name: &str, text: &str| {
+        let path = dir.join(name);
+        std::fs::write(&path, text).unwrap();
+        data(call(&s, Verb::Classify, json!({"file": path})))
+    };
+    let a = classify("a.md", "law of contracts");
+    let b = classify("b.md", "contract law notes");
+    let work = a["placement"]["work"].as_str().unwrap();
+    let item = b["item"].as_str().unwrap();
+    assert_ne!(b["placement"]["work"].as_str().unwrap(), work);
 
     let args = json!({"item": item, "work": work});
     let rev = data(call(&s, Verb::Link, args.clone()))["revision"]
@@ -195,5 +208,5 @@ fn link_previews_commits_and_resolves_the_item() {
     let r = data(call(&s, Verb::Resolve, json!({"id": item})));
     assert_eq!(r["resolved"]["work"], work);
     let w = data(call(&s, Verb::Resolve, json!({"id": work})));
-    assert_eq!(w["resolved"]["items"], json!([item]));
+    assert_eq!(w["resolved"]["items"], json!([a["item"], item]));
 }

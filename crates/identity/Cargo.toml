@@ -24,3 +24,6 @@ tempfile = "3"
 # it a .pdf input fails with `input_unreadable` and reason
 # `unsupported_format`.
 pdf = ["dep:pdf-extract"]
+
+[lints]
+workspace = true

@@ -9,6 +9,11 @@ license = "MIT OR Apache-2.0"
 repository = "https://github.com/shelfmark/shelfmark"
 rust-version = "1.82"
 
+[workspace.lints.clippy]
+too_many_lines = "warn"
+too_many_arguments = "warn"
+type_complexity = "warn"
+
 [workspace.dependencies]
 shelfmark-core = { path = "crates/core" }
 serde = { version = "1", features = ["derive"] }

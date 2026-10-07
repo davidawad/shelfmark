@@ -103,6 +103,13 @@ impl Shelfmark {
             .filter(|(i, _)| i == &item)
             .map(|(_, w)| w)
             .collect();
+        if existing.is_empty() {
+            // Only an ingested file can be linked (U7).
+            return Err(
+                Error::new(ErrorCode::NotFound, format!("{item} has not been ingested"))
+                    .next("shelfmark classify --file <the file>"),
+            );
+        }
         let change = json!({ "item": item, "work": work, "already_linked_to": existing });
         self.mutate(req, store.as_mut(), change, |s| {
             s.append_link(&item, &work).map(drop)

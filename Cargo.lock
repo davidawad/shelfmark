@@ -1608,6 +1608,15 @@ dependencies = [
  "serde",
  "serde_json",
  "shelfmark-core",
+ "shelfmark-grpc",
+ "shelfmark-identity",
+ "shelfmark-naming",
+ "shelfmark-profile",
+ "shelfmark-scheme",
+ "shelfmark-store",
+ "shelfmark-tier-identifier",
+ "shelfmark-tier-lexical",
+ "tokio",
 ]
 
 [[package]]

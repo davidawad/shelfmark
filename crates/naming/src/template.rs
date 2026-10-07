@@ -110,6 +110,27 @@ impl fmt::Display for TemplateError {
 
 impl std::error::Error for TemplateError {}
 
+/// `{class_path}` must fill a whole folder segment and never the file name.
+fn check_class_path(segments: &[Vec<Part>], starts: &[usize]) -> Result<(), TemplateError> {
+    let err = |position: usize, message: &str| TemplateError {
+        position,
+        message: message.into(),
+    };
+    for (n, (seg, &offset)) in segments.iter().zip(starts).enumerate() {
+        let has_path = seg.contains(&Part::Var(Var::ClassPath));
+        if has_path && seg.len() > 1 {
+            return Err(err(
+                offset,
+                "`{class_path}` must be a whole folder: put `/` on both sides",
+            ));
+        }
+        if has_path && n + 1 == segments.len() {
+            return Err(err(offset, "`{class_path}` cannot be the file name"));
+        }
+    }
+    Ok(())
+}
+
 impl Template {
     pub fn parse(source: &str) -> Result<Template, TemplateError> {
         let err = |position: usize, message: String| TemplateError { position, message };
@@ -198,18 +219,7 @@ impl Template {
                 "template ends with `/`; it needs a file name".into(),
             ));
         }
-        for (n, (seg, &offset)) in segments.iter().zip(&starts).enumerate() {
-            let has_path = seg.contains(&Part::Var(Var::ClassPath));
-            if has_path && seg.len() > 1 {
-                return Err(err(
-                    offset,
-                    "`{class_path}` must be a whole folder: put `/` on both sides".into(),
-                ));
-            }
-            if has_path && n + 1 == segments.len() {
-                return Err(err(offset, "`{class_path}` cannot be the file name".into()));
-            }
-        }
+        check_class_path(&segments, &starts)?;
         Ok(Template {
             source: source.to_string(),
             segments,

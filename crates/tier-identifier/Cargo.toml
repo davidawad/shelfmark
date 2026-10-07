@@ -16,3 +16,6 @@ regex = "1"
 
 [dev-dependencies]
 shelfmark-core = { workspace = true, features = ["testkit"] }
+
+[lints]
+workspace = true

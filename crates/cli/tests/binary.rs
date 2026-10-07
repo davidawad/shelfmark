@@ -56,6 +56,10 @@ fn non_tty_output_parses_as_an_envelope_for_every_subcommand() {
     let scheme_path = dir.join("s.json");
     std::fs::write(&scheme_path, scheme).unwrap();
     let sp = scheme_path.to_str().unwrap();
+    let doc = dir.join("doc.md");
+    std::fs::write(&doc, "# Notes\n\nOn compilers.").unwrap();
+    let f = envelope(&store, &["classify", "--file", doc.to_str().unwrap()]);
+    let item = f["data"]["item"].as_str().unwrap().to_string();
     let ok_calls: Vec<Vec<&str>> = vec![
         vec!["describe"],
         vec!["describe", "classify"],
@@ -72,13 +76,7 @@ fn non_tty_output_parses_as_an_envelope_for_every_subcommand() {
         vec!["scheme", "validate", "QA76"],
         vec!["scheme", "validate", "--path", sp],
         vec!["name", &work, "--title", "T"],
-        vec![
-            "link",
-            "--item",
-            "item:s256:0000000000000000000000000000000000000000000000000000000000000000",
-            "--work",
-            &work,
-        ],
+        vec!["link", "--item", &item, "--work", &work],
         vec!["call", r#"{"verb": "status"}"#],
     ];
     for args in ok_calls {

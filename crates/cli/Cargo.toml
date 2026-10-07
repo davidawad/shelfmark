@@ -12,12 +12,26 @@ name = "shelfmark"
 path = "src/main.rs"
 
 [dependencies]
-# `testkit` backs the fakes in `wiring` until the real crates land (U13
-# swaps them in and drops the feature).
-shelfmark-core = { workspace = true, features = ["testkit"] }
+shelfmark-core.workspace = true
+shelfmark-scheme = { path = "../scheme" }
+shelfmark-tier-identifier = { path = "../tier-identifier" }
+shelfmark-tier-lexical = { path = "../tier-lexical" }
+shelfmark-profile = { path = "../profile" }
+shelfmark-store = { path = "../store" }
+shelfmark-identity = { path = "../identity" }
+shelfmark-naming = { path = "../naming" }
 serde.workspace = true
 serde_json.workspace = true
 clap = { version = "4.5", features = ["derive", "env"] }
 
 [dev-dependencies]
 shelfmark-core = { workspace = true, features = ["testkit"] }
+shelfmark-grpc = { path = "../grpc" }
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "net", "sync"] }
+
+[features]
+# PDF text extraction for `classify --file x.pdf` (U7's `pdf` feature).
+pdf = ["shelfmark-identity/pdf"]
+
+[lints]
+workspace = true

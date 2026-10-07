@@ -15,3 +15,6 @@ unicode-normalization.workspace = true
 
 [dev-dependencies]
 shelfmark-core = { workspace = true, features = ["testkit"] }
+
+[lints]
+workspace = true

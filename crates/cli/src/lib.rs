@@ -9,7 +9,7 @@
 //! - [`render`]: the human rendering for a terminal.
 //! - [`store`]: the store seam the service needs beyond `PlacementLog`.
 //! - [`wiring`]: which index, tiers, profiles and store back the service.
-//!   It holds in-crate fakes today; U13 replaces it with the real crates.
+//!   The real U1/U3-U8 crates over a store directory (plan U13).
 
 pub mod args;
 pub mod batch;

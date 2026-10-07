@@ -193,7 +193,8 @@ fn ae7_uncompiled_scheme_names_the_compile_command() {
 #[test]
 fn classify_decides_flags_and_memoizes() {
     let s = service("classify");
-    let args = json!({"title": "Engineering a Compiler", "text": "Compilers (Computer programs)"});
+    // The real vocab tier scores an exact heading about 0.6 uncalibrated.
+    let args = json!({"title": "Engineering a Compiler", "text": "Compilers (Computer programs)", "target": 0.5});
     let first = data(call(&s, Verb::Classify, args.clone()));
     let p = &first["placement"];
     assert_eq!(first["memo_hit"], false);
@@ -240,7 +241,7 @@ fn classify_decides_flags_and_memoizes() {
     let rr = data(call(
         &s,
         Verb::Classify,
-        json!({"text": "compilers (computer programs) again", "profile": "profile:rerank@1"}),
+        json!({"text": "compilers (computer programs) again", "profile": "profile:rerank@1", "target": 0.5}),
     ));
     let states: Vec<&str> = rr["placement"]["trace"]["tiers"]
         .as_array()
@@ -266,7 +267,7 @@ fn resolve_explain_browse_search_validate_and_name() {
     let c = data(call(
         &s,
         Verb::Classify,
-        json!({"text": "compilers (computer programs)"}),
+        json!({"text": "compilers (computer programs)", "target": 0.5}),
     ));
     let pid = c["placement"]["id"].as_str().unwrap();
     let work = c["placement"]["work"].as_str().unwrap();
@@ -323,5 +324,8 @@ fn resolve_explain_browse_search_validate_and_name() {
         Verb::Name,
         json!({"id": work, "title": "Dragon: Book", "ext": "md"}),
     ));
-    assert_eq!(name["path"], "Q/QA/QA76/Dragon_ Book.md");
+    assert_eq!(
+        name["path"],
+        "Q Science/QA Mathematics/QA76 Computer software/D73 Dragon_ Book.md"
+    );
 }

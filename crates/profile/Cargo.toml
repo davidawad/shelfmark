@@ -21,3 +21,6 @@ shelfmark-core = { workspace = true, features = ["testkit"] }
 # Semantic tier stubs (plan PD4). Both report tier_unavailable in v1.
 semantic-shortlist = []
 semantic-rerank = []
+
+[lints]
+workspace = true
