@@ -1,0 +1,14 @@
+{
+  "release": "2024-10-09",
+  "sources": [
+    {
+      "file": "FASTTopical.nt.zip",
+      "member": "FASTTopical.nt",
+      "url": "https://researchworks.oclc.org/researchdata/fast/FASTTopical.nt.zip",
+      "mirror": "https://web.archive.org/web/20250223102341id_/https://researchworks.oclc.org/researchdata/fast/FASTTopical.nt.zip",
+      "fetched": "2026-10-08",
+      "bytes": 55099212,
+      "sha256": "217826c90649895bfca71e81e2ed88919b2e061646ec42a185bc12d0bd3c19db"
+    }
+  ]
+}
