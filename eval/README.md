@@ -65,9 +65,23 @@ By default an unpredicted gold item counts as wrong at confidence 0
 `shelfmark` binary (`$SHELFMARK`) over a gold set as one NDJSON batch in a
 fresh store and writes one prediction per item. Set `$SHELFMARK_SCHEME` to
 compile a scheme file into the store first; it replaces a bundled scheme
-with the same ID. No identifier table is loaded, because the Open Library
-gold labels come from the records such a table is built from. The
-record's source URL is not passed either, because the label came from
+with the same ID. By default no identifier table is loaded, because the
+Open Library gold labels come from the records such a table is built
+from. `$SHELFMARK_TABLE` loads one anyway. To score the identifier tier
+honestly, build it from the editions dump with the gold records removed,
+so a gold item is only found through other records that carry the same
+ISBN or LCCN (`identifier-tables` reads plain text from a FIFO):
+
+```bash
+jq -r '.identifiers.openlibrary // empty | "\t/books/" + . + "\t"' gold/starter-v1.ndjson > gold-records.txt
+mkfifo editions.txt
+zcat ol_dump_editions_YYYY-MM-DD.txt.gz | grep -v -F -f gold-records.txt > editions.txt &
+identifier-tables build editions.txt --out loo/
+identifier-tables shelfmark-table loo/ --out loo.jsonl
+SHELFMARK_TABLE=loo.jsonl scripts/shelfmark-predictions.sh gold/starter-v1.ndjson preds.ndjson
+```
+
+The record's source URL is not passed either, because the label came from
 there.
 
 ```bash
