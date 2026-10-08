@@ -1,0 +1,18 @@
+[package]
+name = "laya-compare"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+description = "Experimental comparison: laya-decision choice questions (<=20 options) over the LCC outline"
+
+[features]
+# Off by default: laya is an experimental comparison, never a core tier (plan R8 scope note).
+default = []
+laya = ["dep:laya-decision"]
+
+[dependencies]
+anyhow = "1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+laya-decision = { version = "0.2.5", optional = true }
