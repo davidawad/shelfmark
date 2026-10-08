@@ -34,17 +34,25 @@ fn parses_ranges_including_bare_end() {
 
 #[test]
 fn rejects_bad_codes() {
-    for bad in [
-        "",
-        "I12",
-        "ABCD1",
-        "QA76 extra",
-        "QB9-QB1",
-        "QA1-QB2",
-        "R126.H4-R126.H8",
-    ] {
+    for bad in ["", "I12", "ABCD1", "QA76 extra", "QB9-QB1"] {
         assert!(Class::parse(bad).is_err(), "{bad} should not parse");
     }
+}
+
+/// The span forms the LCC outline writes (shelfmark `data/schemes/lcc`).
+#[test]
+fn scheme_spans_across_subclasses_or_cutters() {
+    // Across subclasses: only the main class is certain.
+    assert_eq!(c("KPG1-KPH4999.9").path(), vec!["K"]);
+    assert_eq!(c("QA1-QB2").depth(), 1);
+    // Cutters within one number: that number.
+    assert_eq!(c("BX840.A1-840.Z").canonical(), "BX840");
+    assert_eq!(c("KBM524.4.A-524.4.Z").canonical(), "KBM524.4");
+    assert_eq!(c("R126.H4-R126.H8").canonical(), "R126");
+    // Cutters across numbers: the number range.
+    assert_eq!(c("PM549.A2-2711").canonical(), "PM549-2711");
+    assert_eq!(c("BS2279.42-2545.Z").canonical(), "BS2279.42-2545");
+    assert_eq!(c("BX840.A1-840.Z").matched_depth(&c("BX840.B5")), 3);
 }
 
 #[test]

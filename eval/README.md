@@ -59,6 +59,27 @@ replacement; the RNG is seeded (`--seed`), so a rerun gives identical output.
 By default an unpredicted gold item counts as wrong at confidence 0
 (`--missing as-wrong`); `--missing skip` drops it instead.
 
+## Scoring shelfmark
+
+`scripts/shelfmark-predictions.sh GOLD OUT [PROFILE] [TARGET]` runs a
+`shelfmark` binary (`$SHELFMARK`) over a gold set as one NDJSON batch in a
+fresh store and writes one prediction per item. Set `$SHELFMARK_SCHEME` to
+compile a scheme file into the store first; it replaces a bundled scheme
+with the same ID. No identifier table is loaded, because the Open Library
+gold labels come from the records such a table is built from. The
+record's source URL is not passed either, because the label came from
+there.
+
+```bash
+SHELFMARK=../../src/shelfmark/target/release/shelfmark \
+  scripts/shelfmark-predictions.sh gold/starter-v1.ndjson preds.ndjson profile:lexical@1
+cargo run -- run --gold gold/starter-v1.ndjson --predictions preds.ndjson
+```
+
+Class codes may be LCC outline spans. A span across subclasses
+(`KPG1-KPH4999.9`) scores at the main class only. A cutter span within one
+number (`BX840.A1-840.Z`) scores as that number.
+
 ## Starter gold set
 
 `gold/starter-v1.ndjson` holds 104 items across 21 LCC main classes and 57

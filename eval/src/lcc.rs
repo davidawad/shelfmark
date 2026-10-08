@@ -71,6 +71,22 @@ fn trim_fraction(n: &str) -> String {
     }
 }
 
+/// A range end without its cutter: `BX840.A1` and `840.Z` become `BX840`
+/// and `840`. Schemes write cutter spans (`BH301.A-301.Z`), and the levels
+/// scored here stop at the class number for a range.
+fn strip_cutter(s: &str) -> &str {
+    match s.rsplit_once('.') {
+        Some((head, tail))
+            if head.ends_with(|c: char| c.is_ascii_digit())
+                && tail.starts_with(|c: char| c.is_ascii_uppercase())
+                && tail[1..].chars().all(|c| c.is_ascii_digit()) =>
+        {
+            head
+        }
+        _ => s,
+    }
+}
+
 /// Parse `letters [space] number [.cutter]` from the start of `s`; returns the
 /// code and the unparsed remainder.
 fn parse_code_prefix(s: &str) -> Result<(Code, &str), ParseError> {
@@ -141,13 +157,13 @@ impl Class {
     pub fn parse(raw: &str) -> Result<Class, ParseError> {
         let s = raw.trim().to_ascii_uppercase();
         if let Some((a, b)) = s.split_once('-') {
-            let (lo, rest) = parse_code_prefix(a.trim())?;
+            let (lo, rest) = parse_code_prefix(strip_cutter(a.trim()))?;
             if !rest.trim().is_empty() || lo.number.is_none() || lo.cutter.is_some() {
                 return Err(ParseError(format!(
                     "`{raw}`: range start must be letters+number"
                 )));
             }
-            let b = b.trim();
+            let b = strip_cutter(b.trim());
             let hi_src = if b.starts_with(|c: char| c.is_ascii_digit()) {
                 format!("{}{b}", lo.letters)
             } else {
@@ -160,13 +176,25 @@ impl Class {
                 )));
             }
             if hi.letters != lo.letters {
-                return Err(ParseError(format!(
-                    "`{raw}`: range ends differ in class letters"
-                )));
+                // A span across subclasses (`KPG1-KPH4999.9`) sits under
+                // one main class and no single subclass.
+                return Ok(Class::Code(Code {
+                    letters: lo.letters[..1].to_string(),
+                    number: None,
+                    cutter: None,
+                }));
             }
             let (lo_n, hi_n) = (lo.number.unwrap(), hi.number.unwrap());
             if num_value(&lo_n) > num_value(&hi_n) {
                 return Err(ParseError(format!("`{raw}`: range start exceeds end")));
+            }
+            if lo_n == hi_n {
+                // Cutters within one number (`BX840.A1-840.Z`): that number.
+                return Ok(Class::Code(Code {
+                    letters: lo.letters,
+                    number: Some(lo_n),
+                    cutter: None,
+                }));
             }
             return Ok(Class::Range {
                 letters: lo.letters,

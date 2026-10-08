@@ -1,0 +1,710 @@
+{
+  "tables": [
+    "lcsh.tsv.gz"
+  ],
+  "headings": 521392,
+  "patterns": 1111840,
+  "fixtures": {
+    "cases": 38,
+    "main_class_top1": 33,
+    "subclass_top1": 28,
+    "subclass_top3": 35,
+    "no_vote": 0,
+    "results": [
+      {
+        "id": "f01",
+        "expect": "QA",
+        "got_top3": [
+          "QA",
+          "TA",
+          "P"
+        ],
+        "subclass_ok": true,
+        "main_ok": true,
+        "hits": [
+          "engineering",
+          "analysis",
+          "parsing",
+          "register",
+          "optimization",
+          "programming languages"
+        ]
+      },
+      {
+        "id": "f02",
+        "expect": "QD",
+        "got_top3": [
+          "QD"
+        ],
+        "subclass_ok": true,
+        "main_ok": true,
+        "hits": [
+          "organic chemistry",
+          "reaction mechanisms",
+          "carbonyl compounds",
+          "stereochemistry",
+          "synthesis",
+          "heterocyclic compounds"
+        ]
+      },
+      {
+        "id": "f03",
+        "expect": "QL",
+        "got_top3": [
+          "Z",
+          "QL",
+          "BV"
+        ],
+        "subclass_ok": false,
+        "main_ok": false,
+        "hits": [
+          "guide",
+          "birds",
+          "north america",
+          "notes",
+          "migration",
+          "identification"
+        ]
+      },
+      {
+        "id": "f04",
+        "expect": "QA",
+        "got_top3": [
+          "QA",
+          "QC",
+          "B"
+        ],
+        "subclass_ok": true,
+        "main_ok": true,
+        "hits": [
+          "probability",
+          "theory",
+          "stochastic processes",
+          "processes markov",
+          "markov chains",
+          "martingales",
+          "motion"
+        ]
+      },
+      {
+        "id": "f05",
+        "expect": "ML",
+        "got_top3": [
+          "ML",
+          "M",
+          "GV"
+        ],
+        "subclass_ok": true,
+        "main_ok": true,
+        "hits": [
+          "history",
+          "jazz",
+          "bebop",
+          "improvisation",
+          "swing",
+          "blues"
+        ]
+      },
+      {
+        "id": "f06",
+        "expect": "HB",
+        "got_top3": [
+          "HD",
+          "HG",
+          "HB"
+        ],
+        "subclass_ok": false,
+        "main_ok": true,
+        "hits": [
+          "macroeconomics",
+          "inflation",
+          "unemployment",
+          "monetary policy",
+          "economic growth"
+        ]
+      },
+      {
+        "id": "f07",
+        "expect": "KF",
+        "got_top3": [
+          "JK",
+          "JF",
+          "KNS"
+        ],
+        "subclass_ok": false,
+        "main_ok": false,
+        "hits": [
+          "constitutional law",
+          "states",
+          "judicial review",
+          "separation of powers",
+          "civil rights"
+        ]
+      },
+      {
+        "id": "f08",
+        "expect": "QK",
+        "got_top3": [
+          "QK",
+          "SB",
+          "GB"
+        ],
+        "subclass_ok": true,
+        "main_ok": true,
+        "hits": [
+          "plant physiology",
+          "photosynthesis",
+          "plant hormones",
+          "water",
+          "relations",
+          "botany"
+        ]
+      },
+      {
+        "id": "f09",
+        "expect": "ND",
+        "got_top3": [
+          "ND",
+          "TH",
+          "B"
+        ],
+        "subclass_ok": true,
+        "main_ok": true,
+        "hits": [
+          "oil painting",
+          "color",
+          "mixing",
+          "glazing",
+          "brushwork",
+          "landscape painting"
+        ]
+      },
+      {
+        "id": "f10",
+        "expect": "Z",
+        "got_top3": [
+          "Z",
+          "BF",
+          "P"
+        ],
+        "subclass_ok": true,
+        "main_ok": true,
+        "hits": [
+          "library science",
+          "cataloging",
+          "subject headings",
+          "classification",
+          "metadata",
+          "libraries"
+        ]
+      },
+      {
+        "id": "f11",
+        "expect": "RC",
+        "got_top3": [
+          "RC",
+          "RB"
+        ],
+        "subclass_ok": true,
+        "main_ok": true,
+        "hits": [
+          "cardiology",
+          "diagnosis",
+          "treatment",
+          "heart failure",
+          "arrhythmia",
+          "disease"
+        ]
+      },
+      {
+        "id": "f12",
+        "expect": "D",
+        "got_top3": [
+          "V",
+          "D",
+          "TJ"
+        ],
+        "subclass_ok": false,
+        "main_ok": false,
+        "hits": [
+          "naval operations",
+          "second world",
+          "war",
+          "aircraft carriers",
+          "submarines",
+          "sea power",
+          "pacific"
+        ]
+      },
+      {
+        "id": "f13",
+        "expect": "BQ",
+        "got_top3": [
+          "BQ",
+          "BL"
+        ],
+        "subclass_ok": true,
+        "main_ok": true,
+        "hits": [
+          "buddhism",
+          "four noble truths",
+          "meditation",
+          "zen buddhism"
+        ]
+      },
+      {
+        "id": "f14",
+        "expect": "S",
+        "got_top3": [
+          "S",
+          "HB",
+          "RM"
+        ],
+        "subclass_ok": true,
+        "main_ok": true,
+        "hits": [
+          "soil science",
+          "farmers",
+          "soil fertility",
+          "fertilizers",
+          "crop rotation",
+          "irrigation"
+        ]
+      },
+      {
+        "id": "f15",
+        "expect": "Q",
+        "got_top3": [
+          "Q",
+          "QA",
+          "QP"
+        ],
+        "subclass_ok": true,
+        "main_ok": true,
+        "hits": [
+          "machine learning",
+          "neural networks",
+          "deep learning",
+          "backpropagation",
+          "artificial intelligence"
+        ]
+      },
+      {
+        "id": "f16",
+        "expect": "TR",
+        "got_top3": [
+          "TR",
+          "QB",
+          "QC"
+        ],
+        "subclass_ok": true,
+        "main_ok": true,
+        "hits": [
+          "landscape photography",
+          "cameras",
+          "lenses",
+          "exposure",
+          "digital photography"
+        ]
+      },
+      {
+        "id": "f17",
+        "expect": "BL",
+        "got_top3": [
+          "BL"
+        ],
+        "subclass_ok": true,
+        "main_ok": true,
+        "hits": [
+          "greek mythology",
+          "gods",
+          "heroes",
+          "trojan war"
+        ]
+      },
+      {
+        "id": "f18",
+        "expect": "LB",
+        "got_top3": [
+          "LB",
+          "P",
+          "HV"
+        ],
+        "subclass_ok": true,
+        "main_ok": true,
+        "hits": [
+          "child development",
+          "early childhood education",
+          "play",
+          "language acquisition",
+          "kindergarten",
+          "teaching"
+        ]
+      },
+      {
+        "id": "f19",
+        "expect": "QE",
+        "got_top3": [
+          "QE",
+          "B",
+          "BL"
+        ],
+        "subclass_ok": true,
+        "main_ok": true,
+        "hits": [
+          "plate tectonics",
+          "earthquakes",
+          "seismology",
+          "volcanoes",
+          "structure",
+          "earth"
+        ]
+      },
+      {
+        "id": "f20",
+        "expect": "PR",
+        "got_top3": [
+          "QL",
+          "PN",
+          "B"
+        ],
+        "subclass_ok": false,
+        "main_ok": false,
+        "hits": [
+          "tragedies",
+          "hamlet",
+          "king",
+          "performance",
+          "criticism"
+        ]
+      },
+      {
+        "id": "f21",
+        "expect": "TG",
+        "got_top3": [
+          "TA",
+          "TG",
+          "TS"
+        ],
+        "subclass_ok": false,
+        "main_ok": true,
+        "hits": [
+          "bridge",
+          "engineering design",
+          "steel",
+          "concrete bridges",
+          "structural analysis",
+          "load",
+          "testing"
+        ]
+      },
+      {
+        "id": "f22",
+        "expect": "QC",
+        "got_top3": [
+          "QC"
+        ],
+        "subclass_ok": true,
+        "main_ok": true,
+        "hits": [
+          "quantum mechanics",
+          "wave functions",
+          "schrodinger equation",
+          "quantum field theory"
+        ]
+      },
+      {
+        "id": "f23",
+        "expect": "QH",
+        "got_top3": [
+          "QH"
+        ],
+        "subclass_ok": true,
+        "main_ok": true,
+        "hits": [
+          "cell biology",
+          "molecular genetics",
+          "dna replication",
+          "gene expression",
+          "protein synthesis"
+        ]
+      },
+      {
+        "id": "f24",
+        "expect": "HT",
+        "got_top3": [
+          "HT",
+          "GR",
+          "BL"
+        ],
+        "subclass_ok": true,
+        "main_ok": true,
+        "hits": [
+          "urban sociology",
+          "cities and towns",
+          "suburbs",
+          "gentrification",
+          "poverty"
+        ]
+      },
+      {
+        "id": "f25",
+        "expect": "E",
+        "got_top3": [
+          "E",
+          "HT",
+          "D"
+        ],
+        "subclass_ok": true,
+        "main_ok": true,
+        "hits": [
+          "american",
+          "civil war",
+          "battles",
+          "lincoln",
+          "abolition of slavery",
+          "slavery in the united states"
+        ]
+      },
+      {
+        "id": "f26",
+        "expect": "DG",
+        "got_top3": [
+          "QB",
+          "QL",
+          "SF"
+        ],
+        "subclass_ok": false,
+        "main_ok": false,
+        "hits": [
+          "roman",
+          "empire",
+          "caesar",
+          "fall"
+        ]
+      },
+      {
+        "id": "f27",
+        "expect": "QA",
+        "got_top3": [
+          "QA",
+          "ZA",
+          "PN"
+        ],
+        "subclass_ok": true,
+        "main_ok": true,
+        "hits": [
+          "database management systems",
+          "relational databases",
+          "sql",
+          "queries",
+          "transaction",
+          "processing"
+        ]
+      },
+      {
+        "id": "f28",
+        "expect": "SF",
+        "got_top3": [
+          "SF",
+          "LB",
+          "QL"
+        ],
+        "subclass_ok": true,
+        "main_ok": true,
+        "hits": [
+          "dog",
+          "training",
+          "dog breeds",
+          "obedience",
+          "behavior",
+          "care",
+          "puppies"
+        ]
+      },
+      {
+        "id": "f29",
+        "expect": "JZ",
+        "got_top3": [
+          "JZ",
+          "GV",
+          "KZ"
+        ],
+        "subclass_ok": true,
+        "main_ok": true,
+        "hits": [
+          "international relations",
+          "diplomacy",
+          "treaties",
+          "united nations",
+          "foreign policy"
+        ]
+      },
+      {
+        "id": "f30",
+        "expect": "NA",
+        "got_top3": [
+          "NK",
+          "NA",
+          "TL"
+        ],
+        "subclass_ok": false,
+        "main_ok": true,
+        "hits": [
+          "architecture",
+          "cathedrals",
+          "vaults",
+          "flying",
+          "stained glass"
+        ]
+      },
+      {
+        "id": "f31",
+        "expect": "HG",
+        "got_top3": [
+          "HG",
+          "HQ",
+          "QK"
+        ],
+        "subclass_ok": true,
+        "main_ok": true,
+        "hits": [
+          "personal finance",
+          "investments",
+          "stock",
+          "retirement planning",
+          "mutual funds"
+        ]
+      },
+      {
+        "id": "f32",
+        "expect": "MT",
+        "got_top3": [
+          "ML",
+          "MT",
+          "QA"
+        ],
+        "subclass_ok": false,
+        "main_ok": true,
+        "hits": [
+          "music theory",
+          "harmony",
+          "counterpoint",
+          "musical form",
+          "composers"
+        ]
+      },
+      {
+        "id": "f33",
+        "expect": "BJ",
+        "got_top3": [
+          "BJ",
+          "B",
+          "BD"
+        ],
+        "subclass_ok": true,
+        "main_ok": true,
+        "hits": [
+          "ethics",
+          "moral philosophy",
+          "virtue",
+          "utilitarianism",
+          "life"
+        ]
+      },
+      {
+        "id": "f34",
+        "expect": "BF",
+        "got_top3": [
+          "BF",
+          "LB",
+          "QP"
+        ],
+        "subclass_ok": true,
+        "main_ok": true,
+        "hits": [
+          "psychology",
+          "memory",
+          "cognition",
+          "attention",
+          "perception",
+          "learning"
+        ]
+      },
+      {
+        "id": "f35",
+        "expect": "TK",
+        "got_top3": [
+          "TK",
+          "TH",
+          "TJ"
+        ],
+        "subclass_ok": true,
+        "main_ok": true,
+        "hits": [
+          "electric power systems",
+          "transmission lines",
+          "electric transformers",
+          "power plants"
+        ]
+      },
+      {
+        "id": "f36",
+        "expect": "U",
+        "got_top3": [
+          "U",
+          "N",
+          "TP"
+        ],
+        "subclass_ok": true,
+        "main_ok": true,
+        "hits": [
+          "military strategy",
+          "tactics",
+          "guerrilla warfare",
+          "art",
+          "war"
+        ]
+      },
+      {
+        "id": "f37",
+        "expect": "GA",
+        "got_top3": [
+          "G",
+          "GA",
+          "GN"
+        ],
+        "subclass_ok": false,
+        "main_ok": true,
+        "hits": [
+          "cartography",
+          "map",
+          "projections",
+          "topographic maps",
+          "geographic information systems"
+        ]
+      },
+      {
+        "id": "f38",
+        "expect": "RK",
+        "got_top3": [
+          "RK"
+        ],
+        "subclass_ok": true,
+        "main_ok": true,
+        "hits": [
+          "dentistry",
+          "dental caries",
+          "periodontics",
+          "oral surgery"
+        ]
+      }
+    ]
+  },
+  "self_check": {
+    "sampled": 1997,
+    "heading_recovered": 1997,
+    "own_subclass_top1": 1966,
+    "misses": []
+  }
+}

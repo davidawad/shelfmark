@@ -1,0 +1,196 @@
+# arXiv category -> LCC class. Hand-assigned 2026-10-07 from the LCC
+# schedules; NOT librarian-reviewed. Columns:
+#   category  arXiv category, legacy archive, or bare archive (fallback when
+#             only the archive is known, e.g. old-style IDs like cond-mat/0101001)
+#   lcc       LCC class (letters + number, optional topical Cutter); empty on alias rows
+#   fit       exact = the class covers the category; broad = nearest enclosing class
+#   alias_of  canonical category this row resolves through (arXiv aliases and
+#             discontinued legacy archives); empty otherwise
+#   heading   the LCSH-style heading the class stands for (review aid)
+category	lcc	fit	alias_of	heading
+cs.AI	Q335	exact		Artificial intelligence
+cs.AR	QA76.9.A73	exact		Computer architecture
+cs.CC	QA267.7	exact		Computational complexity
+cs.CE	TA345	broad		Engineering -- Data processing
+cs.CG	QA448.D38	exact		Geometry -- Data processing
+cs.CL	P98	exact		Computational linguistics
+cs.CR	QA76.9.A25	exact		Computer security
+cs.CV	TA1634	exact		Computer vision
+cs.CY	QA76.9.C66	exact		Computers -- Social aspects
+cs.DB	QA76.9.D3	exact		Database management
+cs.DC	QA76.9.D5	exact		Electronic data processing -- Distributed processing
+cs.DL	ZA4080	exact		Digital libraries
+cs.DM	QA297.4	exact		Computer science -- Mathematics
+cs.DS	QA76.9.A43	broad		Computer algorithms (data structures: QA76.9.D35)
+cs.ET	QA76	broad		Computer science
+cs.FL	QA267.3	exact		Formal languages
+cs.GL	QA76	broad		Computer science
+cs.GR	T385	exact		Computer graphics
+cs.GT	QA269	exact		Game theory
+cs.HC	QA76.9.H85	exact		Human-computer interaction
+cs.IR	ZA3075	exact		Information retrieval
+cs.IT	Q360	exact		Information theory
+cs.LG	Q325.5	exact		Machine learning
+cs.LO	QA76.9.L63	exact		Computer science -- Logic
+cs.MA	QA76.76.I58	exact		Intelligent agents (Computer software)
+cs.MM	QA76.575	exact		Multimedia systems
+cs.MS	QA76.95	exact		Mathematics -- Computer programs
+cs.NA		exact	math.NA	arXiv alias
+cs.NE	QA76.87	exact		Neural networks (Computer science)
+cs.NI	TK5105.5	exact		Computer networks
+cs.OH	QA76	broad		Computer science
+cs.OS	QA76.77	exact		Operating systems (Computers)
+cs.PF	QA76.9.E94	broad		Computer systems -- Evaluation
+cs.PL	QA76.7	exact		Programming languages (Electronic computers)
+cs.RO	TJ211	exact		Robotics
+cs.SC	QA155.7.E4	exact		Algebra -- Data processing
+cs.SD	TK7881.4	broad		Sound -- Recording and reproducing -- Digital techniques
+cs.SE	QA76.758	exact		Software engineering
+cs.SI	HM741	broad		Social networks
+cs.SY		exact	eess.SY	arXiv alias
+econ.EM	HB139	exact		Econometrics
+econ.GN	HB71	broad		Economics
+econ.TH	HB171	broad		Economics -- Theory
+eess.AS	TK7882.S65	exact		Speech processing systems
+eess.IV	TA1637	exact		Image processing
+eess.SP	TK5102.9	exact		Signal processing
+eess.SY	TJ213	broad		Automatic control
+math.AC	QA251.3	exact		Commutative algebra
+math.AG	QA564	exact		Geometry, Algebraic
+math.AP	QA377	exact		Differential equations, Partial
+math.AT	QA612	exact		Algebraic topology
+math.CA	QA300	broad		Mathematical analysis (ODEs: QA372)
+math.CO	QA164	exact		Combinatorial analysis
+math.CT	QA169	exact		Categories (Mathematics)
+math.CV	QA331.7	exact		Functions of complex variables
+math.DG	QA641	exact		Geometry, Differential
+math.DS	QA614.8	exact		Differentiable dynamical systems
+math.FA	QA320	exact		Functional analysis
+math.GM	QA	broad		Mathematics
+math.GN	QA611	exact		Topology
+math.GR	QA174.2	exact		Group theory
+math.GT	QA612.14	broad		Low-dimensional topology
+math.HO	QA21	broad		Mathematics -- History
+math.IT		exact	cs.IT	arXiv alias
+math.KT	QA612.33	exact		K-theory
+math.LO	QA9	exact		Logic, Symbolic and mathematical
+math.MG	QA611.28	broad		Metric spaces
+math.MP		exact	math-ph	arXiv alias
+math.NA	QA297	exact		Numerical analysis
+math.NT	QA241	exact		Number theory
+math.OA	QA326	exact		Operator algebras
+math.OC	QA402.5	exact		Mathematical optimization
+math.PR	QA273	exact		Probabilities
+math.QA	QC20.7.G76	broad		Quantum groups
+math.RA	QA247	broad		Rings (Algebra)
+math.RT	QA176	exact		Representations of groups
+math.SG	QA665	exact		Symplectic geometry
+math.SP	QA320	broad		Spectral theory (Mathematics)
+math.ST	QA276	exact		Mathematical statistics
+astro-ph.CO	QB981	exact		Cosmology
+astro-ph.EP	QB600	broad		Planets
+astro-ph.GA	QB857	exact		Galaxies
+astro-ph.HE	QB464	broad		High energy astrophysics
+astro-ph.IM	QB86	broad		Astronomical instruments
+astro-ph.SR	QB801	broad		Stars
+cond-mat.dis-nn	QC173.454	broad		Condensed matter
+cond-mat.mes-hall	QC176.8.M46	exact		Mesoscopic phenomena (Physics)
+cond-mat.mtrl-sci	TA403	exact		Materials science
+cond-mat.other	QC173.454	broad		Condensed matter
+cond-mat.quant-gas	QC175.47	broad		Bose-Einstein condensation
+cond-mat.soft	QC173.458.S62	exact		Soft condensed matter
+cond-mat.stat-mech	QC174.7	exact		Statistical mechanics
+cond-mat.str-el	QC176.8.E4	broad		Electrons -- Solids
+cond-mat.supr-con	QC611.9	exact		Superconductivity
+gr-qc	QC173.6	exact		General relativity (Physics)
+hep-ex	QC793	broad		Particles (Nuclear physics)
+hep-lat	QC793.3	broad		Particles (Nuclear physics) -- lattice gauge theories
+hep-ph	QC793	broad		Particles (Nuclear physics)
+hep-th	QC174.45	broad		Quantum field theory
+math-ph	QC20	exact		Mathematical physics
+nlin.AO	Q325	broad		Self-organizing systems
+nlin.CD	Q172.5.C45	exact		Chaotic behavior in systems
+nlin.CG	QA267.5.C45	exact		Cellular automata
+nlin.PS	QC174.26.W28	broad		Solitons
+nlin.SI	QA614.83	broad		Hamiltonian systems
+nucl-ex	QC776	broad		Nuclear physics
+nucl-th	QC776	broad		Nuclear physics
+physics.acc-ph	QC787.P3	exact		Particle accelerators
+physics.ao-ph	QC861	broad		Atmosphere
+physics.app-ph	QC	broad		Physics
+physics.atm-clus	QC173.4	broad		Matter -- Properties (atomic clusters)
+physics.atom-ph	QC173	broad		Atoms
+physics.bio-ph	QH505	exact		Biophysics
+physics.chem-ph	QD453	broad		Chemistry, Physical and theoretical
+physics.class-ph	QC21	broad		Physics
+physics.comp-ph	QC52	exact		Physics -- Data processing
+physics.data-an	QC20.7.S8	broad		Physics -- Statistical methods
+physics.ed-ph	QC30	exact		Physics -- Study and teaching
+physics.flu-dyn	QA911	exact		Fluid dynamics
+physics.gen-ph	QC21	broad		Physics
+physics.geo-ph	QC806	exact		Geophysics
+physics.hist-ph	QC7	broad		Physics -- History
+physics.ins-det	QC787.C6	broad		Nuclear counters (particle detectors)
+physics.med-ph	R895	exact		Medical physics
+physics.optics	QC350	exact		Optics
+physics.plasm-ph	QC717.6	exact		Plasma (Ionized gases)
+physics.pop-ph	QC24.5	exact		Physics -- Popular works
+physics.soc-ph	H61.25	broad		Social sciences -- Mathematical models
+physics.space-ph	QB500	broad		Space sciences
+quant-ph	QC174.12	exact		Quantum theory
+q-bio.BM	QP514.2	broad		Biochemistry (biomolecules)
+q-bio.CB	QH581.2	broad		Cytology
+q-bio.GN	QH447	exact		Genomics
+q-bio.MN	QH506	broad		Molecular biology
+q-bio.NC	QP356	broad		Neurophysiology
+q-bio.OT	QH	broad		Natural history. Biology
+q-bio.PE	QH366.2	broad		Evolution (Biology)
+q-bio.QM	QH323.5	exact		Biology -- Mathematical models
+q-bio.SC	QH581.2	broad		Cytology
+q-bio.TO	QP88	broad		Tissues
+q-fin.CP	HG106	broad		Finance -- Mathematical models
+q-fin.EC		exact	econ.GN	arXiv alias
+q-fin.GN	HG173	broad		Finance
+q-fin.MF	HG106	exact		Finance -- Mathematical models
+q-fin.PM	HG4529.5	exact		Portfolio management
+q-fin.PR	HG4636	broad		Securities -- Prices
+q-fin.RM	HD61	broad		Risk management
+q-fin.ST	HG106	broad		Finance -- Statistical methods
+q-fin.TR	HG4551	broad		Stock exchanges
+stat.AP	QA276	broad		Mathematical statistics
+stat.CO	QA276.4	exact		Mathematical statistics -- Data processing
+stat.ME	QA276	broad		Mathematical statistics
+stat.ML	Q325.5	exact		Machine learning
+stat.OT	QA276	broad		Mathematical statistics
+stat.TH		exact	math.ST	arXiv alias
+# Bare archives: fallback when only the archive is known.
+cs	QA76	broad		Computer science
+econ	HB71	broad		Economics
+eess	TK	broad		Electrical engineering
+math	QA	broad		Mathematics
+astro-ph	QB461	broad		Astrophysics
+cond-mat	QC173.454	broad		Condensed matter
+nlin	Q172.5.C45	broad		Nonlinear theories / chaotic behavior in systems
+physics	QC21	broad		Physics
+q-bio	QH324.2	broad		Biology -- Data processing
+q-fin	HG106	broad		Finance -- Mathematical models
+stat	QA276	broad		Mathematical statistics
+# Discontinued legacy archives (pre-2007 identifiers) and their successors.
+acc-phys		exact	physics.acc-ph	legacy archive
+adap-org		exact	nlin.AO	legacy archive
+alg-geom		exact	math.AG	legacy archive
+ao-sci		exact	physics.ao-ph	legacy archive
+atom-ph		exact	physics.atom-ph	legacy archive
+bayes-an		exact	physics.data-an	legacy archive
+chao-dyn		exact	nlin.CD	legacy archive
+chem-ph		exact	physics.chem-ph	legacy archive
+cmp-lg		exact	cs.CL	legacy archive
+comp-gas		exact	nlin.CG	legacy archive
+dg-ga		exact	math.DG	legacy archive
+funct-an		exact	math.FA	legacy archive
+mtrl-th		exact	cond-mat.mtrl-sci	legacy archive
+patt-sol		exact	nlin.PS	legacy archive
+plasm-ph		exact	physics.plasm-ph	legacy archive
+q-alg		exact	math.QA	legacy archive
+solv-int		exact	nlin.SI	legacy archive
+supr-con		exact	cond-mat.supr-con	legacy archive

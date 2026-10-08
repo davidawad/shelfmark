@@ -1,0 +1,32 @@
+id	vocab	kind	pref_label	alt_labels	broader	lcc	lcc_source	same_as	deprecated
+fst00794781	fast	Topical	Absurd (Philosophy)	Absurdity (Philosophy)	fst01060777	B105.A3	lcsh	sh85000261	0
+fst00801355	fast	Topical	Agriculture	Farming|Husbandry	fst00970804|fst00998323	S1-S790.3	lcsh	sh85002415	0
+fst00801766	fast	Topical	Agriculture in art					sh96011082	0
+fst00836869	fast	Topical	Botany	Botanical science|Floristic botany|Phytobiology|Phytography|Phytology|Plant biology|Plant science	fst00832383|fst01034268	QK	lcsh	sh85015976	0
+fst00853501	fast	Topical	Chemistry, Organic	Organic chemistry	fst00853344	QD241-QD441	lcsh	sh85023022	0
+fst00853502	fast	Topical	Chemistry, Organic--Analysis						0
+fst00868596	fast	Topical	Color photography	Chromophotography|Heliochromy|Photography, Color	fst01061714	TR510-TR525	lcsh	sh85028614	0
+fst00887557	fast	Topical	Dance photography		fst01061964	TR817.5	lcsh	sh88003320	0
+fst00902116	fast	Topical	Economics	Economic theory|Political economy	fst01122877	HB1-HB130	lcsh	sh85040850	0
+fst00902499	fast	Topical	Education	Children--Education|Education of children|Education, Primitive|Human resource development|Instruction|Pedagogy|Schooling|Students--Education|Youth--Education	fst00862898			sh85040989	0
+fst00902551	fast	Topical	Education--Costs	School costs	fst00902637|fst01107959			sh85040998	0
+fst00921595	fast	Topical	Fascist economics		fst00902116|fst00921551			sh85047373	0
+fst00932975	fast	Topical	Forms (Mathematics)	Quantics	fst00804885|fst01012163	QA201|QA243-QA244	lcsh	sh85050839	0
+fst00936087	fast	Topical	Functional programming languages		fst01078704			sh86005432	0
+fst00936809	fast	Topical	Fuzzy mathematics		fst01012163			sh98004034	0
+fst00940469	fast	Topical	Geography		fst00880594|fst00900729|fst01181345	G-GF|GN476.4	lcsh	sh85053986	0
+fst00940501	fast	Topical	Geography--Names						0
+fst00982165	fast	Topical	Jazz	Accordion and piano music (Jazz)|Clarinet and piano music (Jazz)|Cornet and piano music (Jazz)|Double bass and piano music (Jazz)|Jazz duets|Jazz ensembles|Jazz music|Jazz nonets|Jazz octets|Jazz quartets|Jazz quintets|Jazz septets|Jazz sextets|Jazz trios|Jive (Music)|Saxophone and piano music (Jazz)|Vibraphone and piano music (Jazz)|Wind instrument and piano music (Jazz)|Xylophone and piano music (Jazz)	fst01030269	M1366|ML3505.8-ML3509	lcsh	sh85069833	0
+fst00993678	fast	Topical	Law	Acts, Legislative|Enactments, Legislative|Law--Regions|Laws (Statutes)|Legislative acts|Legislative enactments				sh85075119	0
+fst00994170	fast	Topical	Law, Ao	Ao law|Law, Ao (Indic people)				sh86007811	0
+fst00997916	fast	Topical	Library science	Librarianship|Library economy		Z665-Z718	lcsh	sh85076723	0
+fst01002058	fast	Topical	Logic programming languages		fst01078704			sh93000022	0
+fst01014893	fast	Topical	Medicine	Clinical sciences|Medical profession	fst00962865|fst00998323	R	lcsh	sh85083064	0
+fst01014904	fast	Topical	Medicine--Awards					sh85083069	0
+fst01030620	fast	Topical	Music theory	Musical theory|Theory of music				sh85088826	0
+fst01034937	fast	Topical	Naval art and science	Fighting|Naval administration|Naval science|Naval warfare|Navy|War, Maritime	fst01170328	V	lcsh	sh85090357	0
+fst01034963	fast	Topical	Naval art and science in the Bible			BS1199.N38	lcsh	sh85090363	0
+fst01050567	fast	Topical	Painting	Oil painting|Painting, Primitive|Painting--Industries|Paintings	fst00946595	ND	lcsh	sh85096661	0
+fst01060777	fast	Topical	Philosophy	Mental philosophy	fst00963588	B-BJ	lcsh	sh85100849	0
+fst01067670	fast	Topical	Pods (Botany)	Seed pods|Seedpods	fst00935548	QK660	lcsh	sh85103691	0
+fst01093763	fast	Topical	Religion	Religion, Primitive		BL48-BL50|GN470-GN474	lcsh	sh85112549	0

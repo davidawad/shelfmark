@@ -1,0 +1,93 @@
+<rdf:RDF xmlns:norm="http://whatever/java/org.oclc.marc.NormalFormC" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:dct="http://purl.org/dc/terms/" xmlns:schema="http://schema.org/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:void="http://rdfs.org/ns/void#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:coord="http://whatever/java/org.oclc.marc.CoordToDecimal" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:madsrdf="http://www.loc.gov/mads/rdf/v1#" xmlns:mx="http://www.loc.gov/MARC21/slim" xmlns:dc="http://purl.org/dc/elements/1.1/" xml:base="http://id.worldcat.org/fast/">
+    <rdf:Description rdf:about="1034937">
+        <dct:identifier>1034937</dct:identifier>
+        <skos:inScheme rdf:resource="ontology/1.0/#fast"/>
+        <rdf:type rdf:resource="http://schema.org/Intangible"/>
+        <skos:inScheme rdf:resource="ontology/1.0/#facet-Topical"/>
+        <skos:prefLabel>Naval art and science</skos:prefLabel>
+        <schema:name>Naval art and science</schema:name>
+        <skos:altLabel>Fighting</skos:altLabel>
+        <schema:name>Fighting</schema:name>
+        <skos:altLabel>Naval administration</skos:altLabel>
+        <schema:name>Naval administration</schema:name>
+        <skos:altLabel>Naval science</skos:altLabel>
+        <schema:name>Naval science</schema:name>
+        <skos:altLabel>Naval warfare</skos:altLabel>
+        <schema:name>Naval warfare</schema:name>
+        <skos:altLabel>Navy</skos:altLabel>
+        <schema:name>Navy</schema:name>
+        <skos:altLabel>War, Maritime</skos:altLabel>
+        <schema:name>War, Maritime</schema:name>
+        <skos:broader>
+            <rdf:Description rdf:about="1170328">
+                <rdfs:label>War</rdfs:label>
+            </rdf:Description>
+        </skos:broader>
+        <skos:related>
+            <rdf:Description rdf:about="1020874">
+                <rdfs:label>Military art and science</rdfs:label>
+            </rdf:Description>
+        </skos:related>
+        <skos:related>
+            <rdf:Description rdf:about="1035077">
+                <rdfs:label>Navies</rdfs:label>
+            </rdf:Description>
+        </skos:related>
+        <skos:related>
+            <rdf:Description rdf:about="1035085">
+                <rdfs:label>Navigation</rdfs:label>
+            </rdf:Description>
+        </skos:related>
+        <skos:relatedMatch>
+            <rdf:Description rdf:about="https://www.wikidata.org/entity/Q5371947"/>
+        </skos:relatedMatch>
+        <skos:relatedMatch>
+            <rdf:Description rdf:about="https://www.wikidata.org/entity/Q4508"/>
+        </skos:relatedMatch>
+        <skos:relatedMatch>
+            <rdf:Description rdf:about="https://www.wikidata.org/entity/Q876274"/>
+        </skos:relatedMatch>
+        <skos:relatedMatch>
+            <rdf:Description rdf:about="https://www.wikidata.org/entity/Q650711"/>
+        </skos:relatedMatch>
+        <schema:sameAs>
+            <rdf:Description rdf:about="http://id.loc.gov/authorities/subjects/sh85090357">
+                <rdfs:label>Naval art and science</rdfs:label>
+            </rdf:Description>
+        </schema:sameAs>
+        <rdfs:seeAlso rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://en.wikipedia.org/wiki/Combat</rdfs:seeAlso>
+        <rdfs:seeAlso rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://en.wikipedia.org/wiki/Naval_warfare</rdfs:seeAlso>
+        <rdfs:seeAlso rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://en.wikipedia.org/wiki/Navy</rdfs:seeAlso>
+        <rdfs:seeAlso rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://en.wikipedia.org/wiki/Paiting</rdfs:seeAlso>
+        <schema:sameAs>
+            <rdf:Description rdf:about="http://data.bnf.fr/ark:/12148/cb11935857v">
+                <rdfs:label>Art et science navals</rdfs:label>
+            </rdf:Description>
+        </schema:sameAs>
+    </rdf:Description>
+    <rdf:Description rdf:about="fst01034937">
+        <rdfs:comment>This identifier is deprecated. See the rdfs:seeAlso link for the new identifier.</rdfs:comment>
+        <rdfs:seeAlso rdf:resource="1034937"/>
+    </rdf:Description>
+    <foaf:Document rdf:about="1034937/rdf.xml">
+        <void:inDataset rdf:resource="http://id.worldcat.org/fast/void/0.1"/>
+        <foaf:primaryTopic rdf:resource="1034937"/>
+        <dc:format>application/rdf+xml</dc:format>
+        <dct:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2004-10-24T00:00:00.0</dct:created>
+        <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-05-11T18:43:30.0</dct:modified>
+        <dct:language rdf:resource="http://lexvo.org/id/iso639-3/eng"/>
+        <skos:changeNote xml:lang="en">Cataloged by agency: OCoLC</skos:changeNote>
+        <skos:changeNote xml:lang="en">Transcribed by agency: OCoLC</skos:changeNote>
+    </foaf:Document>
+    <void:Dataset rdf:about="http://id.worldcat.org/fast/void/0.1">
+        <dct:title>FAST (Faceted Application of Subject Terminology) Data</dct:title>
+        <dct:license>
+            <rdf:Description rdf:about="http://www.oclc.org/research/activities/fast/odcby.htm">
+                <dct:title>Open Data Commons Attribution License (ODC-By) v1.0</dct:title>
+                <rdfs:comment>This is OCLC's "local copy" of the ODC-By license</rdfs:comment>
+                <rdfs:seeAlso rdf:resource="http://opendatacommons.org/licenses/by/#toc-anchor-337-3"/>
+                <owl:sameAs rdf:resource="http://opendatacommons.org/licenses/by/1-0/"/>
+            </rdf:Description>
+        </dct:license>
+    </void:Dataset>
+</rdf:RDF>

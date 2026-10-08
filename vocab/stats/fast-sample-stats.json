@@ -1,0 +1,17 @@
+{
+  "triples": 952,
+  "parse_errors": 0,
+  "subjects": 31,
+  "subjects_without_label": 0,
+  "headings": 31,
+  "by_kind": {
+    "Topical": 31
+  },
+  "with_alt_labels": 20,
+  "with_broader": 21,
+  "with_lcsh_link": 29,
+  "lcsh_links_resolved": 29,
+  "lcsh_links_unresolved": 0,
+  "with_lcc_via_lcsh": 18,
+  "lcsh_table_loaded": true
+}
