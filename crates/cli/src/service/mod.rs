@@ -24,9 +24,13 @@ use crate::describe;
 use crate::store::Store;
 use crate::wiring::Wiring;
 
+/// The store's schemes compiled, under the store's [`Store::schemes_key`].
+type CompiledStore = Option<(String, Vec<Arc<dyn CompiledIndex>>)>;
+
 pub struct Shelfmark {
     wiring: Wiring,
     store: Mutex<Box<dyn Store>>,
+    compiled: Mutex<CompiledStore>,
 }
 
 impl Service for Shelfmark {
@@ -47,6 +51,7 @@ impl Shelfmark {
         Shelfmark {
             wiring,
             store: Mutex::new(store),
+            compiled: Mutex::new(None),
         }
     }
 
@@ -92,13 +97,32 @@ impl Shelfmark {
             .map_err(|_| Error::internal("the store lock was poisoned by an earlier panic"))
     }
 
+    /// The store's schemes compiled, reused while its schemes key holds:
+    /// a batch compiles a large scheme once, not once per request.
+    fn store_indexes(&self, store: &dyn Store) -> Result<Vec<Arc<dyn CompiledIndex>>, Error> {
+        let key = store.schemes_key()?;
+        let mut cache = self
+            .compiled
+            .lock()
+            .map_err(|_| Error::internal("the scheme cache lock was poisoned"))?;
+        if let (Some(k), Some((cached, indexes))) = (&key, cache.as_ref()) {
+            if k == cached {
+                return Ok(indexes.clone());
+            }
+        }
+        let indexes = store
+            .schemes()?
+            .iter()
+            .map(|doc| (self.wiring.compile)(doc))
+            .collect::<Result<Vec<_>, Error>>()?;
+        *cache = key.map(|k| (k, indexes.clone()));
+        Ok(indexes)
+    }
+
     /// Every compiled scheme: the store's (which win on the same ID, being
     /// newer) then the built-in ones.
     fn indexes(&self, store: &dyn Store) -> Result<Vec<Arc<dyn CompiledIndex>>, Error> {
-        let mut out: Vec<Arc<dyn CompiledIndex>> = Vec::new();
-        for doc in store.schemes()? {
-            out.push((self.wiring.compile)(&doc)?);
-        }
+        let mut out = self.store_indexes(store)?;
         for index in &self.wiring.schemes {
             if !out.iter().any(|i| i.scheme() == index.scheme()) {
                 out.push(index.clone());

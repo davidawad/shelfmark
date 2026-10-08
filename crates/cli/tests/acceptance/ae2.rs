@@ -18,7 +18,7 @@ fn no_clear_margin_flags_the_top_class_with_its_candidates() {
     assert_eq!(p["status"], "flagged");
     let mut codes = candidate_codes(p);
     let top = codes[0].clone();
-    assert_eq!(p["class"], format!("class:mini-lcc@2024:{top}"));
+    assert_eq!(p["class"], format!("class:lcc@2024:{top}"));
     codes.sort();
     assert_eq!(codes, ["H", "K"]);
     assert!(p["trace"]["deciding_tier"].is_null());

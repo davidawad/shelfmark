@@ -101,7 +101,7 @@ pub const VERBS: [VerbSpec; 16] = [
     verb(Verb::Resolve, "resolve", Some("id"),
         "Resolve any typed ID (work, item, scheme, class, profile, placement) to what it names",
         &[req("id", "id", "any typed ID")],
-        "shelfmark resolve class:mini-lcc@2024:QA76"),
+        "shelfmark resolve class:lcc@2024:QA76"),
     verb(Verb::Classify, "classify", None,
         "Place a Work into a scheme; appends a memoized machine claim with its trace",
         &[arg("text", "string", "the Work's text"),

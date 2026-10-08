@@ -32,7 +32,7 @@ fn essay() -> Vec<String> {
         "they",
         "need",
         "computer",
-        "programs",
+        "software",
     ];
     (0..10)
         .map(|n| {

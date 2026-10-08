@@ -179,6 +179,21 @@ impl Store for DirStore {
             .collect()
     }
 
+    /// Name, length and modification time of every scheme file.
+    fn schemes_key(&self) -> Result<Option<String>, Error> {
+        let mut key = String::new();
+        for path in self.scheme_files()? {
+            let meta = fs::metadata(&path).map_err(|e| self.error(&path, e))?;
+            let modified = meta
+                .modified()
+                .ok()
+                .and_then(|t| t.duration_since(std::time::UNIX_EPOCH).ok())
+                .map_or(0, |d| d.as_nanos());
+            key.push_str(&format!("{}\0{}\0{modified}\0", path.display(), meta.len()));
+        }
+        Ok(Some(key))
+    }
+
     fn calibration(&self) -> Result<Option<Calibration>, Error> {
         self.read_json("calibration.json")
     }

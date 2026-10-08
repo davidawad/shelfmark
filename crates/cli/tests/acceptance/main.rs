@@ -1,10 +1,11 @@
 //! Acceptance examples AE1-AE8 (plan U13), run end to end through the
 //! `shelfmark` binary against a fresh store each.
 //!
-//! The bundled scheme is the mini-LCC fixture until the LCC outline (U2)
-//! lands, and the identifier table is the U3 fixture table. The kb half of
-//! AE5 and all of AE8 need the kb core resource (U12) and are `#[ignore]`d
-//! as pending; running them with `--ignored` fails on purpose.
+//! The scheme is the bundled LCC outline (U2) and the identifier table is
+//! the U3 fixture table. AE8 (the sharing rule and client-scoped kbs,
+//! R26) and the kb half of AE5 belong to the kb core resource (plan L4),
+//! which runs them against this binary; shelfmark itself knows nothing of
+//! kbs (R14).
 
 mod common;
 
@@ -15,5 +16,4 @@ mod ae4;
 mod ae5;
 mod ae6;
 mod ae7;
-mod ae8;
 mod grpc;

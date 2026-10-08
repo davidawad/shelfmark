@@ -22,8 +22,9 @@ fn pdf_with_an_isbn_is_decided_by_the_identifier_tier() {
     assert_eq!(p["trace"]["deciding_tier"], "identifier");
     assert_eq!(p["confidence"], 1.0);
     assert_eq!(p["status"], "machine");
-    // The table row says QA76.6, which files under the scheme's QA76.
-    assert_eq!(p["class"], "class:mini-lcc@2024:QA76");
+    // The table row says QA76.6, which the LCC outline files under the
+    // span that contains it.
+    assert_eq!(p["class"], "class:lcc@2024:QA75.5-76.95");
     let evidence = &p["trace"]["candidates"][0]["evidence"][0];
     assert_eq!(evidence["identifier"]["type"], "isbn");
     assert_eq!(evidence["identifier"]["value"], "9780262033848");

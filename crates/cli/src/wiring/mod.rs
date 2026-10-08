@@ -1,6 +1,7 @@
 //! What backs the service: the real crates (plan U13).
 //!
-//! Schemes compile through `shelfmark-scheme` (U1). The tiers are U3's
+//! Schemes compile through `shelfmark-scheme` (U1), and the bundled scheme
+//! is the LCC outline (U2, `data/schemes/lcc/lcc.json`). The tiers are U3's
 //! identifier lookup and U4's vocabulary and rules tiers, the profiles
 //! are U5's built-ins, and naming is U8's template with Cutter ordering.
 //! The store directory ([`dir_store::DirStore`]) is U6's placement log
@@ -8,14 +9,15 @@
 //! outside this workspace for now.
 //!
 //! Per-store data the tiers read (plan PD5), both optional:
-//! `<store>/tables/*.jsonl` identifier tables and `<store>/rules.json`.
+//! `<store>/tables/*.jsonl` identifier tables and `<store>/rules.json`
+//! (which replaces the bundled `data/rules/starter.json`).
 
 pub mod dir_store;
 mod tiers;
 
 use std::collections::BTreeMap;
 use std::path::Path;
-use std::sync::Arc;
+use std::sync::{Arc, OnceLock};
 
 use shelfmark_core::calibration::{EvalSummary, GoldExample};
 use shelfmark_core::scheme::{CompiledIndex, SchemeDoc};
@@ -25,7 +27,7 @@ use shelfmark_naming::{Naming, NamingOptions, Work, DEFAULT_TEMPLATE};
 
 use crate::service::Shelfmark;
 
-pub use tiers::{parse_identifier, url_domain, RULES_FILE, TABLES_DIR};
+pub use tiers::{parse_identifier, starter_rules, url_domain, RULES_FILE, TABLES_DIR};
 
 pub type Compiler = fn(&SchemeDoc) -> Result<Arc<dyn CompiledIndex>, Error>;
 /// Folder path and filename for a class, a title and an extension (R22).
@@ -47,8 +49,19 @@ pub struct Wiring {
     pub eval: Option<Evaluator>,
 }
 
-/// The bundled scheme until the LCC outline (U2) lands.
-const MINI_LCC: &str = include_str!("../../../../fixtures/schemes/mini-lcc.json");
+/// The bundled scheme: the LCC outline (U2), `data/schemes/lcc/lcc.json`.
+const LCC: &str = include_str!("../../../../data/schemes/lcc/lcc.json");
+
+/// The bundled LCC outline, compiled once per process.
+pub fn bundled_lcc() -> Arc<dyn CompiledIndex> {
+    static INDEX: OnceLock<Arc<dyn CompiledIndex>> = OnceLock::new();
+    INDEX
+        .get_or_init(|| {
+            let doc: SchemeDoc = serde_json::from_str(LCC).expect("bundled scheme parses");
+            compile(&doc).expect("bundled scheme compiles")
+        })
+        .clone()
+}
 
 /// A service over the real crates, with its store in `dir`.
 pub fn open(dir: &Path) -> Shelfmark {
@@ -57,10 +70,10 @@ pub fn open(dir: &Path) -> Shelfmark {
 
 /// The wiring for a store in `dir`: its tables and rules feed the tiers.
 pub fn wiring(dir: &Path) -> Wiring {
-    let doc: SchemeDoc = serde_json::from_str(MINI_LCC).expect("bundled scheme parses");
     Wiring {
-        schemes: vec![compile(&doc).expect("bundled scheme compiles")],
-        known: vec![(SchemeId::new("lcc", "2024"), None)],
+        schemes: vec![bundled_lcc()],
+        // FAST is planned (R5) but not bundled in v1 (plan PD7).
+        known: vec![(SchemeId::new("fast", "2024"), None)],
         compile,
         profiles: shelfmark_profile::builtins(),
         tiers: tiers::registry(dir),

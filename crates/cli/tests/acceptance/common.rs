@@ -15,6 +15,13 @@ pub fn fixture(rel: &str) -> PathBuf {
         .join(rel)
 }
 
+/// The bundled data directory of the workspace (`data/`).
+pub fn data(rel: &str) -> PathBuf {
+    Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("../../data")
+        .join(rel)
+}
+
 /// A scratch directory holding a store (`store/`) and input files.
 pub struct Bench {
     pub dir: PathBuf,

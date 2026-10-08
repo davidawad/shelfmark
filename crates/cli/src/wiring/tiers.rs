@@ -13,10 +13,22 @@ use shelfmark_tier_lexical::{RulesConfig, RulesTier, VocabTier};
 
 /// Identifier tables directory inside a store (PD5).
 pub const TABLES_DIR: &str = "tables";
-/// Rules file inside a store.
+/// Rules file inside a store; it replaces the bundled starter rules.
 pub const RULES_FILE: &str = "rules.json";
 
-/// `identifier`, `vocab` and `rules`. A table or rules file that does not
+/// The bundled starter rules (`data/rules/starter.json`): arXiv category
+/// stamps and URL domains to LCC, generated from the identifier spike's
+/// hand-assigned, not yet librarian-reviewed maps. A `decide` rule weighs
+/// 0.9 and a `hint` 0.4.
+const STARTER_RULES: &str = include_str!("../../../../data/rules/starter.json");
+
+/// The bundled starter rules as a rules file.
+pub fn starter_rules() -> RulesConfig {
+    serde_json::from_str(STARTER_RULES).expect("bundled rules parse")
+}
+
+/// `identifier`, `vocab` and `rules` (the store's `rules.json`, else the
+/// bundled starter rules). A table or rules file that does not
 /// load leaves a tier that reports why on every run, so the error reaches
 /// the caller with its code instead of being dropped at startup.
 pub fn registry(dir: &Path) -> BTreeMap<String, Arc<dyn Tier>> {
@@ -31,7 +43,7 @@ pub fn registry(dir: &Path) -> BTreeMap<String, Arc<dyn Tier>> {
             Err(e) => Arc::new(Broken::new(RulesTier::NAME, e)),
         }
     } else {
-        Arc::new(RulesTier::from_config(&RulesConfig::default()).expect("empty rules compile"))
+        Arc::new(RulesTier::from_config(&starter_rules()).expect("bundled rules compile"))
     };
     let tiers: [(&str, Arc<dyn Tier>); 3] = [
         (shelfmark_tier_identifier::NAME, identifier),

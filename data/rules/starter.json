@@ -1,0 +1,1900 @@
+{
+  "rules": [
+    {
+      "class": "QC787.P3",
+      "id": "arxiv:acc-phys",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[acc\\-phys\\]|acc\\-phys/\\d{7})"
+      }
+    },
+    {
+      "class": "Q325",
+      "id": "arxiv:adap-org",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[adap\\-org\\]|adap\\-org/\\d{7})"
+      }
+    },
+    {
+      "class": "QA564",
+      "id": "arxiv:alg-geom",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[alg\\-geom\\]|alg\\-geom/\\d{7})"
+      }
+    },
+    {
+      "class": "QC861",
+      "id": "arxiv:ao-sci",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[ao\\-sci\\]|ao\\-sci/\\d{7})"
+      }
+    },
+    {
+      "class": "QB461",
+      "id": "arxiv:astro-ph",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[astro\\-ph\\]|astro\\-ph/\\d{7})"
+      }
+    },
+    {
+      "class": "QB981",
+      "id": "arxiv:astro-ph.CO",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[astro\\-ph\\.CO\\]|astro\\-ph\\.CO/\\d{7})"
+      }
+    },
+    {
+      "class": "QB600",
+      "id": "arxiv:astro-ph.EP",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[astro\\-ph\\.EP\\]|astro\\-ph\\.EP/\\d{7})"
+      }
+    },
+    {
+      "class": "QB857",
+      "id": "arxiv:astro-ph.GA",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[astro\\-ph\\.GA\\]|astro\\-ph\\.GA/\\d{7})"
+      }
+    },
+    {
+      "class": "QB464",
+      "id": "arxiv:astro-ph.HE",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[astro\\-ph\\.HE\\]|astro\\-ph\\.HE/\\d{7})"
+      }
+    },
+    {
+      "class": "QB86",
+      "id": "arxiv:astro-ph.IM",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[astro\\-ph\\.IM\\]|astro\\-ph\\.IM/\\d{7})"
+      }
+    },
+    {
+      "class": "QB801",
+      "id": "arxiv:astro-ph.SR",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[astro\\-ph\\.SR\\]|astro\\-ph\\.SR/\\d{7})"
+      }
+    },
+    {
+      "class": "QC173",
+      "id": "arxiv:atom-ph",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[atom\\-ph\\]|atom\\-ph/\\d{7})"
+      }
+    },
+    {
+      "class": "QC20.7.S8",
+      "id": "arxiv:bayes-an",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[bayes\\-an\\]|bayes\\-an/\\d{7})"
+      }
+    },
+    {
+      "class": "Q172.5.C45",
+      "id": "arxiv:chao-dyn",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[chao\\-dyn\\]|chao\\-dyn/\\d{7})"
+      }
+    },
+    {
+      "class": "QD453",
+      "id": "arxiv:chem-ph",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[chem\\-ph\\]|chem\\-ph/\\d{7})"
+      }
+    },
+    {
+      "class": "P98",
+      "id": "arxiv:cmp-lg",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cmp\\-lg\\]|cmp\\-lg/\\d{7})"
+      }
+    },
+    {
+      "class": "QA267.5.C45",
+      "id": "arxiv:comp-gas",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[comp\\-gas\\]|comp\\-gas/\\d{7})"
+      }
+    },
+    {
+      "class": "QC173.454",
+      "id": "arxiv:cond-mat",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cond\\-mat\\]|cond\\-mat/\\d{7})"
+      }
+    },
+    {
+      "class": "QC173.454",
+      "id": "arxiv:cond-mat.dis-nn",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cond\\-mat\\.dis\\-nn\\]|cond\\-mat\\.dis\\-nn/\\d{7})"
+      }
+    },
+    {
+      "class": "QC176.8.M46",
+      "id": "arxiv:cond-mat.mes-hall",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cond\\-mat\\.mes\\-hall\\]|cond\\-mat\\.mes\\-hall/\\d{7})"
+      }
+    },
+    {
+      "class": "TA403",
+      "id": "arxiv:cond-mat.mtrl-sci",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cond\\-mat\\.mtrl\\-sci\\]|cond\\-mat\\.mtrl\\-sci/\\d{7})"
+      }
+    },
+    {
+      "class": "QC173.454",
+      "id": "arxiv:cond-mat.other",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cond\\-mat\\.other\\]|cond\\-mat\\.other/\\d{7})"
+      }
+    },
+    {
+      "class": "QC175.47",
+      "id": "arxiv:cond-mat.quant-gas",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cond\\-mat\\.quant\\-gas\\]|cond\\-mat\\.quant\\-gas/\\d{7})"
+      }
+    },
+    {
+      "class": "QC173.458.S62",
+      "id": "arxiv:cond-mat.soft",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cond\\-mat\\.soft\\]|cond\\-mat\\.soft/\\d{7})"
+      }
+    },
+    {
+      "class": "QC174.7",
+      "id": "arxiv:cond-mat.stat-mech",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cond\\-mat\\.stat\\-mech\\]|cond\\-mat\\.stat\\-mech/\\d{7})"
+      }
+    },
+    {
+      "class": "QC176.8.E4",
+      "id": "arxiv:cond-mat.str-el",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cond\\-mat\\.str\\-el\\]|cond\\-mat\\.str\\-el/\\d{7})"
+      }
+    },
+    {
+      "class": "QC611.9",
+      "id": "arxiv:cond-mat.supr-con",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cond\\-mat\\.supr\\-con\\]|cond\\-mat\\.supr\\-con/\\d{7})"
+      }
+    },
+    {
+      "class": "QA76",
+      "id": "arxiv:cs",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\]|cs/\\d{7})"
+      }
+    },
+    {
+      "class": "Q335",
+      "id": "arxiv:cs.AI",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.AI\\]|cs\\.AI/\\d{7})"
+      }
+    },
+    {
+      "class": "QA76.9.A73",
+      "id": "arxiv:cs.AR",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.AR\\]|cs\\.AR/\\d{7})"
+      }
+    },
+    {
+      "class": "QA267.7",
+      "id": "arxiv:cs.CC",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.CC\\]|cs\\.CC/\\d{7})"
+      }
+    },
+    {
+      "class": "TA345",
+      "id": "arxiv:cs.CE",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.CE\\]|cs\\.CE/\\d{7})"
+      }
+    },
+    {
+      "class": "QA448.D38",
+      "id": "arxiv:cs.CG",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.CG\\]|cs\\.CG/\\d{7})"
+      }
+    },
+    {
+      "class": "P98",
+      "id": "arxiv:cs.CL",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.CL\\]|cs\\.CL/\\d{7})"
+      }
+    },
+    {
+      "class": "QA76.9.A25",
+      "id": "arxiv:cs.CR",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.CR\\]|cs\\.CR/\\d{7})"
+      }
+    },
+    {
+      "class": "TA1634",
+      "id": "arxiv:cs.CV",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.CV\\]|cs\\.CV/\\d{7})"
+      }
+    },
+    {
+      "class": "QA76.9.C66",
+      "id": "arxiv:cs.CY",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.CY\\]|cs\\.CY/\\d{7})"
+      }
+    },
+    {
+      "class": "QA76.9.D3",
+      "id": "arxiv:cs.DB",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.DB\\]|cs\\.DB/\\d{7})"
+      }
+    },
+    {
+      "class": "QA76.9.D5",
+      "id": "arxiv:cs.DC",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.DC\\]|cs\\.DC/\\d{7})"
+      }
+    },
+    {
+      "class": "ZA4080",
+      "id": "arxiv:cs.DL",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.DL\\]|cs\\.DL/\\d{7})"
+      }
+    },
+    {
+      "class": "QA297.4",
+      "id": "arxiv:cs.DM",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.DM\\]|cs\\.DM/\\d{7})"
+      }
+    },
+    {
+      "class": "QA76.9.A43",
+      "id": "arxiv:cs.DS",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.DS\\]|cs\\.DS/\\d{7})"
+      }
+    },
+    {
+      "class": "QA76",
+      "id": "arxiv:cs.ET",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.ET\\]|cs\\.ET/\\d{7})"
+      }
+    },
+    {
+      "class": "QA267.3",
+      "id": "arxiv:cs.FL",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.FL\\]|cs\\.FL/\\d{7})"
+      }
+    },
+    {
+      "class": "QA76",
+      "id": "arxiv:cs.GL",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.GL\\]|cs\\.GL/\\d{7})"
+      }
+    },
+    {
+      "class": "T385",
+      "id": "arxiv:cs.GR",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.GR\\]|cs\\.GR/\\d{7})"
+      }
+    },
+    {
+      "class": "QA269",
+      "id": "arxiv:cs.GT",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.GT\\]|cs\\.GT/\\d{7})"
+      }
+    },
+    {
+      "class": "QA76.9.H85",
+      "id": "arxiv:cs.HC",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.HC\\]|cs\\.HC/\\d{7})"
+      }
+    },
+    {
+      "class": "ZA3075",
+      "id": "arxiv:cs.IR",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.IR\\]|cs\\.IR/\\d{7})"
+      }
+    },
+    {
+      "class": "Q360",
+      "id": "arxiv:cs.IT",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.IT\\]|cs\\.IT/\\d{7})"
+      }
+    },
+    {
+      "class": "Q325.5",
+      "id": "arxiv:cs.LG",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.LG\\]|cs\\.LG/\\d{7})"
+      }
+    },
+    {
+      "class": "QA76.9.L63",
+      "id": "arxiv:cs.LO",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.LO\\]|cs\\.LO/\\d{7})"
+      }
+    },
+    {
+      "class": "QA76.76.I58",
+      "id": "arxiv:cs.MA",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.MA\\]|cs\\.MA/\\d{7})"
+      }
+    },
+    {
+      "class": "QA76.575",
+      "id": "arxiv:cs.MM",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.MM\\]|cs\\.MM/\\d{7})"
+      }
+    },
+    {
+      "class": "QA76.95",
+      "id": "arxiv:cs.MS",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.MS\\]|cs\\.MS/\\d{7})"
+      }
+    },
+    {
+      "class": "QA297",
+      "id": "arxiv:cs.NA",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.NA\\]|cs\\.NA/\\d{7})"
+      }
+    },
+    {
+      "class": "QA76.87",
+      "id": "arxiv:cs.NE",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.NE\\]|cs\\.NE/\\d{7})"
+      }
+    },
+    {
+      "class": "TK5105.5",
+      "id": "arxiv:cs.NI",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.NI\\]|cs\\.NI/\\d{7})"
+      }
+    },
+    {
+      "class": "QA76",
+      "id": "arxiv:cs.OH",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.OH\\]|cs\\.OH/\\d{7})"
+      }
+    },
+    {
+      "class": "QA76.77",
+      "id": "arxiv:cs.OS",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.OS\\]|cs\\.OS/\\d{7})"
+      }
+    },
+    {
+      "class": "QA76.9.E94",
+      "id": "arxiv:cs.PF",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.PF\\]|cs\\.PF/\\d{7})"
+      }
+    },
+    {
+      "class": "QA76.7",
+      "id": "arxiv:cs.PL",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.PL\\]|cs\\.PL/\\d{7})"
+      }
+    },
+    {
+      "class": "TJ211",
+      "id": "arxiv:cs.RO",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.RO\\]|cs\\.RO/\\d{7})"
+      }
+    },
+    {
+      "class": "QA155.7.E4",
+      "id": "arxiv:cs.SC",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.SC\\]|cs\\.SC/\\d{7})"
+      }
+    },
+    {
+      "class": "TK7881.4",
+      "id": "arxiv:cs.SD",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.SD\\]|cs\\.SD/\\d{7})"
+      }
+    },
+    {
+      "class": "QA76.758",
+      "id": "arxiv:cs.SE",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.SE\\]|cs\\.SE/\\d{7})"
+      }
+    },
+    {
+      "class": "HM741",
+      "id": "arxiv:cs.SI",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.SI\\]|cs\\.SI/\\d{7})"
+      }
+    },
+    {
+      "class": "TJ213",
+      "id": "arxiv:cs.SY",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[cs\\.SY\\]|cs\\.SY/\\d{7})"
+      }
+    },
+    {
+      "class": "QA641",
+      "id": "arxiv:dg-ga",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[dg\\-ga\\]|dg\\-ga/\\d{7})"
+      }
+    },
+    {
+      "class": "HB71",
+      "id": "arxiv:econ",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[econ\\]|econ/\\d{7})"
+      }
+    },
+    {
+      "class": "HB139",
+      "id": "arxiv:econ.EM",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[econ\\.EM\\]|econ\\.EM/\\d{7})"
+      }
+    },
+    {
+      "class": "HB71",
+      "id": "arxiv:econ.GN",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[econ\\.GN\\]|econ\\.GN/\\d{7})"
+      }
+    },
+    {
+      "class": "HB171",
+      "id": "arxiv:econ.TH",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[econ\\.TH\\]|econ\\.TH/\\d{7})"
+      }
+    },
+    {
+      "class": "TK",
+      "id": "arxiv:eess",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[eess\\]|eess/\\d{7})"
+      }
+    },
+    {
+      "class": "TK7882.S65",
+      "id": "arxiv:eess.AS",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[eess\\.AS\\]|eess\\.AS/\\d{7})"
+      }
+    },
+    {
+      "class": "TA1637",
+      "id": "arxiv:eess.IV",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[eess\\.IV\\]|eess\\.IV/\\d{7})"
+      }
+    },
+    {
+      "class": "TK5102.9",
+      "id": "arxiv:eess.SP",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[eess\\.SP\\]|eess\\.SP/\\d{7})"
+      }
+    },
+    {
+      "class": "TJ213",
+      "id": "arxiv:eess.SY",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[eess\\.SY\\]|eess\\.SY/\\d{7})"
+      }
+    },
+    {
+      "class": "QA320",
+      "id": "arxiv:funct-an",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[funct\\-an\\]|funct\\-an/\\d{7})"
+      }
+    },
+    {
+      "class": "QC173.6",
+      "id": "arxiv:gr-qc",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[gr\\-qc\\]|gr\\-qc/\\d{7})"
+      }
+    },
+    {
+      "class": "QC793",
+      "id": "arxiv:hep-ex",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[hep\\-ex\\]|hep\\-ex/\\d{7})"
+      }
+    },
+    {
+      "class": "QC793.3",
+      "id": "arxiv:hep-lat",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[hep\\-lat\\]|hep\\-lat/\\d{7})"
+      }
+    },
+    {
+      "class": "QC793",
+      "id": "arxiv:hep-ph",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[hep\\-ph\\]|hep\\-ph/\\d{7})"
+      }
+    },
+    {
+      "class": "QC174.45",
+      "id": "arxiv:hep-th",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[hep\\-th\\]|hep\\-th/\\d{7})"
+      }
+    },
+    {
+      "class": "QA",
+      "id": "arxiv:math",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[math\\]|math/\\d{7})"
+      }
+    },
+    {
+      "class": "QC20",
+      "id": "arxiv:math-ph",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[math\\-ph\\]|math\\-ph/\\d{7})"
+      }
+    },
+    {
+      "class": "QA251.3",
+      "id": "arxiv:math.AC",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[math\\.AC\\]|math\\.AC/\\d{7})"
+      }
+    },
+    {
+      "class": "QA564",
+      "id": "arxiv:math.AG",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[math\\.AG\\]|math\\.AG/\\d{7})"
+      }
+    },
+    {
+      "class": "QA377",
+      "id": "arxiv:math.AP",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[math\\.AP\\]|math\\.AP/\\d{7})"
+      }
+    },
+    {
+      "class": "QA612",
+      "id": "arxiv:math.AT",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[math\\.AT\\]|math\\.AT/\\d{7})"
+      }
+    },
+    {
+      "class": "QA300",
+      "id": "arxiv:math.CA",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[math\\.CA\\]|math\\.CA/\\d{7})"
+      }
+    },
+    {
+      "class": "QA164",
+      "id": "arxiv:math.CO",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[math\\.CO\\]|math\\.CO/\\d{7})"
+      }
+    },
+    {
+      "class": "QA169",
+      "id": "arxiv:math.CT",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[math\\.CT\\]|math\\.CT/\\d{7})"
+      }
+    },
+    {
+      "class": "QA331.7",
+      "id": "arxiv:math.CV",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[math\\.CV\\]|math\\.CV/\\d{7})"
+      }
+    },
+    {
+      "class": "QA641",
+      "id": "arxiv:math.DG",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[math\\.DG\\]|math\\.DG/\\d{7})"
+      }
+    },
+    {
+      "class": "QA614.8",
+      "id": "arxiv:math.DS",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[math\\.DS\\]|math\\.DS/\\d{7})"
+      }
+    },
+    {
+      "class": "QA320",
+      "id": "arxiv:math.FA",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[math\\.FA\\]|math\\.FA/\\d{7})"
+      }
+    },
+    {
+      "class": "QA",
+      "id": "arxiv:math.GM",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[math\\.GM\\]|math\\.GM/\\d{7})"
+      }
+    },
+    {
+      "class": "QA611",
+      "id": "arxiv:math.GN",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[math\\.GN\\]|math\\.GN/\\d{7})"
+      }
+    },
+    {
+      "class": "QA174.2",
+      "id": "arxiv:math.GR",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[math\\.GR\\]|math\\.GR/\\d{7})"
+      }
+    },
+    {
+      "class": "QA612.14",
+      "id": "arxiv:math.GT",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[math\\.GT\\]|math\\.GT/\\d{7})"
+      }
+    },
+    {
+      "class": "QA21",
+      "id": "arxiv:math.HO",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[math\\.HO\\]|math\\.HO/\\d{7})"
+      }
+    },
+    {
+      "class": "Q360",
+      "id": "arxiv:math.IT",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[math\\.IT\\]|math\\.IT/\\d{7})"
+      }
+    },
+    {
+      "class": "QA612.33",
+      "id": "arxiv:math.KT",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[math\\.KT\\]|math\\.KT/\\d{7})"
+      }
+    },
+    {
+      "class": "QA9",
+      "id": "arxiv:math.LO",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[math\\.LO\\]|math\\.LO/\\d{7})"
+      }
+    },
+    {
+      "class": "QA611.28",
+      "id": "arxiv:math.MG",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[math\\.MG\\]|math\\.MG/\\d{7})"
+      }
+    },
+    {
+      "class": "QC20",
+      "id": "arxiv:math.MP",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[math\\.MP\\]|math\\.MP/\\d{7})"
+      }
+    },
+    {
+      "class": "QA297",
+      "id": "arxiv:math.NA",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[math\\.NA\\]|math\\.NA/\\d{7})"
+      }
+    },
+    {
+      "class": "QA241",
+      "id": "arxiv:math.NT",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[math\\.NT\\]|math\\.NT/\\d{7})"
+      }
+    },
+    {
+      "class": "QA326",
+      "id": "arxiv:math.OA",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[math\\.OA\\]|math\\.OA/\\d{7})"
+      }
+    },
+    {
+      "class": "QA402.5",
+      "id": "arxiv:math.OC",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[math\\.OC\\]|math\\.OC/\\d{7})"
+      }
+    },
+    {
+      "class": "QA273",
+      "id": "arxiv:math.PR",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[math\\.PR\\]|math\\.PR/\\d{7})"
+      }
+    },
+    {
+      "class": "QC20.7.G76",
+      "id": "arxiv:math.QA",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[math\\.QA\\]|math\\.QA/\\d{7})"
+      }
+    },
+    {
+      "class": "QA247",
+      "id": "arxiv:math.RA",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[math\\.RA\\]|math\\.RA/\\d{7})"
+      }
+    },
+    {
+      "class": "QA176",
+      "id": "arxiv:math.RT",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[math\\.RT\\]|math\\.RT/\\d{7})"
+      }
+    },
+    {
+      "class": "QA665",
+      "id": "arxiv:math.SG",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[math\\.SG\\]|math\\.SG/\\d{7})"
+      }
+    },
+    {
+      "class": "QA320",
+      "id": "arxiv:math.SP",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[math\\.SP\\]|math\\.SP/\\d{7})"
+      }
+    },
+    {
+      "class": "QA276",
+      "id": "arxiv:math.ST",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[math\\.ST\\]|math\\.ST/\\d{7})"
+      }
+    },
+    {
+      "class": "TA403",
+      "id": "arxiv:mtrl-th",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[mtrl\\-th\\]|mtrl\\-th/\\d{7})"
+      }
+    },
+    {
+      "class": "Q172.5.C45",
+      "id": "arxiv:nlin",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[nlin\\]|nlin/\\d{7})"
+      }
+    },
+    {
+      "class": "Q325",
+      "id": "arxiv:nlin.AO",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[nlin\\.AO\\]|nlin\\.AO/\\d{7})"
+      }
+    },
+    {
+      "class": "Q172.5.C45",
+      "id": "arxiv:nlin.CD",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[nlin\\.CD\\]|nlin\\.CD/\\d{7})"
+      }
+    },
+    {
+      "class": "QA267.5.C45",
+      "id": "arxiv:nlin.CG",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[nlin\\.CG\\]|nlin\\.CG/\\d{7})"
+      }
+    },
+    {
+      "class": "QC174.26.W28",
+      "id": "arxiv:nlin.PS",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[nlin\\.PS\\]|nlin\\.PS/\\d{7})"
+      }
+    },
+    {
+      "class": "QA614.83",
+      "id": "arxiv:nlin.SI",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[nlin\\.SI\\]|nlin\\.SI/\\d{7})"
+      }
+    },
+    {
+      "class": "QC776",
+      "id": "arxiv:nucl-ex",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[nucl\\-ex\\]|nucl\\-ex/\\d{7})"
+      }
+    },
+    {
+      "class": "QC776",
+      "id": "arxiv:nucl-th",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[nucl\\-th\\]|nucl\\-th/\\d{7})"
+      }
+    },
+    {
+      "class": "QC174.26.W28",
+      "id": "arxiv:patt-sol",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[patt\\-sol\\]|patt\\-sol/\\d{7})"
+      }
+    },
+    {
+      "class": "QC21",
+      "id": "arxiv:physics",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[physics\\]|physics/\\d{7})"
+      }
+    },
+    {
+      "class": "QC787.P3",
+      "id": "arxiv:physics.acc-ph",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[physics\\.acc\\-ph\\]|physics\\.acc\\-ph/\\d{7})"
+      }
+    },
+    {
+      "class": "QC861",
+      "id": "arxiv:physics.ao-ph",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[physics\\.ao\\-ph\\]|physics\\.ao\\-ph/\\d{7})"
+      }
+    },
+    {
+      "class": "QC",
+      "id": "arxiv:physics.app-ph",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[physics\\.app\\-ph\\]|physics\\.app\\-ph/\\d{7})"
+      }
+    },
+    {
+      "class": "QC173.4",
+      "id": "arxiv:physics.atm-clus",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[physics\\.atm\\-clus\\]|physics\\.atm\\-clus/\\d{7})"
+      }
+    },
+    {
+      "class": "QC173",
+      "id": "arxiv:physics.atom-ph",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[physics\\.atom\\-ph\\]|physics\\.atom\\-ph/\\d{7})"
+      }
+    },
+    {
+      "class": "QH505",
+      "id": "arxiv:physics.bio-ph",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[physics\\.bio\\-ph\\]|physics\\.bio\\-ph/\\d{7})"
+      }
+    },
+    {
+      "class": "QD453",
+      "id": "arxiv:physics.chem-ph",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[physics\\.chem\\-ph\\]|physics\\.chem\\-ph/\\d{7})"
+      }
+    },
+    {
+      "class": "QC21",
+      "id": "arxiv:physics.class-ph",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[physics\\.class\\-ph\\]|physics\\.class\\-ph/\\d{7})"
+      }
+    },
+    {
+      "class": "QC52",
+      "id": "arxiv:physics.comp-ph",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[physics\\.comp\\-ph\\]|physics\\.comp\\-ph/\\d{7})"
+      }
+    },
+    {
+      "class": "QC20.7.S8",
+      "id": "arxiv:physics.data-an",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[physics\\.data\\-an\\]|physics\\.data\\-an/\\d{7})"
+      }
+    },
+    {
+      "class": "QC30",
+      "id": "arxiv:physics.ed-ph",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[physics\\.ed\\-ph\\]|physics\\.ed\\-ph/\\d{7})"
+      }
+    },
+    {
+      "class": "QA911",
+      "id": "arxiv:physics.flu-dyn",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[physics\\.flu\\-dyn\\]|physics\\.flu\\-dyn/\\d{7})"
+      }
+    },
+    {
+      "class": "QC21",
+      "id": "arxiv:physics.gen-ph",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[physics\\.gen\\-ph\\]|physics\\.gen\\-ph/\\d{7})"
+      }
+    },
+    {
+      "class": "QC806",
+      "id": "arxiv:physics.geo-ph",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[physics\\.geo\\-ph\\]|physics\\.geo\\-ph/\\d{7})"
+      }
+    },
+    {
+      "class": "QC7",
+      "id": "arxiv:physics.hist-ph",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[physics\\.hist\\-ph\\]|physics\\.hist\\-ph/\\d{7})"
+      }
+    },
+    {
+      "class": "QC787.C6",
+      "id": "arxiv:physics.ins-det",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[physics\\.ins\\-det\\]|physics\\.ins\\-det/\\d{7})"
+      }
+    },
+    {
+      "class": "R895",
+      "id": "arxiv:physics.med-ph",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[physics\\.med\\-ph\\]|physics\\.med\\-ph/\\d{7})"
+      }
+    },
+    {
+      "class": "QC350",
+      "id": "arxiv:physics.optics",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[physics\\.optics\\]|physics\\.optics/\\d{7})"
+      }
+    },
+    {
+      "class": "QC717.6",
+      "id": "arxiv:physics.plasm-ph",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[physics\\.plasm\\-ph\\]|physics\\.plasm\\-ph/\\d{7})"
+      }
+    },
+    {
+      "class": "QC24.5",
+      "id": "arxiv:physics.pop-ph",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[physics\\.pop\\-ph\\]|physics\\.pop\\-ph/\\d{7})"
+      }
+    },
+    {
+      "class": "H61.25",
+      "id": "arxiv:physics.soc-ph",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[physics\\.soc\\-ph\\]|physics\\.soc\\-ph/\\d{7})"
+      }
+    },
+    {
+      "class": "QB500",
+      "id": "arxiv:physics.space-ph",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[physics\\.space\\-ph\\]|physics\\.space\\-ph/\\d{7})"
+      }
+    },
+    {
+      "class": "QC717.6",
+      "id": "arxiv:plasm-ph",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[plasm\\-ph\\]|plasm\\-ph/\\d{7})"
+      }
+    },
+    {
+      "class": "QC20.7.G76",
+      "id": "arxiv:q-alg",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[q\\-alg\\]|q\\-alg/\\d{7})"
+      }
+    },
+    {
+      "class": "QH324.2",
+      "id": "arxiv:q-bio",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[q\\-bio\\]|q\\-bio/\\d{7})"
+      }
+    },
+    {
+      "class": "QP514.2",
+      "id": "arxiv:q-bio.BM",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[q\\-bio\\.BM\\]|q\\-bio\\.BM/\\d{7})"
+      }
+    },
+    {
+      "class": "QH581.2",
+      "id": "arxiv:q-bio.CB",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[q\\-bio\\.CB\\]|q\\-bio\\.CB/\\d{7})"
+      }
+    },
+    {
+      "class": "QH447",
+      "id": "arxiv:q-bio.GN",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[q\\-bio\\.GN\\]|q\\-bio\\.GN/\\d{7})"
+      }
+    },
+    {
+      "class": "QH506",
+      "id": "arxiv:q-bio.MN",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[q\\-bio\\.MN\\]|q\\-bio\\.MN/\\d{7})"
+      }
+    },
+    {
+      "class": "QP356",
+      "id": "arxiv:q-bio.NC",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[q\\-bio\\.NC\\]|q\\-bio\\.NC/\\d{7})"
+      }
+    },
+    {
+      "class": "QH",
+      "id": "arxiv:q-bio.OT",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[q\\-bio\\.OT\\]|q\\-bio\\.OT/\\d{7})"
+      }
+    },
+    {
+      "class": "QH366.2",
+      "id": "arxiv:q-bio.PE",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[q\\-bio\\.PE\\]|q\\-bio\\.PE/\\d{7})"
+      }
+    },
+    {
+      "class": "QH323.5",
+      "id": "arxiv:q-bio.QM",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[q\\-bio\\.QM\\]|q\\-bio\\.QM/\\d{7})"
+      }
+    },
+    {
+      "class": "QH581.2",
+      "id": "arxiv:q-bio.SC",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[q\\-bio\\.SC\\]|q\\-bio\\.SC/\\d{7})"
+      }
+    },
+    {
+      "class": "QP88",
+      "id": "arxiv:q-bio.TO",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[q\\-bio\\.TO\\]|q\\-bio\\.TO/\\d{7})"
+      }
+    },
+    {
+      "class": "HG106",
+      "id": "arxiv:q-fin",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[q\\-fin\\]|q\\-fin/\\d{7})"
+      }
+    },
+    {
+      "class": "HG106",
+      "id": "arxiv:q-fin.CP",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[q\\-fin\\.CP\\]|q\\-fin\\.CP/\\d{7})"
+      }
+    },
+    {
+      "class": "HB71",
+      "id": "arxiv:q-fin.EC",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[q\\-fin\\.EC\\]|q\\-fin\\.EC/\\d{7})"
+      }
+    },
+    {
+      "class": "HG173",
+      "id": "arxiv:q-fin.GN",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[q\\-fin\\.GN\\]|q\\-fin\\.GN/\\d{7})"
+      }
+    },
+    {
+      "class": "HG106",
+      "id": "arxiv:q-fin.MF",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[q\\-fin\\.MF\\]|q\\-fin\\.MF/\\d{7})"
+      }
+    },
+    {
+      "class": "HG4529.5",
+      "id": "arxiv:q-fin.PM",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[q\\-fin\\.PM\\]|q\\-fin\\.PM/\\d{7})"
+      }
+    },
+    {
+      "class": "HG4636",
+      "id": "arxiv:q-fin.PR",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[q\\-fin\\.PR\\]|q\\-fin\\.PR/\\d{7})"
+      }
+    },
+    {
+      "class": "HD61",
+      "id": "arxiv:q-fin.RM",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[q\\-fin\\.RM\\]|q\\-fin\\.RM/\\d{7})"
+      }
+    },
+    {
+      "class": "HG106",
+      "id": "arxiv:q-fin.ST",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[q\\-fin\\.ST\\]|q\\-fin\\.ST/\\d{7})"
+      }
+    },
+    {
+      "class": "HG4551",
+      "id": "arxiv:q-fin.TR",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[q\\-fin\\.TR\\]|q\\-fin\\.TR/\\d{7})"
+      }
+    },
+    {
+      "class": "QC174.12",
+      "id": "arxiv:quant-ph",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[quant\\-ph\\]|quant\\-ph/\\d{7})"
+      }
+    },
+    {
+      "class": "QA614.83",
+      "id": "arxiv:solv-int",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[solv\\-int\\]|solv\\-int/\\d{7})"
+      }
+    },
+    {
+      "class": "QA276",
+      "id": "arxiv:stat",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[stat\\]|stat/\\d{7})"
+      }
+    },
+    {
+      "class": "QA276",
+      "id": "arxiv:stat.AP",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[stat\\.AP\\]|stat\\.AP/\\d{7})"
+      }
+    },
+    {
+      "class": "QA276.4",
+      "id": "arxiv:stat.CO",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[stat\\.CO\\]|stat\\.CO/\\d{7})"
+      }
+    },
+    {
+      "class": "QA276",
+      "id": "arxiv:stat.ME",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[stat\\.ME\\]|stat\\.ME/\\d{7})"
+      }
+    },
+    {
+      "class": "Q325.5",
+      "id": "arxiv:stat.ML",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[stat\\.ML\\]|stat\\.ML/\\d{7})"
+      }
+    },
+    {
+      "class": "QA276",
+      "id": "arxiv:stat.OT",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[stat\\.OT\\]|stat\\.OT/\\d{7})"
+      }
+    },
+    {
+      "class": "QA276",
+      "id": "arxiv:stat.TH",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[stat\\.TH\\]|stat\\.TH/\\d{7})"
+      }
+    },
+    {
+      "class": "QC611.9",
+      "id": "arxiv:supr-con",
+      "weight": 0.9,
+      "when": {
+        "regex": "\\barXiv:(?:\\S+\\s+\\[supr\\-con\\]|supr\\-con/\\d{7})"
+      }
+    },
+    {
+      "class": "P98",
+      "id": "domain:aclanthology.org",
+      "weight": 0.9,
+      "when": {
+        "domain": "aclanthology.org"
+      }
+    },
+    {
+      "class": "QA",
+      "id": "domain:ams.org",
+      "weight": 0.4,
+      "when": {
+        "domain": "ams.org"
+      }
+    },
+    {
+      "class": "QH",
+      "id": "domain:biorxiv.org",
+      "weight": 0.4,
+      "when": {
+        "domain": "biorxiv.org"
+      }
+    },
+    {
+      "class": "HG3881",
+      "id": "domain:bis.org",
+      "weight": 0.4,
+      "when": {
+        "domain": "bis.org"
+      }
+    },
+    {
+      "class": "HD",
+      "id": "domain:bls.gov",
+      "weight": 0.4,
+      "when": {
+        "domain": "bls.gov"
+      }
+    },
+    {
+      "class": "RA",
+      "id": "domain:cdc.gov",
+      "weight": 0.4,
+      "when": {
+        "domain": "cdc.gov"
+      }
+    },
+    {
+      "class": "QH",
+      "id": "domain:cell.com",
+      "weight": 0.4,
+      "when": {
+        "domain": "cell.com"
+      }
+    },
+    {
+      "class": "HA",
+      "id": "domain:census.gov",
+      "weight": 0.4,
+      "when": {
+        "domain": "census.gov"
+      }
+    },
+    {
+      "class": "KF",
+      "id": "domain:congress.gov",
+      "weight": 0.4,
+      "when": {
+        "domain": "congress.gov"
+      }
+    },
+    {
+      "class": "KF",
+      "id": "domain:courtlistener.com",
+      "weight": 0.4,
+      "when": {
+        "domain": "courtlistener.com"
+      }
+    },
+    {
+      "class": "QA76.73.R87",
+      "id": "domain:crates.io",
+      "weight": 0.9,
+      "when": {
+        "domain": "crates.io"
+      }
+    },
+    {
+      "class": "TK5105.888",
+      "id": "domain:developer.mozilla.org",
+      "weight": 0.4,
+      "when": {
+        "domain": "developer.mozilla.org"
+      }
+    },
+    {
+      "class": "QA76",
+      "id": "domain:dl.acm.org",
+      "weight": 0.4,
+      "when": {
+        "domain": "dl.acm.org"
+      }
+    },
+    {
+      "class": "QA76.73.R87",
+      "id": "domain:doc.rust-lang.org",
+      "weight": 0.9,
+      "when": {
+        "domain": "doc.rust-lang.org"
+      }
+    },
+    {
+      "class": "QA76.73.P98",
+      "id": "domain:docs.python.org",
+      "weight": 0.9,
+      "when": {
+        "domain": "docs.python.org"
+      }
+    },
+    {
+      "class": "QA76.73.R87",
+      "id": "domain:docs.rs",
+      "weight": 0.9,
+      "when": {
+        "domain": "docs.rs"
+      }
+    },
+    {
+      "class": "KJE",
+      "id": "domain:eur-lex.europa.eu",
+      "weight": 0.4,
+      "when": {
+        "domain": "eur-lex.europa.eu"
+      }
+    },
+    {
+      "class": "HG2563",
+      "id": "domain:federalreserve.gov",
+      "weight": 0.4,
+      "when": {
+        "domain": "federalreserve.gov"
+      }
+    },
+    {
+      "class": "HB",
+      "id": "domain:fred.stlouisfed.org",
+      "weight": 0.4,
+      "when": {
+        "domain": "fred.stlouisfed.org"
+      }
+    },
+    {
+      "class": "QA76.76",
+      "id": "domain:github.com",
+      "weight": 0.4,
+      "when": {
+        "domain": "github.com"
+      }
+    },
+    {
+      "class": "PN",
+      "id": "domain:gutenberg.org",
+      "weight": 0.4,
+      "when": {
+        "domain": "gutenberg.org"
+      }
+    },
+    {
+      "class": "TK",
+      "id": "domain:ieeexplore.ieee.org",
+      "weight": 0.4,
+      "when": {
+        "domain": "ieeexplore.ieee.org"
+      }
+    },
+    {
+      "class": "B",
+      "id": "domain:iep.utm.edu",
+      "weight": 0.4,
+      "when": {
+        "domain": "iep.utm.edu"
+      }
+    },
+    {
+      "class": "HG3881",
+      "id": "domain:imf.org",
+      "weight": 0.4,
+      "when": {
+        "domain": "imf.org"
+      }
+    },
+    {
+      "class": "HG",
+      "id": "domain:investopedia.com",
+      "weight": 0.4,
+      "when": {
+        "domain": "investopedia.com"
+      }
+    },
+    {
+      "class": "KF6271",
+      "id": "domain:irs.gov",
+      "weight": 0.4,
+      "when": {
+        "domain": "irs.gov"
+      }
+    },
+    {
+      "class": "Q325.5",
+      "id": "domain:jmlr.org",
+      "weight": 0.9,
+      "when": {
+        "domain": "jmlr.org"
+      }
+    },
+    {
+      "class": "QC",
+      "id": "domain:journals.aps.org",
+      "weight": 0.4,
+      "when": {
+        "domain": "journals.aps.org"
+      }
+    },
+    {
+      "class": "KF",
+      "id": "domain:law.cornell.edu",
+      "weight": 0.4,
+      "when": {
+        "domain": "law.cornell.edu"
+      }
+    },
+    {
+      "class": "QA",
+      "id": "domain:mathoverflow.net",
+      "weight": 0.4,
+      "when": {
+        "domain": "mathoverflow.net"
+      }
+    },
+    {
+      "class": "R",
+      "id": "domain:medrxiv.org",
+      "weight": 0.4,
+      "when": {
+        "domain": "medrxiv.org"
+      }
+    },
+    {
+      "class": "TL",
+      "id": "domain:nasa.gov",
+      "weight": 0.4,
+      "when": {
+        "domain": "nasa.gov"
+      }
+    },
+    {
+      "class": "Q",
+      "id": "domain:nature.com",
+      "weight": 0.4,
+      "when": {
+        "domain": "nature.com"
+      }
+    },
+    {
+      "class": "HB",
+      "id": "domain:nber.org",
+      "weight": 0.4,
+      "when": {
+        "domain": "nber.org"
+      }
+    },
+    {
+      "class": "QC851",
+      "id": "domain:noaa.gov",
+      "weight": 0.4,
+      "when": {
+        "domain": "noaa.gov"
+      }
+    },
+    {
+      "class": "HC",
+      "id": "domain:oecd.org",
+      "weight": 0.4,
+      "when": {
+        "domain": "oecd.org"
+      }
+    },
+    {
+      "class": "Q325.5",
+      "id": "domain:openreview.net",
+      "weight": 0.4,
+      "when": {
+        "domain": "openreview.net"
+      }
+    },
+    {
+      "class": "KF8742",
+      "id": "domain:oyez.org",
+      "weight": 0.9,
+      "when": {
+        "domain": "oyez.org"
+      }
+    },
+    {
+      "class": "B",
+      "id": "domain:plato.stanford.edu",
+      "weight": 0.4,
+      "when": {
+        "domain": "plato.stanford.edu"
+      }
+    },
+    {
+      "class": "Q325.5",
+      "id": "domain:proceedings.neurips.cc",
+      "weight": 0.4,
+      "when": {
+        "domain": "proceedings.neurips.cc"
+      }
+    },
+    {
+      "class": "R",
+      "id": "domain:pubmed.ncbi.nlm.nih.gov",
+      "weight": 0.4,
+      "when": {
+        "domain": "pubmed.ncbi.nlm.nih.gov"
+      }
+    },
+    {
+      "class": "QD",
+      "id": "domain:pubs.acs.org",
+      "weight": 0.4,
+      "when": {
+        "domain": "pubs.acs.org"
+      }
+    },
+    {
+      "class": "QA76.73.P98",
+      "id": "domain:pypi.org",
+      "weight": 0.9,
+      "when": {
+        "domain": "pypi.org"
+      }
+    },
+    {
+      "class": "Q",
+      "id": "domain:science.org",
+      "weight": 0.4,
+      "when": {
+        "domain": "science.org"
+      }
+    },
+    {
+      "class": "HG4501",
+      "id": "domain:sec.gov",
+      "weight": 0.4,
+      "when": {
+        "domain": "sec.gov"
+      }
+    },
+    {
+      "class": "H",
+      "id": "domain:ssrn.com",
+      "weight": 0.4,
+      "when": {
+        "domain": "ssrn.com"
+      }
+    },
+    {
+      "class": "QA76",
+      "id": "domain:stackoverflow.com",
+      "weight": 0.4,
+      "when": {
+        "domain": "stackoverflow.com"
+      }
+    },
+    {
+      "class": "KF8742",
+      "id": "domain:supremecourt.gov",
+      "weight": 0.9,
+      "when": {
+        "domain": "supremecourt.gov"
+      }
+    },
+    {
+      "class": "HJ",
+      "id": "domain:treasury.gov",
+      "weight": 0.4,
+      "when": {
+        "domain": "treasury.gov"
+      }
+    },
+    {
+      "class": "QE",
+      "id": "domain:usgs.gov",
+      "weight": 0.4,
+      "when": {
+        "domain": "usgs.gov"
+      }
+    },
+    {
+      "class": "RA",
+      "id": "domain:who.int",
+      "weight": 0.4,
+      "when": {
+        "domain": "who.int"
+      }
+    },
+    {
+      "class": "HC59.7",
+      "id": "domain:worldbank.org",
+      "weight": 0.4,
+      "when": {
+        "domain": "worldbank.org"
+      }
+    },
+    {
+      "class": "R",
+      "id": "url:ncbi.nlm.nih.gov/pmc/",
+      "weight": 0.4,
+      "when": {
+        "regex": "(?i)^https?://(?:[^/]*\\.)?ncbi\\.nlm\\.nih\\.gov/pmc/"
+      }
+    }
+  ]
+}

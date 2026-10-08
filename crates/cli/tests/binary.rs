@@ -36,6 +36,7 @@ fn envelope(store: &Path, args: &[&str]) -> Value {
 fn non_tty_output_parses_as_an_envelope_for_every_subcommand() {
     let dir = temp_dir("bin");
     let store = dir.join("store");
+    common::seed_mini_lcc(&store);
     let c = envelope(
         &store,
         &[
@@ -89,10 +90,11 @@ fn non_tty_output_parses_as_an_envelope_for_every_subcommand() {
 #[test]
 fn errors_carry_code_next_command_and_exit_code() {
     let store = temp_dir("binerr").join("store");
+    common::seed_mini_lcc(&store);
     let cases: [(&[&str], &str, i32); 5] = [
         (&["resolve", "nonsense"], "invalid_id", 2),
         (
-            &["classify", "--scheme", "scheme:lcc@2024", "--text", "x"],
+            &["classify", "--scheme", "scheme:fast@2024", "--text", "x"],
             "scheme_not_compiled",
             4,
         ),
@@ -123,6 +125,7 @@ fn errors_carry_code_next_command_and_exit_code() {
 #[test]
 fn commit_with_a_stale_expected_revision_is_a_revision_conflict() {
     let store = temp_dir("bincommit").join("store");
+    common::seed_mini_lcc(&store);
     let c = envelope(&store, &["classify", "--text", "law and social sciences"]);
     let pid = c["data"]["placement"]["id"].as_str().unwrap().to_string();
     let preview = envelope(&store, &["confirm", &pid]);
@@ -146,6 +149,7 @@ fn commit_with_a_stale_expected_revision_is_a_revision_conflict() {
 fn batch_writes_one_line_per_input_and_resume_skips_completed_ones() {
     let dir = temp_dir("batch");
     let store = dir.join("store");
+    common::seed_mini_lcc(&store);
     let files: Vec<String> = ["law", "compilers (computer programs)", "mathematics"]
         .iter()
         .enumerate()

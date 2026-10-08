@@ -2,7 +2,7 @@
 
 #![allow(dead_code)]
 
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicUsize, Ordering};
 
 use serde_json::Value;
@@ -23,9 +23,29 @@ pub fn temp_dir(tag: &str) -> PathBuf {
     dir
 }
 
-/// A service over a fresh store seeded with the fixture identifier table.
+/// Compile the five-class mini-LCC fixture into `store`, so it is the
+/// default scheme there (store schemes list before the bundled LCC
+/// outline). These tests exercise the service's mechanics, and a scheme
+/// this small keeps every expected class and score readable; the
+/// acceptance suite runs against the bundled outline.
+pub fn seed_mini_lcc(store: &Path) {
+    let schemes = store.join("schemes");
+    std::fs::create_dir_all(&schemes).unwrap();
+    std::fs::copy(
+        concat!(
+            env!("CARGO_MANIFEST_DIR"),
+            "/../../fixtures/schemes/mini-lcc.json"
+        ),
+        schemes.join("mini-lcc@2024.json"),
+    )
+    .unwrap();
+}
+
+/// A service over a fresh store seeded with the fixture identifier table
+/// and the mini-LCC scheme.
 pub fn service(tag: &str) -> Shelfmark {
     let store = temp_dir(tag).join("store");
+    seed_mini_lcc(&store);
     let tables = store.join(shelfmark_cli::wiring::TABLES_DIR);
     std::fs::create_dir_all(&tables).unwrap();
     std::fs::copy(

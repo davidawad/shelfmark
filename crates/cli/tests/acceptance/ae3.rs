@@ -54,7 +54,7 @@ fn vocabulary_tier_can_decide_for_the_rerank_profile_too() {
     let out = b.ok(&[
         "classify",
         "--text",
-        "Compilers (Computer programs)",
+        "Computer software",
         "--profile",
         "profile:rerank@1",
         "--target",
@@ -62,7 +62,7 @@ fn vocabulary_tier_can_decide_for_the_rerank_profile_too() {
     ]);
     let p = &out["placement"];
     assert_eq!(p["trace"]["deciding_tier"], "vocab");
-    assert_eq!(p["class"], "class:mini-lcc@2024:QA76");
+    assert_eq!(p["class"], "class:lcc@2024:QA76.75-76.765");
     assert_eq!(p["trace"]["cost"]["model_calls"], 0);
     let states = tier_states(p);
     assert!(

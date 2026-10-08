@@ -124,6 +124,7 @@ fn correct_rejects_codes_outside_the_scheme() {
 #[test]
 fn scheme_compile_previews_commits_and_makes_old_placements_stale() {
     let dir = temp_dir("compile");
+    common::seed_mini_lcc(&dir.join("store"));
     let s = shelfmark_cli::wiring::open(&dir.join("store"));
     let c = data(call(&s, Verb::Classify, json!({"text": "law"})));
     assert_eq!(c["placement"]["class"], "class:mini-lcc@2024:K");
@@ -179,6 +180,7 @@ fn scheme_compile_previews_commits_and_makes_old_placements_stale() {
 #[test]
 fn link_previews_commits_and_resolves_the_item() {
     let dir = temp_dir("link");
+    common::seed_mini_lcc(&dir.join("store"));
     let s = shelfmark_cli::wiring::open(&dir.join("store"));
     let unknown = format!("item:s256:{}", "a".repeat(64));
     let e = error(call(&s, Verb::Resolve, json!({"id": unknown})));

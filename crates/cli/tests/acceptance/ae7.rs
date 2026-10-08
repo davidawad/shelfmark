@@ -11,7 +11,7 @@ fn uncompiled_scheme_error_has_a_stable_code_and_the_compile_command() {
         "--text",
         "anything",
         "--scheme",
-        "scheme:lcc@2024",
+        "scheme:fast@2024",
     ]);
     assert_eq!(env["ok"], false);
     assert_eq!(env["error"]["code"], "scheme_not_compiled");
@@ -23,7 +23,7 @@ fn uncompiled_scheme_error_has_a_stable_code_and_the_compile_command() {
     assert!(next.starts_with("shelfmark scheme compile"), "{next}");
 
     // The same shape from every verb that takes a scheme.
-    let (browse, _) = b.run(&["scheme", "browse", "--scheme", "scheme:lcc@2024"]);
+    let (browse, _) = b.run(&["scheme", "browse", "--scheme", "scheme:fast@2024"]);
     assert_eq!(browse["error"]["code"], "scheme_not_compiled");
     assert_eq!(
         browse["error"]["next_command"],

@@ -25,6 +25,12 @@ pub trait Store: PlacementLog + Send {
     /// Keep a compiled scheme so later calls can load it.
     fn save_scheme(&mut self, doc: &SchemeDoc) -> Result<(), Error>;
     fn schemes(&self) -> Result<Vec<SchemeDoc>, Error>;
+    /// A key that changes whenever [`Store::schemes`] would return
+    /// something different, so their compiled forms can be reused across
+    /// calls; `None` recompiles on every call.
+    fn schemes_key(&self) -> Result<Option<String>, Error> {
+        Ok(None)
+    }
     /// The fitted calibration the cascade applies, if any (PD3).
     fn calibration(&self) -> Result<Option<Calibration>, Error>;
     /// The latest eval's results, if any (R23).
