@@ -1,0 +1,66 @@
+# Starter URL-domain -> class rules. Hand-assigned 2026-10-07; NOT reviewed.
+# Matching: a rule matches a URL whose host equals `domain` or is a
+# subdomain of it, and whose path starts with `path_prefix` (empty = any).
+# The most specific rule wins: longest domain, then longest path prefix.
+# Columns:
+#   lcc       LCC class, or `=arxiv` (resolve the arXiv ID through
+#             arxiv-lcc.tsv; the domain alone says nothing)
+#   ddc       DDC number (numbers only, never captions), or empty
+#   strength  decide = the domain alone is enough to place the Work;
+#             hint   = a prior for later tiers, never decides alone
+#   note      why
+domain	path_prefix	lcc	ddc	strength	note
+arxiv.org		=arxiv		decide	resolve via the arXiv ID's category
+docs.rs		QA76.73.R87	005.133	decide	Rust crate documentation
+doc.rust-lang.org		QA76.73.R87	005.133	decide	Rust language documentation
+crates.io		QA76.73.R87	005.133	decide	Rust package registry
+docs.python.org		QA76.73.P98	005.133	decide	Python language documentation
+pypi.org		QA76.73.P98	005.133	decide	Python package index
+aclanthology.org		P98	410.285	decide	computational linguistics proceedings
+jmlr.org		Q325.5	006.31	decide	Journal of Machine Learning Research
+proceedings.neurips.cc		Q325.5	006.31	hint	NeurIPS: mostly machine learning
+openreview.net		Q325.5	006.31	hint	mostly machine-learning venues
+supremecourt.gov		KF8742	347.7326	decide	US Supreme Court opinions and dockets
+oyez.org		KF8742	347.7326	decide	US Supreme Court case summaries
+law.cornell.edu		KF	349.73	hint	US law (also hosts foreign and international law)
+congress.gov		KF	328.73	hint	US legislation
+courtlistener.com		KF	347.73	hint	US court opinions
+eur-lex.europa.eu		KJE	341.2422	hint	European Union law
+sec.gov		HG4501	332.6	hint	securities filings and regulation
+federalreserve.gov		HG2563	332.11	hint	Federal Reserve
+fred.stlouisfed.org		HB	330	hint	economic data series
+nber.org		HB	330	hint	NBER working papers (economics)
+imf.org		HG3881	332.042	hint	international finance
+bis.org		HG3881	332.042	hint	international central banking
+worldbank.org		HC59.7	338.9	hint	economic development
+oecd.org		HC	330	hint	economic policy
+treasury.gov		HJ	336	hint	public finance
+irs.gov		KF6271	343.04	hint	US federal taxation
+bls.gov		HD	331	hint	labor statistics
+census.gov		HA	310	hint	statistics, demography
+investopedia.com		HG	332	hint	finance explainers
+ssrn.com		H	300	hint	social-science preprints (law, economics, finance)
+pubmed.ncbi.nlm.nih.gov		R	610	hint	biomedical literature
+ncbi.nlm.nih.gov	/pmc/	R	610	hint	PubMed Central full text
+medrxiv.org		R	610	hint	medical preprints
+biorxiv.org		QH	570	hint	biology preprints
+cdc.gov		RA	614	hint	public health
+who.int		RA	362.1	hint	public health
+nature.com		Q	500	hint	general science journals
+science.org		Q	500	hint	general science journals
+cell.com		QH	570	hint	life-science journals
+journals.aps.org		QC	530	hint	physics journals
+pubs.acs.org		QD	540	hint	chemistry journals
+ams.org		QA	510	hint	mathematics
+mathoverflow.net		QA	510	hint	mathematics Q&A
+ieeexplore.ieee.org		TK	621.3	hint	electrical and computer engineering
+dl.acm.org		QA76	004	hint	computing literature
+stackoverflow.com		QA76	005	hint	programming Q&A
+developer.mozilla.org		TK5105.888	006.7	hint	web development reference
+github.com		QA76.76	005.3	hint	software repositories (README/code)
+plato.stanford.edu		B	100	hint	Stanford Encyclopedia of Philosophy
+iep.utm.edu		B	100	hint	Internet Encyclopedia of Philosophy
+gutenberg.org		PN	800	hint	public-domain literature
+nasa.gov		TL	629.4	hint	aeronautics and astronautics
+noaa.gov		QC851	551.5	hint	meteorology, oceans
+usgs.gov		QE	550	hint	earth sciences

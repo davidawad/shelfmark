@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/cr1Ju4FXUV/THAgevQPZJL4rfNQ</id>
+  <title>arXiv Query: search_query=&amp;id_list=2401.03879&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-07T20:36:12Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2401.03879" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2401.03879v1</id>
+    <title>Multi-trace YMS amplitudes from soft behavior</title>
+    <updated>2024-01-08T13:20:04Z</updated>
+    <link href="https://arxiv.org/abs/2401.03879v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.03879v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Tree level multi-trace Yang-Mills-scalar (YMS) amplitudes have been shown to satisfy a recursive expansion formula, which expresses any YMS amplitude by those with fewer gluons and/or scalar traces. In an earlier work, the single-trace expansion formula has been shown to be determined by the universality of soft behavior. This approach is nevertheless not extended to multi-trace case in a straightforward way. In this paper, we derive the expansion formula of tree-level multi-trace YMS amplitudes in a bottom-up way: we first determine the simplest amplitude, the double-trace pure scalar amplitude which involves two scalars in each trace. Then insert more scalars to one of the traces. Based on this amplitude, we further obtain the double-soft behavior when the trace containing only two scalars is soft. The multi-trace amplitudes with more scalars and more gluons finally follow from the double-soft behavior as well as the single-soft behaviors which has been derived before.</summary>
+    <category term="hep-th" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-08T13:20:04Z</published>
+    <arxiv:comment>39 pages, 3 figures</arxiv:comment>
+    <arxiv:primary_category term="hep-th"/>
+    <arxiv:journal_ref>JHEP 03 (2024) 081</arxiv:journal_ref>
+    <author>
+      <name>Yi-Jian Du</name>
+    </author>
+    <author>
+      <name>Kang Zhou</name>
+    </author>
+  </entry>
+</feed>

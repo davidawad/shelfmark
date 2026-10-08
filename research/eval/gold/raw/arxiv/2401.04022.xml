@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/7pedxDpjcKFkO/SDRE/V6nEM5rg</id>
+  <title>arXiv Query: search_query=&amp;id_list=2401.04022&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-07T20:35:25Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2401.04022" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2401.04022v1</id>
+    <title>Identifying Fabricated Networks within Authorship-for-Sale Enterprises</title>
+    <updated>2024-01-08T17:02:12Z</updated>
+    <link href="https://arxiv.org/abs/2401.04022v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.04022v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Fabricated papers do not just need text, images, and data, they also require a fabricated or partially fabricated network of authors. Most `authors' on a fabricated paper have not been associated with the research, but rather are added through a transaction. This lack of deeper connection means that there is a low likelihood that co-authors on fabricated papers will ever appear together on the same paper more than once. This paper constructs a model that encodes some of the key characteristics of this activity in an `authorship-for-sale' network with the aim to create a robust method to detect this type of activity. A characteristic network fingerprint arises from this model that provides a robust statistical approach to the detection of paper-mill networks. The model suggested in this paper detects networks that have a statistically significant overlap with other approaches that principally rely on textual analysis for the detection of fraudulent papers. Researchers connected to networks identified using the methodology outlined in this paper are shown to be connected with 37% of papers identified through the tortured-phrase and clay-feet methods deployed in the Problematic Paper Screener website. Finally, methods to limit the expansion and propagation of these networks is discussed both in technological and social terms.</summary>
+    <category term="cs.DL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-08T17:02:12Z</published>
+    <arxiv:primary_category term="cs.DL"/>
+    <author>
+      <name>Simon J. Porter</name>
+    </author>
+    <author>
+      <name>Leslie D. McIntosh</name>
+    </author>
+    <arxiv:doi>10.1038/s41598-024-71230-8</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1038/s41598-024-71230-8" title="doi"/>
+  </entry>
+</feed>

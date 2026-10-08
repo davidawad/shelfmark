@@ -1,0 +1,22 @@
+[package]
+name = "vocab-ingest"
+description = "Deterministic LCSH and FAST vocabulary ingester and label matcher prototype (materials classifier spike)"
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+publish = false
+
+# Standalone: no dependency on the surrounding repo (R14). It depends
+# inward on the shelfmark crates only for `enrich-scheme`, which places
+# headings with shelfmark's own compiled scheme index.
+[workspace]
+
+[dependencies]
+aho-corasick = "1"
+flate2 = "1"
+quick-xml = "0.37"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+unicode-normalization = "0.1"
+shelfmark-core = { path = "../../src/shelfmark/crates/core" }
+shelfmark-scheme = { path = "../../src/shelfmark/crates/scheme" }

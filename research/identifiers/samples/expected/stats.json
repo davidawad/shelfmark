@@ -1,0 +1,139 @@
+{
+  "dump_lines": 79,
+  "edition_records": 79,
+  "parse_errors": 0,
+  "fields": {
+    "ddc": {
+      "editions_with_field": 51,
+      "values_valid": 50,
+      "values_invalid": 2,
+      "invalid_sample": [
+        "B",
+        "[E]"
+      ]
+    },
+    "isbn_10": {
+      "editions_with_field": 61,
+      "values_valid": 68,
+      "values_invalid": 0,
+      "invalid_sample": []
+    },
+    "isbn_13": {
+      "editions_with_field": 25,
+      "values_valid": 25,
+      "values_invalid": 0,
+      "invalid_sample": []
+    },
+    "lcc": {
+      "editions_with_field": 47,
+      "values_valid": 75,
+      "values_invalid": 1,
+      "invalid_sample": [
+        "MLCM 2005/03157 (P)"
+      ]
+    },
+    "lccn": {
+      "editions_with_field": 43,
+      "values_valid": 43,
+      "values_invalid": 0,
+      "invalid_sample": []
+    },
+    "oclc": {
+      "editions_with_field": 46,
+      "values_valid": 53,
+      "values_invalid": 0,
+      "invalid_sample": []
+    }
+  },
+  "editions": {
+    "with_any_key": 66,
+    "with_lcc": 46,
+    "with_ddc": 50,
+    "with_key_and_lcc": 46,
+    "with_key_and_ddc": 37,
+    "with_key_and_any_class": 48,
+    "lcc_by_main_class": {
+      "B": 9,
+      "D": 5,
+      "F": 1,
+      "G": 3,
+      "H": 9,
+      "J": 1,
+      "P": 9,
+      "Q": 4,
+      "R": 5,
+      "S": 1,
+      "T": 1
+    },
+    "ddc_by_main_class": {
+      "0": 1,
+      "1": 1,
+      "2": 8,
+      "3": 11,
+      "5": 6,
+      "6": 8,
+      "7": 7,
+      "8": 5,
+      "9": 3
+    },
+    "class_by_source": {
+      "amazon": 9,
+      "bwb": 30,
+      "ia": 25,
+      "idb": 2,
+      "marc": 55,
+      "promise": 19
+    }
+  },
+  "keys": {
+    "isbn": {
+      "distinct": 68,
+      "with_lcc": 49,
+      "with_ddc": 40,
+      "with_either": 50,
+      "with_both": 39,
+      "lcc_multiple_full": 15,
+      "lcc_conflict_prefix": 6,
+      "lcc_conflict_top": 5,
+      "lcc_conflict_top_single_edition": 5,
+      "ddc_conflict_prefix": 0,
+      "ddc_conflict_top": 0
+    },
+    "lccn": {
+      "distinct": 43,
+      "with_lcc": 41,
+      "with_ddc": 36,
+      "with_either": 42,
+      "with_both": 35,
+      "lcc_multiple_full": 12,
+      "lcc_conflict_prefix": 4,
+      "lcc_conflict_top": 4,
+      "lcc_conflict_top_single_edition": 4,
+      "ddc_conflict_prefix": 0,
+      "ddc_conflict_top": 0
+    },
+    "oclc": {
+      "distinct": 53,
+      "with_lcc": 43,
+      "with_ddc": 32,
+      "with_either": 44,
+      "with_both": 31,
+      "lcc_multiple_full": 15,
+      "lcc_conflict_prefix": 7,
+      "lcc_conflict_top": 6,
+      "lcc_conflict_top_single_edition": 6,
+      "ddc_conflict_prefix": 0,
+      "ddc_conflict_top": 0
+    }
+  },
+  "table": {
+    "keys": 136,
+    "lookup_rows": 294,
+    "conflict_rows": 32,
+    "distinct_lcc_full": 62,
+    "distinct_lcc_prefix": 51,
+    "distinct_ddc_full": 35,
+    "lookup_bytes": 12129,
+    "conflicts_bytes": 1337
+  }
+}

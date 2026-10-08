@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/uEzHbPkja7Hp4o/cFWWACtrlack</id>
+  <title>arXiv Query: search_query=&amp;id_list=2401.06790&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-07T20:35:05Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2401.06790" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2401.06790v2</id>
+    <title>Using Zero-shot Prompting in the Automatic Creation and Expansion of Topic Taxonomies for Tagging Retail Banking Transactions</title>
+    <updated>2024-02-11T15:54:58Z</updated>
+    <link href="https://arxiv.org/abs/2401.06790v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.06790v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This work presents an unsupervised method for automatically constructing and expanding topic taxonomies using instruction-based fine-tuned LLMs (Large Language Models). We apply topic modeling and keyword extraction techniques to create initial topic taxonomies and LLMs to post-process the resulting terms and create a hierarchy. To expand an existing taxonomy with new terms, we use zero-shot prompting to find out where to add new nodes, which, to our knowledge, is the first work to present such an approach to taxonomy tasks. We use the resulting taxonomies to assign tags that characterize merchants from a retail bank dataset. To evaluate our work, we asked 12 volunteers to answer a two-part form in which we first assessed the quality of the taxonomies created and then the tags assigned to merchants based on that taxonomy. The evaluation revealed a coherence rate exceeding 90% for the chosen taxonomies. The taxonomies' expansion with LLMs also showed exciting results for parent node prediction, with an f1-score above 70% in our taxonomies.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-08T00:27:16Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Daniel de S. Moraes</name>
+    </author>
+    <author>
+      <name>Pedro T. C. Santos</name>
+    </author>
+    <author>
+      <name>Polyana B. da Costa</name>
+    </author>
+    <author>
+      <name>Matheus A. S. Pinto</name>
+    </author>
+    <author>
+      <name>Ivan de J. P. Pinto</name>
+    </author>
+    <author>
+      <name>Álvaro M. G. da Veiga</name>
+    </author>
+    <author>
+      <name>Sergio Colcher</name>
+    </author>
+    <author>
+      <name>Antonio J. G. Busson</name>
+    </author>
+    <author>
+      <name>Rafael H. Rocha</name>
+    </author>
+    <author>
+      <name>Rennan Gaio</name>
+    </author>
+    <author>
+      <name>Rafael Miceli</name>
+    </author>
+    <author>
+      <name>Gabriela Tourinho</name>
+    </author>
+    <author>
+      <name>Marcos Rabaioli</name>
+    </author>
+    <author>
+      <name>Leandro Santos</name>
+    </author>
+    <author>
+      <name>Fellipe Marques</name>
+    </author>
+    <author>
+      <name>David Favaro</name>
+    </author>
+  </entry>
+</feed>

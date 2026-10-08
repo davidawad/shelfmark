@@ -1,0 +1,5 @@
+# Four items with hand-computed expectations (see tests/harness.rs).
+{"id":"g1","title":"C book","acceptable":["QA76.73.C15"],"fast":["C (Computer program language)"]}
+{"id":"g2","item":"item:sha256-0002","title":"Cosmology paper","acceptable":["QB980-QB991"]}
+{"id":"g3","title":"Capitalism","acceptable":[{"code":"HB501","path":["H","HB","HB501"]}]}
+{"id":"g4","title":"Oak","acceptable":["SB413.O34","SD397.O12"]}

@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/fAt1vmQkkm/oO0tvwJ+VEf/ebC4</id>
+  <title>arXiv Query: search_query=&amp;id_list=2401.03703&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-07T20:35:15Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2401.03703" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2401.03703v1</id>
+    <title>On Lattices, Learning with Errors, Random Linear Codes, and Cryptography</title>
+    <updated>2024-01-08T07:14:54Z</updated>
+    <link href="https://arxiv.org/abs/2401.03703v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.03703v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Our main result is a reduction from worst-case lattice problems such as GapSVP and SIVP to a certain learning problem. This learning problem is a natural extension of the `learning from parity with error' problem to higher moduli. It can also be viewed as the problem of decoding from a random linear code. This, we believe, gives a strong indication that these problems are hard. Our reduction, however, is quantum. Hence, an efficient solution to the learning problem implies a quantum algorithm for GapSVP and SIVP. A main open question is whether this reduction can be made classical (i.e., non-quantum).
+  We also present a (classical) public-key cryptosystem whose security is based on the hardness of the learning problem. By the main result, its security is also based on the worst-case quantum hardness of GapSVP and SIVP. The new cryptosystem is much more efficient than previous lattice-based cryptosystems: the public key is of size $\tilde{O}(n^2)$ and encrypting a message increases its size by a factor of $\tilde{O}(n)$ (in previous cryptosystems these values are $\tilde{O}(n^4)$ and $\tilde{O}(n^2)$, respectively). In fact, under the assumption that all parties share a random bit string of length $\tilde{O}(n^2)$, the size of the public key can be reduced to $\tilde{O}(n)$.</summary>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="quant-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-08T07:14:54Z</published>
+    <arxiv:comment>Identical to the version posted in 2009, apart from fixing a bug in the proof of Claim 3.13</arxiv:comment>
+    <arxiv:primary_category term="cs.CR"/>
+    <arxiv:journal_ref>Journal of the ACM, Volume 56, Issue 6, Article 34 (2009)</arxiv:journal_ref>
+    <author>
+      <name>Oded Regev</name>
+    </author>
+  </entry>
+</feed>

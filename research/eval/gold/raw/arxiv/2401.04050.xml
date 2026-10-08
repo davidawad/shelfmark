@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/A+sz7tPPWj+HnHc/NgovwjsBTtI</id>
+  <title>arXiv Query: search_query=&amp;id_list=2401.04050&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-07T20:35:54Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2401.04050" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2401.04050v1</id>
+    <title>Robust Estimation in Network Vector Autoregression with Nonstationary Regressors</title>
+    <updated>2024-01-08T17:40:22Z</updated>
+    <link href="https://arxiv.org/abs/2401.04050v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.04050v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This article studies identification and estimation for the network vector autoregressive model with nonstationary regressors. In particular, network dependence is characterized by a nonstochastic adjacency matrix. The information set includes a stationary regressand and a node-specific vector of nonstationary regressors, both observed at the same equally spaced time frequencies. Our proposed econometric specification correponds to the NVAR model under time series nonstationarity which relies on the local-to-unity parametrization for capturing the unknown form of persistence of these node-specific regressors. Robust econometric estimation is achieved using an IVX-type estimator and the asymptotic theory analysis for the augmented vector of regressors is studied based on a double asymptotic regime where both the network size and the time dimension tend to infinity.</summary>
+    <category term="econ.EM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-08T17:40:22Z</published>
+    <arxiv:comment>arXiv admin note: text overlap with arXiv:1906.03179 by other authors</arxiv:comment>
+    <arxiv:primary_category term="econ.EM"/>
+    <author>
+      <name>Christis Katsouris</name>
+    </author>
+  </entry>
+</feed>

@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/LpDEm+nFE1Ovwjkf7H7GvOsQFf8</id>
+  <title>arXiv Query: search_query=&amp;id_list=2401.04095&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-07T20:36:44Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2401.04095" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2401.04095v2</id>
+    <title>Singular effect of linkage on long term genetic gain in the infinitesimal model</title>
+    <updated>2024-06-21T11:31:02Z</updated>
+    <link href="https://arxiv.org/abs/2401.04095v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.04095v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>During the founding of the field of quantitative genetics, Fisher formulated in 1918 his ``infinitesimal model'' that provided a novel mathematical framework to describe the Mendelian transmission of quantitative traits. If the infinitely many genes in that model are assumed to segregate independently during reproduction, corresponding to having no linkage, directional selection asymptotically leads to a constant genetic gain at each generation. In reality, genes are subject to strong linkage because they lie on chromosomes and thus segregate in a correlated way. Various approximations have been used in the past to study that more realistic case of the infinitesimal model with the expectation that the asymptotic gain per generation is modestly decreased. To treat this system even in the strong linkage limit, we take the genes to lie on continuous chromosomes. Surprisingly, the consequences of genetic linkage are in fact rather singular, changing the nature of the long-term gain per generation: the asymptotic gain vanishes rather than being simply decreased. Nevertheless, the per-generation gain tends to zero sufficiently slowly for the total gain, accumulated over generations, to be unbounded.</summary>
+    <category term="q-bio.PE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-08T18:54:50Z</published>
+    <arxiv:comment>20pages, 3 figures, 2 appendices</arxiv:comment>
+    <arxiv:primary_category term="q-bio.PE"/>
+    <author>
+      <name>Elise Tourrette</name>
+    </author>
+    <author>
+      <name>Olivier C. Martin</name>
+    </author>
+  </entry>
+</feed>

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mc-eval/gold-item@1",
+  "title": "Gold item (one NDJSON line of a gold set)",
+  "type": "object",
+  "required": ["id", "title", "acceptable"],
+  "properties": {
+    "id": {"type": "string", "minLength": 1, "description": "Stable key predictions reference, e.g. gold:arxiv:2401.03802."},
+    "item": {"type": "string", "pattern": "^item:", "description": "L0 item ID when the gold item is a known file."},
+    "scheme": {"type": "string", "default": "lcc"},
+    "title": {"type": "string"},
+    "text": {"type": "string", "description": "The text a classifier sees (abstract, description or article extract)."},
+    "identifiers": {"type": "object", "additionalProperties": {"type": "string"}, "description": "isbn, isbn10, lccn, doi, arxiv, wikidata, ..."},
+    "acceptable": {
+      "type": "array",
+      "minItems": 1,
+      "description": "LCC classes a correct placement may land in; any one counts.",
+      "items": {
+        "oneOf": [
+          {"type": "string"},
+          {
+            "type": "object",
+            "required": ["code"],
+            "properties": {
+              "code": {"type": "string", "description": "LCC code (QA76.73.C15) or caption range (QB630-638.8)."},
+              "path": {"type": "array", "items": {"type": "string"}, "description": "Derived root-to-leaf hierarchy; must match code if present."},
+              "from": {"type": "string", "description": "The source value this class was derived from."}
+            },
+            "additionalProperties": false
+          }
+        ]
+      }
+    },
+    "fast": {"type": "array", "items": {"type": "string"}, "description": "Optional FAST headings (IDs or labels)."},
+    "source": {
+      "type": "object",
+      "required": ["kind", "record", "label_rule"],
+      "properties": {
+        "kind": {"type": "string", "description": "arxiv, openlibrary, wikipedia, correction, ..."},
+        "record": {"type": "string"},
+        "url": {"type": "string"},
+        "retrieved_at": {"type": "string"},
+        "license": {"type": "string"},
+        "label_rule": {"type": "string"},
+        "raw": {"type": "string", "description": "Raw snapshot path relative to the gold directory."},
+        "raw_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    }
+  }
+}

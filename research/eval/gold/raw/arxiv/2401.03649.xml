@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/z1Bw4RRPSTm4su4NgY5N+bYMe9k</id>
+  <title>arXiv Query: search_query=&amp;id_list=2401.03649&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-07T20:37:04Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2401.03649" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2401.03649v1</id>
+    <title>Bayes Factor of Zero Inflated Models under Jeffereys Prior</title>
+    <updated>2024-01-08T03:40:02Z</updated>
+    <link href="https://arxiv.org/abs/2401.03649v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.03649v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Microbiome omics data including 16S rRNA reveal intriguing dynamic associations between the human microbiome and various disease states. Drastic changes in microbiota can be associated with factors like diet, hormonal cycles, diseases, and medical interventions. Along with the identification of specific bacteria taxa associated with diseases, recent advancements give evidence that metabolism, genetics, and environmental factors can model these microbial effects. However, the current analytic methods for integrating microbiome data are fully developed to address the main challenges of longitudinal metagenomics data, such as high-dimensionality, intra-sample dependence, and zero-inflation of observed counts. Hence, we propose the Bayes factor approach for model selection based on negative binomial, Poisson, zero-inflated negative binomial, and zero-inflated Poisson models with non-informative Jeffreys prior. We find that both in simulation studies and real data analysis, our Bayes factor remarkably outperform traditional Akaike information criterion and Vuong's test. A new R package BFZINBZIP has been introduced to do simulation study and real data analysis to facilitate Bayesian model selection based on the Bayes factor.</summary>
+    <category term="stat.ME" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-08T03:40:02Z</published>
+    <arxiv:comment>34 pages, 5 tables</arxiv:comment>
+    <arxiv:primary_category term="stat.ME"/>
+    <author>
+      <name>Paramahansa Pramanik</name>
+    </author>
+    <author>
+      <name>Arnab Kumar Maity</name>
+    </author>
+  </entry>
+</feed>

@@ -1,0 +1,130 @@
+<rdf:RDF xmlns:norm="http://whatever/java/org.oclc.marc.NormalFormC" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:dct="http://purl.org/dc/terms/" xmlns:schema="http://schema.org/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:void="http://rdfs.org/ns/void#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:coord="http://whatever/java/org.oclc.marc.CoordToDecimal" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:madsrdf="http://www.loc.gov/mads/rdf/v1#" xmlns:mx="http://www.loc.gov/MARC21/slim" xmlns:dc="http://purl.org/dc/elements/1.1/" xml:base="http://id.worldcat.org/fast/">
+    <rdf:Description rdf:about="902499">
+        <dct:identifier>902499</dct:identifier>
+        <skos:inScheme rdf:resource="ontology/1.0/#fast"/>
+        <rdf:type rdf:resource="http://schema.org/Intangible"/>
+        <skos:inScheme rdf:resource="ontology/1.0/#facet-Topical"/>
+        <skos:prefLabel>Education</skos:prefLabel>
+        <schema:name>Education</schema:name>
+        <skos:altLabel>Children--Education</skos:altLabel>
+        <schema:name>Children--Education</schema:name>
+        <skos:altLabel>Education of children</skos:altLabel>
+        <schema:name>Education of children</schema:name>
+        <skos:altLabel>Education, Primitive</skos:altLabel>
+        <schema:name>Education, Primitive</schema:name>
+        <skos:altLabel>Human resource development</skos:altLabel>
+        <schema:name>Human resource development</schema:name>
+        <skos:altLabel>Instruction</skos:altLabel>
+        <schema:name>Instruction</schema:name>
+        <skos:altLabel>Pedagogy</skos:altLabel>
+        <schema:name>Pedagogy</schema:name>
+        <skos:altLabel>Schooling</skos:altLabel>
+        <schema:name>Schooling</schema:name>
+        <skos:altLabel>Students--Education</skos:altLabel>
+        <schema:name>Students--Education</schema:name>
+        <skos:altLabel>Youth--Education</skos:altLabel>
+        <schema:name>Youth--Education</schema:name>
+        <skos:broader>
+            <rdf:Description rdf:about="862898">
+                <rdfs:label>Civilization</rdfs:label>
+            </rdf:Description>
+        </skos:broader>
+        <skos:related>
+            <rdf:Description rdf:about="994857">
+                <rdfs:label>Learning and scholarship</rdfs:label>
+            </rdf:Description>
+        </skos:related>
+        <skos:related>
+            <rdf:Description rdf:about="1016325">
+                <rdfs:label>Mental discipline</rdfs:label>
+            </rdf:Description>
+        </skos:related>
+        <skos:related>
+            <rdf:Description rdf:about="1107958">
+                <rdfs:label>Schools</rdfs:label>
+            </rdf:Description>
+        </skos:related>
+        <skos:related>
+            <rdf:Description rdf:about="1136041">
+                <rdfs:label>Students</rdfs:label>
+            </rdf:Description>
+        </skos:related>
+        <skos:related>
+            <rdf:Description rdf:about="1144565">
+                <rdfs:label>Teaching</rdfs:label>
+            </rdf:Description>
+        </skos:related>
+        <skos:related>
+            <rdf:Description rdf:about="1154445">
+                <rdfs:label>Training</rdfs:label>
+            </rdf:Description>
+        </skos:related>
+        <skos:relatedMatch>
+            <rdf:Description rdf:about="https://www.wikidata.org/entity/Q3914"/>
+        </skos:relatedMatch>
+        <skos:relatedMatch>
+            <rdf:Description rdf:about="https://www.wikidata.org/entity/Q7922"/>
+        </skos:relatedMatch>
+        <skos:relatedMatch>
+            <rdf:Description rdf:about="https://www.wikidata.org/entity/Q8434"/>
+        </skos:relatedMatch>
+        <schema:sameAs>
+            <rdf:Description rdf:about="http://id.loc.gov/authorities/subjects/sh85040989">
+                <rdfs:label>Education</rdfs:label>
+            </rdf:Description>
+        </schema:sameAs>
+        <rdfs:seeAlso rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://en.wikipedia.org/wiki/Education</rdfs:seeAlso>
+        <rdfs:seeAlso rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://en.wikipedia.org/wiki/Pedagogy</rdfs:seeAlso>
+        <rdfs:seeAlso rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://en.wikipedia.org/wiki/School</rdfs:seeAlso>
+        <skos:relatedMatch>
+            <rdf:Description rdf:about="http://d-nb.info/gnd/4006650-2">
+                <rdfs:label>Bildung</rdfs:label>
+            </rdf:Description>
+        </skos:relatedMatch>
+        <skos:relatedMatch>
+            <rdf:Description rdf:about="http://d-nb.info/gnd/4112760-2">
+                <rdfs:label>Bildungsarbeit</rdfs:label>
+            </rdf:Description>
+        </skos:relatedMatch>
+        <skos:relatedMatch>
+            <rdf:Description rdf:about="http://d-nb.info/gnd/4015482-8">
+                <rdfs:label>Erziehung</rdfs:label>
+            </rdf:Description>
+        </skos:relatedMatch>
+        <schema:sameAs>
+            <rdf:Description rdf:about="http://data.bnf.fr/ark:/12148/cb11933049j">
+                <rdfs:label>Pédagogie</rdfs:label>
+            </rdf:Description>
+        </schema:sameAs>
+        <schema:sameAs>
+            <rdf:Description rdf:about="http://data.bnf.fr/ark:/12148/cb13318807v">
+                <rdfs:label>Éducation</rdfs:label>
+            </rdf:Description>
+        </schema:sameAs>
+    </rdf:Description>
+    <rdf:Description rdf:about="fst00902499">
+        <rdfs:comment>This identifier is deprecated. See the rdfs:seeAlso link for the new identifier.</rdfs:comment>
+        <rdfs:seeAlso rdf:resource="902499"/>
+    </rdf:Description>
+    <foaf:Document rdf:about="902499/rdf.xml">
+        <void:inDataset rdf:resource="http://id.worldcat.org/fast/void/0.1"/>
+        <foaf:primaryTopic rdf:resource="902499"/>
+        <dc:format>application/rdf+xml</dc:format>
+        <dct:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2004-10-24T00:00:00.0</dct:created>
+        <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2022-05-11T18:43:30.0</dct:modified>
+        <dct:language rdf:resource="http://lexvo.org/id/iso639-3/eng"/>
+        <skos:changeNote xml:lang="en">Cataloged by agency: OCoLC</skos:changeNote>
+        <skos:changeNote xml:lang="en">Transcribed by agency: OCoLC</skos:changeNote>
+    </foaf:Document>
+    <void:Dataset rdf:about="http://id.worldcat.org/fast/void/0.1">
+        <dct:title>FAST (Faceted Application of Subject Terminology) Data</dct:title>
+        <dct:license>
+            <rdf:Description rdf:about="http://www.oclc.org/research/activities/fast/odcby.htm">
+                <dct:title>Open Data Commons Attribution License (ODC-By) v1.0</dct:title>
+                <rdfs:comment>This is OCLC's "local copy" of the ODC-By license</rdfs:comment>
+                <rdfs:seeAlso rdf:resource="http://opendatacommons.org/licenses/by/#toc-anchor-337-3"/>
+                <owl:sameAs rdf:resource="http://opendatacommons.org/licenses/by/1-0/"/>
+            </rdf:Description>
+        </dct:license>
+    </void:Dataset>
+</rdf:RDF>

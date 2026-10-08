@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/jskwnsXE2ls8G6DcGiqFsS1NTgg</id>
+  <title>arXiv Query: search_query=&amp;id_list=2401.09474&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-07T20:35:41Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2401.09474" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2401.09474v1</id>
+    <title>Weak Memory Demands Model-based Compiler Testing</title>
+    <updated>2024-01-12T15:50:32Z</updated>
+    <link href="https://arxiv.org/abs/2401.09474v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.09474v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A compiler bug arises if the behaviour of a compiled concurrent program, as allowed by its architecture memory model, is not a behaviour permitted by the source program under its source model. One might reasonably think that most compiler bugs have been found in the decade since the introduction of the C/C++ memory model. We observe that processor implementations are increasingly exploiting the behaviour of relaxed architecture models. As such, compiled programs may exhibit bugs not seen on older hardware. To account for this we require model-based compiler testing.
+  While this observation is not surprising, its implications are broad. Compilers and their testing tools will need to be updated to follow hardware relaxations, concurrent test generators will need to be improved, and assumptions of prior work will need revisiting. We explore these ideas using a compiler toolchain bug we reported in LLVM.</summary>
+    <category term="cs.PL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-12T15:50:32Z</published>
+    <arxiv:comment>2 pages, Presented at The Future of Weak Memory Workshop, 2024 at the 51st ACM SIGPLAN Symposium on Principles of Programming Languages (POPL 2024)</arxiv:comment>
+    <arxiv:primary_category term="cs.PL"/>
+    <author>
+      <name>Luke Geeson</name>
+    </author>
+  </entry>
+</feed>

@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/kqEf2WlLNoTB2ZHLqiBKGJjbPNA</id>
+  <title>arXiv Query: search_query=&amp;id_list=2401.03802&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-07T20:34:52Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2401.03802" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2401.03802v2</id>
+    <title>LSPE-STRIP on-sky calibration strategy using bright celestial sources</title>
+    <updated>2024-01-16T18:36:11Z</updated>
+    <link href="https://arxiv.org/abs/2401.03802v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.03802v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper we describe the global on-sky calibration strategy of the LSPE-Strip instrument. Strip is a microwave telescope operating in the Q- and W-bands (central frequencies of 43 and 95 GHz respectively) from the Observatorio del Teide in Tenerife, with the goal to observe and characterise the polarised Galactic foreground emission, and complement the observations of the polarisation of the cosmic microwave background to be performed by the LSPE-SWIPE instrument and other similar experiments operating at higher frequencies to target the detection of the B-mode signal from the inflationary epoch of the Universe. Starting from basic assumptions on some of the instrument parameters (NET, 1/f noise knee frequency, beam properties, observing efficiency) we perform realistic simulations to study the level of accuracy that can be achieved through observations of bright celestial calibrators in the Strip footprint (sky fraction of 30 %) on the determination and characterisation of the main instrument parameters: global and relative gain factors (in intensity and in polarisation), polarisation direction, polarisation efficiency, leakage from intensity to polarisation, beams, window functions and pointing model.</summary>
+    <category term="astro-ph.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph.IM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-08T10:42:58Z</published>
+    <arxiv:comment>46 pages, 20 figures. This paper is part of of the paper series "The LSPE/Strip instrument description and testing", to appear in Jinst. Comments are welcome</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.CO"/>
+    <author>
+      <name>R. T. Génova-Santos</name>
+    </author>
+    <author>
+      <name>M. Bersanelli</name>
+    </author>
+    <author>
+      <name>C. Franceschet</name>
+    </author>
+    <author>
+      <name>M. Gervasi</name>
+    </author>
+    <author>
+      <name>C. López-Caraballo</name>
+    </author>
+    <author>
+      <name>L. Mandelli</name>
+    </author>
+    <author>
+      <name>M. Maris</name>
+    </author>
+    <author>
+      <name>A. Mennella</name>
+    </author>
+    <author>
+      <name>J. A. Rubiño-Martín</name>
+    </author>
+    <author>
+      <name>F. Villa</name>
+    </author>
+    <author>
+      <name>M. Zannoni</name>
+    </author>
+    <author>
+      <name>C. Baccigalupi</name>
+    </author>
+    <author>
+      <name>B. Caccianiga</name>
+    </author>
+    <author>
+      <name>L. Colombo</name>
+    </author>
+    <author>
+      <name>F. Cuttaia</name>
+    </author>
+    <author>
+      <name>F. Farsian</name>
+    </author>
+    <author>
+      <name>G. Morgante</name>
+    </author>
+    <author>
+      <name>S. Paradiso</name>
+    </author>
+    <author>
+      <name>G. Polenta</name>
+    </author>
+    <author>
+      <name>S. Ricciardi</name>
+    </author>
+    <author>
+      <name>M. Sandri</name>
+    </author>
+    <author>
+      <name>A. Taylor</name>
+    </author>
+    <author>
+      <name>L. Terenzi</name>
+    </author>
+    <author>
+      <name>M. Tomasi</name>
+    </author>
+  </entry>
+</feed>

@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/z6Y45Mij3Qd+MPfFH0bJIkqNFkQ</id>
+  <title>arXiv Query: search_query=&amp;id_list=2401.03642&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-07T20:35:08Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2401.03642" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2401.03642v2</id>
+    <title>A Content-Based Novelty Measure for Scholarly Publications: A Proof of Concept</title>
+    <updated>2024-01-16T01:05:59Z</updated>
+    <link href="https://arxiv.org/abs/2401.03642v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.03642v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Novelty, akin to gene mutation in evolution, opens possibilities for scholarly advancement. Although peer review remains the gold standard for evaluating novelty in scholarly communication and resource allocation, the vast volume of submissions necessitates an automated measure of scholarly novelty. Adopting a perspective that views novelty as the atypical combination of existing knowledge, we introduce an information-theoretic measure of novelty in scholarly publications. This measure quantifies the degree of 'surprise' perceived by a language model that represents the word distribution of scholarly discourse. The proposed measure is accompanied by face and construct validity evidence; the former demonstrates correspondence to scientific common sense, and the latter is endorsed through alignment with novelty evaluations from a select panel of domain experts. Additionally, characterized by its interpretability, fine granularity, and accessibility, this measure addresses gaps prevalent in existing methods. We believe this measure holds great potential to benefit editors, stakeholders, and policymakers, and it provides a reliable lens for examining the relationship between novelty and academic dynamics such as creativity, interdisciplinarity, and scientific advances.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-08T03:14:24Z</published>
+    <arxiv:comment>Accepted for publication in the proceedings of iConference2024</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Haining Wang</name>
+    </author>
+  </entry>
+</feed>

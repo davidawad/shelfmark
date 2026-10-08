@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/Iwt75LRuLxCJGmqyZYNj6+QuGdo</id>
+  <title>arXiv Query: search_query=&amp;id_list=2401.03990&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-07T20:35:51Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2401.03990" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2401.03990v4</id>
+    <title>Identification with possibly invalid IVs</title>
+    <updated>2024-10-22T06:31:43Z</updated>
+    <link href="https://arxiv.org/abs/2401.03990v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.03990v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper proposes a novel identification strategy relying on quasi-instrumental variables (quasi-IVs). A quasi-IV is a relevant but possibly invalid IV because it is not exogenous or not excluded. We show that a variety of models with discrete or continuous endogenous treatment which are usually identified with an IV - quantile models with rank invariance, additive models with homogenous treatment effects, and local average treatment effect models - can be identified under the joint relevance of two complementary quasi-IVs instead. To achieve identification, we complement one excluded but possibly endogenous quasi-IV (e.g., "relevant proxies" such as lagged treatment choice) with one exogenous (conditional on the excluded quasi-IV) but possibly included quasi-IV (e.g., random assignment or exogenous market shocks). Our approach also holds if any of the two quasi-IVs turns out to be a valid IV. In practice, being able to address endogeneity with complementary quasi-IVs instead of IVs is convenient since there are many applications where quasi-IVs are more readily available. Difference-in-differences is a notable example: time is an exogenous quasi-IV while the group assignment acts as a complementary excluded quasi-IV.</summary>
+    <category term="econ.EM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-08T16:11:22Z</published>
+    <arxiv:primary_category term="econ.EM"/>
+    <author>
+      <name>Christophe Bruneel-Zupanc</name>
+    </author>
+    <author>
+      <name>Jad Beyhum</name>
+    </author>
+  </entry>
+</feed>

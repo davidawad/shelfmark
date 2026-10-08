@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/duHLRbAYGP8WXGCfihqzho8MIzE</id>
+  <title>arXiv Query: search_query=&amp;id_list=2401.03629&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-07T20:35:48Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2401.03629" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2401.03629v2</id>
+    <title>DDM-Lag : A Diffusion-based Decision-making Model for Autonomous Vehicles with Lagrangian Safety Enhancement</title>
+    <updated>2024-04-05T08:56:09Z</updated>
+    <link href="https://arxiv.org/abs/2401.03629v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.03629v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Decision-making stands as a pivotal component in the realm of autonomous vehicles (AVs), playing a crucial role in navigating the intricacies of autonomous driving. Amidst the evolving landscape of data-driven methodologies, enhancing decision-making performance in complex scenarios has emerged as a prominent research focus. Despite considerable advancements, current learning-based decision-making approaches exhibit potential for refinement, particularly in aspects of policy articulation and safety assurance. To address these challenges, we introduce DDM-Lag, a Diffusion Decision Model, augmented with Lagrangian-based safety enhancements. This work conceptualizes the sequential decision-making challenge inherent in autonomous driving as a problem of generative modeling, adopting diffusion models as the medium for assimilating patterns of decision-making. We introduce a hybrid policy update strategy for diffusion models, amalgamating the principles of behavior cloning and Q-learning, alongside the formulation of an Actor-Critic architecture for the facilitation of updates. To augment the model's exploration process with a layer of safety, we incorporate additional safety constraints, employing a sophisticated policy optimization technique predicated on Lagrangian relaxation to refine the policy learning endeavor comprehensively. Empirical evaluation of our proposed decision-making methodology was conducted across a spectrum of driving tasks, distinguished by their varying degrees of complexity and environmental contexts. The comparative analysis with established baseline methodologies elucidates our model's superior performance, particularly in dimensions of safety and holistic efficacy.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-08T02:17:09Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Jiaqi Liu</name>
+    </author>
+    <author>
+      <name>Peng Hang</name>
+    </author>
+    <author>
+      <name>Xiaocong Zhao</name>
+    </author>
+    <author>
+      <name>Jianqiang Wang</name>
+    </author>
+    <author>
+      <name>Jian Sun</name>
+    </author>
+  </entry>
+</feed>

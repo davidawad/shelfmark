@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/O8QH0xfOca9gbvR8dmLDEoFSZok</id>
+  <title>arXiv Query: search_query=&amp;id_list=2401.04096&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-07T20:34:55Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2401.04096" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2401.04096v1</id>
+    <title>Spherical collapse and halo abundance in shift-symmetric Galileon theory</title>
+    <updated>2024-01-08T18:55:06Z</updated>
+    <link href="https://arxiv.org/abs/2401.04096v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.04096v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present the nonlinear growth of bound cosmological structures using the spherical collapse approach in the shift-symmetric Galileon theories. In particular, we focus on the class of models belonging to the Kinetic Gravity Braiding by adopting a general parametrization of the action encoding a large set of models by means of four free parameters: two defining the background evolution and two affecting the perturbations. For the latter we identify their specific signatures on the linearised critical density contrast, nonlinear effective gravitational coupling and the virial overdensity and how they drive their predictions away from $Λ$CDM. We then use the results of the spherical collapse model to predict the evolution of the halo mass function. We find that the shift-symmetric model predicts a larger number of objects compared to $Λ$CDM for masses $M \gtrsim 10^{14} h^{-1} \mathrm{M}_\odot$ and such number increases for larger deviations from the standard model. Therefore, the shift-symmetric model shows detectable signatures which can be used to distinguish it from the standard scenario.</summary>
+    <category term="astro-ph.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="gr-qc" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-08T18:55:06Z</published>
+    <arxiv:comment>17 pages, 16 figures, Accepted for publication in Physical Review D</arxiv:comment>
+    <arxiv:primary_category term="astro-ph.CO"/>
+    <author>
+      <name>Inês S. Albuquerque</name>
+    </author>
+    <author>
+      <name>Noemi Frusciante</name>
+    </author>
+    <author>
+      <name>Francesco Pace</name>
+    </author>
+    <author>
+      <name>Carlo Schimd</name>
+    </author>
+  </entry>
+</feed>
