@@ -17,6 +17,7 @@
 //! [`GoldExample`]: shelfmark_core::calibration::GoldExample
 
 mod gold;
+mod index;
 mod jsonl;
 mod memo;
 mod stale;
@@ -25,6 +26,7 @@ use std::collections::BTreeMap;
 use std::ffi::OsString;
 use std::fs::{File, OpenOptions};
 use std::path::{Path, PathBuf};
+use std::sync::{Arc, Mutex, MutexGuard};
 
 use fs2::FileExt;
 use serde::Serialize;
@@ -33,6 +35,7 @@ use shelfmark_core::error::{Error, ErrorCode};
 use shelfmark_core::placement::{self, InputHashes, Placement, PlacementLog};
 use shelfmark_core::{SchemeId, WorkId};
 
+use index::{Fingerprint, LogIndex};
 pub use jsonl::TailRepair;
 pub use memo::MemoMap;
 pub use stale::{stale, StaleClaim, StaleQuery, StaleReason};
@@ -55,10 +58,12 @@ pub fn resolve_path(flag: Option<&Path>, env: Option<OsString>) -> PathBuf {
         .unwrap_or_else(|| PathBuf::from(DEFAULT_DIR))
 }
 
-/// A placement store directory.
+/// A placement store directory. Clones share one in-memory index of the
+/// claim log, so a handle kept for a batch reads each claim line once.
 #[derive(Debug, Clone)]
 pub struct Store {
     root: PathBuf,
+    index: Arc<Mutex<LogIndex>>,
 }
 
 /// An advisory lock on `<store>/.lock`, released on drop.
@@ -83,7 +88,10 @@ impl Store {
     pub fn open(root: impl Into<PathBuf>) -> Result<Store, Error> {
         let root = root.into();
         std::fs::create_dir_all(&root).map_err(|e| jsonl::io_error(&root, "create", e))?;
-        Ok(Store { root })
+        Ok(Store {
+            root,
+            index: Arc::default(),
+        })
     }
 
     /// Open the store named by `--store` or the environment (see
@@ -159,19 +167,41 @@ impl Store {
         Ok(stale::stale(&self.claims()?, query))
     }
 
+    /// The index over the log, caught up with it. Hold the store lock.
+    fn index(&self) -> Result<MutexGuard<'_, LogIndex>, Error> {
+        let mut ix = self
+            .index
+            .lock()
+            .map_err(|_| Error::internal("the store index was poisoned by an earlier panic"))?;
+        ix.refresh(&self.path(PLACEMENTS))?;
+        Ok(ix)
+    }
+
     /// The memo index as currently on disk, or rebuilt in memory from the
     /// log when the file is missing or behind.
     pub fn memo_index(&self) -> Result<MemoMap, Error> {
         let _lock = self.lock_shared()?;
-        let claims = self.read_claims()?;
-        Ok(memo::load(&self.path(MEMO), claims.len())
-            .unwrap_or_else(|| memo::fold(memo::rebuild(&claims))))
+        let ix = self.index()?;
+        match memo::load(&self.path(MEMO), ix.metas.len()) {
+            Some(map) => Ok(map),
+            None => Ok(memo::fold(memo::rebuild(&ix, &self.path(PLACEMENTS))?)),
+        }
     }
 
     /// Rewrite `memo.jsonl` from the log.
     pub fn rebuild_memo(&self) -> Result<(), Error> {
         let _lock = self.lock_exclusive()?;
-        memo::write_rebuilt(&self.path(MEMO), &self.read_claims()?)
+        let mut ix = self.index()?;
+        self.write_memo(&mut ix)
+    }
+
+    /// Rewrite `memo.jsonl` from the log and remember what it now is.
+    fn write_memo(&self, ix: &mut LogIndex) -> Result<(), Error> {
+        let path = self.path(MEMO);
+        ix.memo = None;
+        memo::write_rebuilt(&path, ix, &self.path(PLACEMENTS))?;
+        ix.memo = Fingerprint::of(&path)?.map(|f| (f, ix.metas.len()));
+        Ok(())
     }
 
     /// Fix a torn final line in the claim and gold logs: a tail that is a
@@ -184,35 +214,9 @@ impl Store {
             placements: jsonl::repair_tail::<Placement>(&self.path(PLACEMENTS))?,
             gold: jsonl::repair_tail::<GoldExample>(&self.path(GOLD))?,
         };
-        memo::write_rebuilt(&self.path(MEMO), &self.read_claims()?)?;
+        let mut ix = self.index()?;
+        self.write_memo(&mut ix)?;
         Ok(repair)
-    }
-
-    fn check_supersedes(claims: &[Placement], p: &Placement) -> Result<(), Error> {
-        let Some(old) = &p.supersedes else {
-            return Ok(());
-        };
-        if !claims.iter().any(|c| &c.id == old) {
-            return Err(Error::new(
-                ErrorCode::NotFound,
-                format!("{} supersedes {old}, which is not in this store", p.id),
-            )
-            .details(serde_json::json!({ "supersedes": old.to_string() })));
-        }
-        if let Some(by) = claims.iter().find(|c| c.supersedes.as_ref() == Some(old)) {
-            return Err(Error::new(
-                ErrorCode::InvalidRequest,
-                format!(
-                    "{old} is already superseded by {}; supersede the current claim instead",
-                    by.id
-                ),
-            )
-            .details(serde_json::json!({
-                "supersedes": old.to_string(),
-                "superseded_by": by.id.to_string(),
-            })));
-        }
-        Ok(())
     }
 }
 
@@ -226,19 +230,25 @@ impl PlacementLog for Store {
             .details(serde_json::json!({ "expected_id": p.compute_id().to_string() })));
         }
         let _lock = self.lock_exclusive()?;
-        let mut claims = self.read_claims()?;
-        if claims.iter().any(|c| c.id == p.id) {
+        let mut ix = self.index()?;
+        if ix.position(&p.id).is_some() {
             return Ok(false);
         }
-        Self::check_supersedes(&claims, p)?;
+        ix.check_supersedes(p)?;
+        let log = self.path(PLACEMENTS);
         let memo_path = self.path(MEMO);
-        let memo_current = memo::load(&memo_path, claims.len()).is_some();
-        jsonl::append(&self.path(PLACEMENTS), std::slice::from_ref(p))?;
-        claims.push(p.clone());
+        let before = ix.metas.len();
+        let seen = memo::seq(&memo_path, ix.memo.take())?;
+        let memo_current = seen.is_some_and(|(_, seq)| seq == before);
+        let offset = ix.bytes;
+        let written = jsonl::append(&log, std::slice::from_ref(p))?;
+        ix.push(p, offset, written as usize - 1);
+        ix.bytes += written;
         if memo_current {
-            jsonl::append(&memo_path, &memo::entries_after_append(&claims))?;
+            jsonl::append(&memo_path, &memo::entries_after_append(&ix, &log, p)?)?;
+            ix.memo = Fingerprint::of(&memo_path)?.map(|f| (f, ix.metas.len()));
         } else {
-            memo::write_rebuilt(&memo_path, &claims)?;
+            self.write_memo(&mut ix)?;
         }
         Ok(true)
     }
@@ -248,30 +258,33 @@ impl PlacementLog for Store {
         self.read_claims()
     }
 
-    /// Served from `memo.jsonl` when it is current, else from the log.
+    /// Reads only the pair's claims, located through the index.
+    fn claims_for(&self, work: &WorkId, scheme: &SchemeId) -> Result<Vec<Placement>, Error> {
+        let _lock = self.lock_shared()?;
+        let ix = self.index()?;
+        let log = self.path(PLACEMENTS);
+        ix.pair(work, scheme)
+            .iter()
+            .map(|&i| ix.read(&log, i))
+            .collect()
+    }
+
+    /// Served from the in-memory index over the log.
     fn memo(&self, inputs: &InputHashes) -> Result<Option<Placement>, Error> {
         let _lock = self.lock_shared()?;
-        let log = jsonl::read_bytes(&self.path(PLACEMENTS))?;
-        let len = jsonl::lines(&self.path(PLACEMENTS), &log)?.len();
-        let key = inputs.memo_key();
-        if let Some(map) = memo::load(&self.path(MEMO), len) {
-            return Ok(map.get(&key).cloned());
-        }
-        Ok(memo::lookup(&self.read_claims()?, &key))
+        let ix = self.index()?;
+        ix.memo_answer(&inputs.memo_key())
+            .map(|i| ix.read(&self.path(PLACEMENTS), i))
+            .transpose()
     }
 
     /// `log:<claims>:<last claim id>`: the count grows on every append.
     fn revision(&self) -> Result<String, Error> {
         let _lock = self.lock_shared()?;
-        let path = self.path(PLACEMENTS);
-        let bytes = jsonl::read_bytes(&path)?;
-        let lines = jsonl::lines(&path, &bytes)?;
-        match lines.last() {
-            None => Ok("log:0".into()),
-            Some(last) => {
-                let p: Placement = jsonl::parse(&path, lines.len(), last)?;
-                Ok(format!("log:{}:{}", lines.len(), p.id))
-            }
-        }
+        let ix = self.index()?;
+        Ok(match ix.metas.last() {
+            None => "log:0".into(),
+            Some(last) => format!("log:{}:{}", ix.metas.len(), last.id),
+        })
     }
 }

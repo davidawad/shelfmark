@@ -46,7 +46,7 @@ pub(crate) fn lines<'a>(path: &Path, bytes: &'a [u8]) -> Result<Vec<&'a [u8]>, E
         .collect())
 }
 
-fn torn(path: &Path, offset: usize, len: usize) -> Error {
+pub(crate) fn torn(path: &Path, offset: usize, len: usize) -> Error {
     Error::new(
         ErrorCode::StoreError,
         format!(
@@ -95,8 +95,9 @@ pub(crate) fn encode<T: Serialize>(record: &T) -> Result<Vec<u8>, Error> {
     Ok(line)
 }
 
-/// Append records in one write and flush them to disk.
-pub(crate) fn append<T: Serialize>(path: &Path, records: &[T]) -> Result<(), Error> {
+/// Append records in one write and flush them to disk. Returns the
+/// number of bytes written.
+pub(crate) fn append<T: Serialize>(path: &Path, records: &[T]) -> Result<u64, Error> {
     let mut buf = Vec::new();
     for r in records {
         buf.extend(encode(r)?);
@@ -108,7 +109,8 @@ pub(crate) fn append<T: Serialize>(path: &Path, records: &[T]) -> Result<(), Err
         .map_err(|e| io_error(path, "open", e))?;
     f.write_all(&buf)
         .and_then(|()| f.sync_data())
-        .map_err(|e| io_error(path, "append to", e))
+        .map_err(|e| io_error(path, "append to", e))?;
+    Ok(buf.len() as u64)
 }
 
 /// Replace a whole file atomically (write a sibling, then rename).
