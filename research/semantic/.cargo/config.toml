@@ -1,0 +1,9 @@
+# candle's quantized (GGML) kernels select SIMD at compile time: without AVX2 enabled they
+# fall back to scalar code (~20x slower Q8_0). x86-64-v3 = AVX2/FMA/BMI2 (Haswell+, 2013+),
+# a portable baseline for shipped binaries; f32 gemm detects features at runtime anyway.
+[target.x86_64-unknown-linux-gnu]
+rustflags = ["-C", "target-cpu=x86-64-v3"]
+[target.x86_64-pc-windows-msvc]
+rustflags = ["-C", "target-cpu=x86-64-v3"]
+[target.x86_64-apple-darwin]
+rustflags = ["-C", "target-cpu=x86-64-v3"]

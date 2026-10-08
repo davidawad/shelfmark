@@ -1,0 +1,1305 @@
+{
+  "scheme": "lcc-outline",
+  "version": "2026-10-07-spike",
+  "source": "Library of Congress Classification Outline (https://www.loc.gov/catdir/cpso/lcco/), per-class PDFs fetched 2026-10-07: https://www.loc.gov/aba/cataloging/classification/lcco/lcco_a.pdf https://www.loc.gov/aba/cataloging/classification/lcco/lcco_b.pdf https://www.loc.gov/aba/cataloging/classification/lcco/lcco_c.pdf https://www.loc.gov/aba/cataloging/classification/lcco/lcco_d.pdf https://www.loc.gov/aba/cataloging/classification/lcco/lcco_ef.pdf https://www.loc.gov/aba/cataloging/classification/lcco/lcco_g.pdf https://www.loc.gov/aba/cataloging/classification/lcco/lcco_h.pdf https://www.loc.gov/aba/cataloging/classification/lcco/lcco_j.pdf https://www.loc.gov/aba/cataloging/classification/lcco/lcco_k.pdf https://www.loc.gov/aba/cataloging/classification/lcco/lcco_l.pdf https://www.loc.gov/aba/cataloging/classification/lcco/lcco_m.pdf https://www.loc.gov/aba/cataloging/classification/lcco/lcco_n.pdf https://www.loc.gov/aba/cataloging/classification/lcco/lcco_p.pdf https://www.loc.gov/aba/cataloging/classification/lcco/lcco_q.pdf https://www.loc.gov/aba/cataloging/classification/lcco/lcco_r.pdf https://www.loc.gov/aba/cataloging/classification/lcco/lcco_s.pdf https://www.loc.gov/aba/cataloging/classification/lcco/lcco_t.pdf https://www.loc.gov/aba/cataloging/classification/lcco/lcco_u.pdf https://www.loc.gov/aba/cataloging/classification/lcco/lcco_v.pdf https://www.loc.gov/aba/cataloging/classification/lcco/lcco_z.pdf",
+  "notes": "captions from LC outline (subclass list at the head of each class PDF; wrapped lines rejoined, PDF text-extraction spacing artifacts fixed); scope strings are editorial (not LC text), written as embedding text. E and F have no lettered subclasses: their subclasses are the outline's number ranges. K regional groupings KD-KDK, KJ-KKZ, KL-KWX are the outline's own grouping. Dutch America (F) has no number range in the outline (cross-references only) and is omitted. JX is listed in the outline as obsolete.",
+  "classes": [
+    {
+      "code": "A",
+      "label": "General Works",
+      "scope": "General reference works, encyclopedias, periodicals, museums, learned societies",
+      "subclasses": [
+        {
+          "code": "AC",
+          "label": "Collections. Series. Collected works",
+          "scope": "Collected essays, monograph series, pamphlets and miscellaneous collected writings"
+        },
+        {
+          "code": "AE",
+          "label": "Encyclopedias",
+          "scope": "General encyclopedias covering all fields of knowledge, in any language"
+        },
+        {
+          "code": "AG",
+          "label": "Dictionaries and other general reference works",
+          "scope": "General reference books, handbooks of facts, trivia, questions and answers"
+        },
+        {
+          "code": "AI",
+          "label": "Indexes",
+          "scope": "General indexes to periodicals and other publications"
+        },
+        {
+          "code": "AM",
+          "label": "Museums. Collectors and collecting",
+          "scope": "Museums, museum methods and museology, collectors and collecting"
+        },
+        {
+          "code": "AN",
+          "label": "Newspapers",
+          "scope": "General newspapers and works about newspapers"
+        },
+        {
+          "code": "AP",
+          "label": "Periodicals",
+          "scope": "General magazines and periodicals, including humorous and juvenile periodicals"
+        },
+        {
+          "code": "AS",
+          "label": "Academies and learned societies",
+          "scope": "Academies, learned societies, scholarly associations, congresses and their proceedings"
+        },
+        {
+          "code": "AY",
+          "label": "Yearbooks. Almanacs. Directories",
+          "scope": "Annuals, yearbooks, almanacs and general directories"
+        },
+        {
+          "code": "AZ",
+          "label": "History of scholarship and learning. The humanities",
+          "scope": "History of scholarship, learning and intellectual life; the humanities generally"
+        }
+      ]
+    },
+    {
+      "code": "B",
+      "label": "Philosophy. Psychology. Religion",
+      "scope": "Philosophy, logic, psychology, ethics, aesthetics, world religions, Christianity and the Bible",
+      "subclasses": [
+        {
+          "code": "B",
+          "label": "Philosophy (General)",
+          "scope": "History of philosophy and individual philosophers, ancient, medieval and modern"
+        },
+        {
+          "code": "BC",
+          "label": "Logic",
+          "scope": "Formal logic, reasoning, argument, syllogism and fallacies"
+        },
+        {
+          "code": "BD",
+          "label": "Speculative philosophy",
+          "scope": "Metaphysics, epistemology, ontology, cosmology, theory of knowledge, being and existence"
+        },
+        {
+          "code": "BF",
+          "label": "Psychology",
+          "scope": "Psychology, the mind, emotions, psychoanalysis, parapsychology, occultism, astrology, dreams"
+        },
+        {
+          "code": "BH",
+          "label": "Aesthetics",
+          "scope": "Philosophy of beauty, taste and art"
+        },
+        {
+          "code": "BJ",
+          "label": "Ethics",
+          "scope": "Moral philosophy, ethics, conduct of life, etiquette, practical wisdom and self-help"
+        },
+        {
+          "code": "BL",
+          "label": "Religions. Mythology. Rationalism",
+          "scope": "Comparative religion, mythology, Greek and Norse myths, Hinduism, freethought, rationalism"
+        },
+        {
+          "code": "BM",
+          "label": "Judaism",
+          "scope": "Jewish religion, Talmud, rabbinical literature, Jewish worship and thought"
+        },
+        {
+          "code": "BP",
+          "label": "Islam. Bahaism. Theosophy, etc.",
+          "scope": "Islam and the Quran, Bahai faith, theosophy, anthroposophy and new religious movements"
+        },
+        {
+          "code": "BQ",
+          "label": "Buddhism",
+          "scope": "Buddhist doctrine, scriptures, schools and practice"
+        },
+        {
+          "code": "BR",
+          "label": "Christianity",
+          "scope": "Christianity generally, church history, early church fathers, Christian biography"
+        },
+        {
+          "code": "BS",
+          "label": "The Bible",
+          "scope": "Bible texts, translations, commentaries, biblical criticism and study"
+        },
+        {
+          "code": "BT",
+          "label": "Doctrinal Theology",
+          "scope": "Christian doctrine, dogma, God, Jesus Christ, salvation, eschatology, apologetics"
+        },
+        {
+          "code": "BV",
+          "label": "Practical Theology",
+          "scope": "Worship, liturgy, hymns, missions, preaching, devotional literature, Christian life"
+        },
+        {
+          "code": "BX",
+          "label": "Christian Denominations",
+          "scope": "Catholic, Orthodox, Protestant churches and sects; monasticism; saints and clergy of denominations"
+        }
+      ]
+    },
+    {
+      "code": "C",
+      "label": "Auxiliary Sciences of History",
+      "scope": "Archaeology, civilization history, archives, numismatics, heraldry, genealogy, biography",
+      "subclasses": [
+        {
+          "code": "C",
+          "label": "Auxiliary Sciences of History (General)",
+          "scope": "General works on the auxiliary sciences of history"
+        },
+        {
+          "code": "CB",
+          "label": "History of Civilization",
+          "scope": "History of civilization and culture, intellectual and cultural history"
+        },
+        {
+          "code": "CC",
+          "label": "Archaeology",
+          "scope": "Archaeology, excavation methods, antiquities, bells and crosses"
+        },
+        {
+          "code": "CD",
+          "label": "Diplomatics. Archives. Seals",
+          "scope": "Diplomatics, archives and record keeping, seals and sigillography"
+        },
+        {
+          "code": "CE",
+          "label": "Technical Chronology. Calendar",
+          "scope": "Calendars, chronology and reckoning of time"
+        },
+        {
+          "code": "CJ",
+          "label": "Numismatics",
+          "scope": "Coins, medals, tokens and the study of currency"
+        },
+        {
+          "code": "CN",
+          "label": "Inscriptions. Epigraphy",
+          "scope": "Ancient and medieval inscriptions on stone and metal; epigraphy"
+        },
+        {
+          "code": "CR",
+          "label": "Heraldry",
+          "scope": "Heraldry, coats of arms, chivalry, knighthood, titles of honor"
+        },
+        {
+          "code": "CS",
+          "label": "Genealogy",
+          "scope": "Genealogy, family history, surnames and names"
+        },
+        {
+          "code": "CT",
+          "label": "Biography",
+          "scope": "Collective and general biography, memoirs of people not tied to one subject"
+        }
+      ]
+    },
+    {
+      "code": "D",
+      "label": "World History and History of Europe, Asia, Africa, Australia, New Zealand, etc.",
+      "scope": "World history and the history of Europe, Asia, Africa and Oceania, world wars",
+      "subclasses": [
+        {
+          "code": "D",
+          "label": "History (General)",
+          "scope": "General and world history, historiography, World War I and World War II, Crusades"
+        },
+        {
+          "code": "DA",
+          "label": "Great Britain",
+          "scope": "History of England, Scotland, Wales, Ireland and the British Empire"
+        },
+        {
+          "code": "DAW",
+          "label": "Central Europe",
+          "scope": "History of Central Europe as a region"
+        },
+        {
+          "code": "DB",
+          "label": "Austria - Liechtenstein - Hungary - Czechoslovakia",
+          "scope": "History of Austria, Liechtenstein, Hungary, Czech lands and Slovakia"
+        },
+        {
+          "code": "DC",
+          "label": "France - Andorra - Monaco",
+          "scope": "History of France, including the French Revolution and Napoleon"
+        },
+        {
+          "code": "DD",
+          "label": "Germany",
+          "scope": "History of Germany and Prussia"
+        },
+        {
+          "code": "DE",
+          "label": "Greco-Roman World",
+          "scope": "History of the ancient Mediterranean and Greco-Roman world"
+        },
+        {
+          "code": "DF",
+          "label": "Greece",
+          "scope": "History of ancient and modern Greece"
+        },
+        {
+          "code": "DG",
+          "label": "Italy - Malta",
+          "scope": "History of Italy and ancient Rome, Roman Empire, Malta"
+        },
+        {
+          "code": "DH",
+          "label": "Low Countries - Benelux Countries",
+          "scope": "History of the Low Countries, Belgium and Luxembourg"
+        },
+        {
+          "code": "DJ",
+          "label": "Netherlands (Holland)",
+          "scope": "History of the Netherlands (Holland) and the Dutch Republic"
+        },
+        {
+          "code": "DJK",
+          "label": "Eastern Europe (General)",
+          "scope": "History of Eastern Europe as a region"
+        },
+        {
+          "code": "DK",
+          "label": "Russia. Soviet Union. Former Soviet Republics - Poland",
+          "scope": "History of Russia, the Soviet Union, former Soviet republics and Poland"
+        },
+        {
+          "code": "DL",
+          "label": "Northern Europe. Scandinavia",
+          "scope": "History of Scandinavia: Denmark, Norway, Sweden, Iceland, Finland; Vikings"
+        },
+        {
+          "code": "DP",
+          "label": "Spain - Portugal",
+          "scope": "History of Spain and Portugal"
+        },
+        {
+          "code": "DQ",
+          "label": "Switzerland",
+          "scope": "History of Switzerland and the Swiss cantons"
+        },
+        {
+          "code": "DR",
+          "label": "Balkan Peninsula",
+          "scope": "History of the Balkans, Turkey and the Ottoman Empire, Yugoslavia, Bulgaria, Romania"
+        },
+        {
+          "code": "DS",
+          "label": "Asia",
+          "scope": "History of Asia: Middle East, Israel, India, China, Japan and others"
+        },
+        {
+          "code": "DT",
+          "label": "Africa",
+          "scope": "History of Africa, including ancient Egypt and colonial Africa"
+        },
+        {
+          "code": "DU",
+          "label": "Oceania (South Seas)",
+          "scope": "History of Australia, New Zealand, Hawaii and Pacific islands"
+        },
+        {
+          "code": "DX",
+          "label": "Romanies",
+          "scope": "History and culture of the Romani (Gypsy) people"
+        }
+      ]
+    },
+    {
+      "code": "E",
+      "label": "History of the Americas",
+      "scope": "History of the Americas generally and of the United States as a nation",
+      "subclasses": [
+        {
+          "code": "E11-143",
+          "label": "America",
+          "scope": "Pre-Columbian America, American Indians, discovery and early exploration of the Americas"
+        },
+        {
+          "code": "E151-909",
+          "label": "United States",
+          "scope": "United States national history: colonial era, Revolution, Civil War, presidents, slavery"
+        }
+      ]
+    },
+    {
+      "code": "F",
+      "label": "History of the Americas",
+      "scope": "Local history of US states and regions, Canada, Latin America",
+      "subclasses": [
+        {
+          "code": "F1-975",
+          "label": "United States local history",
+          "scope": "History of individual US states, regions, cities; the American West and frontier"
+        },
+        {
+          "code": "F1001-1145.2",
+          "label": "British America (including Canada)",
+          "scope": "History of Canada and British North America"
+        },
+        {
+          "code": "F1170",
+          "label": "French America",
+          "scope": "History of French possessions in the Americas, Saint Pierre and Miquelon"
+        },
+        {
+          "code": "F1201-3799",
+          "label": "Latin America. Spanish America",
+          "scope": "History of Mexico, Central America, West Indies, South America"
+        }
+      ]
+    },
+    {
+      "code": "G",
+      "label": "Geography. Anthropology. Recreation",
+      "scope": "Geography, maps, travel, oceanography, anthropology, folklore, customs, sports and games",
+      "subclasses": [
+        {
+          "code": "G",
+          "label": "Geography (General). Atlases. Maps",
+          "scope": "Geography, voyages and travels, exploration, polar expeditions, atlases and maps"
+        },
+        {
+          "code": "GA",
+          "label": "Mathematical geography. Cartography",
+          "scope": "Cartography, map making, surveying the earth, globes"
+        },
+        {
+          "code": "GB",
+          "label": "Physical geography",
+          "scope": "Landforms, rivers, lakes, glaciers, caves, hydrology and physical geography"
+        },
+        {
+          "code": "GC",
+          "label": "Oceanography",
+          "scope": "Oceans and seas, ocean currents, tides and marine environment"
+        },
+        {
+          "code": "GE",
+          "label": "Environmental Sciences",
+          "scope": "Environmental science and environmental studies"
+        },
+        {
+          "code": "GF",
+          "label": "Human ecology. Anthropogeography",
+          "scope": "Human ecology, human geography, people and their environment"
+        },
+        {
+          "code": "GN",
+          "label": "Anthropology",
+          "scope": "Physical and cultural anthropology, ethnology, prehistoric peoples"
+        },
+        {
+          "code": "GR",
+          "label": "Folklore",
+          "scope": "Folk tales, legends, fairy tales, superstitions and popular beliefs"
+        },
+        {
+          "code": "GT",
+          "label": "Manners and customs (General)",
+          "scope": "Customs, costume and dress, festivals, social life and daily life"
+        },
+        {
+          "code": "GV",
+          "label": "Recreation. Leisure",
+          "scope": "Sports, games, chess, card games, outdoor recreation, dance, circus, theatre amusements"
+        }
+      ]
+    },
+    {
+      "code": "H",
+      "label": "Social Sciences",
+      "scope": "Economics, statistics, commerce, finance, sociology, family, social problems, socialism",
+      "subclasses": [
+        {
+          "code": "H",
+          "label": "Social sciences (General)",
+          "scope": "General social science works and periodicals"
+        },
+        {
+          "code": "HA",
+          "label": "Statistics",
+          "scope": "Statistics, statistical methods and census data"
+        },
+        {
+          "code": "HB",
+          "label": "Economic theory. Demography",
+          "scope": "Economic theory, political economy, value, capital, population and demography"
+        },
+        {
+          "code": "HC",
+          "label": "Economic history and conditions",
+          "scope": "Economic history and economic conditions of countries and regions"
+        },
+        {
+          "code": "HD",
+          "label": "Industries. Land use. Labor",
+          "scope": "Industries, agriculture economics, land tenure, labor, trade unions, management"
+        },
+        {
+          "code": "HE",
+          "label": "Transportation and communications",
+          "scope": "Railroads, shipping, roads, postal service, telegraph and telecommunications economics"
+        },
+        {
+          "code": "HF",
+          "label": "Commerce",
+          "scope": "Trade, business, accounting, advertising, salesmanship, tariffs and commercial practice"
+        },
+        {
+          "code": "HG",
+          "label": "Finance",
+          "scope": "Money, banking, credit, investment, insurance and stock markets"
+        },
+        {
+          "code": "HJ",
+          "label": "Public finance",
+          "scope": "Taxation, public revenue, government budgets and public debt"
+        },
+        {
+          "code": "HM",
+          "label": "Sociology (General)",
+          "scope": "General sociology, social theory, social psychology, groups and crowds"
+        },
+        {
+          "code": "HN",
+          "label": "Social history and conditions. Social problems. Social reform",
+          "scope": "Social conditions, social problems and reform movements"
+        },
+        {
+          "code": "HQ",
+          "label": "The family. Marriage. Women",
+          "scope": "Family, marriage, sexuality, children, women's rights and feminism"
+        },
+        {
+          "code": "HS",
+          "label": "Societies: secret, benevolent, etc.",
+          "scope": "Freemasonry, secret societies, fraternal and benevolent associations, clubs"
+        },
+        {
+          "code": "HT",
+          "label": "Communities. Classes. Races",
+          "scope": "Cities and urban sociology, rural communities, social classes, slavery, race"
+        },
+        {
+          "code": "HV",
+          "label": "Social pathology. Social and public welfare. Criminology",
+          "scope": "Charity, poverty, welfare, crime, criminals, prisons, alcoholism, temperance"
+        },
+        {
+          "code": "HX",
+          "label": "Socialism. Communism. Anarchism",
+          "scope": "Socialism, communism, anarchism and utopian communities"
+        }
+      ]
+    },
+    {
+      "code": "J",
+      "label": "Political Science",
+      "scope": "Political theory, government, public administration, colonization, international relations",
+      "subclasses": [
+        {
+          "code": "J",
+          "label": "General legislative and executive papers",
+          "scope": "Official government documents, legislative and presidential papers"
+        },
+        {
+          "code": "JA",
+          "label": "Political science (General)",
+          "scope": "General political science and its study"
+        },
+        {
+          "code": "JC",
+          "label": "Political theory",
+          "scope": "Theory of the state, sovereignty, liberty, democracy, political philosophy"
+        },
+        {
+          "code": "JF",
+          "label": "Political institutions and public administration",
+          "scope": "Comparative government, constitutions, legislatures, elections, parties"
+        },
+        {
+          "code": "JJ",
+          "label": "Political institutions and public administration (North America)",
+          "scope": "Government and politics of North America"
+        },
+        {
+          "code": "JK",
+          "label": "Political institutions and public administration (United States)",
+          "scope": "US government, Congress, presidency, constitution, US elections and politics"
+        },
+        {
+          "code": "JL",
+          "label": "Political institutions and public administration (Canada, Latin America, etc.)",
+          "scope": "Government and politics of Canada and Latin America"
+        },
+        {
+          "code": "JN",
+          "label": "Political institutions and public administration (Europe)",
+          "scope": "Government and politics of Britain and European countries"
+        },
+        {
+          "code": "JQ",
+          "label": "Political institutions and public administration (Asia, Africa, Australia, Pacific Area, etc.)",
+          "scope": "Government and politics of Asia, Africa, Australia, Pacific"
+        },
+        {
+          "code": "JS",
+          "label": "Local government. Municipal government",
+          "scope": "City and local government, municipal administration"
+        },
+        {
+          "code": "JV",
+          "label": "Colonies and colonization. Emigration and immigration. International migration",
+          "scope": "Colonialism, colonies, emigration and immigration"
+        },
+        {
+          "code": "JX",
+          "label": "International law, see JZ and KZ (obsolete)",
+          "scope": "Obsolete class for international law, diplomacy, peace, war and arbitration"
+        },
+        {
+          "code": "JZ",
+          "label": "International relations",
+          "scope": "International relations, diplomacy, foreign policy, peace movements, world order"
+        }
+      ]
+    },
+    {
+      "code": "K",
+      "label": "Law",
+      "scope": "Law: jurisprudence, religious law, national and international law",
+      "subclasses": [
+        {
+          "code": "K",
+          "label": "Law in general. Comparative and uniform law. Jurisprudence",
+          "scope": "Jurisprudence, philosophy of law, comparative law, legal profession"
+        },
+        {
+          "code": "KB",
+          "label": "Religious law in general. Comparative religious law. Jurisprudence",
+          "scope": "Religious legal systems in general and comparative religious law"
+        },
+        {
+          "code": "KBM",
+          "label": "Jewish law",
+          "scope": "Halakhah and Jewish legal tradition"
+        },
+        {
+          "code": "KBP",
+          "label": "Islamic law",
+          "scope": "Sharia, fiqh and Islamic jurisprudence"
+        },
+        {
+          "code": "KBR",
+          "label": "History of canon law",
+          "scope": "History of Christian church law"
+        },
+        {
+          "code": "KBU",
+          "label": "Law of the Roman Catholic Church. The Holy See",
+          "scope": "Catholic canon law and the Holy See"
+        },
+        {
+          "code": "KD-KDK",
+          "label": "United Kingdom and Ireland",
+          "scope": "Law of England, Wales, Scotland, Northern Ireland and Ireland; English common law"
+        },
+        {
+          "code": "KDZ",
+          "label": "America. North America",
+          "scope": "Law of North America generally, OAS, Bermuda, Greenland"
+        },
+        {
+          "code": "KE",
+          "label": "Canada",
+          "scope": "Canadian federal and provincial law"
+        },
+        {
+          "code": "KF",
+          "label": "United States",
+          "scope": "US federal and state law, constitutional law, legal cases and trials"
+        },
+        {
+          "code": "KG",
+          "label": "Latin America - Mexico and Central America - West Indies. Caribbean area",
+          "scope": "Law of Mexico, Central America and the Caribbean"
+        },
+        {
+          "code": "KH",
+          "label": "South America",
+          "scope": "Law of South American countries"
+        },
+        {
+          "code": "KJ-KKZ",
+          "label": "Europe",
+          "scope": "Law of European countries, Roman law, Germanic law, European Union law"
+        },
+        {
+          "code": "KL-KWX",
+          "label": "Asia and Eurasia, Africa, Pacific Area, and Antarctica",
+          "scope": "Ancient Near Eastern law and law of Asia, Africa, Australia, Pacific"
+        },
+        {
+          "code": "KZ",
+          "label": "Law of nations",
+          "scope": "International law, law of war, treaties, law of the sea"
+        }
+      ]
+    },
+    {
+      "code": "L",
+      "label": "Education",
+      "scope": "Education theory, history, teaching, schools, universities and textbooks",
+      "subclasses": [
+        {
+          "code": "L",
+          "label": "Education (General)",
+          "scope": "General works and periodicals on education"
+        },
+        {
+          "code": "LA",
+          "label": "History of education",
+          "scope": "History of education and schooling in various countries"
+        },
+        {
+          "code": "LB",
+          "label": "Theory and practice of education",
+          "scope": "Teaching methods, pedagogy, child study, kindergarten, school management"
+        },
+        {
+          "code": "LC",
+          "label": "Special aspects of education",
+          "scope": "Moral, religious and vocational education; education of women and minorities"
+        },
+        {
+          "code": "LD",
+          "label": "Individual institutions - United States",
+          "scope": "Histories of individual American colleges and universities"
+        },
+        {
+          "code": "LE",
+          "label": "Individual institutions - America (except United States)",
+          "scope": "Individual schools and universities in Canada and Latin America"
+        },
+        {
+          "code": "LF",
+          "label": "Individual institutions - Europe",
+          "scope": "Individual European universities and schools such as Oxford and Cambridge"
+        },
+        {
+          "code": "LG",
+          "label": "Individual institutions - Asia, Africa, Indian Ocean islands, Australia, New Zealand, Pacific islands",
+          "scope": "Individual schools and universities outside Europe and the Americas"
+        },
+        {
+          "code": "LH",
+          "label": "College and school magazines and papers",
+          "scope": "Student magazines and school newspapers"
+        },
+        {
+          "code": "LJ",
+          "label": "Student fraternities and societies, United States",
+          "scope": "American college fraternities and sororities"
+        },
+        {
+          "code": "LT",
+          "label": "Textbooks",
+          "scope": "General school textbooks and readers"
+        }
+      ]
+    },
+    {
+      "code": "M",
+      "label": "Music",
+      "scope": "Music scores, writings about music, and music instruction",
+      "subclasses": [
+        {
+          "code": "M",
+          "label": "Music",
+          "scope": "Printed music and scores: songs, hymns, instrumental and vocal music"
+        },
+        {
+          "code": "ML",
+          "label": "Literature on music",
+          "scope": "Music history, composers' biographies, opera, musical criticism"
+        },
+        {
+          "code": "MT",
+          "label": "Instruction and study",
+          "scope": "Music theory, harmony, composition and instrument instruction"
+        }
+      ]
+    },
+    {
+      "code": "N",
+      "label": "Fine Arts",
+      "scope": "Visual arts, architecture, sculpture, drawing, painting, prints, decorative arts",
+      "subclasses": [
+        {
+          "code": "N",
+          "label": "Visual arts",
+          "scope": "Art history, art criticism, artists and art galleries"
+        },
+        {
+          "code": "NA",
+          "label": "Architecture",
+          "scope": "Architecture, architectural history, buildings and architects"
+        },
+        {
+          "code": "NB",
+          "label": "Sculpture",
+          "scope": "Sculpture, sculptors, statues and carving in stone or metal"
+        },
+        {
+          "code": "NC",
+          "label": "Drawing. Design. Illustration",
+          "scope": "Drawing, design, illustration, caricature and cartoons"
+        },
+        {
+          "code": "ND",
+          "label": "Painting",
+          "scope": "Painting, painters and painting techniques"
+        },
+        {
+          "code": "NE",
+          "label": "Print media",
+          "scope": "Engraving, etching, woodcuts, lithography and printmaking"
+        },
+        {
+          "code": "NK",
+          "label": "Decorative arts",
+          "scope": "Decorative arts, furniture, ceramics, glass, textiles, jewelry, interior decoration"
+        },
+        {
+          "code": "NX",
+          "label": "Arts in general",
+          "scope": "The arts generally, patronage and arts administration"
+        }
+      ]
+    },
+    {
+      "code": "P",
+      "label": "Language and Literature",
+      "scope": "Linguistics, languages, and the literatures of all languages and nations",
+      "subclasses": [
+        {
+          "code": "P",
+          "label": "Philology. Linguistics",
+          "scope": "General linguistics, philology, language origins and communication"
+        },
+        {
+          "code": "PA",
+          "label": "Greek language and literature. Latin language and literature",
+          "scope": "Classical Greek and Latin literature: Homer, Plato, Virgil, Cicero, medieval Latin"
+        },
+        {
+          "code": "PB",
+          "label": "Modern languages. Celtic languages",
+          "scope": "Modern languages generally; Irish, Gaelic, Welsh and Celtic languages and literature"
+        },
+        {
+          "code": "PC",
+          "label": "Romance languages",
+          "scope": "French, Italian, Spanish, Portuguese and other Romance languages"
+        },
+        {
+          "code": "PD",
+          "label": "Germanic languages. Scandinavian languages",
+          "scope": "Germanic and Scandinavian languages, Old Norse language"
+        },
+        {
+          "code": "PE",
+          "label": "English language",
+          "scope": "English grammar, dictionaries, usage, etymology, Old and Middle English language"
+        },
+        {
+          "code": "PF",
+          "label": "West Germanic languages",
+          "scope": "Dutch, Flemish, Frisian and German languages"
+        },
+        {
+          "code": "PG",
+          "label": "Slavic languages. Baltic languages. Albanian language",
+          "scope": "Russian, Polish, Czech and other Slavic languages and literatures"
+        },
+        {
+          "code": "PH",
+          "label": "Uralic languages. Basque language",
+          "scope": "Finnish, Hungarian, Estonian, Basque languages and literatures"
+        },
+        {
+          "code": "PJ",
+          "label": "Oriental languages and literatures",
+          "scope": "Semitic languages and literatures: Arabic, Hebrew, Egyptian, Arabian Nights"
+        },
+        {
+          "code": "PK",
+          "label": "Indo-Iranian languages and literatures",
+          "scope": "Sanskrit, Persian, Hindi and Indic literature"
+        },
+        {
+          "code": "PL",
+          "label": "Languages and literatures of Eastern Asia, Africa, Oceania",
+          "scope": "Chinese, Japanese, Korean, African and Pacific languages and literatures"
+        },
+        {
+          "code": "PM",
+          "label": "Hyperborean, Indian, and artificial languages",
+          "scope": "Native American languages, Inuit, Esperanto and constructed languages"
+        },
+        {
+          "code": "PN",
+          "label": "Literature (General)",
+          "scope": "Literary history and criticism, drama and theater, journalism, anthologies, poetics"
+        },
+        {
+          "code": "PQ",
+          "label": "French literature - Italian literature - Spanish literature - Portuguese literature",
+          "scope": "French, Italian, Spanish and Portuguese novels, poetry and drama"
+        },
+        {
+          "code": "PR",
+          "label": "English literature",
+          "scope": "English literature: British and Irish novels, poetry, drama, essays"
+        },
+        {
+          "code": "PS",
+          "label": "American literature",
+          "scope": "American literature: US novels, short stories, poetry, essays"
+        },
+        {
+          "code": "PT",
+          "label": "German literature - Dutch literature - Flemish literature since 1830 - Afrikaans literature - Scandinavian literature - Old Norse literature: Old Icelandic and Old Norwegian - Modern Icelandic literature - Faroese literature - Danish literature - Norwegian literature - Swedish literature",
+          "scope": "German, Dutch and Scandinavian literature: novels, poetry, drama, sagas"
+        },
+        {
+          "code": "PZ",
+          "label": "Fiction and juvenile belles lettres",
+          "scope": "Children's stories, juvenile fiction, picture books and fiction in English"
+        }
+      ]
+    },
+    {
+      "code": "Q",
+      "label": "Science",
+      "scope": "Mathematics, astronomy, physics, chemistry, geology, biology, botany, zoology, physiology",
+      "subclasses": [
+        {
+          "code": "Q",
+          "label": "Science (General)",
+          "scope": "General science, scientific method, history of science, popular science"
+        },
+        {
+          "code": "QA",
+          "label": "Mathematics",
+          "scope": "Mathematics, arithmetic, algebra, geometry, calculus, computer science"
+        },
+        {
+          "code": "QB",
+          "label": "Astronomy",
+          "scope": "Astronomy, stars, planets, solar system, celestial mechanics"
+        },
+        {
+          "code": "QC",
+          "label": "Physics",
+          "scope": "Physics, mechanics, heat, light, electricity, magnetism, meteorology"
+        },
+        {
+          "code": "QD",
+          "label": "Chemistry",
+          "scope": "Chemistry, chemical elements, analytical and organic chemistry, alchemy"
+        },
+        {
+          "code": "QE",
+          "label": "Geology",
+          "scope": "Geology, rocks, minerals, fossils and paleontology, earthquakes, volcanoes"
+        },
+        {
+          "code": "QH",
+          "label": "Natural history - Biology",
+          "scope": "Natural history, evolution, ecology, genetics, microscopy, cell biology"
+        },
+        {
+          "code": "QK",
+          "label": "Botany",
+          "scope": "Botany, plants, flowers, trees, ferns, fungi"
+        },
+        {
+          "code": "QL",
+          "label": "Zoology",
+          "scope": "Zoology, animals, birds, insects, fishes, mammals and animal behavior"
+        },
+        {
+          "code": "QM",
+          "label": "Human anatomy",
+          "scope": "Human anatomy and the structure of the human body"
+        },
+        {
+          "code": "QP",
+          "label": "Physiology",
+          "scope": "Physiology, bodily functions, nervous system, nutrition and metabolism"
+        },
+        {
+          "code": "QR",
+          "label": "Microbiology",
+          "scope": "Microbiology: bacteria, viruses, microorganisms and immunology"
+        }
+      ]
+    },
+    {
+      "code": "R",
+      "label": "Medicine",
+      "scope": "Medicine, public health, diseases, surgery, pharmacy, nursing and alternative medicine",
+      "subclasses": [
+        {
+          "code": "R",
+          "label": "Medicine (General)",
+          "scope": "General medicine, history of medicine, physicians, medical practice"
+        },
+        {
+          "code": "RA",
+          "label": "Public aspects of medicine",
+          "scope": "Public health, hygiene, sanitation, epidemics, forensic medicine, toxicology"
+        },
+        {
+          "code": "RB",
+          "label": "Pathology",
+          "scope": "Pathology and the study of disease"
+        },
+        {
+          "code": "RC",
+          "label": "Internal medicine",
+          "scope": "Internal diseases, infectious diseases, psychiatry, neurology, tuberculosis"
+        },
+        {
+          "code": "RD",
+          "label": "Surgery",
+          "scope": "Surgery, wounds, fractures, anesthesia and surgical techniques"
+        },
+        {
+          "code": "RE",
+          "label": "Ophthalmology",
+          "scope": "The eye and eye diseases"
+        },
+        {
+          "code": "RF",
+          "label": "Otorhinolaryngology",
+          "scope": "Ear, nose and throat diseases"
+        },
+        {
+          "code": "RG",
+          "label": "Gynecology and obstetrics",
+          "scope": "Gynecology, pregnancy, childbirth and midwifery"
+        },
+        {
+          "code": "RJ",
+          "label": "Pediatrics",
+          "scope": "Children's health, infant care and childhood diseases"
+        },
+        {
+          "code": "RK",
+          "label": "Dentistry",
+          "scope": "Teeth, dental care and dentistry"
+        },
+        {
+          "code": "RL",
+          "label": "Dermatology",
+          "scope": "The skin, hair and skin diseases"
+        },
+        {
+          "code": "RM",
+          "label": "Therapeutics. Pharmacology",
+          "scope": "Therapeutics, drugs, diet therapy, physical therapy, hydrotherapy"
+        },
+        {
+          "code": "RS",
+          "label": "Pharmacy and materia medica",
+          "scope": "Pharmacy, medicinal substances and materia medica"
+        },
+        {
+          "code": "RT",
+          "label": "Nursing",
+          "scope": "Nursing and care of the sick"
+        },
+        {
+          "code": "RV",
+          "label": "Botanic, Thomsonian, and eclectic medicine",
+          "scope": "Herbal and botanic medicine traditions"
+        },
+        {
+          "code": "RX",
+          "label": "Homeopathy",
+          "scope": "Homeopathy and homeopathic remedies and practice"
+        },
+        {
+          "code": "RZ",
+          "label": "Other systems of medicine",
+          "scope": "Chiropractic, osteopathy, mental healing and other alternative medicine"
+        }
+      ]
+    },
+    {
+      "code": "S",
+      "label": "Agriculture",
+      "scope": "Agriculture, farming, gardening, forestry, animal husbandry, fisheries and hunting",
+      "subclasses": [
+        {
+          "code": "S",
+          "label": "Agriculture (General)",
+          "scope": "General agriculture, farming, soils, fertilizers and farm management"
+        },
+        {
+          "code": "SB",
+          "label": "Plant culture",
+          "scope": "Gardening, horticulture, fruit and vegetable growing, flowers, landscape gardening, pests"
+        },
+        {
+          "code": "SD",
+          "label": "Forestry",
+          "scope": "Forestry, forests, trees and timber management"
+        },
+        {
+          "code": "SF",
+          "label": "Animal culture",
+          "scope": "Livestock, horses, dogs, cats, poultry, bees, dairy and veterinary medicine"
+        },
+        {
+          "code": "SH",
+          "label": "Aquaculture. Fisheries. Angling",
+          "scope": "Fish culture, fisheries, fishing and angling"
+        },
+        {
+          "code": "SK",
+          "label": "Hunting sports",
+          "scope": "Hunting, game, shooting, trapping and wildlife"
+        }
+      ]
+    },
+    {
+      "code": "T",
+      "label": "Technology",
+      "scope": "Engineering, building, machinery, electricity, vehicles, mining, chemical technology, crafts, home economics",
+      "subclasses": [
+        {
+          "code": "T",
+          "label": "Technology (General)",
+          "scope": "General technology, inventions, patents, industrial arts, technical drawing"
+        },
+        {
+          "code": "TA",
+          "label": "Engineering (General). Civil engineering",
+          "scope": "Civil engineering, materials and structural engineering, surveying"
+        },
+        {
+          "code": "TC",
+          "label": "Hydraulic engineering. Ocean engineering",
+          "scope": "Canals, dams, harbors, water power and hydraulic works"
+        },
+        {
+          "code": "TD",
+          "label": "Environmental technology. Sanitary engineering",
+          "scope": "Water supply, sewage, sanitation and pollution control"
+        },
+        {
+          "code": "TE",
+          "label": "Highway engineering. Roads and pavements",
+          "scope": "Highway engineering, road building and pavements"
+        },
+        {
+          "code": "TF",
+          "label": "Railroad engineering and operation",
+          "scope": "Railways, locomotives and railroad operation"
+        },
+        {
+          "code": "TG",
+          "label": "Bridge engineering",
+          "scope": "Design and construction of bridges"
+        },
+        {
+          "code": "TH",
+          "label": "Building construction",
+          "scope": "Building construction, carpentry, heating, plumbing and houses"
+        },
+        {
+          "code": "TJ",
+          "label": "Mechanical engineering and machinery",
+          "scope": "Machines, steam engines, mechanisms, tools and power"
+        },
+        {
+          "code": "TK",
+          "label": "Electrical engineering. Electronics. Nuclear engineering",
+          "scope": "Electricity, telegraph, telephone, radio, electronics, electric lighting"
+        },
+        {
+          "code": "TL",
+          "label": "Motor vehicles. Aeronautics. Astronautics",
+          "scope": "Automobiles, bicycles, aircraft, balloons, flight and rockets"
+        },
+        {
+          "code": "TN",
+          "label": "Mining engineering. Metallurgy",
+          "scope": "Mining, ores, metals and metallurgy"
+        },
+        {
+          "code": "TP",
+          "label": "Chemical technology",
+          "scope": "Industrial chemistry, fuels, food technology, explosives, dyes, brewing"
+        },
+        {
+          "code": "TR",
+          "label": "Photography",
+          "scope": "Photography, cameras and photographic processes"
+        },
+        {
+          "code": "TS",
+          "label": "Manufactures",
+          "scope": "Manufacturing processes, textiles production, metalworking, paper"
+        },
+        {
+          "code": "TT",
+          "label": "Handicrafts. Arts and crafts",
+          "scope": "Woodworking, needlework, sewing, knitting, dressmaking and crafts"
+        },
+        {
+          "code": "TX",
+          "label": "Home economics",
+          "scope": "Cookery, recipes, housekeeping, nutrition and household management"
+        }
+      ]
+    },
+    {
+      "code": "U",
+      "label": "Military Science",
+      "scope": "Military science, armies, strategy, tactics, weapons and military engineering",
+      "subclasses": [
+        {
+          "code": "U",
+          "label": "Military science (General)",
+          "scope": "Art of war, strategy, tactics, military history and theory"
+        },
+        {
+          "code": "UA",
+          "label": "Armies: Organization, distribution, military situation",
+          "scope": "Organization and status of national armies, defense policy"
+        },
+        {
+          "code": "UB",
+          "label": "Military administration",
+          "scope": "Military administration, recruiting, military law, intelligence"
+        },
+        {
+          "code": "UC",
+          "label": "Maintenance and transportation",
+          "scope": "Military supply, logistics, uniforms and transport"
+        },
+        {
+          "code": "UD",
+          "label": "Infantry",
+          "scope": "Infantry tactics, drill and small arms"
+        },
+        {
+          "code": "UE",
+          "label": "Cavalry. Armor",
+          "scope": "Cavalry, horse soldiers, and armored forces"
+        },
+        {
+          "code": "UF",
+          "label": "Artillery",
+          "scope": "Artillery, ordnance, guns and ammunition"
+        },
+        {
+          "code": "UG",
+          "label": "Military engineering. Air forces",
+          "scope": "Fortifications, military engineering, military aviation and air forces"
+        },
+        {
+          "code": "UH",
+          "label": "Other services",
+          "scope": "Military medical services, chaplains, welfare services"
+        }
+      ]
+    },
+    {
+      "code": "V",
+      "label": "Naval Science",
+      "scope": "Naval science, navies, seamanship, navigation, merchant marine, shipbuilding",
+      "subclasses": [
+        {
+          "code": "V",
+          "label": "Naval science (General)",
+          "scope": "Naval warfare, sea power and naval history generally"
+        },
+        {
+          "code": "VA",
+          "label": "Navies: Organization, distribution, naval situation",
+          "scope": "Organization and status of national navies"
+        },
+        {
+          "code": "VB",
+          "label": "Naval administration",
+          "scope": "Naval administration and naval law"
+        },
+        {
+          "code": "VC",
+          "label": "Naval maintenance",
+          "scope": "Naval supply, provisioning and maintenance of fleets"
+        },
+        {
+          "code": "VD",
+          "label": "Naval seamen",
+          "scope": "Naval seamen, sailors' training and life"
+        },
+        {
+          "code": "VE",
+          "label": "Marines",
+          "scope": "Marines and marine corps, naval infantry"
+        },
+        {
+          "code": "VF",
+          "label": "Naval ordnance",
+          "scope": "Naval guns, torpedoes and naval weapons"
+        },
+        {
+          "code": "VG",
+          "label": "Minor services of navies",
+          "scope": "Naval medical, aviation and other minor services"
+        },
+        {
+          "code": "VK",
+          "label": "Navigation. Merchant marine",
+          "scope": "Navigation, seamanship, lighthouses, shipwrecks, merchant shipping"
+        },
+        {
+          "code": "VM",
+          "label": "Naval architecture. Shipbuilding. Marine engineering",
+          "scope": "Ship design, shipbuilding, boats, submarines and marine engines"
+        }
+      ]
+    },
+    {
+      "code": "Z",
+      "label": "Bibliography. Library Science. Information Resources (General)",
+      "scope": "Books, writing, printing, publishing, libraries, bibliographies and information resources",
+      "subclasses": [
+        {
+          "code": "Z",
+          "label": "Books (General). Writing. Paleography. Book industries and trade. Libraries. Bibliography",
+          "scope": "History of books, writing, printing, publishing, libraries, cataloging, bibliographies"
+        },
+        {
+          "code": "ZA",
+          "label": "Information resources (General)",
+          "scope": "Information resources, information literacy and electronic information"
+        }
+      ]
+    }
+  ]
+}
