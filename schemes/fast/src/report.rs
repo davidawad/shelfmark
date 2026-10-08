@@ -112,18 +112,24 @@ pub fn sources_md(
     for (k, v) in rows {
         let _ = writeln!(o, "| {k} | {v} |");
     }
-    o.push_str("\n## Outputs\n\n| file | scheme | classes | bytes | content hash |\n|---|---|---|---|---|\n");
+    o.push_str(
+        "\n## Outputs\n\nThe content hash is shelfmark's: sha256 over the document's canonical \
+         JSON (`serde_json::to_vec` of the `SchemeDoc`), as `scheme compile` reports it.\n\n\
+         | file | scheme | classes | bytes | file sha256 | content hash |\n|---|---|---|---|---|---|\n",
+    );
     for (file, d, text) in [
         ("out/fast.json (not committed)", doc, scheme),
         ("fast-sample.json", sample_doc, sample),
     ] {
+        let canonical = serde_json::to_vec(d).expect("a scheme serializes");
         let _ = writeln!(
             o,
-            "| {file} | `{}` | {} | {} | `s256:{}` |",
+            "| {file} | `{}` | {} | {} | `{}` | `s256:{}` |",
             d.id(),
             d.classes.len(),
             text.len(),
-            sha256_hex(text.as_bytes())
+            sha256_hex(text.as_bytes()),
+            sha256_hex(&canonical)
         );
     }
     let _ = writeln!(

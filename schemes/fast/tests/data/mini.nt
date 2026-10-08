@@ -1,0 +1,30 @@
+# A hand-written slice in the shape of FASTTopical.nt, one case per rule.
+<http://id.worldcat.org/fast/100> <http://www.w3.org/2004/02/skos/core#prefLabel> "Computers" .
+<http://id.worldcat.org/fast/100> <http://www.w3.org/2004/02/skos/core#altLabel> "Electronic computers" .
+<http://id.worldcat.org/fast/100> <http://www.w3.org/2004/02/skos/core#altLabel> "Computers" .
+<http://id.worldcat.org/fast/100> <http://schema.org/sameAs> <http://id.loc.gov/authorities/subjects/sh85029552> .
+<http://id.loc.gov/authorities/subjects/sh85029552> <http://www.w3.org/2000/01/rdf-schema#label> "Computers" .
+<http://id.worldcat.org/fast/100> <http://www.w3.org/2004/02/skos/core#relatedMatch> <http://d-nb.info/gnd/4070083-5> .
+<http://id.worldcat.org/fast/101> <http://www.w3.org/2004/02/skos/core#prefLabel> "Computers--History" .
+<http://id.worldcat.org/fast/102> <http://www.w3.org/2004/02/skos/core#prefLabel> "Computers--History--20th century" .
+<http://id.worldcat.org/fast/103> <http://www.w3.org/2004/02/skos/core#prefLabel> "Computers--Design and construction--Data processing" .
+<http://id.worldcat.org/fast/200> <http://www.w3.org/2004/02/skos/core#prefLabel> "Microcomputers" .
+<http://id.worldcat.org/fast/200> <http://www.w3.org/2004/02/skos/core#broader> <http://id.worldcat.org/fast/300> .
+<http://id.worldcat.org/fast/200> <http://www.w3.org/2004/02/skos/core#broader> <http://id.worldcat.org/fast/100> .
+<http://id.worldcat.org/fast/200> <http://www.w3.org/2004/02/skos/core#broader> <http://id.worldcat.org/fast/9999> .
+<http://id.worldcat.org/fast/9999> <http://www.w3.org/2000/01/rdf-schema#label> "Silicon Valley (Calif.)" .
+<http://id.worldcat.org/fast/300> <http://www.w3.org/2004/02/skos/core#prefLabel> "Electronic digital computers" .
+<http://id.worldcat.org/fast/300> <http://schema.org/sameAs> <http://id.loc.gov/authorities/subjects/sh00000001> .
+<http://id.worldcat.org/fast/400> <http://www.w3.org/2004/02/skos/core#prefLabel> "Loop A" .
+<http://id.worldcat.org/fast/400> <http://www.w3.org/2004/02/skos/core#broader> <http://id.worldcat.org/fast/401> .
+<http://id.worldcat.org/fast/401> <http://www.w3.org/2004/02/skos/core#prefLabel> "Loop B" .
+<http://id.worldcat.org/fast/401> <http://www.w3.org/2004/02/skos/core#broader> <http://id.worldcat.org/fast/400> .
+<http://id.worldcat.org/fast/500> <http://www.w3.org/2004/02/skos/core#prefLabel> "Calculating machines" .
+<http://id.worldcat.org/fast/500> <http://www.w3.org/2002/07/owl#deprecated> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://id.worldcat.org/fast/500> <http://purl.org/dc/terms/isReplacedBy> <http://id.worldcat.org/fast/100> .
+<http://id.worldcat.org/fast/500> <http://purl.org/dc/terms/isReplacedBy> <http://id.worldcat.org/fast/300> .
+<http://id.worldcat.org/fast/500> <http://purl.org/dc/terms/isReplacedBy> <http://id.worldcat.org/fast/7777777> .
+<http://id.worldcat.org/fast/600> <http://www.w3.org/2004/02/skos/core#prefLabel> "Cafés \"and\" bistros" .
+<http://id.worldcat.org/fast/600> <http://www.w3.org/2004/02/skos/core#related> _:B1 .
+_:B1 <http://www.w3.org/2000/01/rdf-schema#label> "Restaurants" .
+<http://id.worldcat.org/fast/600> <http://www.w3.org/2000/01/rdf-schema#seeAlso> "http://en.wikipedia.org/wiki/Bistro"^^<http://www.w3.org/2001/XMLSchema#anyURI> .

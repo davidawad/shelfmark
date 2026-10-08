@@ -42,9 +42,11 @@ FAST release 2024-10-09, from the [FAST download page](https://www.oclc.org/rese
 
 ## Outputs
 
-| file | scheme | classes | bytes | content hash |
-|---|---|---|---|---|
-| out/fast.json (not committed) | `scheme:fast@2024` | 440612 | 79309844 | `s256:cc20d820aadad5ac3b6f3a72095d01f61a0eda4e6de13acd9b54294470549e47` |
-| fast-sample.json | `scheme:fast@2024-sample` | 1486 | 345813 | `s256:e48afe6a47dbb0d1372d88ff3aee39d3335e8ffedee5c590eced0759fd10e6d1` |
+The content hash is shelfmark's: sha256 over the document's canonical JSON (`serde_json::to_vec` of the `SchemeDoc`), as `scheme compile` reports it.
+
+| file | scheme | classes | bytes | file sha256 | content hash |
+|---|---|---|---|---|---|
+| out/fast.json (not committed) | `scheme:fast@2024` | 440612 | 79309844 | `cc20d820aadad5ac3b6f3a72095d01f61a0eda4e6de13acd9b54294470549e47` | `s256:9cd2169c6e712a4890df1144fc14b5f1874b7c717164891f10ed99970b3c8cec` |
+| fast-sample.json | `scheme:fast@2024-sample` | 1486 | 345813 | `e48afe6a47dbb0d1372d88ff3aee39d3335e8ffedee5c590eced0759fd10e6d1` | `s256:58c33e5cacc367b5599789dc7c111f359f24b6cdab419eb70ca3c7d0f17caace` |
 
 The sample is seeds fst00872451, fst01004795, fst00997341, fst00863572, fst01136458, fst00988184, fst01754966 with their ancestors and 2 levels of descendants.
