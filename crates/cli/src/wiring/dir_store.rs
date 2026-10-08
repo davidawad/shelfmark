@@ -4,40 +4,62 @@
 //! are plain files next to them.
 //!
 //! Opening touches nothing; reads of a store that does not exist yet are
-//! empty, and the directory appears on the first write.
+//! empty, and the directory appears on the first write. The claim log and
+//! identity handles are kept once opened: each catches up with other
+//! writers under the store lock, so a batch reads every line once.
 
 use std::fs;
 use std::path::{Path, PathBuf};
+use std::sync::OnceLock;
 
 use serde::de::DeserializeOwned;
 use shelfmark_core::calibration::{Calibration, EvalSummary, GoldExample};
 use shelfmark_core::id::sha256_hex;
 use shelfmark_core::placement::{InputHashes, Placement, PlacementLog};
 use shelfmark_core::scheme::SchemeDoc;
-use shelfmark_core::{Error, ErrorCode, ItemId, WorkId};
+use shelfmark_core::{Error, ErrorCode, ItemId, SchemeId, WorkId};
 use shelfmark_identity::{Identity, Ingested, Link, Minted, LINKS_FILE};
 
 use crate::store::Store;
 
 pub struct DirStore {
     dir: PathBuf,
+    log: OnceLock<shelfmark_store::Store>,
+    identity: Option<Identity>,
 }
 
 impl DirStore {
     pub fn new(dir: impl Into<PathBuf>) -> Self {
-        DirStore { dir: dir.into() }
+        DirStore {
+            dir: dir.into(),
+            log: OnceLock::new(),
+            identity: None,
+        }
     }
 
     fn exists(&self) -> bool {
         self.dir.is_dir()
     }
 
-    fn log(&self) -> Result<shelfmark_store::Store, Error> {
-        shelfmark_store::Store::open(&self.dir)
+    fn log(&self) -> Result<&shelfmark_store::Store, Error> {
+        if let Some(log) = self.log.get() {
+            return Ok(log);
+        }
+        let log = shelfmark_store::Store::open(&self.dir)?;
+        Ok(self.log.get_or_init(|| log))
     }
 
-    fn identity(&self) -> Result<Identity, Error> {
-        Identity::open(&self.dir)
+    fn log_mut(&mut self) -> Result<&mut shelfmark_store::Store, Error> {
+        self.log()?;
+        Ok(self.log.get_mut().expect("log() set it"))
+    }
+
+    /// The kept identity handle; its writes catch up before appending.
+    fn identity(&mut self) -> Result<&mut Identity, Error> {
+        if self.identity.is_none() {
+            self.identity = Some(Identity::open(&self.dir)?);
+        }
+        Ok(self.identity.as_mut().expect("just set"))
     }
 
     fn error(&self, path: &Path, what: impl std::fmt::Display) -> Error {
@@ -77,7 +99,7 @@ impl DirStore {
 
 impl PlacementLog for DirStore {
     fn append(&mut self, placement: &Placement) -> Result<bool, Error> {
-        self.log()?.append(placement)
+        self.log_mut()?.append(placement)
     }
 
     fn claims(&self) -> Result<Vec<Placement>, Error> {
@@ -85,6 +107,13 @@ impl PlacementLog for DirStore {
             return Ok(Vec::new());
         }
         self.log()?.claims()
+    }
+
+    fn claims_for(&self, work: &WorkId, scheme: &SchemeId) -> Result<Vec<Placement>, Error> {
+        if !self.exists() {
+            return Ok(Vec::new());
+        }
+        self.log()?.claims_for(work, scheme)
     }
 
     fn memo(&self, inputs: &InputHashes) -> Result<Option<Placement>, Error> {
@@ -104,7 +133,8 @@ impl PlacementLog for DirStore {
             "{}\0{}\0{}\0",
             self.log()?.revision()?,
             self.gold()?.len(),
-            self.identity()?.revision()
+            // A fresh handle: the kept one only catches up when it writes.
+            Identity::open(&self.dir)?.revision()
         );
         for path in self.scheme_files()? {
             let text = fs::read_to_string(&path).map_err(|e| self.error(&path, e))?;
