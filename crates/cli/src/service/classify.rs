@@ -35,13 +35,17 @@ impl Shelfmark {
         let index = self.scheme_arg(store.as_ref(), args)?;
         let calibration = store.calibration()?;
         let work = input.work.clone().expect("classify_input sets the work");
+        // What a later confirm or correct labels as gold (R15).
+        store.save_input(&input)?;
         let inputs = InputHashes {
             work: work.clone(),
             scheme: index.content_hash().to_string(),
             profile: self.profile_hash(&profile),
             config: config_hash(&json!({
                 "target": target.unwrap_or(profile.default_target),
-                "calibration": calibration.as_ref().map(|c| &c.gold_hash),
+                // The whole fit: a refit on the same gold (after a rules
+                // or table change) must not serve claims made under the old one.
+                "calibration": calibration.as_ref().map(|c| config_hash(&json!(c))),
             })),
         };
         if let Some(hit) = store.memo(&inputs)? {
@@ -103,7 +107,9 @@ impl Shelfmark {
 }
 
 /// What ingesting the file did, and the link command for the closest
-/// near-duplicate when there is one (R3).
+/// near-duplicate when there is one (R3). Linking comes before explaining
+/// a flagged placement: once linked, the copy shares the existing Work's
+/// placements.
 fn add_ingest(out: &mut Value, ingested: Option<&Ingested>) {
     let Some(ing) = ingested else { return };
     out["ingest"] = json!({
@@ -114,12 +120,10 @@ fn add_ingest(out: &mut Value, ingested: Option<&Ingested>) {
         "proposals": ing.proposals,
     });
     if let Some(p) = ing.proposals.first() {
-        if out.get("next_command").is_none() {
-            out["next_command"] = json!(format!(
-                "shelfmark link --item {} --work {}",
-                ing.item, p.work
-            ));
-        }
+        out["next_command"] = json!(format!(
+            "shelfmark link --item {} --work {}",
+            ing.item, p.work
+        ));
     }
 }
 
@@ -165,7 +169,18 @@ pub(super) fn classify_input(args: &Args) -> Result<(ClassifyInput, Option<Minte
         url,
         headings: args.strings("headings")?,
     };
-    // The Work is its text (PD2); without text, what was supplied.
+    let input = with_work(input).ok_or_else(|| {
+        bad(
+            Verb::Classify,
+            "nothing to classify: give text, file, title, identifiers, url or headings",
+        )
+    })?;
+    Ok((input, minted))
+}
+
+/// The input with its Work ID set: the Work is its text (PD2); without
+/// text, what was supplied. `None` when nothing classifiable is left.
+pub(super) fn with_work(input: ClassifyInput) -> Option<ClassifyInput> {
     let basis = if input.text.trim().is_empty() {
         let mut parts: Vec<String> = input.title.iter().cloned().collect();
         parts.extend(input.identifiers.iter().map(|i| i.key()));
@@ -175,16 +190,10 @@ pub(super) fn classify_input(args: &Args) -> Result<(ClassifyInput, Option<Minte
         input.text.clone()
     };
     if shelfmark_core::id::normalize_text_v1(&basis).is_empty() {
-        return Err(bad(
-            Verb::Classify,
-            "nothing to classify: give text, file, title, identifiers, url or headings",
-        ));
+        return None;
     }
-    Ok((
-        ClassifyInput {
-            work: Some(WorkId::from_text(&basis)),
-            ..input
-        },
-        minted,
-    ))
+    Some(ClassifyInput {
+        work: Some(WorkId::from_text(&basis)),
+        ..input
+    })
 }

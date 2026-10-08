@@ -1,6 +1,6 @@
 //! Identity for shelfmark (plan U7; R1-R3, AE4, PD2).
 //!
-//! - [`extract`]: plain text from `.txt`, `.md`, `.html` and (with the
+//! - [`extract`]: plain text from `.txt`, `.md`, `.org`, `.html` and (with the
 //!   `pdf` feature) `.pdf`.
 //! - [`Minted`]: an input's Item ID (file bytes), Work ID (normalized
 //!   text, `WorkId::from_text`) and MinHash signature.
@@ -17,6 +17,7 @@ pub mod index;
 mod jsonl;
 pub mod lock;
 pub mod minhash;
+mod org;
 
 pub use extract::Format;
 pub use html::html_to_text;

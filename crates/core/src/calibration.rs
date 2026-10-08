@@ -46,6 +46,15 @@ pub fn gold_set_hash(examples: &[GoldExample]) -> String {
     format!("s256:{}", sha256_hex(all.as_bytes()))
 }
 
+/// Weight of the raw score in [`TierCalibration::apply`]. Pool-adjacent-
+/// violators leaves plateaus where neighbouring bins pool; without this,
+/// every candidate on a plateau ties and the cascade ranks them by class
+/// code, throwing away the tier's own order (measured on the starter gold
+/// set: main-class top-1 fell from 31.7% to 22.1%). It only ever adds, so
+/// a bin fitted at the target still reaches it, and it is far too small
+/// to move a confidence.
+pub const RAW_TIEBREAK: f64 = 1e-6;
+
 /// Raw-score-to-confidence map for one tier: the calibrated value of each
 /// of the [`BINS`] equal-width bins, monotone non-decreasing.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -61,7 +70,9 @@ impl TierCalibration {
             return raw;
         }
         let i = ((raw * self.bins.len() as f64) as usize).min(self.bins.len() - 1);
-        self.bins[i]
+        // Strictly increasing in `raw`, so calibration keeps the tier's
+        // ranking (see [`RAW_TIEBREAK`]).
+        (self.bins[i] + raw * RAW_TIEBREAK).min(1.0)
     }
 }
 
@@ -111,8 +122,10 @@ pub struct EvalSummary {
     /// RFC 3339.
     pub at: String,
     pub per_profile: BTreeMap<String, Metrics>,
+    /// Keyed `<profile>/<deciding tier>`; `none` when no tier decided.
     pub per_tier: BTreeMap<String, Metrics>,
-    /// Keyed by hierarchy level (`"0"`, `"1"`, ...).
+    /// Keyed `<profile>/<hierarchy level>`, level 1 being the scheme's
+    /// top classes.
     pub per_level: BTreeMap<String, Metrics>,
 }
 

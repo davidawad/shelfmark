@@ -91,7 +91,7 @@ fn missing_semantic_tier_reports_feature_and_model() {
     assert_eq!(err.code, ErrorCode::TierUnavailable);
     let details = err.details.unwrap();
     assert_eq!(details["feature"], "semantic-shortlist");
-    assert_eq!(details["model"], "Qwen3-Embedding-0.6B (Q8)");
+    assert_eq!(details["model"], "BGE-small-en-v1.5 (int8 ONNX)");
     assert_eq!(details["feature_enabled"], false);
     assert!(err.next_command.unwrap().contains("semantic-shortlist"));
 }

@@ -26,10 +26,14 @@ async fn grpc_and_cli_return_the_same_bytes() {
     });
     let mut client = Client::connect(addr).await.unwrap();
 
-    // Place the Work first, so both classify calls below are memo hits
-    // over the same store.
+    // Place both Works first, so both classify calls below are memo hits
+    // over the same store. Text "x" has no lexical candidate, so it is the
+    // flagged best guess (R10); with the shortlist tier built in it gets a
+    // shortlist placement. Either way the call succeeds.
     let isbn = ["classify", "--identifier", "isbn:9780262033848"];
+    let unmatched = ["classify", "--text", "x", "--scheme", "scheme:lcc@2024"];
     b.ok(&isbn);
+    b.ok(&unmatched);
     let cases: Vec<(Vec<&str>, Request)> = vec![
         (
             isbn.to_vec(),
@@ -39,7 +43,7 @@ async fn grpc_and_cli_return_the_same_bytes() {
             ),
         ),
         (
-            vec!["classify", "--text", "x", "--scheme", "scheme:lcc@2024"],
+            unmatched.to_vec(),
             Request::new(
                 Verb::Classify,
                 json!({"text": "x", "scheme": "scheme:lcc@2024"}),

@@ -83,8 +83,13 @@ fn non_tty_output_parses_as_an_envelope_for_every_subcommand() {
     for args in ok_calls {
         assert_eq!(envelope(&store, &args)["ok"], true, "{args:?}");
     }
-    let e = envelope(&store, &["eval"]);
-    assert_eq!(e["error"]["code"], "tier_unavailable");
+    // Confirm and correct above were previews, so there is no gold yet.
+    let e = envelope(&store, &["eval", "--k", "3"]);
+    assert_eq!(e["error"]["code"], "not_found");
+    assert_eq!(
+        e["error"]["next_command"],
+        "shelfmark eval --gold <gold.ndjson>"
+    );
 }
 
 #[test]

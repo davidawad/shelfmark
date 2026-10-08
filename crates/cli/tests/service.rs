@@ -150,7 +150,7 @@ fn every_error_has_a_code_a_next_command_and_its_exit_code() {
             json!({"code": "ZZ"}),
             ErrorCode::NotFound,
         ),
-        (Verb::Eval, json!({}), ErrorCode::TierUnavailable),
+        (Verb::Eval, json!({}), ErrorCode::NotFound),
         (
             Verb::Link,
             json!({"item": "item:s256:00", "work": "work:x"}),
@@ -213,7 +213,7 @@ fn classify_decides_flags_and_memoizes() {
     let flagged = data(call(
         &s,
         Verb::Classify,
-        json!({"text": "law and social sciences"}),
+        json!({"text": "law and social sciences", "profile": "profile:lexical@1"}),
     ));
     assert_eq!(flagged["placement"]["status"], "flagged");
     assert_eq!(
@@ -259,7 +259,13 @@ fn classify_decides_flags_and_memoizes() {
     let st = data(call(&s, Verb::Status, json!({})));
     assert_eq!(st["flagged_backlog"], 1);
     assert_eq!(st["placements"]["claims"], 4);
-    assert_eq!(st["recommended_profile"], "profile:lexical@1");
+    // R9: the richest profile this build and machine can run.
+    let richest = if cfg!(feature = "semantic-shortlist") {
+        "profile:shortlist@1"
+    } else {
+        "profile:lexical@1"
+    };
+    assert_eq!(st["recommended_profile"], richest);
     let lf = data(call(&s, Verb::ListFlagged, json!({})));
     assert_eq!(lf["total"], 1);
     assert_eq!(lf["flagged"][0]["placement"], flagged["placement"]["id"]);

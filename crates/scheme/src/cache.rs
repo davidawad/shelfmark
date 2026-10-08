@@ -96,26 +96,38 @@ impl CompileCache {
     /// Compile scheme bytes; `source` names the file in errors and in the
     /// scheme's pointer.
     pub fn compile_bytes(&self, bytes: &[u8], source: &str) -> Result<Compiled, Error> {
-        let hash = content_hash(bytes);
-        let (index, status) = match self.load(&hash) {
-            Some(index) => (index, CacheStatus::Hit),
-            None => {
-                let doc = validate_source(bytes, source)?;
-                let stored = Stored::build(&doc, hash.clone());
-                let json = serde_json::to_vec(&stored)
-                    .map_err(|e| Error::internal(format!("compiled index serializes: {e}")))?;
-                write_atomic(&self.object(&hash), &json)?;
-                (SchemeIndex::from_stored(stored)?, CacheStatus::Miss)
-            }
-        };
+        let compiled = self.compile_object(bytes, source)?;
         let pointer = Pointer {
-            content_hash: hash,
+            content_hash: compiled.index.content_hash().to_string(),
             source: source.to_string(),
         };
         let json = serde_json::to_vec_pretty(&pointer)
             .map_err(|e| Error::internal(format!("pointer serializes: {e}")))?;
-        write_atomic(&self.pointer(index.scheme()), &json)?;
-        Ok(Compiled { index, status })
+        write_atomic(&self.pointer(compiled.index.scheme()), &json)?;
+        Ok(compiled)
+    }
+
+    /// Like [`CompileCache::compile_bytes`], but leaves the scheme's
+    /// pointer alone: for callers that keep the bytes themselves and only
+    /// want to skip validating and compiling them again. A hit writes
+    /// nothing.
+    pub fn compile_object(&self, bytes: &[u8], source: &str) -> Result<Compiled, Error> {
+        let hash = content_hash(bytes);
+        if let Some(index) = self.load(&hash) {
+            return Ok(Compiled {
+                index,
+                status: CacheStatus::Hit,
+            });
+        }
+        let doc = validate_source(bytes, source)?;
+        let stored = Stored::build(&doc, hash.clone());
+        let json = serde_json::to_vec(&stored)
+            .map_err(|e| Error::internal(format!("compiled index serializes: {e}")))?;
+        write_atomic(&self.object(&hash), &json)?;
+        Ok(Compiled {
+            index: SchemeIndex::from_stored(stored)?,
+            status: CacheStatus::Miss,
+        })
     }
 
     /// The latest compiled index for `scheme`. A scheme with no compiled

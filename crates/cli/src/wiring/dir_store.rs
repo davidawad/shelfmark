@@ -1,7 +1,8 @@
 //! A store directory (PD6): U6's claim log, gold set and memo index plus
 //! U7's item links and MinHash index, side by side and under the one
-//! `<store>/.lock`. Compiled schemes, the calibration and the latest eval
-//! are plain files next to them.
+//! `<store>/.lock`. Compiled schemes, the calibration, the latest eval
+//! and each Work's latest classify input (`inputs/<hash>.json`) are plain
+//! files next to them.
 //!
 //! Opening touches nothing; reads of a store that does not exist yet are
 //! empty, and the directory appears on the first write. The claim log and
@@ -17,6 +18,7 @@ use shelfmark_core::calibration::{Calibration, EvalSummary, GoldExample};
 use shelfmark_core::id::sha256_hex;
 use shelfmark_core::placement::{InputHashes, Placement, PlacementLog};
 use shelfmark_core::scheme::SchemeDoc;
+use shelfmark_core::tier::ClassifyInput;
 use shelfmark_core::{Error, ErrorCode, ItemId, SchemeId, WorkId};
 use shelfmark_identity::{Identity, Ingested, Link, Minted, LINKS_FILE};
 
@@ -79,6 +81,26 @@ impl DirStore {
             Err(e) if e.kind() == std::io::ErrorKind::NotFound => Ok(None),
             Err(e) => Err(self.error(&path, e)),
         }
+    }
+
+    /// Replace a file whole: write a sibling, then rename over it, so a
+    /// reader never sees half a JSON document.
+    fn write_json(&self, name: &str, value: &impl serde::Serialize) -> Result<(), Error> {
+        let path = self.dir.join(name);
+        if let Some(parent) = path.parent() {
+            fs::create_dir_all(parent).map_err(|e| self.error(parent, e))?;
+        }
+        let text = serde_json::to_string_pretty(value).map_err(|e| self.error(&path, e))?;
+        let tmp = path.with_extension(format!("tmp.{}", std::process::id()));
+        fs::write(&tmp, text).map_err(|e| self.error(&tmp, e))?;
+        fs::rename(&tmp, &path).map_err(|e| self.error(&path, e))
+    }
+
+    /// `inputs/<hash>.json` for a Work: the hash part of its ID.
+    fn input_file(work: &WorkId) -> String {
+        let id = work.to_string();
+        let hash = id.rsplit(':').next().unwrap_or(&id);
+        format!("inputs/{hash}.json")
     }
 
     fn scheme_files(&self) -> Result<Vec<PathBuf>, Error> {
@@ -230,5 +252,24 @@ impl Store for DirStore {
 
     fn eval_summary(&self) -> Result<Option<EvalSummary>, Error> {
         self.read_json("eval.json")
+    }
+
+    /// The calibration first: an eval file never describes a calibration
+    /// that failed to land.
+    fn save_eval(&mut self, eval: &EvalSummary, calibration: &Calibration) -> Result<(), Error> {
+        self.write_json("calibration.json", calibration)?;
+        self.write_json("eval.json", eval)
+    }
+
+    fn save_input(&mut self, input: &ClassifyInput) -> Result<(), Error> {
+        let work = input
+            .work
+            .as_ref()
+            .ok_or_else(|| Error::internal("a saved classify input needs its Work"))?;
+        self.write_json(&Self::input_file(work), input)
+    }
+
+    fn input(&self, work: &WorkId) -> Result<Option<ClassifyInput>, Error> {
+        self.read_json(&Self::input_file(work))
     }
 }

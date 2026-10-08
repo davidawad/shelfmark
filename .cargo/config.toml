@@ -1,0 +1,15 @@
+# x86-64-v3 = AVX2/FMA/BMI2 (Haswell+, 2013+) as the baseline for x86_64
+# builds, carried over from the CPU semantic spike. There, candle's
+# quantized (GGML) kernels pick SIMD at compile time and fell back to
+# scalar code without AVX2 (~10-20x slower). The shortlist tier runs on
+# ONNX Runtime, a prebuilt C++ library that dispatches AVX2/AVX-512 at
+# runtime, so for that tier this buys only the Rust side (tokenizer,
+# cosine ranking, label cache), which is a small share of per-item time.
+# It is kept so any future in-process quantized kernel is fast by default.
+# Binaries built with it will not run on pre-Haswell x86_64 CPUs.
+[target.x86_64-unknown-linux-gnu]
+rustflags = ["-C", "target-cpu=x86-64-v3"]
+[target.x86_64-pc-windows-msvc]
+rustflags = ["-C", "target-cpu=x86-64-v3"]
+[target.x86_64-apple-darwin]
+rustflags = ["-C", "target-cpu=x86-64-v3"]

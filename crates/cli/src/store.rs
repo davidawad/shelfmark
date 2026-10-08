@@ -7,6 +7,7 @@
 use shelfmark_core::calibration::{Calibration, EvalSummary, GoldExample};
 use shelfmark_core::placement::PlacementLog;
 use shelfmark_core::scheme::SchemeDoc;
+use shelfmark_core::tier::ClassifyInput;
 use shelfmark_core::{Error, ItemId, WorkId};
 use shelfmark_identity::{Ingested, Minted};
 
@@ -35,4 +36,10 @@ pub trait Store: PlacementLog + Send {
     fn calibration(&self) -> Result<Option<Calibration>, Error>;
     /// The latest eval's results, if any (R23).
     fn eval_summary(&self) -> Result<Option<EvalSummary>, Error>;
+    /// Write an eval's results and the calibration it fitted (R16, R17).
+    fn save_eval(&mut self, eval: &EvalSummary, calibration: &Calibration) -> Result<(), Error>;
+    /// Keep the latest classify input for its Work, so a later
+    /// confirm or correct can label it with the text (R15).
+    fn save_input(&mut self, input: &ClassifyInput) -> Result<(), Error>;
+    fn input(&self, work: &WorkId) -> Result<Option<ClassifyInput>, Error>;
 }

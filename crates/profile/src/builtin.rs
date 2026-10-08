@@ -2,11 +2,11 @@
 //! tier.
 //!
 //! Profile costs are the sum of their tiers' declared costs, so the two
-//! never drift apart. The semantic figures are provisional estimates for
-//! Qwen3-Embedding-0.6B and Qwen3-Reranker-0.6B at Q8 on a CPU runtime;
-//! the CPU benchmark spike (dot-materials-classifier-v1-gis4b.4) replaces
-//! them with measured ones. Costs are not part of the profile hash, so
-//! updating them does not make placements stale.
+//! never drift apart. The `shortlist` figures are the CPU benchmark
+//! spike's (dot-materials-classifier-v1-gis4b.4) for BGE-small-en-v1.5
+//! int8 on 4 threads; `rerank` is still an estimate for
+//! Qwen3-Reranker-0.6B at Q8, which no build ships. Costs are not part of
+//! the profile hash, so updating them does not make placements stale.
 
 use shelfmark_core::error::{Error, ErrorCode};
 use shelfmark_core::tier::Profile;
@@ -49,13 +49,13 @@ pub const TIERS: [TierSpec; 5] = [
         expected_memory_mb: 8,
         expected_micros_per_item: 50,
     },
-    // Q8 weights (~640 MB) plus runtime and activations; one embedding of
-    // up to 512 tokens per item.
+    // Measured: 572 MB peak RSS with the ONNX runtime, 46 ms p50 per item
+    // (85 ms p95), one embedding of up to 512 tokens.
     TierSpec {
         name: "shortlist",
         needs_model: true,
-        expected_memory_mb: 900,
-        expected_micros_per_item: 60_000,
+        expected_memory_mb: 600,
+        expected_micros_per_item: 50_000,
     },
     // Q8 weights plus runtime; scores about 20 prior candidates per item.
     TierSpec {
@@ -101,7 +101,7 @@ pub fn shortlist() -> Profile {
     tiers.push("shortlist");
     profile(
         "shortlist",
-        "Lexical tiers, then an embedding shortlist (Qwen3-Embedding-0.6B Q8)",
+        "Lexical tiers, then an embedding shortlist (BGE-small-en-v1.5 int8)",
         &tiers,
     )
 }

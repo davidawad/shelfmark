@@ -52,14 +52,14 @@ fn big_simd_machine_gets_rerank() {
 
 #[test]
 fn mid_memory_machine_gets_shortlist() {
-    // Budget 1024 MB: shortlist (964) fits, rerank (1864) does not.
+    // Budget 1024 MB: shortlist (664) fits, rerank (1564) does not.
     let cap = machine(2_048, 4, true, false);
     let r = assess(&cap, &builtins(), &all_tiers());
     assert_eq!(r.recommended.unwrap().to_string(), "profile:shortlist@1");
     let rerank = &r.profiles[2];
     assert!(!rerank.fits);
     assert!(
-        rerank.reasons[0].contains("needs 1864 MB"),
+        rerank.reasons[0].contains("needs 1564 MB"),
         "{:?}",
         rerank.reasons
     );

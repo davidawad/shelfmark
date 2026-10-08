@@ -10,6 +10,7 @@ fn extensions_map_to_formats() {
     for (ext, f) in [
         ("txt", Format::Text),
         ("MD", Format::Markdown),
+        ("org", Format::Org),
         ("htm", Format::Html),
         ("pdf", Format::Pdf),
     ] {
@@ -54,6 +55,34 @@ fn markdown_keeps_words_not_markup() {
         "{text:?}"
     );
     assert!(!text.contains("img.png"));
+}
+
+#[test]
+fn org_keeps_words_not_markup() {
+    let org = "#+title: Compilers\n#+startup: overview\n\
+               * TODO [#A] Parsing :cs:\n\
+               :PROPERTIES:\n:ID: 1234-abcd\n:END:\n\
+               SCHEDULED: <2026-10-08 Thu>\n\
+               See [[https://example.org/dragon][the dragon book]] and [[file:lr.org]].\n\
+               # a private comment\n\
+               #+begin_src rust\nlet x = 1;\n#+end_src\n\
+               #+begin_comment\nhidden\n#+end_comment\n\
+               - item one\n| a | b |\n";
+    let text = extract(org.as_bytes(), Format::Org).unwrap();
+    assert_eq!(
+        WorkId::from_text(&text),
+        WorkId::from_text("Parsing See the dragon book and file lr org let x 1 item one a b"),
+        "{text:?}"
+    );
+}
+
+#[test]
+fn org_and_its_markdown_conversion_mint_one_work() {
+    let org = "#+title: Notes\n* Lexing\nTokens come from [[https://x.org][a scanner]].\n";
+    let md = "---\ntitle: Notes\n---\n# Lexing\nTokens come from [a scanner](https://x.org).\n";
+    let a = Minted::from_bytes(org.as_bytes(), Format::Org).unwrap();
+    let b = Minted::from_bytes(md.as_bytes(), Format::Markdown).unwrap();
+    assert_eq!(a.work, b.work, "{:?} vs {:?}", a.text, b.text);
 }
 
 #[test]
@@ -130,8 +159,25 @@ mod pdf {
     }
 
     #[test]
+    fn placeholder_pdf_names_the_missing_xref() {
+        let err = extract(b"%PDF-fake\n", Format::Pdf).unwrap_err();
+        assert_eq!(err.code, ErrorCode::InputUnreadable);
+        assert!(
+            err.message.contains("no cross-reference table"),
+            "{}",
+            err.message
+        );
+        assert_eq!(err.details.unwrap()["reason"], "extract_failed");
+    }
+
+    #[test]
     fn broken_pdf_is_input_unreadable_not_a_panic() {
-        let err = extract(b"%PDF-1.4\nnot really a pdf", Format::Pdf).unwrap_err();
+        // A cross-reference pointer to nowhere gets past the header check.
+        let err = extract(
+            b"%PDF-1.4\nnot really a pdf\nstartxref\n9999\n%%EOF",
+            Format::Pdf,
+        )
+        .unwrap_err();
         assert_eq!(err.code, ErrorCode::InputUnreadable);
         assert_eq!(err.details.unwrap()["reason"], "extract_failed");
     }

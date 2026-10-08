@@ -82,7 +82,7 @@ impl Verb {
     pub fn mutates(self) -> bool {
         matches!(
             self,
-            Verb::Confirm | Verb::Correct | Verb::Link | Verb::SchemeCompile
+            Verb::Confirm | Verb::Correct | Verb::Link | Verb::SchemeCompile | Verb::Eval
         )
     }
 }

@@ -1,4 +1,4 @@
-//! Scheme browsing and checking (R6), naming (R22) and eval (R16).
+//! Scheme browsing and checking (R6) and naming (R22).
 
 use serde_json::{json, Value};
 use shelfmark_core::id::AnyId;
@@ -118,28 +118,5 @@ impl Shelfmark {
             "path": (self.wiring.name)(index.as_ref(), &class, title, ext)?,
             "placement": placement.id, "class": placement.class,
         }))
-    }
-
-    pub(super) fn eval(&self, args: &Args) -> Result<Value, Error> {
-        let scheme = args.id::<SchemeId>("scheme")?;
-        let profile = args.id("profile")?;
-        let Some(eval) = self.wiring.eval else {
-            return Err(Error::new(
-                ErrorCode::TierUnavailable,
-                "the eval harness is not built into this binary",
-            )
-            .next("shelfmark status"));
-        };
-        let store = self.store()?;
-        let gold: Vec<_> = store
-            .gold()?
-            .into_iter()
-            .filter(|g| scheme.as_ref().is_none_or(|s| &g.scheme == s))
-            .collect();
-        let profiles = match profile {
-            Some(p) => vec![self.profile(Some(&p))?],
-            None => self.wiring.profiles.clone(),
-        };
-        Ok(json!(eval(&gold, &profiles)?))
     }
 }

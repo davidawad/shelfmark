@@ -20,9 +20,14 @@ shelfmark-profile = { path = "../profile" }
 shelfmark-store = { path = "../store" }
 shelfmark-identity = { path = "../identity" }
 shelfmark-naming = { path = "../naming" }
+shelfmark-eval = { path = "../eval" }
+# The BGE-small shortlist tier (feature `semantic-shortlist`).
+shelfmark-tier-shortlist = { path = "../tier-shortlist", optional = true }
 serde.workspace = true
 serde_json.workspace = true
 clap = { version = "4.5", features = ["derive", "env"] }
+# The bundled scheme ships gzipped (data/schemes/lcc/lcc-lcsh.json.gz).
+flate2 = "1"
 
 [dev-dependencies]
 shelfmark-core = { workspace = true, features = ["testkit"] }
@@ -32,6 +37,9 @@ tokio = { version = "1", features = ["rt-multi-thread", "macros", "net", "sync"]
 [features]
 # PDF text extraction for `classify --file x.pdf` (U7's `pdf` feature).
 pdf = ["shelfmark-identity/pdf"]
+# The `shortlist` tier: BGE-small-en-v1.5 int8 through fastembed and ONNX
+# Runtime, downloaded on first use (needs rustc 1.88+).
+semantic-shortlist = ["dep:shelfmark-tier-shortlist", "shelfmark-tier-shortlist/fastembed"]
 
 [lints]
 workspace = true

@@ -1,8 +1,8 @@
 //! Lexical tiers for shelfmark (plan U4; R7, AE2).
 //!
 //! - [`VocabTier`] (`vocab`) matches normalized input text against every
-//!   class label and vocabulary link of the scheme with one Aho-Corasick
-//!   automaton built once per compiled index, weights matches by inverse
+//!   class label and vocabulary link of the scheme with one token trie
+//!   built once per compiled index, weights matches by inverse
 //!   class frequency over the scheme, and turns them into margin-aware
 //!   scores in [0, 1].
 //! - [`RulesTier`] (`rules`) applies configured rules

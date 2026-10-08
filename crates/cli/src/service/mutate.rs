@@ -72,17 +72,19 @@ impl Shelfmark {
         old: Placement,
         claim: Placement,
     ) -> Result<Value, Error> {
+        // The input the Work was last classified from, so the eval can
+        // re-run every profile on it; a claim from before inputs were kept
+        // labels only the Work.
+        let input = store.input(&claim.work)?.unwrap_or_else(|| ClassifyInput {
+            work: Some(claim.work.clone()),
+            ..Default::default()
+        });
         let gold = GoldExample {
             work: claim.work.clone(),
             item: None,
             scheme: claim.scheme.clone(),
             class: claim.class.clone(),
-            // Until the store keeps classify inputs (U6), a label carries
-            // only the Work.
-            input: ClassifyInput {
-                work: Some(claim.work.clone()),
-                ..Default::default()
-            },
+            input,
             from_placement: Some(old.id.clone()),
             provenance: claim.provenance.clone(),
         };

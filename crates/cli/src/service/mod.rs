@@ -2,6 +2,8 @@
 //! and the kb resource all call [`Service::call`] on it.
 
 mod classify;
+mod eval;
+mod gold_file;
 mod mutate;
 mod read;
 mod scheme;
@@ -86,7 +88,7 @@ impl Shelfmark {
             Verb::SchemeBrowse => self.scheme_browse(&args),
             Verb::SchemeSearch => self.scheme_search(&args),
             Verb::SchemeValidate => self.scheme_validate(&args),
-            Verb::Eval => self.eval(&args),
+            Verb::Eval => self.eval(req, &args),
             Verb::Name => self.name(&args),
         }
     }

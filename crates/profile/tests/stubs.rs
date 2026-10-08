@@ -27,7 +27,7 @@ fn check(stub: SemanticStub, feature: &str, model: &str) {
 fn shortlist_stub_names_feature_and_model() {
     let s = shelfmark_profile::semantic::shortlist();
     assert_eq!(s.info().name, "shortlist");
-    check(s, "semantic-shortlist", "Qwen3-Embedding-0.6B (Q8)");
+    check(s, "semantic-shortlist", "BGE-small-en-v1.5 (int8 ONNX)");
 }
 
 #[cfg(feature = "semantic-rerank")]

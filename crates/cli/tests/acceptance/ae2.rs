@@ -16,11 +16,15 @@ fn no_clear_margin_flags_the_top_class_with_its_candidates() {
     ]);
     let p = &out["placement"];
     assert_eq!(p["status"], "flagged");
-    let mut codes = candidate_codes(p);
+    let codes = candidate_codes(p);
     let top = codes[0].clone();
     assert_eq!(p["class"], format!("class:lcc@2024:{top}"));
-    codes.sort();
-    assert_eq!(codes, ["H", "K"]);
+    // The bundled LCSH vocabulary also links `law` to narrower classes
+    // (B1-5802, BT95-97.2); H and K stay the two strongest.
+    assert!(["H", "K"].contains(&top.as_str()), "{codes:?}");
+    let mut two: Vec<&str> = codes[..2].iter().map(String::as_str).collect();
+    two.sort_unstable();
+    assert_eq!(two, ["H", "K"]);
     assert!(p["trace"]["deciding_tier"].is_null());
     let pid = p["id"].as_str().unwrap();
     assert_eq!(out["next_command"], format!("shelfmark explain {pid}"));

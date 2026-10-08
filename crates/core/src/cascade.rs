@@ -5,7 +5,8 @@
 //! reaches the target confidence with at least the profile's minimum
 //! margin over its own runner-up decides, and later tiers are skipped.
 //! Otherwise the top-ranked candidate across every tier that ran is taken,
-//! flagged. Ranking is by score, then class code in byte order, so
+//! flagged; with no candidate at all, the scheme's first top-level class
+//! is taken at confidence 0, flagged. Ranking is by score, then class code in byte order, so
 //! identical inputs always give an identical decision.
 
 use std::cmp::Ordering;
@@ -100,6 +101,30 @@ fn invalid_target(target: f64) -> Error {
     .next("shelfmark describe classify")
 }
 
+/// The best guess when no tier produced any candidate (R10, "best guess,
+/// flagged"): the scheme's first top-level class in shelf order, at
+/// confidence 0. Only a scheme with no classes at all has no guess.
+fn fallback(index: &dyn CompiledIndex) -> Result<(ClassId, String), Error> {
+    let root = index.children(None).into_iter().next().ok_or_else(|| {
+        Error::new(
+            ErrorCode::NotFound,
+            format!(
+                "scheme {} has no classes to place this input in",
+                index.scheme()
+            ),
+        )
+        .next(format!(
+            "shelfmark scheme browse --scheme {}",
+            index.scheme()
+        ))
+    })?;
+    let reason = format!(
+        "no tier produced a candidate; fell back to the first top-level class {} ({})",
+        root.id.code, root.label
+    );
+    Ok((root.id, reason))
+}
+
 /// Run `profile` over `input`. `tiers` maps tier names to implementations;
 /// a name with no implementation is reported `unavailable`, as is a tier
 /// that returns `tier_unavailable`. Any other tier error aborts. Without a
@@ -189,16 +214,23 @@ pub fn run(
     let (class, confidence, status, deciding_tier, margin, flag_reason) = match decided {
         Some((tier, top, m)) => (top.class, top.score, Status::Machine, Some(tier), m, None),
         None => {
-            let top = candidates.first().ok_or_else(|| {
-                Error::new(
-                    ErrorCode::NotFound,
-                    "no tier produced a candidate class for this input",
-                )
-                .next(format!(
-                    "shelfmark scheme search {} <terms>",
-                    index.scheme()
-                ))
-            })?;
+            let Some(top) = candidates.first() else {
+                let (class, reason) = fallback(index)?;
+                return Ok(Decision {
+                    class,
+                    confidence: 0.0,
+                    status: Status::Flagged,
+                    trace: Trace {
+                        target,
+                        candidates,
+                        margin: 0.0,
+                        deciding_tier: None,
+                        tiers: runs,
+                        cost: total,
+                        flag_reason: Some(reason),
+                    },
+                });
+            };
             let scores: Vec<f64> = candidates.iter().map(|c| c.score).collect();
             let margin = margin_of(&scores);
             let reason = if top.score >= target {

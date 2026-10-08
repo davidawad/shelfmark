@@ -165,3 +165,22 @@ fn compiles_are_deterministic() {
     assert_eq!(a.vocab(), b.vocab());
     let _ = std::fs::remove_dir_all(dir);
 }
+
+#[test]
+fn compile_object_hits_without_writing_a_pointer() {
+    let dir = scratch("object");
+    let bytes = std::fs::read(fixture()).unwrap();
+    let cache = CompileCache::new(dir.join("cache"));
+
+    let first = cache.compile_object(&bytes, "mini").unwrap();
+    assert_eq!(first.status, CacheStatus::Miss);
+    let again = cache.compile_object(&bytes, "mini").unwrap();
+    assert_eq!(again.status, CacheStatus::Hit);
+    assert_eq!(again.index.content_hash(), first.index.content_hash());
+    assert!(!dir.join("cache/schemes").exists());
+    let err = cache
+        .open(first.index.scheme(), None)
+        .expect_err("no pointer was written");
+    assert_eq!(err.code, ErrorCode::SchemeNotCompiled);
+    let _ = std::fs::remove_dir_all(dir);
+}

@@ -1,0 +1,14 @@
+[package]
+name = "shelfmark-eval"
+description = "Gold-set metrics per profile, tier and hierarchy level, and the PD3 per-tier calibration fit, for shelfmark"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+shelfmark-core.workspace = true
+
+[lints]
+workspace = true

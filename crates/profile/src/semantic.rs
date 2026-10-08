@@ -1,12 +1,15 @@
 //! Semantic tier stubs (plan PD4).
 //!
-//! v1 declares the `shortlist` (embedding) and `rerank` (cross-encoder)
-//! tiers so profiles and `describe` are stable, but ships no model
-//! runtime. With the cargo feature on, [`shortlist`] and [`rerank`] give
-//! stub tiers; without it, the builder fills the slot with a tier saying
-//! which feature to build. Either way the tier reports `tier_unavailable`
-//! naming the feature and the model to install, and the cascade records
-//! it as `unavailable` and carries on.
+//! The `shortlist` (embedding) and `rerank` (cross-encoder) tiers are
+//! declared here so profiles and `describe` are stable whatever a build
+//! includes. The real `shortlist` tier is `shelfmark-tier-shortlist`,
+//! which the CLI registers when built with its `semantic-shortlist`
+//! feature; no rerank runtime ships yet. When a build has no
+//! implementation for a semantic tier, the builder fills the slot with a
+//! stub saying which feature to build. With this crate's cargo feature
+//! on, [`shortlist`] and [`rerank`] give stand-alone stubs. Either way the
+//! stub reports `tier_unavailable` naming the feature and the model, and
+//! the cascade records it as `unavailable` and carries on.
 
 use shelfmark_core::error::{Error, ErrorCode};
 use shelfmark_core::scheme::CompiledIndex;
@@ -14,7 +17,7 @@ use shelfmark_core::tier::{Candidate, ClassifyInput, Tier, TierInfo, TierOutput}
 
 use crate::builtin::tier_spec;
 
-pub const SHORTLIST_MODEL: &str = "Qwen3-Embedding-0.6B (Q8)";
+pub const SHORTLIST_MODEL: &str = "BGE-small-en-v1.5 (int8 ONNX)";
 pub const RERANK_MODEL: &str = "Qwen3-Reranker-0.6B (Q8)";
 /// `TierInfo::version` of every stub.
 pub const STUB_VERSION: &str = "stub-1";

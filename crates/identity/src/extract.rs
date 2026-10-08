@@ -1,4 +1,4 @@
-//! Plain text from an input file (R2): `.txt`, `.md`, `.html`, and `.pdf`
+//! Plain text from an input file (R2): `.txt`, `.md`, `.org`, `.html`, and `.pdf`
 //! behind the `pdf` feature. The text only has to keep the words: Work
 //! IDs hash it after normalization v1, which drops punctuation, case and
 //! spacing, so a format conversion that keeps the words keeps the ID.
@@ -10,6 +10,7 @@ use serde::{Deserialize, Serialize};
 use shelfmark_core::{Error, ErrorCode};
 
 use crate::html::html_to_text;
+pub use crate::org::org_to_text;
 
 /// An input format this crate can read text from.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -17,18 +18,26 @@ use crate::html::html_to_text;
 pub enum Format {
     Text,
     Markdown,
+    Org,
     Html,
     Pdf,
 }
 
 impl Format {
-    pub const ALL: [Format; 4] = [Format::Text, Format::Markdown, Format::Html, Format::Pdf];
+    pub const ALL: [Format; 5] = [
+        Format::Text,
+        Format::Markdown,
+        Format::Org,
+        Format::Html,
+        Format::Pdf,
+    ];
 
     /// The format named by a file extension (case-insensitive).
     pub fn from_extension(ext: &str) -> Option<Format> {
         match ext.to_ascii_lowercase().as_str() {
             "txt" | "text" => Some(Format::Text),
             "md" | "markdown" | "mdown" | "mkd" => Some(Format::Markdown),
+            "org" => Some(Format::Org),
             "html" | "htm" | "xhtml" => Some(Format::Html),
             "pdf" => Some(Format::Pdf),
             _ => None,
@@ -43,7 +52,7 @@ impl Format {
             .ok_or_else(|| {
                 unsupported(
                     format!(
-                        "{} has no supported extension (.txt, .md, .html, .pdf)",
+                        "{} has no supported extension (.txt, .md, .org, .html, .pdf)",
                         path.display()
                     ),
                     None,
@@ -60,6 +69,7 @@ impl Format {
         match self {
             Format::Text => "text",
             Format::Markdown => "markdown",
+            Format::Org => "org",
             Format::Html => "html",
             Format::Pdf => "pdf",
         }
@@ -88,6 +98,7 @@ pub fn extract(bytes: &[u8], format: Format) -> Result<String, Error> {
     match format {
         Format::Text => Ok(decode(bytes)),
         Format::Markdown => Ok(markdown_to_text(&decode(bytes))),
+        Format::Org => Ok(org_to_text(&decode(bytes))),
         Format::Html => Ok(html_to_text(&decode(bytes))),
         Format::Pdf => pdf_text(bytes),
     }
@@ -102,6 +113,18 @@ fn decode(bytes: &[u8]) -> String {
 
 #[cfg(feature = "pdf")]
 fn pdf_text(bytes: &[u8]) -> Result<String, Error> {
+    // Every complete PDF ends with a `startxref` pointer. Without one the
+    // parser only reports "failed parsing cross reference table", which
+    // reads like a parser bug; say what the file is instead. (Each such
+    // failure in the repo-corpus run was a 10-byte `%PDF-fake` fixture.)
+    if !bytes.windows(9).any(|w| w == b"startxref") {
+        let what = if bytes.starts_with(b"%PDF-") {
+            "it has a PDF header but no cross-reference table (truncated, or a placeholder)"
+        } else {
+            "it is not a PDF (no %PDF- header and no cross-reference table)"
+        };
+        return Err(unreadable(Format::Pdf, what));
+    }
     // pdf-extract panics on some malformed files; a bad input must be an
     // error, never a crash.
     match std::panic::catch_unwind(|| pdf_extract::extract_text_from_mem(bytes)) {

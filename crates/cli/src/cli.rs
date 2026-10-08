@@ -73,6 +73,18 @@ pub struct Classify {
     pub target: Option<f64>,
 }
 
+#[derive(Debug, ClapArgs)]
+pub struct EvalArgs {
+    /// NDJSON gold file to add to the store's gold set.
+    #[arg(long)]
+    pub gold: Option<String>,
+    /// Ranks counted by top-k accuracy.
+    #[arg(long)]
+    pub k: Option<u64>,
+    #[command(flatten)]
+    pub scoped: Scoped,
+}
+
 #[derive(Debug, Subcommand)]
 pub enum Command {
     /// Every noun, verb, profile and scheme; or one topic.
@@ -115,8 +127,9 @@ pub enum Command {
     /// Compile, browse, search or validate schemes.
     #[command(subcommand)]
     Scheme(SchemeCommand),
-    /// Accuracy and calibration from the gold set.
-    Eval(Scoped),
+    /// Accuracy and calibration from the gold set (preview; --commit
+    /// writes eval.json and calibration.json).
+    Eval(EvalArgs),
     /// Link a file to an existing Work (preview; --commit to apply).
     Link {
         #[arg(long)]
@@ -207,6 +220,12 @@ fn scoped(sc: Scoped) -> Vec<(&'static str, Option<Value>)> {
     vec![("scheme", s(sc.scheme)), ("profile", s(sc.profile))]
 }
 
+fn eval_args(e: EvalArgs) -> Value {
+    let mut pairs = vec![("gold", s(e.gold)), ("k", e.k.map(|k| json!(k)))];
+    pairs.extend(scoped(e.scoped));
+    obj(pairs)
+}
+
 /// The request a (non-batch, non-call) subcommand sends.
 pub fn to_request(command: Command) -> Result<(Verb, Value), Error> {
     use Command as C;
@@ -259,7 +278,7 @@ pub fn to_request(command: Command) -> Result<(Verb, Value), Error> {
             ]),
         ),
         C::Stale(sc) => (Verb::Stale, obj(scoped(sc))),
-        C::Eval(sc) => (Verb::Eval, obj(scoped(sc))),
+        C::Eval(e) => (Verb::Eval, eval_args(e)),
         C::Link { item, work } => (Verb::Link, json!({ "item": item, "work": work })),
         C::Name {
             id,

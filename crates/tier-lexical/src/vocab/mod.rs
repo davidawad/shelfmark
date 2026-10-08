@@ -16,6 +16,7 @@
 //!   at most one half and the cascade flags the decision (AE2).
 
 use std::collections::BTreeMap;
+use std::path::PathBuf;
 use std::sync::{Arc, Mutex};
 use std::time::Instant;
 
@@ -27,14 +28,19 @@ use shelfmark_core::tier::{Candidate, ClassifyInput, Cost, Evidence, Tier, TierI
 use crate::{micros_since, normalized_fields, rank};
 
 mod matcher;
+mod persist;
+mod trie;
 
 pub use matcher::{VocabMatcher, LABEL_SOURCE, QUALIFIER_DISCOUNT};
 
 /// The `vocab` tier. Builds its [`VocabMatcher`] on first use for an
-/// index and reuses it until the index's content hash changes.
+/// index and reuses it until the index's content hash changes. With a
+/// cache directory it also saves each matcher there and loads it in later
+/// processes instead of rebuilding it.
 #[derive(Debug, Default)]
 pub struct VocabTier {
     cache: Mutex<Option<Arc<VocabMatcher>>>,
+    dir: Option<PathBuf>,
 }
 
 impl VocabTier {
@@ -45,69 +51,92 @@ impl VocabTier {
         VocabTier::default()
     }
 
+    /// A tier that keeps built matchers in `dir` (created on first save).
+    pub fn with_cache_dir(dir: impl Into<PathBuf>) -> Self {
+        VocabTier {
+            cache: Mutex::default(),
+            dir: Some(dir.into()),
+        }
+    }
+
     /// A tier with its matcher already built for `index`.
     pub fn for_index(index: &dyn CompiledIndex) -> Result<Self, Error> {
         Ok(VocabTier {
             cache: Mutex::new(Some(Arc::new(VocabMatcher::build(index)?))),
+            dir: None,
         })
     }
 
-    /// The matcher for `index`, built now if the cached one is for another
-    /// index or none is cached.
+    /// The matcher for `index`: the one in memory if it is for this index,
+    /// else the one saved in the cache directory, else built now (and
+    /// saved, ignoring a failed write).
     pub fn matcher(&self, index: &dyn CompiledIndex) -> Result<Arc<VocabMatcher>, Error> {
         let mut cache = self.cache.lock().unwrap_or_else(|e| e.into_inner());
         if let Some(m) = cache.as_ref().filter(|m| m.is_for(index)) {
             return Ok(Arc::clone(m));
         }
-        let built = Arc::new(VocabMatcher::build(index)?);
-        *cache = Some(Arc::clone(&built));
-        Ok(built)
+        let saved = self
+            .dir
+            .as_deref()
+            .and_then(|d| VocabMatcher::load(d, index));
+        let matcher = match saved {
+            Some(m) => m,
+            None => {
+                let built = VocabMatcher::build(index)?;
+                if let Some(dir) = &self.dir {
+                    let _ = built.save(dir);
+                }
+                built
+            }
+        };
+        let matcher = Arc::new(matcher);
+        *cache = Some(Arc::clone(&matcher));
+        Ok(matcher)
     }
 
     /// Score `input` with an already-built matcher.
     pub fn score(matcher: &VocabMatcher, input: &ClassifyInput) -> Vec<Candidate> {
         let counts = matcher.count(&normalized_fields(input));
-        let mut raw: BTreeMap<&str, f64> = BTreeMap::new();
-        let mut evidence: BTreeMap<&str, Vec<Evidence>> = BTreeMap::new();
+        // Keyed by class number, which follows code byte order, so sums
+        // and ties run in code order.
+        let mut raw: BTreeMap<u32, f64> = BTreeMap::new();
+        let mut evidence: BTreeMap<u32, Vec<Evidence>> = BTreeMap::new();
         for (&pid, &count) in &counts {
             let phrase = &matcher.phrases[pid];
             let tf = 1.0 + f64::from(count).ln();
             for link in &phrase.links {
-                *raw.entry(&link.class).or_insert(0.0) += link.weight * phrase.idf * tf;
+                *raw.entry(link.class).or_insert(0.0) += link.weight * phrase.idf * tf;
                 evidence
-                    .entry(&link.class)
+                    .entry(link.class)
                     .or_default()
                     .push(Evidence::Vocab {
                         term: phrase.text.clone(),
-                        source: link.source.clone(),
+                        source: matcher.sources[link.source as usize].clone(),
                         count,
                     });
             }
         }
 
-        let no_ancestors = Vec::new();
-        let ancestors = |c: &str| matcher.ancestors.get(c).unwrap_or(&no_ancestors);
-        let related = |a: &str, b: &str| {
-            ancestors(a).iter().any(|x| x == b) || ancestors(b).iter().any(|x| x == a)
-        };
+        let ancestors = |c: u32| &matcher.ancestors[c as usize];
+        let related = |a: u32, b: u32| ancestors(a).contains(&b) || ancestors(b).contains(&a);
         let mut out: Vec<Candidate> = raw
             .iter()
-            .map(|(&code, &own)| {
+            .map(|(&class, &own)| {
                 let support = own
-                    + ancestors(code)
+                    + ancestors(class)
                         .iter()
-                        .filter_map(|a| raw.get(a.as_str()))
+                        .filter_map(|a| raw.get(a))
                         .sum::<f64>();
                 let rival: f64 = raw
                     .iter()
-                    .filter(|(&other, _)| other != code && !related(code, other))
+                    .filter(|(&other, _)| other != class && !related(class, other))
                     .map(|(_, r)| r)
                     .sum();
                 let score = (1.0 - (-support).exp()) * support / (support + rival);
-                let mut ev = evidence.remove(code).unwrap_or_default();
+                let mut ev = evidence.remove(&class).unwrap_or_default();
                 ev.sort_by(|a, b| evidence_key(a).cmp(&evidence_key(b)));
                 Candidate {
-                    class: ClassId::new(matcher.scheme().clone(), code),
+                    class: ClassId::new(matcher.scheme().clone(), &matcher.codes[class as usize]),
                     score: if score.is_finite() {
                         score.clamp(0.0, 1.0)
                     } else {

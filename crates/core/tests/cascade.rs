@@ -5,6 +5,7 @@ use std::collections::BTreeMap;
 use shelfmark_core::calibration::{Calibration, TierCalibration};
 use shelfmark_core::cascade::{self, Decision};
 use shelfmark_core::placement::{Status, TierRunState};
+use shelfmark_core::scheme::SchemeDoc;
 use shelfmark_core::testkit::{FixedTier, MemIndex};
 use shelfmark_core::tier::{ClassifyInput, Profile, Tier};
 use shelfmark_core::{ErrorCode, ProfileId, SchemeId};
@@ -129,14 +130,49 @@ fn missing_or_unavailable_tiers_are_reported_not_fatal() {
 }
 
 #[test]
-fn no_candidates_is_not_found_with_a_next_command() {
+fn no_candidates_is_a_flagged_best_guess_at_the_first_top_level_class() {
     let empty = FixedTier::new("vocab", &[]);
-    let e = run(&profile(&["vocab"]), &[&empty], None).unwrap_err();
+    let d = run(&profile(&["vocab"]), &[&empty], None).unwrap();
+    assert_eq!(d.class.code, "H");
+    assert_eq!(d.status, Status::Flagged);
+    assert!(d.confidence.abs() < f64::EPSILON);
+    assert!(d.trace.candidates.is_empty());
+    assert_eq!(d.trace.deciding_tier, None);
+    assert_eq!(d.trace.tiers[0].state, TierRunState::Ran);
+    assert!(d
+        .trace
+        .flag_reason
+        .unwrap()
+        .contains("no tier produced a candidate"));
+}
+
+#[test]
+fn no_candidates_in_an_empty_scheme_is_not_found_with_a_next_command() {
+    let empty = FixedTier::new("vocab", &[]);
+    let map: BTreeMap<String, &dyn Tier> = [("vocab".to_string(), &empty as &dyn Tier)].into();
+    let index = MemIndex::new(&SchemeDoc {
+        schema: None,
+        name: "none".into(),
+        version: "1".into(),
+        title: "Empty".into(),
+        source: None,
+        code_grammar: "[A-Z]+".into(),
+        classes: Vec::new(),
+    });
+    let e = cascade::run(
+        &profile(&["vocab"]),
+        &map,
+        &index,
+        &ClassifyInput::default(),
+        None,
+        None,
+    )
+    .unwrap_err();
     assert_eq!(e.code, ErrorCode::NotFound);
     assert!(e
         .next_command
         .unwrap()
-        .starts_with("shelfmark scheme search scheme:test@1"));
+        .starts_with("shelfmark scheme browse --scheme scheme:none@1"));
 }
 
 #[test]
@@ -200,7 +236,7 @@ fn calibration_maps_raw_scores_before_the_target_check() {
         Some(&cal),
     )
     .unwrap();
-    assert_eq!(d.confidence, 0.7);
+    assert!((d.confidence - 0.7).abs() < 1e-5, "{}", d.confidence);
     assert_eq!(
         d.status,
         Status::Flagged,

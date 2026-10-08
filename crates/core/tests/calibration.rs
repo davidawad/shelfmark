@@ -50,9 +50,29 @@ fn calibration_bins_raw_scores_and_reports_staleness() {
         bins: (0..10).map(|i| i as f64 / 20.0).collect(),
         support: 10,
     };
+    let near = |a: f64, b: f64| (a - b).abs() < 1e-5;
     assert_eq!(t.apply(0.0), 0.0);
-    assert_eq!(t.apply(0.55), 0.25);
-    assert_eq!(t.apply(1.0), 0.45, "1.0 falls in the last bin");
+    assert!(near(t.apply(0.55), 0.25));
+    assert!(near(t.apply(1.0), 0.45), "1.0 falls in the last bin");
+    // A plateau keeps the raw order, so calibration never reorders a
+    // tier's candidates.
+    let flat = TierCalibration {
+        bins: vec![0.4; 10],
+        support: 10,
+    };
+    assert!(flat.apply(0.31) < flat.apply(0.32));
+    assert!(flat.apply(0.32) < flat.apply(0.9));
+    // Never below the fitted value, so a bin fitted at the target reaches it.
+    let at_target = TierCalibration {
+        bins: vec![0.8; 10],
+        support: 10,
+    };
+    assert!(at_target.apply(0.75) >= 0.8);
+    let top = TierCalibration {
+        bins: vec![1.0; 10],
+        support: 10,
+    };
+    assert_eq!(top.apply(0.9), 1.0);
     let cal = Calibration {
         scheme: SchemeId::new("lcc", "2024"),
         gold_hash: gold_set_hash(&[example("H")]),
@@ -60,7 +80,7 @@ fn calibration_bins_raw_scores_and_reports_staleness() {
         fitted_at: "2026-10-07T00:00:00Z".into(),
         tiers: BTreeMap::from([("vocab".to_string(), t)]),
     };
-    assert_eq!(cal.apply("vocab", 0.55), 0.25);
+    assert!(near(cal.apply("vocab", 0.55), 0.25));
     assert_eq!(
         cal.apply("identifier", 0.55),
         0.55,

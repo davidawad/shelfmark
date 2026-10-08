@@ -1,8 +1,9 @@
-//! The lexical tiers for a store directory (U3, U4), and identifier
-//! parsing for request arguments.
+//! The tiers for a store directory: the lexical ones (U3, U4), plus the
+//! BGE-small `shortlist` tier when built with feature `semantic-shortlist`,
+//! and identifier parsing for request arguments.
 
 use std::collections::BTreeMap;
-use std::path::Path;
+use std::path::{Path, PathBuf};
 use std::sync::Arc;
 
 use shelfmark_core::scheme::CompiledIndex;
@@ -28,10 +29,13 @@ pub fn starter_rules() -> RulesConfig {
 }
 
 /// `identifier`, `vocab` and `rules` (the store's `rules.json`, else the
-/// bundled starter rules). A table or rules file that does not
-/// load leaves a tier that reports why on every run, so the error reaches
-/// the caller with its code instead of being dropped at startup.
-pub fn registry(dir: &Path) -> BTreeMap<String, Arc<dyn Tier>> {
+/// bundled starter rules), and `shortlist` in a build with it. With a
+/// `cache` directory the vocab tier saves built matchers under `vocab/`
+/// and the shortlist tier its label vectors under `shortlist/`. A table or
+/// rules file that does not load leaves a tier that reports why on every
+/// run, so the error reaches the caller with its code instead of being
+/// dropped at startup.
+pub fn registry(dir: &Path, cache: Option<PathBuf>) -> BTreeMap<String, Arc<dyn Tier>> {
     let identifier: Arc<dyn Tier> = match load_tables(&dir.join(TABLES_DIR)) {
         Ok(tables) => Arc::new(IdentifierTier::new(tables)),
         Err(e) => Arc::new(Broken::new(shelfmark_tier_identifier::NAME, e)),
@@ -45,12 +49,38 @@ pub fn registry(dir: &Path) -> BTreeMap<String, Arc<dyn Tier>> {
     } else {
         Arc::new(RulesTier::from_config(&starter_rules()).expect("bundled rules compile"))
     };
+    let vocab = match &cache {
+        Some(c) => VocabTier::with_cache_dir(c.join("vocab")),
+        None => VocabTier::new(),
+    };
     let tiers: [(&str, Arc<dyn Tier>); 3] = [
         (shelfmark_tier_identifier::NAME, identifier),
-        (VocabTier::NAME, Arc::new(VocabTier::new())),
+        (VocabTier::NAME, Arc::new(vocab)),
         (RulesTier::NAME, rules),
     ];
-    tiers.into_iter().map(|(n, t)| (n.to_string(), t)).collect()
+    tiers
+        .into_iter()
+        .chain(shortlist(cache))
+        .map(|(n, t)| (n.to_string(), t))
+        .collect()
+}
+
+/// The BGE-small shortlist tier. The model loads on the first run that
+/// needs it, not here.
+#[cfg(feature = "semantic-shortlist")]
+fn shortlist(cache: Option<PathBuf>) -> Option<(&'static str, Arc<dyn Tier>)> {
+    use shelfmark_tier_shortlist::ShortlistTier;
+    Some((
+        ShortlistTier::NAME,
+        Arc::new(ShortlistTier::bge_small(cache)),
+    ))
+}
+
+/// This build has no shortlist tier; the profile builder fills the slot
+/// with a stub naming the feature.
+#[cfg(not(feature = "semantic-shortlist"))]
+fn shortlist(_cache: Option<PathBuf>) -> Option<(&'static str, Arc<dyn Tier>)> {
+    None
 }
 
 fn load_tables(dir: &Path) -> Result<Tables, Error> {

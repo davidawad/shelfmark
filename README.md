@@ -6,9 +6,32 @@ classification scheme supplied as a data file, and records each result as
 an append-only placement claim with a confidence, a replayable trace, and
 the hashes of its inputs.
 
-Status: **v0.1 contracts.** The shared types every component builds against
-are in `crates/core`; the scheme compiler, tiers, store, CLI and gRPC
-surfaces are being built against them.
+Status: **v0.1.** The shared types are in `crates/core`; the scheme
+compiler, the lexical tiers, the store, the CLI and gRPC are built on them.
+The bundled scheme is the LCC outline with LCSH vocabulary
+(`data/schemes/lcc/`). The `shortlist` profile's embedding tier
+(BGE-small-en-v1.5 int8 through ONNX Runtime) is in builds with feature
+`semantic-shortlist`; the `rerank` tier is still a stub. The store records
+claims in an append-only log and also holds near-duplicate links, gold
+labels and the fitted calibration. Inputs are `.txt`, `.md`, `.org`,
+`.html` and, with the `pdf` feature, `.pdf`. `shelfmark eval` measures
+every runnable profile against the gold set and fits the calibration. Not
+yet built: the rerank tier and the FAST scheme.
+
+## Profiles
+
+| Profile | Tiers | Build | Peak RSS | Per item |
+|---|---|---|---|---|
+| `lexical` | identifier, vocab, rules | default | ~100 MB | under 50 ms |
+| `shortlist` | lexical, then an embedding shortlist | `--features semantic-shortlist` | ~300-360 MB | ~50-100 ms more |
+| `rerank` | shortlist, then a cross-encoder | not available yet | | |
+
+Measured on a 4-CPU Linux box, one item per process with a warm store
+cache; process start-up is about 0.2 s. `shelfmark status` reports which
+profiles this build and machine can run. The shortlist model (~65 MB)
+downloads on first use into the user's cache (`FASTEMBED_CACHE_DIR`
+overrides it). Each store keeps derived data in `<store>/cache/`
+(compiled schemes, vocab matchers, label vectors); it is safe to delete.
 
 ## The tower
 
@@ -43,6 +66,27 @@ Every ID names its kind, and a hash ID names its algorithm, so one
 - `testkit` (feature): an in-memory index and a fixed-score tier for
   tests.
 
+## Eval and calibration (`crates/eval`)
+
+`shelfmark eval` re-runs each runnable profile on the gold set and
+reports top-1/top-k accuracy, calibration error (ECE), flagged rate and
+latency per profile, per deciding tier and per hierarchy level (R16). It
+fits a per-tier calibration from the same run: raw scores in 10 bins,
+made monotone by pool-adjacent-violators (plan PD3). Like any mutation it
+previews first. `--commit` writes `calibration.json` and `eval.json` to
+the store; `classify` then applies the calibration and `status` reports
+both, including whether the calibration is stale against newer gold
+(R17, R23). Gold comes from `confirm`/`correct`, which label the input the
+Work was classified from, or from `--gold FILE`, an NDJSON file of gold
+examples or mc-eval gold items, which a commit adds to the gold set once.
+The metrics are in-sample: the calibration is scored on the examples it
+was fitted on.
+
+```sh
+shelfmark eval --gold starter-v1.ndjson            # preview
+shelfmark eval --gold starter-v1.ndjson --commit --expected-revision <rev>
+```
+
 [`proto/shelfmark/v1/shelfmark.proto`](proto/shelfmark/v1/shelfmark.proto)
 carries the same requests and envelopes over gRPC. A test keeps its enums
 in sync with the core.
@@ -52,7 +96,10 @@ in sync with the core.
 ```sh
 cargo test
 cargo clippy --all-targets --all-features -- -D warnings
+cargo build --release --features semantic-shortlist   # needs rustc 1.88+
 ```
+
+`.cargo/config.toml` builds x86_64 for `x86-64-v3` (AVX2, 2013+ CPUs).
 
 This workspace has no dependency outside its own directory. A test checks
 that, and the directory can be split into its own repository unchanged.
