@@ -74,6 +74,18 @@ fn a_kept_handle_sees_appends_from_another_handle() {
 }
 
 #[test]
+fn a_deleted_log_reads_as_empty() {
+    let (_d, mut s) = store();
+    let a = machine("w1", "QA76");
+    s.append(&a).unwrap();
+    std::fs::remove_file(s.root().join(PLACEMENTS)).unwrap();
+    assert_eq!(s.revision().unwrap(), "log:0");
+    assert_eq!(s.memo(&a.inputs).unwrap(), None);
+    assert!(s.append(&a).unwrap(), "the claim is new again");
+    assert_eq!(s.claims().unwrap(), vec![a]);
+}
+
+#[test]
 fn claims_for_reads_only_the_pair() {
     let (_d, mut s) = store();
     let m1 = machine("w1", "QA76");

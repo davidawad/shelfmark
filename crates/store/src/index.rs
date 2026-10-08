@@ -96,6 +96,11 @@ impl LogIndex {
         if len == self.bytes {
             return Ok(());
         }
+        if len == 0 {
+            // Emptied or deleted: nothing to read.
+            self.reset();
+            return Ok(());
+        }
         // Resume only where the parsed part still ends in a newline;
         // otherwise the file was rewritten, so start over.
         let resume =
