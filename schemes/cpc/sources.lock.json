@@ -1,0 +1,26 @@
+{
+  "release": "2026.08",
+  "source": {
+    "file": "CPCTitleList202608.zip",
+    "url": "https://www.cooperativepatentclassification.org/sites/default/files/cpc/bulk/CPCTitleList202608.zip",
+    "fetched": "2026-10-08",
+    "bytes": 4680549,
+    "sha256": "cd3a64318110395804de7df411e8036211fc3379d93b1a7deb77975777541f92"
+  },
+  "outputs": [
+    {
+      "file": "cpc.json",
+      "depth": "all",
+      "classes": 254314,
+      "bytes": 29046508,
+      "sha256": "554464bd29ed597fcf50ea6a79aaa4c99200d434f0c3ac75d7690c2754c89846"
+    },
+    {
+      "file": "cpc-main-group.json",
+      "depth": "main-group",
+      "classes": 10694,
+      "bytes": 1728281,
+      "sha256": "7b4c252c8d7f58cd01074f71efe29b7a27baf9fabe70c2e0bbcb6133c227c804"
+    }
+  ]
+}

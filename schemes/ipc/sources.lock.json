@@ -1,0 +1,25 @@
+{
+  "edition": "20260101",
+  "sources": [
+    {
+      "file": "ipc_scheme_20260101.zip",
+      "url": "https://www.wipo.int/classifications/data/ipc/ITSupport_and_download_area/20260101/MasterFiles/ipc_scheme_20260101.zip",
+      "role": "scheme",
+      "fetched": "2026-10-08",
+      "bytes": 4908682,
+      "sha256": "22977dd19b2061d155b4d48558b495192418bafca8147ea15eea2e05019e4849",
+      "member": "EN_ipc_scheme_20260101.xml",
+      "member_sha256": "60abc42ec68c8c8ea789fa5698404fe893a0f9b79156b1d8f2d15318ef6904a3"
+    },
+    {
+      "file": "ipc_catchwordindex_20260101.zip",
+      "url": "https://www.wipo.int/classifications/data/ipc/ITSupport_and_download_area/20260101/MasterFiles/ipc_catchwordindex_20260101.zip",
+      "role": "catchwords",
+      "fetched": "2026-10-08",
+      "bytes": 1113420,
+      "sha256": "d6fff7db7c1b3c7d80b4cc9746ac7918062ed2d8283c619c4b15dfd54f29a183",
+      "member": "EN_ipc_catchwordindex_20260101.xml",
+      "member_sha256": "12d192e605a341d16162b771d064635210597c65e7fff9c9e6bc3a222a50107c"
+    }
+  ]
+}

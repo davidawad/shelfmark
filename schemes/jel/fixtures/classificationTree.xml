@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!-- Synthetic test input in the shape of the AEA's classificationTree.xml.
+     Codes follow the JEL grammar; labels are written for these tests and are
+     not AEA text, so the fixture can ship with the open-source workspace. -->
+<data>
+  <classification level="1" language="English">
+    <code>A</code>
+    <description><![CDATA[Fixture Economics]]></description>
+    <classification level="2" language="English">
+      <code>A1</code>
+      <description><![CDATA[Fixture Topics]]></description>
+      <classification level="3" language="English">
+        <code>A10</code>
+        <description><![CDATA[General]]></description>
+      </classification>
+      <classification level="3" language="English">
+        <code>A11</code>
+        <description><![CDATA[Harbour Tolls &bull; Canal Pricing]]></description>
+      </classification>
+      <classification level="3" language="English">
+        <code>A12</code>
+        <description><![CDATA[Lighthouse R&D, 1800&ndash;]]></description>
+      </classification>
+    </classification>
+    <classification level="2" language="English">
+      <code>A2</code>
+      <description><![CDATA[Fixture Teaching]]></description>
+    </classification>
+  </classification>
+  <classification level="1" language="English">
+    <code>Y</code>
+    <description><![CDATA[Fixture Miscellany]]></description>
+    <classification level="2" language="English">
+      <code>Y9</code>
+      <description><![CDATA[Other]]></description>
+      <classification level="3" language="English">
+        <code>Y91</code>
+        <description><![CDATA[Weather Vanes]]></description>
+      </classification>
+    </classification>
+  </classification>
+</data>

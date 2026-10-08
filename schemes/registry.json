@@ -1,0 +1,27 @@
+{
+  "$comment": "Scheme data files under src/shelfmark/schemes/, one entry per scheme. Each loads from its file with `shelfmark scheme compile <file>`; none is compiled into the binary (plan R5). A `distribution: fetch` entry is built locally from its source and never committed.",
+  "schemes": [
+    {
+      "name": "acm-ccs",
+      "version": "2012",
+      "title": "ACM Computing Classification System",
+      "dir": "acm-ccs",
+      "distribution": "fetch",
+      "license": "ACM, Inc.: educational and research use; not redistributable, so not bundled",
+      "build": "cargo run --release --manifest-path src/shelfmark/schemes/acm-ccs/Cargo.toml -- build",
+      "output": "src/shelfmark/schemes/acm-ccs/out/acm-ccs.json",
+      "source": "https://dl.acm.org/ccs"
+    },
+    {
+      "name": "ipc",
+      "version": "2026.01",
+      "title": "International Patent Classification (IPC)",
+      "file": "ipc/ipc.json",
+      "builder": "ipc/builder",
+      "sources": "ipc/sources.lock.json",
+      "license": "CC BY 4.0",
+      "attribution": "International Patent Classification (IPC), World Intellectual Property Organization (WIPO), edition 20260101. Licensed CC BY 4.0. Reformatted by shelfmark; not endorsed by WIPO.",
+      "may_bundle": true
+    }
+  ]
+}

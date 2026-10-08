@@ -1,0 +1,75 @@
+{
+  "edition": "2026-10-08",
+  "sources": [
+    {
+      "tag": "---",
+      "file": "udcs-aux.html",
+      "url": "https://udcsummary.info/php/index.php?tag=---&lang=en",
+      "bytes": 150961,
+      "sha256": "46f128ea7ee78aa7c4a32444ab984cc8508fe0b84ce58d796dc2d03688a26de3"
+    },
+    {
+      "tag": "0",
+      "file": "udcs-0.html",
+      "url": "https://udcsummary.info/php/index.php?tag=0&lang=en",
+      "bytes": 38846,
+      "sha256": "9b30fc9ddecf836d76fd97790b83435f67438412f1cc7d72f09f03287ed306c1"
+    },
+    {
+      "tag": "1",
+      "file": "udcs-1.html",
+      "url": "https://udcsummary.info/php/index.php?tag=1&lang=en",
+      "bytes": 18435,
+      "sha256": "e29736aaff8d49aba5623fb9e2f86604c6643eb6e9557d340b83aa91c497b6e6"
+    },
+    {
+      "tag": "2",
+      "file": "udcs-2.html",
+      "url": "https://udcsummary.info/php/index.php?tag=2&lang=en",
+      "bytes": 28542,
+      "sha256": "cca793e9719154d2292115977e4b477c84d7bfa30762e81f25fd9ce38c4ba118"
+    },
+    {
+      "tag": "3",
+      "file": "udcs-3.html",
+      "url": "https://udcsummary.info/php/index.php?tag=3&lang=en",
+      "bytes": 52454,
+      "sha256": "ad992fd8fac05daa47e0ad227cf7547806eb255465da64cab1cbf2f848c28d25"
+    },
+    {
+      "tag": "5",
+      "file": "udcs-5.html",
+      "url": "https://udcsummary.info/php/index.php?tag=5&lang=en",
+      "bytes": 97731,
+      "sha256": "cd2ff0b2c779758db6e4021272171f9a5c9b4f5bd3c033a5069e5f6fc1be2738"
+    },
+    {
+      "tag": "6",
+      "file": "udcs-6.html",
+      "url": "https://udcsummary.info/php/index.php?tag=6&lang=en",
+      "bytes": 113096,
+      "sha256": "ebf505aec3d9aba438cba90c59085564e3984ae91f53d68aec888eec78e8f83a"
+    },
+    {
+      "tag": "7",
+      "file": "udcs-7.html",
+      "url": "https://udcsummary.info/php/index.php?tag=7&lang=en",
+      "bytes": 46789,
+      "sha256": "4385a22abb5190880bd0cc921bade9aa0b45f5246bc7bc9794407719a8bba992"
+    },
+    {
+      "tag": "8",
+      "file": "udcs-8.html",
+      "url": "https://udcsummary.info/php/index.php?tag=8&lang=en",
+      "bytes": 49596,
+      "sha256": "c6fed24f4c26f1ada0106797d020e1d3246ffd8ba2b5f615a97d677877b109dc"
+    },
+    {
+      "tag": "9",
+      "file": "udcs-9.html",
+      "url": "https://udcsummary.info/php/index.php?tag=9&lang=en",
+      "bytes": 17936,
+      "sha256": "31ca4a75270b5ce2e43d6b3486838d2497ea03274c3ddbfcb094d714c3cac9c6"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "url": "https://msc2020.org/MSC_2020.csv",
+  "file": "MSC_2020.csv",
+  "bytes": 797211,
+  "sha256": "f7c889354c202551fe01f89bad2ae95ccadec4c57ac1f6f9de38bbd658d3c78c",
+  "checked": "2026-10-08",
+  "license": "CC BY-NC-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+  "attribution": "Mathematics Subject Classification MSC2020, jointly published by Mathematical Reviews (American Mathematical Society) and zbMATH Open (FIZ Karlsruhe) under CC BY-NC-SA 4.0, https://msc2020.org/",
+  "bundle": false
+}

@@ -1,0 +1,32 @@
+{
+  "sources": [
+    {
+      "file": "sources/definitions.py.txt",
+      "url": "https://raw.githubusercontent.com/arXiv/arxiv-base/a5985f621b07a4031c9e9b4f870a2206a9aa15a7/arxiv/taxonomy/definitions.py",
+      "role": "definitions",
+      "commit": "a5985f621b07a4031c9e9b4f870a2206a9aa15a7",
+      "changed": "2024-04-01",
+      "fetched": "2026-10-08",
+      "bytes": 92732,
+      "sha256": "221381b7a4e5bfb31894dbb7f88f06e0420b4615fd40ee618421abea24b14084"
+    },
+    {
+      "file": "sources/LICENSE",
+      "url": "https://raw.githubusercontent.com/arXiv/arxiv-base/e8b26ea2511cb1c15f57e14b5b0f86e494db44b3/LICENSE",
+      "role": "license",
+      "commit": "e8b26ea2511cb1c15f57e14b5b0f86e494db44b3",
+      "changed": "2026-07-08",
+      "fetched": "2026-10-08",
+      "bytes": 2180,
+      "sha256": "169d14d27a0b59e70e7e211d4d213cf91305518216ef3bd9706d590970477285"
+    },
+    {
+      "file": "category_taxonomy.html",
+      "url": "https://arxiv.org/category_taxonomy",
+      "role": "page",
+      "fetched": "2026-10-08",
+      "bytes": 83891,
+      "sha256": "e92f23c47608806d74e2f843b8e89252392d26d83613ccc7b8d35a54d982625f"
+    }
+  ]
+}

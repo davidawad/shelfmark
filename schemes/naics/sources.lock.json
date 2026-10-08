@@ -1,0 +1,20 @@
+{
+  "sources": [
+    {
+      "file": "2-6 digit_2022_Codes.xlsx",
+      "url": "https://www.census.gov/naics/2022NAICS/2-6%20digit_2022_Codes.xlsx",
+      "role": "codes",
+      "fetched": "2026-10-08",
+      "bytes": 82460,
+      "sha256": "be12ba41002803359f49181c9bf33a03fbd08578f4f4a4c0bbad7aadaaea0316"
+    },
+    {
+      "file": "2022_NAICS_Index_File.xlsx",
+      "url": "https://www.census.gov/naics/2022NAICS/2022_NAICS_Index_File.xlsx",
+      "role": "index",
+      "fetched": "2026-10-08",
+      "bytes": 499358,
+      "sha256": "6506b37b9546dd9cec1f8b79e0b38b68e547a5cce5fd6f8332d35024dbd6cd63"
+    }
+  ]
+}

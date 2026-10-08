@@ -1,0 +1,17 @@
+{
+  "version": "2026",
+  "license": {
+    "holder": "Copyright American Economic Association.",
+    "terms": "All rights reserved; the aeaweb.org terms of use grant only a limited, revocable, non-transferable license to download and reproduce site content for personal purposes, and grant no right to redistribute it.",
+    "terms_url": "https://www.aeaweb.org/terms-of-service/site",
+    "attribution": "Credit: JEL Classification System, American Economic Association (https://www.aeaweb.org/econlit/jelCodes.php).",
+    "redistributable": false
+  },
+  "source": {
+    "file": "classificationTree.xml",
+    "url": "https://www.aeaweb.org/econlit/classificationTree.xml",
+    "fetched": "2026-10-08",
+    "bytes": 182097,
+    "sha256": "5bf3d44ad066a8751c263b8f2e5e6a148a771904c7ff8516ba66a8adb4c68562"
+  }
+}

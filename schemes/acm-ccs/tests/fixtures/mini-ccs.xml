@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Synthetic: the shape of ACM's SKOS file with invented concepts and labels. -->
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#">
+  <skos:ConceptScheme rdf:about="ccs2012">
+    <skos:hasTopConcept rdf:resource="10000002" />
+    <skos:hasTopConcept rdf:resource="10000001" />
+  </skos:ConceptScheme>
+  <skos:Concept rdf:about="10000002">
+    <skos:prefLabel lang="en">Beta practice</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="ccs2012" />
+    <skos:narrower rdf:resource="10000002.10000020" />
+  </skos:Concept>
+  <skos:Concept rdf:about="10000002.10000020">
+    <skos:prefLabel lang="en">Mechanisms</skos:prefLabel>
+    <skos:broader rdf:resource="10000002" />
+    <skos:narrower rdf:resource="10000002.10000020.10000101" />
+  </skos:Concept>
+  <skos:Concept rdf:about="10000002.10000020.10000101">
+    <skos:prefLabel lang="en">Gear trains</skos:prefLabel>
+    <skos:broader rdf:resource="10000002.10000020" />
+  </skos:Concept>
+  <skos:Concept rdf:about="10000001">
+    <skos:prefLabel lang="en">Alpha studies</skos:prefLabel>
+    <skos:topConceptOf rdf:resource="ccs2012" />
+    <skos:narrower rdf:resource="10000001.10000011" />
+    <skos:narrower rdf:resource="10000001.10000010" />
+  </skos:Concept>
+  <skos:Concept rdf:about="10000001.10000011">
+    <skos:prefLabel lang="en">Widget testing &amp; inspection</skos:prefLabel>
+    <skos:broader rdf:resource="10000001" />
+  </skos:Concept>
+  <skos:Concept rdf:about="10000001.10000010">
+    <skos:prefLabel lang="en">Widget design</skos:prefLabel>
+    <skos:broader rdf:resource="10000001" />
+    <skos:narrower rdf:resource="10000001.10000010.10000101" />
+    <skos:narrower rdf:resource="10000001.10000010.10000100" />
+  </skos:Concept>
+  <skos:Concept rdf:about="10000001.10000010.10000101">
+    <skos:prefLabel lang="en">Gear trains</skos:prefLabel>
+    <skos:broader rdf:resource="10000001.10000010" />
+  </skos:Concept>
+  <skos:Concept rdf:about="10000001.10000010.10000100">
+    <skos:prefLabel lang="en">Sprocket tuning</skos:prefLabel>
+    <skos:broader rdf:resource="10000001.10000010" />
+  </skos:Concept>
+</rdf:RDF>

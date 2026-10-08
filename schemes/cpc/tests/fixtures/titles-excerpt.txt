@@ -1,0 +1,42 @@
+A		HUMAN NECESSITIES
+A01		AGRICULTURE; FORESTRY; ANIMAL HUSBANDRY; HUNTING; TRAPPING; FISHING
+A01B		SOIL WORKING IN AGRICULTURE OR FORESTRY; PARTS, DETAILS, OR ACCESSORIES OF AGRICULTURAL MACHINES OR IMPLEMENTS, IN GENERAL (making or covering furrows or holes for sowing, planting or manuring A01C5/00; mowers convertible to soil working apparatus or capable of soil working A01D42/04; mowers combined with soil working implements A01D43/12; soil working for engineering purposes E01, E02, E21)
+A01B1/00	0	Hand tools (edge trimmers for lawns A01G3/06)
+A01B1/02	1	Spades; Shovels
+A01B1/022	2	{Collapsible; extensible; combinations with other tools}
+A01B1/024	2	{Foot protectors attached to the blade}
+A01B1/026	2	{with auxiliary handles for facilitating lifting}
+A01B1/028	2	{with ground abutment shoes or earth anchors for facilitating lifting}
+A01B1/04	2	with teeth
+A01C		PLANTING; SOWING; FERTILISING (parts, details or accessories of agricultural machines or implements, in general A01B51/00 - A01B75/00)
+A01C1/00	0	Apparatus, or methods of use thereof, for testing or treating seed, roots, or the like, prior to sowing or planting
+A01C1/005	1	{Potato seed cutters}
+A01C1/04	1	Arranging seed on carriers, e.g. on tapes, on cords {; Carrier compositions}
+A01C1/042	2	{Tapes, bands or cords}
+A01C1/044	2	{Sheets, multiple sheets or mats}
+A01C1/046	2	{Carrier compositions}
+A01C2001/048	2	{Machines}
+G		PHYSICS
+G06		COMPUTING OR CALCULATING; COUNTING
+G06F		ELECTRIC DIGITAL DATA PROCESSING (computer systems based on specific computational models G06N)
+G06F16/00	0	Information retrieval; Database structures therefor; File system structures therefor
+G06F16/30	1	of unstructured textual data (document management systems G06F16/93)
+G06F16/33	2	Querying
+G06F16/332	3	Query formulation
+G06F16/334	4	Query execution (filtering based on additional data G06F16/335)
+G06F16/335	3	Filtering based on additional data, e.g. user or group profiles (filtering in web context G06F16/9535, G06F16/9536)
+G06F16/337	4	{Profile generation, learning or modification}
+G06F16/338	3	Presentation of query results
+H		ELECTRICITY
+H04		ELECTRIC COMMUNICATION TECHNIQUE
+H04L		TRANSMISSION OF DIGITAL INFORMATION, e.g. TELEGRAPHIC COMMUNICATION (arrangements common to telegraphic and telephonic communication H04M)
+H04L9/00	0	{Cryptographic mechanisms or cryptographic} arrangements for secret or secure communications; Network security protocols
+H04L9/06	1	the encryption apparatus using shift registers or memories for block-wise {or stream} coding, e.g. DES systems {or RC4; Hash functions; Pseudorandom sequence generators}
+H04L9/065	2	{Encryption by serially and continuously modifying data stream elements, e.g. stream cipher systems, RC4, SEAL or A5/3}
+H04L9/08	1	Key distribution {or management, e.g. generation, sharing or updating, of cryptographic keys or passwords (network architectures or network communication protocols for supporting key management in a packet data network H04L63/06)}
+H04L9/088	2	{Usage controlling of secret information, e.g. techniques for restricting cryptographic keys to pre-authorized uses, different access levels, validity of crypto-period, different key- or password length, or different strong and weak cryptographic algorithms (network architectures or network communication protocols for using time-dependent keys in a packet data network H04L63/068)}
+Y		GENERAL TAGGING OF NEW TECHNOLOGICAL DEVELOPMENTS; GENERAL TAGGING OF CROSS-SECTIONAL TECHNOLOGIES SPANNING OVER SEVERAL SECTIONS OF THE IPC; TECHNICAL SUBJECTS COVERED BY FORMER USPC CROSS-REFERENCE ART COLLECTIONS [XRACs] AND DIGESTS
+Y02		TECHNOLOGIES OR APPLICATIONS FOR MITIGATION OR ADAPTATION AGAINST CLIMATE CHANGE
+Y02E		REDUCTION OF GREENHOUSE GAS [GHG] EMISSIONS, RELATED TO ENERGY GENERATION, TRANSMISSION OR DISTRIBUTION
+Y02E10/00	0	Energy generation through renewable energy sources
+Y02E10/50	1	Photovoltaic [PV] energy

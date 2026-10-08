@@ -33,6 +33,24 @@ downloads on first use into the user's cache (`FASTEMBED_CACHE_DIR`
 overrides it). Each store keeps derived data in `<store>/cache/`
 (compiled schemes, vocab matchers, label vectors); it is safe to delete.
 
+## Scheme ports
+
+Schemes beyond the bundled LCC each live in `schemes/<name>/`, with a
+builder, tests and a README. Load the built file with
+`shelfmark scheme compile <file>`.
+
+| Scheme | Directory | Source license | Bundled |
+|---|---|---|---|
+| `fast` (FAST topical) | [`schemes/fast/`](schemes/fast/) | ODC-By 1.0 | no: allowed, but at 79 MB it is built locally |
+| `udc-summary` (UDC Summary) | [`schemes/udc-summary/`](schemes/udc-summary/) | CC BY-NC 4.0 | no: each user fetches and builds it |
+| `ipc` (IPC 2026.01) | [`schemes/ipc/`](schemes/ipc/) | CC BY 4.0 | data file committed (`ipc.json`) |
+| `cpc` (CPC 2026.08) | [`schemes/cpc/`](schemes/cpc/) | none; EPO website terms apply | no: each user fetches and builds it |
+| `msc` (MSC2020) | [`schemes/msc/`](schemes/msc/) | CC BY-NC-SA 4.0 | no: each user fetches and builds it |
+| `acm-ccs` (ACM CCS 2012) | [`schemes/acm-ccs/`](schemes/acm-ccs/) | ACM copyright, not redistributable | no: each user fetches and builds it |
+| `jel` (JEL) | [`schemes/jel/`](schemes/jel/) | AEA, all rights reserved | no: each user fetches and builds it |
+| `arxiv` (arXiv categories) | [`schemes/arxiv/`](schemes/arxiv/) | MIT (arxiv-base) | data file committed (`arxiv.json`) |
+| `naics` (NAICS 2022) | [`schemes/naics/`](schemes/naics/) | US government work, no US copyright | data file committed (`naics.json`) |
+
 ## The tower
 
 | Layer | Noun | ID form |
