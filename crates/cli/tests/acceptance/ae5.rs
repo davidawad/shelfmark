@@ -11,16 +11,13 @@ use crate::common::Bench;
 #[test]
 fn correction_supersedes_the_machine_claim_and_the_work_id_still_resolves() {
     let b = Bench::new("ae5");
-    let placed = b.ok(&[
-        "classify",
-        "--text",
-        "Computer software",
-        "--target",
-        "0.5",
-    ]);
+    let placed = b.ok(&["classify", "--text", "Computer software", "--target", "0.5"]);
     let machine = placed["placement"]["id"].as_str().unwrap().to_string();
     let work = placed["placement"]["work"].as_str().unwrap().to_string();
-    assert_eq!(placed["placement"]["class"], "class:lcc@2024:QA76.75-76.765");
+    assert_eq!(
+        placed["placement"]["class"],
+        "class:lcc@2024:QA76.75-76.765"
+    );
     let before = b.ok(&["name", &work, "--title", "Engineering a Compiler"]);
 
     let corrected = b.commit(&["correct", &machine, "--class", "QA", "--author", "david"]);

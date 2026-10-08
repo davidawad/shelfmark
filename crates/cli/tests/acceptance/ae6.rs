@@ -15,8 +15,10 @@ fn split_scheme() -> Value {
     let mut doc: Value = serde_json::from_str(&text).unwrap();
     doc["version"] = json!("2025");
     let classes = doc["classes"].as_array_mut().unwrap();
-    classes.push(json!({"code": "QA76.75-76.755", "parent": SPLIT, "label": "Software in general",
-        "range": {"start": "QA76.75", "end": "QA76.755"}}));
+    classes.push(
+        json!({"code": "QA76.75-76.755", "parent": SPLIT, "label": "Software in general",
+        "range": {"start": "QA76.75", "end": "QA76.755"}}),
+    );
     classes.push(json!({"code": "QA76.76", "parent": SPLIT, "label": "Special topics"}));
     doc
 }

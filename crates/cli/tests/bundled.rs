@@ -62,9 +62,15 @@ fn a_store_rules_file_replaces_the_starter_rules() {
     )
     .unwrap();
     let s = shelfmark_cli::wiring::open(&store);
-    let env = call(&s, Verb::Classify, json!({"text": "serde", "url": "https://docs.rs/serde"}));
+    let env = call(
+        &s,
+        Verb::Classify,
+        json!({"text": "serde", "url": "https://docs.rs/serde"}),
+    );
     let starter_silent = match env {
-        shelfmark_core::Envelope::Ok { data, .. } => data["placement"]["trace"]["deciding_tier"] != "rules",
+        shelfmark_core::Envelope::Ok { data, .. } => {
+            data["placement"]["trace"]["deciding_tier"] != "rules"
+        }
         shelfmark_core::Envelope::Err { .. } => true,
     };
     assert!(starter_silent, "the starter docs.rs rule must not fire");

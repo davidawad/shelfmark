@@ -180,7 +180,11 @@ fn every_error_has_a_code_a_next_command_and_its_exit_code() {
 #[test]
 fn ae7_uncompiled_scheme_names_the_compile_command() {
     let s = service("ae7");
-    let env = call(&s, Verb::SchemeBrowse, json!({"scheme": "scheme:fast@2024"}));
+    let env = call(
+        &s,
+        Verb::SchemeBrowse,
+        json!({"scheme": "scheme:fast@2024"}),
+    );
     assert_eq!(env.exit_code(), 4);
     let e = error(env);
     assert_eq!(e.code, ErrorCode::SchemeNotCompiled);
