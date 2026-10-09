@@ -1,0 +1,17 @@
+{
+  "version": "4.24",
+  "license": {
+    "holder": "European Union, Publications Office of the European Union.",
+    "terms": "The dataset metadata on data.europa.eu names the European Commission reuse notice (Decision 2011/833/EU); the Publications Office copyright notice refers questions on reusing the EU Vocabularies to op-copyright@publications.europa.eu; BARTOC lists CC0 1.0. The sources disagree, so the data is treated as not bundled.",
+    "terms_url": "https://data.europa.eu/eli/dec/2011/833/oj",
+    "attribution": "Credit: EuroVoc, Publications Office of the European Union (https://op.europa.eu/en/web/eu-vocabularies/th-dataset/-/resource/dataset/eurovoc). Reformatted by shelfmark; not endorsed by the Publications Office.",
+    "redistributable": false
+  },
+  "source": {
+    "file": "eurovoc_in_skos_core_concepts.zip",
+    "url": "https://op.europa.eu/o/opportal-service/euvoc-download-handler?cellarURI=http%3A%2F%2Fpublications.europa.eu%2Fresource%2Fcellar%2F9f2bd600-ae7b-11e7-837e-01aa75ed71a1.0001.09%2FDOC_1&fileName=eurovoc_in_skos_core_concepts.zip",
+    "fetched": "2026-10-09",
+    "bytes": 8567290,
+    "sha256": "91bdb24e833ba431707f3980a19f475434ea8dcddb2b4d5e32e79e9fc1a0ca2f"
+  }
+}

@@ -13,6 +13,17 @@
       "source": "https://dl.acm.org/ccs"
     },
     {
+      "name": "eurovoc",
+      "version": "4.24",
+      "title": "EuroVoc (multilingual thesaurus of the EU Publications Office)",
+      "dir": "eurovoc",
+      "distribution": "fetch",
+      "license": "EU reuse terms stated inconsistently (Commission reuse notice in dataset metadata, CC0 in a third-party registry); not bundled, built from the Publications Office download",
+      "build": "cargo run --release --manifest-path schemes/eurovoc/Cargo.toml -- build --cache /tmp/eurovoc-sources",
+      "output": "schemes/eurovoc/eurovoc.json",
+      "source": "https://op.europa.eu/en/web/eu-vocabularies/th-dataset/-/resource/dataset/eurovoc"
+    },
+    {
       "name": "ipc",
       "version": "2026.01",
       "title": "International Patent Classification (IPC)",

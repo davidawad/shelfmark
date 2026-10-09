@@ -51,6 +51,7 @@ builder, tests and a README. Load the built file with
 | `jel` (JEL) | [`schemes/jel/`](schemes/jel/) | AEA, all rights reserved | no: each user fetches and builds it | <https://www.aeaweb.org/econlit/jelCodes.php> |
 | `arxiv` (arXiv categories) | [`schemes/arxiv/`](schemes/arxiv/) | MIT (arxiv-base) | data file committed (`arxiv.json`) | <https://arxiv.org/category_taxonomy> |
 | `naics` (NAICS 2022) | [`schemes/naics/`](schemes/naics/) | US government work, no US copyright | data file committed (`naics.json`) | <https://www.census.gov/naics/> |
+| `eurovoc` (EuroVoc 4.24) | [`schemes/eurovoc/`](schemes/eurovoc/) | EU reuse terms unsettled (see crate README) | no: each user fetches and builds it | <https://op.europa.eu/en/web/eu-vocabularies/th-dataset/-/resource/dataset/eurovoc> |
 
 ## The tower
 
