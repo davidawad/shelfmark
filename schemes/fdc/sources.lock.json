@@ -1,0 +1,12 @@
+{
+  "sources": [
+    {
+      "file": "fdc.txt",
+      "url": "https://raw.githubusercontent.com/JohnMarkOckerbloom/fdc/4d247249c4e2be7cbe13baf84f16fa939b084e0a/fdc.txt",
+      "commit": "4d247249c4e2be7cbe13baf84f16fa939b084e0a",
+      "fetched": "2026-10-09",
+      "bytes": 47452,
+      "sha256": "ad5dce4f15814d9bac2b60afcc71121730dab0b5dd7919c12b32549fd69ce13f"
+    }
+  ]
+}

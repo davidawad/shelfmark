@@ -45,6 +45,17 @@
       "attribution": "OpenAlex topics data, CC0 1.0 public domain dedication. Reformatted by shelfmark.",
       "may_bundle": true,
       "source": "https://docs.openalex.org/api-entities/topics"
+    },
+    {
+      "name": "fdc",
+      "version": "0.06",
+      "title": "Free Decimal Correspondence",
+      "file": "fdc/fdc.json",
+      "builder": "fdc/builder",
+      "sources": "fdc/sources.lock.json",
+      "license": "CC0 1.0",
+      "attribution": "Free Decimal Correspondence v0.06, edited by John Mark Ockerbloom; dedicated to the public domain (CC0 1.0). Reformatted by shelfmark.",
+      "may_bundle": true
     }
   ]
 }

@@ -53,6 +53,7 @@ builder, tests and a README. Load the built file with
 | `arxiv` (arXiv categories) | [`schemes/arxiv/`](schemes/arxiv/) | MIT (arxiv-base) | data file committed (`arxiv.json`) | <https://arxiv.org/category_taxonomy> |
 | `naics` (NAICS 2022) | [`schemes/naics/`](schemes/naics/) | US government work, no US copyright | data file committed (`naics.json`) | <https://www.census.gov/naics/> |
 | `openalex-topics` (OpenAlex Topics) | [`schemes/openalex-topics/`](schemes/openalex-topics/) | CC0 1.0 | data file committed (`openalex-topics.json`, about 13 MB) | <https://docs.openalex.org/api-entities/topics> |
+| `fdc` (Free Decimal Correspondence 0.06) | [`schemes/fdc/`](schemes/fdc/) | CC0 1.0 | data file committed (`fdc.json`) | <https://everybodyslibraries.com/free-decimal-correspondence/> |
 
 ## The tower
 
