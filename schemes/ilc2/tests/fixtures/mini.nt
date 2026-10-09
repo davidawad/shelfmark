@@ -1,0 +1,74 @@
+<http://www.iskoi.org/ilc/2/scheme> <http://purl.org/dc/terms/issued> "2019-10-17"^^<http://www.w3.org/2001/XMLSchema#date> .
+<http://www.iskoi.org/ilc/2/class/m> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://www.iskoi.org/ilc/2/class/m> <http://www.w3.org/2004/02/skos/core#notation> "m"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://www.iskoi.org/ilc/2/class/m> <http://www.w3.org/2004/02/skos/core#prefLabel> "fixture organisms"@en .
+<http://www.iskoi.org/ilc/2/class/mq> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://www.iskoi.org/ilc/2/class/mq> <http://www.w3.org/2004/02/skos/core#notation> "mq"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://www.iskoi.org/ilc/2/class/mq> <http://www.w3.org/2004/02/skos/core#prefLabel> "fixture animals"@en .
+<http://www.iskoi.org/ilc/2/class/mq> <http://www.w3.org/2004/02/skos/core#altLabel> "fixture metazoa"@en .
+<http://www.iskoi.org/ilc/2/class/mq> <http://www.w3.org/2004/02/skos/core#broader> <http://www.iskoi.org/ilc/2/class/m> .
+<http://www.iskoi.org/ilc/2/class/m> <http://www.w3.org/2004/02/skos/core#narrower> <http://www.iskoi.org/ilc/2/class/mq> .
+<http://www.iskoi.org/ilc/2/class/mq> <http://www.w3.org/2004/02/skos/core#closeMatch> <http://dewey.info/class/590> .
+<http://www.iskoi.org/ilc/2/class/mq> <http://www.w3.org/2004/02/skos/core#closeMatch> <http://dewey.info/class/591> .
+<http://www.iskoi.org/ilc/2/class/mq> <http://www.w3.org/2004/02/skos/core#scopeNote> "invented scope"@en .
+<http://www.iskoi.org/ilc/2/class/mq> <http://www.w3.org/2004/02/skos/core#related> <http://www.iskoi.org/ilc/2/class/z> .
+<http://www.iskoi.org/ilc/2/class/mqa> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://www.iskoi.org/ilc/2/class/mqa> <http://www.w3.org/2004/02/skos/core#notation> "mqa"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://www.iskoi.org/ilc/2/class/mqa> <http://www.w3.org/2004/02/skos/core#prefLabel> "fixture whales"@en .
+<http://www.iskoi.org/ilc/2/class/mqa> <http://www.w3.org/2004/02/skos/core#broader> <http://www.iskoi.org/ilc/2/class/mq> .
+<http://www.iskoi.org/ilc/2/class/mq> <http://www.w3.org/2004/02/skos/core#narrower> <http://www.iskoi.org/ilc/2/class/mqa> .
+<http://www.iskoi.org/ilc/2/class/mqb> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://www.iskoi.org/ilc/2/class/mqb> <http://www.w3.org/2004/02/skos/core#notation> "mqb"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://www.iskoi.org/ilc/2/class/mqb> <http://www.w3.org/2004/02/skos/core#prefLabel> "fixture \"quoted\" label"@en .
+<http://www.iskoi.org/ilc/2/class/mqb> <http://www.w3.org/2004/02/skos/core#broader> <http://www.iskoi.org/ilc/2/class/mq> .
+<http://www.iskoi.org/ilc/2/class/mq> <http://www.w3.org/2004/02/skos/core#narrower> <http://www.iskoi.org/ilc/2/class/mqb> .
+<http://www.iskoi.org/ilc/2/class/mqb> <http://www.w3.org/2004/02/skos/core#note> "invented note"@en .
+<http://www.iskoi.org/ilc/2/class/z> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://www.iskoi.org/ilc/2/class/z> <http://www.w3.org/2004/02/skos/core#notation> "z"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://www.iskoi.org/ilc/2/class/z> <http://www.w3.org/2004/02/skos/core#prefLabel> "fixture sea"@en .
+<http://www.iskoi.org/ilc/2/class/z> <http://www.w3.org/2004/02/skos/core#broader> <http://www.iskoi.org/ilc/2/class/m> .
+<http://www.iskoi.org/ilc/2/class/m> <http://www.w3.org/2004/02/skos/core#narrower> <http://www.iskoi.org/ilc/2/class/z> .
+<http://www.iskoi.org/ilc/2/class/t> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://www.iskoi.org/ilc/2/class/t> <http://www.w3.org/2004/02/skos/core#notation> "t"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://www.iskoi.org/ilc/2/class/t> <http://www.w3.org/2004/02/skos/core#prefLabel> "fixture knowledge"@en .
+<http://www.iskoi.org/ilc/2/class/t> <http://www.w3.org/2004/02/skos/core#prefLabel> "fixture second label"@en .
+<http://www.iskoi.org/ilc/2/class/~> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://www.iskoi.org/ilc/2/class/~> <http://www.w3.org/2004/02/skos/core#notation> "~"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://www.iskoi.org/ilc/2/class/~> <http://www.w3.org/2004/02/skos/core#prefLabel> "fixture infinity"@en .
+<http://www.iskoi.org/ilc/2/class/0> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://www.iskoi.org/ilc/2/class/0> <http://www.w3.org/2004/02/skos/core#notation> "0"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://www.iskoi.org/ilc/2/class/0> <http://www.w3.org/2004/02/skos/core#prefLabel> "fixture perspective"@en .
+<http://www.iskoi.org/ilc/2/class/0> <http://www.w3.org/2004/02/skos/core#altLabel> "fixture viewpoint"@en .
+<http://www.iskoi.org/ilc/2/class/0> <http://www.w3.org/2000/01/rdf-schema#domain> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://www.iskoi.org/ilc/2/class/0> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://www.iskoi.org/ilc/2/class/0> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2004/02/skos/core#related> .
+<http://www.iskoi.org/ilc/2/class/00> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://www.iskoi.org/ilc/2/class/00> <http://www.w3.org/2004/02/skos/core#notation> "00"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://www.iskoi.org/ilc/2/class/00> <http://www.w3.org/2004/02/skos/core#prefLabel> "fixture attested"@en .
+<http://www.iskoi.org/ilc/2/class/00> <http://www.w3.org/2000/01/rdf-schema#domain> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://www.iskoi.org/ilc/2/class/00> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://www.iskoi.org/ilc/2/class/00> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.iskoi.org/ilc/2/class/0> .
+<http://www.iskoi.org/ilc/2/class/mq9> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://www.iskoi.org/ilc/2/class/mq9> <http://www.w3.org/2004/02/skos/core#notation> "mq9"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://www.iskoi.org/ilc/2/class/mq9> <http://www.w3.org/2004/02/skos/core#prefLabel> "fixture condition"@en .
+<http://www.iskoi.org/ilc/2/class/mq9> <http://www.w3.org/2000/01/rdf-schema#domain> <http://www.iskoi.org/ilc/2/class/mq> .
+<http://www.iskoi.org/ilc/2/class/mq9> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://www.iskoi.org/ilc/2/class/mq9> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.iskoi.org/ilc/2/class/0> .
+<http://www.iskoi.org/ilc/2/class/mq94> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://www.iskoi.org/ilc/2/class/mq94> <http://www.w3.org/2004/02/skos/core#notation> "mq94"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://www.iskoi.org/ilc/2/class/mq94> <http://www.w3.org/2004/02/skos/core#prefLabel> "fixture affected by disease"@en .
+<http://www.iskoi.org/ilc/2/class/mq94> <http://www.w3.org/2000/01/rdf-schema#domain> <http://www.iskoi.org/ilc/2/class/mq> .
+<http://www.iskoi.org/ilc/2/class/mq94> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.iskoi.org/ilc/2/class/mqa> .
+<http://www.iskoi.org/ilc/2/class/mq94> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.iskoi.org/ilc/2/class/mq9> .
+<http://www.iskoi.org/ilc/2/class/mq05> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://www.iskoi.org/ilc/2/class/mq05> <http://www.w3.org/2004/02/skos/core#notation> "mq05"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://www.iskoi.org/ilc/2/class/mq05> <http://www.w3.org/2004/02/skos/core#prefLabel> ""@en .
+<http://www.iskoi.org/ilc/2/class/mq05> <http://www.w3.org/2000/01/rdf-schema#domain> <http://www.iskoi.org/ilc/2/class/mq> .
+<http://www.iskoi.org/ilc/2/class/mq05> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://www.iskoi.org/ilc/2/class/mq05> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.iskoi.org/ilc/2/class/mq0> .
+<http://www.iskoi.org/ilc/2/class/8389> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://www.iskoi.org/ilc/2/class/8389> <http://www.w3.org/2004/02/skos/core#notation> "8389"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://www.iskoi.org/ilc/2/class/8389> <http://www.w3.org/2004/02/skos/core#prefLabel> "fixture weight"@en .
+<http://www.iskoi.org/ilc/2/class/8389> <http://www.w3.org/2000/01/rdf-schema#domain> <http://www.w3.org/2004/02/skos/core#Concept> .
+<http://www.iskoi.org/ilc/2/class/8389> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.iskoi.org/ilc/2/class/mqa> .
+<http://www.iskoi.org/ilc/2/class/8389> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.iskoi.org/ilc/2/class/838> .
