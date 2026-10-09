@@ -33,14 +33,14 @@ that it validates, and checks that it is `lcc.json` plus vocabulary.
 ## Rebuild
 
 The ingester and the enrichment step are the vocabulary spike's
-(`materials-classifier-work/vocab`, outside this workspace; moving them into
+(`research/vocab`, outside this workspace; moving them into
 `tools/lcc-outline` is open work):
 
 ```sh
-cd materials-classifier-work/vocab && cargo build --release
+cd research/vocab && cargo build --release
 B=target/release/vocab-ingest
 $B lcsh --input subjects.madsrdf.nt.gz --out lcsh.tsv.gz --stats lcsh-stats.json
-$B enrich-scheme --scheme ../../src/shelfmark/data/schemes/lcc/lcc.json \
+$B enrich-scheme --scheme ../../data/schemes/lcc/lcc.json \
   --table lcsh.tsv.gz --out lcc-lcsh.json --stats enrich-stats.json
 ```
 

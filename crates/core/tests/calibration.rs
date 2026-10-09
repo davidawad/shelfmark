@@ -24,7 +24,7 @@ fn example(code: &str) -> GoldExample {
         from_placement: None,
         provenance: Provenance {
             author_kind: AuthorKind::Human,
-            author: "david".into(),
+            author: "reviewer".into(),
             model: None,
             harness: None,
             run_id: None,

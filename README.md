@@ -124,3 +124,16 @@ This workspace has no dependency outside its own directory. A test checks
 that, and the directory can be split into its own repository unchanged.
 
 License: MIT OR Apache-2.0.
+
+Repository: https://gitlab.com/davidawad/shelfmark (a GitHub mirror may also exist).
+
+## Gold set sources and attribution
+
+The starter gold set (`research/eval/gold/starter-v1.ndjson`, 104 items) is
+built only from public sources, each item recording its source and license:
+arXiv metadata (CC0), Open Library records (CC0), and Wikipedia article
+summaries. The roughly 30 Wikipedia-derived items are licensed CC BY-SA 4.0
+(https://creativecommons.org/licenses/by-sa/4.0/); the article title and URL
+recorded on each item are the attribution, and reuse of those items must keep
+the same license and attribution. See `research/eval/README.md` and
+`research/eval/gold/manifest.json`.

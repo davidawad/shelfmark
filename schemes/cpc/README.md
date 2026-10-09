@@ -112,9 +112,9 @@ cargo test                                          # builder units + excerpt sc
 CPC_SOURCES=/tmp/cpc-sources cargo test --release   # also builds the locked release and checks its hashes
 ```
 
-`tests/fixtures/titles-excerpt.txt` holds 42 lines of the 2026.08 title
-list (source: www.cooperativepatentclassification.org, EPO/USPTO,
-unchanged). The tests check that the excerpt's scheme validates against
+`tests/fixtures/titles-excerpt.txt` holds 42 synthetic lines in the shape of the 2026.08 title
+list (real CPC codes and the same markup, invented labels; no CPC title text is
+committed). The tests check that the excerpt's scheme validates against
 `schemas/scheme.schema.json`, round-trips through `SchemeDoc`, passes the
 scheme compiler, and browses, searches and checks codes as expected.
 Without `CPC_SOURCES`, the full-release test logs a `SKIP` line to

@@ -1,6 +1,6 @@
 # Identifier tables: findings
 
-Bead dot-materials-classifier-v1-gis4b.3. Plan R7 (identifier tier), AE1.
+Spike 3. Plan R7 (identifier tier), AE1.
 Measured on a remote box (12 cores, 22 GiB RAM) on 2026-10-07. The dump
 and full outputs stayed on the box. Committed artifacts are listed under
 "Reproduce".
@@ -44,7 +44,7 @@ and full outputs stayed on the box. Committed artifacts are listed under
 - **Memory:** peak RSS is 14.1 GiB (14,760,096 kB VmHWM). Most of it is the
   set of every valid identifier, which is kept to compute coverage
   denominators, plus the key-to-value map. A builder that does not need
-  coverage could drop the sets. Building needs a box, not a laptop.
+  coverage could drop the sets. Building needs a large machine, not a laptop.
 - **Determinism:**
   - Two full-dump runs at `--jobs 10` and `--jobs 4` produced byte-identical
     `lookup.tsv`, `conflicts.tsv` and `stats.json`. That run used the build
@@ -103,7 +103,7 @@ LCC editions by main class:
 | 298 k | 813 k | 4.35 M | 1.17 M | 657 k | 246 k | 973 k | 114 k | 39 k | 274 k |
 
 **What the ISBN rate means for a real corpus is unmeasured.** I planned to
-measure the hit rate on the ISBNs, arXiv IDs and URLs in `kb/agent-library`.
+measure the hit rate on the ISBNs, arXiv IDs and URLs in a real library corpus.
 That failed: this box's snapshot is a partial clone without those blobs, and
 fetching them needs the remote. The 33% is the share of Open Library's own
 ISBNs. Library-held books, which are most of what gets cited, should resolve
@@ -318,7 +318,7 @@ pack**, not inside the binary.
 ## Reproduce
 
 ```sh
-cd materials-classifier-work/identifiers
+cd research/identifiers
 cargo test --release                      # 18 tests
 cargo run --release -- check              # rule files
 cargo run --release -- build /path/ol_dump_editions_2026-09-30.txt.gz --out out/
@@ -338,7 +338,7 @@ Committed artifacts, all small:
    only on prefix agreement (see "Conflicts").
 2. A compiled runtime form and a data-pack format, with `ids:` version
    hashing for R14.
-3. Real-corpus hit rate in the R16 eval (`kb/agent-library` ISBNs, arXiv
+3. Real-corpus hit rate in the R16 eval (a real library corpus ISBNs, arXiv
    IDs, URLs).
 4. Switch LCC subclass validation to the L1 LCC scheme once it exists.
 5. Fill DDC gaps from the Open Library works dump (`dewey_number` on works)

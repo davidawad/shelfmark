@@ -1,9 +1,8 @@
 # vocab: LCSH and FAST vocabulary ingest (spike)
 
-Spike `dot-materials-classifier-v1-gis4b.2` for the vocabulary tier of the
-materials classifier (plan `docs/plans/2026-10-07-001-feat-materials-classifier-and-kb-resource-plan.md`,
-R7). It is a standalone Rust crate with no dependency on this repo (R14),
-so it can move into `src/shelfmark` or its own repo unchanged.
+Spike 2 for the vocabulary tier of the
+materials classifier (R7). It is a standalone Rust crate (its own `[workspace]`) whose only
+path dependencies are shelfmark's `core` and `scheme` crates, used by `enrich-scheme`.
 
 It covers three things:
 
@@ -171,17 +170,17 @@ name-authority identifiers for persons and works.
 
 ## Folding headings into the shelfmark scheme (`enrich-scheme`)
 
-The bundled LCC outline (`src/shelfmark/data/schemes/lcc/lcc.json`, U2)
+The bundled LCC outline (`data/schemes/lcc/lcc.json`, U2)
 links a heading only when its LCC number is exactly an outline class: 1,343
 links on 1,033 of 7,392 classes. `enrich-scheme` adds every active heading
 from the table to the outline class that holds its number. The holder is the
 class itself or the deepest span covering it, as shelfmark's own compiled
 index decides (`check_code`, through a path dependency on
-`src/shelfmark/crates/{core,scheme}`). The result is an ordinary scheme file
+`crates/{core,scheme}`). The result is an ordinary scheme file
 that shelfmark's vocab tier (U4) reads with no code change:
 
 ```sh
-$B enrich-scheme --scheme src/shelfmark/data/schemes/lcc/lcc.json \
+$B enrich-scheme --scheme data/schemes/lcc/lcc.json \
   --table $D/out/lcsh.tsv.gz --out $D/out/lcc-lcsh.json --stats $D/out/enrich-stats.json
 shelfmark scheme compile $D/out/lcc-lcsh.json   # preview, then --commit
 ```
@@ -193,7 +192,7 @@ On the 2026-10-07 dump, 91,499 of 91,580 headings with LCC land in a class
 21.6 MB.
 
 Measured with the lexical profile on the eval starter gold set (104 items,
-`materials-classifier-work/eval`, no identifier table), with subclass
+`research/eval`, no identifier table), with subclass
 top-1 meaning LCC subclass level:
 
 | scheme | class top-1 | subclass top-1 | subclass top-5 |

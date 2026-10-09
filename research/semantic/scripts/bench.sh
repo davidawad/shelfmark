@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # Run every candidate profile in a fresh process (so RSS/peak are per-profile), after a
-# prefetch pass that keeps download time out of load timings. Remote boxes only — never
-# run on a personal laptop (bead dot-materials-classifier-v1-gis4b.4).
+# prefetch pass that keeps download time out of load timings. Remote machines only; never
+# run on a personal machine.
 #
-#   scripts/bench.sh [filter-regex]        # from materials-classifier-work/semantic/
+#   scripts/bench.sh [filter-regex]        # from research/semantic/
 set -euo pipefail
 cd "$(dirname "$0")/.."
 BIN=${SEMSPIKE_BIN:-${CARGO_TARGET_DIR:-target}/release/semspike}

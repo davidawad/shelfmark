@@ -1,7 +1,7 @@
 # mc-eval — materials classifier eval harness
 
 Scores classifier predictions against a labelled gold set (plan R15–R17 and
-Success Criteria in `docs/plans/2026-10-07-001-feat-materials-classifier-and-kb-resource-plan.md`).
+the success criteria).
 It is a standalone Rust crate with its own `[workspace]` and no path into the
 surrounding repo, so it moves with the open-source tool when that is split out.
 
@@ -85,7 +85,7 @@ The record's source URL is not passed either, because the label came from
 there.
 
 ```bash
-SHELFMARK=../../src/shelfmark/target/release/shelfmark \
+SHELFMARK=../../target/release/shelfmark \
   scripts/shelfmark-predictions.sh gold/starter-v1.ndjson preds.ndjson profile:lexical@1
 cargo run -- run --gold gold/starter-v1.ndjson --predictions preds.ndjson
 ```
@@ -144,4 +144,4 @@ item is predicted as the five most frequent subclasses, with their frequencies
 as scores. It scores 18.3% subclass top-1 on the starter set. Any real profile
 should beat it.
 
-Benchmark latency and throughput on remote boxes only, never on a laptop.
+Benchmark latency and throughput on remote boxes only.

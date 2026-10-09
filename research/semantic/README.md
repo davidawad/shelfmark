@@ -1,12 +1,11 @@
 # CPU semantic tiers — spike and benchmark
 
-Bead `dot-materials-classifier-v1-gis4b.4`, plan
-`docs/plans/2026-10-07-001-feat-materials-classifier-and-kb-resource-plan.md` (R8, R9; the
+Spike 4 (R8, R9; the
 laya comparison from the R8 scope note). A standalone Cargo workspace with no dependency on
 the surrounding repo (R14). Everything here is a spike: the code is meant to inform the
 `shortlist` and `rerank` tiers, not to become them.
 
-**Remote boxes only.** Never run `scripts/bench.sh` on a personal laptop.
+**Remote machines only.** Do not run `scripts/bench.sh` on a personal machine.
 
 ## What was measured
 
@@ -142,7 +141,7 @@ they show the oversubscription penalty.
    - candle is pure Rust; on macOS and Windows the same code builds with the same rustflags
      (Metal and Accelerate are optional features).
    - fastembed downloads prebuilt ONNX Runtime binaries for all three operating systems.
-   - Apple Silicon numbers still need a remote macOS box. Never run this on David's laptop.
+   - Apple Silicon numbers still need a remote macOS box. Do not run this on a personal machine.
 10. **Data caveats.**
     - E and F share the caption "History of the Americas"; their scope strings tell them
       apart.
@@ -170,7 +169,7 @@ results/table.md             generated table
 ```
 
 ```bash
-cd materials-classifier-work/semantic
+cd research/semantic
 cargo build --release -p semspike
 target/release/semspike parity                     # backend cross-checks (see Findings)
 scripts/bench.sh                                   # all profiles; or a regex filter
