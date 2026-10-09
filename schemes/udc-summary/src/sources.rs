@@ -21,7 +21,7 @@ pub const BASE: &str = "https://udcsummary.info/php/index.php";
 /// classes a work is placed in.
 pub const TAGS: [&str; 10] = ["---", "0", "1", "2", "3", "5", "6", "7", "8", "9"];
 
-const USER_AGENT: &str = "shelfmark-udc-summary/0.1 (+https://github.com/shelfmark/shelfmark)";
+const USER_AGENT: &str = "shelfmark-udc-summary/0.1 (+https://gitlab.com/davidawad/shelfmark)";
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Locked {

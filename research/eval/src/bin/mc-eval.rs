@@ -12,7 +12,7 @@ use std::io::{IsTerminal, Write};
 #[command(
     name = "mc-eval",
     version,
-    about = "Evaluate materials-classifier predictions against a gold set"
+    about = "Evaluate classifier predictions against a gold set"
 )]
 struct Cli {
     #[command(subcommand)]

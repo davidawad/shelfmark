@@ -46,7 +46,7 @@ pub fn scheme(xml: &[u8], lock: &Lock) -> Result<SchemeDoc, String> {
                  {bytes} bytes, sha256 {sha}); parents from its nesting, labels from its descriptions \
                  with HTML entities decoded and bullet separators written as `; `. The source carries \
                  no LCC or LCSH links, so no class has vocabulary. Built locally by \
-                 src/shelfmark/schemes/jel (`jel-scheme build`); see its README.",
+                 schemes/jel (`jel-scheme build`); see its README.",
                 file = s.file,
                 url = s.url,
                 fetched = s.fetched,

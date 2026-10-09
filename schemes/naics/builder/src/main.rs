@@ -6,7 +6,7 @@
 //! naics-scheme check --cache DIR [--data DIR]   rebuild; fail if output differs
 //! ```
 //!
-//! `--data` defaults to `src/shelfmark/schemes/naics`. `build` and `check`
+//! `--data` defaults to `schemes/naics`. `build` and `check`
 //! read only cached sources whose sha256 matches the lock, so they are
 //! deterministic and need no network.
 

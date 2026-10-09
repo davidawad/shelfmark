@@ -1,5 +1,5 @@
 //! Benchmark the `shortlist` tier with BGE-small-en-v1.5 int8 over the
-//! bundled LCC scheme. Run on a remote box only:
+//! bundled LCC scheme. Run on a dedicated benchmark machine only:
 //!
 //! ```text
 //! cargo run --release -p shelfmark-tier-shortlist --features fastembed \

@@ -25,7 +25,7 @@ non-commercial use and share it only under those terms.
 ## Build and use
 
 ```sh
-cd src/shelfmark/schemes/msc/tool
+cd schemes/msc/tool
 cargo run --release -- build --out ~/msc2020.json      # fetches into ~/.cache/shelfmark/msc
 cargo run --release -- check --out ~/msc2020.json      # fails if the file is stale
 shelfmark scheme compile ~/msc2020.json                # preview, then --commit
@@ -70,7 +70,7 @@ run `msc-scheme relock` to pin the new file.
 ## Tests
 
 ```sh
-cd src/shelfmark/schemes/msc/tool
+cd schemes/msc/tool
 cargo test                                                    # fixture; real-source tests skip
 MSC_SOURCE_CACHE=~/.cache/shelfmark/msc MSC_REQUIRE_SOURCE=1 cargo test   # also the real CSV
 ```

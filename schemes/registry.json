@@ -1,5 +1,5 @@
 {
-  "$comment": "Scheme data files under src/shelfmark/schemes/, one entry per scheme. Each loads from its file with `shelfmark scheme compile <file>`; none is compiled into the binary (plan R5). A `distribution: fetch` entry is built locally from its source and never committed.",
+  "$comment": "Scheme data files under schemes/, one entry per scheme. Each loads from its file with `shelfmark scheme compile <file>`; none is compiled into the binary (plan R5). A `distribution: fetch` entry is built locally from its source and never committed.",
   "schemes": [
     {
       "name": "acm-ccs",
@@ -8,8 +8,8 @@
       "dir": "acm-ccs",
       "distribution": "fetch",
       "license": "ACM, Inc.: educational and research use; not redistributable, so not bundled",
-      "build": "cargo run --release --manifest-path src/shelfmark/schemes/acm-ccs/Cargo.toml -- build",
-      "output": "src/shelfmark/schemes/acm-ccs/out/acm-ccs.json",
+      "build": "cargo run --release --manifest-path schemes/acm-ccs/Cargo.toml -- build",
+      "output": "schemes/acm-ccs/out/acm-ccs.json",
       "source": "https://dl.acm.org/ccs"
     },
     {

@@ -6,7 +6,7 @@
 //! lcc-outline check --cache DIR [--data DIR]   rebuild; fail if output differs
 //! ```
 //!
-//! `--data` defaults to `src/shelfmark/data/schemes/lcc`. `build` and
+//! `--data` defaults to `data/schemes/lcc`. `build` and
 //! `check` read only cached sources whose sha256 matches the lock, so they
 //! are deterministic and need no network.
 

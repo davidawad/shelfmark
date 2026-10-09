@@ -32,7 +32,7 @@ contact its terms give.
 ## Build
 
 ```sh
-cd src/shelfmark/schemes/cpc
+cd schemes/cpc
 cargo run --release -- fetch --cache /tmp/cpc-sources --release 202608  # network; rewrites sources.lock.json
 cargo run --release -- build --cache /tmp/cpc-sources                   # offline; writes cpc.json
 cargo run --release -- build --cache /tmp/cpc-sources --depth main-group  # cpc-main-group.json

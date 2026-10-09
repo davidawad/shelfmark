@@ -205,7 +205,7 @@ pub fn build(
                 3-digit subsector under its sector (31-33, 44-45 and 48-49 are sector spans). \
                 Vocabulary: the 2022 NAICS index entries, as `naics-index` terms on their 6-digit \
                 industry. NAICS publishes no LCC or LCSH links. Built by \
-                src/shelfmark/schemes/naics/builder; see schemes/naics/SOURCES.md."
+                schemes/naics/builder; see schemes/naics/SOURCES.md."
                     .to_string(),
             url: Some(SOURCE_URL.to_string()),
             license: Some(LICENSE.to_string()),

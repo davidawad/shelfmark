@@ -345,7 +345,7 @@ pub fn build(
         version: VERSION.to_string(),
         title: "Library of Congress Classification outline".to_string(),
         source: Some(Source {
-            description: "Main classes and subclasses from the LC Classification Outline; numbered spans and captions from the 2024 FreeLCC outline PDFs; LCSH links from id.loc.gov subject headings whose LCC number is exactly a class's number or span. A span's code is `<start>-<end>` with the end's letters dropped when they repeat the start's. Built by src/shelfmark/tools/lcc-outline; see data/schemes/lcc/SOURCES.md.".to_string(),
+            description: "Main classes and subclasses from the LC Classification Outline; numbered spans and captions from the 2024 FreeLCC outline PDFs; LCSH links from id.loc.gov subject headings whose LCC number is exactly a class's number or span. A span's code is `<start>-<end>` with the end's letters dropped when they repeat the start's. Built by tools/lcc-outline; see data/schemes/lcc/SOURCES.md.".to_string(),
             url: Some("https://www.loc.gov/aba/publications/FreeLCC/freelcc.html".to_string()),
             license: Some("Library of Congress data: US government work, not subject to copyright in the United States".to_string()),
         }),

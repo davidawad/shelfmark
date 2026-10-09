@@ -1,7 +1,7 @@
 # Identifier tables: findings
 
 Spike 3. Plan R7 (identifier tier), AE1.
-Measured on a remote box (12 cores, 22 GiB RAM) on 2026-10-07. The dump
+Measured on a dedicated server (12 cores, 22 GiB RAM) on 2026-10-07. The dump
 and full outputs stayed on the box. Committed artifacts are listed under
 "Reproduce".
 
@@ -44,7 +44,7 @@ and full outputs stayed on the box. Committed artifacts are listed under
 - **Memory:** peak RSS is 14.1 GiB (14,760,096 kB VmHWM). Most of it is the
   set of every valid identifier, which is kept to compute coverage
   denominators, plus the key-to-value map. A builder that does not need
-  coverage could drop the sets. Building needs a large machine, not a laptop.
+  coverage could drop the sets. Building needs a large machine, not a laptop-class machine.
 - **Determinism:**
   - Two full-dump runs at `--jobs 10` and `--jobs 4` produced byte-identical
     `lookup.tsv`, `conflicts.tsv` and `stats.json`. That run used the build

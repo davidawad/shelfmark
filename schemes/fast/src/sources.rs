@@ -109,7 +109,7 @@ fn get(url: &str) -> Result<Vec<u8>, String> {
     let resp = ureq::get(url)
         .header(
             "User-Agent",
-            "shelfmark-fast-scheme/0.1 (+https://github.com/shelfmark/shelfmark)",
+            "shelfmark-fast-scheme/0.1 (+https://gitlab.com/davidawad/shelfmark)",
         )
         .call()
         .map_err(|e| e.to_string())?;

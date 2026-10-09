@@ -5,13 +5,13 @@
 `ipc.json` is the IPC as a shelfmark scheme: `scheme:ipc@2026.01`, 80,145
 classes (8 sections, 132 classes, 655 subclasses, 7,668 main groups and
 71,682 subgroups, including indexing-scheme entries). It validates against
-`src/shelfmark/schemas/scheme.schema.json`. The data comes from WIPO's
+`schemas/scheme.schema.json`. The data comes from WIPO's
 2026.01 master files. `SOURCES.md` records the URLs, sha256 hashes, license
 and build counts.
 
 ```sh
-shelfmark scheme validate --path src/shelfmark/schemes/ipc/ipc.json
-shelfmark scheme compile src/shelfmark/schemes/ipc/ipc.json   # preview; add --commit --expected-revision <rev>
+shelfmark scheme validate --path schemes/ipc/ipc.json
+shelfmark scheme compile schemes/ipc/ipc.json   # preview; add --commit --expected-revision <rev>
 shelfmark scheme browse H01B1/00 --scheme scheme:ipc@2026.01
 shelfmark scheme search "superconductive cable" --scheme scheme:ipc@2026.01
 ```
@@ -59,7 +59,7 @@ binary (plan R5). Its entry in `../registry.json` records this.
 and has its own `Cargo.lock`.
 
 ```sh
-cd src/shelfmark/schemes/ipc/builder
+cd schemes/ipc/builder
 cargo run --release -- fetch --cache /tmp/ipc-sources   # network; rewrites sources.lock.json
 cargo run --release -- build --cache /tmp/ipc-sources   # offline; same lock, same bytes
 cargo run --release -- check --cache /tmp/ipc-sources   # fails if ipc.json or SOURCES.md is stale

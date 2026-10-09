@@ -144,4 +144,4 @@ item is predicted as the five most frequent subclasses, with their frequencies
 as scores. It scores 18.3% subclass top-1 on the starter set. Any real profile
 should beat it.
 
-Benchmark latency and throughput on remote boxes only.
+Benchmark latency and throughput on a dedicated benchmark machine only.

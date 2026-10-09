@@ -17,7 +17,7 @@ number (`fst01004795` is "Machine learning").
 ## Build and use
 
 ```sh
-cd src/shelfmark/schemes/fast
+cd schemes/fast
 cargo run --release -- fetch --cache /tmp/fast-sources   # network, about 55 MB
 cargo run --release -- build --cache /tmp/fast-sources   # offline, about 10 s
 cd ../.. && shelfmark scheme compile schemes/fast/out/fast.json --commit --expected-revision <rev>
