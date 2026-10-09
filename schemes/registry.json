@@ -33,6 +33,18 @@
       "license": "US government work, no US copyright (17 U.S.C. 105)",
       "attribution": "Library of Congress Classification, Library of Congress, Policy, Training, and Cooperative Programs Division.",
       "may_bundle": true
+    },
+    {
+      "name": "openalex-topics",
+      "version": "2026-10-09",
+      "title": "OpenAlex Topics (domain > field > subfield > topic)",
+      "file": "openalex-topics/openalex-topics.json",
+      "builder": "openalex-topics/builder",
+      "sources": "openalex-topics/sources.lock.json",
+      "license": "CC0 1.0",
+      "attribution": "OpenAlex topics data, CC0 1.0 public domain dedication. Reformatted by shelfmark.",
+      "may_bundle": true,
+      "source": "https://docs.openalex.org/api-entities/topics"
     }
   ]
 }
