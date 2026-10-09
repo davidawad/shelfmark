@@ -1,0 +1,47 @@
+PREFIX :          <http://vocabularies.unesco.org/thesaurus/>
+PREFIX skos:      <http://www.w3.org/2004/02/skos/core#>
+
+:concept1  rdf:type  skos:Concept;
+        skos:altLabel  "Pupil teaching"@en , "Enseignement"@fr;
+        skos:hiddenLabel  "Teachin"@en;
+        skos:prefLabel  "Teaching"@en , "Enseignement"@fr;
+        skos:scopeNote  "Imparting \"knowledge\"."@en;
+        skos:topConceptOf  <http://vocabularies.unesco.org/thesaurus> .
+
+:concept2  rdf:type  skos:Concept;
+        skos:prefLabel  "Lecturing"@en;
+        skos:broader  :concept1 .
+
+:concept3  rdf:type  skos:Concept;
+        skos:prefLabel  "Tutoring"@en;
+        skos:broader  :concept2 , :concept1 .
+
+:concept4  rdf:type  skos:Concept;
+        skos:prefLabel  "Classroom"@en;
+        skos:broader  :concept9 .
+
+:concept9  rdf:type  skos:Concept;
+        skos:prefLabel  "Buildings"@en;
+        skos:topConceptOf  <http://vocabularies.unesco.org/thesaurus> .
+
+:mt1.05  rdf:type  iso-thes:ConceptGroup , unescovoc:MicroThesaurus , skos:Collection;
+        iso-thes:superGroup  :domain1;
+        skos:member  :concept3 , :concept1 , :concept2 , :concept4;
+        skos:notation  "1.05";
+        skos:prefLabel  "Teaching"@en .
+
+:mt1.10  rdf:type  iso-thes:ConceptGroup , unescovoc:MicroThesaurus , skos:Collection;
+        iso-thes:superGroup  :domain1;
+        skos:member  :concept9;
+        skos:notation  "1.10";
+        skos:prefLabel  "Facilities"@en .
+
+:domain1  rdf:type  iso-thes:ConceptGroup , skos:Collection , unescovoc:Domain;
+        iso-thes:subGroup  :mt1.05 , :mt1.10;
+        skos:notation  "1";
+        skos:prefLabel  "Education"@en .
+
+<http://vocabularies.unesco.org/thesaurus>
+        rdf:type          skos:ConceptScheme;
+        dct:modified      "2026-08-31"^^xsd:date;
+        skos:prefLabel    "UNESCO Thesaurus"@en .
