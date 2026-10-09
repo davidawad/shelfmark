@@ -6,7 +6,7 @@ edition = "2021"
 license = "MIT OR Apache-2.0"
 publish = false
 
-# Standalone: no dependency on the surrounding repo (R14). It depends
+# Standalone: no dependency on the surrounding repo. It depends
 # inward on the shelfmark crates only for `enrich-scheme`, which places
 # headings with shelfmark's own compiled scheme index.
 [workspace]

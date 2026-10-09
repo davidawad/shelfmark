@@ -22,7 +22,7 @@ A code is the printed IPC symbol with its space removed, because shelfmark
 codes cannot contain whitespace: `A01B 1/02` becomes `A01B1/02`, and the
 class ID is `class:ipc@2026.01:A01B1/02`. Sections (`H`), classes (`H01`)
 and subclasses (`H01B`) stay as printed. Each class's parent comes from the
-master file's nesting, so subgroups sit under their dot-level parent
+master file's nesting, so subgroups sit under their dotted-depth parent
 (`H01B1/08` → `H01B1/06` → `H01B1/00` → `H01B` → `H01` → `H`). Labels are
 WIPO's titles verbatim. A title made of several parts is joined with `; `,
 and title images are written `[image]`. The cross-references in a title

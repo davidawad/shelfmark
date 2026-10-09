@@ -46,7 +46,7 @@ pub fn parse(text: &str) -> Result<Vec<Title>, String> {
     let mut out = Vec::new();
     for (i, line) in text.lines().enumerate() {
         let line = line.trim_end_matches('\r');
-        if line.trim().is_empty() {
+        if line.trim().is_empty() || line.starts_with("# ") {
             continue;
         }
         let mut fields = line.splitn(3, '\t');
@@ -80,6 +80,7 @@ mod tests {
 
     #[test]
     fn parses_lines() {
+        assert_eq!(parse("# invented fixture\nA\t\tExample\n").unwrap().len(), 1);
         let t = parse(TEXT).unwrap();
         assert_eq!(t.len(), 3);
         assert_eq!(t[0].level, None);

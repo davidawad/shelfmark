@@ -1,7 +1,6 @@
 # mc-eval — materials classifier eval harness
 
-Scores classifier predictions against a labelled gold set (plan R15–R17 and
-the success criteria).
+Scores classifier predictions against a labelled gold set.
 It is a standalone Rust crate with its own `[workspace]` and no path into the
 surrounding repo, so it moves with the open-source tool when that is split out.
 
@@ -47,7 +46,7 @@ L are outside that level's denominator; the report gives `n` per level.
 | `levels[].ece`, `brier` | calibration of top-1 confidence against correctness at that level (equal-width bins, top-label Brier) |
 | `reliability` | calibration bins at `--level` (default 2, subclass) |
 | `risk_coverage`, `aurc` | error rate as items are accepted in confidence order; area under that curve |
-| `thresholds` | for each `--precision` target, the lowest confidence whose accepted set meets it, with its coverage; this is where R17's thresholds come from |
+| `thresholds` | for each `--precision` target, the lowest confidence whose accepted set meets it, with its coverage; this is where 's thresholds come from |
 | `flagged_rate`, `accuracy_flagged/unflagged` | how much is flagged and whether flagging tracks errors |
 | `latency_ms` | mean, p50, p95, max |
 | `fast` | micro precision/recall/F1 when gold items carry FAST tags |
@@ -132,7 +131,7 @@ Known limits of these labels:
   Only 42 items reach level 4 and 31 reach level 5.
 - Some Open Library editions have no description, so their `text` is empty and
   only the title and identifiers (ISBN, LCCN) remain. This is realistic for
-  identifier-tier evaluation (AE1).
+  identifier-tier evaluation.
 - No item carries FAST tags yet. FAST metrics appear once corrections add them.
 
 Licensing: arXiv metadata is CC0. Wikipedia extracts are CC BY-SA 4.0, with the

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Run every candidate profile in a fresh process (so RSS/peak are per-profile), after a
-# prefetch pass that keeps download time out of load timings. Remote machines only; never
-# run on a personal machine.
+# prefetch pass that keeps download time out of load timings. Controlled benchmark environment only; never
+# run in a controlled benchmark environment.
 #
 #   scripts/bench.sh [filter-regex]        # from research/semantic/
 set -euo pipefail
@@ -15,7 +15,7 @@ FILTER=${1:-.}
 # Labels are embedded as instructed queries and items as passages (--flip): on this task it
 # lifted Qwen3-Embedding sub@1 from 20% to 47% and helped every model (see README).
 # fe-qwen3:bf16 is omitted: candle's CPU backend has no BF16 matmul.
-# The bench box exposes 12 vCPUs but has a 4-CPU cgroup quota (cpu.max 400000/100000), so
+# The benchmark host exposes 12 vCPUs but has a 4-CPU cgroup quota (cpu.max 400000/100000), so
 # the 4core:* rows (taskset 0-3, 4 threads) are the representative numbers.
 # name | embedder | reranker (- for none) | cpu list (- for all)
 PROFILES=(

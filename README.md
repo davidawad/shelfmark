@@ -42,15 +42,20 @@ builder, tests and a README. Load the built file with
 | Scheme | Directory | Source license | Bundled | Official page |
 |---|---|---|---|---|
 | `lcc` (LCC outline + LCSH links) | [`data/schemes/lcc/`](data/schemes/lcc/) | US government work, no US copyright | yes: data file committed and pre-compiled | <https://www.loc.gov/catdir/cpso/lcco/> |
+| `lcc-full` (LCC complete schedules, 416,186 classes) | [`schemes/lcc-full/`](schemes/lcc-full/) | US government work, no US copyright | data file committed (`lcc-full.json.gz`, 7.5 MB) | <https://www.loc.gov/aba/publications/FreeLCC/freelcc.html> |
 | `fast` (FAST topical) | [`schemes/fast/`](schemes/fast/) | ODC-By 1.0 | no: allowed, but at 79 MB it is built locally | <https://www.oclc.org/research/areas/data-science/fast.html> |
 | `udc-summary` (UDC Summary) | [`schemes/udc-summary/`](schemes/udc-summary/) | CC BY-NC 4.0 | no: each user fetches and builds it | <https://udcsummary.info/> |
 | `ipc` (IPC 2026.01) | [`schemes/ipc/`](schemes/ipc/) | CC BY 4.0 | data file committed (`ipc.json`) | <https://www.wipo.int/en/web/classification-ipc> |
 | `cpc` (CPC 2026.08) | [`schemes/cpc/`](schemes/cpc/) | none; EPO website terms apply | no: each user fetches and builds it | <https://www.cooperativepatentclassification.org/home> |
 | `msc` (MSC2020) | [`schemes/msc/`](schemes/msc/) | CC BY-NC-SA 4.0 | no: each user fetches and builds it | <https://msc2020.org/> |
 | `acm-ccs` (ACM CCS 2012) | [`schemes/acm-ccs/`](schemes/acm-ccs/) | ACM copyright, not redistributable | no: each user fetches and builds it | <https://dl.acm.org/ccs> |
+| `ilc2` (ILC2) | [`schemes/ilc2/`](schemes/ilc2/) | unsettled: CC BY 3.0 in the SKOS file, CC BY-SA 3.0 on BARTOC, none on the site | no: each user fetches and builds it | <https://www.iskoi.org/ilc/> |
 | `jel` (JEL) | [`schemes/jel/`](schemes/jel/) | AEA, all rights reserved | no: each user fetches and builds it | <https://www.aeaweb.org/econlit/jelCodes.php> |
 | `arxiv` (arXiv categories) | [`schemes/arxiv/`](schemes/arxiv/) | MIT (arxiv-base) | data file committed (`arxiv.json`) | <https://arxiv.org/category_taxonomy> |
 | `naics` (NAICS 2022) | [`schemes/naics/`](schemes/naics/) | US government work, no US copyright | data file committed (`naics.json`) | <https://www.census.gov/naics/> |
+| `openalex-topics` (OpenAlex Topics) | [`schemes/openalex-topics/`](schemes/openalex-topics/) | CC0 1.0 | data file committed (`openalex-topics.json`, about 13 MB) | <https://docs.openalex.org/api-entities/topics> |
+| `fdc` (Free Decimal Correspondence 0.06) | [`schemes/fdc/`](schemes/fdc/) | CC0 1.0 | data file committed (`fdc.json`) | <https://everybodyslibraries.com/free-decimal-correspondence/> |
+| `eurovoc` (EuroVoc 4.24) | [`schemes/eurovoc/`](schemes/eurovoc/) | EU reuse terms unsettled (see crate README) | no: each user fetches and builds it | <https://op.europa.eu/en/web/eu-vocabularies/th-dataset/-/resource/dataset/eurovoc> |
 
 ## The tower
 

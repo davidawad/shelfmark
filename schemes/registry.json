@@ -13,6 +13,17 @@
       "source": "https://dl.acm.org/ccs"
     },
     {
+      "name": "eurovoc",
+      "version": "4.24",
+      "title": "EuroVoc (multilingual thesaurus of the EU Publications Office)",
+      "dir": "eurovoc",
+      "distribution": "fetch",
+      "license": "EU reuse terms stated inconsistently (Commission reuse notice in dataset metadata, CC0 in a third-party registry); not bundled, built from the Publications Office download",
+      "build": "cargo run --release --manifest-path schemes/eurovoc/Cargo.toml -- build --cache /tmp/eurovoc-sources",
+      "output": "schemes/eurovoc/eurovoc.json",
+      "source": "https://op.europa.eu/en/web/eu-vocabularies/th-dataset/-/resource/dataset/eurovoc"
+    },
+    {
       "name": "ipc",
       "version": "2026.01",
       "title": "International Patent Classification (IPC)",
@@ -22,6 +33,51 @@
       "license": "CC BY 4.0",
       "attribution": "International Patent Classification (IPC), World Intellectual Property Organization (WIPO), edition 20260101. Licensed CC BY 4.0. Reformatted by shelfmark; not endorsed by WIPO.",
       "may_bundle": true
+    },
+    {
+      "name": "lcc-full",
+      "version": "2024",
+      "title": "Library of Congress Classification: complete schedules",
+      "file": "lcc-full/lcc-full.json.gz",
+      "builder": "lcc-full",
+      "sources": "lcc-full/sources.lock.json",
+      "license": "US government work, no US copyright (17 U.S.C. 105)",
+      "attribution": "Library of Congress Classification, Library of Congress, Policy, Training, and Cooperative Programs Division.",
+      "may_bundle": true
+    },
+    {
+      "name": "openalex-topics",
+      "version": "2026-10-09",
+      "title": "OpenAlex Topics (domain > field > subfield > topic)",
+      "file": "openalex-topics/openalex-topics.json",
+      "builder": "openalex-topics/builder",
+      "sources": "openalex-topics/sources.lock.json",
+      "license": "CC0 1.0",
+      "attribution": "OpenAlex topics data, CC0 1.0 public domain dedication. Reformatted by shelfmark.",
+      "may_bundle": true,
+      "source": "https://docs.openalex.org/api-entities/topics"
+    },
+    {
+      "name": "fdc",
+      "version": "0.06",
+      "title": "Free Decimal Correspondence",
+      "file": "fdc/fdc.json",
+      "builder": "fdc/builder",
+      "sources": "fdc/sources.lock.json",
+      "license": "CC0 1.0",
+      "attribution": "Free Decimal Correspondence v0.06, edited by John Mark Ockerbloom; dedicated to the public domain (CC0 1.0). Reformatted by shelfmark.",
+      "may_bundle": true
+    },
+    {
+      "name": "ilc2",
+      "version": "2019-10-17",
+      "title": "Integrative Levels Classification, edition 2 (ILC2)",
+      "dir": "ilc2",
+      "distribution": "fetch",
+      "license": "Unsettled: the publisher's SKOS file says CC BY 3.0, BARTOC lists CC BY-SA 3.0, no iskoi.org page states a license; not bundled",
+      "build": "cargo run --release --manifest-path schemes/ilc2/Cargo.toml -- build",
+      "output": "schemes/ilc2/out/ilc2.json",
+      "source": "https://www.iskoi.org/ilc/"
     }
   ]
 }

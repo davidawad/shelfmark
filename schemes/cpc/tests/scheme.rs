@@ -2,7 +2,7 @@
 //! published JSON Schema, round-trips through `SchemeDoc`, passes the
 //! scheme compiler's checks, and browses and searches as CPC should.
 //!
-//! Most tests build from `fixtures/titles-excerpt.txt`, synthetic lines in//! 2026.08 title list. `full_release_*` builds the locked release itself
+//! Most tests build from `fixtures/titles-excerpt.txt`, synthetic entries shaped like a title list. `full_release_*` builds the locked release itself
 //! when `CPC_SOURCES` names a cache holding it (`cpc-scheme fetch`), and
 //! otherwise logs a skip to `$TEST_SKIP_LOG`
 //! (`CPC_REQUIRE_SOURCES=1` turns the skip into a failure).

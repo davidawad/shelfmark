@@ -1,6 +1,6 @@
 # identifier-tables
 
-Data for the materials classifier's identifier tier (plan R7, AE1): the
+Data for the materials classifier's identifier tier: the
 exact-lookup step that runs before any vocabulary matching or model.
 
 This is a standalone Cargo workspace with no dependency on the surrounding

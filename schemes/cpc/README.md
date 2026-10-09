@@ -112,7 +112,7 @@ cargo test                                          # builder units + excerpt sc
 CPC_SOURCES=/tmp/cpc-sources cargo test --release   # also builds the locked release and checks its hashes
 ```
 
-`tests/fixtures/titles-excerpt.txt` holds 42 synthetic lines in the shape of the 2026.08 title
+`tests/fixtures/titles-excerpt.txt` holds 42 synthetic lines; every label is invented and used only as test data. The lines follow the shape of a title
 list (real CPC codes and the same markup, invented labels; no CPC title text is
 committed). The tests check that the excerpt's scheme validates against
 `schemas/scheme.schema.json`, round-trips through `SchemeDoc`, passes the

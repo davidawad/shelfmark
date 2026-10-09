@@ -6,7 +6,7 @@ description = "Deterministic builder for identifier -> LCC/DDC lookup tables (ma
 license = "MIT OR Apache-2.0"
 publish = false
 
-# Standalone workspace: no dependency on the surrounding repo (R14).
+# Standalone workspace: no dependency on the surrounding repo.
 [workspace]
 
 [dependencies]

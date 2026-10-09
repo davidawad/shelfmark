@@ -1,0 +1,228 @@
+{
+  "sources": [
+    {
+      "file": "license.html",
+      "url": "https://help.openalex.org/hc/en-us/articles/24397762024087-Pricing",
+      "role": "license",
+      "fetched": "2026-10-09",
+      "bytes": 33098,
+      "sha256": "1043265aa336c2e17be40c3fa6f8248f991a2328b1e2162332f2c2c69bbd0615"
+    },
+    {
+      "file": "domains-001.json",
+      "url": "https://api.openalex.org/domains?per-page=200&select=id,display_name,description,display_name_alternatives&cursor=*&mailto=shelfmark@example.org",
+      "role": "domains",
+      "fetched": "2026-10-09",
+      "bytes": 1320,
+      "sha256": "73cb6a4920e1076c9fd83b4dadeb3c8cd3b98783ca0fd37453f502a1e5b0bfa4"
+    },
+    {
+      "file": "fields-001.json",
+      "url": "https://api.openalex.org/fields?per-page=200&select=id,display_name,description,display_name_alternatives,domain&cursor=*&mailto=shelfmark@example.org",
+      "role": "fields",
+      "fetched": "2026-10-09",
+      "bytes": 9421,
+      "sha256": "ff929078c03e1f5c1f4ecfdf019d3b828bdbb6ea3163029131fa330842d34b84"
+    },
+    {
+      "file": "subfields-001.json",
+      "url": "https://api.openalex.org/subfields?per-page=200&select=id,display_name,description,display_name_alternatives,field,domain&cursor=*&mailto=shelfmark@example.org",
+      "role": "subfields",
+      "fetched": "2026-10-09",
+      "bytes": 83818,
+      "sha256": "8af22a71236c04afc44fcdcb7a9e5f38f1c2dd6bf15eed19f9555ec6b4dbf051"
+    },
+    {
+      "file": "subfields-002.json",
+      "url": "https://api.openalex.org/subfields?per-page=200&select=id,display_name,description,display_name_alternatives,field,domain&cursor=IlsyNDA3MTUsICdodHRwczovL29wZW5hbGV4Lm9yZy9zdWJmaWVsZHMvMjQwNiddIg==&mailto=shelfmark@example.org",
+      "role": "subfields",
+      "fetched": "2026-10-09",
+      "bytes": 21734,
+      "sha256": "da3773d0a4770b946bdb53455b75660106a3ce13744b7824c0231800d2924d1e"
+    },
+    {
+      "file": "topics-001.json",
+      "url": "https://api.openalex.org/topics?per-page=200&select=id,display_name,description,keywords,subfield,field,domain&cursor=*&mailto=shelfmark@example.org",
+      "role": "topics",
+      "fetched": "2026-10-09",
+      "bytes": 722317,
+      "sha256": "ab6b7e44ad980743e691829b5184056cb08c3fc51c2de07bc5cd4653d9f650b8"
+    },
+    {
+      "file": "topics-002.json",
+      "url": "https://api.openalex.org/topics?per-page=200&select=id,display_name,description,keywords,subfield,field,domain&cursor=IlsyNjA2NjQsICdodHRwczovL29wZW5hbGV4Lm9yZy9UMTAzNTInXSI=&mailto=shelfmark@example.org",
+      "role": "topics",
+      "fetched": "2026-10-09",
+      "bytes": 736729,
+      "sha256": "168066babbd78e822e5e8d1d5b24dc3ccfe124aeb10dae199a27299d7dd37022"
+    },
+    {
+      "file": "topics-003.json",
+      "url": "https://api.openalex.org/topics?per-page=200&select=id,display_name,description,keywords,subfield,field,domain&cursor=IlsxODUyMzEsICdodHRwczovL29wZW5hbGV4Lm9yZy9UMTAwNTknXSI=&mailto=shelfmark@example.org",
+      "role": "topics",
+      "fetched": "2026-10-09",
+      "bytes": 736944,
+      "sha256": "0395c059d7f7a4d93781bcb5aee432cd78a9443025692fa862fd2d713d22be97"
+    },
+    {
+      "file": "topics-004.json",
+      "url": "https://api.openalex.org/topics?per-page=200&select=id,display_name,description,keywords,subfield,field,domain&cursor=IlsxNDk5OTUsICdodHRwczovL29wZW5hbGV4Lm9yZy9UMTAxMjInXSI=&mailto=shelfmark@example.org",
+      "role": "topics",
+      "fetched": "2026-10-09",
+      "bytes": 742485,
+      "sha256": "280b06c816835e3f6dfa38a4f9bdac7d0adaf4b6567dbbb99c548992b6347591"
+    },
+    {
+      "file": "topics-005.json",
+      "url": "https://api.openalex.org/topics?per-page=200&select=id,display_name,description,keywords,subfield,field,domain&cursor=IlsxMjcwNjMsICdodHRwczovL29wZW5hbGV4Lm9yZy9UMTA4MDQnXSI=&mailto=shelfmark@example.org",
+      "role": "topics",
+      "fetched": "2026-10-09",
+      "bytes": 746587,
+      "sha256": "b640ebfe197092b7cafe118341d1169e56aaa2df4eb256b50d63a2fedab4f244"
+    },
+    {
+      "file": "topics-006.json",
+      "url": "https://api.openalex.org/topics?per-page=200&select=id,display_name,description,keywords,subfield,field,domain&cursor=IlsxMTEwOTMsICdodHRwczovL29wZW5hbGV4Lm9yZy9UMTA3NDgnXSI=&mailto=shelfmark@example.org",
+      "role": "topics",
+      "fetched": "2026-10-09",
+      "bytes": 748555,
+      "sha256": "9c0214d54f659cfa94da25cc230ceaaf8475cca3fe68228d94e2b414e0a18391"
+    },
+    {
+      "file": "topics-007.json",
+      "url": "https://api.openalex.org/topics?per-page=200&select=id,display_name,description,keywords,subfield,field,domain&cursor=Ils5Nzc5OSwgJ2h0dHBzOi8vb3BlbmFsZXgub3JnL1QxMDA5NiddIg==&mailto=shelfmark@example.org",
+      "role": "topics",
+      "fetched": "2026-10-09",
+      "bytes": 748603,
+      "sha256": "ba93b46d6f26ca4c5e01cef0102ad63c7eb579c4a2ddac0ad3f960029d019316"
+    },
+    {
+      "file": "topics-008.json",
+      "url": "https://api.openalex.org/topics?per-page=200&select=id,display_name,description,keywords,subfield,field,domain&cursor=Ils4NjA2MCwgJ2h0dHBzOi8vb3BlbmFsZXgub3JnL1QxMDU3NSddIg==&mailto=shelfmark@example.org",
+      "role": "topics",
+      "fetched": "2026-10-09",
+      "bytes": 748524,
+      "sha256": "ae2e0daf4fd963e09f24ee3e91f3c6d2d2a3461112cd26961c6260b7c40bc81a"
+    },
+    {
+      "file": "topics-009.json",
+      "url": "https://api.openalex.org/topics?per-page=200&select=id,display_name,description,keywords,subfield,field,domain&cursor=Ils3NjQ2NywgJ2h0dHBzOi8vb3BlbmFsZXgub3JnL1QxMDk0NSddIg==&mailto=shelfmark@example.org",
+      "role": "topics",
+      "fetched": "2026-10-09",
+      "bytes": 746193,
+      "sha256": "df6a688c90e80bcdd02bc50359cb7c481287e91ae5f7f5001a140ef6dc90c697"
+    },
+    {
+      "file": "topics-010.json",
+      "url": "https://api.openalex.org/topics?per-page=200&select=id,display_name,description,keywords,subfield,field,domain&cursor=Ils2ODM5MiwgJ2h0dHBzOi8vb3BlbmFsZXgub3JnL1QxMTE4NiddIg==&mailto=shelfmark@example.org",
+      "role": "topics",
+      "fetched": "2026-10-09",
+      "bytes": 747818,
+      "sha256": "90f29190062dd9a62225d4068e3523f6f1f1e5e603450ef7910ec8f68a1809de"
+    },
+    {
+      "file": "topics-011.json",
+      "url": "https://api.openalex.org/topics?per-page=200&select=id,display_name,description,keywords,subfield,field,domain&cursor=Ils2MDg3MSwgJ2h0dHBzOi8vb3BlbmFsZXgub3JnL1QxMDg1MSddIg==&mailto=shelfmark@example.org",
+      "role": "topics",
+      "fetched": "2026-10-09",
+      "bytes": 752884,
+      "sha256": "1df1e029b38f2775e85af489da00fec81f568568b2cb4e6963553c9bd791b506"
+    },
+    {
+      "file": "topics-012.json",
+      "url": "https://api.openalex.org/topics?per-page=200&select=id,display_name,description,keywords,subfield,field,domain&cursor=Ils1NDM5NCwgJ2h0dHBzOi8vb3BlbmFsZXgub3JnL1QxMzI5MiddIg==&mailto=shelfmark@example.org",
+      "role": "topics",
+      "fetched": "2026-10-09",
+      "bytes": 755508,
+      "sha256": "a6836223dc5cfc2b520f8081b14b8bd892089f7b94ecb0fec48eeadfc313db06"
+    },
+    {
+      "file": "topics-013.json",
+      "url": "https://api.openalex.org/topics?per-page=200&select=id,display_name,description,keywords,subfield,field,domain&cursor=Ils0ODAxMCwgJ2h0dHBzOi8vb3BlbmFsZXgub3JnL1QxMTE2NCddIg==&mailto=shelfmark@example.org",
+      "role": "topics",
+      "fetched": "2026-10-09",
+      "bytes": 750197,
+      "sha256": "84833f9a62e29f58a41673c8c720be91f42120b5e6e61d8174c5e8019ab3c01a"
+    },
+    {
+      "file": "topics-014.json",
+      "url": "https://api.openalex.org/topics?per-page=200&select=id,display_name,description,keywords,subfield,field,domain&cursor=Ils0MTU2NCwgJ2h0dHBzOi8vb3BlbmFsZXgub3JnL1QxMjYwOSddIg==&mailto=shelfmark@example.org",
+      "role": "topics",
+      "fetched": "2026-10-09",
+      "bytes": 745181,
+      "sha256": "38272a1afd6306f6f156ae37ca5bc2d8636981b0300ba997f037c36cab9ab612"
+    },
+    {
+      "file": "topics-015.json",
+      "url": "https://api.openalex.org/topics?per-page=200&select=id,display_name,description,keywords,subfield,field,domain&cursor=IlszNTkyNiwgJ2h0dHBzOi8vb3BlbmFsZXgub3JnL1QxMjYzNCddIg==&mailto=shelfmark@example.org",
+      "role": "topics",
+      "fetched": "2026-10-09",
+      "bytes": 736714,
+      "sha256": "3f6cd09483814095010da63d30b0f81863b82f70844f3b9fd5593dfd1ef0d2c8"
+    },
+    {
+      "file": "topics-016.json",
+      "url": "https://api.openalex.org/topics?per-page=200&select=id,display_name,description,keywords,subfield,field,domain&cursor=IlszMTMwNiwgJ2h0dHBzOi8vb3BlbmFsZXgub3JnL1QxMjE1MCddIg==&mailto=shelfmark@example.org",
+      "role": "topics",
+      "fetched": "2026-10-09",
+      "bytes": 735637,
+      "sha256": "4e7e0907bddd0f777701e8ba58fd69368d418c978fe0a0efd5af68347c27aa4c"
+    },
+    {
+      "file": "topics-017.json",
+      "url": "https://api.openalex.org/topics?per-page=200&select=id,display_name,description,keywords,subfield,field,domain&cursor=IlsyNjkzNCwgJ2h0dHBzOi8vb3BlbmFsZXgub3JnL1QxMzg4OSddIg==&mailto=shelfmark@example.org",
+      "role": "topics",
+      "fetched": "2026-10-09",
+      "bytes": 727123,
+      "sha256": "4379eec824806d9c8515a9fb8d525715343b1623a540c98250a0fc548bf95586"
+    },
+    {
+      "file": "topics-018.json",
+      "url": "https://api.openalex.org/topics?per-page=200&select=id,display_name,description,keywords,subfield,field,domain&cursor=IlsyMjc0MiwgJ2h0dHBzOi8vb3BlbmFsZXgub3JnL1QxMjEzNCddIg==&mailto=shelfmark@example.org",
+      "role": "topics",
+      "fetched": "2026-10-09",
+      "bytes": 710898,
+      "sha256": "42c1685a758e0a6dbd346cbfb7461181c8cf2922ccd0e16122ffb5c115f1203e"
+    },
+    {
+      "file": "topics-019.json",
+      "url": "https://api.openalex.org/topics?per-page=200&select=id,display_name,description,keywords,subfield,field,domain&cursor=IlsxODkxMiwgJ2h0dHBzOi8vb3BlbmFsZXgub3JnL1QxMjEwMSddIg==&mailto=shelfmark@example.org",
+      "role": "topics",
+      "fetched": "2026-10-09",
+      "bytes": 672240,
+      "sha256": "9e0815c1aaa36d785439b7af8168871423cb613a4f4cbfa0ef512ca8c78fc7a3"
+    },
+    {
+      "file": "topics-020.json",
+      "url": "https://api.openalex.org/topics?per-page=200&select=id,display_name,description,keywords,subfield,field,domain&cursor=IlsxNTA3MCwgJ2h0dHBzOi8vb3BlbmFsZXgub3JnL1QxMjU5MiddIg==&mailto=shelfmark@example.org",
+      "role": "topics",
+      "fetched": "2026-10-09",
+      "bytes": 639838,
+      "sha256": "1ad7e3cbacb7f3b9e292ac68b1f1c761ddacb7ca39b424e50241f53be1d81487"
+    },
+    {
+      "file": "topics-021.json",
+      "url": "https://api.openalex.org/topics?per-page=200&select=id,display_name,description,keywords,subfield,field,domain&cursor=IlsxMTEzNCwgJ2h0dHBzOi8vb3BlbmFsZXgub3JnL1QxNDMwNCddIg==&mailto=shelfmark@example.org",
+      "role": "topics",
+      "fetched": "2026-10-09",
+      "bytes": 537841,
+      "sha256": "86d5a62f205347e9cfddbfeba41dace5ec404479d1664dd6cb23b02ac34b92c6"
+    },
+    {
+      "file": "topics-022.json",
+      "url": "https://api.openalex.org/topics?per-page=200&select=id,display_name,description,keywords,subfield,field,domain&cursor=Ils2MDU4LCAnaHR0cHM6Ly9vcGVuYWxleC5vcmcvVDEzOTczJ10i&mailto=shelfmark@example.org",
+      "role": "topics",
+      "fetched": "2026-10-09",
+      "bytes": 307151,
+      "sha256": "027e36aa8490f84e07dadddfef3ff6ffc423c13ac7b2ea57190e371c5b319404"
+    },
+    {
+      "file": "topics-023.json",
+      "url": "https://api.openalex.org/topics?per-page=200&select=id,display_name,description,keywords,subfield,field,domain&cursor=IlsxNjYsICdodHRwczovL29wZW5hbGV4Lm9yZy9UMTM3MDcnXSI=&mailto=shelfmark@example.org",
+      "role": "topics",
+      "fetched": "2026-10-09",
+      "bytes": 93737,
+      "sha256": "dc4ee42c413796b0ffea0a16fe2a884187ab65e47ac52f8c9fa7fcb1f62f16fe"
+    }
+  ]
+}

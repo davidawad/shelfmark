@@ -1,3 +1,4 @@
+# Synthetic fixture: every label below is invented for tests.
 A		SYNTHETIC SECTION ONE
 A01		SYNTHETIC CLASS ALPHA; SAMPLE ENTRIES; TEST DATA
 A01B		SYNTHETIC SUBCLASS ONE; PARTS, DETAILS, OR ACCESSORIES, IN GENERAL (see fixture A01C5/00; example A01D42/04; example A01D43/12; example E01, E02, E21)

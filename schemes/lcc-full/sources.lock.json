@@ -1,0 +1,313 @@
+{
+  "outline_sha256": "b21e4c6680c72f82df633f397e54291eeb1ada3ffe3a2df1dcf0af6211eb79f7",
+  "sources": [
+    {
+      "file": "LCC_A2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_A2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 197228,
+      "sha256": "61d02bb98f21bfbf943b04ad97605b0a646a92e82d6412ad1916f1b52ca783a2"
+    },
+    {
+      "file": "LCC_B-BJ2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_B-BJ2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 980654,
+      "sha256": "6d940aa5bec7ade87031b084da040076e1df57c50a4df2f9010e7286d916a430"
+    },
+    {
+      "file": "LCC_BL-BQ2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_BL-BQ2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 1181197,
+      "sha256": "a597f5ee4808941a86b7f44033f8532f47c7afb144e6770ba30938aa89104039"
+    },
+    {
+      "file": "LCC_BR-BX2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_BR-BX2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 1421673,
+      "sha256": "2d311af1d2316672d73962da0cbac7460e3b1b38077b03c95b393d43e0b55e06"
+    },
+    {
+      "file": "LCC_C2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_C2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 426191,
+      "sha256": "a4203b748375517fc71ba0684b9ea6f3357b2ec094bbc35fdbc6f55f79cee5da"
+    },
+    {
+      "file": "LCC_D-DR2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_D-DR2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 1710193,
+      "sha256": "6240a23125292d7c1db50b751efd1d462822d4aff3c00e770b34a3b4db5f289b"
+    },
+    {
+      "file": "LCC_DS-DX2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_DS-DX2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 976534,
+      "sha256": "e6caba39142d894864b77b42c6ae47fc8dd76041860863b16d6c803f6aeb63f0"
+    },
+    {
+      "file": "LCC_E-F2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_E-F2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 1758665,
+      "sha256": "92b67beeb8b8af2b173180022e90365a1fb8c5b277b849a61c81a1bf95ccecff"
+    },
+    {
+      "file": "LCC_G2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_G2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 1468459,
+      "sha256": "731de5b09bcf0aa2673f16a05c0ca9c2b3da3d43d3531aee68cb686b74f8ff45"
+    },
+    {
+      "file": "LCC_H2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_H2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 1932027,
+      "sha256": "53e68cded3ecf0acf337ebd904e3484a2ccd3924bf8ab57c3325806d6953ae7d"
+    },
+    {
+      "file": "LCC_J2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_J2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 923999,
+      "sha256": "0034b367dc4bd45d904b93b523d37e20f0f99668d4098bd80eb69fcc3709e99c"
+    },
+    {
+      "file": "LCC_K2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_K2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 373728,
+      "sha256": "09db5d3b4692ebcf595f134c7f031fa108c52eb4f2bb51fd40ee7dd2d7252433"
+    },
+    {
+      "file": "LCC_KB2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_KB2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 1149630,
+      "sha256": "77035b1dfbec0fd89ced31066db2e05d7cf19b867afbdad6c001564a81f38819"
+    },
+    {
+      "file": "LCC_KD2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_KD2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 508339,
+      "sha256": "7cff079176736758a179e171554428322c5d0ade44be74c57333bc9f46acfb5d"
+    },
+    {
+      "file": "LCC_KDZ_KG-KH2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_KDZ_KG-KH2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 714992,
+      "sha256": "2b23a9a7680558bc12224a332bacd274105ce4147acedce7b2815a2ae30b4ecc"
+    },
+    {
+      "file": "LCC_KE2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_KE2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 526504,
+      "sha256": "14224dbe5980b8ad6c1cd280f8ed39fee174c6dcc05c07c8ce9edf4b772ba23e"
+    },
+    {
+      "file": "LCC_KF2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_KF2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 1199369,
+      "sha256": "39574ec61370763fcc272338b71b18f3340ab8cd527b0bec14b179be36ba610a"
+    },
+    {
+      "file": "LCC_KI-KIL2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_KI-KIL2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 478219,
+      "sha256": "1d9759712d7603a3f562bf7659ce04237eba382a1ce2ce4c1d5ffbf35637ed76"
+    },
+    {
+      "file": "LCC_KIM-KIR2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_KIM-KIR2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 314938,
+      "sha256": "0e7473e3ad9bab5f7207951be59e3455c2ec224f04f97dd8a6e488de2e1bd304"
+    },
+    {
+      "file": "LCC_KJ-KKZ2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_KJ-KKZ2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 1325905,
+      "sha256": "5cd2094d208320cb294e1d1f21478a866c71605db0e5fc646586169508414043"
+    },
+    {
+      "file": "LCC_KJV-KJW2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_KJV-KJW2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 600340,
+      "sha256": "b3c31d0447da42f4ee87171ab2cb62e4dee0a07e733092ca98fee326ffd49377"
+    },
+    {
+      "file": "LCC_KK-KKC2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_KK-KKC2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 1151961,
+      "sha256": "63ed9abc6058100efa07bd359d3f3e73ef836fcdfb6433ad062034e3b2c6912b"
+    },
+    {
+      "file": "LCC_KL-KWX2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_KL-KWX2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 2009163,
+      "sha256": "454310fb5dd5e6e2035c4a1835e7ea0dfa9d88b95ebc73ff061ae5fc63e12456"
+    },
+    {
+      "file": "LCC_KVJ2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_KVJ2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 187984,
+      "sha256": "7b7e202130a9fb178b40af5466e6a6432af0b782330e70701a8f4f994c803a06"
+    },
+    {
+      "file": "LCC_KZ2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_KZ2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 440853,
+      "sha256": "80db6c7eeb771f4e3550f15da9d30aba29b01b2633e12b0532283a066615b100"
+    },
+    {
+      "file": "LCC_K_TABLES2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_K_TABLES2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 130986,
+      "sha256": "d1d6ad49660a906710e9cead27392a08fff8d6936e23d9eea977e9d48bdc9300"
+    },
+    {
+      "file": "LCC_L2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_L2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 775341,
+      "sha256": "1655c703e4c421490b1660cdfd7cf48fa4f6cdce81e3377859887b30590c6958"
+    },
+    {
+      "file": "LCC_M2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_M2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 738387,
+      "sha256": "0c3e3859cd4b142168dfaa7ccd9ea2036b207f0b7bb1532022c8d8735e2cd7fc"
+    },
+    {
+      "file": "LCC_N2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_N2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 1419028,
+      "sha256": "d7f775b27aba5db854c5a5872182ff1d6d76eb001e0777dc8fa26e79a6dae369"
+    },
+    {
+      "file": "LCC_P-PA2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_P-PA2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 949779,
+      "sha256": "c52ea10481f41d618a648f62f39bb7e7e819b4162b475b40761d9ca1ec7ddf9a"
+    },
+    {
+      "file": "LCC_PB-PH2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_PB-PH2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 1541911,
+      "sha256": "67a7eec8fce4e9efc20d2611cf3c44785330fdc7beddcbd46dbfcda15f473581"
+    },
+    {
+      "file": "LCC_PJ-PK2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_PJ-PK2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 691951,
+      "sha256": "4d31c80ccdca02556577a4c8634348e20202a2d8629a81dcc641ea6bdcabb5af"
+    },
+    {
+      "file": "LCC_PL-PM2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_PL-PM2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 1605542,
+      "sha256": "57be508ae0fc8c25d1da647f8bc0355d907012d6a206000c90333e1122e2d43e"
+    },
+    {
+      "file": "LCC_PN2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_PN2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 737384,
+      "sha256": "cbafb0ecceef8f32a8b0f3be9a5c89f376dfdd82c800188cdbf85add40f92752"
+    },
+    {
+      "file": "LCC_PQ2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_PQ2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 1117538,
+      "sha256": "8d02376571aa520463acbf852b11444723aa7132ca78bd0723de63f634378056"
+    },
+    {
+      "file": "LCC_PR-PS_PZ2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_PR-PS_PZ2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 1504218,
+      "sha256": "a04bf24f565ad683b27c9682e6c01c4c26b9f72049ba255fd3bda6ecfad39d9a"
+    },
+    {
+      "file": "LCC_PT2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_PT2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 907760,
+      "sha256": "f2aa577955b84f7fdf637f4ae4e53059a15bd23a5037b23b1db97cf2e5b2ac58"
+    },
+    {
+      "file": "LCC_P_TABLES2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_P_TABLES2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 290006,
+      "sha256": "54ffbc4a6ec119e9e24104a89559b59fc619e1082d1875784f8d81f0db04566c"
+    },
+    {
+      "file": "LCC_Q2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_Q2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 1586875,
+      "sha256": "a5952ce7dc306507d80de6bff70e28635ab456df2c2625bbc65c80369d6b9899"
+    },
+    {
+      "file": "LCC_R2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_R2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 1046772,
+      "sha256": "02280d5836cd09c3af14588db4501dd4e015d1e4907e2663f4a02f84416c24f4"
+    },
+    {
+      "file": "LCC_S2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_S2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 890293,
+      "sha256": "386d12e8990968f60115333dd84705e4611f61cc16a57fdc2f4355df714209e4"
+    },
+    {
+      "file": "LCC_T2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_T2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 1537115,
+      "sha256": "1f22d05e52828717692ddfa8e7bae7bdb750f0a8ffafe814577f6ca80a4da967"
+    },
+    {
+      "file": "LCC_U-V2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_U-V2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 587141,
+      "sha256": "20e36b5b1ca42089fd1cc2e4cab865cbf52def24f5b9c7d8190143eff834167e"
+    },
+    {
+      "file": "LCC_Z2024TEXT.pdf",
+      "url": "https://www.loc.gov/aba/publications/FreeLCC/LCC_Z2024TEXT.pdf",
+      "fetched": "2026-10-09",
+      "bytes": 1347651,
+      "sha256": "58dbf29b12c740f343655de0dade081835d7d831a61c41f160f2aaaabe0abd4f"
+    }
+  ]
+}
