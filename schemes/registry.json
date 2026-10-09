@@ -22,6 +22,18 @@
       "license": "CC BY 4.0",
       "attribution": "International Patent Classification (IPC), World Intellectual Property Organization (WIPO), edition 20260101. Licensed CC BY 4.0. Reformatted by shelfmark; not endorsed by WIPO.",
       "may_bundle": true
+    },
+    {
+      "name": "unesco-thesaurus",
+      "version": "2026-08-31",
+      "title": "UNESCO Thesaurus",
+      "file": "unesco-thesaurus/unesco-thesaurus.json",
+      "builder": "unesco-thesaurus",
+      "sources": "unesco-thesaurus/sources.lock.json",
+      "license": "CC BY-SA 3.0 IGO",
+      "attribution": "UNESCO Thesaurus, (c) UNESCO, https://vocabularies.unesco.org/. Licensed CC BY-SA 3.0 IGO. Adapted by shelfmark (English labels, one parent per concept); not endorsed by UNESCO.",
+      "may_bundle": false,
+      "source": "https://vocabularies.unesco.org/"
     }
   ]
 }

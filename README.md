@@ -51,6 +51,7 @@ builder, tests and a README. Load the built file with
 | `jel` (JEL) | [`schemes/jel/`](schemes/jel/) | AEA, all rights reserved | no: each user fetches and builds it | <https://www.aeaweb.org/econlit/jelCodes.php> |
 | `arxiv` (arXiv categories) | [`schemes/arxiv/`](schemes/arxiv/) | MIT (arxiv-base) | data file committed (`arxiv.json`) | <https://arxiv.org/category_taxonomy> |
 | `naics` (NAICS 2022) | [`schemes/naics/`](schemes/naics/) | US government work, no US copyright | data file committed (`naics.json`) | <https://www.census.gov/naics/> |
+| `unesco-thesaurus` (UNESCO Thesaurus 2026-08-31) | [`schemes/unesco-thesaurus/`](schemes/unesco-thesaurus/) | CC BY-SA 3.0 IGO | data file committed (`unesco-thesaurus.json`); not bundled into binaries (share-alike) | <https://vocabularies.unesco.org/> |
 
 ## The tower
 
