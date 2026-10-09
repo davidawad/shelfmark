@@ -90,6 +90,17 @@
       "attribution": "UNESCO Thesaurus, © UNESCO. Licensed CC BY-SA 3.0 IGO. Adapted by shelfmark (English labels; one primary parent per concept, other broader links retained as vocabulary); not endorsed by UNESCO.",
       "may_bundle": false,
       "source": "https://vocabularies.unesco.org/"
+    },
+    {
+      "name": "bk",
+      "version": "2026-10-03",
+      "title": "Basic Classification (Basisklassifikation, BK)",
+      "file": "bk/bk.json",
+      "builder": "bk",
+      "sources": "bk/sources.lock.json",
+      "license": "CC0 1.0",
+      "attribution": "Basisklassifikation (BK), Verbundzentrale des GBV (VZG) for the Gemeinsamer Bibliotheksverbund (GBV), CC0 1.0. Attribution is not required; credit is given as courtesy. Reformatted by shelfmark.",
+      "may_bundle": true
     }
   ]
 }
