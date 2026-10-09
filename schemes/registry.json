@@ -56,6 +56,17 @@
       "license": "CC0 1.0",
       "attribution": "Free Decimal Correspondence v0.06, edited by John Mark Ockerbloom; dedicated to the public domain (CC0 1.0). Reformatted by shelfmark.",
       "may_bundle": true
+    },
+    {
+      "name": "ilc2",
+      "version": "2019-10-17",
+      "title": "Integrative Levels Classification, edition 2 (ILC2)",
+      "dir": "ilc2",
+      "distribution": "fetch",
+      "license": "Unsettled: the publisher's SKOS file says CC BY 3.0, BARTOC lists CC BY-SA 3.0, no iskoi.org page states a license; not bundled",
+      "build": "cargo run --release --manifest-path src/shelfmark/schemes/ilc2/Cargo.toml -- build",
+      "output": "src/shelfmark/schemes/ilc2/out/ilc2.json",
+      "source": "https://www.iskoi.org/ilc/"
     }
   ]
 }

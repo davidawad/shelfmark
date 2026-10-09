@@ -49,6 +49,7 @@ builder, tests and a README. Load the built file with
 | `cpc` (CPC 2026.08) | [`schemes/cpc/`](schemes/cpc/) | none; EPO website terms apply | no: each user fetches and builds it | <https://www.cooperativepatentclassification.org/home> |
 | `msc` (MSC2020) | [`schemes/msc/`](schemes/msc/) | CC BY-NC-SA 4.0 | no: each user fetches and builds it | <https://msc2020.org/> |
 | `acm-ccs` (ACM CCS 2012) | [`schemes/acm-ccs/`](schemes/acm-ccs/) | ACM copyright, not redistributable | no: each user fetches and builds it | <https://dl.acm.org/ccs> |
+| `ilc2` (ILC2) | [`schemes/ilc2/`](schemes/ilc2/) | unsettled: CC BY 3.0 in the SKOS file, CC BY-SA 3.0 on BARTOC, none on the site | no: each user fetches and builds it | <https://www.iskoi.org/ilc/> |
 | `jel` (JEL) | [`schemes/jel/`](schemes/jel/) | AEA, all rights reserved | no: each user fetches and builds it | <https://www.aeaweb.org/econlit/jelCodes.php> |
 | `arxiv` (arXiv categories) | [`schemes/arxiv/`](schemes/arxiv/) | MIT (arxiv-base) | data file committed (`arxiv.json`) | <https://arxiv.org/category_taxonomy> |
 | `naics` (NAICS 2022) | [`schemes/naics/`](schemes/naics/) | US government work, no US copyright | data file committed (`naics.json`) | <https://www.census.gov/naics/> |
