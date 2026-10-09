@@ -259,8 +259,8 @@ mod tests {
 
     #[test]
     fn strips_leading_codes() {
-        assert_eq!(strip_code("6011 animal product", "6011"), "animal product");
-        assert_eq!(strip_code("04 POLITICS", "04"), "POLITICS");
+        assert_eq!(strip_code("6011 fixture item", "6011"), "fixture item");
+        assert_eq!(strip_code("04 FIXTURE DOMAIN ALPHA", "04"), "FIXTURE DOMAIN ALPHA");
         assert_eq!(strip_code("no code", "04"), "no code");
     }
 
@@ -271,9 +271,9 @@ mod tests {
           <rdf:Description rdf:about="http://x/domains"><rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme"/></rdf:Description>
           <rdf:Description rdf:about="http://x/1"><rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
             <skos:inScheme rdf:resource="http://x/domains"/><skos:notation>04</skos:notation>
-            <skos:prefLabel xml:lang="en">04 POLITICS</skos:prefLabel></rdf:Description>
+            <skos:prefLabel xml:lang="en">04 FIXTURE DOMAIN ALPHA</skos:prefLabel></rdf:Description>
           <rdf:Description rdf:about="http://x/2"><rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
-            <skos:notation>0406</skos:notation><skos:prefLabel xml:lang="en">0406 political framework</skos:prefLabel></rdf:Description>
+            <skos:notation>0406</skos:notation><skos:prefLabel xml:lang="en">0406 fixture group one</skos:prefLabel></rdf:Description>
           <rdf:Description rdf:about="http://x/3"><rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
             <skos:inScheme rdf:resource="http://x/2"/><skos:broader rdf:resource="http://x/9"/>
             <skos:prefLabel xml:lang="en">orphan</skos:prefLabel></rdf:Description>

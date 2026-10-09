@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- SYNTHETIC TEST FIXTURE: every label, code and structure here is invented for
+     the tests. It contains no text taken from the real EuroVoc dataset. -->
 <rdf:RDF
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
 
@@ -16,32 +18,32 @@
 	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
 	<inScheme xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://eurovoc.europa.eu/domains"/>
 	<notation xmlns="http://www.w3.org/2004/02/skos/core#">04</notation>
-	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="en">04 POLITICS</prefLabel>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="en">04 FIXTURE DOMAIN ALPHA</prefLabel>
 </rdf:Description>
 
 <rdf:Description rdf:about="http://eurovoc.europa.eu/100146">
 	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
 	<inScheme xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://eurovoc.europa.eu/domains"/>
 	<notation xmlns="http://www.w3.org/2004/02/skos/core#">16</notation>
-	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="en">16 ECONOMICS</prefLabel>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="en">16 FIXTURE DOMAIN BETA</prefLabel>
 </rdf:Description>
 
 <rdf:Description rdf:about="http://eurovoc.europa.eu/100171">
 	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
 	<notation xmlns="http://www.w3.org/2004/02/skos/core#">0406</notation>
-	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="en">0406 political framework</prefLabel>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="en">0406 fixture group one</prefLabel>
 </rdf:Description>
 
 <rdf:Description rdf:about="http://eurovoc.europa.eu/100172">
 	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
 	<notation xmlns="http://www.w3.org/2004/02/skos/core#">0411</notation>
-	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="en">0411 political geography</prefLabel>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="en">0411 fixture group two</prefLabel>
 </rdf:Description>
 
 <rdf:Description rdf:about="http://eurovoc.europa.eu/100180">
 	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
 	<notation xmlns="http://www.w3.org/2004/02/skos/core#">1606</notation>
-	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="en">1606 economic policy</prefLabel>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="en">1606 fixture group three</prefLabel>
 </rdf:Description>
 
 <rdf:Description rdf:about="http://eurovoc.europa.eu/1">

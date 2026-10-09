@@ -57,8 +57,8 @@ fn domains_microthesauri_and_descriptors_nest() {
     };
     assert_eq!(codes(idx.children(None)), ["04", "16"]);
     assert_eq!(codes(idx.children(Some("04"))), ["0406", "0411"]);
-    assert_eq!(idx.get("04").unwrap().label, "POLITICS");
-    assert_eq!(idx.get("0406").unwrap().label, "political framework");
+    assert_eq!(idx.get("04").unwrap().label, "FIXTURE DOMAIN ALPHA");
+    assert_eq!(idx.get("0406").unwrap().label, "fixture group one");
     assert_eq!(codes(idx.children(Some("0406"))), ["C1"]);
     assert_eq!(codes(idx.children(Some("C1"))), ["C2", "C3"]);
     assert_eq!(codes(idx.ancestors("C3")), ["C3", "C1", "0406", "04"]);
@@ -87,7 +87,7 @@ fn polyhierarchy_picks_one_parent_and_keeps_the_rest_in_the_note() {
     assert_eq!(c4.parent.as_deref(), Some("0411"));
     assert_eq!(
         c4.note.as_deref(),
-        Some("Also a top term of: 1606 economic policy")
+        Some("Also a top term of: 1606 fixture group three")
     );
 }
 
