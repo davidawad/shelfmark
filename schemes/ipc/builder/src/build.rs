@@ -185,7 +185,7 @@ fn source(lock: &Lock) -> Result<Source, String> {
              catchword index entries (`{CATCHWORD}`) and guidance headings (`{HEADING}`). \
              A group's code is the printed symbol without its space (`A01B 1/02` is `A01B1/02`). \
              Sources: {s} (sha256 {ss}; {sm} sha256 {sms}) and {w} (sha256 {ws}; {wm} sha256 {wms}). \
-             Built by src/shelfmark/schemes/ipc/builder; see schemes/ipc/SOURCES.md.",
+             Built by schemes/ipc/builder; see schemes/ipc/SOURCES.md.",
             ed = lock.edition,
             s = scheme.url,
             ss = scheme.sha256,

@@ -4,7 +4,7 @@
   "version": "2022",
   "title": "North American Industry Classification System (NAICS), United States, 2022",
   "source": {
-    "description": "Every 2- to 6-digit code and US title from the Census Bureau's 2022 NAICS 2-6 digit codes file; each code sits under the code one digit shorter, and each 3-digit subsector under its sector (31-33, 44-45 and 48-49 are sector spans). Vocabulary: the 2022 NAICS index entries, as `naics-index` terms on their 6-digit industry. NAICS publishes no LCC or LCSH links. Built by src/shelfmark/schemes/naics/builder; see schemes/naics/SOURCES.md.",
+    "description": "Every 2- to 6-digit code and US title from the Census Bureau's 2022 NAICS 2-6 digit codes file; each code sits under the code one digit shorter, and each 3-digit subsector under its sector (31-33, 44-45 and 48-49 are sector spans). Vocabulary: the 2022 NAICS index entries, as `naics-index` terms on their 6-digit industry. NAICS publishes no LCC or LCSH links. Built by schemes/naics/builder; see schemes/naics/SOURCES.md.",
     "url": "https://www.census.gov/naics/",
     "license": "NAICS United States, 2022 (Executive Office of the President, Office of Management and Budget; published by the US Census Bureau): US government work, not subject to copyright in the United States (17 U.S.C. 105). Credit: Source: U.S. Census Bureau, 2022 NAICS"
   },

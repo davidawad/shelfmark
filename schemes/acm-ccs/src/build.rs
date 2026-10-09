@@ -95,7 +95,7 @@ pub fn build(skos: &Skos, lock: &Lock) -> Result<(SchemeDoc, Stats), String> {
                  A class's code is the concept's dotted path of ACM concept IDs, as in ACM's \
                  CCSXML index terms; a concept filed under several parents appears once per \
                  path. The source maps no concept to LCC or LCSH. Built by \
-                 src/shelfmark/schemes/acm-ccs; see its README.",
+                 schemes/acm-ccs; see its README.",
                 file = lock.file,
                 bytes = lock.bytes,
                 sha = lock.sha256,

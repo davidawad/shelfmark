@@ -1,8 +1,8 @@
-//! Exports into the shelfmark classifier's own formats (`src/shelfmark`):
+//! Exports into the shelfmark classifier's own formats (this repo):
 //!
 //! - [`rules`]: the arXiv category map and the URL-domain rules as one
 //!   rules-tier file (`{"rules": [{id, when, class, weight}]}`), shipped
-//!   as `src/shelfmark/data/rules/starter.json`.
+//!   as `data/rules/starter.json`.
 //! - [`table`]: a built `lookup.tsv` as an identifier-tier table (plan
 //!   PD5: one `{"id","class"}` JSON line per identifier), which is
 //!   downloaded data and never shipped.

@@ -1,4 +1,4 @@
-//! AE5 (R12, R28): when David corrects a Work's class and its file moves,
+//! AE5 (R12, R28): when a reviewer corrects a Work's class and its file moves,
 //! a citation through the Work ID still resolves and the machine claim is
 //! superseded, not deleted.
 //!
@@ -20,7 +20,7 @@ fn correction_supersedes_the_machine_claim_and_the_work_id_still_resolves() {
     );
     let before = b.ok(&["name", &work, "--title", "Engineering a Compiler"]);
 
-    let corrected = b.commit(&["correct", &machine, "--class", "QA", "--author", "david"]);
+    let corrected = b.commit(&["correct", &machine, "--class", "QA", "--author", "reviewer"]);
     assert!(corrected.get("revision").is_some(), "{corrected}");
 
     // The citation is the Work ID: it resolves to the confirmed class.

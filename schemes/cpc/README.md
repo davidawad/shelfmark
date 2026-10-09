@@ -32,7 +32,7 @@ contact its terms give.
 ## Build
 
 ```sh
-cd src/shelfmark/schemes/cpc
+cd schemes/cpc
 cargo run --release -- fetch --cache /tmp/cpc-sources --release 202608  # network; rewrites sources.lock.json
 cargo run --release -- build --cache /tmp/cpc-sources                   # offline; writes cpc.json
 cargo run --release -- build --cache /tmp/cpc-sources --depth main-group  # cpc-main-group.json
@@ -112,9 +112,9 @@ cargo test                                          # builder units + excerpt sc
 CPC_SOURCES=/tmp/cpc-sources cargo test --release   # also builds the locked release and checks its hashes
 ```
 
-`tests/fixtures/titles-excerpt.txt` holds 42 lines of the 2026.08 title
-list (source: www.cooperativepatentclassification.org, EPO/USPTO,
-unchanged). The tests check that the excerpt's scheme validates against
+`tests/fixtures/titles-excerpt.txt` holds 42 synthetic lines; every label is invented and used only as test data. The lines follow the shape of a title
+list (real CPC codes and the same markup, invented labels; no CPC title text is
+committed). The tests check that the excerpt's scheme validates against
 `schemas/scheme.schema.json`, round-trips through `SchemeDoc`, passes the
 scheme compiler, and browses, searches and checks codes as expected.
 Without `CPC_SOURCES`, the full-release test logs a `SKIP` line to

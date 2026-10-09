@@ -31,7 +31,7 @@ older linked-data page (udcdata.info, now offline) still says CC BY-SA
 ## Use
 
 ```sh
-cd src/shelfmark/schemes/udc-summary
+cd schemes/udc-summary
 cargo run --release -- build --cache ~/.cache/udc-summary --fetch
 shelfmark scheme compile out/udc-summary.json          # preview; prints the commit command
 shelfmark scheme compile out/udc-summary.json --commit --expected-revision <rev>

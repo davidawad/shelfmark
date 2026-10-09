@@ -6,7 +6,7 @@
 //! arxiv-scheme check [--cache DIR] [--data DIR] rebuild; fail if arxiv.json differs
 //! ```
 //!
-//! `--data` defaults to `src/shelfmark/schemes/arxiv`. `build` and `check`
+//! `--data` defaults to `schemes/arxiv`. `build` and `check`
 //! read only sources whose sha256 matches the lock and need no network.
 //! `check` cross-checks the taxonomy page only when given `--cache`.
 

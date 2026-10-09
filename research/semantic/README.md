@@ -1,12 +1,10 @@
 # CPU semantic tiers — spike and benchmark
 
-Bead `dot-materials-classifier-v1-gis4b.4`, plan
-`docs/plans/2026-10-07-001-feat-materials-classifier-and-kb-resource-plan.md` (R8, R9; the
-laya comparison from the R8 scope note). A standalone Cargo workspace with no dependency on
-the surrounding repo (R14). Everything here is a spike: the code is meant to inform the
+Experimental comparison. A standalone Cargo workspace with no dependency on
+the surrounding repo. Everything here is a spike: the code is meant to inform the
 `shortlist` and `rerank` tiers, not to become them.
 
-**Remote boxes only.** Never run `scripts/bench.sh` on a personal laptop.
+**Benchmarking is environment-specific.** The recorded measurements require a controlled benchmark host.
 
 ## What was measured
 
@@ -19,7 +17,7 @@ the surrounding repo (R14). Everything here is a spike: the code is meant to inf
   2–4 per class.
   - Text is title plus the Gutenberg summary (`marc520`), clipped to 1,500 characters.
   - Gold labels are Gutenberg's LoCC field, hand-checked.
-- **Box:**
+- **Host:**
   - AMD EPYC Genoa (KVM), Linux x86_64, 22 GB RAM.
   - 12 vCPUs are visible, but the cgroup quota is **4 CPUs** (`cpu.max 400000 100000`), so
     the `4core:*` rows (`taskset -c 0-3`, 4 threads) are the representative numbers.
@@ -32,7 +30,7 @@ the surrounding repo (R14). Everything here is a spike: the code is meant to inf
     could reach.
   - `load s`: model construction from the local cache, after a prefetch pass; downloads
     are excluded.
-  - `index s`: embedding all 251 labels, a one-off per scheme version and memoizable (R7).
+  - `index s`: embedding all 251 labels, a one-off per scheme version and memoizable.
   - `RSS MB`: resident memory after everything is loaded; `peak MB` is VmHWM.
   - Latency is per item, single item (batch 1), after one warm-up item.
 - **Process isolation:** every profile runs in a fresh process, so memory figures are
@@ -45,9 +43,9 @@ the surrounding repo (R14). Everything here is a spike: the code is meant to inf
 Representative numbers come from 4 threads on the 4-CPU quota and n = 49. The lexical
 profile runs no model and is benchmarked elsewhere; it is listed so the ladder is complete.
 
-| R8 profile | Tiers / models | Steady RSS | Peak | Load | Label index (251) | Per item p50 (p95) | class@1 | sub@1 | sub recall@10 | Recommendation |
+|  profile | Tiers / models | Steady RSS | Peak | Load | Label index (251) | Per item p50 (p95) | class@1 | sub@1 | sub recall@10 | Recommendation |
 |---|---|---|---|---|---|---|---|---|---|---|
-| `lexical` | identifiers, vocabulary, rules; no model | ~0 | ~0 | — | — | — | — | — | — | **Default everywhere.** It decides first; semantic tiers run only below the target confidence (AE3). |
+| `lexical` | identifiers, vocabulary, rules; no model | ~0 | ~0 | — | — | — | — | — | — | **Default everywhere.** It decides first; semantic tiers run only below the target confidence. |
 | `shortlist-lite` | BGE-small-en-v1.5 int8 (ONNX via fastembed, MIT, 33M) | 570 MB | 572 MB | 0.2 s | 3.5 s | **46 ms** (85) | 65% | 49% | 73% | **Recommended light shortlist.** Any machine with ≥1 GB free; English only. |
 | `shortlist` | EmbeddingGemma-300M q (ONNX via fastembed) | 2.3 GB | 2.45 GB | 1.4 s | 15 s | 199 ms (301) | **73%** | **53%** | **80%** | **Most accurate measured.** Needs ≥3 GB. Multilingual. Check the Gemma Terms of Use before making it a bundled default; download on demand. |
 | `shortlist` (Apache-2.0 alternative) | Qwen3-Embedding-0.6B Q8_0 (own candle, in-process quantized) | 814 MB | 1.96 GB | 1.8 s | 81 s | 1.28 s (1.65) | 71% | 47% | 76% | Use when the license must be Apache-2.0 or for 100+ languages. Accuracy matches Gemma within noise; 6× slower. Q4K: 603 MB RSS, 1.33 s, 67% / 49% / 82%. |
@@ -55,7 +53,7 @@ profile runs no model and is benchmarked elsewhere; it is listed so the ladder i
 | `shortlist+rerank` (light) | Qwen3 Q8_0 → jina-reranker-v1-turbo-en (ONNX) | 991 MB | 1.96 GB | 2.2 s | 82 s | 1.63 s (rerank 226 ms) | 57% | 33% | (76%) | **Rejected.** Cheap, but it loses 14 points of sub@1 against the shortlist it reranks. |
 | experimental | laya-decision 0.2.5, ModernBERT-large `convaiinnovations/laya`; choice ≤20 options, own shortlist above 20 | 1.68 GB | 2.64 GB | 2.1 s | — | 27.8 s (92 s) | 43% | 27% | — | **Comparison only, not a tier.** Worse and about 20× slower than Qwen3 Q8_0. |
 
-**Machine guidance for R9's "which profiles can this machine run":**
+**Machine guidance for 's "which profiles can this machine run":**
 - Under 1 GB free: `lexical` only.
 - 1–3 GB: add `shortlist-lite`.
 - 3 GB or more: add `shortlist` (Gemma, or Qwen3 Q8_0 for Apache-2.0).
@@ -129,10 +127,10 @@ they show the oversubscription penalty.
    - fastembed and ORT profiles sit near their peak (the arena allocator).
 7. **Throughput and memoization.** Qwen3-0.6B on 4 CPUs runs at roughly 100–250 tokens/s.
    Embedding the 251 LCC labels costs about 80 s, once per (scheme version, model,
-   precision), and must be memoized per R7. Per-item cost is about 1.3 s for a 1,500-character
+   precision), and must be memoized per . Per-item cost is about 1.3 s for a 1,500-character
    summary.
 8. **Backend parity** (`semspike parity`, `/work/artifacts/semantic/parity.json` on the
-   bench box):
+   benchmark host):
    - This crate's candle Qwen3 f32 matches fastembed's independent Qwen3 implementation
      (cos 1.0000).
    - Q8_0 cos is 0.9996 or better; Q4K is 0.94–0.97.
@@ -142,7 +140,7 @@ they show the oversubscription penalty.
    - candle is pure Rust; on macOS and Windows the same code builds with the same rustflags
      (Metal and Accelerate are optional features).
    - fastembed downloads prebuilt ONNX Runtime binaries for all three operating systems.
-   - Apple Silicon numbers still need a remote macOS box. Never run this on David's laptop.
+   - Apple Silicon numbers still need a dedicated macOS machine. Do not run this on a dedicated benchmark machine.
 10. **Data caveats.**
     - E and F share the caption "History of the Americas"; their scope strings tell them
       apart.
@@ -170,7 +168,7 @@ results/table.md             generated table
 ```
 
 ```bash
-cd materials-classifier-work/semantic
+cd research/semantic
 cargo build --release -p semspike
 target/release/semspike parity                     # backend cross-checks (see Findings)
 scripts/bench.sh                                   # all profiles; or a regex filter

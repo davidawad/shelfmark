@@ -7,7 +7,7 @@ publish.workspace = true
 description = "Experimental comparison: laya-decision choice questions (<=20 options) over the LCC outline"
 
 [features]
-# Off by default: laya is an experimental comparison, never a core tier (plan R8 scope note).
+# Off by default: laya is an experimental comparison, never a core tier.
 default = []
 laya = ["dep:laya-decision"]
 

@@ -74,7 +74,7 @@ pub fn source(provenance: &str) -> Source {
              of Subject Terminology) Data (https://www.oclc.org/research/areas/data-science/fast/download.html) \
              which is made available by OCLC Online Computer Library Center, Inc. under the \
              ODC Attribution License (https://www.oclc.org/research/activities/fast/odcby.html). \
-             Built by src/shelfmark/schemes/fast; see SOURCES.md there."
+             Built by schemes/fast; see SOURCES.md there."
         ),
         url: Some("https://www.oclc.org/research/areas/data-science/fast/download.html".into()),
         license: Some("ODC-By-1.0".into()),

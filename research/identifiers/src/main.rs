@@ -49,7 +49,7 @@ enum Command {
         arxiv: PathBuf,
         #[arg(long, default_value = "data/url-domain-rules.tsv")]
         domains: PathBuf,
-        #[arg(long, default_value = "../../src/shelfmark/data/rules/starter.json")]
+        #[arg(long, default_value = "../../data/rules/starter.json")]
         out: PathBuf,
     },
     /// Convert a built lookup.tsv (with its conflicts.tsv) to a shelfmark identifier table (JSONL).

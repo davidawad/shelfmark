@@ -1,12 +1,18 @@
 [workspace]
 resolver = "2"
 members = ["crates/*"]
+exclude = [
+    "research/eval",
+    "research/identifiers",
+    "research/semantic",
+    "research/vocab",
+]
 
 [workspace.package]
 version = "0.1.0"
 edition = "2021"
 license = "MIT OR Apache-2.0"
-repository = "https://github.com/shelfmark/shelfmark"
+repository = "https://gitlab.com/davidawad/shelfmark"
 rust-version = "1.82"
 
 [workspace.lints.clippy]

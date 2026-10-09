@@ -1,9 +1,8 @@
 # vocab: LCSH and FAST vocabulary ingest (spike)
 
-Spike `dot-materials-classifier-v1-gis4b.2` for the vocabulary tier of the
-materials classifier (plan `docs/plans/2026-10-07-001-feat-materials-classifier-and-kb-resource-plan.md`,
-R7). It is a standalone Rust crate with no dependency on this repo (R14),
-so it can move into `src/shelfmark` or its own repo unchanged.
+Spike 2 for the vocabulary tier of the
+materials classifier. It is a standalone Rust crate (its own `[workspace]`) whose only
+path dependencies are shelfmark's `core` and `scheme` crates, used by `enrich-scheme`.
 
 It covers three things:
 
@@ -13,7 +12,7 @@ It covers three things:
 3. An **Aho-Corasick label matcher prototype** with an LCC class vote and a
    small accuracy check.
 
-Large downloads and full outputs stay on the box and are never committed.
+Large downloads and full outputs stay on the benchmark host and are never committed.
 Committed: code, real record fixtures, table samples, stats and the eval report.
 
 ## Headline numbers (LCSH dump issued 2026-10-06, fetched 2026-10-07)
@@ -32,7 +31,7 @@ All headings with LCC links are active. Full detail is in `stats/lcsh-stats.json
 The 2026-10-07 dump has sha256 `f57e6dcf…eebd` (230 MB). The table it produces
 has sha256 `d2f074cc…948b` (11 MB gz), and two runs give byte-identical output.
 
-On this box (12 vCPU), the full LCSH ingest takes about 20 s with a peak RSS of
+On the benchmark host (12 vCPU), the full LCSH ingest takes about 20 s with a peak RSS of
 280 MB. Building the matcher over 1.11 M patterns and running the eval takes
 about 7 s with a peak RSS of 1.4 GB.
 
@@ -80,7 +79,7 @@ time.
 ## FAST: blocked bulk download
 
 The FAST bulk files (`researchworks.oclc.org/researchdata/fast/FAST*.{nt,marcxml}.zip`)
-answer **HTTP 403 with a Cloudflare browser challenge** from this box, whatever
+answer **HTTP 403 with a Cloudflare browser challenge** from the benchmark host, whatever
 the user agent. A non-interactive client cannot get past it, so the full FAST
 table could not be built here. What exists:
 
@@ -100,7 +99,7 @@ table could not be built here. What exists:
   (`Education--Costs`) have no LCSH link and no LCC.
 
 To finish FAST, fetch `FASTTopical.nt.zip` from a browser (or any machine
-Cloudflare lets through), copy it to the box and run the `fast --nt` command
+Cloudflare lets through), copy it to the benchmark host and run the `fast --nt` command
 below. Then check that the bulk predicates match the ones assumed above.
 
 ## Matcher prototype
@@ -164,24 +163,24 @@ Nothing else was tuned against the fixtures.
 - Generic single words outvoting the topic (`roman`, `empire`, `guide`).
 - No singular/plural folding, so `compiler` does not hit `Compilers`.
 
-Suggested next steps for the lexical tier (U4, `.9`): fold plurals, add IDF
-weighting so generic single-token headings count for less (the plan already
+Suggested next steps for the lexical tier: fold plurals, add IDF
+weighting so generic single-token headings count for less (we already
 specifies IDF), check range containment against the LCC outline, and add
 name-authority identifiers for persons and works.
 
 ## Folding headings into the shelfmark scheme (`enrich-scheme`)
 
-The bundled LCC outline (`src/shelfmark/data/schemes/lcc/lcc.json`, U2)
+The bundled LCC outline (`data/schemes/lcc/lcc.json`, )
 links a heading only when its LCC number is exactly an outline class: 1,343
 links on 1,033 of 7,392 classes. `enrich-scheme` adds every active heading
 from the table to the outline class that holds its number. The holder is the
 class itself or the deepest span covering it, as shelfmark's own compiled
 index decides (`check_code`, through a path dependency on
-`src/shelfmark/crates/{core,scheme}`). The result is an ordinary scheme file
-that shelfmark's vocab tier (U4) reads with no code change:
+`crates/{core,scheme}`). The result is an ordinary scheme file
+that shelfmark's vocab tier reads with no code change:
 
 ```sh
-$B enrich-scheme --scheme src/shelfmark/data/schemes/lcc/lcc.json \
+$B enrich-scheme --scheme data/schemes/lcc/lcc.json \
   --table $D/out/lcsh.tsv.gz --out $D/out/lcc-lcsh.json --stats $D/out/enrich-stats.json
 shelfmark scheme compile $D/out/lcc-lcsh.json   # preview, then --commit
 ```
@@ -193,7 +192,7 @@ On the 2026-10-07 dump, 91,499 of 91,580 headings with LCC land in a class
 21.6 MB.
 
 Measured with the lexical profile on the eval starter gold set (104 items,
-`materials-classifier-work/eval`, no identifier table), with subclass
+`research/eval`, no identifier table), with subclass
 top-1 meaning LCC subclass level:
 
 | scheme | class top-1 | subclass top-1 | subclass top-5 |
@@ -207,11 +206,10 @@ top-1 meaning LCC subclass level:
 bundled scheme, and the vocab tier builds its automaton on first use. For
 the preferred-label file that is 0.79 s to compile (0.42 s of it schema
 validation) plus about 0.8 s for the automaton, so one interactive classify
-takes about 1.6 s on a 12-vCPU box. The bundled outline takes 0.25 s. The
-plan's success criterion is well under a second on a laptop CPU, and the
-binary would grow by 9 MB. Bundling needs a persisted compiled form (U1's
-compile cache) and a persisted or lazily built automaton first. Until then
-the file is generated data, like the identifier tables (plan PD5): build it
+takes about 1.6 s on a 12-vCPU benchmark host. The bundled outline takes 0.25 s. The
+the success criterion is well under a second on a laptop CPU, and the
+binary would grow by 9 MB. Bundling needs a persisted compiled form and a persisted or lazily built automaton first. Until then
+the file is generated data, like the identifier tables: build it
 from the public LCSH dump and compile it into a store.
 
 ## Commands
@@ -256,6 +254,6 @@ $B sample --table $D/out/lcsh.tsv.gz --every 2500 --ids sh86007588,sh85082139,sh
 ## Sources and licences
 
 - LCSH: Library of Congress, id.loc.gov bulk download. US government work; no
-  explicit licence text was found (the plan records this as unverified).
+  explicit licence text was found (recorded as unverified).
 - FAST: OCLC, Open Data Commons Attribution License (ODC-By) 1.0.
   "FAST (Faceted Application of Subject Terminology) data, © OCLC."

@@ -28,7 +28,7 @@ writes the scheme locally.
 ## Build
 
 ```sh
-cd src/shelfmark/schemes/acm-ccs
+cd schemes/acm-ccs
 cargo run --release -- build          # downloads into cache/ if needed; writes out/acm-ccs.json
 shelfmark scheme compile out/acm-ccs.json --commit --expected-revision <revision from the preview>
 ```

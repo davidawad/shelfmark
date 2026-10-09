@@ -2,8 +2,7 @@
 //! published JSON Schema, round-trips through `SchemeDoc`, passes the
 //! scheme compiler's checks, and browses and searches as CPC should.
 //!
-//! Most tests build from `fixtures/titles-excerpt.txt`, 42 lines of the
-//! 2026.08 title list. `full_release_*` builds the locked release itself
+//! Most tests build from `fixtures/titles-excerpt.txt`, synthetic entries shaped like a title list. `full_release_*` builds the locked release itself
 //! when `CPC_SOURCES` names a cache holding it (`cpc-scheme fetch`), and
 //! otherwise logs a skip to `$TEST_SKIP_LOG`
 //! (`CPC_REQUIRE_SOURCES=1` turns the skip into a failure).
@@ -117,7 +116,7 @@ fn browses_the_hierarchy() {
     );
     assert_eq!(
         idx.get("Y02E10/50").unwrap().label,
-        "Photovoltaic [PV] energy"
+        "Sunlight [SL] category"
     );
 }
 
@@ -130,9 +129,9 @@ fn searches_labels() {
             .map(|h| h.class.code)
             .collect::<Vec<_>>()
     };
-    assert!(top("spades shovels").contains(&"A01B1/02".to_string()));
-    assert!(top("photovoltaic").contains(&"Y02E10/50".to_string()));
-    assert!(top("stream cipher").contains(&"H04L9/065".to_string()));
+    assert!(top("widgets gadgets").contains(&"A01B1/02".to_string()));
+    assert!(top("sunlight").contains(&"Y02E10/50".to_string()));
+    assert!(top("ribbon sequences").contains(&"H04L9/065".to_string()));
 }
 
 #[test]

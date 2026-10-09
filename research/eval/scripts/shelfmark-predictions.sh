@@ -14,7 +14,7 @@
 # anyway; build it from a dump without the gold records to score the tier
 # honestly. Title, text and typed identifiers (isbn, lccn, doi, arxiv) go in;
 # the record's source URL does not, because it is where the label came from.
-# A zero-candidate best guess (R10) is predicted as its placed class.
+# A zero-candidate best guess is predicted as its placed class.
 # Latency is the placement's own cascade cost, so a memoized rerun and
 # process start-up do not count.
 set -euo pipefail

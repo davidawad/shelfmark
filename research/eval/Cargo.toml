@@ -6,8 +6,8 @@ license = "MIT OR Apache-2.0"
 description = "Evaluation harness for the materials classifier: gold sets, predictions, per-level accuracy, calibration, risk-coverage and bootstrap intervals."
 publish = false
 
-# Standalone on purpose (R14): this crate has no path into the surrounding
-# repo, and declares its own workspace so it builds wherever it is split out.
+# Standalone crate with its own workspace and no dependency on the root
+# workspace, so it can be built independently from its manifest.
 [workspace]
 
 [dependencies]

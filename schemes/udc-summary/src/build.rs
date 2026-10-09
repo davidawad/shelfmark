@@ -190,7 +190,7 @@ fn description(lock: &Lock, n: usize) -> String {
          their captions and hierarchy, from the English tree pages of udcsummary.info. The \
          common auxiliary signs are not classes and are left out. The summary has no LCC or \
          LCSH mappings; each term of a multi-term caption is a vocabulary link with source \
-         udc-caption. Built by src/shelfmark/schemes/udc-summary from {} pages locked as \
+         udc-caption. Built by schemes/udc-summary from {} pages locked as \
          {} (edition {}):",
         lock.sources.len(),
         lock.digest(),

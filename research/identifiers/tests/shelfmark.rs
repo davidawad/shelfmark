@@ -15,7 +15,7 @@ fn shipped_starter_rules_match_the_rule_files() {
     let doc = shelfmark::rules(&map, &domains);
     let want = serde_json::to_string_pretty(&doc).unwrap() + "\n";
     assert_eq!(
-        read("../../src/shelfmark/data/rules/starter.json"),
+        read("../../data/rules/starter.json"),
         want,
         "regenerate: cargo run -- shelfmark-rules"
     );

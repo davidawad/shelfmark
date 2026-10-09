@@ -1,7 +1,6 @@
 # mc-eval — materials classifier eval harness
 
-Scores classifier predictions against a labelled gold set (plan R15–R17 and
-Success Criteria in `docs/plans/2026-10-07-001-feat-materials-classifier-and-kb-resource-plan.md`).
+Scores classifier predictions against a labelled gold set.
 It is a standalone Rust crate with its own `[workspace]` and no path into the
 surrounding repo, so it moves with the open-source tool when that is split out.
 
@@ -47,7 +46,7 @@ L are outside that level's denominator; the report gives `n` per level.
 | `levels[].ece`, `brier` | calibration of top-1 confidence against correctness at that level (equal-width bins, top-label Brier) |
 | `reliability` | calibration bins at `--level` (default 2, subclass) |
 | `risk_coverage`, `aurc` | error rate as items are accepted in confidence order; area under that curve |
-| `thresholds` | for each `--precision` target, the lowest confidence whose accepted set meets it, with its coverage; this is where R17's thresholds come from |
+| `thresholds` | for each `--precision` target, the lowest confidence whose accepted set meets it, with its coverage; this is where 's thresholds come from |
 | `flagged_rate`, `accuracy_flagged/unflagged` | how much is flagged and whether flagging tracks errors |
 | `latency_ms` | mean, p50, p95, max |
 | `fast` | micro precision/recall/F1 when gold items carry FAST tags |
@@ -85,7 +84,7 @@ The record's source URL is not passed either, because the label came from
 there.
 
 ```bash
-SHELFMARK=../../src/shelfmark/target/release/shelfmark \
+SHELFMARK=../../target/release/shelfmark \
   scripts/shelfmark-predictions.sh gold/starter-v1.ndjson preds.ndjson profile:lexical@1
 cargo run -- run --gold gold/starter-v1.ndjson --predictions preds.ndjson
 ```
@@ -132,16 +131,16 @@ Known limits of these labels:
   Only 42 items reach level 4 and 31 reach level 5.
 - Some Open Library editions have no description, so their `text` is empty and
   only the title and identifiers (ISBN, LCCN) remain. This is realistic for
-  identifier-tier evaluation (AE1).
+  identifier-tier evaluation.
 - No item carries FAST tags yet. FAST metrics appear once corrections add them.
 
 Licensing: arXiv metadata is CC0. Wikipedia extracts are CC BY-SA 4.0, with the
-article and revision recorded per item. Wikidata is CC0. Open Library data is
-stated as CC0, but the dump license is unverified (see the plan's Dependencies).
+article and revision recorded per item; the 30 Wikipedia-derived gold items must keep that attribution and share-alike licence when redistributed. Wikidata is CC0. Open Library data is
+stated as CC0, but the dump license is unverified (unverified; check before redistributing the raw dumps).
 
 `fixtures/predictions-majority-baseline.ndjson` is a no-model reference: every
 item is predicted as the five most frequent subclasses, with their frequencies
 as scores. It scores 18.3% subclass top-1 on the starter set. Any real profile
 should beat it.
 
-Benchmark latency and throughput on remote boxes only, never on a laptop.
+Benchmark latency and throughput on a dedicated benchmark machine only.

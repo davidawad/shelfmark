@@ -1,5 +1,5 @@
 //! The workspace stays splittable (plan PD1): every path dependency in
-//! every manifest resolves inside `src/shelfmark`.
+//! every manifest resolves inside this repo.
 
 use std::path::{Path, PathBuf};
 

@@ -30,10 +30,10 @@ true and bundle the file the way `data/schemes/lcc/` is bundled.
 ## Build
 
 ```sh
-cd src/shelfmark/schemes/jel
+cd schemes/jel
 cargo run --release -- build --cache /tmp/jel-sources   # fetches if missing; writes jel.json
 cargo run --release -- check --cache /tmp/jel-sources   # fails if jel.json is stale
-shelfmark scheme compile schemes/jel/jel.json            # from src/shelfmark; preview, then --commit
+shelfmark scheme compile schemes/jel/jel.json            # from the repo root; preview, then --commit
 ```
 
 `build` downloads `classificationTree.xml` into the cache when it is absent.

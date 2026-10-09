@@ -1,5 +1,5 @@
 //! Builds shelfmark's arXiv category taxonomy scheme
-//! (`src/shelfmark/schemes/arxiv/arxiv.json`) from arxiv-base's taxonomy
+//! (`schemes/arxiv/arxiv.json`) from arxiv-base's taxonomy
 //! definitions, cross-checked against <https://arxiv.org/category_taxonomy>.
 //!
 //! [`generate`] is the whole build: it reads the locked sources, refuses
@@ -75,7 +75,7 @@ fn description(lock: &Lock) -> Result<String, String> {
          Hierarchy: group (grp_*) > archive > category (archive.subject); a category whose id \
          is its archive's is the archive's class. Retired archives are kept under their group, \
          test groups dropped. Notes carry arXiv's descriptions, aliases and archive history. \
-         The source links no LCC or LCSH headings. Built by src/shelfmark/schemes/arxiv/builder; \
+         The source links no LCC or LCSH headings. Built by schemes/arxiv/builder; \
          see schemes/arxiv/README.md.",
         repo = sources::REPO,
         file = sources::DEFINITIONS,

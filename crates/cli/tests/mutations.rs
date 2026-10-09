@@ -17,7 +17,7 @@ fn preview_then_commit_and_a_stale_revision_conflicts() {
         json!({"text": "law and social sciences"}),
     ));
     let pid = c["placement"]["id"].as_str().unwrap().to_string();
-    let args = json!({"placement": pid, "class": "K", "author": "david"});
+    let args = json!({"placement": pid, "class": "K", "author": "reviewer"});
 
     let preview = data(call(&s, Verb::Correct, args.clone()));
     assert_eq!(preview["mode"], "preview");
@@ -76,7 +76,7 @@ fn preview_then_commit_and_a_stale_revision_conflicts() {
     );
     assert_eq!(
         ex["explanations"][0]["placement"]["provenance"]["author"],
-        "david"
+        "reviewer"
     );
 
     // Superseded and human claims are never memo hits, so a reclassify

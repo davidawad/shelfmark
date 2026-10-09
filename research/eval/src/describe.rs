@@ -7,7 +7,7 @@ pub fn describe() -> Value {
     json!({
         "tool": "mc-eval",
         "version": env!("CARGO_PKG_VERSION"),
-        "purpose": "Score materials-classifier predictions against a labelled gold set: top-1/top-k per LCC hierarchy level, hierarchical accuracy, calibration (ECE, Brier), risk-coverage with measured confidence thresholds, flagged rate and latency, per profile and per deciding tier, with seeded bootstrap intervals.",
+        "purpose": "Score classifier predictions against a labelled gold set: top-1/top-k per LCC hierarchy level, hierarchical accuracy, calibration (ECE, Brier), risk-coverage with measured confidence thresholds, flagged rate and latency, per profile and per deciding tier, with seeded bootstrap intervals.",
         "nouns": {
             "gold item": "one labelled item: {id, title, text, identifiers, acceptable: [LCC code or range], fast?: [heading], source: provenance}; schema schemas/gold-item.schema.json",
             "prediction": "one classifier result: {item, profile, tier, candidates: [{class, score}], confidence?, flagged, latency_ms?, fast?}; schema schemas/prediction.schema.json",

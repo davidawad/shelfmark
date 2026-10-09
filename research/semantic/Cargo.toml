@@ -1,4 +1,4 @@
-# Standalone spike workspace (R14: no dependency on the surrounding repo).
+# Standalone spike workspace.
 [workspace]
 resolver = "2"
 members = ["crates/semspike", "crates/laya-compare"]

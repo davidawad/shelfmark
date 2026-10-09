@@ -1,5 +1,5 @@
 {
-  "$comment": "Scheme data files under src/shelfmark/schemes/, one entry per scheme. Each loads from its file with `shelfmark scheme compile <file>`; none is compiled into the binary (plan R5). A `distribution: fetch` entry is built locally from its source and never committed.",
+  "$comment": "Scheme data files under schemes/, one entry per scheme. Each loads from its file with `shelfmark scheme compile <file>`; none is compiled into the binary. A `distribution: fetch` entry is built locally from its source and never committed.",
   "schemes": [
     {
       "name": "acm-ccs",
@@ -8,8 +8,8 @@
       "dir": "acm-ccs",
       "distribution": "fetch",
       "license": "ACM, Inc.: educational and research use; not redistributable, so not bundled",
-      "build": "cargo run --release --manifest-path src/shelfmark/schemes/acm-ccs/Cargo.toml -- build",
-      "output": "src/shelfmark/schemes/acm-ccs/out/acm-ccs.json",
+      "build": "cargo run --release --manifest-path schemes/acm-ccs/Cargo.toml -- build",
+      "output": "schemes/acm-ccs/out/acm-ccs.json",
       "source": "https://dl.acm.org/ccs"
     },
     {
@@ -75,8 +75,8 @@
       "dir": "ilc2",
       "distribution": "fetch",
       "license": "Unsettled: the publisher's SKOS file says CC BY 3.0, BARTOC lists CC BY-SA 3.0, no iskoi.org page states a license; not bundled",
-      "build": "cargo run --release --manifest-path src/shelfmark/schemes/ilc2/Cargo.toml -- build",
-      "output": "src/shelfmark/schemes/ilc2/out/ilc2.json",
+      "build": "cargo run --release --manifest-path schemes/ilc2/Cargo.toml -- build",
+      "output": "schemes/ilc2/out/ilc2.json",
       "source": "https://www.iskoi.org/ilc/"
     },
     {

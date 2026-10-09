@@ -6,7 +6,7 @@
 //! ipc-scheme check --cache DIR [--data DIR]                        rebuild; fail if output differs
 //! ```
 //!
-//! `--data` defaults to `src/shelfmark/schemes/ipc`. `build` and `check`
+//! `--data` defaults to `schemes/ipc`. `build` and `check`
 //! read only cached archives whose sha256 matches the lock, so they are
 //! deterministic and need no network.
 

@@ -3,7 +3,7 @@
 //!
 //! Profile costs are the sum of their tiers' declared costs, so the two
 //! never drift apart. The `shortlist` figures are the CPU benchmark
-//! spike's (dot-materials-classifier-v1-gis4b.4) for BGE-small-en-v1.5
+//! spike's (spike 4) for BGE-small-en-v1.5
 //! int8 on 4 threads; `rerank` is still an estimate for
 //! Qwen3-Reranker-0.6B at Q8, which no build ships. Costs are not part of
 //! the profile hash, so updating them does not make placements stale.

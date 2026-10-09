@@ -160,7 +160,7 @@ pub fn build(titles: &[Title], prov: &Provenance, depth: Depth) -> Result<Scheme
                 "CPC scheme release {release}: every symbol and title from the official title list \
                  {file} (sha256 {sha}), {url}. Hierarchy from the symbols and the title list's dot \
                  levels; titles verbatim apart from collapsed whitespace; depth {depth}. CPC carries \
-                 no LCC or LCSH links. Built by src/shelfmark/schemes/cpc; see its README.md.",
+                 no LCC or LCSH links. Built by schemes/cpc; see its README.md.",
                 release = prov.release,
                 file = prov.file,
                 sha = prov.sha256,
