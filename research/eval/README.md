@@ -136,8 +136,8 @@ Known limits of these labels:
 - No item carries FAST tags yet. FAST metrics appear once corrections add them.
 
 Licensing: arXiv metadata is CC0. Wikipedia extracts are CC BY-SA 4.0, with the
-article and revision recorded per item. Wikidata is CC0. Open Library data is
-stated as CC0, but the dump license is unverified (see the plan's Dependencies).
+article and revision recorded per item; the 30 Wikipedia-derived gold items must keep that attribution and share-alike licence when redistributed. Wikidata is CC0. Open Library data is
+stated as CC0, but the dump license is unverified (unverified; check before redistributing the raw dumps).
 
 `fixtures/predictions-majority-baseline.ndjson` is a no-model reference: every
 item is predicted as the five most frequent subclasses, with their frequencies

@@ -164,7 +164,7 @@ Nothing else was tuned against the fixtures.
 - No singular/plural folding, so `compiler` does not hit `Compilers`.
 
 Suggested next steps for the lexical tier (U4, `.9`): fold plurals, add IDF
-weighting so generic single-token headings count for less (the plan already
+weighting so generic single-token headings count for less (we already
 specifies IDF), check range containment against the LCC outline, and add
 name-authority identifiers for persons and works.
 
@@ -207,10 +207,10 @@ bundled scheme, and the vocab tier builds its automaton on first use. For
 the preferred-label file that is 0.79 s to compile (0.42 s of it schema
 validation) plus about 0.8 s for the automaton, so one interactive classify
 takes about 1.6 s on a 12-vCPU box. The bundled outline takes 0.25 s. The
-plan's success criterion is well under a second on a laptop CPU, and the
+the success criterion is well under a second on a laptop CPU, and the
 binary would grow by 9 MB. Bundling needs a persisted compiled form (U1's
 compile cache) and a persisted or lazily built automaton first. Until then
-the file is generated data, like the identifier tables (plan PD5): build it
+the file is generated data, like the identifier tables: build it
 from the public LCSH dump and compile it into a store.
 
 ## Commands
@@ -255,6 +255,6 @@ $B sample --table $D/out/lcsh.tsv.gz --every 2500 --ids sh86007588,sh85082139,sh
 ## Sources and licences
 
 - LCSH: Library of Congress, id.loc.gov bulk download. US government work; no
-  explicit licence text was found (the plan records this as unverified).
+  explicit licence text was found (recorded as unverified).
 - FAST: OCLC, Open Data Commons Attribution License (ODC-By) 1.0.
   "FAST (Faceted Application of Subject Terminology) data, © OCLC."

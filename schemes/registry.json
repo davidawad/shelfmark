@@ -1,5 +1,5 @@
 {
-  "$comment": "Scheme data files under schemes/, one entry per scheme. Each loads from its file with `shelfmark scheme compile <file>`; none is compiled into the binary (plan R5). A `distribution: fetch` entry is built locally from its source and never committed.",
+  "$comment": "Scheme data files under schemes/, one entry per scheme. Each loads from its file with `shelfmark scheme compile <file>`; none is compiled into the binary. A `distribution: fetch` entry is built locally from its source and never committed.",
   "schemes": [
     {
       "name": "acm-ccs",
