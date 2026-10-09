@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SYNTHETIC TEST FIXTURE: every label, code and structure here is invented for
+     the tests. It contains no text taken from the real EuroVoc dataset. -->
+<rdf:RDF
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+
+<rdf:Description rdf:about="http://eurovoc.europa.eu/100141">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="en">EuroVoc</prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://eurovoc.europa.eu/domains">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="en">Eurovoc domains</prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://eurovoc.europa.eu/100142">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<inScheme xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://eurovoc.europa.eu/domains"/>
+	<notation xmlns="http://www.w3.org/2004/02/skos/core#">04</notation>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="en">04 FIXTURE DOMAIN ALPHA</prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://eurovoc.europa.eu/100146">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<inScheme xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://eurovoc.europa.eu/domains"/>
+	<notation xmlns="http://www.w3.org/2004/02/skos/core#">16</notation>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="en">16 FIXTURE DOMAIN BETA</prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://eurovoc.europa.eu/100171">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
+	<notation xmlns="http://www.w3.org/2004/02/skos/core#">0406</notation>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="en">0406 fixture group one</prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://eurovoc.europa.eu/100172">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
+	<notation xmlns="http://www.w3.org/2004/02/skos/core#">0411</notation>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="en">0411 fixture group two</prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://eurovoc.europa.eu/100180">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
+	<notation xmlns="http://www.w3.org/2004/02/skos/core#">1606</notation>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="en">1606 fixture group three</prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://eurovoc.europa.eu/1">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<inScheme xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://eurovoc.europa.eu/100141"/>
+	<inScheme xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://eurovoc.europa.eu/100171"/>
+	<notation xmlns="http://www.w3.org/2004/02/skos/core#">1</notation>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="fr">ballot (fr)</prefLabel>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="en">ballot</prefLabel>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="en">voting paper</altLabel>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="en">poll slip</altLabel>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="de">Fremdwort 1</altLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://eurovoc.europa.eu/2">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://eurovoc.europa.eu/1"/>
+	<inScheme xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://eurovoc.europa.eu/100141"/>
+	<inScheme xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://eurovoc.europa.eu/100171"/>
+	<notation xmlns="http://www.w3.org/2004/02/skos/core#">2</notation>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="fr">electoral system (fr)</prefLabel>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="en">electoral system</prefLabel>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="de">Fremdwort 2</altLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://eurovoc.europa.eu/3">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://eurovoc.europa.eu/1"/>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://eurovoc.europa.eu/2"/>
+	<inScheme xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://eurovoc.europa.eu/100141"/>
+	<inScheme xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://eurovoc.europa.eu/100171"/>
+	<notation xmlns="http://www.w3.org/2004/02/skos/core#">3</notation>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="fr">proportional representation (fr)</prefLabel>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="en">proportional representation</prefLabel>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="en">PR</altLabel>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="de">Fremdwort 3</altLabel>
+	<scopeNote xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="en">Seat allocation in proportion to votes</scopeNote>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://eurovoc.europa.eu/4">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<inScheme xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://eurovoc.europa.eu/100141"/>
+	<inScheme xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://eurovoc.europa.eu/100172"/>
+	<inScheme xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://eurovoc.europa.eu/100180"/>
+	<notation xmlns="http://www.w3.org/2004/02/skos/core#">4</notation>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="fr">border region (fr)</prefLabel>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="en">border region</prefLabel>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="en">frontier area</altLabel>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="de">Fremdwort 4</altLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://eurovoc.europa.eu/5">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://eurovoc.europa.eu/3"/>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://eurovoc.europa.eu/4"/>
+	<inScheme xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://eurovoc.europa.eu/100141"/>
+	<inScheme xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://eurovoc.europa.eu/100172"/>
+	<notation xmlns="http://www.w3.org/2004/02/skos/core#">5</notation>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="fr">cross-border zone (fr)</prefLabel>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="en">cross-border zone</prefLabel>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="de">Fremdwort 5</altLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://eurovoc.europa.eu/c_deadbeef">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://eurovoc.europa.eu/4"/>
+	<inScheme xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://eurovoc.europa.eu/100141"/>
+	<inScheme xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://eurovoc.europa.eu/100180"/>
+	<notation xmlns="http://www.w3.org/2004/02/skos/core#">c_deadbeef</notation>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="fr">age-sensitive aid (fr)</prefLabel>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="en">age-sensitive aid</prefLabel>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="en">aid for the elderly</altLabel>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="en">age-sensitive aid</altLabel>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="de">Fremdwort c_deadbeef</altLabel>
+</rdf:Description>
+
+</rdf:RDF>
