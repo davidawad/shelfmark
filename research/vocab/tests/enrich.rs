@@ -5,7 +5,7 @@ use serde_json::Value;
 use vocab_ingest::enrich::enrich;
 use vocab_ingest::table::Heading;
 
-const MINI: &str = "../../src/shelfmark/fixtures/schemes/mini-lcc.json";
+const MINI: &str = "../../fixtures/schemes/mini-lcc.json";
 
 fn heading(id: &str, label: &str, lcc: &[&str]) -> Heading {
     Heading {

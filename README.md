@@ -56,6 +56,7 @@ builder, tests and a README. Load the built file with
 | `openalex-topics` (OpenAlex Topics) | [`schemes/openalex-topics/`](schemes/openalex-topics/) | CC0 1.0 | data file committed (`openalex-topics.json`, about 13 MB) | <https://docs.openalex.org/api-entities/topics> |
 | `fdc` (Free Decimal Correspondence 0.06) | [`schemes/fdc/`](schemes/fdc/) | CC0 1.0 | data file committed (`fdc.json`) | <https://everybodyslibraries.com/free-decimal-correspondence/> |
 | `eurovoc` (EuroVoc 4.24) | [`schemes/eurovoc/`](schemes/eurovoc/) | EU reuse terms unsettled (see crate README) | no: each user fetches and builds it | <https://op.europa.eu/en/web/eu-vocabularies/th-dataset/-/resource/dataset/eurovoc> |
+| `unesco-thesaurus` (UNESCO Thesaurus 2026-08-31) | [`schemes/unesco-thesaurus/`](schemes/unesco-thesaurus/) | CC BY-SA 3.0 IGO | data file committed (`unesco-thesaurus.json`); not bundled into binaries (share-alike) | <https://vocabularies.unesco.org/> |
 
 ## The tower
 
