@@ -1,0 +1,3 @@
+/target
+# The uncompressed scheme is rebuilt from the committed lcc-full.json.gz.
+/lcc-full.json

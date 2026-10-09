@@ -1,0 +1,21 @@
+[package]
+name = "lcc-full"
+description = "Builds the complete Library of Congress Classification schedules as a shelfmark scheme from the FreeLCC Text PDFs"
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+publish = false
+
+# A standalone tool, not a member of the shelfmark workspace.
+[workspace]
+
+[dependencies]
+shelfmark-core = { path = "../../crates/core" }
+shelfmark-scheme = { path = "../../crates/scheme" }
+flate2 = "1"
+lopdf = "0.38"
+regex = "1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+ureq = "3"
+

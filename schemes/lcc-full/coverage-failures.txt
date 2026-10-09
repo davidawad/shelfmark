@@ -1,0 +1,178 @@
+B-BJ	p116 `3913.A.-3913.Z` Other languages, A-Z
+BR-BX	p6 `65.O55A-55.O55Z` Other languages, A-Z
+BR-BX	p17 `249553a` Council of Carthage, 553
+BR-BX	p116 `2095.B37-B372` Barnstone (Table BS2)
+BR-BX	p160 `732.56A-.56Z` Individual, A-Z
+BR-BX	p368 `5129.8.A-5129.Z` Relations with other churches, A-Z
+BR-BX	p470 `9875.5A-.5Z` Other regions or countries, A-Z
+C	p41 `6221-6220` Thailand (Table C6)
+C	p102 `5139.ZA-Z` Other orders, A-Z
+C	p116 `436.L7A1-.A23` Documents
+C	p116 `436.L7A25-.A55` General works. By author or editor (alphabetically)
+D-DR	p22 `546.55th` The Fifth Army
+D-DR	p46 `759.551st` The Fifty-first (Highland) Division
+D-DR	p183 `294.A1st` 1. corps d'armée
+D-DR	p183 `294.B1st` 1. division
+D-DR	p184 `294.C1st` 1. brigade
+D-DR	p184 `294.D1st` 1. régiment d'infanterie
+D-DR	p184 `294.F1st` 1. division de cavalerie
+D-DR	p184 `294.H1st` 1. bataillon de chasseurs à pied
+D-DR	p184 `294.K1st` 1. régiment de chasseurs
+D-DR	p184 `294.L1st` 1. régiment de cuirassiers
+D-DR	p184 `294.M1st` 1. régiment de dragons
+D-DR	p184 `294.N1st` 1. régiment de hussards
+D-DR	p184 `294.R1st` 1. régiment d'artillerie
+D-DR	p234 `253.6339th` 39th
+DS-DX	p48 `195.3.A3-195.Z` Individual, A-Z
+DS-DX	p52 `247.T85.2.A-Z` Relations with individual countries, A-Z (Table DS-DX5)
+DS-DX	p119 `597.337.A3-597.Z` Individual, A-Z
+DS-DX	p324 `180.A-10.Z` Other cities, regions, etc., A-Z
+E-F	p448 `1545.7.A3-1545.Z` Individual, A-Z
+E-F	p451 `1565.7.A3-1565.Z` Individual, A-Z
+E-F	p455 `1635.6.A3-1635.Z` Individual, A-Z
+E-F	p465 `1937.6.A3-1937.Z` Individual, A-Z
+E-F	p468 `1970.6.A3-1970.Z` Individual, A-Z
+G	p436 `76.6A-.6Z` Local, A-Z
+G	p436 `82.6A-.6Z` Local, A-Z
+G	p437 `117.5A-.5Z` Local, A-Z
+H	p29 `5022-715` Income. Factor shares
+H	p252 `9278.A-HD9278.Z` By state, province, department, etc., A-Z
+H	p252 `9279.A-HD9279.Z` By city, A-Z
+H	p252 `9279.5.A-HD9279.5.Z` By company, A-Z
+H	p432 `9921.Z9A-Z` By province, A-Z
+J	p48 `105967th` 67th Congress
+J	p98 `620.A7-79` Andhra Pradesh (Table J12)
+J	p157 `(238.A8a)` Testimony
+J	p157 `(238.A81a)` Testimony
+J	p237 `4887.5.A-4887.Z` By organ, union, bureau, etc., A-Z
+KB	p178 `249553a` Council of Carthage, 553
+KB	p260 `321978a` John Paul II (Pope, 1978- )
+KB	p260 `341978a` John Paul II (Pope, 1978- )
+KF	p89 `45581st` 1st amendment
+KF	p89 `45583rd` 3rd amendment
+KF	p89 `45584th` 4th amendment
+KF	p89 `45585th` 5th amendment
+KF	p89 `45586th` 6th amendment
+KF	p89 `45587th` 7th amendment
+KF	p89 `45588th` 8th amendment
+KF	p89 `45589th` 9th amendment
+KF	p89 `455810th` 10th amendment
+KF	p89 `455811th` 11th amendment
+KF	p89 `455812th` 12th amendment
+KF	p89 `455814th` 14th amendment
+KF	p131 `8240.A328<date>` (no caption)
+KF	p160 `2445.A2v.1-13` Arizona reports (Territory, 1866-1911)
+KF	p160 `2445.A2v.14` Arizona reports (1911- )
+KF	p191 `3647.A191785a` Kirby (1785-1788)
+KF	p191 `3647.A191785b` Kirby Suppl.
+KF	p191 `3647.A191785c` Kirby (1785-1788)
+KF	p192 `45.A2v.1-v.5` Harrington 5 v.
+KF	p192 `45.A2v.6-v.14` Houston 9 v.
+KF	p192 `45.A2v.15-v.16` Marvel 2 v.
+KF	p192 `45.A2v.17-v.23` Pennewill 7 v.
+KF	p192 `45.A2v.24-v.30` Boyce 7 v.
+KF	p192 `45.A2v.31-v.39` W.W. Harrington 9 v.
+KF	p192 `45.A2v.40-v.50` Terry 11 v.
+KF	p192 `45.A2v.51-v.59` Storey 9 v.
+KF	p193 `1245.A191-6D.C.` Cranch 6 v.
+KF	p193 `1245.A196-7D.C.` District of Columbia 2 v.
+KF	p193 `1245.A198-10D.C.` MacArthur 3 v.
+KF	p193 `1245.A1911D.C.` MacArthur and Mackey 1 v.
+KF	p193 `1245.A1912-20D.C.` Mackey
+KF	p193 `1245.A1921D.C.` Tucker and Clephane 1 v.
+KF	p198 `1245.A2v.11-415` Illinois reports (1850-1945) 415 v.
+KF	p198 `1245.A21945-` Illinois reports (2d ser.)
+KF	p200 `4245-1245.9` Supreme Court (Table KF31 modified)
+KF	p217 `3645-KFM3645.9` Supreme Court (Table KF31 modified)
+KF	p217 `3645.A191883a` Gildersleeve (1883-1889, reprint, E.W. Stephens) 2 v. (Old series)
+KF	p217 `3645.A191883b` Johnson (1883-1889) 2 v. (Old series)
+KF	p220 `5045.A161839a` Clarke (1839-1841) 1 v.
+KF	p220 `5045.A2v.15-` New York Reports
+KF	p248 `7445.A191820a` Hawks (1820-1826, Turner and Hughes ed.) 4 v.
+KF	p248 `7445.A191826a` Devereux's Equity (1826-1834) 2 v. (Old series)
+KF	p248 `7445.A191834a` Devereux & Battle's Equity (1834-1839) 2 v. (Old series)
+KF	p248 `7445.A191840a` Iredell's Equity (1840-1852) 8 v. (Old series)
+KF	p248 `7445.A191852a` Busbee's Equity (1852-1853) 1 v. (Old series)
+KF	p248 `7445.A191853a` Jones' Equity (1853-1863) 6 v. (Old series)
+KF	p248 `7445.A191866a` Phillips' Equity (1866-1868) 1 v. (Old series)
+KF	p266 `45.A191789a` Chipman, D. (1789-1824) 1 v.
+KI-KIL	p6 `-KIX` Law of indigenous peoples in the Americas
+KI-KIL	p57 `2195.A-Z` (no caption)
+KI-KIL	p126 `1581-1160` Kikapu (Community) (Table KIA-KIX1)
+KIM-KIR	p56 `8386.2.-Z` Individual. By name, A-Z
+KIM-KIR	p84 `2691-2620` General (Table KIA-KIX3 modified)
+KK-KKC	p35 `785.A-DD785.Z` Individual offenses, A-Z
+KK-KKC	p134 `5245.A31199b` Gesetz über den Bundesnachrichtendienst. Federal Intelligence Service Act
+KL-KWX	p9 `2064.61905a` Manifesto 1905, October 17
+KL-KWX	p9 `2064.61905b` Imperial decree 1905, December 11
+KL-KWX	p326 `700.A-.!` Other, A-Z
+KVJ	p10 `700.A-.!` Other, A-Z
+KZ	p5 `179.5.H2date` Haiti
+L	p180 `2091.G57-.G56` Gustavus Adolphus College, St. Peter, Minnesota (Table L3)
+L	p211 `11.C47-.C46` Costa Rica. Colegio de San Luis Gonzaga, Cartago (Table L3)
+M	p28 `1038.5.A-1038.Z` Cadenzas. By composer of concerto, A-Z
+M	p144 `634-623.9` Russia. Soviet Union. Russia (Federation) (Table M4)
+M	p169 `2620-2520.6` General works (Table M3)
+N	p5 `89.2A-.2Z` Individual, A-Z
+P-PA	p80 `3862.A3date` Collected works. Selections. By date
+P-PA	p109 `3970.E4date` Collected works. Selections. By date
+PB-PH	p85 `1116.A-116.Z` Other, A-Z
+PB-PH	p86 `1125.5.A-1125.Z` Other religious groups, A-Z
+PB-PH	p153 `1413.3.A-1413.Z` Special classes of authors, A-Z
+PB-PH	p199 `3300.L5A4A-.L5Z` Translations. By language
+PB-PH	p209 `3314.Z6A2A-.A2Z` Individual correspondents. By correspondent, A-Z
+PB-PH	p467 `7158.M5A11-.A13` By editor, if given
+PJ-PK	p1 `20.A73b` Bulletin
+PJ-PK	p1 `20.A73c` Other regular serials
+PJ-PK	p1 `20.A73k` Circulars. Announcements. Programs
+PJ-PK	p1 `20.A73l` Lists of members
+PJ-PK	p1 `20.A73m` Miscellaneous
+PL-PM	p158 `2727.S2date` Editions. By date
+PL-PM	p197 `3801.H45-.G4595` Helambu Sherpa (Table P-PZ16)
+PQ	p39 `1459.E3-.D313` Élie de Saint-Gille (Chanson de geste) (Table P-PZ43a)
+PQ	p48 `1525.Z7A-Z` Versifications
+PQ	p101 `2084.Z9A5-Z` By special persons, A-Z
+PQ	p127 `2349.Z5A-Z` Selections for colleges, etc. By editor, A-Z
+PQ	p133 `2389.R25date` Collected works
+PQ	p190 `4302.A72f` Facsimiles or reprints, numbered ...
+PQ	p190 `4302.A721f` Facsimiles or reprints, numbered ...
+PQ	p190 `4302.A722f` Facsimiles or reprints
+PQ	p191 `4302.A74f` Facsimiles or reprints.
+PQ	p191 `4302.A77f` Facsimiles or reprints
+PQ	p191 `4302.A771f` Facsimiles or reprints
+PQ	p191 `4302.A772f` Facsimiles or reprints
+PQ	p191 `4302.A78f` Facsimiles or reprints
+PQ	p191 `4302.A81f` Facsimiles or reprints
+PQ	p191 `4302.A84f` Facsimiles or reprints
+PQ	p191 `4302.A87f` Facsimiles or reprints
+PQ	p191 `4302.A91f` Facsimiles or reprints
+PQ	p191 `4302.A911f` Facsimiles or reprints
+PQ	p191 `4302.A93f` Facsimiles or reprints
+PQ	p191 `4302.A97f` Facsimiles or reprints
+PQ	p207 `44451st.C3` Casini, Il canto I dell' Inferno
+PQ	p207 `444910th.C3` Campanini, Il canto X del Purgatorio
+PQ	p208 `44538th.R6` Rocca, Il canto VIII del Paradiso
+PQ	p227 `4612.A31539a` Milan, 1539
+PR-PS_PZ	p93 `2848.A4no.91` Sonnet number 91
+PR-PS_PZ	p351 `2954.U5date` Texts. By date
+PT	p128 `2365.I4A7-.A79` Translations
+PT	p128 `2365.I4A8-.A89` Criticism
+PT	p214 `2640.Z8A6-Z` Criticism and interpretation
+Q	p120 `792.8.-Z` By region or country, A-Z
+S	p117 `98.3.A-SB98.3.Z` By island or group of islands, A-Z
+S	p150 `269.5.A-SB269.5.Z` By region or country, A-Z
+T	p178 `9598.5.A6-9598.Z` Local, A-Z
+U-V	p31 `693.Z9A-Z` Organizations. By name
+U-V	p33 `713.Z9A-Z` Organizations. By name
+U-V	p34 `723.Z9A-Z` Organizations. By name
+U-V	p34 `733.Z9A-Z` Organizations. By name
+U-V	p34 `743.Z9A-Z` Organizations. By name
+U-V	p36 `783.Z9A-Z` Organizations. By name
+U-V	p36 `793.Z9A-Z` Organizations. By name
+U-V	p84 `119.A-116.Z` Other African countries, A-Z
+U-V	p232 `296.U7no.74` Lighthouse vessel, no. 74
+Z	p23 `(244.A2-Z)` General works
+Z	p52 `(681.3.A-Z)` Special storage media, materials stored, methods, etc., A-Z
+Z	p125 `5055.S376A-S376Z` Individual. By city and institution, A-Z
+Z	p249 `7971-7965` Wool (Table Z6)
+Z	p252 `(7997.A-Z)` Special animals, etc., A-Z
