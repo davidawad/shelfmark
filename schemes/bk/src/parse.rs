@@ -78,12 +78,18 @@ pub fn entries(ndjson: &[u8]) -> Result<Vec<Entry>, String> {
     }
     for (c, (e, _, narrower)) in &by {
         let kids = children.get(&Some(c.clone())).map_or(0, Vec::len);
-        if kids != narrower.len() {
+        let declared: BTreeSet<_> = narrower.iter().collect();
+        let actual: BTreeSet<_> = children
+            .get(&Some(c.clone()))
+            .into_iter()
+            .flatten()
+            .collect();
+        if kids != narrower.len() || declared.len() != narrower.len() || declared != actual {
             return Err(format!(
-                "{}: {} children by ancestors but {} in narrower",
+                "{}: {} children by ancestors but {} distinct concepts in narrower",
                 e.code,
                 kids,
-                narrower.len()
+                declared.len()
             ));
         }
     }
@@ -243,6 +249,17 @@ mod tests {
             ]
         );
         assert_eq!(e[1].label_en, None, "an empty English label is dropped");
+    }
+
+    #[test]
+    fn rejects_duplicate_narrower_entries() {
+        let src = [
+            line("1-2", "top", &[], &["10", "10"]),
+            line("10", "child", &["1-2"], &[]),
+        ]
+        .join("\n");
+        let err = entries(src.as_bytes()).unwrap_err();
+        assert!(err.contains("distinct concepts in narrower"), "{err}");
     }
 
     #[test]

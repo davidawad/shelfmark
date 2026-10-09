@@ -4,9 +4,9 @@
   "version": "2026-10-03",
   "title": "Basic Classification (Basisklassifikation, BK)",
   "source": {
-    "description": "Concepts from the GBV's full JSKOS export of the BK (https://api.dante.gbv.de/export/download/bk/default/bk__default.jskos.ndjson, fetched 2026-10-09, 6540863 bytes, sha256 aadabfeac8718e6a544a65b7e253233c67f0b75a785a44eee863ecb789a8391e); parents from each concept's ancestors, labels are the German preferred labels, English preferred labels and German alternative labels are vocabulary terms (sources `bk-en` and `bk-alt`), and scope notes, definitions and cross-references are class notes. The source carries no LCC or LCSH links. Built by schemes/bk (`bk-scheme build`); see its README.",
+    "description": "Concepts from the GBV's full JSKOS export of the BK (https://dev-download.dante.gbv.de/exports/bk/default/bk__default.jskos.ndjson, fetched 2026-10-09, 6540863 bytes, sha256 aadabfeac8718e6a544a65b7e253233c67f0b75a785a44eee863ecb789a8391e); parents from each concept's ancestors, labels are the German preferred labels, English preferred labels and German alternative labels are vocabulary terms (sources `bk-en` and `bk-alt`), and scope notes, definitions and cross-references are class notes. The source carries no LCC or LCSH links. Built by schemes/bk (`bk-scheme build`); see its README.",
     "url": "https://wiki.k10plus.de/spaces/K10PLUS/pages/118063148/Basisklassifikation",
-    "license": "Gemeinsamer Bibliotheksverbund (GBV), Verbundzentrale des GBV (VZG). The K10plus wiki states: \"Die Daten der Basisklassifikation stehen als Public Domain (CC0) zur Verfügung.\" That is CC0 1.0 Universal; BARTOC records the same license. Basisklassifikation (BK), Gemeinsamer Bibliotheksverbund (GBV), CC0 1.0. Attribution is not required; credit is given as courtesy."
+    "license": "Verbundzentrale des GBV (VZG), for the Gemeinsamer Bibliotheksverbund (GBV). The K10plus wiki states that the Basisklassifikation data are available as Public Domain (CC0); BARTOC also records CC0 1.0 Universal. Basisklassifikation (BK), Verbundzentrale des GBV (VZG) for the Gemeinsamer Bibliotheksverbund (GBV), CC0 1.0. Attribution is not required; credit is given as courtesy. Reformatted by shelfmark."
   },
   "code_grammar": "[0-9]{1,2}(-[0-9]{1,2})?(\\.[0-9]{2}X?)?",
   "classes": [

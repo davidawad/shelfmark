@@ -26,10 +26,10 @@ pinned by sha256 in `sources.lock.json`.
 ## Source
 
 The GBV's DANTE service publishes a full JSKOS export, refreshed weekly:
-<https://api.dante.gbv.de/export/download/bk/default/bk__default.jskos.ndjson>
-(one concept per line; found through the vocabulary record at
-<https://api.dante.gbv.de/voc?uri=http://uri.gbv.de/terminology/bk/>). The
-lock pins the export of 2026-10-03 (the scheme version): 6,540,863 bytes,
+<https://dev-download.dante.gbv.de/exports/bk/default/bk__default.jskos.ndjson>
+(one concept per line; linked from the DANTE export listing at
+<https://dev-api.dante.gbv.de/exports/>). The lock pins the export of
+2026-10-03 (the scheme version): 6,540,863 bytes,
 sha256 `aadabfeac8718e6a544a65b7e253233c67f0b75a785a44eee863ecb789a8391e`.
 Because the URL is a rolling file, a later fetch will usually not match the
 lock; `build` then fails and names both hashes.

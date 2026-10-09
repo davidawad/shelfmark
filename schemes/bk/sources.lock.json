@@ -1,15 +1,15 @@
 {
   "version": "2026-10-03",
   "license": {
-    "holder": "Gemeinsamer Bibliotheksverbund (GBV), Verbundzentrale des GBV (VZG).",
-    "terms": "The K10plus wiki states: \"Die Daten der Basisklassifikation stehen als Public Domain (CC0) zur Verfügung.\" That is CC0 1.0 Universal; BARTOC records the same license.",
+    "holder": "Verbundzentrale des GBV (VZG), for the Gemeinsamer Bibliotheksverbund (GBV).",
+    "terms": "The K10plus wiki states that the Basisklassifikation data are available as Public Domain (CC0); BARTOC also records CC0 1.0 Universal.",
     "terms_url": "https://wiki.k10plus.de/spaces/K10PLUS/pages/118063148/Basisklassifikation",
-    "attribution": "Basisklassifikation (BK), Gemeinsamer Bibliotheksverbund (GBV), CC0 1.0. Attribution is not required; credit is given as courtesy.",
+    "attribution": "Basisklassifikation (BK), Verbundzentrale des GBV (VZG) for the Gemeinsamer Bibliotheksverbund (GBV), CC0 1.0. Attribution is not required; credit is given as courtesy. Reformatted by shelfmark.",
     "redistributable": true
   },
   "source": {
     "file": "bk__default.jskos.ndjson",
-    "url": "https://api.dante.gbv.de/export/download/bk/default/bk__default.jskos.ndjson",
+    "url": "https://dev-download.dante.gbv.de/exports/bk/default/bk__default.jskos.ndjson",
     "fetched": "2026-10-09",
     "bytes": 6540863,
     "sha256": "aadabfeac8718e6a544a65b7e253233c67f0b75a785a44eee863ecb789a8391e"

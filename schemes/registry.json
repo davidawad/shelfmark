@@ -31,7 +31,7 @@
       "builder": "bk",
       "sources": "bk/sources.lock.json",
       "license": "CC0 1.0",
-      "attribution": "Basisklassifikation (BK), Gemeinsamer Bibliotheksverbund (GBV), CC0 1.0. Attribution is not required; credit is given as courtesy. Reformatted by shelfmark.",
+      "attribution": "Basisklassifikation (BK), Verbundzentrale des GBV (VZG) for the Gemeinsamer Bibliotheksverbund (GBV), CC0 1.0. Attribution is not required; credit is given as courtesy. Reformatted by shelfmark.",
       "may_bundle": true
     }
   ]

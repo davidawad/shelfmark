@@ -12,7 +12,7 @@ use shelfmark_core::id::sha256_hex;
 pub const PAGE: &str = "https://wiki.k10plus.de/spaces/K10PLUS/pages/118063148/Basisklassifikation";
 /// The DANTE (GBV) full JSKOS export, refreshed weekly: one concept per line.
 pub const EXPORT_URL: &str =
-    "https://api.dante.gbv.de/export/download/bk/default/bk__default.jskos.ndjson";
+    "https://dev-download.dante.gbv.de/exports/bk/default/bk__default.jskos.ndjson";
 pub const EXPORT_FILE: &str = "bk__default.jskos.ndjson";
 
 /// The license check, recorded with the lock so the build and the README
