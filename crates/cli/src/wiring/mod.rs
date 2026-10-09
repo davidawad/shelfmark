@@ -136,6 +136,11 @@ pub fn wiring(dir: &Path) -> Wiring {
                 SchemeId::new("naics", "2022"),
                 Some("schemes/naics/naics.json".into()),
             ),
+            // FDC (CC0) loads from its data file.
+            (
+                SchemeId::new("fdc", "0.06"),
+                Some("schemes/fdc/fdc.json".into()),
+            ),
         ],
         compile: compiler(schemes),
         profiles: shelfmark_profile::builtins(),

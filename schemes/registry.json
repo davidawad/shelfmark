@@ -22,6 +22,17 @@
       "license": "CC BY 4.0",
       "attribution": "International Patent Classification (IPC), World Intellectual Property Organization (WIPO), edition 20260101. Licensed CC BY 4.0. Reformatted by shelfmark; not endorsed by WIPO.",
       "may_bundle": true
+    },
+    {
+      "name": "fdc",
+      "version": "0.06",
+      "title": "Free Decimal Correspondence",
+      "file": "fdc/fdc.json",
+      "builder": "fdc/builder",
+      "sources": "fdc/sources.lock.json",
+      "license": "CC0 1.0",
+      "attribution": "Free Decimal Correspondence v0.06, edited by John Mark Ockerbloom; dedicated to the public domain (CC0 1.0). Reformatted by shelfmark.",
+      "may_bundle": true
     }
   ]
 }

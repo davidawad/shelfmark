@@ -51,6 +51,7 @@ builder, tests and a README. Load the built file with
 | `jel` (JEL) | [`schemes/jel/`](schemes/jel/) | AEA, all rights reserved | no: each user fetches and builds it | <https://www.aeaweb.org/econlit/jelCodes.php> |
 | `arxiv` (arXiv categories) | [`schemes/arxiv/`](schemes/arxiv/) | MIT (arxiv-base) | data file committed (`arxiv.json`) | <https://arxiv.org/category_taxonomy> |
 | `naics` (NAICS 2022) | [`schemes/naics/`](schemes/naics/) | US government work, no US copyright | data file committed (`naics.json`) | <https://www.census.gov/naics/> |
+| `fdc` (Free Decimal Correspondence 0.06) | [`schemes/fdc/`](schemes/fdc/) | CC0 1.0 | data file committed (`fdc.json`) | <https://everybodyslibraries.com/free-decimal-correspondence/> |
 
 ## The tower
 
