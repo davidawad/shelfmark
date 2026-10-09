@@ -41,6 +41,7 @@ builder, tests and a README. Load the built file with
 
 | Scheme | Directory | Source license | Bundled | Official page |
 |---|---|---|---|---|
+| `lcc` (LCC outline + LCSH links) | [`data/schemes/lcc/`](data/schemes/lcc/) | US government work, no US copyright | yes: data file committed and pre-compiled | <https://www.loc.gov/catdir/cpso/lcco/> |
 | `fast` (FAST topical) | [`schemes/fast/`](schemes/fast/) | ODC-By 1.0 | no: allowed, but at 79 MB it is built locally | <https://www.oclc.org/research/areas/data-science/fast.html> |
 | `udc-summary` (UDC Summary) | [`schemes/udc-summary/`](schemes/udc-summary/) | CC BY-NC 4.0 | no: each user fetches and builds it | <https://udcsummary.info/> |
 | `ipc` (IPC 2026.01) | [`schemes/ipc/`](schemes/ipc/) | CC BY 4.0 | data file committed (`ipc.json`) | <https://www.wipo.int/en/web/classification-ipc> |
