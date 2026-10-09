@@ -24,6 +24,9 @@ const USER_AGENT: &str = "shelfmark-unesco-thesaurus/0.1";
 pub struct Lock {
     pub file: String,
     pub url: String,
+    pub license: String,
+    pub license_url: String,
+    pub attribution: String,
     pub bytes: u64,
     pub sha256: String,
     /// UTC date the file was fetched (`YYYY-MM-DD`), as given by the caller.
@@ -50,6 +53,10 @@ pub fn fetch(cache: &Path, fetched: &str) -> Result<Lock, String> {
     Ok(Lock {
         file: FILE.into(),
         url: URL.into(),
+        license: "CC BY-SA 3.0 IGO".into(),
+        license_url: "https://creativecommons.org/licenses/by-sa/3.0/igo/".into(),
+        attribution: "UNESCO Thesaurus, © UNESCO. Adapted by shelfmark; not endorsed by UNESCO."
+            .into(),
         bytes: bytes.len() as u64,
         sha256: sha256_hex(&bytes),
         fetched: fetched.into(),
@@ -120,6 +127,10 @@ mod tests {
         let lock = |sha: &str| Lock {
             file: FILE.into(),
             url: URL.into(),
+            license: "CC BY-SA 3.0 IGO".into(),
+            license_url: "https://creativecommons.org/licenses/by-sa/3.0/igo/".into(),
+            attribution:
+                "UNESCO Thesaurus, © UNESCO. Adapted by shelfmark; not endorsed by UNESCO.".into(),
             bytes: 1,
             sha256: sha.into(),
             fetched: "2026-10-09".into(),
@@ -137,6 +148,10 @@ mod tests {
         let lock = Lock {
             file: FILE.into(),
             url: URL.into(),
+            license: "CC BY-SA 3.0 IGO".into(),
+            license_url: "https://creativecommons.org/licenses/by-sa/3.0/igo/".into(),
+            attribution:
+                "UNESCO Thesaurus, © UNESCO. Adapted by shelfmark; not endorsed by UNESCO.".into(),
             bytes: 0,
             sha256: "0".repeat(64),
             fetched: "2026-10-09".into(),

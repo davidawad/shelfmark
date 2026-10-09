@@ -27,7 +27,17 @@ fn rebuilds_byte_for_byte_from_the_locked_export() {
             std::env::var("UNESCO_THESAURUS_REQUIRE_CACHE").is_err(),
             "UNESCO_THESAURUS_CACHE is not set"
         );
-        eprintln!("skipped: UNESCO_THESAURUS_CACHE is not set");
+        let line = "SKIP: UNESCO_THESAURUS_CACHE is not set [unesco-thesaurus rebuilds_byte_for_byte_from_the_locked_export]";
+        eprintln!("{line}");
+        if let Some(path) = std::env::var_os("TEST_SKIP_LOG") {
+            use std::io::Write as _;
+            let mut file = std::fs::OpenOptions::new()
+                .create(true)
+                .append(true)
+                .open(path)
+                .unwrap();
+            writeln!(file, "{line}").unwrap();
+        }
         return;
     };
     let lock = read_lock(&common::crate_dir().join(LOCK)).unwrap();

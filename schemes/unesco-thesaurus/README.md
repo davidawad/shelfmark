@@ -14,6 +14,7 @@ shelfmark scheme compile schemes/unesco-thesaurus/unesco-thesaurus.json   # prev
 ## License
 
 CC BY-SA 3.0 IGO, stated on the thesaurus's own
+[vocabulary record](https://vocabularies.unesco.org/unesco/en/) and
 [about page](https://vocabularies.unesco.org/en/about) ("published under
 open access under the Creative Commons Attribution-ShareAlike 3.0 IGO
 license") and in the export itself (`dct:license
@@ -21,8 +22,9 @@ license") and in the export itself (`dct:license
 2026-10-09.
 
 - **Redistribution:** allowed, so the built file is committed.
-- **Attribution:** "UNESCO Thesaurus, (c) UNESCO". The file's
-  `source.license` carries it, with a statement of changes.
+- **Attribution:** "UNESCO Thesaurus, © UNESCO". The file's
+  `source.license` carries it with a statement of changes; `sources.lock.json`
+  records the license, license URL and attribution beside the source checksum.
 - **ShareAlike:** the built file is an adaptation (English only, one
   parent per concept) and stays CC BY-SA 3.0 IGO, separate from this
   repository's MIT/Apache code. It is therefore not marked as bundleable

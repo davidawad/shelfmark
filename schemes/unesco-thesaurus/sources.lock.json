@@ -1,6 +1,9 @@
 {
   "file": "unesco-thesaurus.ttl",
   "url": "https://vocabularies.unesco.org/exports/thesaurus/latest/unesco-thesaurus.ttl",
+  "license": "CC BY-SA 3.0 IGO",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/igo/",
+  "attribution": "UNESCO Thesaurus, © UNESCO. Adapted by shelfmark; not endorsed by UNESCO.",
   "bytes": 3988179,
   "sha256": "fa78145d189776bfb97e1635200060012b853684b9f7d542d41804c37c5178c3",
   "fetched": "2026-10-09"

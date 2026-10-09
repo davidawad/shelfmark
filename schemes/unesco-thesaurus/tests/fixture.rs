@@ -12,6 +12,10 @@ fn lock() -> Lock {
     Lock {
         file: "mini.ttl".into(),
         url: "https://example.org/mini.ttl".into(),
+        license: "CC BY-SA 3.0 IGO".into(),
+        license_url: "https://creativecommons.org/licenses/by-sa/3.0/igo/".into(),
+        attribution: "UNESCO Thesaurus, © UNESCO. Adapted by shelfmark; not endorsed by UNESCO."
+            .into(),
         bytes: 0,
         sha256: "0".repeat(64),
         fetched: "2026-10-09".into(),

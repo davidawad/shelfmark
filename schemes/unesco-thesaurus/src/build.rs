@@ -265,7 +265,9 @@ pub fn build(lock: &Lock, text: &str) -> Result<(SchemeDoc, Stats), String> {
             .iter()
             .filter(|b| concepts[*b].mt == c.mt)
             .collect();
-        same.sort_by_key(|b| number(b));
+        // Numeric id is the documented preference. Break numeric ties by
+        // the full source identifier to avoid input or hash iteration order.
+        same.sort_by_key(|b| (number(b), (*b).clone()));
         let parent = match same.first() {
             Some(p) => format!("c{}", number(p)),
             None => c.mt.clone(),
@@ -410,7 +412,7 @@ impl Emit<'_> {
             .iter()
             .filter(|b| Some(number(b)) != primary)
             .collect();
-        others.sort_by_key(|b| number(b));
+        others.sort_by_key(|b| (number(b), (*b).clone()));
         let mut other_labels = Vec::new();
         for b in others {
             let label = self.labels[b.as_str()];

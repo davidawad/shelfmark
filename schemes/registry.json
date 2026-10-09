@@ -30,8 +30,8 @@
       "file": "unesco-thesaurus/unesco-thesaurus.json",
       "builder": "unesco-thesaurus",
       "sources": "unesco-thesaurus/sources.lock.json",
-      "license": "CC BY-SA 3.0 IGO",
-      "attribution": "UNESCO Thesaurus, (c) UNESCO, https://vocabularies.unesco.org/. Licensed CC BY-SA 3.0 IGO. Adapted by shelfmark (English labels, one parent per concept); not endorsed by UNESCO.",
+      "license": "CC BY-SA 3.0 IGO (https://creativecommons.org/licenses/by-sa/3.0/igo/)",
+      "attribution": "UNESCO Thesaurus, © UNESCO. Licensed CC BY-SA 3.0 IGO. Adapted by shelfmark (English labels; one primary parent per concept, other broader links retained as vocabulary); not endorsed by UNESCO.",
       "may_bundle": false,
       "source": "https://vocabularies.unesco.org/"
     }
