@@ -12,8 +12,11 @@ MSC classes, ACM CCS classes, JEL codes when provided, source URL, and CC0
 metadata license. arXiv applies [CC0 1.0 to metadata](https://info.arxiv.org/help/license/index.html).
 The first category is the arXiv primary category;
 remaining categories are cross-lists. MSC, ACM CCS, and JEL values are the
-source-provided labels. JEL codes are also extracted from comments when a JEL
-marker is present.
+source-provided labels. MSC values are the tokens of arXiv's `msc-class` text
+shaped like MSC 2020 codes (`05C10`, `05Cxx`, `05-XX`, `05-01`), each once and
+in source order. Markers such as `(Primary)` and `Secondary:`, years, and words
+are dropped. Letter case is normalized (`91g70` becomes `91G70`). JEL codes
+are also extracted from comments when a JEL marker is present.
 
 ACM classes come from the `arXivOld` OAI format. The `arXivRaw` and `arXiv`
 formats served by `oaipmh.arxiv.org` repeat the `msc-class` value inside
@@ -68,9 +71,20 @@ cargo run --manifest-path bench/corpus/builder/Cargo.toml -- --relabel-acm \
   bench/corpus/corpus.jsonl bench/corpus/cache/arXivOld-pinned.xml corpus.new.jsonl
 ```
 
+To apply the MSC filter to an existing corpus, use `--relabel-msc`. It
+filters the stored `msc` values of each row and keeps every other field.
+Commas, semicolons and whitespace never occur inside a code, so filtering the
+stored tokens gives the same codes as filtering the source text:
+
+```sh
+cargo run --manifest-path bench/corpus/builder/Cargo.toml -- --relabel-msc \
+  bench/corpus/corpus.jsonl corpus.new.jsonl
+```
+
 The Open Library harvester writes the holdout after reaching 500 qualifying
 editions. Unit tests use synthetic XML records to check parsing, MSC and ACM
-labels, the ACM relabel, deterministic sampling, and archive floors:
+labels, the MSC code filter, the ACM and MSC relabels, deterministic sampling,
+and archive floors:
 
 ```sh
 cargo test --manifest-path bench/corpus/builder/Cargo.toml
@@ -80,10 +94,17 @@ cargo test --manifest-path bench/corpus/builder/Cargo.toml
 
 arXiv records: **10,000**. Open Library holdout records: **500**.
 
-- `corpus.jsonl` SHA-256: `80c4adb1bff89f997bbf75245a77e41c1c9a3eb68a1f89ba500efb7aa0bd5664`
+- `corpus.jsonl` SHA-256: `1027bf9d34928f470ed8b0d7b5ddc5c983fde49bc0cd33eaa162bbd1f830fea5`
 - ID files: `sample-ids.txt`, `holdout-ids.txt`
+- MSC classes: 4,298 codes on 1,325 papers, filtered on 2026-10-10 with
+  `--relabel-msc`. The previous pin (`80c4adb1…`) carried 4,885 `msc` values
+  on 1,348 papers. 581 of those values held no code, such as `(Primary)` and
+  `Secondary:`; others had a code glued to punctuation (`15A23.`) or written
+  in lowercase. 316 rows changed. A row-by-row comparison found
+  no changed byte outside the two `msc` arrays of each row (`msc` and
+  `source.label_sources.msc`).
 - ACM classes: 690 codes on 317 papers, re-harvested from `arXivOld` on
-  2026-10-10 for the pinned IDs; no other field changed. The previous pin
+  2026-10-10 for the pinned IDs; no other field changed. The pin before that
   (`7685685d…`) carried 433 MSC codes on 132 papers in `acm_ccs`.
 
 Sample counts by top-level archive:
@@ -100,4 +121,4 @@ Sample counts by top-level archive:
 | stat | 345 |
 
 Gold-label coverage (records with at least one source-provided label): MSC
-1,348; ACM CCS 132; JEL 2.
+1,325; ACM CCS 317; JEL 2.

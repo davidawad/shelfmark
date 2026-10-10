@@ -160,16 +160,32 @@ fn relabel_acm(corpus: &str, xml: &str, output: &str) -> Result<(), Box<dyn std:
     Ok(())
 }
 
+/// Keep only MSC 2020 codes in the `msc` field of a pinned corpus.
+fn relabel_msc(corpus: &str, output: &str) -> Result<(), Box<dyn std::error::Error>> {
+    let mut rows = fs::read_to_string(corpus)?
+        .lines()
+        .map(serde_json::from_str)
+        .collect::<Result<Vec<Paper>, _>>()?;
+    let summary = relabel::relabel_msc(&mut rows);
+    eprintln!("{summary:?}");
+    write_jsonl(output, &rows)?;
+    Ok(())
+}
+
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args: Vec<_> = env::args().collect();
     if args.len() == 5 && args[1] == "--relabel-acm" {
         return relabel_acm(&args[2], &args[3], &args[4]);
+    }
+    if args.len() == 4 && args[1] == "--relabel-msc" {
+        return relabel_msc(&args[2], &args[3]);
     }
     if args.len() != 4 {
         eprintln!("usage: paper-corpus-builder <OAI-XML> <COUNT> <OUTPUT.jsonl>");
         eprintln!(
             "       paper-corpus-builder --relabel-acm <CORPUS.jsonl> <OAI-XML> <OUTPUT.jsonl>"
         );
+        eprintln!("       paper-corpus-builder --relabel-msc <CORPUS.jsonl> <OUTPUT.jsonl>");
         std::process::exit(2);
     }
     let xml = fs::read_to_string(&args[1])?;
@@ -304,6 +320,85 @@ mod tests {
         );
         let partial = oai::parse_records(&old_record("2602.00003", "", "I.2.8")).unwrap();
         assert!(relabel::relabel(&mut rows, &partial).is_err());
+    }
+
+    #[test]
+    fn msc_keeps_only_msc_2020_codes() {
+        assert_eq!(
+            oai::msc_codes("05C10 (Primary) 05Cxx, 05-XX; 05-01 (Secondary)"),
+            vec!["05C10", "05Cxx", "05-XX", "05-01"]
+        );
+        assert_eq!(
+            oai::msc_codes(
+                "Primary: 74K20(primary); Secondary:15A23. 37Axx:37A30 91g70 00-xx 74K20"
+            ),
+            vec!["74K20", "15A23", "37Axx", "37A30", "91G70", "00-XX"]
+        );
+        for junk in [
+            "(Primary)",
+            "Secondary:",
+            "2020",
+            "MSC2020",
+            "62",
+            "65L",
+            "16G",
+            "I.2.7",
+            "cs.AI",
+            "35Q951",
+            "444A20",
+            "14JA05",
+            "4H20",
+            "B2B27",
+            "1502",
+            "None",
+        ] {
+            assert!(oai::msc_codes(junk).is_empty(), "{junk}");
+        }
+        let xml = format!(
+            "<OAI-PMH>{}</OAI-PMH>",
+            raw_record("2602.00005", "Primary 05C10; Secondary 68R10 (2020)", "")
+        );
+        let p = &parse(&xml).unwrap()[0];
+        assert_eq!(p.msc, vec!["05C10", "68R10"]);
+        assert_eq!(p.source.label_sources["msc"], p.msc);
+    }
+
+    #[test]
+    fn mirrored_acm_check_survives_msc_markers() {
+        let msc = "93C10 (Primary), 34D45 (Secondary)";
+        let p = &parse(&raw_record("2602.00006", msc, msc)).unwrap()[0];
+        assert_eq!(p.msc, vec!["93C10", "34D45"]);
+        assert!(p.acm_ccs.is_empty());
+    }
+
+    #[test]
+    fn relabel_msc_rewrites_only_the_msc_field() {
+        let mut rows = vec![
+            Paper {
+                msc: ["(Primary)", "05C10", "Secondary:", "68R10.", "05C10"]
+                    .map(String::from)
+                    .to_vec(),
+                ..parse(&raw_record("2602.00007", "", "I.2.8")).unwrap()[0].clone()
+            },
+            parse(&raw_record("2602.00008", "11B57", "")).unwrap()[0].clone(),
+        ];
+        let msc = rows[0].msc.clone();
+        rows[0].source.label_sources.insert("msc".into(), msc);
+        let before = rows.clone();
+        let summary = relabel::relabel_msc(&mut rows);
+        assert_eq!(rows[0].msc, vec!["05C10", "68R10"]);
+        assert_eq!(rows[0].source.label_sources["msc"], rows[0].msc);
+        let mut restored = rows[0].clone();
+        restored.msc = before[0].msc.clone();
+        restored.source = before[0].source.clone();
+        assert_eq!(restored, before[0]);
+        assert_eq!(rows[0].source.label_sources["acm_ccs"], vec!["I.2.8"]);
+        assert_eq!(rows[1], before[1]);
+        assert_eq!(
+            (summary.msc_values_before, summary.msc_values_after),
+            (6, 3)
+        );
+        assert_eq!(summary.dropped.len(), 2);
     }
 
     #[test]

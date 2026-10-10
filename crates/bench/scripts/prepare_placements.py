@@ -31,6 +31,18 @@ def request_key(request):
     return "request:s256:" + hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
 
+# MSC 2020 code shapes: 05C10, 05Cxx, 05-XX and 05-01, in any letter case.
+MSC_CODE = re.compile(r"(?<![A-Za-z0-9])([0-9]{2}(?:-(?:[0-9]{2}|[Xx]{2})|[A-Za-z](?:[0-9]{2}|[Xx]{2})))"
+                      r"(?![A-Za-z0-9])")
+
+
+def msc_canonical(code):
+    """`05c10` -> `05C10`, `05cXX` -> `05Cxx`, `05-xx` -> `05-XX`, as the scheme writes them."""
+    if code[2] == "-":
+        return code[:3] + code[3:].upper()
+    return code[:3].upper() + (code[3:].lower() if code[3:].lower() == "xx" else code[3:])
+
+
 def normalize_msc(args):
     valid = {c["code"] for c in json.loads(Path(args.scheme).read_text(encoding="utf-8"))["classes"]}
     rows = read_jsonl(args.corpus)
@@ -39,8 +51,7 @@ def normalize_msc(args):
         values = row.pop("msc", row.get("msc_classes", []))
         codes = []
         for value in values:
-            for code in re.findall(r"(?<![A-Za-z0-9])([0-9]{2}[A-Za-z][0-9]{2})(?![0-9])", value):
-                code = code.upper()
+            for code in map(msc_canonical, MSC_CODE.findall(value)):
                 if code in valid and code not in codes:
                     codes.append(code)
         row["msc_classes"] = codes

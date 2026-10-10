@@ -50,3 +50,47 @@ pub fn relabel(rows: &mut [Paper], records: &[(Format, Paper)]) -> Result<Summar
     }
     Ok(summary)
 }
+
+#[derive(Debug, Default, PartialEq, Eq)]
+pub struct MscSummary {
+    pub rows: usize,
+    pub msc_rows_before: usize,
+    pub msc_values_before: usize,
+    pub msc_rows_after: usize,
+    pub msc_values_after: usize,
+    /// Dropped tokens and how often each occurred.
+    pub dropped: BTreeMap<String, usize>,
+}
+
+/// Keep only MSC 2020 codes in `msc` on every row; no other field changes.
+///
+/// The stored values are the `msc-class` text split at commas, semicolons and
+/// whitespace, none of which can occur inside a code, so filtering them gives
+/// the same codes as filtering the source text.
+pub fn relabel_msc(rows: &mut [Paper]) -> MscSummary {
+    let mut summary = MscSummary {
+        rows: rows.len(),
+        ..MscSummary::default()
+    };
+    for row in rows.iter_mut() {
+        summary.msc_rows_before += usize::from(!row.msc.is_empty());
+        summary.msc_values_before += row.msc.len();
+        let mut codes: Vec<String> = Vec::new();
+        for token in &row.msc {
+            let found = oai::msc_codes(token);
+            if found.is_empty() {
+                *summary.dropped.entry(token.clone()).or_default() += 1;
+            }
+            codes.extend(
+                found
+                    .into_iter()
+                    .filter(|c| !codes.contains(c))
+                    .collect::<Vec<_>>(),
+            );
+        }
+        oai::set_msc(row, codes);
+        summary.msc_rows_after += usize::from(!row.msc.is_empty());
+        summary.msc_values_after += row.msc.len();
+    }
+    summary
+}

@@ -4,6 +4,9 @@
 //! `msc-class` string inside `acm-class`, so their ACM element is not trusted
 //! when it mirrors the MSC element. arXivOld carries the submitted ACM classes;
 //! when an arXivOld record is present for an ID, its ACM classes win.
+//!
+//! The `msc-class` text mixes codes with markers such as `(Primary)` and
+//! `Secondary:`; only tokens shaped like MSC 2020 codes are kept.
 
 use crate::{source_for, Paper};
 use quick_xml::{events::Event, Reader};
@@ -43,6 +46,49 @@ fn split_codes(s: &str) -> Vec<String> {
         })
         .map(str::to_string)
         .collect()
+}
+
+/// The MSC 2020 code at the start of `s`, in canonical case: `05C10`,
+/// `05Cxx`, `05-XX` or `05-01`.
+fn msc_code_at(s: &[u8]) -> Option<String> {
+    let digits = |b: &[u8]| b.iter().all(u8::is_ascii_digit);
+    let xx = |b: &[u8]| b.eq_ignore_ascii_case(b"xx");
+    let w = s.get(..5)?;
+    if !digits(&w[..2]) || s.get(5).is_some_and(u8::is_ascii_alphanumeric) {
+        return None;
+    }
+    let top = String::from_utf8_lossy(&w[..2]);
+    if w[2] == b'-' && xx(&w[3..]) {
+        Some(format!("{top}-XX"))
+    } else if w[2] == b'-' && digits(&w[3..]) {
+        Some(String::from_utf8_lossy(w).into_owned())
+    } else if w[2].is_ascii_alphabetic() && xx(&w[3..]) {
+        Some(format!("{top}{}xx", w[2].to_ascii_uppercase() as char))
+    } else if w[2].is_ascii_alphabetic() && digits(&w[3..]) {
+        Some(String::from_utf8_lossy(w).to_ascii_uppercase())
+    } else {
+        None
+    }
+}
+
+/// MSC 2020 codes in an `msc-class` string, each once, in source order.
+/// Markers (`(Primary)`, `Secondary:`), years, ACM codes and words are
+/// dropped; a code glued to punctuation (`15A23.`, `74K20(primary)`,
+/// `37Axx:37A30`) is kept, and lowercase letters are canonicalized.
+pub fn msc_codes(s: &str) -> Vec<String> {
+    let bytes = s.as_bytes();
+    let mut out: Vec<String> = Vec::new();
+    for i in 0..bytes.len() {
+        if i > 0 && bytes[i - 1].is_ascii_alphanumeric() {
+            continue;
+        }
+        if let Some(code) = msc_code_at(&bytes[i..]) {
+            if !out.contains(&code) {
+                out.push(code);
+            }
+        }
+    }
+    out
 }
 
 /// ACM classes such as `F.3.1 [Specifying ...]; I.2.11 [...]: Multiagent
@@ -114,12 +160,12 @@ struct Pending {
 }
 
 fn finish(mut p: Paper, pending: &Pending) -> Paper {
-    p.msc = split_codes(&pending.msc_raw);
+    p.msc = msc_codes(&pending.msc_raw);
     p.acm_ccs = split_acm(&pending.acm_raw);
     // arXivRaw/arXiv mirror msc-class into acm-class; such a value is not ACM.
     if pending.format == Some(Format::Primary)
         && !pending.acm_raw.is_empty()
-        && split_codes(&pending.acm_raw) == p.msc
+        && split_codes(&pending.acm_raw) == split_codes(&pending.msc_raw)
     {
         p.acm_ccs.clear();
     }
@@ -226,6 +272,12 @@ pub fn old_acm(records: &[(Format, Paper)]) -> BTreeMap<String, Vec<String>> {
 /// Replace a paper's ACM classes and keep its label sources in sync.
 pub fn set_acm(p: &mut Paper, acm: Vec<String>) {
     p.acm_ccs = acm;
+    p.source = source_for(&p.id, &p.categories, &p.msc, &p.acm_ccs, &p.jel);
+}
+
+/// Replace a paper's MSC classes and keep its label sources in sync.
+pub fn set_msc(p: &mut Paper, msc: Vec<String>) {
+    p.msc = msc;
     p.source = source_for(&p.id, &p.categories, &p.msc, &p.acm_ccs, &p.jel);
 }
 

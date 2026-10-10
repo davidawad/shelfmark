@@ -19,12 +19,18 @@ EXTRA = {
     "msc": "schemes/msc (fetch and build)",
     "jel": "schemes/jel (fetch and build)",
 }
-# Why a gold source was empty, checked by hand for this corpus.
-GOLD_NOTES = {
-    "acm-ccs": "the corpus acm_ccs field (433 values on 132 papers) holds MSC-style codes and "
-               "Primary/Secondary markers copied from arXiv's ACM-class field; none is an ACM CCS "
-               "2012 concept path, and no CCS 1998 to 2012 crosswalk is used",
-}
+
+
+def gold_note(name):
+    """Why a gold source was empty, from the corpus field it reads."""
+    if name != "acm-ccs":
+        return None
+    rows = [json.loads(line).get("acm_ccs") or []
+            for line in (ROOT / "bench/corpus/corpus.jsonl").open(encoding="utf-8")]
+    return (f"the corpus acm_ccs field ({sum(map(len, rows))} values on {sum(map(bool, rows))} "
+            "papers) holds ACM CCS 1998 codes such as `I.2.6`, as submitted to arXiv; the scheme "
+            "is CCS 2012, whose codes are paths of 8-digit concept IDs, and no CCS 1998 to 2012 "
+            "crosswalk is used")
 
 
 def load(path):
@@ -69,6 +75,10 @@ COLS = [
     ("nav log a=1", lambda r: r["structure"]["nav_log_a1"]),
     ("nav scan", lambda r: r["structure"]["nav_scan"]),
 ]
+COLUMN_NOTES = ("Column notes: `classes used` is the effective number of classes "
+                "(exp of placement entropy); `nav log a=1` is the expected menu cost "
+                "`sum(1 + log2 fanout)` from root to item; `nav scan` adds a linear menu scan "
+                "and a scan of the final class shelf.")
 
 
 def main():
@@ -78,8 +88,12 @@ def main():
     p.add_argument("--harness", required=True, help="harness binary used for scoring")
     p.add_argument("--runtime", required=True, help="JSON file of wall-clock stage timings")
     p.add_argument("--shelfmark", help="shelfmark binary used for the placed runs")
-    p.add_argument("--baseline", help="published results directory whose graphs and gold results "
-                   "this run reuses; the placed results are compared against it")
+    p.add_argument("--baseline", help="published results directory whose graphs (and, without "
+                   "--gold-only, gold results) this run reuses; its results are compared "
+                   "against this run's")
+    p.add_argument("--gold-only", action="store_true",
+                   help="publish only gold runs (run_benchmark.py --gold-only)")
+    p.add_argument("--notes", help="Markdown file whose text opens results.md, after the setup list")
     a = p.parse_args()
     cache, out = Path(a.cache), Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
@@ -149,11 +163,17 @@ def main():
         info = load(path)
         if "output" in info.get("stats", {}):
             info["stats"]["output"] = str(Path(info["stats"]["output"]).resolve().relative_to(ROOT))
-        if info["scheme"] in GOLD_NOTES:
-            info["note"] = GOLD_NOTES[info["scheme"]]
-        skipped[path.name.removesuffix(".skipped.json")] = info
-    skipped.update({f"{n}-placed": {"reason": s["reason"]}
-                    for n, s in schemes.items() if s["status"] != "ok"})
+        note = gold_note(info["scheme"])
+        if note:
+            info["note"] = note
+        key = path.name.removesuffix(".skipped.json")
+        skipped[key] = info
+        # A skipped run still gets its own file, so every expected result is accounted for.
+        (out / f"{key}.json").write_text(json.dumps(
+            {"skipped": True, "reason": skip_reason(info)} | info, indent=2) + "\n", encoding="utf-8")
+    if not a.gold_only:
+        skipped.update({f"{n}-placed": {"reason": s["reason"]}
+                        for n, s in schemes.items() if s["status"] != "ok"})
     failures = load(runs / "failures.json")
 
     combined = {
@@ -171,10 +191,11 @@ def main():
         },
         "classifier": {"commit": git("rev-parse", "HEAD"), "profile": PROFILE}
                       | ({"binary_sha256": sha256_file(a.shelfmark)} if a.shelfmark else {}),
-        "placement": {"gold": "source labels, normalized to scheme codes (see REPRODUCE.md)",
-                      "placed": f"shelfmark {PROFILE}, one isolated store per scheme with "
-                                "an empty rules file; fallback placements (no candidate) are "
-                                "counted as unplaced"},
+        "placement": {"gold": "source labels, normalized to scheme codes (see REPRODUCE.md)"}
+                     | ({} if a.gold_only else
+                        {"placed": f"shelfmark {PROFILE}, one isolated store per scheme with "
+                                   "an empty rules file; fallback placements (no candidate) are "
+                                   "counted as unplaced"}),
         "schemes": schemes,
         "skipped": skipped,
         "failures": failures,
@@ -185,7 +206,17 @@ def main():
                        "file": f"{k}.json"}
                     for k, v in results.items()},
     }
-    if baseline:
+    if a.gold_only:
+        del combined["classifier"]  # gold placements do not use it
+    if baseline and a.gold_only:
+        before = load(baseline / "results.json")
+        combined["baseline"] = {
+            "results": str((baseline / "results.json").resolve().relative_to(ROOT)),
+            "corpus": before["corpus"],
+            "placed": "not rerun: this run scores only the source labels",
+        }
+        combined["comparison"] = compare_gold(before, results, skipped)
+    elif baseline:
         before = load(baseline / "results.json")
         combined["baseline"] = {
             "results": str((baseline / "results.json").resolve().relative_to(ROOT)),
@@ -196,7 +227,8 @@ def main():
         }
         combined["comparison"] = compare(baseline, before, results)
     (out / "results.json").write_text(json.dumps(combined, indent=2) + "\n", encoding="utf-8")
-    (out / "results.md").write_text(render_md(combined, results), encoding="utf-8")
+    notes = Path(a.notes).read_text(encoding="utf-8").strip() if a.notes else None
+    (out / "results.md").write_text(render_md(combined, results, notes), encoding="utf-8")
     print(json.dumps({"results": len(results), "skipped": sorted(skipped),
                       "failures": sorted(failures)}))
 
@@ -217,7 +249,46 @@ def compare(baseline, before, results):
     return rows
 
 
-def render_md(c, results):
+def compare_gold(before, results, skipped):
+    """Coverage and scores of each gold run, against the baseline's gold run or skip."""
+    rows = {}
+    for key, r in sorted(results.items()):
+        if r["run"]["placement_source"] != "gold":
+            continue
+        old = before["results"].get(key)
+        rows[key] = {"scheme": r["scheme"], "corpus": r["run"]["corpus"],
+                     "before": ({f: old[f] for f in ("coverage", "cost_norm", "skill")}
+                                if old else {"skipped": key in before.get("skipped", {})}),
+                     "after": {f: r[f] for f in ("coverage", "cost_norm", "skill")}}
+    for key, info in sorted(skipped.items()):
+        old = before["results"].get(key)
+        rows[key] = {"scheme": info["scheme"], "corpus": info["corpus"],
+                     "before": ({f: old[f] for f in ("coverage", "cost_norm", "skill")}
+                                if old else {"skipped": key in before.get("skipped", {})}),
+                     "after": {"skipped": True}}
+    return rows
+
+
+def gold_comparison_section(c):
+    def cell(field):
+        def get(r):
+            b, a = r["before"], r["after"]
+            show = lambda v: "skipped" if v.get("skipped") else (
+                f"{v[field]:.4f}" if field in v else "not run")
+            return f"{show(b)} → {show(a)}"
+        return get
+    rows = sorted(c["comparison"].values(), key=lambda r: (r["corpus"], r["scheme"]))
+    return ["## Before and after", "",
+            f"Against the gold results in `{c['baseline']['results']}` (corpus.jsonl sha256 "
+            f"`{c['baseline']['corpus']['corpus.jsonl']}`), on the same graphs and "
+            "average-linkage baselines with the same scheme files.", "",
+            table(rows, [("scheme", lambda r: r["scheme"]), ("corpus", lambda r: r["corpus"]),
+                         ("coverage", cell("coverage")), ("cost_norm", cell("cost_norm")),
+                         ("skill", cell("skill"))]),
+            ""]
+
+
+def render_md(c, results, notes=None):
     def pick(source, corpus):
         rows = [r for r in results.values()
                 if (r["run"]["placement_source"] == "gold") == (source == "gold")
@@ -225,6 +296,7 @@ def render_md(c, results):
         return sorted(rows, key=lambda r: r["cost_norm"])
 
     ref = {k: g["reference"]["ref_cost_norm"] for k, g in c["graphs"].items()}
+    gold_only = "placed" not in c["placement"]
     lines = [
         f"# Scheme benchmark results, {c['date']}",
         "",
@@ -244,8 +316,37 @@ def render_md(c, results):
         f"- Graph: k = 20 mean-offset kNN cosine. Average-linkage baseline cost_norm: corpus "
         f"{ref['corpus']:.4f}, holdout {ref['holdout']:.4f}.",
         f"- Harness: `shelfmark-bench` at commit `{c['harness']['commit']}`.",
-        f"- Classifier: `shelfmark` at commit `{c['classifier']['commit']}`, `{PROFILE}`.",
+        *([] if gold_only else
+          [f"- Classifier: `shelfmark` at commit `{c['classifier']['commit']}`, `{PROFILE}`."]),
         "",
+        *([notes, ""] if notes else []),
+        *(gold_only_lines(c, pick) if gold_only else placed_lines(c, results, pick)),
+        "## Skipped",
+        "",
+    ]
+    if c["skipped"]:
+        for key, info in sorted(c["skipped"].items()):
+            lines.append(f"- `{key}`: {info.get('reason') or skip_reason(info)}")
+    else:
+        lines.append("None.")
+    if c["failures"]:
+        lines += ["", "## Failures", ""] + [f"- `{k}`: {v}" for k, v in sorted(c["failures"].items())]
+    lines += ["", "## Runtime", ""] + [f"- {k}: {v}" for k, v in c["runtime"].items()] + [""]
+    return "\n".join(lines)
+
+
+def gold_only_lines(c, pick):
+    """Gold tables of a gold-only run, then its comparison with the baseline."""
+    lines = ["Only gold placements were scored: the source labels, normalized to scheme codes. "
+             "Items without a label attach to the root.", "", COLUMN_NOTES, "",
+             "## Gold placements", "", "arXiv corpus:", "", table(pick("gold", "corpus"), COLS), ""]
+    if pick("gold", "holdout"):
+        lines += ["Book holdout:", "", table(pick("gold", "holdout"), COLS), ""]
+    return lines + (gold_comparison_section(c) if c.get("comparison") else [])
+
+
+def placed_lines(c, results, pick):
+    return [
         "## Classifier-bias caveat",
         "",
         "Gold and shelfmark-placed results are reported separately and should not be ranked "
@@ -259,10 +360,7 @@ def render_md(c, results):
         "categories, MSC, JEL; LC call numbers for the holdout) and cover only the items that "
         "carry them.",
         "",
-        "Column notes: `classes used` is the effective number of classes "
-        "(exp of placement entropy); `nav log a=1` is the expected menu cost "
-        "`sum(1 + log2 fanout)` from root to item; `nav scan` adds a linear menu scan and a "
-        "scan of the final class shelf.",
+        COLUMN_NOTES,
         "",
         *gold_section(c, pick),
         f"## shelfmark-placed ({PROFILE})",
@@ -294,18 +392,7 @@ def render_md(c, results):
         capture_note(results),
         "",
         *comparison_section(c),
-        "## Skipped",
-        "",
     ]
-    if c["skipped"]:
-        for key, info in sorted(c["skipped"].items()):
-            lines.append(f"- `{key}`: {info.get('reason') or skip_reason(info)}")
-    else:
-        lines.append("None.")
-    if c["failures"]:
-        lines += ["", "## Failures", ""] + [f"- `{k}`: {v}" for k, v in sorted(c["failures"].items())]
-    lines += ["", "## Runtime", ""] + [f"- {k}: {v}" for k, v in c["runtime"].items()] + [""]
-    return "\n".join(lines)
 
 
 def gold_section(c, pick):

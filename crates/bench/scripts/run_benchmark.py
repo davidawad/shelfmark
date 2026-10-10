@@ -198,7 +198,7 @@ class Bench:
         for name in [] if self.a.placed_only else GOLD:
             if name in built:
                 jobs.append((name, f"{name}-gold", lambda n=name: self.gold_job(n)))
-        for name in built:
+        for name in [] if self.a.gold_only else built:
             jobs.append((name, f"{name}-placed", lambda n=name: self.placed_job(n, "corpus")))
             if name in GENERAL:
                 jobs.append((name, f"{name}-placed-holdout",
@@ -232,10 +232,14 @@ def main():
     p.add_argument("--jobs", type=int, default=4)
     p.add_argument("--placed-only", action="store_true",
                    help="skip the gold runs (they do not depend on the classifier)")
+    p.add_argument("--gold-only", action="store_true",
+                   help="skip the shelfmark-placed runs; only the source labels are scored")
     p.add_argument("--reference-from", metavar="RESULTS_JSON",
                    help="take the average-linkage baselines from a published results.json "
                         "instead of recomputing them; the graph hashes must match")
     a = p.parse_args()
+    if a.gold_only and a.placed_only:
+        p.error("--gold-only and --placed-only exclude each other")
     bench = Bench(a)
     started = time.monotonic()
     for corpus in bench.corpora:

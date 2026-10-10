@@ -47,4 +47,7 @@ digests are included in the JSON result.
 `bench/corpus/cache/schemes/`, `scripts/run_benchmark.py` prepares gold and
 shelfmark-placed placements and scores them, and `scripts/publish_results.py`
 writes a dated results directory. `bench/results/2026-10-10/REPRODUCE.md`
-lists the exact commands.
+lists the exact commands. `build_schemes.sh` takes scheme names to build only
+those schemes. `run_benchmark.py --gold-only` and `publish_results.py
+--gold-only` rescore only the source labels, as in
+`bench/results/2026-10-10-r3/`.
