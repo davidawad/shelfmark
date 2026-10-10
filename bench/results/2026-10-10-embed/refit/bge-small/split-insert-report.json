@@ -1,0 +1,15 @@
+{
+  "base": "learned@2026-10-10-bge-small-split80",
+  "classes_after": 91,
+  "classes_before": 91,
+  "inserted": 2000,
+  "params": {
+    "iterations": 10,
+    "max_cos": 0.5,
+    "min_child": 5,
+    "split_after": 12
+  },
+  "scheme": "learned@2026-10-10-bge-small-split80.ins2000",
+  "splits": [],
+  "stable": true
+}

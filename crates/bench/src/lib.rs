@@ -2,6 +2,7 @@
 //! once and shared by all scheme trees in a run.
 pub mod agree;
 pub mod boot;
+pub mod bootstrap;
 pub mod catalogue;
 pub mod consistency;
 pub mod dense;
@@ -12,6 +13,7 @@ mod hier;
 mod metrics;
 pub mod notation;
 pub mod partition;
+mod reference;
 pub mod robust;
 pub mod search;
 pub mod shelf;
@@ -19,9 +21,11 @@ pub mod subset;
 mod tree;
 pub mod treescore;
 
+pub use bootstrap::{BootstrapSummary, Replicates};
 pub use graph::{build_knn_graph, DeterministicEmbedder, Edge, EmbeddingModel, SimilarityGraph};
 pub use hier::Hier;
 pub use metrics::{score_tree, StructuralStats, TreeScore};
+pub use reference::average_linkage_reference;
 pub use tree::{induce_tree, ItemPlacement, Tree, TreeNode};
 
 use serde::{Deserialize, Serialize};
@@ -105,6 +109,9 @@ pub struct BenchmarkResult {
     pub coverage: f64,
     pub structure: StructuralStats,
     pub hashes: ContentHashes,
+    /// Item-bootstrap intervals, when `--bootstrap` asked for them.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub bootstrap: Option<BootstrapSummary>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

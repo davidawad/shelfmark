@@ -1,0 +1,114 @@
+{
+  "scheme": "learned",
+  "version": "2026-10-10-nomic",
+  "track": "P",
+  "mode": "primary",
+  "n": 10000,
+  "k": 20,
+  "edge_weight": 60220.11973891941,
+  "cost": 119395429.069512,
+  "cost_norm": 0.1982650143957592,
+  "revenue": 482805768.3196821,
+  "revenue_norm": 0.8017349856042408,
+  "ref_cost_norm": 0.15183392202502477,
+  "skill": 0.9452570745559759,
+  "coverage": 1.0,
+  "structure": {
+    "mean_depth": 4.9845,
+    "p50_depth": 5,
+    "p95_depth": 5,
+    "max_depth": 5,
+    "mean_branching": 94.4392523364486,
+    "p95_branching": 260,
+    "max_branching": 366,
+    "root_fanout": 2,
+    "nodes_over_50_children": 67,
+    "normalized_entropy": 0.7795864043296512,
+    "effective_classes": 38.20146360349103,
+    "gini": 0.690562377812153,
+    "largest_class_share": 0.12809637344710753,
+    "nav_scan": 181.46790000000217,
+    "nav_log_a0": 13.472970223902996,
+    "nav_log_a1": 18.45747022390315,
+    "nav_log_a2": 23.441970223903372
+  },
+  "hashes": {
+    "graph": "759d3b8461a9384d4359244c9fb42c2bc66496431e0f4681d33b7a59798ed35a",
+    "tree": "200c6a0aa686f3100678a05f436b0932d129ffa3e4635e41ce4828f57752e93d",
+    "scheme": "c6eb4957640c144b422241929cc2415ab35d831ff87083d80f4b5399218323f9"
+  },
+  "bootstrap": {
+    "resamples": 1000,
+    "seed": 20261010,
+    "confidence": 0.95,
+    "method": "percentile; items resampled with replacement on the fixed graph and tree",
+    "ci": {
+      "cost_norm": [
+        0.19195606117062006,
+        0.20517095367185767
+      ],
+      "coverage": [
+        1.0,
+        1.0
+      ],
+      "effective_classes": [
+        37.89708769651212,
+        38.371622554849836
+      ],
+      "gini": [
+        0.6888956425046563,
+        0.6940710153136456
+      ],
+      "largest_class_share": [
+        0.12572143322102822,
+        0.13053160630707517
+      ],
+      "mean_depth": [
+        4.9822,
+        4.9868
+      ],
+      "nav_log_a0": [
+        13.459702649352337,
+        13.48838956476817
+      ],
+      "nav_log_a1": [
+        18.442792099902825,
+        18.473161275899592
+      ],
+      "nav_log_a2": [
+        23.425894268237474,
+        23.458582969667017
+      ],
+      "nav_scan": [
+        179.42415000000182,
+        184.72592749999936
+      ],
+      "normalized_entropy": [
+        0.777874472967857,
+        0.7805375115677301
+      ],
+      "ref_cost_norm": [
+        0.14602098192830057,
+        0.1576712402960591
+      ],
+      "revenue_norm": [
+        0.7948290463281423,
+        0.80804393882938
+      ],
+      "skill": [
+        0.9385768763181634,
+        0.9513162176572957
+      ]
+    }
+  },
+  "run": {
+    "condition": "minilm-k20",
+    "model": "minilm",
+    "graph_k": 20,
+    "universe": "corpus",
+    "key": "learned-nomic-own",
+    "placement_source": "own, refitted on nomic k20 (in-sample works)",
+    "placements": "bench/corpus/cache/embed-bench/refit/nomic/corpus-placements.jsonl",
+    "score_seconds": 3.2
+  }
+}

@@ -1,0 +1,6109 @@
+{
+  "name": "learned",
+  "version": "2026-10-10-nomic",
+  "title": "Learned general classification (similarity- and navigation-optimized prototype)",
+  "source": {
+    "description": "Fitted by schemes/learned (learned-scheme build) to 10000 works of the benchmark corpus (corpus.jsonl sha256 1027bf9d34928f470ed8b0d7b5ddc5c983fde49bc0cd33eaa162bbd1f830fea5) on the k=20 kNN cosine graph (sha256 e5abcae63e02b68ddf11c150bed478a5f2d7760f68606566e1837e2cfeaaf073). Objective: normalized Dasgupta cost + 0.005 x expected navigation cost (per-branch cost 1 bits + log2 fan-out); 2-12 child classes, at most 4 levels, leaf classes of at least 5 works; seed 20261010. Labels: written by hand from each class's c-TF-IDF terms and most central titles; the terms are the class vocabulary (source ctfidf).",
+    "license": "CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/)"
+  },
+  "code_grammar": "[0-9]{2}(\\.[0-9]{2})*",
+  "classes": [
+    {
+      "code": "01",
+      "label": "Learning / language / multi",
+      "vocab": [
+        {
+          "term": "learning",
+          "source": "ctfidf"
+        },
+        {
+          "term": "language",
+          "source": "ctfidf",
+          "weight": 0.9265917123335077
+        },
+        {
+          "term": "multi",
+          "source": "ctfidf",
+          "weight": 0.8148947657449496
+        },
+        {
+          "term": "training",
+          "source": "ctfidf",
+          "weight": 0.8048306598364373
+        },
+        {
+          "term": "reasoning",
+          "source": "ctfidf",
+          "weight": 0.6994047839617653
+        },
+        {
+          "term": "llm",
+          "source": "ctfidf",
+          "weight": 0.6849736329830666
+        },
+        {
+          "term": "generation",
+          "source": "ctfidf",
+          "weight": 0.6375465368777641
+        },
+        {
+          "term": "agent",
+          "source": "ctfidf",
+          "weight": 0.6225191745583704
+        },
+        {
+          "term": "human",
+          "source": "ctfidf",
+          "weight": 0.5915692412693654
+        },
+        {
+          "term": "aware",
+          "source": "ctfidf",
+          "weight": 0.5833959693084021
+        }
+      ],
+      "note": "5104 works in the fitting corpus. c-TF-IDF terms: learning, language, multi, training, reasoning, llm, generation, agent, human, aware."
+    },
+    {
+      "code": "01.01",
+      "label": "Language / llm / agent",
+      "parent": "01",
+      "vocab": [
+        {
+          "term": "language",
+          "source": "ctfidf"
+        },
+        {
+          "term": "llm",
+          "source": "ctfidf",
+          "weight": 0.9661888735620666
+        },
+        {
+          "term": "agent",
+          "source": "ctfidf",
+          "weight": 0.8140946101185481
+        },
+        {
+          "term": "llms",
+          "source": "ctfidf",
+          "weight": 0.7868177366737594
+        },
+        {
+          "term": "reasoning",
+          "source": "ctfidf",
+          "weight": 0.7757810594083935
+        },
+        {
+          "term": "agents",
+          "source": "ctfidf",
+          "weight": 0.7529363204777211
+        },
+        {
+          "term": "learning",
+          "source": "ctfidf",
+          "weight": 0.7433049630610207
+        },
+        {
+          "term": "training",
+          "source": "ctfidf",
+          "weight": 0.6757143270400809
+        },
+        {
+          "term": "multi",
+          "source": "ctfidf",
+          "weight": 0.6369929569352665
+        },
+        {
+          "term": "human",
+          "source": "ctfidf",
+          "weight": 0.6102067578231974
+        }
+      ],
+      "note": "2448 works in the fitting corpus. c-TF-IDF terms: language, llm, agent, llms, reasoning, agents, learning, training, multi, human."
+    },
+    {
+      "code": "01.01.01",
+      "label": "Llm / code / agent",
+      "parent": "01.01",
+      "vocab": [
+        {
+          "term": "llm",
+          "source": "ctfidf"
+        },
+        {
+          "term": "code",
+          "source": "ctfidf",
+          "weight": 0.9239210817324489
+        },
+        {
+          "term": "agent",
+          "source": "ctfidf",
+          "weight": 0.8538362040154668
+        },
+        {
+          "term": "memory",
+          "source": "ctfidf",
+          "weight": 0.8134729406834681
+        },
+        {
+          "term": "language",
+          "source": "ctfidf",
+          "weight": 0.7872493154519332
+        },
+        {
+          "term": "agents",
+          "source": "ctfidf",
+          "weight": 0.7706105693321095
+        },
+        {
+          "term": "training",
+          "source": "ctfidf",
+          "weight": 0.7274171823836989
+        },
+        {
+          "term": "policy",
+          "source": "ctfidf",
+          "weight": 0.665624092744023
+        },
+        {
+          "term": "learning",
+          "source": "ctfidf",
+          "weight": 0.6628744285467153
+        },
+        {
+          "term": "context",
+          "source": "ctfidf",
+          "weight": 0.6504382680904683
+        }
+      ],
+      "note": "884 works in the fitting corpus. c-TF-IDF terms: llm, code, agent, memory, language, agents, training, policy, learning, context."
+    },
+    {
+      "code": "01.01.01.01",
+      "label": "Attention / memory / llm",
+      "parent": "01.01.01",
+      "vocab": [
+        {
+          "term": "attention",
+          "source": "ctfidf"
+        },
+        {
+          "term": "memory",
+          "source": "ctfidf",
+          "weight": 0.7892206498957776
+        },
+        {
+          "term": "llm",
+          "source": "ctfidf",
+          "weight": 0.7676671351184569
+        },
+        {
+          "term": "gpu",
+          "source": "ctfidf",
+          "weight": 0.7559088126627657
+        },
+        {
+          "term": "moe",
+          "source": "ctfidf",
+          "weight": 0.7538617198053884
+        },
+        {
+          "term": "training",
+          "source": "ctfidf",
+          "weight": 0.7006078368238146
+        },
+        {
+          "term": "language",
+          "source": "ctfidf",
+          "weight": 0.6311061429516857
+        },
+        {
+          "term": "experts",
+          "source": "ctfidf",
+          "weight": 0.6197776339276015
+        },
+        {
+          "term": "inference",
+          "source": "ctfidf",
+          "weight": 0.6075966447164115
+        },
+        {
+          "term": "quantization",
+          "source": "ctfidf",
+          "weight": 0.607216219199308
+        }
+      ],
+      "note": "248 works in the fitting corpus. c-TF-IDF terms: attention, memory, llm, gpu, moe, training, language, experts, inference, quantization."
+    },
+    {
+      "code": "01.01.01.02",
+      "label": "Policy / reward / learning",
+      "parent": "01.01.01",
+      "vocab": [
+        {
+          "term": "policy",
+          "source": "ctfidf"
+        },
+        {
+          "term": "reward",
+          "source": "ctfidf",
+          "weight": 0.7946435456402557
+        },
+        {
+          "term": "learning",
+          "source": "ctfidf",
+          "weight": 0.6620685879889916
+        },
+        {
+          "term": "reinforcement learning",
+          "source": "ctfidf",
+          "weight": 0.6001377302540851
+        },
+        {
+          "term": "regret",
+          "source": "ctfidf",
+          "weight": 0.5996425516835345
+        },
+        {
+          "term": "reinforcement",
+          "source": "ctfidf",
+          "weight": 0.5990137578122859
+        },
+        {
+          "term": "training",
+          "source": "ctfidf",
+          "weight": 0.4909877180882431
+        },
+        {
+          "term": "reasoning",
+          "source": "ctfidf",
+          "weight": 0.4712067397663933
+        },
+        {
+          "term": "optimization",
+          "source": "ctfidf",
+          "weight": 0.3900602250686648
+        },
+        {
+          "term": "optimal",
+          "source": "ctfidf",
+          "weight": 0.37684234561651775
+        }
+      ],
+      "note": "183 works in the fitting corpus. c-TF-IDF terms: policy, reward, learning, reinforcement learning, regret, reinforcement, training, reasoning, optimization, optimal."
+    },
+    {
+      "code": "01.01.01.03",
+      "label": "Agent / agents / memory",
+      "parent": "01.01.01",
+      "vocab": [
+        {
+          "term": "agent",
+          "source": "ctfidf"
+        },
+        {
+          "term": "agents",
+          "source": "ctfidf",
+          "weight": 0.8421632368747369
+        },
+        {
+          "term": "memory",
+          "source": "ctfidf",
+          "weight": 0.8187183825902081
+        },
+        {
+          "term": "llm",
+          "source": "ctfidf",
+          "weight": 0.5978563672698697
+        },
+        {
+          "term": "skill",
+          "source": "ctfidf",
+          "weight": 0.5357219596024022
+        },
+        {
+          "term": "long",
+          "source": "ctfidf",
+          "weight": 0.5131005592449408
+        },
+        {
+          "term": "context",
+          "source": "ctfidf",
+          "weight": 0.5007315279000975
+        },
+        {
+          "term": "concept",
+          "source": "ctfidf",
+          "weight": 0.44304997451966055
+        },
+        {
+          "term": "language",
+          "source": "ctfidf",
+          "weight": 0.4416959646480703
+        },
+        {
+          "term": "multi",
+          "source": "ctfidf",
+          "weight": 0.432259056010126
+        }
+      ],
+      "note": "209 works in the fitting corpus. c-TF-IDF terms: agent, agents, memory, llm, skill, long, context, concept, language, multi."
+    },
+    {
+      "code": "01.01.01.04",
+      "label": "Code / security / software",
+      "parent": "01.01.01",
+      "vocab": [
+        {
+          "term": "code",
+          "source": "ctfidf"
+        },
+        {
+          "term": "security",
+          "source": "ctfidf",
+          "weight": 0.7503973719436875
+        },
+        {
+          "term": "software",
+          "source": "ctfidf",
+          "weight": 0.6882199983872956
+        },
+        {
+          "term": "llm",
+          "source": "ctfidf",
+          "weight": 0.5718297376559214
+        },
+        {
+          "term": "agent",
+          "source": "ctfidf",
+          "weight": 0.5690399412453233
+        },
+        {
+          "term": "verification",
+          "source": "ctfidf",
+          "weight": 0.5351706678433448
+        },
+        {
+          "term": "agents",
+          "source": "ctfidf",
+          "weight": 0.5323405369271118
+        },
+        {
+          "term": "llms",
+          "source": "ctfidf",
+          "weight": 0.4320814052694135
+        },
+        {
+          "term": "language",
+          "source": "ctfidf",
+          "weight": 0.4083174059065852
+        },
+        {
+          "term": "vulnerability",
+          "source": "ctfidf",
+          "weight": 0.4013203741043588
+        }
+      ],
+      "note": "244 works in the fitting corpus. c-TF-IDF terms: code, security, software, llm, agent, verification, agents, llms, language, vulnerability."
+    },
+    {
+      "code": "01.01.02",
+      "label": "Reasoning / human / retrieval",
+      "parent": "01.01",
+      "vocab": [
+        {
+          "term": "reasoning",
+          "source": "ctfidf"
+        },
+        {
+          "term": "human",
+          "source": "ctfidf",
+          "weight": 0.8539495412055096
+        },
+        {
+          "term": "retrieval",
+          "source": "ctfidf",
+          "weight": 0.8497785920333122
+        },
+        {
+          "term": "language",
+          "source": "ctfidf",
+          "weight": 0.755935386983091
+        },
+        {
+          "term": "llms",
+          "source": "ctfidf",
+          "weight": 0.7301696141233136
+        },
+        {
+          "term": "llm",
+          "source": "ctfidf",
+          "weight": 0.7226152965091782
+        },
+        {
+          "term": "social",
+          "source": "ctfidf",
+          "weight": 0.6828137010177111
+        },
+        {
+          "term": "user",
+          "source": "ctfidf",
+          "weight": 0.6720055942347262
+        },
+        {
+          "term": "knowledge",
+          "source": "ctfidf",
+          "weight": 0.5681458729879492
+        },
+        {
+          "term": "research",
+          "source": "ctfidf",
+          "weight": 0.5407012611337968
+        }
+      ],
+      "note": "693 works in the fitting corpus. c-TF-IDF terms: reasoning, human, retrieval, language, llms, llm, social, user, knowledge, research."
+    },
+    {
+      "code": "01.01.02.01",
+      "label": "Human / user / governance",
+      "parent": "01.01.02",
+      "vocab": [
+        {
+          "term": "human",
+          "source": "ctfidf"
+        },
+        {
+          "term": "user",
+          "source": "ctfidf",
+          "weight": 0.5925591022635301
+        },
+        {
+          "term": "governance",
+          "source": "ctfidf",
+          "weight": 0.572222355387049
+        },
+        {
+          "term": "students",
+          "source": "ctfidf",
+          "weight": 0.5648885048725141
+        },
+        {
+          "term": "social",
+          "source": "ctfidf",
+          "weight": 0.5319978527579119
+        },
+        {
+          "term": "agents",
+          "source": "ctfidf",
+          "weight": 0.4434242325191079
+        },
+        {
+          "term": "research",
+          "source": "ctfidf",
+          "weight": 0.4073265955203493
+        },
+        {
+          "term": "intelligence",
+          "source": "ctfidf",
+          "weight": 0.4023439910957067
+        },
+        {
+          "term": "design",
+          "source": "ctfidf",
+          "weight": 0.3460350241800437
+        },
+        {
+          "term": "agent",
+          "source": "ctfidf",
+          "weight": 0.3458492334220881
+        }
+      ],
+      "note": "174 works in the fitting corpus. c-TF-IDF terms: human, user, governance, students, social, agents, research, intelligence, design, agent."
+    },
+    {
+      "code": "01.01.02.02",
+      "label": "Scientific / research / citation",
+      "parent": "01.01.02",
+      "vocab": [
+        {
+          "term": "scientific",
+          "source": "ctfidf"
+        },
+        {
+          "term": "research",
+          "source": "ctfidf",
+          "weight": 0.8392450264131105
+        },
+        {
+          "term": "citation",
+          "source": "ctfidf",
+          "weight": 0.6097327829823358
+        },
+        {
+          "term": "papers",
+          "source": "ctfidf",
+          "weight": 0.5985588576537387
+        },
+        {
+          "term": "science",
+          "source": "ctfidf",
+          "weight": 0.5229922421491437
+        },
+        {
+          "term": "open",
+          "source": "ctfidf",
+          "weight": 0.43918444120489
+        },
+        {
+          "term": "students",
+          "source": "ctfidf",
+          "weight": 0.3816381640030739
+        },
+        {
+          "term": "physics",
+          "source": "ctfidf",
+          "weight": 0.3783468037243945
+        },
+        {
+          "term": "academic",
+          "source": "ctfidf",
+          "weight": 0.35318174035890715
+        },
+        {
+          "term": "llms",
+          "source": "ctfidf",
+          "weight": 0.3287458933350627
+        }
+      ],
+      "note": "63 works in the fitting corpus. c-TF-IDF terms: scientific, research, citation, papers, science, open, students, physics, academic, llms."
+    },
+    {
+      "code": "01.01.02.03",
+      "label": "Social / opinion / stance",
+      "parent": "01.01.02",
+      "vocab": [
+        {
+          "term": "social",
+          "source": "ctfidf"
+        },
+        {
+          "term": "opinion",
+          "source": "ctfidf",
+          "weight": 0.7078194760950437
+        },
+        {
+          "term": "stance",
+          "source": "ctfidf",
+          "weight": 0.6499760037104522
+        },
+        {
+          "term": "voting",
+          "source": "ctfidf",
+          "weight": 0.5846108721326873
+        },
+        {
+          "term": "political",
+          "source": "ctfidf",
+          "weight": 0.5043918003805631
+        },
+        {
+          "term": "discourse",
+          "source": "ctfidf",
+          "weight": 0.4712554554935135
+        },
+        {
+          "term": "agent",
+          "source": "ctfidf",
+          "weight": 0.4688735923182607
+        },
+        {
+          "term": "framing",
+          "source": "ctfidf",
+          "weight": 0.4682148197845681
+        },
+        {
+          "term": "decision",
+          "source": "ctfidf",
+          "weight": 0.46288451818915427
+        },
+        {
+          "term": "llm",
+          "source": "ctfidf",
+          "weight": 0.4329858854271649
+        }
+      ],
+      "note": "98 works in the fitting corpus. c-TF-IDF terms: social, opinion, stance, voting, political, discourse, agent, framing, decision, llm."
+    },
+    {
+      "code": "01.01.02.04",
+      "label": "Reasoning / cot / llms",
+      "parent": "01.01.02",
+      "vocab": [
+        {
+          "term": "reasoning",
+          "source": "ctfidf"
+        },
+        {
+          "term": "cot",
+          "source": "ctfidf",
+          "weight": 0.3152904531031416
+        },
+        {
+          "term": "llms",
+          "source": "ctfidf",
+          "weight": 0.2764083283391512
+        },
+        {
+          "term": "answer",
+          "source": "ctfidf",
+          "weight": 0.2302177770598768
+        },
+        {
+          "term": "fairness",
+          "source": "ctfidf",
+          "weight": 0.23008351972127106
+        },
+        {
+          "term": "language",
+          "source": "ctfidf",
+          "weight": 0.21597802020521503
+        },
+        {
+          "term": "logical",
+          "source": "ctfidf",
+          "weight": 0.2135366846575459
+        },
+        {
+          "term": "thought",
+          "source": "ctfidf",
+          "weight": 0.2011864378419324
+        },
+        {
+          "term": "confidence",
+          "source": "ctfidf",
+          "weight": 0.19574224822039518
+        },
+        {
+          "term": "symbolic",
+          "source": "ctfidf",
+          "weight": 0.18175032768417537
+        }
+      ],
+      "note": "105 works in the fitting corpus. c-TF-IDF terms: reasoning, cot, llms, answer, fairness, language, logical, thought, confidence, symbolic."
+    },
+    {
+      "code": "01.01.02.05",
+      "label": "Recommendation / preference / user",
+      "parent": "01.01.02",
+      "vocab": [
+        {
+          "term": "recommendation",
+          "source": "ctfidf"
+        },
+        {
+          "term": "preference",
+          "source": "ctfidf",
+          "weight": 0.7039404843858641
+        },
+        {
+          "term": "user",
+          "source": "ctfidf",
+          "weight": 0.6781780667936039
+        },
+        {
+          "term": "llms",
+          "source": "ctfidf",
+          "weight": 0.5205158547596943
+        },
+        {
+          "term": "language",
+          "source": "ctfidf",
+          "weight": 0.5054777586071131
+        },
+        {
+          "term": "llm",
+          "source": "ctfidf",
+          "weight": 0.4719415715449905
+        },
+        {
+          "term": "persona",
+          "source": "ctfidf",
+          "weight": 0.44627807250236945
+        },
+        {
+          "term": "item",
+          "source": "ctfidf",
+          "weight": 0.4452673284276523
+        },
+        {
+          "term": "multimodal",
+          "source": "ctfidf",
+          "weight": 0.4126400221232758
+        },
+        {
+          "term": "bias",
+          "source": "ctfidf",
+          "weight": 0.399566683818245
+        }
+      ],
+      "note": "112 works in the fitting corpus. c-TF-IDF terms: recommendation, preference, user, llms, language, llm, persona, item, multimodal, bias."
+    },
+    {
+      "code": "01.01.02.06",
+      "label": "Retrieval / query / rag",
+      "parent": "01.01.02",
+      "vocab": [
+        {
+          "term": "retrieval",
+          "source": "ctfidf"
+        },
+        {
+          "term": "query",
+          "source": "ctfidf",
+          "weight": 0.6160717751070232
+        },
+        {
+          "term": "rag",
+          "source": "ctfidf",
+          "weight": 0.6032362817039815
+        },
+        {
+          "term": "search",
+          "source": "ctfidf",
+          "weight": 0.470228096606462
+        },
+        {
+          "term": "queries",
+          "source": "ctfidf",
+          "weight": 0.38631947496864844
+        },
+        {
+          "term": "knowledge",
+          "source": "ctfidf",
+          "weight": 0.3413909790058593
+        },
+        {
+          "term": "augmented",
+          "source": "ctfidf",
+          "weight": 0.3242288296198714
+        },
+        {
+          "term": "retrieval augmented",
+          "source": "ctfidf",
+          "weight": 0.3208013283952281
+        },
+        {
+          "term": "document",
+          "source": "ctfidf",
+          "weight": 0.26702128581707824
+        },
+        {
+          "term": "augmented generation",
+          "source": "ctfidf",
+          "weight": 0.2601245863080257
+        }
+      ],
+      "note": "141 works in the fitting corpus. c-TF-IDF terms: retrieval, query, rag, search, queries, knowledge, augmented, retrieval augmented, document, augmented generation."
+    },
+    {
+      "code": "01.01.03",
+      "label": "Privacy / attacks / attack",
+      "parent": "01.01",
+      "vocab": [
+        {
+          "term": "privacy",
+          "source": "ctfidf"
+        },
+        {
+          "term": "attacks",
+          "source": "ctfidf",
+          "weight": 0.5476187057122198
+        },
+        {
+          "term": "attack",
+          "source": "ctfidf",
+          "weight": 0.47432017478954125
+        },
+        {
+          "term": "detection",
+          "source": "ctfidf",
+          "weight": 0.4647170111448942
+        },
+        {
+          "term": "federated",
+          "source": "ctfidf",
+          "weight": 0.4537762745159405
+        },
+        {
+          "term": "adversarial",
+          "source": "ctfidf",
+          "weight": 0.4493338982238141
+        },
+        {
+          "term": "federated learning",
+          "source": "ctfidf",
+          "weight": 0.3548376576738206
+        },
+        {
+          "term": "learning",
+          "source": "ctfidf",
+          "weight": 0.30157934230441724
+        },
+        {
+          "term": "training",
+          "source": "ctfidf",
+          "weight": 0.27070254844755687
+        },
+        {
+          "term": "text",
+          "source": "ctfidf",
+          "weight": 0.23535000458799232
+        }
+      ],
+      "note": "223 works in the fitting corpus. c-TF-IDF terms: privacy, attacks, attack, detection, federated, adversarial, federated learning, learning, training, text."
+    },
+    {
+      "code": "01.01.03.01",
+      "label": "Privacy / unlearning / pii",
+      "parent": "01.01.03",
+      "vocab": [
+        {
+          "term": "privacy",
+          "source": "ctfidf"
+        },
+        {
+          "term": "unlearning",
+          "source": "ctfidf",
+          "weight": 0.2760773520423287
+        },
+        {
+          "term": "pii",
+          "source": "ctfidf",
+          "weight": 0.17558955559267383
+        },
+        {
+          "term": "differential privacy",
+          "source": "ctfidf",
+          "weight": 0.1700504056161435
+        },
+        {
+          "term": "inference",
+          "source": "ctfidf",
+          "weight": 0.1677238404129908
+        },
+        {
+          "term": "private",
+          "source": "ctfidf",
+          "weight": 0.16470065895545596
+        },
+        {
+          "term": "utility",
+          "source": "ctfidf",
+          "weight": 0.1529605928795775
+        },
+        {
+          "term": "attacks",
+          "source": "ctfidf",
+          "weight": 0.15227610609120043
+        },
+        {
+          "term": "privacy risks",
+          "source": "ctfidf",
+          "weight": 0.13122398007995595
+        },
+        {
+          "term": "user",
+          "source": "ctfidf",
+          "weight": 0.1288096202995355
+        }
+      ],
+      "note": "64 works in the fitting corpus. c-TF-IDF terms: privacy, unlearning, pii, differential privacy, inference, private, utility, attacks, privacy risks, user."
+    },
+    {
+      "code": "01.01.03.02",
+      "label": "Phishing / attacks / detection",
+      "parent": "01.01.03",
+      "vocab": [
+        {
+          "term": "phishing",
+          "source": "ctfidf"
+        },
+        {
+          "term": "attacks",
+          "source": "ctfidf",
+          "weight": 0.7879064780864794
+        },
+        {
+          "term": "detection",
+          "source": "ctfidf",
+          "weight": 0.7825039236066663
+        },
+        {
+          "term": "jailbreak",
+          "source": "ctfidf",
+          "weight": 0.6928510795156891
+        },
+        {
+          "term": "fraud",
+          "source": "ctfidf",
+          "weight": 0.6921513039765955
+        },
+        {
+          "term": "backdoor",
+          "source": "ctfidf",
+          "weight": 0.6141100382376844
+        },
+        {
+          "term": "attack",
+          "source": "ctfidf",
+          "weight": 0.5837723225241084
+        },
+        {
+          "term": "malware",
+          "source": "ctfidf",
+          "weight": 0.5659387913993561
+        },
+        {
+          "term": "benign",
+          "source": "ctfidf",
+          "weight": 0.4778660348405402
+        },
+        {
+          "term": "poisoning",
+          "source": "ctfidf",
+          "weight": 0.47140879957175114
+        }
+      ],
+      "note": "43 works in the fitting corpus. c-TF-IDF terms: phishing, attacks, detection, jailbreak, fraud, backdoor, attack, malware, benign, poisoning."
+    },
+    {
+      "code": "01.01.03.03",
+      "label": "Federated / federated learning / client",
+      "parent": "01.01.03",
+      "vocab": [
+        {
+          "term": "federated",
+          "source": "ctfidf"
+        },
+        {
+          "term": "federated learning",
+          "source": "ctfidf",
+          "weight": 0.8031746908284174
+        },
+        {
+          "term": "client",
+          "source": "ctfidf",
+          "weight": 0.43602341172021986
+        },
+        {
+          "term": "learning",
+          "source": "ctfidf",
+          "weight": 0.4188887281947372
+        },
+        {
+          "term": "clients",
+          "source": "ctfidf",
+          "weight": 0.38616167216814185
+        },
+        {
+          "term": "communication",
+          "source": "ctfidf",
+          "weight": 0.35840625262459824
+        },
+        {
+          "term": "server",
+          "source": "ctfidf",
+          "weight": 0.3046778049289742
+        },
+        {
+          "term": "privacy",
+          "source": "ctfidf",
+          "weight": 0.25605345803152685
+        },
+        {
+          "term": "aggregation",
+          "source": "ctfidf",
+          "weight": 0.25111303795127626
+        },
+        {
+          "term": "distributed",
+          "source": "ctfidf",
+          "weight": 0.2121642531440401
+        }
+      ],
+      "note": "43 works in the fitting corpus. c-TF-IDF terms: federated, federated learning, client, learning, clients, communication, server, privacy, aggregation, distributed."
+    },
+    {
+      "code": "01.01.03.04",
+      "label": "Adversarial / detection / attacks",
+      "parent": "01.01.03",
+      "vocab": [
+        {
+          "term": "adversarial",
+          "source": "ctfidf"
+        },
+        {
+          "term": "detection",
+          "source": "ctfidf",
+          "weight": 0.7673728669843579
+        },
+        {
+          "term": "attacks",
+          "source": "ctfidf",
+          "weight": 0.5952525509608725
+        },
+        {
+          "term": "attack",
+          "source": "ctfidf",
+          "weight": 0.5309958243366502
+        },
+        {
+          "term": "video",
+          "source": "ctfidf",
+          "weight": 0.5179448766185831
+        },
+        {
+          "term": "image",
+          "source": "ctfidf",
+          "weight": 0.4995564450703951
+        },
+        {
+          "term": "text",
+          "source": "ctfidf",
+          "weight": 0.45453720766988076
+        },
+        {
+          "term": "watermarking",
+          "source": "ctfidf",
+          "weight": 0.4314912605410195
+        },
+        {
+          "term": "semantic",
+          "source": "ctfidf",
+          "weight": 0.3946850120229289
+        },
+        {
+          "term": "judge",
+          "source": "ctfidf",
+          "weight": 0.33100298212910695
+        }
+      ],
+      "note": "73 works in the fitting corpus. c-TF-IDF terms: adversarial, detection, attacks, attack, video, image, text, watermarking, semantic, judge."
+    },
+    {
+      "code": "01.01.04",
+      "label": "Speech / audio / language",
+      "parent": "01.01",
+      "vocab": [
+        {
+          "term": "speech",
+          "source": "ctfidf"
+        },
+        {
+          "term": "audio",
+          "source": "ctfidf",
+          "weight": 0.6815127539036733
+        },
+        {
+          "term": "language",
+          "source": "ctfidf",
+          "weight": 0.5553588127352286
+        },
+        {
+          "term": "speaker",
+          "source": "ctfidf",
+          "weight": 0.45368689177685995
+        },
+        {
+          "term": "text",
+          "source": "ctfidf",
+          "weight": 0.4504819026119421
+        },
+        {
+          "term": "languages",
+          "source": "ctfidf",
+          "weight": 0.3924783300880112
+        },
+        {
+          "term": "music",
+          "source": "ctfidf",
+          "weight": 0.38886732144243374
+        },
+        {
+          "term": "recognition",
+          "source": "ctfidf",
+          "weight": 0.3370071463289192
+        },
+        {
+          "term": "english",
+          "source": "ctfidf",
+          "weight": 0.3225430246226114
+        },
+        {
+          "term": "acoustic",
+          "source": "ctfidf",
+          "weight": 0.30096884866963647
+        }
+      ],
+      "note": "255 works in the fitting corpus. c-TF-IDF terms: speech, audio, language, speaker, text, languages, music, recognition, english, acoustic."
+    },
+    {
+      "code": "01.01.04.01",
+      "label": "Speech / speaker / audio",
+      "parent": "01.01.04",
+      "vocab": [
+        {
+          "term": "speech",
+          "source": "ctfidf"
+        },
+        {
+          "term": "speaker",
+          "source": "ctfidf",
+          "weight": 0.5075503459784014
+        },
+        {
+          "term": "audio",
+          "source": "ctfidf",
+          "weight": 0.3922154901689576
+        },
+        {
+          "term": "voice",
+          "source": "ctfidf",
+          "weight": 0.29548323056744596
+        },
+        {
+          "term": "asr",
+          "source": "ctfidf",
+          "weight": 0.2728133289333472
+        },
+        {
+          "term": "tts",
+          "source": "ctfidf",
+          "weight": 0.22917115201695057
+        },
+        {
+          "term": "accent",
+          "source": "ctfidf",
+          "weight": 0.19558370260348176
+        },
+        {
+          "term": "deepfake",
+          "source": "ctfidf",
+          "weight": 0.19434563623071496
+        },
+        {
+          "term": "text",
+          "source": "ctfidf",
+          "weight": 0.1903624844525369
+        },
+        {
+          "term": "speech recognition",
+          "source": "ctfidf",
+          "weight": 0.18138926048200063
+        }
+      ],
+      "note": "65 works in the fitting corpus. c-TF-IDF terms: speech, speaker, audio, voice, asr, tts, accent, deepfake, text, speech recognition."
+    },
+    {
+      "code": "01.01.04.02",
+      "label": "Audio / music / emotion",
+      "parent": "01.01.04",
+      "vocab": [
+        {
+          "term": "audio",
+          "source": "ctfidf"
+        },
+        {
+          "term": "music",
+          "source": "ctfidf",
+          "weight": 0.936127205906689
+        },
+        {
+          "term": "emotion",
+          "source": "ctfidf",
+          "weight": 0.6027901722978088
+        },
+        {
+          "term": "speech",
+          "source": "ctfidf",
+          "weight": 0.49268873957778875
+        },
+        {
+          "term": "acoustic",
+          "source": "ctfidf",
+          "weight": 0.4721040758497158
+        },
+        {
+          "term": "sound",
+          "source": "ctfidf",
+          "weight": 0.42522456071360004
+        },
+        {
+          "term": "musical",
+          "source": "ctfidf",
+          "weight": 0.273074319824726
+        },
+        {
+          "term": "generation",
+          "source": "ctfidf",
+          "weight": 0.26792419840808135
+        },
+        {
+          "term": "song",
+          "source": "ctfidf",
+          "weight": 0.2345222585159182
+        },
+        {
+          "term": "spatial",
+          "source": "ctfidf",
+          "weight": 0.23256095892601863
+        }
+      ],
+      "note": "72 works in the fitting corpus. c-TF-IDF terms: audio, music, emotion, speech, acoustic, sound, musical, generation, song, spatial."
+    },
+    {
+      "code": "01.01.04.03",
+      "label": "Language / english / languages",
+      "parent": "01.01.04",
+      "vocab": [
+        {
+          "term": "language",
+          "source": "ctfidf"
+        },
+        {
+          "term": "english",
+          "source": "ctfidf",
+          "weight": 0.7739126824545842
+        },
+        {
+          "term": "languages",
+          "source": "ctfidf",
+          "weight": 0.7570658793634727
+        },
+        {
+          "term": "text",
+          "source": "ctfidf",
+          "weight": 0.741787526743861
+        },
+        {
+          "term": "recognition",
+          "source": "ctfidf",
+          "weight": 0.7389870314455964
+        },
+        {
+          "term": "translation",
+          "source": "ctfidf",
+          "weight": 0.732651537816032
+        },
+        {
+          "term": "speech",
+          "source": "ctfidf",
+          "weight": 0.7224027528844692
+        },
+        {
+          "term": "chinese",
+          "source": "ctfidf",
+          "weight": 0.6966725672974473
+        },
+        {
+          "term": "bengali",
+          "source": "ctfidf",
+          "weight": 0.5764093487836565
+        },
+        {
+          "term": "dataset",
+          "source": "ctfidf",
+          "weight": 0.5415647125155618
+        }
+      ],
+      "note": "50 works in the fitting corpus. c-TF-IDF terms: language, english, languages, text, recognition, translation, speech, chinese, bengali, dataset."
+    },
+    {
+      "code": "01.01.04.04",
+      "label": "Language / llms / languages",
+      "parent": "01.01.04",
+      "vocab": [
+        {
+          "term": "language",
+          "source": "ctfidf"
+        },
+        {
+          "term": "llms",
+          "source": "ctfidf",
+          "weight": 0.9098614640778603
+        },
+        {
+          "term": "languages",
+          "source": "ctfidf",
+          "weight": 0.8439050019698521
+        },
+        {
+          "term": "multilingual",
+          "source": "ctfidf",
+          "weight": 0.6603689896292045
+        },
+        {
+          "term": "english",
+          "source": "ctfidf",
+          "weight": 0.5989123601678452
+        },
+        {
+          "term": "llm",
+          "source": "ctfidf",
+          "weight": 0.5965634265575395
+        },
+        {
+          "term": "text",
+          "source": "ctfidf",
+          "weight": 0.5117258880146055
+        },
+        {
+          "term": "cognitive",
+          "source": "ctfidf",
+          "weight": 0.4425125806308047
+        },
+        {
+          "term": "question",
+          "source": "ctfidf",
+          "weight": 0.42595771729768667
+        },
+        {
+          "term": "prompt",
+          "source": "ctfidf",
+          "weight": 0.38290298108966736
+        }
+      ],
+      "note": "68 works in the fitting corpus. c-TF-IDF terms: language, llms, languages, multilingual, english, llm, text, cognitive, question, prompt."
+    },
+    {
+      "code": "01.01.05",
+      "label": "Market / risk / financial",
+      "parent": "01.01",
+      "vocab": [
+        {
+          "term": "market",
+          "source": "ctfidf"
+        },
+        {
+          "term": "risk",
+          "source": "ctfidf",
+          "weight": 0.9735453652814234
+        },
+        {
+          "term": "financial",
+          "source": "ctfidf",
+          "weight": 0.7670510370159717
+        },
+        {
+          "term": "volatility",
+          "source": "ctfidf",
+          "weight": 0.697892161178161
+        },
+        {
+          "term": "price",
+          "source": "ctfidf",
+          "weight": 0.6939943378473189
+        },
+        {
+          "term": "agent",
+          "source": "ctfidf",
+          "weight": 0.6390081350258154
+        },
+        {
+          "term": "pricing",
+          "source": "ctfidf",
+          "weight": 0.6083144098826533
+        },
+        {
+          "term": "game",
+          "source": "ctfidf",
+          "weight": 0.5884076170581306
+        },
+        {
+          "term": "portfolio",
+          "source": "ctfidf",
+          "weight": 0.585248653976375
+        },
+        {
+          "term": "optimal",
+          "source": "ctfidf",
+          "weight": 0.5622230832537374
+        }
+      ],
+      "note": "393 works in the fitting corpus. c-TF-IDF terms: market, risk, financial, volatility, price, agent, pricing, game, portfolio, optimal."
+    },
+    {
+      "code": "01.01.05.01",
+      "label": "Game / games / players",
+      "parent": "01.01.05",
+      "vocab": [
+        {
+          "term": "game",
+          "source": "ctfidf"
+        },
+        {
+          "term": "games",
+          "source": "ctfidf",
+          "weight": 0.9864761550961871
+        },
+        {
+          "term": "players",
+          "source": "ctfidf",
+          "weight": 0.6101532003774609
+        },
+        {
+          "term": "equilibrium",
+          "source": "ctfidf",
+          "weight": 0.5084067726261627
+        },
+        {
+          "term": "player",
+          "source": "ctfidf",
+          "weight": 0.44162454403557394
+        },
+        {
+          "term": "nash",
+          "source": "ctfidf",
+          "weight": 0.40722215324739813
+        },
+        {
+          "term": "nash equilibrium",
+          "source": "ctfidf",
+          "weight": 0.3736972783003591
+        },
+        {
+          "term": "agents",
+          "source": "ctfidf",
+          "weight": 0.3242045168018443
+        },
+        {
+          "term": "social",
+          "source": "ctfidf",
+          "weight": 0.31767148734025785
+        },
+        {
+          "term": "equilibria",
+          "source": "ctfidf",
+          "weight": 0.273173245484482
+        }
+      ],
+      "note": "71 works in the fitting corpus. c-TF-IDF terms: game, games, players, equilibrium, player, nash, nash equilibrium, agents, social, equilibria."
+    },
+    {
+      "code": "01.01.05.02",
+      "label": "Multi agent / agent / distributed",
+      "parent": "01.01.05",
+      "vocab": [
+        {
+          "term": "multi agent",
+          "source": "ctfidf"
+        },
+        {
+          "term": "agent",
+          "source": "ctfidf",
+          "weight": 0.866185709910883
+        },
+        {
+          "term": "distributed",
+          "source": "ctfidf",
+          "weight": 0.8411538905364415
+        },
+        {
+          "term": "multi",
+          "source": "ctfidf",
+          "weight": 0.8389660572321644
+        },
+        {
+          "term": "agents",
+          "source": "ctfidf",
+          "weight": 0.7197749403727357
+        },
+        {
+          "term": "consensus",
+          "source": "ctfidf",
+          "weight": 0.5594552675215975
+        },
+        {
+          "term": "control",
+          "source": "ctfidf",
+          "weight": 0.5397686735425303
+        },
+        {
+          "term": "communication",
+          "source": "ctfidf",
+          "weight": 0.5308722985083377
+        },
+        {
+          "term": "cooperative",
+          "source": "ctfidf",
+          "weight": 0.5124844654794699
+        },
+        {
+          "term": "decision",
+          "source": "ctfidf",
+          "weight": 0.4277573994510936
+        }
+      ],
+      "note": "47 works in the fitting corpus. c-TF-IDF terms: multi agent, agent, distributed, multi, agents, consensus, control, communication, cooperative, decision."
+    },
+    {
+      "code": "01.01.05.03",
+      "label": "Risk / pricing / optimal",
+      "parent": "01.01.05",
+      "vocab": [
+        {
+          "term": "risk",
+          "source": "ctfidf"
+        },
+        {
+          "term": "pricing",
+          "source": "ctfidf",
+          "weight": 0.6305379783352195
+        },
+        {
+          "term": "optimal",
+          "source": "ctfidf",
+          "weight": 0.5184591267269213
+        },
+        {
+          "term": "auctions",
+          "source": "ctfidf",
+          "weight": 0.46915522942259014
+        },
+        {
+          "term": "auction",
+          "source": "ctfidf",
+          "weight": 0.43926599050421283
+        },
+        {
+          "term": "investment",
+          "source": "ctfidf",
+          "weight": 0.33529253623219346
+        },
+        {
+          "term": "price",
+          "source": "ctfidf",
+          "weight": 0.33309434245728164
+        },
+        {
+          "term": "equilibrium",
+          "source": "ctfidf",
+          "weight": 0.32489287574140163
+        },
+        {
+          "term": "agent",
+          "source": "ctfidf",
+          "weight": 0.31445725579483236
+        },
+        {
+          "term": "utility",
+          "source": "ctfidf",
+          "weight": 0.30691397325535047
+        }
+      ],
+      "note": "83 works in the fitting corpus. c-TF-IDF terms: risk, pricing, optimal, auctions, auction, investment, price, equilibrium, agent, utility."
+    },
+    {
+      "code": "01.01.05.04",
+      "label": "Volatility / market / portfolio",
+      "parent": "01.01.05",
+      "vocab": [
+        {
+          "term": "volatility",
+          "source": "ctfidf"
+        },
+        {
+          "term": "market",
+          "source": "ctfidf",
+          "weight": 0.8769584461530148
+        },
+        {
+          "term": "portfolio",
+          "source": "ctfidf",
+          "weight": 0.6971581510943292
+        },
+        {
+          "term": "risk",
+          "source": "ctfidf",
+          "weight": 0.6152277376122542
+        },
+        {
+          "term": "price",
+          "source": "ctfidf",
+          "weight": 0.5203333585469345
+        },
+        {
+          "term": "asset",
+          "source": "ctfidf",
+          "weight": 0.5052622868358038
+        },
+        {
+          "term": "financial",
+          "source": "ctfidf",
+          "weight": 0.499151023233508
+        },
+        {
+          "term": "trading",
+          "source": "ctfidf",
+          "weight": 0.4476612629547888
+        },
+        {
+          "term": "option",
+          "source": "ctfidf",
+          "weight": 0.4239604511668544
+        },
+        {
+          "term": "pricing",
+          "source": "ctfidf",
+          "weight": 0.40808362362342065
+        }
+      ],
+      "note": "106 works in the fitting corpus. c-TF-IDF terms: volatility, market, portfolio, risk, price, asset, financial, trading, option, pricing."
+    },
+    {
+      "code": "01.01.05.05",
+      "label": "Financial / firms / market",
+      "parent": "01.01.05",
+      "vocab": [
+        {
+          "term": "financial",
+          "source": "ctfidf"
+        },
+        {
+          "term": "firms",
+          "source": "ctfidf",
+          "weight": 0.7211316668039526
+        },
+        {
+          "term": "market",
+          "source": "ctfidf",
+          "weight": 0.6786193997086998
+        },
+        {
+          "term": "transaction",
+          "source": "ctfidf",
+          "weight": 0.5092251170852634
+        },
+        {
+          "term": "economic",
+          "source": "ctfidf",
+          "weight": 0.45999434995512634
+        },
+        {
+          "term": "blockchain",
+          "source": "ctfidf",
+          "weight": 0.4529868553757332
+        },
+        {
+          "term": "credit",
+          "source": "ctfidf",
+          "weight": 0.44203660385623306
+        },
+        {
+          "term": "firm",
+          "source": "ctfidf",
+          "weight": 0.37433590572841363
+        },
+        {
+          "term": "evidence",
+          "source": "ctfidf",
+          "weight": 0.3699750685651683
+        },
+        {
+          "term": "labor",
+          "source": "ctfidf",
+          "weight": 0.3694868561053647
+        }
+      ],
+      "note": "86 works in the fitting corpus. c-TF-IDF terms: financial, firms, market, transaction, economic, blockchain, credit, firm, evidence, labor."
+    },
+    {
+      "code": "01.02",
+      "label": "Visual / learning / multi",
+      "parent": "01",
+      "vocab": [
+        {
+          "term": "visual",
+          "source": "ctfidf"
+        },
+        {
+          "term": "learning",
+          "source": "ctfidf",
+          "weight": 0.933326764492019
+        },
+        {
+          "term": "multi",
+          "source": "ctfidf",
+          "weight": 0.8042495742168297
+        },
+        {
+          "term": "video",
+          "source": "ctfidf",
+          "weight": 0.7981810826688485
+        },
+        {
+          "term": "image",
+          "source": "ctfidf",
+          "weight": 0.7821385671757065
+        },
+        {
+          "term": "generation",
+          "source": "ctfidf",
+          "weight": 0.7687551955301469
+        },
+        {
+          "term": "vision",
+          "source": "ctfidf",
+          "weight": 0.7642282956029964
+        },
+        {
+          "term": "training",
+          "source": "ctfidf",
+          "weight": 0.7634389990447397
+        },
+        {
+          "term": "language",
+          "source": "ctfidf",
+          "weight": 0.7446036547176664
+        },
+        {
+          "term": "aware",
+          "source": "ctfidf",
+          "weight": 0.6956838028820339
+        }
+      ],
+      "note": "1624 works in the fitting corpus. c-TF-IDF terms: visual, learning, multi, video, image, generation, vision, training, language, aware."
+    },
+    {
+      "code": "01.02.01",
+      "label": "Visual / image / video",
+      "parent": "01.02",
+      "vocab": [
+        {
+          "term": "visual",
+          "source": "ctfidf"
+        },
+        {
+          "term": "image",
+          "source": "ctfidf",
+          "weight": 0.8747048062431941
+        },
+        {
+          "term": "video",
+          "source": "ctfidf",
+          "weight": 0.8467026004512108
+        },
+        {
+          "term": "diffusion",
+          "source": "ctfidf",
+          "weight": 0.6597586991163111
+        },
+        {
+          "term": "generation",
+          "source": "ctfidf",
+          "weight": 0.6441585892391826
+        },
+        {
+          "term": "vision",
+          "source": "ctfidf",
+          "weight": 0.589777829204016
+        },
+        {
+          "term": "language",
+          "source": "ctfidf",
+          "weight": 0.5650974928777255
+        },
+        {
+          "term": "object",
+          "source": "ctfidf",
+          "weight": 0.5467133812499981
+        },
+        {
+          "term": "training",
+          "source": "ctfidf",
+          "weight": 0.5044017632944231
+        },
+        {
+          "term": "reasoning",
+          "source": "ctfidf",
+          "weight": 0.48951396862511914
+        }
+      ],
+      "note": "468 works in the fitting corpus. c-TF-IDF terms: visual, image, video, diffusion, generation, vision, language, object, training, reasoning."
+    },
+    {
+      "code": "01.02.01.01",
+      "label": "View / gaussian / pose",
+      "parent": "01.02.01",
+      "vocab": [
+        {
+          "term": "view",
+          "source": "ctfidf"
+        },
+        {
+          "term": "gaussian",
+          "source": "ctfidf",
+          "weight": 0.9362400376856042
+        },
+        {
+          "term": "pose",
+          "source": "ctfidf",
+          "weight": 0.914686649017633
+        },
+        {
+          "term": "splatting",
+          "source": "ctfidf",
+          "weight": 0.8610880566356147
+        },
+        {
+          "term": "gaussian splatting",
+          "source": "ctfidf",
+          "weight": 0.8139429711736587
+        },
+        {
+          "term": "depth",
+          "source": "ctfidf",
+          "weight": 0.7407515570093691
+        },
+        {
+          "term": "scene",
+          "source": "ctfidf",
+          "weight": 0.6998712534401023
+        },
+        {
+          "term": "image",
+          "source": "ctfidf",
+          "weight": 0.6901847033873572
+        },
+        {
+          "term": "reconstruction",
+          "source": "ctfidf",
+          "weight": 0.6872894993573723
+        },
+        {
+          "term": "estimation",
+          "source": "ctfidf",
+          "weight": 0.6859345875757866
+        }
+      ],
+      "note": "112 works in the fitting corpus. c-TF-IDF terms: view, gaussian, pose, splatting, gaussian splatting, depth, scene, image, reconstruction, estimation."
+    },
+    {
+      "code": "01.02.01.02",
+      "label": "Video / generation / visual",
+      "parent": "01.02.01",
+      "vocab": [
+        {
+          "term": "video",
+          "source": "ctfidf"
+        },
+        {
+          "term": "generation",
+          "source": "ctfidf",
+          "weight": 0.292393737407109
+        },
+        {
+          "term": "visual",
+          "source": "ctfidf",
+          "weight": 0.2856268131092586
+        },
+        {
+          "term": "frame",
+          "source": "ctfidf",
+          "weight": 0.26390133280740896
+        },
+        {
+          "term": "video generation",
+          "source": "ctfidf",
+          "weight": 0.25533519439811436
+        },
+        {
+          "term": "audio",
+          "source": "ctfidf",
+          "weight": 0.2549339331523236
+        },
+        {
+          "term": "motion",
+          "source": "ctfidf",
+          "weight": 0.25079192344601364
+        },
+        {
+          "term": "temporal",
+          "source": "ctfidf",
+          "weight": 0.20621928490795377
+        },
+        {
+          "term": "videos",
+          "source": "ctfidf",
+          "weight": 0.19596975734687824
+        },
+        {
+          "term": "reasoning",
+          "source": "ctfidf",
+          "weight": 0.1657017129260951
+        }
+      ],
+      "note": "97 works in the fitting corpus. c-TF-IDF terms: video, generation, visual, frame, video generation, audio, motion, temporal, videos, reasoning."
+    },
+    {
+      "code": "01.02.01.03",
+      "label": "Visual / vision / reasoning",
+      "parent": "01.02.01",
+      "vocab": [
+        {
+          "term": "visual",
+          "source": "ctfidf"
+        },
+        {
+          "term": "vision",
+          "source": "ctfidf",
+          "weight": 0.6564485521350141
+        },
+        {
+          "term": "reasoning",
+          "source": "ctfidf",
+          "weight": 0.5601098185734957
+        },
+        {
+          "term": "language",
+          "source": "ctfidf",
+          "weight": 0.5261659424112561
+        },
+        {
+          "term": "vision language",
+          "source": "ctfidf",
+          "weight": 0.5238363137041497
+        },
+        {
+          "term": "object",
+          "source": "ctfidf",
+          "weight": 0.4144781108244765
+        },
+        {
+          "term": "tokens",
+          "source": "ctfidf",
+          "weight": 0.39698428959212095
+        },
+        {
+          "term": "multimodal",
+          "source": "ctfidf",
+          "weight": 0.39290207980072944
+        },
+        {
+          "term": "token",
+          "source": "ctfidf",
+          "weight": 0.360558226844789
+        },
+        {
+          "term": "segmentation",
+          "source": "ctfidf",
+          "weight": 0.3560053210308154
+        }
+      ],
+      "note": "117 works in the fitting corpus. c-TF-IDF terms: visual, vision, reasoning, language, vision language, object, tokens, multimodal, token, segmentation."
+    },
+    {
+      "code": "01.02.01.04",
+      "label": "Editing / image / generation",
+      "parent": "01.02.01",
+      "vocab": [
+        {
+          "term": "editing",
+          "source": "ctfidf"
+        },
+        {
+          "term": "image",
+          "source": "ctfidf",
+          "weight": 0.9814844876463092
+        },
+        {
+          "term": "generation",
+          "source": "ctfidf",
+          "weight": 0.546063350861141
+        },
+        {
+          "term": "layout",
+          "source": "ctfidf",
+          "weight": 0.4871111944049752
+        },
+        {
+          "term": "color",
+          "source": "ctfidf",
+          "weight": 0.43149957880707895
+        },
+        {
+          "term": "image generation",
+          "source": "ctfidf",
+          "weight": 0.385626227877825
+        },
+        {
+          "term": "image editing",
+          "source": "ctfidf",
+          "weight": 0.37188947251437376
+        },
+        {
+          "term": "creative",
+          "source": "ctfidf",
+          "weight": 0.3440299952090906
+        },
+        {
+          "term": "semantic",
+          "source": "ctfidf",
+          "weight": 0.33632859714133734
+        },
+        {
+          "term": "diffusion",
+          "source": "ctfidf",
+          "weight": 0.3323720654869575
+        }
+      ],
+      "note": "61 works in the fitting corpus. c-TF-IDF terms: editing, image, generation, layout, color, image generation, image editing, creative, semantic, diffusion."
+    },
+    {
+      "code": "01.02.01.05",
+      "label": "Diffusion / image / generation",
+      "parent": "01.02.01",
+      "vocab": [
+        {
+          "term": "diffusion",
+          "source": "ctfidf"
+        },
+        {
+          "term": "image",
+          "source": "ctfidf",
+          "weight": 0.46135625747777764
+        },
+        {
+          "term": "generation",
+          "source": "ctfidf",
+          "weight": 0.35285969324324057
+        },
+        {
+          "term": "sampling",
+          "source": "ctfidf",
+          "weight": 0.29016209693573847
+        },
+        {
+          "term": "restoration",
+          "source": "ctfidf",
+          "weight": 0.26735063141064663
+        },
+        {
+          "term": "denoising",
+          "source": "ctfidf",
+          "weight": 0.2669716970443706
+        },
+        {
+          "term": "inference",
+          "source": "ctfidf",
+          "weight": 0.252883409509743
+        },
+        {
+          "term": "degradation",
+          "source": "ctfidf",
+          "weight": 0.24499943946218172
+        },
+        {
+          "term": "diffusion language",
+          "source": "ctfidf",
+          "weight": 0.23299404987952926
+        },
+        {
+          "term": "training",
+          "source": "ctfidf",
+          "weight": 0.22579253100521077
+        }
+      ],
+      "note": "81 works in the fitting corpus. c-TF-IDF terms: diffusion, image, generation, sampling, restoration, denoising, inference, degradation, diffusion language, training."
+    },
+    {
+      "code": "01.02.02",
+      "label": "Robot / action / manipulation",
+      "parent": "01.02",
+      "vocab": [
+        {
+          "term": "robot",
+          "source": "ctfidf"
+        },
+        {
+          "term": "action",
+          "source": "ctfidf",
+          "weight": 0.7559048903191437
+        },
+        {
+          "term": "manipulation",
+          "source": "ctfidf",
+          "weight": 0.7238899754012019
+        },
+        {
+          "term": "motion",
+          "source": "ctfidf",
+          "weight": 0.6692625888714528
+        },
+        {
+          "term": "learning",
+          "source": "ctfidf",
+          "weight": 0.645058710102232
+        },
+        {
+          "term": "control",
+          "source": "ctfidf",
+          "weight": 0.5655496058549861
+        },
+        {
+          "term": "policy",
+          "source": "ctfidf",
+          "weight": 0.5641299123081179
+        },
+        {
+          "term": "tracking",
+          "source": "ctfidf",
+          "weight": 0.5005122098932611
+        },
+        {
+          "term": "uav",
+          "source": "ctfidf",
+          "weight": 0.4865004005640714
+        },
+        {
+          "term": "navigation",
+          "source": "ctfidf",
+          "weight": 0.48553983884080787
+        }
+      ],
+      "note": "404 works in the fitting corpus. c-TF-IDF terms: robot, action, manipulation, motion, learning, control, policy, tracking, uav, navigation."
+    },
+    {
+      "code": "01.02.02.01",
+      "label": "Robot / action / policy",
+      "parent": "01.02.02",
+      "vocab": [
+        {
+          "term": "robot",
+          "source": "ctfidf"
+        },
+        {
+          "term": "action",
+          "source": "ctfidf",
+          "weight": 0.9006007701453698
+        },
+        {
+          "term": "policy",
+          "source": "ctfidf",
+          "weight": 0.662492506954364
+        },
+        {
+          "term": "manipulation",
+          "source": "ctfidf",
+          "weight": 0.653596881433543
+        },
+        {
+          "term": "vla",
+          "source": "ctfidf",
+          "weight": 0.5862436354492628
+        },
+        {
+          "term": "learning",
+          "source": "ctfidf",
+          "weight": 0.5420941040520609
+        },
+        {
+          "term": "robotic",
+          "source": "ctfidf",
+          "weight": 0.49753176706469704
+        },
+        {
+          "term": "imitation",
+          "source": "ctfidf",
+          "weight": 0.43125028896028716
+        },
+        {
+          "term": "language action",
+          "source": "ctfidf",
+          "weight": 0.4202747906987889
+        },
+        {
+          "term": "success",
+          "source": "ctfidf",
+          "weight": 0.3767130174410925
+        }
+      ],
+      "note": "103 works in the fitting corpus. c-TF-IDF terms: robot, action, policy, manipulation, vla, learning, robotic, imitation, language action, success."
+    },
+    {
+      "code": "01.02.02.02",
+      "label": "Motion / humanoid / contact",
+      "parent": "01.02.02",
+      "vocab": [
+        {
+          "term": "motion",
+          "source": "ctfidf"
+        },
+        {
+          "term": "humanoid",
+          "source": "ctfidf",
+          "weight": 0.966514775564674
+        },
+        {
+          "term": "contact",
+          "source": "ctfidf",
+          "weight": 0.9167655466750234
+        },
+        {
+          "term": "hand",
+          "source": "ctfidf",
+          "weight": 0.9045346933363279
+        },
+        {
+          "term": "tactile",
+          "source": "ctfidf",
+          "weight": 0.7992294619523492
+        },
+        {
+          "term": "human",
+          "source": "ctfidf",
+          "weight": 0.7780504440467806
+        },
+        {
+          "term": "manipulation",
+          "source": "ctfidf",
+          "weight": 0.7737147254481965
+        },
+        {
+          "term": "whole body",
+          "source": "ctfidf",
+          "weight": 0.7318454182749915
+        },
+        {
+          "term": "body",
+          "source": "ctfidf",
+          "weight": 0.7207155044193488
+        },
+        {
+          "term": "robot",
+          "source": "ctfidf",
+          "weight": 0.6967805871732446
+        }
+      ],
+      "note": "71 works in the fitting corpus. c-TF-IDF terms: motion, humanoid, contact, hand, tactile, human, manipulation, whole body, body, robot."
+    },
+    {
+      "code": "01.02.02.03",
+      "label": "Navigation / spatial / reasoning",
+      "parent": "01.02.02",
+      "vocab": [
+        {
+          "term": "navigation",
+          "source": "ctfidf"
+        },
+        {
+          "term": "spatial",
+          "source": "ctfidf",
+          "weight": 0.877008729567192
+        },
+        {
+          "term": "reasoning",
+          "source": "ctfidf",
+          "weight": 0.5326712380469494
+        },
+        {
+          "term": "gui",
+          "source": "ctfidf",
+          "weight": 0.5006648335897945
+        },
+        {
+          "term": "memory",
+          "source": "ctfidf",
+          "weight": 0.392146007565326
+        },
+        {
+          "term": "planning",
+          "source": "ctfidf",
+          "weight": 0.39200688283518603
+        },
+        {
+          "term": "robot",
+          "source": "ctfidf",
+          "weight": 0.3781212663649617
+        },
+        {
+          "term": "agents",
+          "source": "ctfidf",
+          "weight": 0.36191834792007704
+        },
+        {
+          "term": "visual",
+          "source": "ctfidf",
+          "weight": 0.3452826520519557
+        },
+        {
+          "term": "spatial reasoning",
+          "source": "ctfidf",
+          "weight": 0.3311111612419485
+        }
+      ],
+      "note": "45 works in the fitting corpus. c-TF-IDF terms: navigation, spatial, reasoning, gui, memory, planning, robot, agents, visual, spatial reasoning."
+    },
+    {
+      "code": "01.02.02.04",
+      "label": "Safety / planning / safe",
+      "parent": "01.02.02",
+      "vocab": [
+        {
+          "term": "safety",
+          "source": "ctfidf"
+        },
+        {
+          "term": "planning",
+          "source": "ctfidf",
+          "weight": 0.8712937549080907
+        },
+        {
+          "term": "safe",
+          "source": "ctfidf",
+          "weight": 0.6565018882886234
+        },
+        {
+          "term": "motion",
+          "source": "ctfidf",
+          "weight": 0.6459380031581364
+        },
+        {
+          "term": "control",
+          "source": "ctfidf",
+          "weight": 0.6426001051069383
+        },
+        {
+          "term": "trajectory",
+          "source": "ctfidf",
+          "weight": 0.6402295968619527
+        },
+        {
+          "term": "collision",
+          "source": "ctfidf",
+          "weight": 0.5912027886569816
+        },
+        {
+          "term": "motion planning",
+          "source": "ctfidf",
+          "weight": 0.5699562827320093
+        },
+        {
+          "term": "cbf",
+          "source": "ctfidf",
+          "weight": 0.5062912009428019
+        },
+        {
+          "term": "lunar",
+          "source": "ctfidf",
+          "weight": 0.4753419257789545
+        }
+      ],
+      "note": "47 works in the fitting corpus. c-TF-IDF terms: safety, planning, safe, motion, control, trajectory, collision, motion planning, cbf, lunar."
+    },
+    {
+      "code": "01.02.02.05",
+      "label": "Uav / aerial / drone",
+      "parent": "01.02.02",
+      "vocab": [
+        {
+          "term": "uav",
+          "source": "ctfidf"
+        },
+        {
+          "term": "aerial",
+          "source": "ctfidf",
+          "weight": 0.6837679839726236
+        },
+        {
+          "term": "drone",
+          "source": "ctfidf",
+          "weight": 0.3963952116280638
+        },
+        {
+          "term": "uavs",
+          "source": "ctfidf",
+          "weight": 0.3327115811780639
+        },
+        {
+          "term": "altitude",
+          "source": "ctfidf",
+          "weight": 0.2859842932582725
+        },
+        {
+          "term": "unmanned",
+          "source": "ctfidf",
+          "weight": 0.24427792390224817
+        },
+        {
+          "term": "wind",
+          "source": "ctfidf",
+          "weight": 0.2438474287788481
+        },
+        {
+          "term": "unmanned aerial",
+          "source": "ctfidf",
+          "weight": 0.21566652372194253
+        },
+        {
+          "term": "tracking",
+          "source": "ctfidf",
+          "weight": 0.21146338299868786
+        },
+        {
+          "term": "ground",
+          "source": "ctfidf",
+          "weight": 0.20088294637654291
+        }
+      ],
+      "note": "54 works in the fitting corpus. c-TF-IDF terms: uav, aerial, drone, uavs, altitude, unmanned, wind, unmanned aerial, tracking, ground."
+    },
+    {
+      "code": "01.02.02.06",
+      "label": "Gait / rgb / tracking",
+      "parent": "01.02.02",
+      "vocab": [
+        {
+          "term": "gait",
+          "source": "ctfidf"
+        },
+        {
+          "term": "rgb",
+          "source": "ctfidf",
+          "weight": 0.8156938192172252
+        },
+        {
+          "term": "tracking",
+          "source": "ctfidf",
+          "weight": 0.7719662158775882
+        },
+        {
+          "term": "event",
+          "source": "ctfidf",
+          "weight": 0.7605145972166616
+        },
+        {
+          "term": "modal",
+          "source": "ctfidf",
+          "weight": 0.7103586041614406
+        },
+        {
+          "term": "modality",
+          "source": "ctfidf",
+          "weight": 0.6384082788557952
+        },
+        {
+          "term": "temporal",
+          "source": "ctfidf",
+          "weight": 0.535166856123755
+        },
+        {
+          "term": "recognition",
+          "source": "ctfidf",
+          "weight": 0.5001599340521691
+        },
+        {
+          "term": "multi",
+          "source": "ctfidf",
+          "weight": 0.3973412544394356
+        },
+        {
+          "term": "modalities",
+          "source": "ctfidf",
+          "weight": 0.3705081242244302
+        }
+      ],
+      "note": "37 works in the fitting corpus. c-TF-IDF terms: gait, rgb, tracking, event, modal, modality, temporal, recognition, multi, modalities."
+    },
+    {
+      "code": "01.02.02.07",
+      "label": "Garment / manufacturing / bone",
+      "parent": "01.02.02",
+      "vocab": [
+        {
+          "term": "garment",
+          "source": "ctfidf"
+        },
+        {
+          "term": "manufacturing",
+          "source": "ctfidf",
+          "weight": 0.8363781624060923
+        },
+        {
+          "term": "bone",
+          "source": "ctfidf",
+          "weight": 0.6736152707468954
+        },
+        {
+          "term": "material",
+          "source": "ctfidf",
+          "weight": 0.6708234662614077
+        },
+        {
+          "term": "soft",
+          "source": "ctfidf",
+          "weight": 0.6696655705776402
+        },
+        {
+          "term": "stiffness",
+          "source": "ctfidf",
+          "weight": 0.6047119258776299
+        },
+        {
+          "term": "try",
+          "source": "ctfidf",
+          "weight": 0.6028527693067318
+        },
+        {
+          "term": "tendon",
+          "source": "ctfidf",
+          "weight": 0.5681536388332181
+        },
+        {
+          "term": "virtual try",
+          "source": "ctfidf",
+          "weight": 0.5406047378820201
+        },
+        {
+          "term": "virtual",
+          "source": "ctfidf",
+          "weight": 0.5235007207546931
+        }
+      ],
+      "note": "47 works in the fitting corpus. c-TF-IDF terms: garment, manufacturing, bone, material, soft, stiffness, try, tendon, virtual try, virtual."
+    },
+    {
+      "code": "01.02.03",
+      "label": "Driving / traffic / vehicle",
+      "parent": "01.02",
+      "vocab": [
+        {
+          "term": "driving",
+          "source": "ctfidf"
+        },
+        {
+          "term": "traffic",
+          "source": "ctfidf",
+          "weight": 0.918685969262422
+        },
+        {
+          "term": "vehicle",
+          "source": "ctfidf",
+          "weight": 0.640481720945614
+        },
+        {
+          "term": "autonomous driving",
+          "source": "ctfidf",
+          "weight": 0.6211017965704755
+        },
+        {
+          "term": "autonomous",
+          "source": "ctfidf",
+          "weight": 0.6006080430090044
+        },
+        {
+          "term": "trajectory",
+          "source": "ctfidf",
+          "weight": 0.4940358358161907
+        },
+        {
+          "term": "prediction",
+          "source": "ctfidf",
+          "weight": 0.4654503256307688
+        },
+        {
+          "term": "routing",
+          "source": "ctfidf",
+          "weight": 0.45300934708559215
+        },
+        {
+          "term": "safety",
+          "source": "ctfidf",
+          "weight": 0.44810918290935725
+        },
+        {
+          "term": "vehicles",
+          "source": "ctfidf",
+          "weight": 0.4311270867639818
+        }
+      ],
+      "note": "155 works in the fitting corpus. c-TF-IDF terms: driving, traffic, vehicle, autonomous driving, autonomous, trajectory, prediction, routing, safety, vehicles."
+    },
+    {
+      "code": "01.02.04",
+      "label": "Power / detection / sensing",
+      "parent": "01.02",
+      "vocab": [
+        {
+          "term": "power",
+          "source": "ctfidf"
+        },
+        {
+          "term": "detection",
+          "source": "ctfidf",
+          "weight": 0.7674515898882153
+        },
+        {
+          "term": "sensing",
+          "source": "ctfidf",
+          "weight": 0.6350588629919884
+        },
+        {
+          "term": "energy",
+          "source": "ctfidf",
+          "weight": 0.6350488426510199
+        },
+        {
+          "term": "network",
+          "source": "ctfidf",
+          "weight": 0.6290440119907174
+        },
+        {
+          "term": "forecasting",
+          "source": "ctfidf",
+          "weight": 0.6173662811440523
+        },
+        {
+          "term": "series",
+          "source": "ctfidf",
+          "weight": 0.5687637061135306
+        },
+        {
+          "term": "learning",
+          "source": "ctfidf",
+          "weight": 0.5538192816794789
+        },
+        {
+          "term": "wireless",
+          "source": "ctfidf",
+          "weight": 0.5451563327717637
+        },
+        {
+          "term": "multi",
+          "source": "ctfidf",
+          "weight": 0.5236266021992296
+        }
+      ],
+      "note": "597 works in the fitting corpus. c-TF-IDF terms: power, detection, sensing, energy, network, forecasting, series, learning, wireless, multi."
+    },
+    {
+      "code": "01.02.04.01",
+      "label": "Edge / tsn / semantic",
+      "parent": "01.02.04",
+      "vocab": [
+        {
+          "term": "edge",
+          "source": "ctfidf"
+        },
+        {
+          "term": "tsn",
+          "source": "ctfidf",
+          "weight": 0.7658695224984207
+        },
+        {
+          "term": "semantic",
+          "source": "ctfidf",
+          "weight": 0.6187553226236059
+        },
+        {
+          "term": "network",
+          "source": "ctfidf",
+          "weight": 0.5646399906726556
+        },
+        {
+          "term": "latency",
+          "source": "ctfidf",
+          "weight": 0.52324519084563
+        },
+        {
+          "term": "cloud",
+          "source": "ctfidf",
+          "weight": 0.5007961040785576
+        },
+        {
+          "term": "traffic",
+          "source": "ctfidf",
+          "weight": 0.3976573917013152
+        },
+        {
+          "term": "communication",
+          "source": "ctfidf",
+          "weight": 0.3879010061944121
+        },
+        {
+          "term": "proactive",
+          "source": "ctfidf",
+          "weight": 0.38725352401538815
+        },
+        {
+          "term": "computing",
+          "source": "ctfidf",
+          "weight": 0.37892042395796516
+        }
+      ],
+      "note": "34 works in the fitting corpus. c-TF-IDF terms: edge, tsn, semantic, network, latency, cloud, traffic, communication, proactive, computing."
+    },
+    {
+      "code": "01.02.04.02",
+      "label": "Wireless / channel / sensing",
+      "parent": "01.02.04",
+      "vocab": [
+        {
+          "term": "wireless",
+          "source": "ctfidf"
+        },
+        {
+          "term": "channel",
+          "source": "ctfidf",
+          "weight": 0.8962329524082303
+        },
+        {
+          "term": "sensing",
+          "source": "ctfidf",
+          "weight": 0.775992683420333
+        },
+        {
+          "term": "mimo",
+          "source": "ctfidf",
+          "weight": 0.6480460501562717
+        },
+        {
+          "term": "communication",
+          "source": "ctfidf",
+          "weight": 0.5500536886951461
+        },
+        {
+          "term": "radio",
+          "source": "ctfidf",
+          "weight": 0.5018293599166216
+        },
+        {
+          "term": "isac",
+          "source": "ctfidf",
+          "weight": 0.4764035448436958
+        },
+        {
+          "term": "networks",
+          "source": "ctfidf",
+          "weight": 0.46882424495868535
+        },
+        {
+          "term": "power",
+          "source": "ctfidf",
+          "weight": 0.4642480369370811
+        },
+        {
+          "term": "ris",
+          "source": "ctfidf",
+          "weight": 0.4265249158395566
+        }
+      ],
+      "note": "137 works in the fitting corpus. c-TF-IDF terms: wireless, channel, sensing, mimo, communication, radio, isac, networks, power, ris."
+    },
+    {
+      "code": "01.02.04.03",
+      "label": "Power / energy / grid",
+      "parent": "01.02.04",
+      "vocab": [
+        {
+          "term": "power",
+          "source": "ctfidf"
+        },
+        {
+          "term": "energy",
+          "source": "ctfidf",
+          "weight": 0.7163705002738723
+        },
+        {
+          "term": "grid",
+          "source": "ctfidf",
+          "weight": 0.5528287872427241
+        },
+        {
+          "term": "electricity",
+          "source": "ctfidf",
+          "weight": 0.4649400545136762
+        },
+        {
+          "term": "load",
+          "source": "ctfidf",
+          "weight": 0.4516766523614358
+        },
+        {
+          "term": "renewable",
+          "source": "ctfidf",
+          "weight": 0.4272413050379732
+        },
+        {
+          "term": "charging",
+          "source": "ctfidf",
+          "weight": 0.4086403859319393
+        },
+        {
+          "term": "carbon",
+          "source": "ctfidf",
+          "weight": 0.39550010446296746
+        },
+        {
+          "term": "control",
+          "source": "ctfidf",
+          "weight": 0.3603894198821041
+        },
+        {
+          "term": "demand",
+          "source": "ctfidf",
+          "weight": 0.35144003947884667
+        }
+      ],
+      "note": "118 works in the fitting corpus. c-TF-IDF terms: power, energy, grid, electricity, load, renewable, charging, carbon, control, demand."
+    },
+    {
+      "code": "01.02.04.04",
+      "label": "Anomaly / detection / anomaly detection",
+      "parent": "01.02.04",
+      "vocab": [
+        {
+          "term": "anomaly",
+          "source": "ctfidf"
+        },
+        {
+          "term": "detection",
+          "source": "ctfidf",
+          "weight": 0.9598301088095272
+        },
+        {
+          "term": "anomaly detection",
+          "source": "ctfidf",
+          "weight": 0.7909522559984293
+        },
+        {
+          "term": "fault",
+          "source": "ctfidf",
+          "weight": 0.42156875349970957
+        },
+        {
+          "term": "cyber",
+          "source": "ctfidf",
+          "weight": 0.3503627173084653
+        },
+        {
+          "term": "attacks",
+          "source": "ctfidf",
+          "weight": 0.32599488362305307
+        },
+        {
+          "term": "iot",
+          "source": "ctfidf",
+          "weight": 0.26481247550276116
+        },
+        {
+          "term": "industrial",
+          "source": "ctfidf",
+          "weight": 0.2532457623835728
+        },
+        {
+          "term": "security",
+          "source": "ctfidf",
+          "weight": 0.252733168636787
+        },
+        {
+          "term": "sensor",
+          "source": "ctfidf",
+          "weight": 0.25250846249330544
+        }
+      ],
+      "note": "77 works in the fitting corpus. c-TF-IDF terms: anomaly, detection, anomaly detection, fault, cyber, attacks, iot, industrial, security, sensor."
+    },
+    {
+      "code": "01.02.04.05",
+      "label": "Climate / wind / weather",
+      "parent": "01.02.04",
+      "vocab": [
+        {
+          "term": "climate",
+          "source": "ctfidf"
+        },
+        {
+          "term": "wind",
+          "source": "ctfidf",
+          "weight": 0.4478289260914084
+        },
+        {
+          "term": "weather",
+          "source": "ctfidf",
+          "weight": 0.4034532094744309
+        },
+        {
+          "term": "rainfall",
+          "source": "ctfidf",
+          "weight": 0.3766735778841407
+        },
+        {
+          "term": "precipitation",
+          "source": "ctfidf",
+          "weight": 0.3116398821825339
+        },
+        {
+          "term": "sea",
+          "source": "ctfidf",
+          "weight": 0.27140859390938243
+        },
+        {
+          "term": "resolution",
+          "source": "ctfidf",
+          "weight": 0.2708676406006671
+        },
+        {
+          "term": "monsoon",
+          "source": "ctfidf",
+          "weight": 0.2502104815094064
+        },
+        {
+          "term": "environmental",
+          "source": "ctfidf",
+          "weight": 0.24776667797235832
+        },
+        {
+          "term": "forecasting",
+          "source": "ctfidf",
+          "weight": 0.2188332889489652
+        }
+      ],
+      "note": "58 works in the fitting corpus. c-TF-IDF terms: climate, wind, weather, rainfall, precipitation, sea, resolution, monsoon, environmental, forecasting."
+    },
+    {
+      "code": "01.02.04.06",
+      "label": "Series / forecasting / series forecasting",
+      "parent": "01.02.04",
+      "vocab": [
+        {
+          "term": "series",
+          "source": "ctfidf"
+        },
+        {
+          "term": "forecasting",
+          "source": "ctfidf",
+          "weight": 0.9300278913477725
+        },
+        {
+          "term": "series forecasting",
+          "source": "ctfidf",
+          "weight": 0.4046246459293988
+        },
+        {
+          "term": "forecasts",
+          "source": "ctfidf",
+          "weight": 0.3139929584173976
+        },
+        {
+          "term": "stationarity",
+          "source": "ctfidf",
+          "weight": 0.28987908048170913
+        },
+        {
+          "term": "forecast",
+          "source": "ctfidf",
+          "weight": 0.2116783397727204
+        },
+        {
+          "term": "series foundation",
+          "source": "ctfidf",
+          "weight": 0.19284237184137032
+        },
+        {
+          "term": "historical",
+          "source": "ctfidf",
+          "weight": 0.18084168042648002
+        },
+        {
+          "term": "autoregressive",
+          "source": "ctfidf",
+          "weight": 0.1684596721972156
+        },
+        {
+          "term": "scenarios",
+          "source": "ctfidf",
+          "weight": 0.16507510697742267
+        }
+      ],
+      "note": "63 works in the fitting corpus. c-TF-IDF terms: series, forecasting, series forecasting, forecasts, stationarity, forecast, series foundation, historical, autoregressive, scenarios."
+    },
+    {
+      "code": "01.02.04.07",
+      "label": "Lidar / radar / remote sensing",
+      "parent": "01.02.04",
+      "vocab": [
+        {
+          "term": "lidar",
+          "source": "ctfidf"
+        },
+        {
+          "term": "radar",
+          "source": "ctfidf",
+          "weight": 0.960785667816676
+        },
+        {
+          "term": "remote sensing",
+          "source": "ctfidf",
+          "weight": 0.908696698367105
+        },
+        {
+          "term": "remote",
+          "source": "ctfidf",
+          "weight": 0.8042130883793894
+        },
+        {
+          "term": "sensing",
+          "source": "ctfidf",
+          "weight": 0.7729740628194136
+        },
+        {
+          "term": "underwater",
+          "source": "ctfidf",
+          "weight": 0.7123445109336431
+        },
+        {
+          "term": "spatial",
+          "source": "ctfidf",
+          "weight": 0.6944227170409151
+        },
+        {
+          "term": "detection",
+          "source": "ctfidf",
+          "weight": 0.6823591132581361
+        },
+        {
+          "term": "plant",
+          "source": "ctfidf",
+          "weight": 0.6453871775214436
+        },
+        {
+          "term": "learning",
+          "source": "ctfidf",
+          "weight": 0.5570294009516201
+        }
+      ],
+      "note": "110 works in the fitting corpus. c-TF-IDF terms: lidar, radar, remote sensing, remote, sensing, underwater, spatial, detection, plant, learning."
+    },
+    {
+      "code": "01.03",
+      "label": "Clinical / learning / medical",
+      "parent": "01",
+      "vocab": [
+        {
+          "term": "clinical",
+          "source": "ctfidf"
+        },
+        {
+          "term": "learning",
+          "source": "ctfidf",
+          "weight": 0.9288459399077444
+        },
+        {
+          "term": "medical",
+          "source": "ctfidf",
+          "weight": 0.7032965139402478
+        },
+        {
+          "term": "neural",
+          "source": "ctfidf",
+          "weight": 0.702542832122246
+        },
+        {
+          "term": "causal",
+          "source": "ctfidf",
+          "weight": 0.7021696590811195
+        },
+        {
+          "term": "segmentation",
+          "source": "ctfidf",
+          "weight": 0.6932248862585779
+        },
+        {
+          "term": "bayesian",
+          "source": "ctfidf",
+          "weight": 0.6742080911035868
+        },
+        {
+          "term": "inference",
+          "source": "ctfidf",
+          "weight": 0.6613751593298224
+        },
+        {
+          "term": "prediction",
+          "source": "ctfidf",
+          "weight": 0.6363226441453875
+        },
+        {
+          "term": "treatment",
+          "source": "ctfidf",
+          "weight": 0.6323678793625686
+        }
+      ],
+      "note": "1032 works in the fitting corpus. c-TF-IDF terms: clinical, learning, medical, neural, causal, segmentation, bayesian, inference, prediction, treatment."
+    },
+    {
+      "code": "01.03.01",
+      "label": "Segmentation / imaging / image",
+      "parent": "01.03",
+      "vocab": [
+        {
+          "term": "segmentation",
+          "source": "ctfidf"
+        },
+        {
+          "term": "imaging",
+          "source": "ctfidf",
+          "weight": 0.7746529601069391
+        },
+        {
+          "term": "image",
+          "source": "ctfidf",
+          "weight": 0.7218565079261597
+        },
+        {
+          "term": "clinical",
+          "source": "ctfidf",
+          "weight": 0.696250852018248
+        },
+        {
+          "term": "reconstruction",
+          "source": "ctfidf",
+          "weight": 0.6514799201159289
+        },
+        {
+          "term": "learning",
+          "source": "ctfidf",
+          "weight": 0.6299186211486668
+        },
+        {
+          "term": "images",
+          "source": "ctfidf",
+          "weight": 0.6255998717107502
+        },
+        {
+          "term": "mri",
+          "source": "ctfidf",
+          "weight": 0.6216385116905175
+        },
+        {
+          "term": "protein",
+          "source": "ctfidf",
+          "weight": 0.6069847028543716
+        },
+        {
+          "term": "cell",
+          "source": "ctfidf",
+          "weight": 0.6002959163738127
+        }
+      ],
+      "note": "376 works in the fitting corpus. c-TF-IDF terms: segmentation, imaging, image, clinical, reconstruction, learning, images, mri, protein, cell."
+    },
+    {
+      "code": "01.03.01.01",
+      "label": "Reconstruction / neural / image",
+      "parent": "01.03.01",
+      "vocab": [
+        {
+          "term": "reconstruction",
+          "source": "ctfidf"
+        },
+        {
+          "term": "neural",
+          "source": "ctfidf",
+          "weight": 0.8042419652786409
+        },
+        {
+          "term": "image",
+          "source": "ctfidf",
+          "weight": 0.8035890860511187
+        },
+        {
+          "term": "imaging",
+          "source": "ctfidf",
+          "weight": 0.7104076828373507
+        },
+        {
+          "term": "deblurring",
+          "source": "ctfidf",
+          "weight": 0.6552616525009666
+        },
+        {
+          "term": "tomography",
+          "source": "ctfidf",
+          "weight": 0.6341225954181868
+        },
+        {
+          "term": "network",
+          "source": "ctfidf",
+          "weight": 0.540277089241012
+        },
+        {
+          "term": "radiance",
+          "source": "ctfidf",
+          "weight": 0.5395511220808024
+        },
+        {
+          "term": "deep",
+          "source": "ctfidf",
+          "weight": 0.5240811420889117
+        },
+        {
+          "term": "inverse",
+          "source": "ctfidf",
+          "weight": 0.519559377261583
+        }
+      ],
+      "note": "72 works in the fitting corpus. c-TF-IDF terms: reconstruction, neural, image, imaging, deblurring, tomography, network, radiance, deep, inverse."
+    },
+    {
+      "code": "01.03.01.02",
+      "label": "Segmentation / medical / clinical",
+      "parent": "01.03.01",
+      "vocab": [
+        {
+          "term": "segmentation",
+          "source": "ctfidf"
+        },
+        {
+          "term": "medical",
+          "source": "ctfidf",
+          "weight": 0.6761038115785404
+        },
+        {
+          "term": "clinical",
+          "source": "ctfidf",
+          "weight": 0.5671974904313415
+        },
+        {
+          "term": "images",
+          "source": "ctfidf",
+          "weight": 0.4514873325650089
+        },
+        {
+          "term": "image",
+          "source": "ctfidf",
+          "weight": 0.41128880895483577
+        },
+        {
+          "term": "lesion",
+          "source": "ctfidf",
+          "weight": 0.3920064094362653
+        },
+        {
+          "term": "cancer",
+          "source": "ctfidf",
+          "weight": 0.37592307791928753
+        },
+        {
+          "term": "imaging",
+          "source": "ctfidf",
+          "weight": 0.37103833869698
+        },
+        {
+          "term": "ultrasound",
+          "source": "ctfidf",
+          "weight": 0.3560059157419256
+        },
+        {
+          "term": "dataset",
+          "source": "ctfidf",
+          "weight": 0.3540895852789112
+        }
+      ],
+      "note": "93 works in the fitting corpus. c-TF-IDF terms: segmentation, medical, clinical, images, image, lesion, cancer, imaging, ultrasound, dataset."
+    },
+    {
+      "code": "01.03.01.03",
+      "label": "Mri / surgical / vessel",
+      "parent": "01.03.01",
+      "vocab": [
+        {
+          "term": "mri",
+          "source": "ctfidf"
+        },
+        {
+          "term": "surgical",
+          "source": "ctfidf",
+          "weight": 0.6548326615699434
+        },
+        {
+          "term": "vessel",
+          "source": "ctfidf",
+          "weight": 0.5755577837311434
+        },
+        {
+          "term": "segmentation",
+          "source": "ctfidf",
+          "weight": 0.5194880386857462
+        },
+        {
+          "term": "reconstruction",
+          "source": "ctfidf",
+          "weight": 0.48707852517978273
+        },
+        {
+          "term": "imaging",
+          "source": "ctfidf",
+          "weight": 0.41326902244295494
+        },
+        {
+          "term": "image",
+          "source": "ctfidf",
+          "weight": 0.38198992839110224
+        },
+        {
+          "term": "clinical",
+          "source": "ctfidf",
+          "weight": 0.3613713365691597
+        },
+        {
+          "term": "images",
+          "source": "ctfidf",
+          "weight": 0.3491029764923627
+        },
+        {
+          "term": "diffusion",
+          "source": "ctfidf",
+          "weight": 0.3029225606521545
+        }
+      ],
+      "note": "65 works in the fitting corpus. c-TF-IDF terms: mri, surgical, vessel, segmentation, reconstruction, imaging, image, clinical, images, diffusion."
+    },
+    {
+      "code": "01.03.01.04",
+      "label": "Ecg / reconstruction / imaging",
+      "parent": "01.03.01",
+      "vocab": [
+        {
+          "term": "ecg",
+          "source": "ctfidf"
+        },
+        {
+          "term": "reconstruction",
+          "source": "ctfidf",
+          "weight": 0.4160911473389539
+        },
+        {
+          "term": "imaging",
+          "source": "ctfidf",
+          "weight": 0.35375193496427293
+        },
+        {
+          "term": "clinical",
+          "source": "ctfidf",
+          "weight": 0.3296279836038695
+        },
+        {
+          "term": "cardiac",
+          "source": "ctfidf",
+          "weight": 0.323556857257954
+        },
+        {
+          "term": "microscopy",
+          "source": "ctfidf",
+          "weight": 0.3078934464143671
+        },
+        {
+          "term": "physiological",
+          "source": "ctfidf",
+          "weight": 0.27153588924466393
+        },
+        {
+          "term": "wearable",
+          "source": "ctfidf",
+          "weight": 0.25817781224981423
+        },
+        {
+          "term": "oct",
+          "source": "ctfidf",
+          "weight": 0.2500870058510572
+        },
+        {
+          "term": "brain",
+          "source": "ctfidf",
+          "weight": 0.23235462022542624
+        }
+      ],
+      "note": "49 works in the fitting corpus. c-TF-IDF terms: ecg, reconstruction, imaging, clinical, cardiac, microscopy, physiological, wearable, oct, brain."
+    },
+    {
+      "code": "01.03.01.05",
+      "label": "Protein / cell / molecular",
+      "parent": "01.03.01",
+      "vocab": [
+        {
+          "term": "protein",
+          "source": "ctfidf"
+        },
+        {
+          "term": "cell",
+          "source": "ctfidf",
+          "weight": 0.8765080347488448
+        },
+        {
+          "term": "molecular",
+          "source": "ctfidf",
+          "weight": 0.558876448443284
+        },
+        {
+          "term": "drug",
+          "source": "ctfidf",
+          "weight": 0.4709645236948039
+        },
+        {
+          "term": "sequence",
+          "source": "ctfidf",
+          "weight": 0.4676541003588162
+        },
+        {
+          "term": "prediction",
+          "source": "ctfidf",
+          "weight": 0.43121665812597815
+        },
+        {
+          "term": "biological",
+          "source": "ctfidf",
+          "weight": 0.4301549404546262
+        },
+        {
+          "term": "single cell",
+          "source": "ctfidf",
+          "weight": 0.4214067254434783
+        },
+        {
+          "term": "design",
+          "source": "ctfidf",
+          "weight": 0.4009745923824374
+        },
+        {
+          "term": "rna",
+          "source": "ctfidf",
+          "weight": 0.3382055225909247
+        }
+      ],
+      "note": "97 works in the fitting corpus. c-TF-IDF terms: protein, cell, molecular, drug, sequence, prediction, biological, single cell, design, rna."
+    },
+    {
+      "code": "01.03.02",
+      "label": "Graph / neural / brain",
+      "parent": "01.03",
+      "vocab": [
+        {
+          "term": "graph",
+          "source": "ctfidf"
+        },
+        {
+          "term": "neural",
+          "source": "ctfidf",
+          "weight": 0.8808907494402551
+        },
+        {
+          "term": "brain",
+          "source": "ctfidf",
+          "weight": 0.8688034594882935
+        },
+        {
+          "term": "networks",
+          "source": "ctfidf",
+          "weight": 0.8363341810795697
+        },
+        {
+          "term": "eeg",
+          "source": "ctfidf",
+          "weight": 0.6266730823922163
+        },
+        {
+          "term": "network",
+          "source": "ctfidf",
+          "weight": 0.6034880581401085
+        },
+        {
+          "term": "learning",
+          "source": "ctfidf",
+          "weight": 0.5816776467385062
+        },
+        {
+          "term": "compression",
+          "source": "ctfidf",
+          "weight": 0.5773948711923372
+        },
+        {
+          "term": "temporal",
+          "source": "ctfidf",
+          "weight": 0.5076839131118294
+        },
+        {
+          "term": "node",
+          "source": "ctfidf",
+          "weight": 0.4918221363992202
+        }
+      ],
+      "note": "244 works in the fitting corpus. c-TF-IDF terms: graph, neural, brain, networks, eeg, network, learning, compression, temporal, node."
+    },
+    {
+      "code": "01.03.02.01",
+      "label": "Species / population / cell",
+      "parent": "01.03.02",
+      "vocab": [
+        {
+          "term": "species",
+          "source": "ctfidf"
+        },
+        {
+          "term": "population",
+          "source": "ctfidf",
+          "weight": 0.5146655481321135
+        },
+        {
+          "term": "cell",
+          "source": "ctfidf",
+          "weight": 0.41166692649749304
+        },
+        {
+          "term": "competition",
+          "source": "ctfidf",
+          "weight": 0.3616483313358177
+        },
+        {
+          "term": "biological",
+          "source": "ctfidf",
+          "weight": 0.3557477630597836
+        },
+        {
+          "term": "death",
+          "source": "ctfidf",
+          "weight": 0.3512725153864891
+        },
+        {
+          "term": "evolutionary",
+          "source": "ctfidf",
+          "weight": 0.32156279404701904
+        },
+        {
+          "term": "cancer",
+          "source": "ctfidf",
+          "weight": 0.31395045301978197
+        },
+        {
+          "term": "tumor",
+          "source": "ctfidf",
+          "weight": 0.31092744049484283
+        },
+        {
+          "term": "populations",
+          "source": "ctfidf",
+          "weight": 0.30149447065739227
+        }
+      ],
+      "note": "37 works in the fitting corpus. c-TF-IDF terms: species, population, cell, competition, biological, death, evolutionary, cancer, tumor, populations."
+    },
+    {
+      "code": "01.03.02.02",
+      "label": "Brain / receptive / neural",
+      "parent": "01.03.02",
+      "vocab": [
+        {
+          "term": "brain",
+          "source": "ctfidf"
+        },
+        {
+          "term": "receptive",
+          "source": "ctfidf",
+          "weight": 0.7091362849262302
+        },
+        {
+          "term": "neural",
+          "source": "ctfidf",
+          "weight": 0.7020992582428716
+        },
+        {
+          "term": "neuronal",
+          "source": "ctfidf",
+          "weight": 0.6249489658350301
+        },
+        {
+          "term": "synaptic",
+          "source": "ctfidf",
+          "weight": 0.621602802414298
+        },
+        {
+          "term": "information",
+          "source": "ctfidf",
+          "weight": 0.5660870219906191
+        },
+        {
+          "term": "neurons",
+          "source": "ctfidf",
+          "weight": 0.5385394660231819
+        },
+        {
+          "term": "cortical",
+          "source": "ctfidf",
+          "weight": 0.5056129153214146
+        },
+        {
+          "term": "noise",
+          "source": "ctfidf",
+          "weight": 0.47425750355057283
+        },
+        {
+          "term": "modality",
+          "source": "ctfidf",
+          "weight": 0.4616099526412569
+        }
+      ],
+      "note": "49 works in the fitting corpus. c-TF-IDF terms: brain, receptive, neural, neuronal, synaptic, information, neurons, cortical, noise, modality."
+    },
+    {
+      "code": "01.03.02.03",
+      "label": "Eeg / brain / disease",
+      "parent": "01.03.02",
+      "vocab": [
+        {
+          "term": "eeg",
+          "source": "ctfidf"
+        },
+        {
+          "term": "brain",
+          "source": "ctfidf",
+          "weight": 0.7800259829745988
+        },
+        {
+          "term": "disease",
+          "source": "ctfidf",
+          "weight": 0.455806421918475
+        },
+        {
+          "term": "alzheimer",
+          "source": "ctfidf",
+          "weight": 0.42278162814545855
+        },
+        {
+          "term": "temporal",
+          "source": "ctfidf",
+          "weight": 0.3925993340523741
+        },
+        {
+          "term": "functional",
+          "source": "ctfidf",
+          "weight": 0.3576458499320854
+        },
+        {
+          "term": "eeg foundation",
+          "source": "ctfidf",
+          "weight": 0.33660132880515153
+        },
+        {
+          "term": "seizure",
+          "source": "ctfidf",
+          "weight": 0.33660132880515153
+        },
+        {
+          "term": "neuroimaging",
+          "source": "ctfidf",
+          "weight": 0.3131111669220923
+        },
+        {
+          "term": "fmri",
+          "source": "ctfidf",
+          "weight": 0.3011854758003739
+        }
+      ],
+      "note": "43 works in the fitting corpus. c-TF-IDF terms: eeg, brain, disease, alzheimer, temporal, functional, eeg foundation, seizure, neuroimaging, fmri."
+    },
+    {
+      "code": "01.03.02.04",
+      "label": "Compression / spiking / neural",
+      "parent": "01.03.02",
+      "vocab": [
+        {
+          "term": "compression",
+          "source": "ctfidf"
+        },
+        {
+          "term": "spiking",
+          "source": "ctfidf",
+          "weight": 0.5938846149045058
+        },
+        {
+          "term": "neural",
+          "source": "ctfidf",
+          "weight": 0.5395953816539238
+        },
+        {
+          "term": "jpeg",
+          "source": "ctfidf",
+          "weight": 0.37246058324670495
+        },
+        {
+          "term": "neuromorphic",
+          "source": "ctfidf",
+          "weight": 0.36894483538548445
+        },
+        {
+          "term": "hardware",
+          "source": "ctfidf",
+          "weight": 0.33912844203177467
+        },
+        {
+          "term": "efficient",
+          "source": "ctfidf",
+          "weight": 0.3327097477866387
+        },
+        {
+          "term": "spiking neural",
+          "source": "ctfidf",
+          "weight": 0.3301085369238545
+        },
+        {
+          "term": "image compression",
+          "source": "ctfidf",
+          "weight": 0.3246122746288336
+        },
+        {
+          "term": "neural networks",
+          "source": "ctfidf",
+          "weight": 0.300408060023511
+        }
+      ],
+      "note": "40 works in the fitting corpus. c-TF-IDF terms: compression, spiking, neural, jpeg, neuromorphic, hardware, efficient, spiking neural, image compression, neural networks."
+    },
+    {
+      "code": "01.03.02.05",
+      "label": "Graph / node / ood",
+      "parent": "01.03.02",
+      "vocab": [
+        {
+          "term": "graph",
+          "source": "ctfidf"
+        },
+        {
+          "term": "node",
+          "source": "ctfidf",
+          "weight": 0.4220931000477239
+        },
+        {
+          "term": "ood",
+          "source": "ctfidf",
+          "weight": 0.3864704330362986
+        },
+        {
+          "term": "graphs",
+          "source": "ctfidf",
+          "weight": 0.3553508015431363
+        },
+        {
+          "term": "gnn",
+          "source": "ctfidf",
+          "weight": 0.34070804514062103
+        },
+        {
+          "term": "graph neural",
+          "source": "ctfidf",
+          "weight": 0.30548508695441295
+        },
+        {
+          "term": "nodes",
+          "source": "ctfidf",
+          "weight": 0.26942276399981097
+        },
+        {
+          "term": "networks",
+          "source": "ctfidf",
+          "weight": 0.26203983313328133
+        },
+        {
+          "term": "neural",
+          "source": "ctfidf",
+          "weight": 0.2536023480470416
+        },
+        {
+          "term": "learning",
+          "source": "ctfidf",
+          "weight": 0.2529752232686794
+        }
+      ],
+      "note": "43 works in the fitting corpus. c-TF-IDF terms: graph, node, ood, graphs, gnn, graph neural, nodes, networks, neural, learning."
+    },
+    {
+      "code": "01.03.02.06",
+      "label": "Networks / network / node",
+      "parent": "01.03.02",
+      "vocab": [
+        {
+          "term": "networks",
+          "source": "ctfidf"
+        },
+        {
+          "term": "network",
+          "source": "ctfidf",
+          "weight": 0.8574705296855324
+        },
+        {
+          "term": "node",
+          "source": "ctfidf",
+          "weight": 0.557851937394591
+        },
+        {
+          "term": "periphery",
+          "source": "ctfidf",
+          "weight": 0.3888282443335341
+        },
+        {
+          "term": "algorithm",
+          "source": "ctfidf",
+          "weight": 0.38474964403781836
+        },
+        {
+          "term": "interference",
+          "source": "ctfidf",
+          "weight": 0.38308154902285785
+        },
+        {
+          "term": "core periphery",
+          "source": "ctfidf",
+          "weight": 0.3675375462976579
+        },
+        {
+          "term": "social",
+          "source": "ctfidf",
+          "weight": 0.3482370219961028
+        },
+        {
+          "term": "graphs",
+          "source": "ctfidf",
+          "weight": 0.33947032037338143
+        },
+        {
+          "term": "nodes",
+          "source": "ctfidf",
+          "weight": 0.33553491343619696
+        }
+      ],
+      "note": "32 works in the fitting corpus. c-TF-IDF terms: networks, network, node, periphery, algorithm, interference, core periphery, social, graphs, nodes."
+    },
+    {
+      "code": "01.03.03",
+      "label": "Bayesian / causal / treatment",
+      "parent": "01.03",
+      "vocab": [
+        {
+          "term": "bayesian",
+          "source": "ctfidf"
+        },
+        {
+          "term": "causal",
+          "source": "ctfidf",
+          "weight": 0.9918554533976138
+        },
+        {
+          "term": "treatment",
+          "source": "ctfidf",
+          "weight": 0.8956945946829963
+        },
+        {
+          "term": "clinical",
+          "source": "ctfidf",
+          "weight": 0.8469545672650652
+        },
+        {
+          "term": "inference",
+          "source": "ctfidf",
+          "weight": 0.8074911477538864
+        },
+        {
+          "term": "regression",
+          "source": "ctfidf",
+          "weight": 0.7769145088772101
+        },
+        {
+          "term": "estimation",
+          "source": "ctfidf",
+          "weight": 0.6542468290508298
+        },
+        {
+          "term": "sample",
+          "source": "ctfidf",
+          "weight": 0.5761371615912185
+        },
+        {
+          "term": "estimator",
+          "source": "ctfidf",
+          "weight": 0.5169033552854784
+        },
+        {
+          "term": "distribution",
+          "source": "ctfidf",
+          "weight": 0.5163624928937147
+        }
+      ],
+      "note": "412 works in the fitting corpus. c-TF-IDF terms: bayesian, causal, treatment, clinical, inference, regression, estimation, sample, estimator, distribution."
+    },
+    {
+      "code": "01.03.03.01",
+      "label": "Causal / treatment / trial",
+      "parent": "01.03.03",
+      "vocab": [
+        {
+          "term": "causal",
+          "source": "ctfidf"
+        },
+        {
+          "term": "treatment",
+          "source": "ctfidf",
+          "weight": 0.8043297088083909
+        },
+        {
+          "term": "trial",
+          "source": "ctfidf",
+          "weight": 0.3016163305182967
+        },
+        {
+          "term": "trials",
+          "source": "ctfidf",
+          "weight": 0.2857769729891241
+        },
+        {
+          "term": "confounding",
+          "source": "ctfidf",
+          "weight": 0.2594231177688955
+        },
+        {
+          "term": "variables",
+          "source": "ctfidf",
+          "weight": 0.24660366721690302
+        },
+        {
+          "term": "outcomes",
+          "source": "ctfidf",
+          "weight": 0.24412814124215365
+        },
+        {
+          "term": "dose",
+          "source": "ctfidf",
+          "weight": 0.23225105677663954
+        },
+        {
+          "term": "causal discovery",
+          "source": "ctfidf",
+          "weight": 0.23222877036305414
+        },
+        {
+          "term": "causal inference",
+          "source": "ctfidf",
+          "weight": 0.22433448274110981
+        }
+      ],
+      "note": "79 works in the fitting corpus. c-TF-IDF terms: causal, treatment, trial, trials, confounding, variables, outcomes, dose, causal discovery, causal inference."
+    },
+    {
+      "code": "01.03.03.02",
+      "label": "Epidemic / covid / disease",
+      "parent": "01.03.03",
+      "vocab": [
+        {
+          "term": "epidemic",
+          "source": "ctfidf"
+        },
+        {
+          "term": "covid",
+          "source": "ctfidf",
+          "weight": 0.8722297498202264
+        },
+        {
+          "term": "disease",
+          "source": "ctfidf",
+          "weight": 0.6066426379734424
+        },
+        {
+          "term": "spread",
+          "source": "ctfidf",
+          "weight": 0.5781769511508852
+        },
+        {
+          "term": "long covid",
+          "source": "ctfidf",
+          "weight": 0.5243735952589859
+        },
+        {
+          "term": "outbreak",
+          "source": "ctfidf",
+          "weight": 0.48691833845477267
+        },
+        {
+          "term": "transmission",
+          "source": "ctfidf",
+          "weight": 0.46472342735424166
+        },
+        {
+          "term": "outbreaks",
+          "source": "ctfidf",
+          "weight": 0.46259182173482677
+        },
+        {
+          "term": "virus",
+          "source": "ctfidf",
+          "weight": 0.4620663605964685
+        },
+        {
+          "term": "wastewater",
+          "source": "ctfidf",
+          "weight": 0.4337261107037378
+        }
+      ],
+      "note": "24 works in the fitting corpus. c-TF-IDF terms: epidemic, covid, disease, spread, long covid, outbreak, transmission, outbreaks, virus, wastewater."
+    },
+    {
+      "code": "01.03.03.03",
+      "label": "Clinical / medical / patient",
+      "parent": "01.03.03",
+      "vocab": [
+        {
+          "term": "clinical",
+          "source": "ctfidf"
+        },
+        {
+          "term": "medical",
+          "source": "ctfidf",
+          "weight": 0.733835972833927
+        },
+        {
+          "term": "patient",
+          "source": "ctfidf",
+          "weight": 0.5798139108953658
+        },
+        {
+          "term": "health",
+          "source": "ctfidf",
+          "weight": 0.3252526692451841
+        },
+        {
+          "term": "healthcare",
+          "source": "ctfidf",
+          "weight": 0.2845897719718132
+        },
+        {
+          "term": "llms",
+          "source": "ctfidf",
+          "weight": 0.26961205167105373
+        },
+        {
+          "term": "ehr",
+          "source": "ctfidf",
+          "weight": 0.240337300263154
+        },
+        {
+          "term": "care",
+          "source": "ctfidf",
+          "weight": 0.22165213732376024
+        },
+        {
+          "term": "evidence",
+          "source": "ctfidf",
+          "weight": 0.21445352906518061
+        },
+        {
+          "term": "treatment",
+          "source": "ctfidf",
+          "weight": 0.20214183998486962
+        }
+      ],
+      "note": "75 works in the fitting corpus. c-TF-IDF terms: clinical, medical, patient, health, healthcare, llms, ehr, care, evidence, treatment."
+    },
+    {
+      "code": "01.03.03.04",
+      "label": "Regression / estimator / estimation",
+      "parent": "01.03.03",
+      "vocab": [
+        {
+          "term": "regression",
+          "source": "ctfidf"
+        },
+        {
+          "term": "estimator",
+          "source": "ctfidf",
+          "weight": 0.6636003617861863
+        },
+        {
+          "term": "estimation",
+          "source": "ctfidf",
+          "weight": 0.5786063982719037
+        },
+        {
+          "term": "tests",
+          "source": "ctfidf",
+          "weight": 0.5755366280992609
+        },
+        {
+          "term": "covariance",
+          "source": "ctfidf",
+          "weight": 0.463670604923176
+        },
+        {
+          "term": "test",
+          "source": "ctfidf",
+          "weight": 0.4069285280222033
+        },
+        {
+          "term": "inference",
+          "source": "ctfidf",
+          "weight": 0.4065574154949417
+        },
+        {
+          "term": "sample",
+          "source": "ctfidf",
+          "weight": 0.38523161631769814
+        },
+        {
+          "term": "estimators",
+          "source": "ctfidf",
+          "weight": 0.38114622964821104
+        },
+        {
+          "term": "nonparametric",
+          "source": "ctfidf",
+          "weight": 0.37988935819467456
+        }
+      ],
+      "note": "54 works in the fitting corpus. c-TF-IDF terms: regression, estimator, estimation, tests, covariance, test, inference, sample, estimators, nonparametric."
+    },
+    {
+      "code": "01.03.03.05",
+      "label": "Bayesian / inference / posterior",
+      "parent": "01.03.03",
+      "vocab": [
+        {
+          "term": "bayesian",
+          "source": "ctfidf"
+        },
+        {
+          "term": "inference",
+          "source": "ctfidf",
+          "weight": 0.6357261850929176
+        },
+        {
+          "term": "posterior",
+          "source": "ctfidf",
+          "weight": 0.4946341794193678
+        },
+        {
+          "term": "distribution",
+          "source": "ctfidf",
+          "weight": 0.4182664889820315
+        },
+        {
+          "term": "bayes",
+          "source": "ctfidf",
+          "weight": 0.4156386979186056
+        },
+        {
+          "term": "variational",
+          "source": "ctfidf",
+          "weight": 0.385681728467539
+        },
+        {
+          "term": "likelihood",
+          "source": "ctfidf",
+          "weight": 0.3787172024279749
+        },
+        {
+          "term": "distributions",
+          "source": "ctfidf",
+          "weight": 0.3232144925442989
+        },
+        {
+          "term": "estimation",
+          "source": "ctfidf",
+          "weight": 0.3182440136507159
+        },
+        {
+          "term": "variational inference",
+          "source": "ctfidf",
+          "weight": 0.31176867581042705
+        }
+      ],
+      "note": "82 works in the fitting corpus. c-TF-IDF terms: bayesian, inference, posterior, distribution, bayes, variational, likelihood, distributions, estimation, variational inference."
+    },
+    {
+      "code": "01.03.03.06",
+      "label": "Optimization / bayesian / functional",
+      "parent": "01.03.03",
+      "vocab": [
+        {
+          "term": "optimization",
+          "source": "ctfidf"
+        },
+        {
+          "term": "bayesian",
+          "source": "ctfidf",
+          "weight": 0.9797130246260252
+        },
+        {
+          "term": "functional",
+          "source": "ctfidf",
+          "weight": 0.8198993057343604
+        },
+        {
+          "term": "prediction",
+          "source": "ctfidf",
+          "weight": 0.7716655048033674
+        },
+        {
+          "term": "conformal",
+          "source": "ctfidf",
+          "weight": 0.7650148544305276
+        },
+        {
+          "term": "bayesian optimization",
+          "source": "ctfidf",
+          "weight": 0.6544837106526996
+        },
+        {
+          "term": "surrogate",
+          "source": "ctfidf",
+          "weight": 0.606731837335477
+        },
+        {
+          "term": "conformal prediction",
+          "source": "ctfidf",
+          "weight": 0.5430201353706178
+        },
+        {
+          "term": "principal",
+          "source": "ctfidf",
+          "weight": 0.5107104855265613
+        },
+        {
+          "term": "selection",
+          "source": "ctfidf",
+          "weight": 0.4719594440658341
+        }
+      ],
+      "note": "61 works in the fitting corpus. c-TF-IDF terms: optimization, bayesian, functional, prediction, conformal, bayesian optimization, surrogate, conformal prediction, principal, selection."
+    },
+    {
+      "code": "01.03.03.07",
+      "label": "Clustering / cluster / clusters",
+      "parent": "01.03.03",
+      "vocab": [
+        {
+          "term": "clustering",
+          "source": "ctfidf"
+        },
+        {
+          "term": "cluster",
+          "source": "ctfidf",
+          "weight": 0.41977289579108173
+        },
+        {
+          "term": "clusters",
+          "source": "ctfidf",
+          "weight": 0.3108295871854914
+        },
+        {
+          "term": "algorithm",
+          "source": "ctfidf",
+          "weight": 0.2994104748508852
+        },
+        {
+          "term": "planted",
+          "source": "ctfidf",
+          "weight": 0.2780631024727954
+        },
+        {
+          "term": "partitions",
+          "source": "ctfidf",
+          "weight": 0.23960817693178937
+        },
+        {
+          "term": "balanced",
+          "source": "ctfidf",
+          "weight": 0.21794334777532234
+        },
+        {
+          "term": "random",
+          "source": "ctfidf",
+          "weight": 0.20375694258028385
+        },
+        {
+          "term": "log",
+          "source": "ctfidf",
+          "weight": 0.19757444547694425
+        },
+        {
+          "term": "granular",
+          "source": "ctfidf",
+          "weight": 0.19351331672709232
+        }
+      ],
+      "note": "37 works in the fitting corpus. c-TF-IDF terms: clustering, cluster, clusters, algorithm, planted, partitions, balanced, random, log, granular."
+    },
+    {
+      "code": "02",
+      "label": "Quantum / order / non",
+      "vocab": [
+        {
+          "term": "quantum",
+          "source": "ctfidf"
+        },
+        {
+          "term": "order",
+          "source": "ctfidf",
+          "weight": 0.5830893258101192
+        },
+        {
+          "term": "non",
+          "source": "ctfidf",
+          "weight": 0.5829073996675647
+        },
+        {
+          "term": "field",
+          "source": "ctfidf",
+          "weight": 0.5713110567064547
+        },
+        {
+          "term": "finite",
+          "source": "ctfidf",
+          "weight": 0.5568916679737724
+        },
+        {
+          "term": "energy",
+          "source": "ctfidf",
+          "weight": 0.5506382423812571
+        },
+        {
+          "term": "phase",
+          "source": "ctfidf",
+          "weight": 0.5021996821666433
+        },
+        {
+          "term": "theory",
+          "source": "ctfidf",
+          "weight": 0.5009080137565267
+        },
+        {
+          "term": "space",
+          "source": "ctfidf",
+          "weight": 0.4923305488181834
+        },
+        {
+          "term": "dimensional",
+          "source": "ctfidf",
+          "weight": 0.4613010353605655
+        }
+      ],
+      "note": "4896 works in the fitting corpus. c-TF-IDF terms: quantum, order, non, field, finite, energy, phase, theory, space, dimensional."
+    },
+    {
+      "code": "02.01",
+      "label": "Prove / finite / order",
+      "parent": "02",
+      "vocab": [
+        {
+          "term": "prove",
+          "source": "ctfidf"
+        },
+        {
+          "term": "finite",
+          "source": "ctfidf",
+          "weight": 0.9701791041887688
+        },
+        {
+          "term": "order",
+          "source": "ctfidf",
+          "weight": 0.9351840965734141
+        },
+        {
+          "term": "equations",
+          "source": "ctfidf",
+          "weight": 0.9311578118492385
+        },
+        {
+          "term": "linear",
+          "source": "ctfidf",
+          "weight": 0.8691463766250931
+        },
+        {
+          "term": "equation",
+          "source": "ctfidf",
+          "weight": 0.7952605856543131
+        },
+        {
+          "term": "functions",
+          "source": "ctfidf",
+          "weight": 0.7769005243100195
+        },
+        {
+          "term": "convergence",
+          "source": "ctfidf",
+          "weight": 0.7523670558313325
+        },
+        {
+          "term": "space",
+          "source": "ctfidf",
+          "weight": 0.7352344265667231
+        },
+        {
+          "term": "non",
+          "source": "ctfidf",
+          "weight": 0.7304308580104801
+        }
+      ],
+      "note": "2533 works in the fitting corpus. c-TF-IDF terms: prove, finite, order, equations, linear, equation, functions, convergence, space, non."
+    },
+    {
+      "code": "02.01.01",
+      "label": "Equations / order / equation",
+      "parent": "02.01",
+      "vocab": [
+        {
+          "term": "equations",
+          "source": "ctfidf"
+        },
+        {
+          "term": "order",
+          "source": "ctfidf",
+          "weight": 0.8455562920293831
+        },
+        {
+          "term": "equation",
+          "source": "ctfidf",
+          "weight": 0.8234832351445419
+        },
+        {
+          "term": "linear",
+          "source": "ctfidf",
+          "weight": 0.7675901478774193
+        },
+        {
+          "term": "convergence",
+          "source": "ctfidf",
+          "weight": 0.7519716452766135
+        },
+        {
+          "term": "nonlinear",
+          "source": "ctfidf",
+          "weight": 0.7410629470822532
+        },
+        {
+          "term": "stochastic",
+          "source": "ctfidf",
+          "weight": 0.6697619347275545
+        },
+        {
+          "term": "solution",
+          "source": "ctfidf",
+          "weight": 0.6471415367204311
+        },
+        {
+          "term": "solutions",
+          "source": "ctfidf",
+          "weight": 0.6445873746592272
+        },
+        {
+          "term": "approximation",
+          "source": "ctfidf",
+          "weight": 0.6258938182420204
+        }
+      ],
+      "note": "1227 works in the fitting corpus. c-TF-IDF terms: equations, order, equation, linear, convergence, nonlinear, stochastic, solution, solutions, approximation."
+    },
+    {
+      "code": "02.01.01.01",
+      "label": "Control / nonlinear / linear",
+      "parent": "02.01.01",
+      "vocab": [
+        {
+          "term": "control",
+          "source": "ctfidf"
+        },
+        {
+          "term": "nonlinear",
+          "source": "ctfidf",
+          "weight": 0.4959599453251814
+        },
+        {
+          "term": "linear",
+          "source": "ctfidf",
+          "weight": 0.46337998595006524
+        },
+        {
+          "term": "stochastic",
+          "source": "ctfidf",
+          "weight": 0.4433944201962769
+        },
+        {
+          "term": "predictive control",
+          "source": "ctfidf",
+          "weight": 0.40346850788467037
+        },
+        {
+          "term": "predictive",
+          "source": "ctfidf",
+          "weight": 0.3980216872711297
+        },
+        {
+          "term": "dynamics",
+          "source": "ctfidf",
+          "weight": 0.37590334530967767
+        },
+        {
+          "term": "input",
+          "source": "ctfidf",
+          "weight": 0.36714173715449505
+        },
+        {
+          "term": "delay",
+          "source": "ctfidf",
+          "weight": 0.3045156946626047
+        },
+        {
+          "term": "mpc",
+          "source": "ctfidf",
+          "weight": 0.302160510849792
+        }
+      ],
+      "note": "179 works in the fitting corpus. c-TF-IDF terms: control, nonlinear, linear, stochastic, predictive control, predictive, dynamics, input, delay, mpc."
+    },
+    {
+      "code": "02.01.01.02",
+      "label": "Neural / networks / neural networks",
+      "parent": "02.01.01",
+      "vocab": [
+        {
+          "term": "neural",
+          "source": "ctfidf"
+        },
+        {
+          "term": "networks",
+          "source": "ctfidf",
+          "weight": 0.7859077307073004
+        },
+        {
+          "term": "neural networks",
+          "source": "ctfidf",
+          "weight": 0.5582440753582333
+        },
+        {
+          "term": "pde",
+          "source": "ctfidf",
+          "weight": 0.551132903185827
+        },
+        {
+          "term": "differential",
+          "source": "ctfidf",
+          "weight": 0.5263244075226403
+        },
+        {
+          "term": "equations",
+          "source": "ctfidf",
+          "weight": 0.5002335403789191
+        },
+        {
+          "term": "network",
+          "source": "ctfidf",
+          "weight": 0.4844553878627543
+        },
+        {
+          "term": "differential equations",
+          "source": "ctfidf",
+          "weight": 0.4356243291923399
+        },
+        {
+          "term": "learning",
+          "source": "ctfidf",
+          "weight": 0.361374041736942
+        },
+        {
+          "term": "order",
+          "source": "ctfidf",
+          "weight": 0.36075089730360554
+        }
+      ],
+      "note": "135 works in the fitting corpus. c-TF-IDF terms: neural, networks, neural networks, pde, differential, equations, network, differential equations, learning, order."
+    },
+    {
+      "code": "02.01.01.03",
+      "label": "Matrix / tensor / matrices",
+      "parent": "02.01.01",
+      "vocab": [
+        {
+          "term": "matrix",
+          "source": "ctfidf"
+        },
+        {
+          "term": "tensor",
+          "source": "ctfidf",
+          "weight": 0.78915321669955
+        },
+        {
+          "term": "matrices",
+          "source": "ctfidf",
+          "weight": 0.6127243742472748
+        },
+        {
+          "term": "algorithm",
+          "source": "ctfidf",
+          "weight": 0.48622015507945915
+        },
+        {
+          "term": "rank",
+          "source": "ctfidf",
+          "weight": 0.4204914329383325
+        },
+        {
+          "term": "sparse",
+          "source": "ctfidf",
+          "weight": 0.4114064000773006
+        },
+        {
+          "term": "eigenvalue",
+          "source": "ctfidf",
+          "weight": 0.38259482291282276
+        },
+        {
+          "term": "linear",
+          "source": "ctfidf",
+          "weight": 0.3597420897068417
+        },
+        {
+          "term": "multiplication",
+          "source": "ctfidf",
+          "weight": 0.33848806254048786
+        },
+        {
+          "term": "order",
+          "source": "ctfidf",
+          "weight": 0.31470922121277833
+        }
+      ],
+      "note": "142 works in the fitting corpus. c-TF-IDF terms: matrix, tensor, matrices, algorithm, rank, sparse, eigenvalue, linear, multiplication, order."
+    },
+    {
+      "code": "02.01.01.04",
+      "label": "Convex / optimization / gradient",
+      "parent": "02.01.01",
+      "vocab": [
+        {
+          "term": "convex",
+          "source": "ctfidf"
+        },
+        {
+          "term": "optimization",
+          "source": "ctfidf",
+          "weight": 0.9880733603931742
+        },
+        {
+          "term": "gradient",
+          "source": "ctfidf",
+          "weight": 0.8665578925669616
+        },
+        {
+          "term": "complexity",
+          "source": "ctfidf",
+          "weight": 0.7805487238140918
+        },
+        {
+          "term": "stochastic",
+          "source": "ctfidf",
+          "weight": 0.7229898043254008
+        },
+        {
+          "term": "algorithm",
+          "source": "ctfidf",
+          "weight": 0.7173851876512247
+        },
+        {
+          "term": "nonconvex",
+          "source": "ctfidf",
+          "weight": 0.6735063110940805
+        },
+        {
+          "term": "manifold",
+          "source": "ctfidf",
+          "weight": 0.6375180051491713
+        },
+        {
+          "term": "order",
+          "source": "ctfidf",
+          "weight": 0.6348963755328251
+        },
+        {
+          "term": "smooth",
+          "source": "ctfidf",
+          "weight": 0.5881372707531656
+        }
+      ],
+      "note": "130 works in the fitting corpus. c-TF-IDF terms: convex, optimization, gradient, complexity, stochastic, algorithm, nonconvex, manifold, order, smooth."
+    },
+    {
+      "code": "02.01.01.05",
+      "label": "Equations / solutions / equation",
+      "parent": "02.01.01",
+      "vocab": [
+        {
+          "term": "equations",
+          "source": "ctfidf"
+        },
+        {
+          "term": "solutions",
+          "source": "ctfidf",
+          "weight": 0.9052776593040675
+        },
+        {
+          "term": "equation",
+          "source": "ctfidf",
+          "weight": 0.8475997610194959
+        },
+        {
+          "term": "stochastic",
+          "source": "ctfidf",
+          "weight": 0.7604751217714409
+        },
+        {
+          "term": "boundary",
+          "source": "ctfidf",
+          "weight": 0.7173629858969107
+        },
+        {
+          "term": "parabolic",
+          "source": "ctfidf",
+          "weight": 0.6491593224030071
+        },
+        {
+          "term": "solution",
+          "source": "ctfidf",
+          "weight": 0.5929606211393252
+        },
+        {
+          "term": "diffusion",
+          "source": "ctfidf",
+          "weight": 0.5915303659021639
+        },
+        {
+          "term": "convergence",
+          "source": "ctfidf",
+          "weight": 0.559349532380645
+        },
+        {
+          "term": "reaction",
+          "source": "ctfidf",
+          "weight": 0.5169546525200299
+        }
+      ],
+      "note": "164 works in the fitting corpus. c-TF-IDF terms: equations, solutions, equation, stochastic, boundary, parabolic, solution, diffusion, convergence, reaction."
+    },
+    {
+      "code": "02.01.01.06",
+      "label": "Equation / schr / odinger",
+      "parent": "02.01.01",
+      "vocab": [
+        {
+          "term": "equation",
+          "source": "ctfidf"
+        },
+        {
+          "term": "schr",
+          "source": "ctfidf",
+          "weight": 0.9344784550726047
+        },
+        {
+          "term": "odinger",
+          "source": "ctfidf",
+          "weight": 0.8411901696775127
+        },
+        {
+          "term": "schr odinger",
+          "source": "ctfidf",
+          "weight": 0.8411901696775127
+        },
+        {
+          "term": "nonlinear",
+          "source": "ctfidf",
+          "weight": 0.6338471331378327
+        },
+        {
+          "term": "soliton",
+          "source": "ctfidf",
+          "weight": 0.6236055243072943
+        },
+        {
+          "term": "odinger equation",
+          "source": "ctfidf",
+          "weight": 0.5154454038673284
+        },
+        {
+          "term": "nonlinear schr",
+          "source": "ctfidf",
+          "weight": 0.4705935565295518
+        },
+        {
+          "term": "kuramoto",
+          "source": "ctfidf",
+          "weight": 0.45365458813197074
+        },
+        {
+          "term": "wave",
+          "source": "ctfidf",
+          "weight": 0.4395200265592277
+        }
+      ],
+      "note": "77 works in the fitting corpus. c-TF-IDF terms: equation, schr, odinger, schr odinger, nonlinear, soliton, odinger equation, nonlinear schr, kuramoto, wave."
+    },
+    {
+      "code": "02.01.01.07",
+      "label": "Element / finite element / finite",
+      "parent": "02.01.01",
+      "vocab": [
+        {
+          "term": "element",
+          "source": "ctfidf"
+        },
+        {
+          "term": "finite element",
+          "source": "ctfidf",
+          "weight": 0.776515288360592
+        },
+        {
+          "term": "finite",
+          "source": "ctfidf",
+          "weight": 0.6300468579937853
+        },
+        {
+          "term": "error",
+          "source": "ctfidf",
+          "weight": 0.5718647367328225
+        },
+        {
+          "term": "boundary",
+          "source": "ctfidf",
+          "weight": 0.5522218886959644
+        },
+        {
+          "term": "convergence",
+          "source": "ctfidf",
+          "weight": 0.498137361108698
+        },
+        {
+          "term": "galerkin",
+          "source": "ctfidf",
+          "weight": 0.4838238094403335
+        },
+        {
+          "term": "approximation",
+          "source": "ctfidf",
+          "weight": 0.4802277434321869
+        },
+        {
+          "term": "order",
+          "source": "ctfidf",
+          "weight": 0.47820841714947143
+        },
+        {
+          "term": "discontinuous",
+          "source": "ctfidf",
+          "weight": 0.45752285702803597
+        }
+      ],
+      "note": "177 works in the fitting corpus. c-TF-IDF terms: element, finite element, finite, error, boundary, convergence, galerkin, approximation, order, discontinuous."
+    },
+    {
+      "code": "02.01.01.08",
+      "label": "Turbulence / fluid / flow",
+      "parent": "02.01.01",
+      "vocab": [
+        {
+          "term": "turbulence",
+          "source": "ctfidf"
+        },
+        {
+          "term": "fluid",
+          "source": "ctfidf",
+          "weight": 0.9982141422971523
+        },
+        {
+          "term": "flow",
+          "source": "ctfidf",
+          "weight": 0.970441704330682
+        },
+        {
+          "term": "flows",
+          "source": "ctfidf",
+          "weight": 0.8780955509938618
+        },
+        {
+          "term": "droplet",
+          "source": "ctfidf",
+          "weight": 0.824226313390756
+        },
+        {
+          "term": "particle",
+          "source": "ctfidf",
+          "weight": 0.8005412257942351
+        },
+        {
+          "term": "plasma",
+          "source": "ctfidf",
+          "weight": 0.7758804597371685
+        },
+        {
+          "term": "dynamics",
+          "source": "ctfidf",
+          "weight": 0.7269506626609712
+        },
+        {
+          "term": "equations",
+          "source": "ctfidf",
+          "weight": 0.7184833186468648
+        },
+        {
+          "term": "euler",
+          "source": "ctfidf",
+          "weight": 0.6874354995819872
+        }
+      ],
+      "note": "223 works in the fitting corpus. c-TF-IDF terms: turbulence, fluid, flow, flows, droplet, particle, plasma, dynamics, equations, euler."
+    },
+    {
+      "code": "02.01.02",
+      "label": "Prove / graphs / graph",
+      "parent": "02.01",
+      "vocab": [
+        {
+          "term": "prove",
+          "source": "ctfidf"
+        },
+        {
+          "term": "graphs",
+          "source": "ctfidf",
+          "weight": 0.7984589279271723
+        },
+        {
+          "term": "graph",
+          "source": "ctfidf",
+          "weight": 0.7321198718077467
+        },
+        {
+          "term": "groups",
+          "source": "ctfidf",
+          "weight": 0.7221691720180179
+        },
+        {
+          "term": "spaces",
+          "source": "ctfidf",
+          "weight": 0.7076719782186933
+        },
+        {
+          "term": "conjecture",
+          "source": "ctfidf",
+          "weight": 0.6741570363879152
+        },
+        {
+          "term": "finite",
+          "source": "ctfidf",
+          "weight": 0.6737874535671219
+        },
+        {
+          "term": "theorem",
+          "source": "ctfidf",
+          "weight": 0.6458618014650991
+        },
+        {
+          "term": "let",
+          "source": "ctfidf",
+          "weight": 0.6445314517246289
+        },
+        {
+          "term": "group",
+          "source": "ctfidf",
+          "weight": 0.6269675629776202
+        }
+      ],
+      "note": "1306 works in the fitting corpus. c-TF-IDF terms: prove, graphs, graph, groups, spaces, conjecture, finite, theorem, let, group."
+    },
+    {
+      "code": "02.01.02.01",
+      "label": "Spaces / functions / curvature",
+      "parent": "02.01.02",
+      "vocab": [
+        {
+          "term": "spaces",
+          "source": "ctfidf"
+        },
+        {
+          "term": "functions",
+          "source": "ctfidf",
+          "weight": 0.7489220904284646
+        },
+        {
+          "term": "curvature",
+          "source": "ctfidf",
+          "weight": 0.7414464952640824
+        },
+        {
+          "term": "fractional",
+          "source": "ctfidf",
+          "weight": 0.6838561574023082
+        },
+        {
+          "term": "prove",
+          "source": "ctfidf",
+          "weight": 0.6087025567985797
+        },
+        {
+          "term": "inequality",
+          "source": "ctfidf",
+          "weight": 0.6077611687412152
+        },
+        {
+          "term": "sharp",
+          "source": "ctfidf",
+          "weight": 0.5792009980603577
+        },
+        {
+          "term": "integral",
+          "source": "ctfidf",
+          "weight": 0.5738492717227827
+        },
+        {
+          "term": "integrals",
+          "source": "ctfidf",
+          "weight": 0.5660968867839992
+        },
+        {
+          "term": "inequalities",
+          "source": "ctfidf",
+          "weight": 0.565529181236095
+        }
+      ],
+      "note": "276 works in the fitting corpus. c-TF-IDF terms: spaces, functions, curvature, fractional, prove, inequality, sharp, integral, integrals, inequalities."
+    },
+    {
+      "code": "02.01.02.02",
+      "label": "Random / spectral / operators",
+      "parent": "02.01.02",
+      "vocab": [
+        {
+          "term": "random",
+          "source": "ctfidf"
+        },
+        {
+          "term": "spectral",
+          "source": "ctfidf",
+          "weight": 0.6184271169348197
+        },
+        {
+          "term": "operators",
+          "source": "ctfidf",
+          "weight": 0.38869516006982124
+        },
+        {
+          "term": "matrix",
+          "source": "ctfidf",
+          "weight": 0.3566163037743695
+        },
+        {
+          "term": "probability",
+          "source": "ctfidf",
+          "weight": 0.3509026391955273
+        },
+        {
+          "term": "gaussian",
+          "source": "ctfidf",
+          "weight": 0.3355216619904403
+        },
+        {
+          "term": "prove",
+          "source": "ctfidf",
+          "weight": 0.3312415687987455
+        },
+        {
+          "term": "transport",
+          "source": "ctfidf",
+          "weight": 0.32952421798531956
+        },
+        {
+          "term": "matrices",
+          "source": "ctfidf",
+          "weight": 0.3143213068313131
+        },
+        {
+          "term": "optimal",
+          "source": "ctfidf",
+          "weight": 0.3120387924812967
+        }
+      ],
+      "note": "213 works in the fitting corpus. c-TF-IDF terms: random, spectral, operators, matrix, probability, gaussian, prove, transport, matrices, optimal."
+    },
+    {
+      "code": "02.01.02.03",
+      "label": "Conjecture / polynomials / prove",
+      "parent": "02.01.02",
+      "vocab": [
+        {
+          "term": "conjecture",
+          "source": "ctfidf"
+        },
+        {
+          "term": "polynomials",
+          "source": "ctfidf",
+          "weight": 0.8851457167344674
+        },
+        {
+          "term": "prove",
+          "source": "ctfidf",
+          "weight": 0.8280700435697015
+        },
+        {
+          "term": "positive",
+          "source": "ctfidf",
+          "weight": 0.7847885465600977
+        },
+        {
+          "term": "polynomial",
+          "source": "ctfidf",
+          "weight": 0.7485204884457385
+        },
+        {
+          "term": "functions",
+          "source": "ctfidf",
+          "weight": 0.7442273797705686
+        },
+        {
+          "term": "let",
+          "source": "ctfidf",
+          "weight": 0.7416950496021362
+        },
+        {
+          "term": "prime",
+          "source": "ctfidf",
+          "weight": 0.5989503170208144
+        },
+        {
+          "term": "sum",
+          "source": "ctfidf",
+          "weight": 0.5903188840210639
+        },
+        {
+          "term": "finite",
+          "source": "ctfidf",
+          "weight": 0.5839927378129443
+        }
+      ],
+      "note": "260 works in the fitting corpus. c-TF-IDF terms: conjecture, polynomials, prove, positive, polynomial, functions, let, prime, sum, finite."
+    },
+    {
+      "code": "02.01.02.04",
+      "label": "Groups / group / surfaces",
+      "parent": "02.01.02",
+      "vocab": [
+        {
+          "term": "groups",
+          "source": "ctfidf"
+        },
+        {
+          "term": "group",
+          "source": "ctfidf",
+          "weight": 0.9451503098660798
+        },
+        {
+          "term": "surfaces",
+          "source": "ctfidf",
+          "weight": 0.6676680638776749
+        },
+        {
+          "term": "algebras",
+          "source": "ctfidf",
+          "weight": 0.6138477484389258
+        },
+        {
+          "term": "varieties",
+          "source": "ctfidf",
+          "weight": 0.6010848758245046
+        },
+        {
+          "term": "lie",
+          "source": "ctfidf",
+          "weight": 0.5597193845209816
+        },
+        {
+          "term": "prove",
+          "source": "ctfidf",
+          "weight": 0.5507828150397716
+        },
+        {
+          "term": "algebra",
+          "source": "ctfidf",
+          "weight": 0.543575511636091
+        },
+        {
+          "term": "curves",
+          "source": "ctfidf",
+          "weight": 0.5269885331447782
+        },
+        {
+          "term": "manifolds",
+          "source": "ctfidf",
+          "weight": 0.4843725442970033
+        }
+      ],
+      "note": "319 works in the fitting corpus. c-TF-IDF terms: groups, group, surfaces, algebras, varieties, lie, prove, algebra, curves, manifolds."
+    },
+    {
+      "code": "02.01.02.05",
+      "label": "Category / logic / categories",
+      "parent": "02.01.02",
+      "vocab": [
+        {
+          "term": "category",
+          "source": "ctfidf"
+        },
+        {
+          "term": "logic",
+          "source": "ctfidf",
+          "weight": 0.7992286094971189
+        },
+        {
+          "term": "categories",
+          "source": "ctfidf",
+          "weight": 0.765021175589369
+        },
+        {
+          "term": "algebras",
+          "source": "ctfidf",
+          "weight": 0.6439207893754578
+        },
+        {
+          "term": "theory",
+          "source": "ctfidf",
+          "weight": 0.5643954778200027
+        },
+        {
+          "term": "semantics",
+          "source": "ctfidf",
+          "weight": 0.5450148846676202
+        },
+        {
+          "term": "homotopy",
+          "source": "ctfidf",
+          "weight": 0.500787298705118
+        },
+        {
+          "term": "logics",
+          "source": "ctfidf",
+          "weight": 0.4688783467835962
+        },
+        {
+          "term": "mathsf",
+          "source": "ctfidf",
+          "weight": 0.4685292775943065
+        },
+        {
+          "term": "calculus",
+          "source": "ctfidf",
+          "weight": 0.4225938894959786
+        }
+      ],
+      "note": "90 works in the fitting corpus. c-TF-IDF terms: category, logic, categories, algebras, theory, semantics, homotopy, logics, mathsf, calculus."
+    },
+    {
+      "code": "02.01.02.06",
+      "label": "Graphs / graph / vertex",
+      "parent": "02.01.02",
+      "vocab": [
+        {
+          "term": "graphs",
+          "source": "ctfidf"
+        },
+        {
+          "term": "graph",
+          "source": "ctfidf",
+          "weight": 0.8834136455568369
+        },
+        {
+          "term": "vertex",
+          "source": "ctfidf",
+          "weight": 0.565899394808718
+        },
+        {
+          "term": "vertices",
+          "source": "ctfidf",
+          "weight": 0.31657465269326285
+        },
+        {
+          "term": "edge",
+          "source": "ctfidf",
+          "weight": 0.3113087750311775
+        },
+        {
+          "term": "ell",
+          "source": "ctfidf",
+          "weight": 0.3055659637808662
+        },
+        {
+          "term": "degree",
+          "source": "ctfidf",
+          "weight": 0.2954003985584803
+        },
+        {
+          "term": "coloring",
+          "source": "ctfidf",
+          "weight": 0.27754907678677265
+        },
+        {
+          "term": "trees",
+          "source": "ctfidf",
+          "weight": 0.2735199772961106
+        },
+        {
+          "term": "tur",
+          "source": "ctfidf",
+          "weight": 0.2686735798801325
+        }
+      ],
+      "note": "148 works in the fitting corpus. c-TF-IDF terms: graphs, graph, vertex, vertices, edge, ell, degree, coloring, trees, tur."
+    },
+    {
+      "code": "02.02",
+      "label": "Quantum / spin / field",
+      "parent": "02",
+      "vocab": [
+        {
+          "term": "quantum",
+          "source": "ctfidf"
+        },
+        {
+          "term": "spin",
+          "source": "ctfidf",
+          "weight": 0.4568852729503178
+        },
+        {
+          "term": "field",
+          "source": "ctfidf",
+          "weight": 0.4366797220267597
+        },
+        {
+          "term": "energy",
+          "source": "ctfidf",
+          "weight": 0.42688763217623704
+        },
+        {
+          "term": "phase",
+          "source": "ctfidf",
+          "weight": 0.4163642616728045
+        },
+        {
+          "term": "magnetic",
+          "source": "ctfidf",
+          "weight": 0.39606791501382577
+        },
+        {
+          "term": "mass",
+          "source": "ctfidf",
+          "weight": 0.3953511867918677
+        },
+        {
+          "term": "states",
+          "source": "ctfidf",
+          "weight": 0.37364842488882255
+        },
+        {
+          "term": "optical",
+          "source": "ctfidf",
+          "weight": 0.3249082531116251
+        },
+        {
+          "term": "matter",
+          "source": "ctfidf",
+          "weight": 0.3176817521244512
+        }
+      ],
+      "note": "2363 works in the fitting corpus. c-TF-IDF terms: quantum, spin, field, energy, phase, magnetic, mass, states, optical, matter."
+    },
+    {
+      "code": "02.02.01",
+      "label": "Quantum / spin / states",
+      "parent": "02.02",
+      "vocab": [
+        {
+          "term": "quantum",
+          "source": "ctfidf"
+        },
+        {
+          "term": "spin",
+          "source": "ctfidf",
+          "weight": 0.41648606395543647
+        },
+        {
+          "term": "states",
+          "source": "ctfidf",
+          "weight": 0.35605921812002744
+        },
+        {
+          "term": "phase",
+          "source": "ctfidf",
+          "weight": 0.3362338546870114
+        },
+        {
+          "term": "magnetic",
+          "source": "ctfidf",
+          "weight": 0.29715696934238917
+        },
+        {
+          "term": "field",
+          "source": "ctfidf",
+          "weight": 0.2862829569009383
+        },
+        {
+          "term": "entanglement",
+          "source": "ctfidf",
+          "weight": 0.25490403577230714
+        },
+        {
+          "term": "symmetry",
+          "source": "ctfidf",
+          "weight": 0.2494188729236283
+        },
+        {
+          "term": "optical",
+          "source": "ctfidf",
+          "weight": 0.23723028193404008
+        },
+        {
+          "term": "theory",
+          "source": "ctfidf",
+          "weight": 0.22978383873582547
+        }
+      ],
+      "note": "1432 works in the fitting corpus. c-TF-IDF terms: quantum, spin, states, phase, magnetic, field, entanglement, symmetry, optical, theory."
+    },
+    {
+      "code": "02.02.01.01",
+      "label": "Quantum / theory / symmetry",
+      "parent": "02.02.01",
+      "vocab": [
+        {
+          "term": "quantum",
+          "source": "ctfidf"
+        },
+        {
+          "term": "theory",
+          "source": "ctfidf",
+          "weight": 0.5641193240964515
+        },
+        {
+          "term": "symmetry",
+          "source": "ctfidf",
+          "weight": 0.5512399835040822
+        },
+        {
+          "term": "non",
+          "source": "ctfidf",
+          "weight": 0.47891613216759477
+        },
+        {
+          "term": "phase",
+          "source": "ctfidf",
+          "weight": 0.4491107090032536
+        },
+        {
+          "term": "gauge",
+          "source": "ctfidf",
+          "weight": 0.4266085168929687
+        },
+        {
+          "term": "field",
+          "source": "ctfidf",
+          "weight": 0.4167554714094882
+        },
+        {
+          "term": "finite",
+          "source": "ctfidf",
+          "weight": 0.4155162693162484
+        },
+        {
+          "term": "dynamics",
+          "source": "ctfidf",
+          "weight": 0.4121026017119035
+        },
+        {
+          "term": "lattice",
+          "source": "ctfidf",
+          "weight": 0.41017550755509385
+        }
+      ],
+      "note": "313 works in the fitting corpus. c-TF-IDF terms: quantum, theory, symmetry, non, phase, gauge, field, finite, dynamics, lattice."
+    },
+    {
+      "code": "02.02.01.02",
+      "label": "Spin / magnetic / quantum",
+      "parent": "02.02.01",
+      "vocab": [
+        {
+          "term": "spin",
+          "source": "ctfidf"
+        },
+        {
+          "term": "magnetic",
+          "source": "ctfidf",
+          "weight": 0.8603699357157338
+        },
+        {
+          "term": "quantum",
+          "source": "ctfidf",
+          "weight": 0.44201051301316946
+        },
+        {
+          "term": "field",
+          "source": "ctfidf",
+          "weight": 0.390462857523511
+        },
+        {
+          "term": "phase",
+          "source": "ctfidf",
+          "weight": 0.3788537912142389
+        },
+        {
+          "term": "electronic",
+          "source": "ctfidf",
+          "weight": 0.363429202925438
+        },
+        {
+          "term": "states",
+          "source": "ctfidf",
+          "weight": 0.33896643283845296
+        },
+        {
+          "term": "symmetry",
+          "source": "ctfidf",
+          "weight": 0.3302750974472159
+        },
+        {
+          "term": "temperature",
+          "source": "ctfidf",
+          "weight": 0.31147166857050285
+        },
+        {
+          "term": "band",
+          "source": "ctfidf",
+          "weight": 0.30901582243616166
+        }
+      ],
+      "note": "341 works in the fitting corpus. c-TF-IDF terms: spin, magnetic, quantum, field, phase, electronic, states, symmetry, temperature, band."
+    },
+    {
+      "code": "02.02.01.03",
+      "label": "Quantum / entanglement / classical",
+      "parent": "02.02.01",
+      "vocab": [
+        {
+          "term": "quantum",
+          "source": "ctfidf"
+        },
+        {
+          "term": "entanglement",
+          "source": "ctfidf",
+          "weight": 0.25516647787276703
+        },
+        {
+          "term": "classical",
+          "source": "ctfidf",
+          "weight": 0.235268220381072
+        },
+        {
+          "term": "states",
+          "source": "ctfidf",
+          "weight": 0.22340926671302608
+        },
+        {
+          "term": "codes",
+          "source": "ctfidf",
+          "weight": 0.22269576474997108
+        },
+        {
+          "term": "circuit",
+          "source": "ctfidf",
+          "weight": 0.2161759738054985
+        },
+        {
+          "term": "qubit",
+          "source": "ctfidf",
+          "weight": 0.20501950793727422
+        },
+        {
+          "term": "error",
+          "source": "ctfidf",
+          "weight": 0.17481287775612878
+        },
+        {
+          "term": "circuits",
+          "source": "ctfidf",
+          "weight": 0.14945700132990136
+        },
+        {
+          "term": "qubits",
+          "source": "ctfidf",
+          "weight": 0.14522366997720845
+        }
+      ],
+      "note": "366 works in the fitting corpus. c-TF-IDF terms: quantum, entanglement, classical, states, codes, circuit, qubit, error, circuits, qubits."
+    },
+    {
+      "code": "02.02.01.04",
+      "label": "Quantum / optical / photon",
+      "parent": "02.02.01",
+      "vocab": [
+        {
+          "term": "quantum",
+          "source": "ctfidf"
+        },
+        {
+          "term": "optical",
+          "source": "ctfidf",
+          "weight": 0.961936355950658
+        },
+        {
+          "term": "photon",
+          "source": "ctfidf",
+          "weight": 0.7389767303647257
+        },
+        {
+          "term": "photonic",
+          "source": "ctfidf",
+          "weight": 0.652938702945867
+        },
+        {
+          "term": "light",
+          "source": "ctfidf",
+          "weight": 0.6312586834463356
+        },
+        {
+          "term": "entanglement",
+          "source": "ctfidf",
+          "weight": 0.5712692798434789
+        },
+        {
+          "term": "phase",
+          "source": "ctfidf",
+          "weight": 0.49954671453016647
+        },
+        {
+          "term": "laser",
+          "source": "ctfidf",
+          "weight": 0.42614480050832654
+        },
+        {
+          "term": "noise",
+          "source": "ctfidf",
+          "weight": 0.4153138135323943
+        },
+        {
+          "term": "field",
+          "source": "ctfidf",
+          "weight": 0.41255224222924164
+        }
+      ],
+      "note": "234 works in the fitting corpus. c-TF-IDF terms: quantum, optical, photon, photonic, light, entanglement, phase, laser, noise, field."
+    },
+    {
+      "code": "02.02.01.05",
+      "label": "Materials / molecular / electron",
+      "parent": "02.02.01",
+      "vocab": [
+        {
+          "term": "materials",
+          "source": "ctfidf"
+        },
+        {
+          "term": "molecular",
+          "source": "ctfidf",
+          "weight": 0.7887495805456645
+        },
+        {
+          "term": "electron",
+          "source": "ctfidf",
+          "weight": 0.7005606494133192
+        },
+        {
+          "term": "density",
+          "source": "ctfidf",
+          "weight": 0.5188613747815857
+        },
+        {
+          "term": "experimental",
+          "source": "ctfidf",
+          "weight": 0.5045699153951816
+        },
+        {
+          "term": "simulations",
+          "source": "ctfidf",
+          "weight": 0.5032409038635748
+        },
+        {
+          "term": "dynamics",
+          "source": "ctfidf",
+          "weight": 0.5013055101415064
+        },
+        {
+          "term": "thermal",
+          "source": "ctfidf",
+          "weight": 0.48616170177461776
+        },
+        {
+          "term": "electronic",
+          "source": "ctfidf",
+          "weight": 0.4562636881687013
+        },
+        {
+          "term": "machine",
+          "source": "ctfidf",
+          "weight": 0.4448972543795593
+        }
+      ],
+      "note": "178 works in the fitting corpus. c-TF-IDF terms: materials, molecular, electron, density, experimental, simulations, dynamics, thermal, electronic, machine."
+    },
+    {
+      "code": "02.02.02",
+      "label": "Mass / dark / galaxies",
+      "parent": "02.02",
+      "vocab": [
+        {
+          "term": "mass",
+          "source": "ctfidf"
+        },
+        {
+          "term": "dark",
+          "source": "ctfidf",
+          "weight": 0.7754297163797091
+        },
+        {
+          "term": "galaxies",
+          "source": "ctfidf",
+          "weight": 0.7156141859719167
+        },
+        {
+          "term": "black",
+          "source": "ctfidf",
+          "weight": 0.7108336001370407
+        },
+        {
+          "term": "star",
+          "source": "ctfidf",
+          "weight": 0.7021473475789893
+        },
+        {
+          "term": "galaxy",
+          "source": "ctfidf",
+          "weight": 0.7017889747083396
+        },
+        {
+          "term": "matter",
+          "source": "ctfidf",
+          "weight": 0.6523848502618491
+        },
+        {
+          "term": "energy",
+          "source": "ctfidf",
+          "weight": 0.6311888025720462
+        },
+        {
+          "term": "stellar",
+          "source": "ctfidf",
+          "weight": 0.6018255884360758
+        },
+        {
+          "term": "gravitational",
+          "source": "ctfidf",
+          "weight": 0.588611432214995
+        }
+      ],
+      "note": "931 works in the fitting corpus. c-TF-IDF terms: mass, dark, galaxies, black, star, galaxy, matter, energy, stellar, gravitational."
+    },
+    {
+      "code": "02.02.02.01",
+      "label": "Neutron / detector / beam",
+      "parent": "02.02.02",
+      "vocab": [
+        {
+          "term": "neutron",
+          "source": "ctfidf"
+        },
+        {
+          "term": "detector",
+          "source": "ctfidf",
+          "weight": 0.8880654143714414
+        },
+        {
+          "term": "beam",
+          "source": "ctfidf",
+          "weight": 0.8300244977087351
+        },
+        {
+          "term": "detectors",
+          "source": "ctfidf",
+          "weight": 0.7877715518992768
+        },
+        {
+          "term": "photon",
+          "source": "ctfidf",
+          "weight": 0.6958978931860778
+        },
+        {
+          "term": "laser",
+          "source": "ctfidf",
+          "weight": 0.570176517169575
+        },
+        {
+          "term": "radiation",
+          "source": "ctfidf",
+          "weight": 0.5518436641632023
+        },
+        {
+          "term": "nuclear",
+          "source": "ctfidf",
+          "weight": 0.5464885406041131
+        },
+        {
+          "term": "electron",
+          "source": "ctfidf",
+          "weight": 0.536673680208944
+        },
+        {
+          "term": "beams",
+          "source": "ctfidf",
+          "weight": 0.5133759297499435
+        }
+      ],
+      "note": "84 works in the fitting corpus. c-TF-IDF terms: neutron, detector, beam, detectors, photon, laser, radiation, nuclear, electron, beams."
+    },
+    {
+      "code": "02.02.02.02",
+      "label": "Dark / matter / dark matter",
+      "parent": "02.02.02",
+      "vocab": [
+        {
+          "term": "dark",
+          "source": "ctfidf"
+        },
+        {
+          "term": "matter",
+          "source": "ctfidf",
+          "weight": 0.8479828577787705
+        },
+        {
+          "term": "dark matter",
+          "source": "ctfidf",
+          "weight": 0.7875288911862541
+        },
+        {
+          "term": "neutrino",
+          "source": "ctfidf",
+          "weight": 0.7515847194307389
+        },
+        {
+          "term": "lhc",
+          "source": "ctfidf",
+          "weight": 0.6021409575374158
+        },
+        {
+          "term": "production",
+          "source": "ctfidf",
+          "weight": 0.59806999532251
+        },
+        {
+          "term": "axion",
+          "source": "ctfidf",
+          "weight": 0.5911796997985416
+        },
+        {
+          "term": "higgs",
+          "source": "ctfidf",
+          "weight": 0.5911580892883611
+        },
+        {
+          "term": "collisions",
+          "source": "ctfidf",
+          "weight": 0.587877446093709
+        },
+        {
+          "term": "decays",
+          "source": "ctfidf",
+          "weight": 0.5822507108497232
+        }
+      ],
+      "note": "179 works in the fitting corpus. c-TF-IDF terms: dark, matter, dark matter, neutrino, lhc, production, axion, higgs, collisions, decays."
+    },
+    {
+      "code": "02.02.02.03",
+      "label": "Galaxies / galaxy / star",
+      "parent": "02.02.02",
+      "vocab": [
+        {
+          "term": "galaxies",
+          "source": "ctfidf"
+        },
+        {
+          "term": "galaxy",
+          "source": "ctfidf",
+          "weight": 0.9098221466458769
+        },
+        {
+          "term": "star",
+          "source": "ctfidf",
+          "weight": 0.7650349441387531
+        },
+        {
+          "term": "mass",
+          "source": "ctfidf",
+          "weight": 0.6340404585807431
+        },
+        {
+          "term": "stellar",
+          "source": "ctfidf",
+          "weight": 0.6333529452897707
+        },
+        {
+          "term": "stars",
+          "source": "ctfidf",
+          "weight": 0.6072053466310189
+        },
+        {
+          "term": "formation",
+          "source": "ctfidf",
+          "weight": 0.5083319361954736
+        },
+        {
+          "term": "gas",
+          "source": "ctfidf",
+          "weight": 0.453868536860219
+        },
+        {
+          "term": "redshift",
+          "source": "ctfidf",
+          "weight": 0.4414057017631737
+        },
+        {
+          "term": "star formation",
+          "source": "ctfidf",
+          "weight": 0.4053412177975537
+        }
+      ],
+      "note": "242 works in the fitting corpus. c-TF-IDF terms: galaxies, galaxy, star, mass, stellar, stars, formation, gas, redshift, star formation."
+    },
+    {
+      "code": "02.02.02.04",
+      "label": "Emission / observations / radio",
+      "parent": "02.02.02",
+      "vocab": [
+        {
+          "term": "emission",
+          "source": "ctfidf"
+        },
+        {
+          "term": "observations",
+          "source": "ctfidf",
+          "weight": 0.7750904674326342
+        },
+        {
+          "term": "radio",
+          "source": "ctfidf",
+          "weight": 0.7743410368052698
+        },
+        {
+          "term": "magnetic",
+          "source": "ctfidf",
+          "weight": 0.7423460965867316
+        },
+        {
+          "term": "solar",
+          "source": "ctfidf",
+          "weight": 0.7292141049594837
+        },
+        {
+          "term": "planet",
+          "source": "ctfidf",
+          "weight": 0.7057987946472031
+        },
+        {
+          "term": "dust",
+          "source": "ctfidf",
+          "weight": 0.6954822083808889
+        },
+        {
+          "term": "ray",
+          "source": "ctfidf",
+          "weight": 0.6812581421044481
+        },
+        {
+          "term": "planets",
+          "source": "ctfidf",
+          "weight": 0.6075457293903603
+        },
+        {
+          "term": "energy",
+          "source": "ctfidf",
+          "weight": 0.5835853036603603
+        }
+      ],
+      "note": "179 works in the fitting corpus. c-TF-IDF terms: emission, observations, radio, magnetic, solar, planet, dust, ray, planets, energy."
+    },
+    {
+      "code": "02.02.02.05",
+      "label": "Black / gravitational / black hole",
+      "parent": "02.02.02",
+      "vocab": [
+        {
+          "term": "black",
+          "source": "ctfidf"
+        },
+        {
+          "term": "gravitational",
+          "source": "ctfidf",
+          "weight": 0.780112781925886
+        },
+        {
+          "term": "black hole",
+          "source": "ctfidf",
+          "weight": 0.7112604930204108
+        },
+        {
+          "term": "hole",
+          "source": "ctfidf",
+          "weight": 0.6815886387785957
+        },
+        {
+          "term": "black holes",
+          "source": "ctfidf",
+          "weight": 0.5551917622425562
+        },
+        {
+          "term": "holes",
+          "source": "ctfidf",
+          "weight": 0.5377588209144154
+        },
+        {
+          "term": "gravity",
+          "source": "ctfidf",
+          "weight": 0.5113856055983373
+        },
+        {
+          "term": "gravitational wave",
+          "source": "ctfidf",
+          "weight": 0.40614888632772395
+        },
+        {
+          "term": "scalar",
+          "source": "ctfidf",
+          "weight": 0.4036642567244044
+        },
+        {
+          "term": "wave",
+          "source": "ctfidf",
+          "weight": 0.39797238956189335
+        }
+      ],
+      "note": "247 works in the fitting corpus. c-TF-IDF terms: black, gravitational, black hole, hole, black holes, holes, gravity, gravitational wave, scalar, wave."
+    }
+  ]
+}

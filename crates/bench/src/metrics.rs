@@ -106,7 +106,7 @@ fn tree_depth(tree: &Tree, mut node: usize) -> usize {
 
 /// Menu-scan cost from a leaf to the root: half the fan-out of every
 /// branching ancestor, plus half a step for the choice itself.
-fn branch_scan_cost(tree: &Tree, leaf: usize) -> f64 {
+pub(crate) fn branch_scan_cost(tree: &Tree, leaf: usize) -> f64 {
     let mut cost = 0.0;
     let mut node = leaf;
     while let Some(parent) = tree.nodes[node].parent {
@@ -120,7 +120,7 @@ fn branch_scan_cost(tree: &Tree, leaf: usize) -> f64 {
 }
 
 /// Binary-search menu cost from a leaf to the root with per-branch cost `a`.
-fn log_branch_cost(tree: &Tree, leaf: usize, a: usize) -> f64 {
+pub(crate) fn log_branch_cost(tree: &Tree, leaf: usize, a: usize) -> f64 {
     let mut cost = 0.0;
     let mut node = leaf;
     while let Some(parent) = tree.nodes[node].parent {
@@ -135,7 +135,7 @@ fn log_branch_cost(tree: &Tree, leaf: usize, a: usize) -> f64 {
 
 /// The deepest class (a node with a code) at or above a leaf's parent, or the
 /// leaf itself when none exists.
-fn shelf_class(tree: &Tree, leaf: usize) -> usize {
+pub(crate) fn shelf_class(tree: &Tree, leaf: usize) -> usize {
     tree.ancestors(leaf)
         .into_iter()
         .skip(1)
@@ -182,7 +182,7 @@ fn quantile(v: &[usize], q: f64) -> usize {
     }
 }
 
-fn entropy_nats(classes: &[f64], total: f64) -> f64 {
+pub(crate) fn entropy_nats(classes: &[f64], total: f64) -> f64 {
     -classes
         .iter()
         .map(|c| {
@@ -196,7 +196,7 @@ fn entropy_nats(classes: &[f64], total: f64) -> f64 {
         .sum::<f64>()
 }
 
-fn gini(classes: &[f64]) -> f64 {
+pub(crate) fn gini(classes: &[f64]) -> f64 {
     if classes.is_empty() {
         return 0.0;
     }

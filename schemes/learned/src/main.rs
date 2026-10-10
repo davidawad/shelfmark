@@ -9,11 +9,11 @@ const USAGE: &str = "usage:
       [--subset ids.txt] [--vectors V.f32] [--labels labels.tsv] [--allow-auto-labels]
       [--centroids out.json.gz] [--placements out.jsonl] [--report out.json] [--sheet out.md]
       [--lambda 0.005] [--branch-cost 1] [--max-depth 4] [--max-children 12] [--min-leaf 5]
-      [--seed 20261010] [--version 2026-10-10]
+      [--seed 20261010] [--version 2026-10-10] [--model NAME]
   learned-scheme insert --scheme S.json --centroids C.json.gz --corpus R.jsonl --vectors V.json.gz
       --out scheme.json --placements out.jsonl [--ids ids.txt] [--base-placements P.jsonl]
       [--report out.json] [--split-after 12] [--min-child 5] [--max-cos 0.5]
-  learned-scheme quantize --corpus R.jsonl --vectors V.f32 --out V.json.gz [--ids ids.txt]
+  learned-scheme quantize --corpus R.jsonl --vectors V.f32 --out V.json.gz [--ids ids.txt] [--model NAME]
   learned-scheme subset --corpus C.jsonl --graph G.json[.gz] --ids ids.txt
       --out-corpus out.jsonl --out-graph out.json [--placements P.jsonl --out-placements out.jsonl]
   learned-scheme split-ids --corpus C.jsonl --fraction 0.2 --seed S --train train.txt --test test.txt";

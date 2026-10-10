@@ -1,0 +1,99 @@
+{
+  "config": {
+    "params": {
+      "branch_cost": 1.0,
+      "lambda": 0.005,
+      "max_children": 12,
+      "max_depth": 4,
+      "min_children": 2,
+      "min_leaf": 5
+    },
+    "rotation_passes": 20,
+    "search_rounds": 10,
+    "seed": 20261010
+  },
+  "inputs": {
+    "corpus_sha256": "1027bf9d34928f470ed8b0d7b5ddc5c983fde49bc0cd33eaa162bbd1f830fea5",
+    "edge_weight": 18240.386325527972,
+    "edges": 94573,
+    "graph_sha256": "68df716f9b8dc292c0b6136fd03ef25941316f47a1db40cb762330b78437b6f1",
+    "n": 8000,
+    "subset": 8000
+  },
+  "objective": {
+    "dasgupta": 0.15711032707005096,
+    "nav": 18.07648292066004,
+    "total": 0.24749274167335117
+  },
+  "scheme": "learned@2026-10-10-bge-small-split80",
+  "scheme_sha256": "4cffbc65171b7c6224cc1ac9d526551c2a89e5abb424e2d5ca03777f6e7ebc58",
+  "shape": {
+    "children": {
+      "max": 9,
+      "mean": 4.333333333333333,
+      "min": 2,
+      "root": 2
+    },
+    "classes": 91,
+    "classes_by_depth": {
+      "1": 2,
+      "2": 5,
+      "3": 13,
+      "4": 71
+    },
+    "internal_classes": 20,
+    "leaf_classes": 71,
+    "leaf_size": {
+      "max": 244,
+      "median": 107,
+      "min": 37
+    },
+    "mean_item_class_depth": 4.0
+  },
+  "stages": [
+    {
+      "dasgupta": 0.1402038870286778,
+      "detail": {},
+      "name": "average_linkage",
+      "nav": null,
+      "seconds": 0.298588918,
+      "total": null
+    },
+    {
+      "dasgupta": 0.1402038870286778,
+      "detail": {
+        "rotations": 0
+      },
+      "name": "rotation_local_search",
+      "nav": null,
+      "seconds": 0.019902328,
+      "total": null
+    },
+    {
+      "dasgupta": 0.15717923909971854,
+      "detail": {
+        "classes": 97,
+        "dp_total": 0.24754900092341223
+      },
+      "name": "collapse",
+      "nav": 18.08562966429612,
+      "seconds": 0.023759791,
+      "total": 0.24760738742119914
+    },
+    {
+      "dasgupta": 0.15711032707005096,
+      "detail": {
+        "classes": 91,
+        "stats": {
+          "rounds": 4,
+          "shifts": 25,
+          "structure_moves": 7
+        }
+      },
+      "name": "order_preserving_local_search",
+      "nav": 18.07648292066004,
+      "seconds": 0.427047454,
+      "total": 0.24749274167335117
+    }
+  ]
+}

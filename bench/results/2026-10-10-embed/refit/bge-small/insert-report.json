@@ -1,0 +1,66 @@
+{
+  "base": "learned@2026-10-10-bge-small",
+  "classes_after": 97,
+  "classes_before": 87,
+  "inserted": 500,
+  "params": {
+    "iterations": 10,
+    "max_cos": 0.5,
+    "min_child": 5,
+    "split_after": 12
+  },
+  "scheme": "learned@2026-10-10-bge-small.ins500",
+  "splits": [
+    {
+      "after_inserts": 409,
+      "cause": "capacity",
+      "centroid_cos": 0.7641844755695292,
+      "core": "01.01.01.02.01",
+      "core_new_works": 5,
+      "leaf": "01.01.01.02",
+      "new": "01.01.01.02.02",
+      "new_works": 346
+    },
+    {
+      "after_inserts": 410,
+      "cause": "capacity",
+      "centroid_cos": 0.9436142209912063,
+      "core": "01.01.01.02.02.01",
+      "core_new_works": 194,
+      "leaf": "01.01.01.02.02",
+      "new": "01.01.01.02.02.02",
+      "new_works": 153
+    },
+    {
+      "after_inserts": 411,
+      "cause": "capacity",
+      "centroid_cos": 0.9462813245125884,
+      "core": "01.01.01.02.02.02.01",
+      "core_new_works": 69,
+      "leaf": "01.01.01.02.02.02",
+      "new": "01.01.01.02.02.02.02",
+      "new_works": 85
+    },
+    {
+      "after_inserts": 412,
+      "cause": "capacity",
+      "centroid_cos": 0.9459685205274652,
+      "core": "01.01.01.02.02.01.01",
+      "core_new_works": 115,
+      "leaf": "01.01.01.02.02.01",
+      "new": "01.01.01.02.02.01.02",
+      "new_works": 80
+    },
+    {
+      "after_inserts": 430,
+      "cause": "capacity",
+      "centroid_cos": 0.9573751203655093,
+      "core": "01.01.01.02.02.01.01.01",
+      "core_new_works": 64,
+      "leaf": "01.01.01.02.02.01.01",
+      "new": "01.01.01.02.02.01.01.02",
+      "new_works": 60
+    }
+  ],
+  "stable": true
+}

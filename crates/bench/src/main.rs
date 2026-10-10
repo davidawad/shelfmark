@@ -1,6 +1,7 @@
 use shelfmark_bench::{
-    embed_corpus, induce_tree, score_tree, sha256_hex, BenchmarkResult, ContentHashes, CorpusRow,
-    DeterministicEmbedder, ItemPlacement,
+    average_linkage_reference, bootstrap, embed_corpus, induce_tree, score_tree, sha256_hex,
+    BenchmarkResult, ContentHashes, CorpusRow, DeterministicEmbedder, ItemPlacement, Replicates,
+    SimilarityGraph, Tree,
 };
 use shelfmark_core::scheme::SchemeDoc;
 use std::{
@@ -56,7 +57,7 @@ fn parse_args(
     args: &[String],
 ) -> Result<(BTreeMap<String, String>, usize), Box<dyn std::error::Error>> {
     if args.len() < 6 || args[1] != "run" {
-        return Err("usage: shelfmark-bench run --corpus corpus.jsonl --scheme scheme.json [--placements placements.jsonl] [--k 20] [--output results.json]".into());
+        return Err("usage: shelfmark-bench run --corpus corpus.jsonl --scheme scheme.json [--placements placements.jsonl] [--track A|P] [--graph graph.json] [--k 20] [--reference-cost X] [--bootstrap N [--seed S] [--reference-replicates FILE] [--replicates-out FILE]] [--output results.json]".into());
     }
     let mut values = BTreeMap::new();
     let mut k = 20usize;
@@ -129,10 +130,9 @@ fn load_graph(
     values: &BTreeMap<String, String>,
     corpus: &[CorpusRow],
     k: usize,
-) -> Result<shelfmark_bench::SimilarityGraph, Box<dyn std::error::Error>> {
+) -> Result<SimilarityGraph, Box<dyn std::error::Error>> {
     if let Some(path) = values.get("--graph") {
-        let graph: shelfmark_bench::SimilarityGraph =
-            serde_json::from_slice(&std::fs::read(path)?)?;
+        let graph: SimilarityGraph = serde_json::from_slice(&std::fs::read(path)?)?;
         if graph.n != corpus.len() {
             return Err(
                 format!("graph has {} rows but corpus has {}", graph.n, corpus.len()).into(),
@@ -143,6 +143,76 @@ fn load_graph(
         let model = DeterministicEmbedder::default();
         Ok(embed_corpus(corpus, &model, k))
     }
+}
+
+/// The reference cost from `--reference-cost`, or the average-linkage tree
+/// of the graph (also returned, for bootstrap replicates of its cost).
+fn reference(
+    values: &BTreeMap<String, String>,
+    graph: &SimilarityGraph,
+) -> Result<(f64, Option<Tree>), Box<dyn std::error::Error>> {
+    if let Some(value) = values.get("--reference-cost") {
+        Ok((value.parse()?, None))
+    } else {
+        let hac = average_linkage_reference(graph);
+        Ok((score_tree(&hac, graph).cost_norm, Some(hac)))
+    }
+}
+
+/// Item-bootstrap replicates when `--bootstrap N` is given. Their reference
+/// cost comes from `--reference-replicates` (the replicates file of the
+/// reference run on the same graph, seed and resample count) or from the
+/// average-linkage tree computed in this run.
+fn bootstrap_replicates(
+    values: &BTreeMap<String, String>,
+    tree: &Tree,
+    graph: &SimilarityGraph,
+    hac: Option<&Tree>,
+) -> Result<Option<Replicates>, Box<dyn std::error::Error>> {
+    let resamples: usize = match values.get("--bootstrap") {
+        Some(v) => v.parse()?,
+        None => return Ok(None),
+    };
+    if resamples == 0 {
+        return Ok(None);
+    }
+    let seed = match values.get("--seed") {
+        Some(v) => v.parse()?,
+        None => bootstrap::DEFAULT_SEED,
+    };
+    let reference = match values.get("--reference-replicates") {
+        Some(path) => {
+            let r: Replicates = serde_json::from_slice(&std::fs::read(path)?)?;
+            if (r.n, r.resamples, r.seed) != (graph.n, resamples, seed) {
+                return Err(format!(
+                    "{path}: replicates are for another n, resample count or seed"
+                )
+                .into());
+            }
+            Some(
+                r.reference_costs()
+                    .ok_or("reference replicates lack ref_cost_norm")?
+                    .to_vec(),
+            )
+        }
+        None => None,
+    };
+    let prepared = bootstrap::Prepared::new(tree, graph, true);
+    let hac = match (&reference, hac) {
+        (None, Some(t)) => Some(bootstrap::Prepared::new(t, graph, false)),
+        _ => None,
+    };
+    let replicates = bootstrap::run(
+        &prepared,
+        reference.as_deref(),
+        hac.as_ref(),
+        resamples,
+        seed,
+    );
+    if let Some(path) = values.get("--replicates-out") {
+        std::fs::write(path, serde_json::to_vec(&replicates)?)?;
+    }
+    Ok(Some(replicates))
 }
 
 fn run() -> Result<(), Box<dyn std::error::Error>> {
@@ -165,12 +235,8 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
     let tree =
         induce_tree(&scheme, &item_placements).map_err(|e| format!("tree induction: {e}"))?;
     let score = score_tree(&tree, &graph);
-    let ref_score = if let Some(value) = values.get("--reference-cost") {
-        value.parse()?
-    } else {
-        let hac = average_linkage_reference(&graph);
-        score_tree(&hac, &graph).cost_norm
-    };
+    let (ref_score, hac) = reference(&values, &graph)?;
+    let replicates = bootstrap_replicates(&values, &tree, &graph, hac.as_ref())?;
     let skill = if ref_score < 1.0 {
         (1.0 - score.cost_norm) / (1.0 - ref_score)
     } else {
@@ -181,15 +247,16 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
         .filter(|p| !p.classes.is_empty())
         .count() as f64
         / corpus.len().max(1) as f64;
+    let track = match values.get("--track") {
+        Some(t) if t == "A" || t == "P" => t.clone(),
+        Some(t) => return Err(format!("--track must be A or P, not {t}").into()),
+        None if values.contains_key("--placements") => "P".into(),
+        None => "A".into(),
+    };
     let result = BenchmarkResult {
         scheme: scheme.name,
         version: scheme.version,
-        track: if values.contains_key("--placements") {
-            "P"
-        } else {
-            "A"
-        }
-        .into(),
+        track,
         mode: "primary".into(),
         n: corpus.len(),
         k,
@@ -207,6 +274,7 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
             tree: sha256_hex(&serde_json::to_vec(&tree)?),
             scheme: sha256_hex(&scheme_bytes),
         },
+        bootstrap: replicates.map(|r| r.summary()),
     };
     let json = serde_json::to_string_pretty(&result)?;
     if let Some(path) = values.get("--output") {
@@ -229,137 +297,4 @@ pub(crate) fn read_jsonl<T: serde::de::DeserializeOwned>(
             serde_json::from_str(&line).map_err(|e| format!("JSONL line {}: {e}", idx + 1).into())
         })
         .collect()
-}
-
-/// Deterministic average-linkage HAC. Missing graph edges have similarity 0.
-fn average_linkage_reference(graph: &shelfmark_bench::SimilarityGraph) -> shelfmark_bench::Tree {
-    use shelfmark_bench::Tree;
-    use std::cmp::Ordering;
-    use std::collections::{BTreeSet, BinaryHeap};
-    #[derive(Clone, Copy, Debug)]
-    struct Candidate(f64, usize, usize);
-    impl PartialEq for Candidate {
-        fn eq(&self, other: &Self) -> bool {
-            self.0 == other.0 && self.1 == other.1 && self.2 == other.2
-        }
-    }
-    impl Eq for Candidate {}
-    impl PartialOrd for Candidate {
-        fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
-            Some(self.cmp(other))
-        }
-    }
-    impl Ord for Candidate {
-        fn cmp(&self, other: &Self) -> Ordering {
-            self.0
-                .total_cmp(&other.0)
-                .then_with(|| other.1.cmp(&self.1))
-                .then_with(|| other.2.cmp(&self.2))
-        }
-    }
-    let n = graph.n;
-    let mut tree = Tree::new();
-    tree.item_leaves = vec![vec![]; n];
-    if n == 0 {
-        return tree;
-    }
-    let mut cluster_nodes: Vec<usize> = (0..n)
-        .map(|i| {
-            let leaf = tree.add_node(0, None, Some(i));
-            tree.item_leaves[i] = vec![(leaf, 1.0)];
-            leaf
-        })
-        .collect();
-    let mut sizes = vec![1usize; n];
-    let mut similarities = BTreeMap::<(usize, usize), f64>::new();
-    let mut candidates = BinaryHeap::new();
-    for e in &graph.edges {
-        let pair = (e.left.min(e.right), e.left.max(e.right));
-        similarities.insert(pair, e.weight);
-        if e.weight > 0.0 {
-            candidates.push(Candidate(e.weight, pair.0, pair.1));
-        }
-    }
-    let mut active: BTreeSet<usize> = (0..n).collect();
-    let mut next_id = n;
-    while active.len() > 1 {
-        // Only similarities touched by a positive edge need heap entries.
-        // If none remain, deterministic zero-similarity merges complete the tree.
-        let best = loop {
-            match candidates.pop() {
-                Some(Candidate(score, a, b)) if active.contains(&a) && active.contains(&b) => {
-                    break (score, a, b);
-                }
-                Some(_) => continue,
-                None => {
-                    let mut ids = active.iter().copied();
-                    break (0.0, ids.next().unwrap(), ids.next().unwrap());
-                }
-            }
-        };
-        let (a, b) = (best.1, best.2);
-        let node = tree.add_node(0, None, None); // reparent merged subtree under its merge node
-        for child in [cluster_nodes[a], cluster_nodes[b]] {
-            tree.nodes[0].children.retain(|&x| x != child);
-            tree.nodes[child].parent = Some(node);
-            tree.nodes[node].children.push(child);
-        }
-        let combined_size = sizes[a] + sizes[b];
-        active.remove(&a);
-        active.remove(&b);
-        for &other in &active {
-            let left = similarities
-                .get(&(a.min(other), a.max(other)))
-                .copied()
-                .unwrap_or(0.0);
-            let right = similarities
-                .get(&(b.min(other), b.max(other)))
-                .copied()
-                .unwrap_or(0.0);
-            let similarity =
-                (sizes[a] as f64 * left + sizes[b] as f64 * right) / combined_size as f64;
-            let pair = (next_id.min(other), next_id.max(other));
-            similarities.insert(pair, similarity);
-            if similarity > 0.0 {
-                candidates.push(Candidate(similarity, pair.0, pair.1));
-            }
-        }
-        active.insert(next_id);
-        cluster_nodes.push(node);
-        sizes.push(combined_size);
-        next_id += 1;
-    }
-    tree
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-    use shelfmark_bench::Edge;
-    use shelfmark_bench::{score_tree, SimilarityGraph};
-
-    #[test]
-    fn average_linkage_merges_the_highest_similarity_pair_first() {
-        let graph = SimilarityGraph {
-            n: 3,
-            k: 1,
-            tau: 0.0,
-            edges: vec![
-                Edge {
-                    left: 0,
-                    right: 1,
-                    weight: 4.0,
-                },
-                Edge {
-                    left: 1,
-                    right: 2,
-                    weight: 1.0,
-                },
-            ],
-        };
-        let tree = average_linkage_reference(&graph);
-        let score = score_tree(&tree, &graph);
-        assert_eq!(score.cost, 4.0 * 2.0 + 1.0 * 3.0);
-        assert_eq!(tree, average_linkage_reference(&graph));
-    }
 }

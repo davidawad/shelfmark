@@ -203,7 +203,7 @@ pub fn build(a: &Args) -> Res<()> {
         }
         let file = CentroidFile {
             scheme: format!("learned@{}", doc.version),
-            model: vectors::MODEL.into(),
+            model: a.get("model").unwrap_or(vectors::MODEL).into(),
             dims: all[0].len(),
             leaves,
         };
@@ -295,7 +295,7 @@ pub fn quantize(a: &Args) -> Res<()> {
     let all = vectors::read_f32(Path::new(a.need("vectors")?), rows.len())?;
     let kept = keep(&rows, &read_ids(a.get("ids"))?)?;
     let file = VectorFile {
-        model: vectors::MODEL.into(),
+        model: a.get("model").unwrap_or(vectors::MODEL).into(),
         dims: all[0].len(),
         rows: kept
             .iter()

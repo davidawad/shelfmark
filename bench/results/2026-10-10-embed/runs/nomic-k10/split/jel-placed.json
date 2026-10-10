@@ -1,0 +1,114 @@
+{
+  "scheme": "jel",
+  "version": "2026",
+  "track": "P",
+  "mode": "primary",
+  "n": 2000,
+  "k": 10,
+  "edge_weight": 632.7433353240142,
+  "cost": 1139054.9123503556,
+  "cost_norm": 0.9000923824563638,
+  "revenue": 126431.75829767273,
+  "revenue_norm": 0.0999076175436362,
+  "ref_cost_norm": 0.050043767478201794,
+  "skill": 0.10517075852896587,
+  "coverage": 0.478,
+  "structure": {
+    "mean_depth": 2.2835,
+    "p50_depth": 1,
+    "p95_depth": 4,
+    "max_depth": 4,
+    "mean_branching": 12.325301204819278,
+    "p95_branching": 83,
+    "max_branching": 207,
+    "root_fanout": 1060,
+    "nodes_over_50_children": 5,
+    "normalized_entropy": 0.7579661304904228,
+    "effective_classes": 28.483686410707435,
+    "gini": 0.7420785596613177,
+    "largest_class_share": 0.0884300740163615,
+    "nav_scan": 584.7742500000139,
+    "nav_log_a0": 13.760514262882984,
+    "nav_log_a1": 15.738014262883437,
+    "nav_log_a2": 17.71551426288372
+  },
+  "hashes": {
+    "graph": "3c6ccb30c9a8510a23abe746686dae6e5de52b7d636991d5cf0755680d7b24a5",
+    "tree": "27ee034571db5f222fa68434d365d172fcb1cfaa4bfa1dff5c7fabecb9efdafa",
+    "scheme": "f8a2c7204830222bdfbe1d6bbb07874c2cb9bdfed9390b9ac7ef3626cd33116c"
+  },
+  "bootstrap": {
+    "resamples": 1000,
+    "seed": 20261010,
+    "confidence": 0.95,
+    "method": "percentile; items resampled with replacement on the fixed graph and tree",
+    "ci": {
+      "cost_norm": [
+        0.8761806763685047,
+        0.9222193400129721
+      ],
+      "coverage": [
+        0.45398750000000004,
+        0.499
+      ],
+      "effective_classes": [
+        26.422545280635745,
+        29.79592928413538
+      ],
+      "gini": [
+        0.6877547204554805,
+        0.7362504447573321
+      ],
+      "largest_class_share": [
+        0.07913234887172649,
+        0.09778759279888125
+      ],
+      "mean_depth": [
+        2.2165,
+        2.343
+      ],
+      "nav_log_a0": [
+        13.566666396051428,
+        13.93810085591367
+      ],
+      "nav_log_a1": [
+        15.491989172474955,
+        15.96145505637224
+      ],
+      "nav_log_a2": [
+        17.42209087693502,
+        17.980644235069622
+      ],
+      "nav_scan": [
+        580.4500250000054,
+        590.0536875000042
+      ],
+      "normalized_entropy": [
+        0.7591931496941773,
+        0.7927908411781561
+      ],
+      "ref_cost_norm": [
+        0.04145460755234497,
+        0.061597772990695465
+      ],
+      "revenue_norm": [
+        0.07778065998702785,
+        0.1238193236314953
+      ],
+      "skill": [
+        0.08175806155718635,
+        0.13107858849968965
+      ]
+    }
+  },
+  "run": {
+    "condition": "nomic-k10",
+    "model": "nomic",
+    "graph_k": 10,
+    "universe": "split",
+    "key": "jel-placed",
+    "placement_source": "shelfmark lexical@2, restricted to the 20%",
+    "placements": "bench/corpus/cache/embed-bench/placements/split/test-jel-placed.jsonl",
+    "score_seconds": 0.1
+  }
+}

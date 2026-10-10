@@ -1,0 +1,19 @@
+{
+  "model_id": "nomic-ai/nomic-embed-text-v1.5",
+  "runtime": "fastembed 0.9.0 / ONNX Runtime CPU",
+  "weights_repository": "nomic-ai/nomic-embed-text-v1.5",
+  "weights_revision": "e9b6763023c676ca8431644204f50c2b100d9aab",
+  "weights_sha256": "147d5aa88c2101237358e17796cf3a227cead1ec304ec34b465bb08e9d952965",
+  "corpus_sha256": "1027bf9d34928f470ed8b0d7b5ddc5c983fde49bc0cd33eaa162bbd1f830fea5",
+  "n": 10000,
+  "dimensions": 768,
+  "graph_k": 50,
+  "tau_rule": "exact mean cosine over all unordered corpus pairs",
+  "tau": 0.5628243078892845,
+  "graph_sha256": "15aa8a622759d2b1ef48d695c5025f98805aef6034c460aae678261a7045d876",
+  "weights_file": "onnx/model.onnx",
+  "text_prefix": "clustering: ",
+  "max_length_tokens": 512,
+  "published": "graphs/nomic-corpus-k50.json.gz",
+  "gz_mb": 4.81
+}

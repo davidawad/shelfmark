@@ -1,0 +1,114 @@
+{
+  "scheme": "fdc",
+  "version": "0.06",
+  "track": "P",
+  "mode": "primary",
+  "n": 500,
+  "k": 10,
+  "edge_weight": 486.96761427055173,
+  "cost": 242836.7517104529,
+  "cost_norm": 0.9973425114695063,
+  "revenue": 647.05542482296,
+  "revenue_norm": 0.0026574885304938,
+  "ref_cost_norm": 0.28135513747711066,
+  "skill": 0.003697916271417167,
+  "coverage": 0.052,
+  "structure": {
+    "mean_depth": 1.138,
+    "p50_depth": 1,
+    "p95_depth": 2,
+    "max_depth": 7,
+    "mean_branching": 1.4864864864864864,
+    "p95_branching": 3,
+    "max_branching": 4,
+    "root_fanout": 482,
+    "nodes_over_50_children": 0,
+    "normalized_entropy": 0.9514593757538553,
+    "effective_classes": 31.051331908485263,
+    "gini": 0.3141402271837055,
+    "largest_class_share": 0.07246376811594203,
+    "nav_scan": 242.666000000003,
+    "nav_log_a0": 9.014588586244423,
+    "nav_log_a1": 10.096588586244431,
+    "nav_log_a2": 11.178588586244295
+  },
+  "hashes": {
+    "graph": "dfe2258762d97c1f9332ceaedf1e3d3f269ab901cd81c713270c9b992e205fca",
+    "tree": "0986c6306ce8934540a8455d80b8b157ede302fcef7d7ab6d230d20c75bd7957",
+    "scheme": "066e8d10ede72fae3cc20e6b5019d10136510cdc8dd078328048b5cc80b3a4db"
+  },
+  "bootstrap": {
+    "resamples": 1000,
+    "seed": 20261010,
+    "confidence": 0.95,
+    "method": "percentile; items resampled with replacement on the fixed graph and tree",
+    "ci": {
+      "cost_norm": [
+        0.9925074944837369,
+        0.9998555351243669
+      ],
+      "coverage": [
+        0.034,
+        0.072
+      ],
+      "effective_classes": [
+        16.114119495563425,
+        29.123120984499003
+      ],
+      "gini": [
+        0.2415653935185186,
+        0.4187395406915373
+      ],
+      "largest_class_share": [
+        0.06896551724137931,
+        0.15154671717171714
+      ],
+      "mean_depth": [
+        1.088,
+        1.192
+      ],
+      "nav_log_a0": [
+        8.97556903623576,
+        9.055628888128032
+      ],
+      "nav_log_a1": [
+        10.02624023999143,
+        10.173276782500235
+      ],
+      "nav_log_a2": [
+        11.075908886238583,
+        11.289608136253005
+      ],
+      "nav_scan": [
+        243.07500000000155,
+        243.26507500000153
+      ],
+      "normalized_entropy": [
+        0.9047712061497165,
+        0.9690315480220609
+      ],
+      "ref_cost_norm": [
+        0.2526671950541479,
+        0.3137235026490423
+      ],
+      "revenue_norm": [
+        0.00014446487563316295,
+        0.0074925055162631225
+      ],
+      "skill": [
+        0.00020145282299037685,
+        0.010295922899865712
+      ]
+    }
+  },
+  "run": {
+    "condition": "bge-small-k10",
+    "model": "bge-small",
+    "graph_k": 10,
+    "universe": "holdout",
+    "key": "fdc-placed",
+    "placement_source": "shelfmark lexical@2",
+    "placements": "bench/corpus/cache/placed/holdout-fdc/placements.jsonl",
+    "score_seconds": 0.1
+  }
+}

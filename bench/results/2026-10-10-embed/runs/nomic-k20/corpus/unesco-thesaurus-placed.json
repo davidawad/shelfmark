@@ -1,0 +1,114 @@
+{
+  "scheme": "unesco-thesaurus",
+  "version": "2026-08-31",
+  "track": "P",
+  "mode": "primary",
+  "n": 10000,
+  "k": 20,
+  "edge_weight": 29100.993987798374,
+  "cost": 209225805.82518974,
+  "cost_norm": 0.718964465313161,
+  "revenue": 81784134.05279401,
+  "revenue_norm": 0.2810355346868389,
+  "ref_cost_norm": 0.15535014428793428,
+  "skill": 0.33272430319652085,
+  "coverage": 0.9731,
+  "structure": {
+    "mean_depth": 4.8982,
+    "p50_depth": 5,
+    "p95_depth": 7,
+    "max_depth": 9,
+    "mean_branching": 10.2697807435653,
+    "p95_branching": 41,
+    "max_branching": 535,
+    "root_fanout": 276,
+    "nodes_over_50_children": 46,
+    "normalized_entropy": 0.7171408975179554,
+    "effective_classes": 146.66336490135438,
+    "gini": 0.8523828479610667,
+    "largest_class_share": 0.11874711405263969,
+    "nav_scan": 304.6872000000106,
+    "nav_log_a0": 21.979544895110212,
+    "nav_log_a1": 26.681944895110526,
+    "nav_log_a2": 31.3843448951104
+  },
+  "hashes": {
+    "graph": "e5abcae63e02b68ddf11c150bed478a5f2d7760f68606566e1837e2cfeaaf073",
+    "tree": "a2f76993cedf5d60699e3d2d8da89bf721eacd9370d61976d5c1fa912910f735",
+    "scheme": "05f0b3cefa69d9096f9736bb606aa45b1f0eaece1afb7fa01231b9f8c338e745"
+  },
+  "bootstrap": {
+    "resamples": 1000,
+    "seed": 20261010,
+    "confidence": 0.95,
+    "method": "percentile; items resampled with replacement on the fixed graph and tree",
+    "ci": {
+      "cost_norm": [
+        0.7121786233697157,
+        0.7256492298002087
+      ],
+      "coverage": [
+        0.9698,
+        0.9762
+      ],
+      "effective_classes": [
+        141.26662760386935,
+        147.6999934621696
+      ],
+      "gini": [
+        0.8310326464780158,
+        0.8391904880287258
+      ],
+      "largest_class_share": [
+        0.11624457861297333,
+        0.12118243304558723
+      ],
+      "mean_depth": [
+        4.873290000000001,
+        4.9187025
+      ],
+      "nav_log_a0": [
+        21.896220564860595,
+        22.059465016785385
+      ],
+      "nav_log_a1": [
+        26.581296661366938,
+        26.775571773336026
+      ],
+      "nav_log_a2": [
+        31.269595470140292,
+        31.497938592896322
+      ],
+      "nav_scan": [
+        300.58705875000175,
+        309.87539875000107
+      ],
+      "normalized_entropy": [
+        0.726688952395831,
+        0.7332965193392397
+      ],
+      "ref_cost_norm": [
+        0.1495961569243542,
+        0.16186742561254375
+      ],
+      "revenue_norm": [
+        0.27435077019979126,
+        0.2878213766302843
+      ],
+      "skill": [
+        0.3245749661734298,
+        0.3409910312179314
+      ]
+    }
+  },
+  "run": {
+    "condition": "nomic-k20",
+    "model": "nomic",
+    "graph_k": 20,
+    "universe": "corpus",
+    "key": "unesco-thesaurus-placed",
+    "placement_source": "shelfmark lexical@2",
+    "placements": "bench/corpus/cache/placed/corpus-unesco-thesaurus/placements.jsonl",
+    "score_seconds": 5.1
+  }
+}
