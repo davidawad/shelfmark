@@ -1,0 +1,1874 @@
+{
+ "confidence": 0.95,
+ "corpus_sha256": "1027bf9d34928f470ed8b0d7b5ddc5c983fde49bc0cd33eaa162bbd1f830fea5",
+ "graph_sha256": "e5abcae63e02b68ddf11c150bed478a5f2d7760f68606566e1837e2cfeaaf073",
+ "k": 20,
+ "method": "paired percentile bootstrap over items on the fixed graph: each draw takes n items with replacement, gives a drawn item one copy per draw under its original parent, keeps every graph edge once per pair of copies, prunes classes left without items, and rescores every run and the average-linkage reference tree (built once on the full graph) on the same draw",
+ "n": 10000,
+ "paired": {
+  "cost_norm": [
+   {
+    "a": "arxiv-gold",
+    "b": "fdc-arxiv",
+    "ci": [
+     -0.06416877950056847,
+     -0.05258214792322582
+    ],
+    "diff": -0.058279598768780805,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "arxiv-gold",
+    "b": "fdc-arxiv-nested",
+    "ci": [
+     0.01883129794014599,
+     0.025026314531071688
+    ],
+    "diff": 0.021845930637878375,
+    "share_a_lower": 0.0
+   },
+   {
+    "a": "arxiv-gold",
+    "b": "lcc-arxiv",
+    "ci": [
+     -0.11182204066922843,
+     -0.09675585837956241
+    ],
+    "diff": -0.10400280338552526,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "arxiv-gold",
+    "b": "lcc-arxiv-nested",
+    "ci": [
+     -0.013138684234450823,
+     -0.0037174306530913114
+    ],
+    "diff": -0.008375448032738875,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "arxiv-gold",
+    "b": "fdc-placed",
+    "ci": [
+     -0.5001625577302591,
+     -0.47743577734657555
+    ],
+    "diff": -0.48861006639188587,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "arxiv-gold",
+    "b": "openalex-topics-placed",
+    "ci": [
+     -0.308041348569095,
+     -0.28590084470623334
+    ],
+    "diff": -0.29691296927692046,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "arxiv-gold",
+    "b": "learned-placed",
+    "ci": [
+     -0.05051587675042926,
+     -0.03056717233067
+    ],
+    "diff": -0.040803909934772675,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "fdc-arxiv",
+    "b": "fdc-arxiv-nested",
+    "ci": [
+     0.07604980099974949,
+     0.08453791405033034
+    ],
+    "diff": 0.08012552940665918,
+    "share_a_lower": 0.0
+   },
+   {
+    "a": "fdc-arxiv",
+    "b": "lcc-arxiv",
+    "ci": [
+     -0.05038193923923892,
+     -0.040843750409651824
+    ],
+    "diff": -0.04572320461674445,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "fdc-arxiv",
+    "b": "lcc-arxiv-nested",
+    "ci": [
+     0.0437815067443765,
+     0.05572470501320635
+    ],
+    "diff": 0.04990415073604193,
+    "share_a_lower": 0.0
+   },
+   {
+    "a": "fdc-arxiv",
+    "b": "fdc-placed",
+    "ci": [
+     -0.4404485494204073,
+     -0.4188667443797826
+    ],
+    "diff": -0.43033046762310506,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "fdc-arxiv",
+    "b": "openalex-topics-placed",
+    "ci": [
+     -0.24883583317310295,
+     -0.227857350076363
+    ],
+    "diff": -0.23863337050813965,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "fdc-arxiv",
+    "b": "learned-placed",
+    "ci": [
+     0.008371250334732815,
+     0.02646831434404508
+    ],
+    "diff": 0.01747568883400813,
+    "share_a_lower": 0.0
+   },
+   {
+    "a": "fdc-arxiv-nested",
+    "b": "lcc-arxiv",
+    "ci": [
+     -0.13263749463346294,
+     -0.11969980463523232
+    ],
+    "diff": -0.12584873402340363,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "fdc-arxiv-nested",
+    "b": "lcc-arxiv-nested",
+    "ci": [
+     -0.03415066341582116,
+     -0.026342942562934017
+    ],
+    "diff": -0.03022137867061725,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "fdc-arxiv-nested",
+    "b": "fdc-placed",
+    "ci": [
+     -0.5208915916945122,
+     -0.49943824526653186
+    ],
+    "diff": -0.5104559970297642,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "fdc-arxiv-nested",
+    "b": "openalex-topics-placed",
+    "ci": [
+     -0.32969363190944373,
+     -0.30816372647582513
+    ],
+    "diff": -0.31875889991479883,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "fdc-arxiv-nested",
+    "b": "learned-placed",
+    "ci": [
+     -0.0725610575922549,
+     -0.052584441747057245
+    ],
+    "diff": -0.06264984057265105,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "lcc-arxiv",
+    "b": "lcc-arxiv-nested",
+    "ci": [
+     0.09094648885392403,
+     0.10090591725158567
+    ],
+    "diff": 0.09562735535278638,
+    "share_a_lower": 0.0
+   },
+   {
+    "a": "lcc-arxiv",
+    "b": "fdc-placed",
+    "ci": [
+     -0.3942939828376099,
+     -0.37360315414786754
+    ],
+    "diff": -0.3846072630063606,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "lcc-arxiv",
+    "b": "openalex-topics-placed",
+    "ci": [
+     -0.2030085691116965,
+     -0.18303178233159006
+    ],
+    "diff": -0.1929101658913952,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "lcc-arxiv",
+    "b": "learned-placed",
+    "ci": [
+     0.05326064715178087,
+     0.07310006135164336
+    ],
+    "diff": 0.06319889345075258,
+    "share_a_lower": 0.0
+   },
+   {
+    "a": "lcc-arxiv-nested",
+    "b": "fdc-placed",
+    "ci": [
+     -0.4895179595724457,
+     -0.4694987778296525
+    ],
+    "diff": -0.480234618359147,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "lcc-arxiv-nested",
+    "b": "openalex-topics-placed",
+    "ci": [
+     -0.29853491425601764,
+     -0.2782560956975205
+    ],
+    "diff": -0.2885375212441816,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "lcc-arxiv-nested",
+    "b": "learned-placed",
+    "ci": [
+     -0.04225445649883066,
+     -0.022237040103063554
+    ],
+    "diff": -0.0324284619020338,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "fdc-placed",
+    "b": "openalex-topics-placed",
+    "ci": [
+     0.1825815126543964,
+     0.2007405319129353
+    ],
+    "diff": 0.1916970971149654,
+    "share_a_lower": 0.0
+   },
+   {
+    "a": "fdc-placed",
+    "b": "learned-placed",
+    "ci": [
+     0.4363059181821748,
+     0.45832297584152265
+    ],
+    "diff": 0.4478061564571132,
+    "share_a_lower": 0.0
+   },
+   {
+    "a": "openalex-topics-placed",
+    "b": "learned-placed",
+    "ci": [
+     0.24553312311497097,
+     0.266659151920511
+    ],
+    "diff": 0.2561090593421478,
+    "share_a_lower": 0.0
+   }
+  ],
+  "largest_class_share": [
+   {
+    "a": "arxiv-gold",
+    "b": "fdc-arxiv",
+    "ci": [
+     -0.09512147209039612,
+     -0.08105738305411458
+    ],
+    "diff": -0.08784909077805148,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "arxiv-gold",
+    "b": "fdc-arxiv-nested",
+    "ci": [
+     -0.025721576091111812,
+     -0.014053991800540457
+    ],
+    "diff": -0.019683397295107874,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "arxiv-gold",
+    "b": "lcc-arxiv",
+    "ci": [
+     -0.13802839783904092,
+     -0.12788020136470513
+    ],
+    "diff": -0.13269181838171026,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "arxiv-gold",
+    "b": "lcc-arxiv-nested",
+    "ci": [
+     -0.07567860341842418,
+     -0.06713444585478517
+    ],
+    "diff": -0.07123286164338927,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "arxiv-gold",
+    "b": "fdc-placed",
+    "ci": [
+     0.03190114365225439,
+     0.04091061107641062
+    ],
+    "diff": 0.03652061563091054,
+    "share_a_lower": 0.0
+   },
+   {
+    "a": "arxiv-gold",
+    "b": "openalex-topics-placed",
+    "ci": [
+     -0.0763777265340149,
+     -0.06773716193738039
+    ],
+    "diff": -0.07210223861631043,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "arxiv-gold",
+    "b": "learned-placed",
+    "ci": [
+     -0.021182157928446556,
+     -0.01566709466509982
+    ],
+    "diff": -0.018276346163859203,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "fdc-arxiv",
+    "b": "fdc-arxiv-nested",
+    "ci": [
+     0.06678665152273909,
+     0.06955445466575459
+    ],
+    "diff": 0.0681656934829436,
+    "share_a_lower": 0.0
+   },
+   {
+    "a": "fdc-arxiv",
+    "b": "lcc-arxiv",
+    "ci": [
+     -0.047045720343819764,
+     -0.042607962965720475
+    ],
+    "diff": -0.04484272760365879,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "fdc-arxiv",
+    "b": "lcc-arxiv-nested",
+    "ci": [
+     0.013686713186347734,
+     0.019661181815826885
+    ],
+    "diff": 0.016616229134662208,
+    "share_a_lower": 0.0
+   },
+   {
+    "a": "fdc-arxiv",
+    "b": "fdc-placed",
+    "ci": [
+     0.11857555399756352,
+     0.13021542098376016
+    ],
+    "diff": 0.12436970640896201,
+    "share_a_lower": 0.0
+   },
+   {
+    "a": "fdc-arxiv",
+    "b": "openalex-topics-placed",
+    "ci": [
+     0.010723339818485554,
+     0.0207489449810418
+    ],
+    "diff": 0.015746852161741043,
+    "share_a_lower": 0.0
+   },
+   {
+    "a": "fdc-arxiv",
+    "b": "learned-placed",
+    "ci": [
+     0.0629344336707099,
+     0.07660360563230581
+    ],
+    "diff": 0.06957274461419227,
+    "share_a_lower": 0.0
+   },
+   {
+    "a": "fdc-arxiv-nested",
+    "b": "lcc-arxiv",
+    "ci": [
+     -0.11388749659838905,
+     -0.11206707325696225
+    ],
+    "diff": -0.11300842108660239,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "fdc-arxiv-nested",
+    "b": "lcc-arxiv-nested",
+    "ci": [
+     -0.05314435558092077,
+     -0.049892166173345354
+    ],
+    "diff": -0.05154946434828139,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "fdc-arxiv-nested",
+    "b": "fdc-placed",
+    "ci": [
+     0.05140489597220095,
+     0.06109486450829285
+    ],
+    "diff": 0.05620401292601841,
+    "share_a_lower": 0.0
+   },
+   {
+    "a": "fdc-arxiv-nested",
+    "b": "openalex-topics-placed",
+    "ci": [
+     -0.056161779860693845,
+     -0.04861419515201542
+    ],
+    "diff": -0.05241884132120256,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "fdc-arxiv-nested",
+    "b": "learned-placed",
+    "ci": [
+     -0.003988386226700427,
+     0.007173077964883928
+    ],
+    "diff": 0.001407051131248671,
+    "share_a_lower": 0.319
+   },
+   {
+    "a": "lcc-arxiv",
+    "b": "lcc-arxiv-nested",
+    "ci": [
+     0.060679468152982356,
+     0.062335200324525226
+    ],
+    "diff": 0.061458956738321,
+    "share_a_lower": 0.0
+   },
+   {
+    "a": "lcc-arxiv",
+    "b": "fdc-placed",
+    "ci": [
+     0.1649147229784425,
+     0.17368992214395007
+    ],
+    "diff": 0.16921243401262082,
+    "share_a_lower": 0.0
+   },
+   {
+    "a": "lcc-arxiv",
+    "b": "openalex-topics-placed",
+    "ci": [
+     0.05744881503592926,
+     0.06387680823979108
+    ],
+    "diff": 0.06058957976539983,
+    "share_a_lower": 0.0
+   },
+   {
+    "a": "lcc-arxiv",
+    "b": "learned-placed",
+    "ci": [
+     0.10969723839012585,
+     0.11962434635297137
+    ],
+    "diff": 0.11441547221785106,
+    "share_a_lower": 0.0
+   },
+   {
+    "a": "lcc-arxiv-nested",
+    "b": "fdc-placed",
+    "ci": [
+     0.1037698459278424,
+     0.11164524927972122
+    ],
+    "diff": 0.1077534772742998,
+    "share_a_lower": 0.0
+   },
+   {
+    "a": "lcc-arxiv-nested",
+    "b": "openalex-topics-placed",
+    "ci": [
+     -0.0036973622615361535,
+     0.001999339855379117
+    ],
+    "diff": -0.0008693769729211653,
+    "share_a_lower": 0.719
+   },
+   {
+    "a": "lcc-arxiv-nested",
+    "b": "learned-placed",
+    "ci": [
+     0.0488886281449182,
+     0.05734209185626469
+    ],
+    "diff": 0.052956515479530064,
+    "share_a_lower": 0.0
+   },
+   {
+    "a": "fdc-placed",
+    "b": "openalex-topics-placed",
+    "ci": [
+     -0.11281709805248333,
+     -0.10420769826366565
+    ],
+    "diff": -0.10862285424722097,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "fdc-placed",
+    "b": "learned-placed",
+    "ci": [
+     -0.05915697944755581,
+     -0.05023603999228701
+    ],
+    "diff": -0.05479696179476974,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "openalex-topics-placed",
+    "b": "learned-placed",
+    "ci": [
+     0.049686937740996764,
+     0.058059042812997806
+    ],
+    "diff": 0.05382589245245123,
+    "share_a_lower": 0.0
+   }
+  ],
+  "nav_log_a1": [
+   {
+    "a": "arxiv-gold",
+    "b": "fdc-arxiv",
+    "ci": [
+     -0.1436415646083705,
+     0.06734146776832287
+    ],
+    "diff": -0.019705183478507138,
+    "share_a_lower": 0.727
+   },
+   {
+    "a": "arxiv-gold",
+    "b": "fdc-arxiv-nested",
+    "ci": [
+     -1.0307658616346393,
+     -0.9096177855737694
+    ],
+    "diff": -0.971016247530784,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "arxiv-gold",
+    "b": "lcc-arxiv",
+    "ci": [
+     -5.844742308941065,
+     -5.62161488737185
+    ],
+    "diff": -5.724605560162178,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "arxiv-gold",
+    "b": "lcc-arxiv-nested",
+    "ci": [
+     -4.475777415569875,
+     -4.3278614509547735
+    ],
+    "diff": -4.4078648726240175,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "arxiv-gold",
+    "b": "fdc-placed",
+    "ci": [
+     -7.36283573038934,
+     -6.974684777123899
+    ],
+    "diff": -7.231131312946953,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "arxiv-gold",
+    "b": "openalex-topics-placed",
+    "ci": [
+     -8.650336801125805,
+     -8.253393940437618
+    ],
+    "diff": -8.517851272286741,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "arxiv-gold",
+    "b": "learned-placed",
+    "ci": [
+     -13.431238818231478,
+     -11.628218309355098
+    ],
+    "diff": -12.742907056969987,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "fdc-arxiv",
+    "b": "fdc-arxiv-nested",
+    "ci": [
+     -0.9947135022291397,
+     -0.8700854455878557
+    ],
+    "diff": -0.9513110640522768,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "fdc-arxiv",
+    "b": "lcc-arxiv",
+    "ci": [
+     -5.830688803012197,
+     -5.562946362893914
+    ],
+    "diff": -5.704900376683671,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "fdc-arxiv",
+    "b": "lcc-arxiv-nested",
+    "ci": [
+     -4.492806108701841,
+     -4.243501485356
+    ],
+    "diff": -4.38815968914551,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "fdc-arxiv",
+    "b": "fdc-placed",
+    "ci": [
+     -7.352659137914885,
+     -6.914756693423425
+    ],
+    "diff": -7.211426129468446,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "fdc-arxiv",
+    "b": "openalex-topics-placed",
+    "ci": [
+     -8.619803847042927,
+     -8.204517152509117
+    ],
+    "diff": -8.498146088808234,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "fdc-arxiv",
+    "b": "learned-placed",
+    "ci": [
+     -13.368469232345063,
+     -11.592502052714739
+    ],
+    "diff": -12.72320187349148,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "fdc-arxiv-nested",
+    "b": "lcc-arxiv",
+    "ci": [
+     -4.881553673120158,
+     -4.640520480212685
+    ],
+    "diff": -4.753589312631394,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "fdc-arxiv-nested",
+    "b": "lcc-arxiv-nested",
+    "ci": [
+     -3.5163142014458684,
+     -3.3485478193177065
+    ],
+    "diff": -3.4368486250932335,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "fdc-arxiv-nested",
+    "b": "fdc-placed",
+    "ci": [
+     -6.4021984447098355,
+     -5.9972064661921225
+    ],
+    "diff": -6.260115065416169,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "fdc-arxiv-nested",
+    "b": "openalex-topics-placed",
+    "ci": [
+     -7.683230984465366,
+     -7.280590980923949
+    ],
+    "diff": -7.546835024755957,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "fdc-arxiv-nested",
+    "b": "learned-placed",
+    "ci": [
+     -12.452422424511191,
+     -10.667493675458887
+    ],
+    "diff": -11.771890809439203,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "lcc-arxiv",
+    "b": "lcc-arxiv-nested",
+    "ci": [
+     1.273210512849093,
+     1.3925769107075645
+    ],
+    "diff": 1.3167406875381609,
+    "share_a_lower": 0.0
+   },
+   {
+    "a": "lcc-arxiv",
+    "b": "fdc-placed",
+    "ci": [
+     -1.668671520768185,
+     -1.2180953763612192
+    ],
+    "diff": -1.5065257527847749,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "lcc-arxiv",
+    "b": "openalex-topics-placed",
+    "ci": [
+     -2.9305296645021217,
+     -2.4970739199700858
+    ],
+    "diff": -2.7932457121245626,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "lcc-arxiv",
+    "b": "learned-placed",
+    "ci": [
+     -7.683622922860451,
+     -5.876469576569152
+    ],
+    "diff": -7.018301496807808,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "lcc-arxiv-nested",
+    "b": "fdc-placed",
+    "ci": [
+     -2.984457419951357,
+     -2.559681122919782
+    ],
+    "diff": -2.8232664403229357,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "lcc-arxiv-nested",
+    "b": "openalex-topics-placed",
+    "ci": [
+     -4.255883417110339,
+     -3.8450768073739843
+    ],
+    "diff": -4.1099863996627235,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "lcc-arxiv-nested",
+    "b": "learned-placed",
+    "ci": [
+     -9.010018433210728,
+     -7.230605068745828
+    ],
+    "diff": -8.33504218434597,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "fdc-placed",
+    "b": "openalex-topics-placed",
+    "ci": [
+     -1.536132028858676,
+     -0.995376093064153
+    ],
+    "diff": -1.2867199593397878,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "fdc-placed",
+    "b": "learned-placed",
+    "ci": [
+     -6.268849299194984,
+     -4.4151971915594705
+    ],
+    "diff": -5.5117757440230335,
+    "share_a_lower": 1.0
+   },
+   {
+    "a": "openalex-topics-placed",
+    "b": "learned-placed",
+    "ci": [
+     -4.981720246842566,
+     -3.14584006611478
+    ],
+    "diff": -4.225055784683246,
+    "share_a_lower": 1.0
+   }
+  ]
+ },
+ "reference": {
+  "ci": [
+   0.1498524914592156,
+   0.1615018878942334
+  ],
+  "cost_norm": 0.15535014428793428
+ },
+ "resamples": 1000,
+ "runs": {
+  "arxiv-gold": {
+   "ci": {
+    "cost_norm": [
+     0.3371116986178069,
+     0.35612812147198314
+    ],
+    "coverage": [
+     1.0,
+     1.0
+    ],
+    "effective_classes": [
+     35.810664152302834,
+     37.019616544211914
+    ],
+    "expected_tree_distance": [
+     4.105793198152084,
+     4.222771283246192
+    ],
+    "gini": [
+     0.7885494625033493,
+     0.7973370781580212
+    ],
+    "largest_class_share": [
+     0.13375394812872432,
+     0.13995977499778572
+    ],
+    "max_branching": [
+     757.975,
+     854.0
+    ],
+    "max_depth": [
+     4.0,
+     4.0
+    ],
+    "mean_branching": [
+     60.83233532934132,
+     62.67901234567901
+    ],
+    "mean_depth": [
+     3.8912,
+     3.9037
+    ],
+    "nav_log_a0": [
+     15.113498069319453,
+     15.209167267990859
+    ],
+    "nav_log_a1": [
+     18.272082664965673,
+     18.372514740011734
+    ],
+    "nav_log_a2": [
+     21.42892657531931,
+     21.53301835282263
+    ],
+    "nav_scan": [
+     281.1473674999888,
+     301.8698150000069
+    ],
+    "nodes_over_50_children": [
+     48.0,
+     55.0
+    ],
+    "normalized_entropy": [
+     0.7005833021773349,
+     0.7080729188141804
+    ],
+    "p50_depth": [
+     4.0,
+     4.0
+    ],
+    "p95_branching": [
+     191.97500000000002,
+     233.0
+    ],
+    "p95_depth": [
+     4.0,
+     4.0
+    ],
+    "revenue_norm": [
+     0.6438718785280169,
+     0.6628883013821931
+    ],
+    "root_fanout": [
+     8.0,
+     8.0
+    ],
+    "skill": [
+     0.7634846282940044,
+     0.7830864798584262
+    ]
+   },
+   "placements_sha256": "43171e7094792fb4fb08260e80ca2bb02669e0fc8f38014ab5d30e2231783652",
+   "point": {
+    "cost_norm": 0.3465083148649126,
+    "coverage": 1.0,
+    "effective_classes": 36.481698686133974,
+    "expected_tree_distance": 4.163668961859314,
+    "gini": 0.7951432860397372,
+    "largest_class_share": 0.13694091662065158,
+    "max_branching": 797.0,
+    "max_depth": 4.0,
+    "mean_branching": 60.83233532934132,
+    "mean_depth": 3.8976,
+    "nav_log_a0": 15.172191886997975,
+    "nav_log_a1": 18.33239188699816,
+    "nav_log_a2": 21.49259188699768,
+    "nav_scan": 291.2549000000038,
+    "nodes_over_50_children": 52.0,
+    "normalized_entropy": 0.7027774672679232,
+    "p50_depth": 4.0,
+    "p95_branching": 200.0,
+    "p95_depth": 4.0,
+    "revenue_norm": 0.6534916851350874,
+    "root_fanout": 8.0,
+    "skill": 0.7736835337338379
+   },
+   "scheme": "arxiv",
+   "scheme_sha256": "97cbb680a3ffd3855bde560a52e969698aa67d1693272c22c821a38ddfbeb22f",
+   "version": "2024-04-01"
+  },
+  "fdc-arxiv": {
+   "ci": {
+    "cost_norm": [
+     0.3959149395236277,
+     0.4138310394143186
+    ],
+    "coverage": [
+     1.0,
+     1.0
+    ],
+    "effective_classes": [
+     10.665371512075867,
+     11.02307637452929
+    ],
+    "expected_tree_distance": [
+     3.047381338850549,
+     3.1491744270850734
+    ],
+    "gini": [
+     0.6717879661208765,
+     0.6811313775913181
+    ],
+    "largest_class_share": [
+     0.2204226109820389,
+     0.2292811717704278
+    ],
+    "max_branching": [
+     3874.975,
+     4057.0
+    ],
+    "max_depth": [
+     5.0,
+     5.0
+    ],
+    "mean_branching": [
+     385.46153846153845,
+     385.46153846153845
+    ],
+    "mean_depth": [
+     3.2870975000000002,
+     3.3085
+    ],
+    "nav_log_a0": [
+     15.52120068801361,
+     15.664039483283172
+    ],
+    "nav_log_a1": [
+     18.273105323482326,
+     18.441348714461224
+    ],
+    "nav_log_a2": [
+     21.02663087150554,
+     21.22060001267422
+    ],
+    "nav_scan": [
+     2211.551023749904,
+     2321.0516162499557
+    ],
+    "nodes_over_50_children": [
+     15.0,
+     16.0
+    ],
+    "normalized_entropy": [
+     0.7264984810562745,
+     0.7366236388580731
+    ],
+    "p50_depth": [
+     3.0,
+     3.0
+    ],
+    "p95_branching": [
+     1400.0,
+     1542.025
+    ],
+    "p95_depth": [
+     4.0,
+     5.0
+    ],
+    "revenue_norm": [
+     0.5861689605856814,
+     0.6040850604763723
+    ],
+    "root_fanout": [
+     4.0,
+     4.0
+    ],
+    "skill": [
+     0.6954810066926194,
+     0.7138360628328717
+    ]
+   },
+   "placements_sha256": "e04333675bcdc897f2f361b8deecfa9df5a069d5a60bef29f5547662f533cf1e",
+   "point": {
+    "cost_norm": 0.40478791363369343,
+    "coverage": 1.0,
+    "effective_classes": 10.851698619876615,
+    "expected_tree_distance": 3.099246396956019,
+    "gini": 0.676176176176176,
+    "largest_class_share": 0.22479000739870306,
+    "max_branching": 3968.0,
+    "max_depth": 5.0,
+    "mean_branching": 385.46153846153845,
+    "mean_depth": 3.2977,
+    "nav_log_a0": 15.587397070475395,
+    "nav_log_a1": 18.352097070476667,
+    "nav_log_a2": 21.116797070475453,
+    "nav_scan": 2266.7775999999703,
+    "nodes_over_50_children": 15.0,
+    "normalized_entropy": 0.7318142954745859,
+    "p50_depth": 3.0,
+    "p95_branching": 1470.0,
+    "p95_depth": 5.0,
+    "revenue_norm": 0.5952120863663066,
+    "root_fanout": 4.0,
+    "skill": 0.7046850033077015
+   },
+   "scheme": "fdc",
+   "scheme_sha256": "066e8d10ede72fae3cc20e6b5019d10136510cdc8dd078328048b5cc80b3a4db",
+   "version": "0.06"
+  },
+  "fdc-arxiv-nested": {
+   "ci": {
+    "cost_norm": [
+     0.3155991443563352,
+     0.3337517669186675
+    ],
+    "coverage": [
+     1.0,
+     1.0
+    ],
+    "effective_classes": [
+     33.99639733485147,
+     34.93120738981885
+    ],
+    "expected_tree_distance": [
+     4.287067143615803,
+     4.415495351019177
+    ],
+    "gini": [
+     0.8003584481263573,
+     0.8084444386646145
+    ],
+    "largest_class_share": [
+     0.15358966846048838,
+     0.15976414633124275
+    ],
+    "max_branching": [
+     757.975,
+     854.0
+    ],
+    "max_depth": [
+     6.0,
+     6.0
+    ],
+    "mean_branching": [
+     58.44827586206897,
+     60.14792899408284
+    ],
+    "mean_depth": [
+     4.2870975,
+     4.3085
+    ],
+    "nav_log_a0": [
+     15.503956094958223,
+     15.613161100750261
+    ],
+    "nav_log_a1": [
+     19.22756676355434,
+     19.34990361063025
+    ],
+    "nav_log_a2": [
+     22.94991668199774,
+     23.08972238555223
+    ],
+    "nav_scan": [
+     281.76132875000195,
+     302.35615750001443
+    ],
+    "nodes_over_50_children": [
+     48.0,
+     55.0
+    ],
+    "normalized_entropy": [
+     0.6847684807621566,
+     0.6913725232888218
+    ],
+    "p50_depth": [
+     4.0,
+     4.0
+    ],
+    "p95_branching": [
+     185.97500000000002,
+     228.0
+    ],
+    "p95_depth": [
+     5.0,
+     6.0
+    ],
+    "revenue_norm": [
+     0.6662482330813325,
+     0.6844008556436648
+    ],
+    "root_fanout": [
+     4.0,
+     4.0
+    ],
+    "skill": [
+     0.7901281936266159,
+     0.8083937443866485
+    ]
+   },
+   "placements_sha256": "621a9e2d3be004e6c1b4dffbbc4451ec4d574da0711ea83e24cc894917d330a7",
+   "point": {
+    "cost_norm": 0.32466238422703425,
+    "coverage": 1.0,
+    "effective_classes": 34.537526487479376,
+    "expected_tree_distance": 4.352731826611822,
+    "gini": 0.8064019889864025,
+    "largest_class_share": 0.15662431391575946,
+    "max_branching": 797.0,
+    "max_depth": 6.0,
+    "mean_branching": 58.44827586206897,
+    "mean_depth": 4.2977,
+    "nav_log_a0": 15.573508134528831,
+    "nav_log_a1": 19.303408134528944,
+    "nav_log_a2": 23.033308134529488,
+    "nav_scan": 291.83519999999254,
+    "nodes_over_50_children": 52.0,
+    "normalized_entropy": 0.6865688099346285,
+    "p50_depth": 4.0,
+    "p95_branching": 200.0,
+    "p95_depth": 6.0,
+    "revenue_norm": 0.6753376157729658,
+    "root_fanout": 4.0,
+    "skill": 0.7995474233564338
+   },
+   "scheme": "fdc-arxiv",
+   "scheme_sha256": "86088bbf1c8f4dc95fc73dff7319ee07d30ecb4fb2b50301a95a63906c7ec144",
+   "version": "0.06+arxiv"
+  },
+  "fdc-placed": {
+   "ci": {
+    "cost_norm": [
+     0.82816215822594,
+     0.8416451768064585
+    ],
+    "coverage": [
+     0.7622,
+     0.7777
+    ],
+    "effective_classes": [
+     52.97933139656825,
+     55.2681627727477
+    ],
+    "expected_tree_distance": [
+     5.665917534569799,
+     5.774193370652401
+    ],
+    "gini": [
+     0.8110467178854097,
+     0.8247194121766259
+    ],
+    "largest_class_share": [
+     0.09693438504757615,
+     0.10392498713130978
+    ],
+    "max_branching": [
+     1045.0,
+     1173.0
+    ],
+    "max_depth": [
+     6.0,
+     7.0
+    ],
+    "mean_branching": [
+     31.32514937034654,
+     33.875988494201444
+    ],
+    "mean_depth": [
+     3.186795,
+     3.2390149999999998
+    ],
+    "nav_log_a0": [
+     22.13632032490082,
+     22.486121357449747
+    ],
+    "nav_log_a1": [
+     25.308335304822585,
+     25.681719204462286
+    ],
+    "nav_log_a2": [
+     28.464574694086853,
+     28.880091635649702
+    ],
+    "nav_scan": [
+     1377.4478512499563,
+     1450.8403962499729
+    ],
+    "nodes_over_50_children": [
+     35.0,
+     41.0
+    ],
+    "normalized_entropy": [
+     0.7208748716219612,
+     0.7317709742665782
+    ],
+    "p50_depth": [
+     4.0,
+     4.0
+    ],
+    "p95_branching": [
+     146.0,
+     173.0
+    ],
+    "p95_depth": [
+     5.0,
+     5.0
+    ],
+    "revenue_norm": [
+     0.1583548231935416,
+     0.17183784177405997
+    ],
+    "root_fanout": [
+     2233.0,
+     2388.0
+    ],
+    "skill": [
+     0.18723773372354288,
+     0.2034341623097204
+    ]
+   },
+   "placements_sha256": "6b347fb15277992ccc512a83b59b581f92ce8f835cc794960cd64a2b80af1462",
+   "point": {
+    "cost_norm": 0.8351183812567985,
+    "coverage": 0.7696,
+    "effective_classes": 54.54372888323448,
+    "expected_tree_distance": 5.719628451553923,
+    "gini": 0.8361995567063261,
+    "largest_class_share": 0.10042030098974104,
+    "max_branching": 1103.0,
+    "max_depth": 7.0,
+    "mean_branching": 29.05109489051095,
+    "mean_depth": 3.2127,
+    "nav_log_a0": 22.38452319994559,
+    "nav_log_a1": 25.563523199945113,
+    "nav_log_a2": 28.742523199944703,
+    "nav_scan": 1413.4728999999447,
+    "nodes_over_50_children": 38.0,
+    "normalized_entropy": 0.7124374624953792,
+    "p50_depth": 4.0,
+    "p95_branching": 153.0,
+    "p95_depth": 5.0,
+    "revenue_norm": 0.16488161874320154,
+    "root_fanout": 2314.0,
+    "skill": 0.19520706435710125
+   },
+   "scheme": "fdc",
+   "scheme_sha256": "066e8d10ede72fae3cc20e6b5019d10136510cdc8dd078328048b5cc80b3a4db",
+   "version": "0.06"
+  },
+  "lcc-arxiv": {
+   "ci": {
+    "cost_norm": [
+     0.441919845151741,
+     0.4592925561971971
+    ],
+    "coverage": [
+     1.0,
+     1.0
+    ],
+    "effective_classes": [
+     8.952619820634263,
+     9.165508705853135
+    ],
+    "expected_tree_distance": [
+     3.0852772833161,
+     3.193925607364286
+    ],
+    "gini": [
+     0.7058088089655816,
+     0.7126131861422699
+    ],
+    "largest_class_share": [
+     0.26736892300384113,
+     0.27187202235153013
+    ],
+    "max_branching": [
+     3874.975,
+     4057.0
+    ],
+    "max_depth": [
+     6.0,
+     6.0
+    ],
+    "mean_branching": [
+     417.5,
+     417.5
+    ],
+    "mean_depth": [
+     4.3601975,
+     4.411805
+    ],
+    "nav_log_a0": [
+     20.42497759855528,
+     20.64073658122656
+    ],
+    "nav_log_a1": [
+     23.939275809950832,
+     24.17223908708966
+    ],
+    "nav_log_a2": [
+     27.450018516462972,
+     27.704559232316498
+    ],
+    "nav_scan": [
+     2647.488662500081,
+     2779.4921425001003
+    ],
+    "nodes_over_50_children": [
+     14.0,
+     15.0
+    ],
+    "normalized_entropy": [
+     0.6897133666524389,
+     0.6971081999002315
+    ],
+    "p50_depth": [
+     4.0,
+     4.0
+    ],
+    "p95_branching": [
+     1400.0,
+     1542.025
+    ],
+    "p95_depth": [
+     6.0,
+     6.0
+    ],
+    "revenue_norm": [
+     0.5407074438028029,
+     0.5580801548482589
+    ],
+    "root_fanout": [
+     4.0,
+     4.0
+    ],
+    "skill": [
+     0.6408688954910075,
+     0.660248825915844
+    ]
+   },
+   "placements_sha256": "96074f1e0f03ae1dd264b452a980087d825eeffde4cb27a02079053a1ab42525",
+   "point": {
+    "cost_norm": 0.4505111182504379,
+    "coverage": 1.0,
+    "effective_classes": 9.055615814178955,
+    "expected_tree_distance": 3.136928643635784,
+    "gini": 0.709076326562746,
+    "largest_class_share": 0.26963273500236185,
+    "max_branching": 3968.0,
+    "max_depth": 6.0,
+    "mean_branching": 417.5,
+    "mean_depth": 4.3872,
+    "nav_log_a0": 20.53449744715959,
+    "nav_log_a1": 24.056997447160338,
+    "nav_log_a2": 27.579497447161444,
+    "nav_scan": 2714.2529500001147,
+    "nodes_over_50_children": 14.0,
+    "normalized_entropy": 0.6933127048303436,
+    "p50_depth": 4.0,
+    "p95_branching": 1470.0,
+    "p95_depth": 6.0,
+    "revenue_norm": 0.5494888817495621,
+    "root_fanout": 4.0,
+    "skill": 0.6505522709008529
+   },
+   "scheme": "lcc",
+   "scheme_sha256": "aab91312e939007a8e705ad4d4b3207f696911c43e70e21fa923de3391548327",
+   "version": "2024"
+  },
+  "lcc-arxiv-nested": {
+   "ci": {
+    "cost_norm": [
+     0.34624053372410946,
+     0.36396080600606
+    ],
+    "coverage": [
+     1.0,
+     1.0
+    ],
+    "effective_classes": [
+     23.90048297424897,
+     24.637791796255865
+    ],
+    "expected_tree_distance": [
+     4.323590166995345,
+     4.459600371868224
+    ],
+    "gini": [
+     0.8443837828451308,
+     0.8509521666001855
+    ],
+    "largest_class_share": [
+     0.2066935286491601,
+     0.20971334645454834
+    ],
+    "max_branching": [
+     757.975,
+     854.0
+    ],
+    "max_depth": [
+     7.0,
+     7.0
+    ],
+    "mean_branching": [
+     59.116279069767444,
+     60.8562874251497
+    ],
+    "mean_depth": [
+     5.3601975,
+     5.411805
+    ],
+    "nav_log_a0": [
+     18.145531545461175,
+     18.30419090247313
+    ],
+    "nav_log_a1": [
+     22.633302654236875,
+     22.812255996298266
+    ],
+    "nav_log_a2": [
+     27.12354801939073,
+     27.322430010289157
+    ],
+    "nav_scan": [
+     286.8764787499947,
+     307.6851037500097
+    ],
+    "nodes_over_50_children": [
+     48.0,
+     55.0
+    ],
+    "normalized_entropy": [
+     0.6177882418000232,
+     0.6245174341400902
+    ],
+    "p50_depth": [
+     5.0,
+     5.0
+    ],
+    "p95_branching": [
+     191.0,
+     233.0
+    ],
+    "p95_depth": [
+     7.0,
+     7.0
+    ],
+    "revenue_norm": [
+     0.6360391939939399,
+     0.6537594662758905
+    ],
+    "root_fanout": [
+     4.0,
+     4.0
+    ],
+    "skill": [
+     0.7542518001061503,
+     0.7723623291317533
+    ]
+   },
+   "placements_sha256": "621a9e2d3be004e6c1b4dffbbc4451ec4d574da0711ea83e24cc894917d330a7",
+   "point": {
+    "cost_norm": 0.3548837628976515,
+    "coverage": 1.0,
+    "effective_classes": 24.29830680598546,
+    "expected_tree_distance": 4.390414073292076,
+    "gini": 0.849267901972758,
+    "largest_class_share": 0.20817377826404085,
+    "max_branching": 797.0,
+    "max_depth": 7.0,
+    "mean_branching": 59.116279069767444,
+    "mean_depth": 5.3872,
+    "nav_log_a0": 18.240656759622325,
+    "nav_log_a1": 22.740256759622177,
+    "nav_log_a2": 27.239856759622484,
+    "nav_scan": 297.03264999999385,
+    "nodes_over_50_children": 52.0,
+    "normalized_entropy": 0.6197979781277609,
+    "p50_depth": 5.0,
+    "p95_branching": 200.0,
+    "p95_depth": 7.0,
+    "revenue_norm": 0.6451162371023484,
+    "root_fanout": 4.0,
+    "skill": 0.7637676520509148
+   },
+   "scheme": "lcc-arxiv",
+   "scheme_sha256": "c3a66874f6fee65e409da2f4b54ff4eb7c0e93e4e7b55be887c6a41f163075ae",
+   "version": "2024+arxiv"
+  },
+  "learned-placed": {
+   "ci": {
+    "cost_norm": [
+     0.3785444995511279,
+     0.3967031362222926
+    ],
+    "coverage": [
+     0.9988,
+     0.9998
+    ],
+    "effective_classes": [
+     33.15610705398794,
+     33.72631124964541
+    ],
+    "expected_tree_distance": [
+     4.960818940242971,
+     5.106615836437631
+    ],
+    "gini": [
+     0.7209494269284875,
+     0.7266637365520034
+    ],
+    "largest_class_share": [
+     0.1519883095426014,
+     0.15812256055023483
+    ],
+    "max_branching": [
+     1120.975,
+     1246.025
+    ],
+    "max_depth": [
+     5.0,
+     5.0
+    ],
+    "mean_branching": [
+     91.78181818181818,
+     91.87272727272727
+    ],
+    "mean_depth": [
+     4.3608875,
+     4.4032
+    ],
+    "nav_log_a0": [
+     25.544436195256623,
+     27.359985412231246
+    ],
+    "nav_log_a1": [
+     29.942858968545266,
+     31.739392998567727
+    ],
+    "nav_log_a2": [
+     34.336372974061426,
+     36.11334696738993
+    ],
+    "nav_scan": [
+     1005.7215012500182,
+     1072.893270000004
+    ],
+    "nodes_over_50_children": [
+     57.0,
+     64.02499999999998
+    ],
+    "normalized_entropy": [
+     0.7448657694425224,
+     0.7484933470966799
+    ],
+    "p50_depth": [
+     5.0,
+     5.0
+    ],
+    "p95_branching": [
+     212.0,
+     260.0
+    ],
+    "p95_depth": [
+     5.0,
+     5.0
+    ],
+    "revenue_norm": [
+     0.6032968637777075,
+     0.621455500448872
+    ],
+    "root_fanout": [
+     4.0,
+     14.0
+    ],
+    "skill": [
+     0.716003209074476,
+     0.7347228664737097
+    ]
+   },
+   "placements_sha256": "f7930a6d8e6a9ba86c8efaf1dd1ad32d569ade878749c1042fbf4164da25e3e6",
+   "point": {
+    "cost_norm": 0.3873122247996853,
+    "coverage": 0.9993,
+    "effective_classes": 33.4710966989946,
+    "expected_tree_distance": 5.034862339712432,
+    "gini": 0.7230526966382715,
+    "largest_class_share": 0.15521726278451078,
+    "max_branching": 1183.0,
+    "max_depth": 5.0,
+    "mean_branching": 91.82727272727273,
+    "mean_depth": 4.383,
+    "nav_log_a0": 26.692298943968723,
+    "nav_log_a1": 31.075298943968146,
+    "nav_log_a2": 35.45829894396672,
+    "nav_scan": 1036.676500000041,
+    "nodes_over_50_children": 61.0,
+    "normalized_entropy": 0.7468773419121073,
+    "p50_depth": 5.0,
+    "p95_branching": 233.0,
+    "p95_depth": 5.0,
+    "revenue_norm": 0.6126877752003147,
+    "root_fanout": 9.0,
+    "skill": 0.7253748651668213
+   },
+   "scheme": "learned",
+   "scheme_sha256": "de2ece687cafb7c3df3a8afc9818db02414c6ade455894bdacb7a2099af5a7de",
+   "version": "2026-10-10"
+  },
+  "openalex-topics-placed": {
+   "ci": {
+    "cost_norm": [
+     0.6363930125738536,
+     0.6503045560434272
+    ],
+    "coverage": [
+     0.9703,
+     0.9765
+    ],
+    "effective_classes": [
+     74.73295016272169,
+     77.8015130128564
+    ],
+    "expected_tree_distance": [
+     6.703906115081871,
+     6.813172288968613
+    ],
+    "gini": [
+     0.8777546221454908,
+     0.882615241713108
+    ],
+    "largest_class_share": [
+     0.20659008483492491,
+     0.2115692669657825
+    ],
+    "max_branching": [
+     524.0,
+     601.0
+    ],
+    "max_depth": [
+     5.0,
+     5.0
+    ],
+    "mean_branching": [
+     10.866979695431471,
+     11.334394904458598
+    ],
+    "mean_depth": [
+     4.4289,
+     4.462807499999999
+    ],
+    "nav_log_a0": [
+     22.18661048517489,
+     22.56702405071722
+    ],
+    "nav_log_a1": [
+     26.582377279252416,
+     26.96760852902501
+    ],
+    "nav_log_a2": [
+     30.972320569409067,
+     31.368280861338995
+    ],
+    "nav_scan": [
+     294.6681975000009,
+     326.47524499999986
+    ],
+    "nodes_over_50_children": [
+     32.0,
+     39.0
+    ],
+    "normalized_entropy": [
+     0.6279041070080144,
+     0.6333234452367256
+    ],
+    "p50_depth": [
+     5.0,
+     5.0
+    ],
+    "p95_branching": [
+     37.0,
+     43.0
+    ],
+    "p95_depth": [
+     5.0,
+     5.0
+    ],
+    "revenue_norm": [
+     0.3496954439565729,
+     0.3636069874261465
+    ],
+    "root_fanout": [
+     239.0,
+     301.0
+    ],
+    "skill": [
+     0.41398582266050077,
+     0.4308447297884586
+    ]
+   },
+   "placements_sha256": "048610218aa39754fe6af94e35cda13a24f23820e39fad44ec9e32d3f8c3d238",
+   "point": {
+    "cost_norm": 0.6434212841418331,
+    "coverage": 0.9732,
+    "effective_classes": 77.58921725268033,
+    "expected_tree_distance": 6.759066789009422,
+    "gini": 0.8921191058854823,
+    "largest_class_share": 0.209043155236962,
+    "max_branching": 554.0,
+    "max_depth": 5.0,
+    "mean_branching": 9.510936132983376,
+    "mean_depth": 4.4457,
+    "nav_log_a0": 22.4497431592846,
+    "nav_log_a1": 26.8502431592849,
+    "nav_log_a2": 31.250743159284557,
+    "nav_scan": 311.1478000000049,
+    "nodes_over_50_children": 36.0,
+    "normalized_entropy": 0.6179767172226143,
+    "p50_depth": 5.0,
+    "p95_branching": 35.0,
+    "p95_depth": 5.0,
+    "revenue_norm": 0.35657871585816686,
+    "root_fanout": 272.0,
+    "skill": 0.4221615778973408
+   },
+   "scheme": "openalex-topics",
+   "scheme_sha256": "70b17f20d08f3f1e9e8d2ae16e27b9efac4763b2fdbc8ddf4274e76ffb1953df",
+   "version": "2026-10-09"
+  }
+ },
+ "seed": 20261010,
+ "runs_spec": [
+  {
+   "key": "arxiv-gold",
+   "scheme": "schemes/arxiv/arxiv.json",
+   "placements": "bench/results/2026-10-10-embed/placements/corpus-arxiv-gold.jsonl"
+  },
+  {
+   "key": "fdc-arxiv",
+   "scheme": "schemes/fdc/fdc.json",
+   "placements": "bench/results/2026-10-10-proposal/placements/corpus/fdc-arxiv.jsonl"
+  },
+  {
+   "key": "fdc-arxiv-nested",
+   "scheme": "bench/results/2026-10-10-proposal/schemes/fdc-arxiv.json",
+   "placements": "bench/results/2026-10-10-proposal/placements/corpus/fdc-arxiv-nested.jsonl"
+  },
+  {
+   "key": "lcc-arxiv",
+   "scheme": "data/schemes/lcc/lcc.json",
+   "placements": "bench/results/2026-10-10-proposal/placements/corpus/lcc-arxiv.jsonl"
+  },
+  {
+   "key": "lcc-arxiv-nested",
+   "scheme": "bench/results/2026-10-10-proposal/schemes/lcc-arxiv.json",
+   "placements": "bench/results/2026-10-10-proposal/placements/corpus/lcc-arxiv-nested.jsonl"
+  },
+  {
+   "key": "fdc-placed",
+   "scheme": "schemes/fdc/fdc.json",
+   "placements": "bench/results/2026-10-10-embed/placements/corpus-fdc-placed.jsonl"
+  },
+  {
+   "key": "openalex-topics-placed",
+   "scheme": "schemes/openalex-topics/openalex-topics.json",
+   "placements": "bench/results/2026-10-10-embed/placements/corpus-openalex-topics-placed.jsonl"
+  },
+  {
+   "key": "learned-placed",
+   "scheme": "schemes/learned/learned.json",
+   "placements": "bench/results/2026-10-10-embed/placements/corpus-learned-placed.jsonl"
+  }
+ ],
+ "condition": {
+  "universe": "corpus",
+  "model": "nomic",
+  "k": 20
+ }
+}

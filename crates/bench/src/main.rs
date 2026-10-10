@@ -41,7 +41,7 @@ mod cli_dense;
 mod cli_scores;
 
 const USAGE: &str = "usage: shelfmark-bench run --corpus corpus.jsonl --scheme scheme.json [--placements placements.jsonl] [--track A|P] [--graph graph.json] [--k 20] [--reference-cost X] [--bootstrap N [--seed S] [--reference-replicates FILE] [--replicates-out FILE]] [--output results.json]
-       shelfmark-bench bootstrap --corpus corpus.jsonl --graph graph.json --runs runs.json [--resamples 1000] [--seed 20261010] [--confidence 0.95] [--threads 8] [--output bootstrap.json]
+       shelfmark-bench bootstrap --corpus corpus.jsonl --graph graph.json --runs runs.json [--resamples 1000] [--seed 20261010] [--confidence 0.95] [--threads 8] [--output bootstrap.json] [--draws-out draws.json [--draw-metrics m1,m2]]
        shelfmark-bench scores ...  (see cli_scores.rs)
        shelfmark-bench agree ...   (see cli_agree.rs)
        shelfmark-bench dense ...   (see cli_dense.rs)";
