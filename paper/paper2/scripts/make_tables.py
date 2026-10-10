@@ -334,7 +334,6 @@ def build():
         {"D (cost_norm)", "N (nav, a = 1)", "J", "classes", "seconds"},
     )
 
-    parents = {c["parent"] for c in scheme["classes"] if c.get("parent")}
     leaf_n = {l["code"]: l["n"] for l in centroids["leaves"]}
     def under(code):
         return [c for c in leaf_n if c == code or c.startswith(code + ".")]
