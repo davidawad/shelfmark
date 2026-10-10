@@ -1,0 +1,12 @@
+{
+  "items": 3000,
+  "items_covered": 3000,
+  "related_population": 20122,
+  "related_rule": "share a heading held by at most 30 books",
+  "related_sampled": 4000,
+  "seed": 20261010,
+  "signal": "lcsh",
+  "universe": "books",
+  "unrelated_rule": "covered items sharing no feature at all",
+  "unrelated_sampled": 4000
+}

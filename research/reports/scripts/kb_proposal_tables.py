@@ -3,7 +3,9 @@
 
 Reads only committed files: `bench/results/2026-10-10-proposal/` (written by
 `kb_proposal_runs.py` and `ol_work_numbers.py`), `2026-10-10-ddc`,
-`2026-10-10-embed` and `2026-10-10-covered`. Each table sits in the report
+`2026-10-10-embed`, `2026-10-10-covered`, `2026-10-11-metrics` and, for the
+false-join tables of `kb_proposal_falsejoin.py`, `2026-10-11-falsejoin` and
+`docs/validity/falsejoin-results.json`. Each table sits in the report
 between `<!-- table:NAME -->` and `<!-- /table:NAME -->`. With no option the
 script rebuilds every table and exits 1 if any differs from the report;
 `--write` rewrites them in place, and rewrites the LCC-to-FDC crosswalk
@@ -733,6 +735,20 @@ TABLES = {
     "dewey-cut": t_dewey_cut, "section-lcc": t_section_lcc,
     "locality-weight": t_locality_weight, "captions": t_captions,
 }
+
+
+def first_code(row):
+    """The first class code of a placement row, or None."""
+    c = row["classes"][0] if row["classes"] else None
+    return c if c is None or isinstance(c, str) else c["code"]
+
+
+# The false-join correction and the external checks (2026-10-11-falsejoin).
+_fj_spec = importlib.util.spec_from_file_location("kb_proposal_falsejoin",
+                                                  Path(__file__).with_name("kb_proposal_falsejoin.py"))
+fjt = importlib.util.module_from_spec(_fj_spec)
+_fj_spec.loader.exec_module(fjt)
+TABLES.update(fjt.register(sys.modules[__name__]))
 
 
 def main():

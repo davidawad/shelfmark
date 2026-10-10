@@ -1,0 +1,18 @@
+{
+  "corpus": "bench/corpus/holdout-books.jsonl",
+  "dimensions": 384,
+  "graph": "bench/results/2026-10-10-proposal/graphs/bge-small-books-k50.json.gz",
+  "graph_sha256": "ad6c489320ab5edb2098c8dc38c237d7ef69bb0ed0ec7766b66819c8a44d9624",
+  "mean_dissimilarity": 0.04444631369258839,
+  "n": 3000,
+  "negatives_sha256": "e9ae837b1b8de2d345b7761c9eb534e4daacf808d8599b5355b082e98a9979a9",
+  "pairs": 30000,
+  "spec": {
+    "floor": 0.5553888446433128,
+    "per_item": 10,
+    "seed": 20261010
+  },
+  "vectors": "bench/corpus/cache/falsejoin/vectors/bge-small-holdout-books.f32",
+  "vectors_rule": "build_graph_fastembed.py --vectors on this corpus and model (nomic: --max-length 512)",
+  "vectors_sha256": "64bb1d5f857daf90e02047b2a24531b6f87b2cf2c429e73e4ef3920ca5a9a33a"
+}

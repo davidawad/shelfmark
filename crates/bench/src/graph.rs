@@ -104,7 +104,7 @@ pub fn build_knn_graph(vectors: &[Vec<f32>], k: usize) -> SimilarityGraph {
     }
 }
 
-fn cosine(a: &[f32], b: &[f32]) -> f64 {
+pub(crate) fn cosine(a: &[f32], b: &[f32]) -> f64 {
     if a.len() != b.len() || a.is_empty() {
         return 0.0;
     }

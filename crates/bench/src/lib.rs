@@ -6,6 +6,7 @@ pub mod catalogue;
 pub mod consistency;
 pub mod dense;
 pub mod embedscore;
+pub mod falsejoin;
 pub mod goldtree;
 mod graph;
 mod hier;

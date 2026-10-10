@@ -146,8 +146,12 @@ pub struct BootstrapSamples {
 }
 
 /// Rescores the reference and every run on each draw, `threads` draws at a time.
+/// With a negative sample (`crate::falsejoin`), its pairs between drawn copies
+/// are kept the way graph edges are, and every run also gets `fj_norm` and
+/// the combined objectives on the same draw.
 pub fn bootstrap(
     graph: &SimilarityGraph,
+    negatives: Option<&SimilarityGraph>,
     reference: &Tree,
     runs: &[BootstrapRun<'_>],
     draws: &[Vec<usize>],
@@ -155,13 +159,21 @@ pub fn bootstrap(
 ) -> BootstrapSamples {
     let one = |picks: &Vec<usize>| {
         let g = resample_graph(graph, picks);
+        let neg = negatives.map(|n| resample_graph(n, picks));
         let ref_cost = score_tree(&resample_tree(reference, picks), &g).cost_norm;
         let per_run: Vec<_> = runs
             .iter()
             .map(|run| {
-                let score = score_tree(&resample_tree(run.tree, picks), &g);
+                let tree = resample_tree(run.tree, picks);
+                let score = score_tree(&tree, &g);
                 let covered = picks.iter().filter(|&&i| run.placed[i]).count();
-                metric_values(&score, ref_cost, covered as f64 / picks.len().max(1) as f64)
+                let mut values =
+                    metric_values(&score, ref_cost, covered as f64 / picks.len().max(1) as f64);
+                if let Some(neg) = &neg {
+                    let fj = crate::falsejoin::false_join(&tree, neg);
+                    values.extend(crate::falsejoin::metric_values(score.cost_norm, &fj));
+                }
+                values
             })
             .collect();
         (ref_cost, per_run)
@@ -272,6 +284,38 @@ mod tests {
         assert!((full.cost - again.cost).abs() < 1e-12);
         assert_eq!(full.structure.mean_depth, again.structure.mean_depth);
         assert_eq!(full.structure.root_fanout, again.structure.root_fanout);
+    }
+
+    #[test]
+    fn negatives_join_the_draw_and_identity_draws_reproduce_them() {
+        let (scheme, placements, graph) = fixture();
+        let tree = induce_tree(&scheme, &placements).unwrap();
+        // Items 0 and 2 are dissimilar and meet at A (3 items of 5): (5 − 3) / 5.
+        let neg = SimilarityGraph {
+            n: 5,
+            k: 1,
+            tau: 0.0,
+            edges: vec![Edge {
+                left: 0,
+                right: 2,
+                weight: 1.0,
+            }],
+        };
+        let runs = [BootstrapRun {
+            key: "toy".into(),
+            tree: &tree,
+            placed: vec![true, true, true, true, false],
+        }];
+        let identity = vec![(0..5).collect::<Vec<_>>()];
+        let s = bootstrap(&graph, Some(&neg), &tree, &runs, &identity, 1);
+        let v = &s.runs["toy"][0];
+        assert!((v["fj_norm"] - 0.4).abs() < 1e-15);
+        assert!((v["cfj_b1"] - (v["cost_norm"] + 0.4)).abs() < 1e-15);
+        // Without item 2 the pair is gone and nothing is joined falsely.
+        let s = bootstrap(&graph, Some(&neg), &tree, &runs, &[vec![0, 0, 1, 3, 4]], 1);
+        assert_eq!(s.runs["toy"][0]["fj_norm"], 0.0);
+        let plain = bootstrap(&graph, None, &tree, &runs, &identity, 1);
+        assert!(!plain.runs["toy"][0].contains_key("fj_norm"));
     }
 
     #[test]

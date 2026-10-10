@@ -1,6 +1,8 @@
 # Which knowledge-base structure for a personal library: a proposal from the benchmark
 
-Written 2026-10-10. This report recommends one classification scheme and
+Written 2026-10-10; revised 2026-10-11 for the false-join correction
+of the metric and two non-LLM validity checks (§2.8, §4.5, §4.6). This
+report recommends one classification scheme and
 one hierarchy for the owner's personal library: mostly books, plus papers
 and other specimens. The recommendation is precise enough for another
 agent to reorganise the collection. Every number in a table is
@@ -25,6 +27,10 @@ Inputs:
   work-level lookups, papers nested under a book backbone, the books graphs
   for the other two models, and paired bootstraps for every universe and
   graph. They are described in that directory's `README.md`.
+- `bench/results/2026-10-11-falsejoin/`: every published run rescored with
+  the false-join term, on the same paired item draws, together with the
+  external citation and LCSH signals. `docs/validity/falsejoin-results.md`
+  re-runs the judge agreement on the stored labels.
 
 The semantic-tier rerun (`bench/results/2026-10-10-semantic/`) published
 no results and is **pending** (`bench/results/README.md`). Every
@@ -32,6 +38,49 @@ classifier number below is therefore the lexical classifier
 (`profile:lexical@2`).
 
 ## Summary
+
+**Does "Dewey 3-digit with FDC captions" still beat LCC? No, not under
+the corrected metric.** The original metric, the Dasgupta cost C, cannot
+see a false join: two dissimilar works filed together cost nothing. A
+judge-labelled validity check found that C agrees with librarian
+judgement at only κ = 0.27 (`docs/validity/README.md`). With a false-join
+term added (§2.8) the corrected objective is
+
+  J′ = C + β · FJs + λ · N, with β = 1.
+
+On the same 953 judged pairs and the same stored labels, J′ agrees with the
+judge at κ = 0.48 [0.43, 0.53], against 0.27 for C alone (§4.5). Under J′,
+Dewey sections against LCC on the 3,000 books, at the working condition
+k = 20, give these paired differences (95% CI, Holm-adjusted p over the
+nine graphs):
+
+- MiniLM: −0.0080 [−0.0229, +0.0070], p = 1.000;
+- bge-small: −0.0221 [−0.0367, −0.0080], p = 0.040;
+- nomic: −0.0041 [−0.0192, +0.0114], p = 1.000.
+
+Dewey sections still win at k = 50 on all three models, and LCC wins at
+k = 10 on two of them. With the other false-join form (outside mass), or
+with β = 4, LCC wins at k = 20 on every model. The two non-LLM checks do
+not separate the schemes either:
+
+- shared LCSH headings: Dewey sections − LCC = −0.002 [−0.011, +0.007],
+  Holm p = 1.000;
+- bibliographic coupling and co-citation, for papers under an FDC or an LCC
+  backbone: +0.004 [−0.001, +0.010] and +0.001 [−0.026, +0.025].
+
+**What changes.**
+
+- **The scheme claim.** Dewey sections and LCC tie on arrangement.
+  Dewey numbers with FDC captions stay the default, but only narrowly. Over
+  all nine graphs, λ ∈ [0.0005, 0.005] and β ∈ [0.5, 2], they have the
+  lowest worst-case regret, 0.060 against 0.067 for LCC (`fj-cuts`). They
+  also have the shorter notation, and papers still join them better than
+  they join LCC (§5.2). LCC becomes an equally supported alternative, with
+  an explicit rule for choosing it (§6.1).
+- **The depth rule does not change.** FJs is flat from two digits to the
+  full number (0.0267–0.0269), so the cut is still set by C and N.
+- **The placement rule does not change**, except that LC call numbers file
+  directly when LCC is chosen (§6.3).
 
 **Recommendation.** Every item gets the Dewey number that librarians
 gave it, taken from catalogue data. The directory tree is that number's
@@ -42,28 +91,40 @@ full Dewey number is kept only in each item's metadata, where it sets the
 order inside a section. Where no Dewey number exists, the item gets one
 from its LC call number through a measured crosswalk, or from its arXiv
 category for papers. Otherwise it goes to a review queue. The classifier
-never decides on its own.
+never decides on its own. A library of books that carry LC call numbers
+rather than Dewey numbers, or one browsed mainly along a shelf, may use
+LCC instead with no loss on the measured objective (§6.1).
 
 Why:
 
-1. **Arrangement.** On 3,000 books, Dewey sections beat LCC on the
+1. **Arrangement.** Under C alone, Dewey sections beat LCC on the
    decision objective J (normalised Dasgupta cost plus a navigation term,
-   §1). The difference is −0.0273 [−0.0421, −0.0123], and it holds at
-   k = 20 and k = 50 for all three embedding models. At k = 10 the two do
-   not differ significantly after correction.
-2. **The learned scheme.** It is better still: −0.155 cost. But it fails
-   two admissibility constraints (opaque notation, and placement tied to
-   one embedding model). Part of its lead is home advantage. Nesting it
-   inside Dewey sections buys almost nothing.
+   §1): −0.0273 [−0.0421, −0.0123] at k = 20 and k = 50 for all three
+   embedding models. Once false joins are charged (J′), that lead is gone
+   at k = 20 on two of three models (above). Part of LCC's lower
+   false-join cost is a sampling artefact: the books are stratified
+   equally over LCC's 21 main classes. LCC still separates dissimilar
+   books better than a random relabelling with the same class sizes
+   (`fj-null`).
+2. **The learned scheme.** It is better still: −0.155 cost, and −0.130 on
+   C + FJs. But it fails two admissibility constraints (opaque notation, and
+   placement tied to one embedding model). Part of its lead is home
+   advantage. Nesting it inside Dewey sections buys almost nothing.
 3. **Depth.** Three digits is the minimax-regret cut over the plausible
    range of the navigation weight in six of nine conditions. Two digits
    wins the other three, and it is the better cut for libraries under
-   about 2,000 items.
+   about 2,000 items. The false-join term does not move this.
 4. **Placement.** A work-level Open Library lookup gives a Dewey number
    for 91% of the holdout's works, against 22% from the edition record.
    The LCC-to-FDC crosswalk then places 76% of the remaining books with
    87% main-to-section accuracy (cross-validated). The lexical classifier
    agrees with librarians on only 54% of main classes.
+5. **Validity of the metric itself.** The false-join term roughly doubles
+   agreement with the LLM judge. It does not improve agreement with the
+   non-LLM signals at the pair level, and at the scheme level it leaves the
+   (already high, ρ ≈ 0.9) rank agreement unchanged at β ≤ 1 (§4.6). The
+   corrected metric is therefore better supported than C, but by one
+   annotator model only.
 
 ## 1. The decision objective
 
@@ -155,6 +216,21 @@ shelf-order locality and TSD (§2.5) are reported as secondary scores. On
 the books they disagree with C in one place: LCC has better locality
 (§4.3). §4.3 gives the locality weight at which that would flip the
 decision.
+
+**The false-join correction (2026-10-11).** C sums only over similar
+pairs, so it never charges a scheme for filing dissimilar works together.
+The judge-labelled check (`docs/validity/README.md`) found that this
+blindness is the metric's largest failure. The corrected objective adds
+the specificity form of the false-join term, FJs (§2.8):
+
+  J′_λ,β(S; G) = C(𝒯; G) + β · FJs(𝒯; G) + λ · N(𝒯), with β = 1.
+
+β = 1 weighs the two error types equally per unit of normalised cost.
+Neither the judge nor the external checks pin it down, so β is treated as
+λ is: choices are also checked by worst-case regret over
+β ∈ [0.5, 2] (`fj-cuts`) and swept over 0.25–4 (`fj-beta-sweep`). Every
+table computed from J before 2026-10-11 is kept unchanged. The corrected
+comparison is in §4.5, §4.6 and the `fj-*` and `ext-*` tables.
 
 ## 2. Metrics
 
@@ -265,6 +341,35 @@ The catalogue scores (triplet, locality, TSD) use the vertex replicates of
 (`scores/*.json`, key `catalogue.boot`). The vertex bootstrap gives
 intervals about three times wider than the edge bootstrap on the books
 (`bench/results/2026-10-10-covered/results.md`, "Bootstrap intervals").
+
+The false-join tables use the same procedure on the rescored runs
+(`bench/results/2026-10-11-falsejoin/bootstrap/`, 1,000 paired item draws,
+seed 20261010). Every run's cost_norm there equals its published value to
+1e-9, so the C columns match the tables above. The negative pairs are
+resampled with the items, as graph edges are.
+
+### 2.8 False-join term
+
+The Dasgupta cost never charges a false join. The harness therefore
+draws a seeded **negative sample** from the kNN complement: for each item,
+10 random partners that are not graph edges and whose cosine lies below
+the graph's τ. Each pair is weighted by its dissimilarity d = τ − cos
+(`crates/bench/src/falsejoin.rs`). On it, two forms of the term are
+computed:
+
+- **Outside mass**, FJ = Σ d (n − |leaves(LCA)|) / (n Σ d). This is one
+  minus the dissimilarity objective of `cohenaddad2017` (maximise
+  Σ d |leaves(LCA)|), normalised by n Σ d. A pair that meets in a main
+  class holding a tenth of the library already pays 0.9, so FJ mostly
+  charges *shallow* joins and rewards a wide top level.
+- **Specificity**, FJs = Σ d ln(n / |leaves(LCA)|) / (ln n Σ d). This is
+  the information content of the class where the pair meets: every halving
+  of that class adds the same charge, so deep joins cost more than shallow
+  ones. FJs is the primary form.
+
+Both forms are 0 when every dissimilar pair meets at the root. An
+unplaced item adds nothing, because C already charges it the maximum on
+every edge. Lower is better.
 
 ## 3. Availability of numbers
 
@@ -520,6 +625,228 @@ recover. **The hybrid is not recommended.** The learned scheme stays
 useful as a "related items" view next to the tree, where A2 and A3 do
 not apply.
 
+### 4.5 The false-join correction
+
+**Is the correction valid?** The judge check of `docs/validity/` was re-run
+for every metric variant. It used the same 953 pairs and the same stored
+pass-1 labels, with no relabelling (`docs/validity/falsejoin-results.md`).
+Next to it are the two non-LLM checks of §4.6. Pair-level scores are each
+pair's standardised charge; scheme-level ρ is the Spearman correlation over
+runs between the variant and the external separation of §4.6. Sources:
+`docs/validity/falsejoin-results.json` and
+`bench/results/2026-10-11-falsejoin/external/agreement.json` (MiniLM,
+k = 20):
+
+<!-- table:fj-validity -->
+| variant | judge κ | judge AUC | coupling: pair AUC | coupling: scheme ρ | co-citation: pair AUC | co-citation: scheme ρ | LCSH: pair AUC | LCSH: scheme ρ |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `dasgupta` | 0.27 [0.22, 0.32] | 0.65 [0.62, 0.67] | 0.55 [0.55, 0.56] | 0.90 [0.88, 0.94] | 0.58 [0.57, 0.60] | 0.87 [0.78, 0.91] | 0.59 [0.59, 0.60] | 0.88 [0.85, 0.93] |
+| `fj` | 0.20 [0.14, 0.25] | 0.61 [0.58, 0.64] | 0.46 [0.45, 0.46] | -0.80 [-0.84, -0.76] | 0.56 [0.55, 0.57] | -0.74 [-0.79, -0.61] | 0.48 [0.48, 0.49] | -0.23 [-0.53, 0.03] |
+| `fjs` | 0.21 [0.15, 0.26] | 0.61 [0.59, 0.64] | 0.46 [0.46, 0.46] | -0.69 [-0.75, -0.63] | 0.56 [0.55, 0.57] | -0.61 [-0.68, -0.46] | 0.48 [0.48, 0.49] | -0.11 [-0.53, 0.04] |
+| `c+0.25fjs` | 0.49 [0.43, 0.54] | 0.81 [0.78, 0.84] | 0.51 [0.51, 0.52] | 0.90 [0.88, 0.94] | 0.65 [0.63, 0.67] | 0.87 [0.78, 0.91] | 0.58 [0.57, 0.59] | 0.88 [0.85, 0.93] |
+| `c+1fj` | 0.47 [0.41, 0.52] | 0.78 [0.75, 0.81] | 0.51 [0.50, 0.51] | 0.89 [0.85, 0.92] | 0.64 [0.63, 0.66] | 0.87 [0.77, 0.91] | 0.57 [0.56, 0.58] | 0.93 [0.83, 0.98] |
+| `c+1fjs` | 0.48 [0.43, 0.53] | 0.78 [0.75, 0.81] | 0.51 [0.51, 0.51] | 0.90 [0.88, 0.94] | 0.64 [0.63, 0.66] | 0.87 [0.79, 0.91] | 0.57 [0.56, 0.58] | 0.89 [0.86, 0.93] |
+| `c+4fjs` | 0.45 [0.40, 0.51] | 0.76 [0.73, 0.79] | 0.50 [0.50, 0.51] | 0.89 [0.86, 0.93] | 0.64 [0.62, 0.65] | 0.84 [0.76, 0.89] | 0.57 [0.56, 0.58] | 0.93 [0.83, 0.94] |
+<!-- /table:fj-validity -->
+
+The false-join term alone agrees with nothing: it cannot see a false
+split. Added to C, it raises judge agreement from κ = 0.27 to 0.48
+(Δκ = +0.21 [+0.15, +0.27]) and AUC from 0.65 to 0.78. The gain comes from
+the placed general schemes, whose deep joins of unrelated works the judge
+rejects. For arXiv gold the judge accepts most such joins, and κ falls from
+0.24 to 0.11 (`docs/validity/falsejoin-results.md`). The non-LLM signals
+are less favourable:
+
+- at the pair level, the term lowers AUC against bibliographic coupling
+  (0.55 → 0.51) and LCSH (0.59 → 0.57), and raises it against co-citation
+  (0.58 → 0.64);
+- at the scheme level, ρ ≈ 0.9 is unchanged for β ≤ 1, and with the
+  outside form it collapses at β = 4 (`agreement.md`).
+
+These checks label a pair "unrelated" when it shares no reference or
+heading. That label is weak evidence of dissimilarity, so they test false
+splits much better than false joins. The two forms agree with the judge
+equally well (κ 0.47 and 0.48). FJs is primary because it charges deep
+joins, which is the failure the judge found.
+
+**Books under the corrected objective.** Source:
+`bootstrap/books-minilm-k20.json.gz` of the false-join rescoring.
+
+<!-- table:fj-books-main -->
+| run | coverage | C [95% CI] | FJs [95% CI] | FJ [95% CI] | C + FJs [95% CI] | J' = C + FJs + 0.002·N | C + FJ + 0.002·N |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `ddc-section` | 1.000 | 0.4941 [0.4767, 0.5125] | 0.0268 [0.0248, 0.0289] | 0.0990 [0.0917, 0.1062] | 0.5210 [0.5030, 0.5397] | 0.5553 | 0.6274 |
+| `ddc-d2` | 1.000 | 0.4991 [0.4819, 0.5171] | 0.0267 [0.0247, 0.0287] | 0.0990 [0.0917, 0.1062] | 0.5258 [0.5082, 0.5440] | 0.5570 | 0.6292 |
+| `fdc-d3` | 1.000 | 0.4964 [0.4791, 0.5144] | 0.0269 [0.0249, 0.0289] | 0.0991 [0.0919, 0.1062] | 0.5233 [0.5053, 0.5419] | 0.5587 | 0.6309 |
+| `ddc-gold` | 1.000 | 0.4929 [0.4752, 0.5113] | 0.0269 [0.0248, 0.0289] | 0.0990 [0.0917, 0.1062] | 0.5198 [0.5019, 0.5384] | 0.5584 | 0.6305 |
+| `lcc-gold` | 1.000 | 0.5233 [0.5060, 0.5413] | 0.0075 [0.0062, 0.0088] | 0.0182 [0.0151, 0.0213] | 0.5309 [0.5131, 0.5487] | 0.5633 | 0.5739 |
+| `learned-own` | 1.000 | 0.3390 [0.3248, 0.3541] | 0.0521 [0.0498, 0.0543] | 0.2464 [0.2381, 0.2556] | 0.3911 [0.3756, 0.4069] | 0.4505 | 0.6448 |
+| `fdc-placed` | 0.839 | 0.6537 [0.6369, 0.6711] | 0.0267 [0.0245, 0.0289] | 0.1033 [0.0941, 0.1132] | 0.6804 [0.6636, 0.6979] | 0.7271 | 0.8037 |
+| `lcc-placed` | 0.915 | 0.7334 [0.7184, 0.7490] | 0.0168 [0.0148, 0.0187] | 0.0478 [0.0420, 0.0532] | 0.7502 [0.7347, 0.7661] | 0.7913 | 0.8223 |
+<!-- /table:fj-books-main -->
+
+Dewey sections against LCC on all nine graphs, Holm-adjusted over the 27
+tests of the table. The last column is the β at which C + β · FJs is equal
+for the two:
+
+<!-- table:fj-section-lcc -->
+| graph | Δ (C + FJs) | 95% CI | p (Holm) | Δ J' (λ = 0.002) | 95% CI | p (Holm) | Δ (C + FJ) | 95% CI | p (Holm) | β where C + β·FJs equal |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| minilm k = 10 | +0.0305 | [+0.0134, +0.0480] | 0.027 | +0.0324 | [+0.0149, +0.0497] | 0.027 | +0.0920 | [+0.0733, +0.1107] | 0.027 | never |
+| minilm k = 20 | -0.0099 | [-0.0249, +0.0053] | 0.960 | -0.0080 | [-0.0229, +0.0070] | 1.000 | +0.0516 | [+0.0355, +0.0686] | 0.027 | 1.51 |
+| minilm k = 50 | -0.0438 | [-0.0558, -0.0313] | 0.027 | -0.0419 | [-0.0541, -0.0295] | 0.027 | +0.0177 | [+0.0039, +0.0316] | 0.090 | 3.27 |
+| bge-small k = 10 | +0.0178 | [+0.0016, +0.0346] | 0.204 | +0.0197 | [+0.0033, +0.0363] | 0.168 | +0.0728 | [+0.0547, +0.0925] | 0.027 | never |
+| bge-small k = 20 | -0.0240 | [-0.0385, -0.0097] | 0.027 | -0.0221 | [-0.0367, -0.0080] | 0.040 | +0.0311 | [+0.0153, +0.0480] | 0.027 | 2.41 |
+| bge-small k = 50 | -0.0583 | [-0.0703, -0.0462] | 0.027 | -0.0564 | [-0.0685, -0.0445] | 0.027 | -0.0032 | [-0.0169, +0.0113] | 1.000 | 4.42 |
+| nomic k = 10 | +0.0371 | [+0.0203, +0.0539] | 0.027 | +0.0389 | [+0.0221, +0.0557] | 0.027 | +0.0961 | [+0.0777, +0.1145] | 0.027 | never |
+| nomic k = 20 | -0.0060 | [-0.0210, +0.0094] | 1.000 | -0.0041 | [-0.0192, +0.0114] | 1.000 | +0.0531 | [+0.0378, +0.0707] | 0.027 | 1.33 |
+| nomic k = 50 | -0.0428 | [-0.0551, -0.0298] | 0.027 | -0.0409 | [-0.0532, -0.0280] | 0.027 | +0.0162 | [+0.0028, +0.0314] | 0.128 | 3.38 |
+<!-- /table:fj-section-lcc -->
+
+How the k = 20 difference moves with β and with the form (descriptive,
+unadjusted p):
+
+<!-- table:fj-beta-sweep -->
+| form | β | minilm Δ | 95% CI | p | bge-small Δ | 95% CI | p | nomic Δ | 95% CI | p |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| FJs | 0.25 | -0.0244 | [-0.0392, -0.0095] | 0.002 | -0.0368 | [-0.0510, -0.0229] | <0.002 | -0.0194 | [-0.0340, -0.0038] | 0.016 |
+| FJs | 0.50 | -0.0195 | [-0.0341, -0.0046] | 0.014 | -0.0325 | [-0.0467, -0.0185] | <0.002 | -0.0149 | [-0.0295, +0.0006] | 0.060 |
+| FJs | 1.00 | -0.0099 | [-0.0249, +0.0053] | 0.192 | -0.0240 | [-0.0385, -0.0097] | 0.002 | -0.0060 | [-0.0210, +0.0094] | 0.424 |
+| FJs | 2.00 | +0.0094 | [-0.0060, +0.0251] | 0.244 | -0.0069 | [-0.0218, +0.0077] | 0.354 | +0.0120 | [-0.0031, +0.0283] | 0.126 |
+| FJs | 4.00 | +0.0481 | [+0.0310, +0.0651] | <0.002 | +0.0272 | [+0.0107, +0.0446] | 0.004 | +0.0479 | [+0.0315, +0.0658] | <0.002 |
+| FJ | 0.25 | -0.0090 | [-0.0239, +0.0061] | 0.226 | -0.0230 | [-0.0373, -0.0088] | 0.002 | -0.0047 | [-0.0196, +0.0107] | 0.510 |
+| FJ | 0.50 | +0.0112 | [-0.0038, +0.0265] | 0.154 | -0.0050 | [-0.0200, +0.0095] | 0.502 | +0.0146 | [-0.0005, +0.0304] | 0.058 |
+| FJ | 1.00 | +0.0516 | [+0.0355, +0.0686] | <0.002 | +0.0311 | [+0.0153, +0.0480] | <0.002 | +0.0531 | [+0.0378, +0.0707] | <0.002 |
+| FJ | 2.00 | +0.1324 | [+0.1121, +0.1526] | <0.002 | +0.1032 | [+0.0833, +0.1256] | <0.002 | +0.1301 | [+0.1108, +0.1524] | <0.002 |
+| FJ | 4.00 | +0.2941 | [+0.2629, +0.3250] | <0.002 | +0.2474 | [+0.2140, +0.2831] | <0.002 | +0.2841 | [+0.2518, +0.3196] | <0.002 |
+<!-- /table:fj-beta-sweep -->
+
+**Answer: Dewey sections no longer beat LCC under J′ at k = 20.** The
+difference is not significant on MiniLM (Holm p = 1.000) or nomic (1.000).
+It survives only on bge-small (−0.0221 [−0.0367, −0.0080], Holm
+p = 0.040). Dewey sections still win at k = 50, and LCC wins at k = 10.
+At k = 20 the sign depends on the weight:
+
+- Dewey wins with C alone (β = 0, §4.2) and with FJs at β ≤ 0.5;
+- the two tie with FJs at β = 1 or 2;
+- LCC wins with FJs at β = 4, and with the outside form at any β ≥ 1.
+
+The scheme ranking therefore rests on a weight that the data do not
+fix.
+
+**Why LCC joins fewer dissimilar books.** LCC has 21 main classes and
+Dewey 10, and the books were sampled equally over LCC's main classes, so
+two random books share an LCC main class far less often. A permutation
+null shows how much of LCC's lower FJs comes from that. It keeps each
+run's class sizes and shuffles which book sits where (20 seeded
+permutations, MiniLM k = 20):
+
+<!-- table:fj-null -->
+| run | top-level classes | FJs | FJs, permuted | FJs / permuted | FJ | FJ, permuted | FJ / permuted |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `ddc-section` | 10 | 0.0268 | 0.0413 | 0.649 | 0.0990 | 0.1392 | 0.711 |
+| `fdc-d3` | 10 | 0.0269 | 0.0415 | 0.649 | 0.0991 | 0.1400 | 0.708 |
+| `ddc-d2` | 10 | 0.0267 | 0.0405 | 0.659 | 0.0990 | 0.1392 | 0.711 |
+| `lcc-gold` | 21 | 0.0075 | 0.0197 | 0.382 | 0.0182 | 0.0452 | 0.403 |
+| `learned-own` | 2 | 0.0521 | 0.0810 | 0.643 | 0.2464 | 0.3323 | 0.741 |
+<!-- /table:fj-null -->
+
+Against its own null, LCC's FJs is 0.38 of chance and Dewey's 0.65. So
+LCC does separate dissimilar books better than its class sizes alone
+would. But its null is half of Dewey's, which reflects how the sample was
+drawn more than any library. In a collection not balanced over LCC main
+classes the gap would be smaller.
+
+### 4.6 External, non-LLM checks
+
+Two signals independent of the LLM judge (`external_signals.py`,
+`falsejoin_validity.py`; `bench/results/2026-10-11-falsejoin/README.md`):
+
+- **Citations (papers).** OpenAlex `referenced_works` (CC0) for the
+  10,000 arXiv papers, fetched through their arXiv DOIs. 9,623 papers
+  were found, but only 1,615 have references and 1,403 are cited. Most of
+  the corpus is 2025–26 preprints, which OpenAlex holds without reference
+  lists. The related pairs are those with bibliographic coupling (a shared
+  reference; 6,104 pairs) or co-citation (a shared citing work; 140 pairs).
+- **LCSH (books).** The Library of Congress subject headings of the 3,000
+  books. A related pair shares a heading held by at most 30 books (20,122
+  pairs). This signal is distinct from the class number, but it is not
+  independent of LCC: LC assigns headings and call numbers in the same
+  record. Nor is it independent of the graph, because the books' embedding
+  text is mostly these headings.
+
+For each signal, up to 4,000 related pairs and 4,000 unrelated pairs
+(covered items sharing nothing) are drawn with a fixed seed. A run's
+**external separation** is the AUC with which a smaller meeting class
+(|leaves(LCA)|) picks the related pair over the unrelated one. Its
+intervals resample pairs within each kind (1,000 replicates, the same
+replicates for every run, so differences are paired). The separation is
+independent of the embedding and of both cost terms.
+
+<!-- table:ext-books -->
+| signal | run | separation [95% CI] | external error rate |
+| --- | --- | ---: | ---: |
+| lcsh | `ddc-section` | 0.722 [0.712, 0.731] | 0.317 |
+| lcsh | `fdc-d3` | 0.721 [0.712, 0.731] | 0.321 |
+| lcsh | `ddc-d2` | 0.720 [0.710, 0.729] | 0.328 |
+| lcsh | `ddc-gold` | 0.722 [0.712, 0.731] | 0.314 |
+| lcsh | `lcc-gold` | 0.723 [0.715, 0.732] | 0.326 |
+| lcsh | `learned-own` | 0.677 [0.666, 0.689] | 0.062 |
+| lcsh | `fdc-placed` | 0.674 [0.665, 0.684] | 0.340 |
+| lcsh | `lcc-placed` | 0.630 [0.622, 0.638] | 0.396 |
+
+| signal | comparison | Δ separation | 95% CI | p | p (Holm) |
+| --- | --- | ---: | ---: | ---: | ---: |
+| lcsh | `ddc-section` − `lcc-gold` | -0.002 | [-0.011, +0.007] | 0.680 | 1.000 |
+| lcsh | `fdc-d3` − `lcc-gold` | -0.003 | [-0.011, +0.006] | 0.566 | 1.000 |
+| lcsh | `ddc-gold` − `lcc-gold` | -0.002 | [-0.010, +0.007] | 0.714 | 1.000 |
+| lcsh | `ddc-d2` − `ddc-section` | -0.002 | [-0.002, -0.001] | <0.002 | 0.005 |
+| lcsh | `learned-own` − `ddc-section` | -0.044 | [-0.058, -0.031] | <0.002 | 0.005 |
+<!-- /table:ext-books -->
+
+<!-- table:ext-papers -->
+| signal | run | separation [95% CI] | external error rate |
+| --- | --- | ---: | ---: |
+| coupling | `arxiv-gold` | 0.782 [0.772, 0.791] | 0.243 |
+| coupling | `fdc-arxiv-nested` | 0.770 [0.761, 0.781] | 0.189 |
+| coupling | `lcc-arxiv-nested` | 0.766 [0.756, 0.777] | 0.173 |
+| coupling | `fdc-arxiv` | 0.754 [0.744, 0.764] | 0.275 |
+| coupling | `lcc-arxiv` | 0.744 [0.734, 0.756] | 0.282 |
+| coupling | `learned-placed` | 0.702 [0.691, 0.713] | 0.262 |
+| coupling | `openalex-topics-placed` | 0.586 [0.575, 0.597] | 0.376 |
+| coupling | `fdc-placed` | 0.530 [0.522, 0.538] | 0.467 |
+| cocitation | `arxiv-gold` | 0.863 [0.825, 0.897] | 0.042 |
+| cocitation | `fdc-arxiv-nested` | 0.856 [0.820, 0.890] | 0.048 |
+| cocitation | `lcc-arxiv-nested` | 0.856 [0.819, 0.889] | 0.094 |
+| cocitation | `fdc-arxiv` | 0.815 [0.782, 0.846] | 0.214 |
+| cocitation | `lcc-arxiv` | 0.765 [0.733, 0.795] | 0.296 |
+| cocitation | `learned-placed` | 0.740 [0.691, 0.786] | 0.078 |
+| cocitation | `openalex-topics-placed` | 0.559 [0.506, 0.614] | 0.043 |
+| cocitation | `fdc-placed` | 0.557 [0.520, 0.596] | 0.061 |
+
+| signal | comparison | Δ separation | 95% CI | p | p (Holm) |
+| --- | --- | ---: | ---: | ---: | ---: |
+| coupling | `fdc-arxiv-nested` − `lcc-arxiv-nested` | +0.004 | [-0.001, +0.010] | 0.094 | 0.282 |
+| coupling | `fdc-arxiv-nested` − `arxiv-gold` | -0.011 | [-0.016, -0.007] | <0.002 | 0.008 |
+| coupling | `fdc-arxiv` − `lcc-arxiv` | +0.009 | [+0.004, +0.015] | 0.004 | 0.016 |
+| coupling | `learned-placed` − `arxiv-gold` | -0.080 | [-0.093, -0.068] | <0.002 | 0.008 |
+| cocitation | `fdc-arxiv-nested` − `lcc-arxiv-nested` | +0.001 | [-0.026, +0.025] | 0.892 | 0.892 |
+| cocitation | `fdc-arxiv-nested` − `arxiv-gold` | -0.007 | [-0.021, +0.010] | 0.420 | 0.840 |
+| cocitation | `fdc-arxiv` − `lcc-arxiv` | +0.051 | [+0.022, +0.076] | <0.002 | 0.008 |
+| cocitation | `learned-placed` − `arxiv-gold` | -0.123 | [-0.175, -0.071] | <0.002 | 0.008 |
+<!-- /table:ext-papers -->
+
+- **LCSH does not separate Dewey sections from LCC** (−0.002
+  [−0.011, +0.007], Holm p = 1.000). It does rank the learned scheme
+  below Dewey (−0.044), the opposite of C.
+- **Citations do not separate the FDC and LCC backbones for papers**
+  (coupling +0.004 [−0.001, +0.010], co-citation +0.001). They do favour
+  FDC over LCC when papers are shelved at the backbone class without
+  their arXiv category (`fdc-arxiv` − `lcc-arxiv`).
+- **Nesting under the backbone costs a little coupling separation
+  against arXiv's own taxonomy** (−0.011 [−0.016, −0.007]); co-citation
+  shows no difference.
+
 ## 5. Sensitivity
 
 ### 5.1 Embedding model and k
@@ -593,6 +920,33 @@ What these three tables show:
   Browsing a knowledge base reaches beyond the ten nearest items, so k = 20
   is the working condition.
 
+**Under the corrected objective.** The table gives the minimax-regret
+structure over λ ∈ [0.0005, 0.005] and β ∈ [0.5, 2] together. It takes
+every Dewey and FDC cut and LCC as candidates, and its last three columns
+are J′ at λ = 0.002 and β = 1:
+
+<!-- table:fj-cuts -->
+| graph | minimax structure | max regret `ddc-section` | max regret `ddc-d2` | max regret `fdc-d3` | max regret `lcc-gold` | J' `ddc-section` | J' `ddc-d2` | J' `lcc-gold` |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| minilm k = 10 | `lcc-gold` | 0.0545 | 0.0561 | 0.0605 | 0.0000 | 0.4744 | 0.4781 | 0.4421 |
+| minilm k = 20 | `ddc-d2` | 0.0142 | 0.0138 | 0.0193 | 0.0194 | 0.5553 | 0.5570 | 0.5633 |
+| minilm k = 50 | `ddc-d2` | 0.0050 | 0.0023 | 0.0092 | 0.0536 | 0.6439 | 0.6438 | 0.6859 |
+| bge-small k = 10 | `lcc-gold` | 0.0396 | 0.0412 | 0.0452 | 0.0000 | 0.4607 | 0.4643 | 0.4410 |
+| bge-small k = 20 | `ddc-section` | 0.0033 | 0.0044 | 0.0080 | 0.0325 | 0.5422 | 0.5438 | 0.5643 |
+| bge-small k = 50 | `ddc-d2` | 0.0051 | 0.0022 | 0.0090 | 0.0670 | 0.6305 | 0.6302 | 0.6869 |
+| nomic k = 10 | `lcc-gold` | 0.0597 | 0.0618 | 0.0655 | 0.0000 | 0.4506 | 0.4546 | 0.4117 |
+| nomic k = 20 | `lcc-gold` | 0.0167 | 0.0167 | 0.0218 | 0.0149 | 0.5315 | 0.5335 | 0.5356 |
+| nomic k = 50 | `ddc-d2` | 0.0047 | 0.0026 | 0.0089 | 0.0517 | 0.6206 | 0.6207 | 0.6615 |
+| worst case over the nine graphs | `ddc-section` | 0.0597 | 0.0618 | 0.0655 | 0.0670 |  |  |  |
+<!-- /table:fj-cuts -->
+
+LCC is the minimax structure on all three k = 10 graphs and on nomic
+k = 20. Two-digit Dewey is minimax on the k = 50 graphs and on MiniLM
+k = 20, and the section cut on bge-small k = 20. Over all nine graphs, the
+section cut has the lowest worst-case regret (0.060), ahead of two digits
+(0.062) and LCC (0.067). That margin is small. Two digits and three are
+within 0.002 of J′ at k = 20, because FJs barely differs between Dewey cuts.
+
 ### 5.2 Books vs papers corpora, and the title-only holdout
 
 **The 500-book holdout** has a title-only graph from Paper 1. Source:
@@ -663,6 +1017,37 @@ nesting under LCC, and it beats FDC without nesting by 0.08. So **papers
 join the same tree, one level below their FDC class**. They need their
 own leaf vocabulary, because FDC alone is too coarse for them (`fdc-arxiv`
 0.39–0.40).
+
+Under the corrected objective (C + FJs, and J′ at λ = 0.002), nesting
+papers under the FDC backbone still beats arXiv's own taxonomy, the LCC
+backbone and the un-nested FDC class on every model:
+
+<!-- table:fj-papers -->
+| graph (k = 20) | comparison | C + FJs a | C + FJs b | Δ (C + FJs) | 95% CI | p (Holm) | Δ J' (λ = 0.002) | 95% CI | p (Holm) |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| minilm | `fdc-arxiv-nested` − `arxiv-gold` | 0.3433 | 0.3491 | -0.0058 | [-0.0089, -0.0030] | 0.018 | -0.0039 | [-0.0069, -0.0011] | 0.018 |
+| minilm | `fdc-arxiv-nested` − `lcc-arxiv-nested` | 0.3433 | 0.3684 | -0.0251 | [-0.0287, -0.0214] | 0.018 | -0.0320 | [-0.0356, -0.0283] | 0.018 |
+| minilm | `fdc-arxiv-nested` − `fdc-arxiv` | 0.3433 | 0.4291 | -0.0858 | [-0.0905, -0.0814] | 0.018 | -0.0839 | [-0.0885, -0.0796] | 0.018 |
+| bge-small | `fdc-arxiv-nested` − `arxiv-gold` | 0.3319 | 0.3427 | -0.0108 | [-0.0141, -0.0076] | 0.018 | -0.0089 | [-0.0122, -0.0057] | 0.018 |
+| bge-small | `fdc-arxiv-nested` − `lcc-arxiv-nested` | 0.3319 | 0.3645 | -0.0326 | [-0.0371, -0.0283] | 0.018 | -0.0394 | [-0.0440, -0.0352] | 0.018 |
+| bge-small | `fdc-arxiv-nested` − `fdc-arxiv` | 0.3319 | 0.4148 | -0.0828 | [-0.0873, -0.0786] | 0.018 | -0.0809 | [-0.0853, -0.0769] | 0.018 |
+| nomic | `fdc-arxiv-nested` − `arxiv-gold` | 0.3479 | 0.3583 | -0.0105 | [-0.0137, -0.0072] | 0.018 | -0.0085 | [-0.0118, -0.0054] | 0.018 |
+| nomic | `fdc-arxiv-nested` − `lcc-arxiv-nested` | 0.3479 | 0.3836 | -0.0358 | [-0.0398, -0.0317] | 0.018 | -0.0426 | [-0.0467, -0.0386] | 0.018 |
+| nomic | `fdc-arxiv-nested` − `fdc-arxiv` | 0.3479 | 0.4277 | -0.0799 | [-0.0843, -0.0758] | 0.018 | -0.0779 | [-0.0824, -0.0740] | 0.018 |
+<!-- /table:fj-papers -->
+
+The title-only holdout still cannot rank FDC against LCC:
+
+<!-- table:fj-holdout -->
+| graph (k = 20) | comparison | C + FJs a | C + FJs b | Δ | 95% CI | p (Holm) |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| minilm | `fdc-work` − `lcc-gold` | 0.7744 | 0.7620 | +0.0124 | [-0.0141, +0.0396] | 1.000 |
+| minilm | `fdc-pipeline` − `lcc-pipeline` | 0.7744 | 0.7617 | +0.0127 | [-0.0135, +0.0404] | 1.000 |
+| bge-small | `fdc-work` − `lcc-gold` | 0.7648 | 0.7669 | -0.0021 | [-0.0297, +0.0234] | 1.000 |
+| bge-small | `fdc-pipeline` − `lcc-pipeline` | 0.7648 | 0.7667 | -0.0018 | [-0.0291, +0.0241] | 1.000 |
+| nomic | `fdc-work` − `lcc-gold` | 0.7464 | 0.7588 | -0.0124 | [-0.0394, +0.0147] | 1.000 |
+| nomic | `fdc-pipeline` − `lcc-pipeline` | 0.7464 | 0.7586 | -0.0121 | [-0.0397, +0.0146] | 1.000 |
+<!-- /table:fj-holdout -->
 
 ### 5.3 Coverage-controlled vs raw, and the classifier
 
@@ -784,16 +1169,44 @@ class that contains it, written as "<number> (in <FDC caption>)".
 | 392 | 371 (0.946) | 2721/3000 (0.907) |
 <!-- /table:captions -->
 
-Not chosen:
+**LCC is an equal alternative, not a loser.** Under C alone, LCC loses on
+J at k ≥ 20 by 0.024–0.075 (`section-lcc`). Under the corrected J′ it ties
+Dewey sections at k = 20 on two of three models (`fj-section-lcc`), and
+LCSH does not separate the two (`ext-books`). Dewey numbers stay the
+default for three reasons, none of them decisive:
 
-- **LCC** loses on J at k ≥ 20 by 0.024–0.075 (`section-lcc`) and wins
-  only on locality.
+- the lowest worst-case regret over all graphs, λ and β (0.060 against
+  0.067; `fj-cuts`);
+- papers nest better under the FDC backbone than under LCC (`fj-papers`);
+- a three-digit notation, against LCC's 7.6 characters (`catalogue-books`).
+
+**Choose LCC instead** when any of these holds:
+
+- most items are books that carry an LC call number but no Dewey number.
+  In the holdout every work had an LC call number and 91% a Dewey number
+  (`availability`). The crosswalk (step 5 of §6.3) is right only 72% of the
+  time out of sample.
+- the library holds few papers;
+- the owner browses mainly along one physical shelf, where LCC's better
+  locality counts (`locality-weight`).
+
+The LCC tree is the bench LCC class each call number resolves to
+(`lcc-gold`), captioned with the LCC schedules, a US government work (A1;
+`usc105`).
+
+Not chosen:
 - **Full-depth Dewey** gains 0.0012 of cost for 2.2 more bits of
   navigation (`ddc-reference`), and its J is worse.
 - **The learned scheme** fails A2 and A3 (§4.4).
 - **Hybrids** gain under 0.001 (§4.4).
 
 ### 6.2 Hierarchy depth (cut rule)
+
+The false-join term does not change this rule. FJs differs by less than
+0.0003 between two digits, three digits and the full number
+(`fj-books-main`). Under J′, two digits and
+three are within 0.002 at k = 20, and each is minimax on some graph
+(`fj-cuts`), just as under J (`dewey-cut`).
 
 - **Libraries of about 2,000 items or more:** three levels, which are
   main class (`8xx`), division (`82x`) and section (`823`).
@@ -896,6 +1309,15 @@ wins. Each item records `placement_source` and, where given,
    Measure the queue as the share of items with source `classifier` or
    `crosswalk` below the cut.
 
+**If LCC is chosen (§6.1),** step 5 becomes the main step. The LC call
+number resolves to its bench LCC class and the item is filed there, with
+source `edition` or `work` and no crosswalk; the Dewey number is kept as
+metadata. Steps 2 and 3 read `lc_classifications` and `lcc` instead of the
+Dewey fields. Papers use `FDC_LCC` in step 6. Steps 7 and 8 are unchanged,
+with `lcc` as the classifier's target. The false-join term changes nothing
+else in the rule: classifier-placed runs score as badly under J′ as under J
+(`fj-books-main`), so the classifier stays confined to the review queue.
+
 ### 6.4 Inserting new items without renumbering
 
 - Directories are named by numbers that are fixed by the notation, so
@@ -948,6 +1370,16 @@ Two rules for every name and caption:
 
 ## 7. Failure modes and risks
 
+- **The metric's own validity.** C ignores false joins. J′ fixes that
+  and roughly doubles agreement with the judge. But the judge is one LLM,
+  and the non-LLM signals do not confirm the gain at the pair level (§4.5).
+  The Dewey-versus-LCC ranking under J′ turns on β, which nothing
+  calibrates (`fj-beta-sweep`). That is why the recommendation no longer
+  claims that Dewey beats LCC.
+- **Sample design.** The books are stratified equally over LCC's main
+  classes. That lowers LCC's false-join cost by design, and only part of
+  LCC's advantage survives a class-size-preserving null (`fj-null`).
+
 - **Coverage-driven rankings.** Any comparison of placed schemes mostly
   measures coverage (§5.3). The recommendation rests on gold runs at
   coverage 1.000 and on both-place subsets. Classifier-placed rankings
@@ -998,7 +1430,12 @@ Two rules for every name and caption:
   on a graph built from co-use, citations or the owner's own links, at
   k ≥ 20. The scheme choice would then flip to LCC with the same
   placement steps: LCC call numbers are available for 100% of the
-  holdout's works.
+  holdout's works. Shared LCSH headings, the one such signal measured for
+  books, tie the two (`ext-books`).
+- **A calibrated false-join weight.** Suppose the owner's own judgements
+  put β at 2 or more for FJs, or the outside form fitted them better. LCC
+  would then lead at k = 20 (`fj-beta-sweep`), and the default should
+  switch to LCC. With β ≤ 0.5, Dewey sections lead again, as under C.
 - **A learned scheme without home advantage.** Suppose the learned
   scheme kept a J lead of ≥ 0.05 on such a graph, and its notation were
   made hospitable and short. It would become a candidate primary
@@ -1018,6 +1455,18 @@ python3 -I research/reports/scripts/kb_proposal_runs.py all --harness target/rel
 python3 -I research/reports/scripts/kb_proposal_tables.py           # exit 1 on any drift
 ```
 
+The false-join tables need the rescoring and the validity checks first
+(`bench/results/2026-10-11-falsejoin/README.md`):
+
+```sh
+python3 -I crates/bench/scripts/falsejoin_rescore.py all --harness target/release/shelfmark-bench
+python3 -I crates/bench/scripts/external_signals.py openalex      # cached, polite OpenAlex fetch
+python3 -I crates/bench/scripts/external_signals.py lcsh
+python3 -I crates/bench/scripts/falsejoin_validity.py judge     # same 953 pairs and stored labels
+python3 -I crates/bench/scripts/falsejoin_validity.py sample    # needs the rebuilt vectors
+python3 -I crates/bench/scripts/falsejoin_validity.py external
+```
+
 `kb_proposal_runs.py graphs` needs the bge-small and nomic books graphs
 built by `crates/bench/scripts/build_graph_fastembed.py` in
 `bench/corpus/cache/proposal/graphs/`. The committed `.json.gz` graphs
@@ -1029,7 +1478,8 @@ Bibliography keys refer to `docs/research/references.bib`: `dasgupta2016`,
 `cohenaddad2017`, `moseley2017`, `moseley2023`, `hick1952`, `hyman1953`,
 `miller1981`, `snowberry1983`, `landauer1985`, `zaphiris2000`,
 `larson1998`, `fdc`, `deweyrights`, `oclcclassify`, `usc105`,
-`openlibrarylicensing`.
+`openlibrarylicensing`. `cohenaddad2017` also defines the dissimilarity
+objective from which the outside-mass false-join form is derived (§2.8).
 
 Others:
 
@@ -1039,4 +1489,5 @@ Others:
 - Holm 1979, TODO(cite)
 
 Reports 6 (scoring catalogue) and 7 (Dewey licensing position) of this
-directory.
+directory, and the validity check in `docs/validity/`. Citation data: OpenAlex
+(https://openalex.org, CC0).

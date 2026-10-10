@@ -1,0 +1,12 @@
+{
+  "items": 10000,
+  "items_covered": 1403,
+  "related_population": 140,
+  "related_rule": "share at least one citing work",
+  "related_sampled": 140,
+  "seed": 20261010,
+  "signal": "cocitation",
+  "universe": "corpus",
+  "unrelated_rule": "covered items sharing no feature at all",
+  "unrelated_sampled": 4000
+}

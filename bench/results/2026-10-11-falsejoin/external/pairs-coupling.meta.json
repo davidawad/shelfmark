@@ -1,0 +1,12 @@
+{
+  "items": 10000,
+  "items_covered": 1615,
+  "related_population": 6104,
+  "related_rule": "share at least one reference",
+  "related_sampled": 4000,
+  "seed": 20261010,
+  "signal": "coupling",
+  "universe": "corpus",
+  "unrelated_rule": "covered items sharing no feature at all",
+  "unrelated_sampled": 4000
+}

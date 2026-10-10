@@ -214,6 +214,42 @@ It does **not** show agreement with human librarians.
 - The results cover one corpus (10,000 arXiv papers),
   one embedding model and one k = 20 graph.
 
+## False-join re-validation (2026-10-11)
+
+This check found that the metric never charges a false join. The bench
+now has a false-join term for that, with an outside-mass form and a
+specificity form (`crates/bench/src/falsejoin.rs`), and a combined
+objective C + β · FJ. `crates/bench/scripts/falsejoin_validity.py judge`
+re-runs the agreement on the same 953 pairs and the same stored pass-1
+labels, with no relabelling, for every variant and β. Results are in
+`falsejoin-results.md` and `falsejoin-results.json`. The Dasgupta variant
+reproduces the table above (κ = 0.27, AUC 0.65).
+
+| variant | κ [95% CI] | Δκ against Dasgupta | AUC | ΔAUC |
+|---|---|---|---|---|
+| Dasgupta alone | 0.27 [0.22, 0.32] | – | 0.65 | – |
+| C + 1 · FJ (outside mass) | 0.47 [0.41, 0.52] | +0.20 [+0.14, +0.26] | 0.78 | +0.13 [+0.09, +0.17] |
+| C + 1 · FJs (specificity) | 0.48 [0.43, 0.53] | +0.21 [+0.15, +0.27] | 0.78 | +0.14 [+0.09, +0.18] |
+
+Where the gain comes from:
+
+- **The placed general schemes.** κ is 0.54–0.68 per run, against
+  0.24–0.29.
+- **`msc-gold`.** AUC rises from 0.60 to 0.85.
+- **`arxiv-gold`.** κ falls from 0.24 to 0.11, because the judge accepts
+  most of its deep joins of embedding-dissimilar papers.
+- **`learned-placed`.** No change.
+
+Within stratum B, the term flags pairs that C could not flag. It still ranks
+them only weakly (AUC 0.55), because almost every B pair is a deep join.
+
+Two non-LLM checks follow in `bench/results/2026-10-11-falsejoin/external/`:
+bibliographic coupling and co-citation from OpenAlex for the papers, and
+shared LCSH headings for the books. They do not confirm the gain at the
+pair level (AUC −0.04, +0.06 and −0.02), and they leave the scheme-level
+rank agreement unchanged (ρ ≈ 0.9 at β ≤ 1). Report 9, §4.5 and §4.6,
+discusses both checks.
+
 ## Reproduce
 
 After `bench/results/2026-10-10-scores/REPRODUCE.md` steps 1–3 (graphs,

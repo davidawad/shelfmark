@@ -6,6 +6,7 @@ use serde_json::{json, Map, Value};
 use shelfmark_bench::bootstrap::{
     bootstrap, draws, interval, metric_values, BootstrapRun, BootstrapSamples, DEFAULT_SEED,
 };
+use shelfmark_bench::falsejoin::{self, BETA_SWEEP, PRIMARY_BETA};
 use shelfmark_bench::{
     average_linkage_reference, induce_tree, score_tree, sha256_hex, CorpusRow, ItemPlacement,
     SimilarityGraph, Tree,
@@ -14,8 +15,9 @@ use shelfmark_core::scheme::SchemeDoc;
 use std::collections::BTreeMap;
 
 const USAGE: &str = "usage: shelfmark-bench bootstrap --corpus corpus.jsonl --graph graph.json \
---runs runs.json [--resamples 1000] [--seed 20261010] [--confidence 0.95] [--threads 8] \
-[--output bootstrap.json] [--draws-out draws.json [--draw-metrics cost_norm,nav_log_a1,coverage]]";
+--runs runs.json [--negatives negatives.json] [--resamples 1000] [--seed 20261010] \
+[--confidence 0.95] [--threads 8] [--output bootstrap.json] \
+[--draws-out draws.json [--draw-metrics cost_norm,nav_log_a1,coverage]]";
 
 /// Metrics whose paired differences between runs are reported.
 const PAIRED: &[&str] = &[
@@ -44,6 +46,45 @@ const PAIRED: &[&str] = &[
     "nav_log_a2",
     "nav_log_a4",
 ];
+
+/// `PAIRED`, plus the false-join metrics when a negative sample is scored.
+fn paired_metrics(false_join: bool) -> Vec<String> {
+    let mut out: Vec<String> = PAIRED.iter().map(|&m| m.to_owned()).collect();
+    if false_join {
+        out.extend(falsejoin::metric_names());
+    }
+    out
+}
+
+/// The negative sample of `--negatives`, checked against the graph.
+fn load_negatives(
+    path: Option<&String>,
+    graph: &SimilarityGraph,
+) -> Result<Option<(SimilarityGraph, Value)>, Error> {
+    let Some(path) = path else { return Ok(None) };
+    let bytes = std::fs::read(path)?;
+    let neg: SimilarityGraph = serde_json::from_slice(&bytes)?;
+    if neg.n != graph.n {
+        return Err(format!(
+            "{path}: negatives have {} rows but the graph has {}",
+            neg.n, graph.n
+        )
+        .into());
+    }
+    let info = json!({
+        "sha256": sha256_hex(&bytes),
+        "pairs": neg.edges.len(),
+        "floor": neg.tau,
+        "per_item": neg.k,
+        "dissimilarity": neg.edges.iter().map(|e| e.weight).sum::<f64>(),
+        "primary_beta": PRIMARY_BETA,
+        "beta_sweep": BETA_SWEEP,
+        "objective": "cfj_b<beta> = cost_norm + beta * fj_norm and cfjs_b<beta> = cost_norm + beta * \
+    fjs_norm; fj_norm = sum d (n - |leaves(LCA)|) / (n sum d) and fjs_norm = sum d ln(n / |leaves(LCA)|) \
+    / (ln(n) sum d) over the negative pairs (cosine below the floor, not graph edges), d = floor - cosine",
+    });
+    Ok(Some((neg, info)))
+}
 
 #[derive(serde::Deserialize)]
 struct RunSpec {
@@ -81,6 +122,8 @@ pub fn run(args: &[String]) -> Result<(), Error> {
         provenance.push(prov);
         trees.push((tree, placed));
     }
+    let negatives = load_negatives(values.get("negatives"), &graph)?;
+    let neg = negatives.as_ref().map(|(g, _)| g);
     let reference = average_linkage_reference(&graph);
     let ref_point = score_tree(&reference, &graph).cost_norm;
     let runs: Vec<_> = specs
@@ -93,11 +136,16 @@ pub fn run(args: &[String]) -> Result<(), Error> {
         })
         .collect();
     let picks = draws(graph.n, resamples, seed);
-    let samples = bootstrap(&graph, &reference, &runs, &picks, threads);
+    let samples = bootstrap(&graph, neg, &reference, &runs, &picks, threads);
     let mut out_runs = Map::new();
     for ((run, prov), (tree, placed)) in runs.iter().zip(provenance).zip(&trees) {
         let coverage = placed.iter().filter(|&&p| p).count() as f64 / placed.len().max(1) as f64;
-        let point = metric_values(&score_tree(tree, &graph), ref_point, coverage);
+        let score = score_tree(tree, &graph);
+        let mut point = metric_values(&score, ref_point, coverage);
+        if let Some(neg) = neg {
+            let fj = falsejoin::false_join(tree, neg);
+            point.extend(falsejoin::metric_values(score.cost_norm, &fj));
+        }
         let draws_for = &samples.runs[&run.key];
         let ci: Map<String, Value> = point
             .keys()
@@ -111,7 +159,8 @@ pub fn run(args: &[String]) -> Result<(), Error> {
         entry["ci"] = Value::Object(ci);
         out_runs.insert(run.key.clone(), entry);
     }
-    let paired = paired_differences(&runs, &samples, &out_runs, confidence);
+    let metrics = paired_metrics(neg.is_some());
+    let paired = paired_differences(&runs, &samples, &out_runs, &metrics, confidence);
     if let Some(path) = values.get("draws-out") {
         let metrics = values
             .get("draw-metrics")
@@ -121,7 +170,7 @@ pub fn run(args: &[String]) -> Result<(), Error> {
             draws_json(&samples, metrics, graph.n, resamples, seed)?,
         )?;
     }
-    let result = json!({
+    let mut result = json!({
         "method": "paired percentile bootstrap over items on the fixed graph: each draw takes n items \
     with replacement, gives a drawn item one copy per draw under its original parent, keeps every graph \
     edge once per pair of copies, prunes classes left without items, and rescores every run and the \
@@ -137,6 +186,9 @@ pub fn run(args: &[String]) -> Result<(), Error> {
         "runs": out_runs,
         "paired": paired,
     });
+    if let Some((_, info)) = negatives {
+        result["negatives"] = info;
+    }
     let text = serde_json::to_string_pretty(&result)?;
     match values.get("output") {
         Some(path) => std::fs::write(path, text)?,
@@ -209,10 +261,12 @@ fn paired_differences(
     runs: &[BootstrapRun<'_>],
     samples: &BootstrapSamples,
     out_runs: &Map<String, Value>,
+    metrics: &[String],
     confidence: f64,
 ) -> Map<String, Value> {
     let mut paired = Map::new();
-    for &metric in PAIRED {
+    for metric in metrics {
+        let metric = metric.as_str();
         let mut rows = Vec::new();
         for (i, a) in runs.iter().enumerate() {
             for b in &runs[i + 1..] {

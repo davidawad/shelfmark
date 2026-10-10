@@ -98,6 +98,38 @@ intervals for class-size measures (`effective_classes`, `gini`, the
 navigation costs) are wider than and can sit off-centre from the point
 value.
 
+## False-join term
+
+The Dasgupta cost only counts similar pairs, so a scheme that files
+dissimilar works together pays nothing for it (`docs/validity/README.md`).
+`src/falsejoin.rs` adds a term that charges such joins:
+
+```sh
+cargo run --release -p shelfmark-bench -- negatives --graph graph.json \
+  --vectors vectors.f32 [--floor <graph tau>] [--per-item 10] [--seed 20261010] \
+  --output negatives.json
+cargo run --release -p shelfmark-bench -- bootstrap --corpus corpus.jsonl \
+  --graph graph.json --runs runs.json --negatives negatives.json ...
+```
+
+`negatives` draws a seeded sample from the kNN complement. For every item
+it tries random partners until `--per-item` pairs are accepted; a pair is
+accepted when it is not an edge of the graph and its cosine (from the
+little-endian f32 vectors) is below the floor. The sample is written as a
+graph whose edge weights are the dissimilarities `floor − cos`.
+`bootstrap --negatives` resamples that sample with the items, as it
+resamples edges, and adds four kinds of metric to every run and every
+paired difference:
+
+- `fj_norm` (outside mass), `Σ d (n − |leaves(LCA)|) / (n Σ d)`;
+- `fjs_norm` (specificity), `Σ d ln(n / |leaves(LCA)|) / (ln n Σ d)`;
+- `cfj_b<β>` and `cfjs_b<β>`, the combined objectives `cost_norm + β ·`
+  each form, for β in 0.25, 0.5, 1, 2, 4 and 8.
+
+β = 1 is the stated weighting. `scripts/falsejoin_rescore.py` drives this
+over every published run; `bench/results/2026-10-11-falsejoin/README.md`
+lists the commands and results.
+
 ## Full benchmark run
 
 `scripts/build_schemes.sh` builds every benchmark scheme into the ignored

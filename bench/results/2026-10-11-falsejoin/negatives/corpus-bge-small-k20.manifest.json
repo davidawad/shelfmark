@@ -1,0 +1,18 @@
+{
+  "corpus": "bench/corpus/corpus.jsonl",
+  "dimensions": 384,
+  "graph": "bench/results/2026-10-11-metrics/embed/graphs/bge-small-corpus-k20.json",
+  "graph_sha256": "68df716f9b8dc292c0b6136fd03ef25941316f47a1db40cb762330b78437b6f1",
+  "mean_dissimilarity": 0.04911449451591719,
+  "n": 10000,
+  "negatives_sha256": "d40b0b2415a7a8c9ae31a4b7833a01f0d4bd1ad3f3c2c754d12f602b00dd6001",
+  "pairs": 100000,
+  "spec": {
+    "floor": 0.6146495407795176,
+    "per_item": 10,
+    "seed": 20261010
+  },
+  "vectors": "bench/corpus/cache/falsejoin/vectors/bge-small-corpus.f32",
+  "vectors_rule": "build_graph_fastembed.py --vectors on this corpus and model (nomic: --max-length 512)",
+  "vectors_sha256": "f9cdec7b1955ea046d5abe7e7a452b964706f1345d03b4446335732f411a647b"
+}

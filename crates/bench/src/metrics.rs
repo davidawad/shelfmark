@@ -41,48 +41,8 @@ pub struct TreeScore {
 /// Moseley–Wang (2023): `revenue(T) = n·Σw_ij − cost(T)`.
 pub fn score_tree(tree: &Tree, graph: &SimilarityGraph) -> TreeScore {
     let n = tree.item_leaves.len();
-    let mut cost = 0.0;
-    let mut weight = 0.0;
-    let mut distance = 0.0;
-    let order = top_down_order(tree);
-    let mut depths = vec![0usize; tree.nodes.len()];
-    for &node in &order[1..] {
-        depths[node] = tree.nodes[node].parent.map_or(0, |p| depths[p] + 1);
-    }
-    let mut leaf_mass = vec![0.0; tree.nodes.len()];
-    for copies in &tree.item_leaves {
-        for &(leaf, mass) in copies {
-            leaf_mass[leaf] += mass;
-        }
-    }
-    // Children before parents, each summed in child order as a recursion would.
-    let mut subtree_mass = vec![0.0; tree.nodes.len()];
-    for &node in order.iter().rev() {
-        subtree_mass[node] = leaf_mass[node]
-            + tree.nodes[node]
-                .children
-                .iter()
-                .map(|&child| subtree_mass[child])
-                .sum::<f64>();
-    }
-    for edge in &graph.edges {
-        if edge.left >= n || edge.right >= n {
-            continue;
-        }
-        let mut pair_cost = 0.0;
-        let mut pair_dist = 0.0;
-        for &(a, ma) in &tree.item_leaves[edge.left] {
-            for &(b, mb) in &tree.item_leaves[edge.right] {
-                let mass = ma * mb;
-                let lca = lca_by_depth(tree, &depths, a, b);
-                pair_cost += mass * subtree_mass[lca];
-                pair_dist += mass * (depths[a] + depths[b] - 2 * depths[lca]) as f64;
-            }
-        }
-        cost += edge.weight * pair_cost;
-        distance += edge.weight * pair_dist;
-        weight += edge.weight;
-    }
+    let sums = PairSums::of(tree, graph);
+    let (cost, weight) = (sums.cost, sums.weight);
     let denom = n as f64 * weight;
     let revenue = denom - cost;
     TreeScore {
@@ -91,8 +51,85 @@ pub fn score_tree(tree: &Tree, graph: &SimilarityGraph) -> TreeScore {
         edge_weight: weight,
         cost_norm: if denom > 0.0 { cost / denom } else { 0.0 },
         revenue_norm: if denom > 0.0 { revenue / denom } else { 0.0 },
-        expected_tree_distance: if weight > 0.0 { distance / weight } else { 0.0 },
+        expected_tree_distance: if weight > 0.0 {
+            sums.distance / weight
+        } else {
+            0.0
+        },
         structure: structural_stats(tree),
+    }
+}
+
+/// Weighted sums over a graph's pairs on one tree: `cost = Σ w · mass(LCA)`
+/// (the Dasgupta sum, fractional placements spread by their masses),
+/// `outside = Σ w · (n − mass(LCA))` (summed per pair, so a root meeting is
+/// exactly zero), `specificity = Σ w · ln(n / mass(LCA))`, `weight = Σ w` and
+/// `distance = Σ w · tree distance`.
+/// Pairs naming an item outside the tree are skipped.
+pub(crate) struct PairSums {
+    pub cost: f64,
+    pub outside: f64,
+    pub specificity: f64,
+    pub weight: f64,
+    pub distance: f64,
+}
+
+impl PairSums {
+    pub fn of(tree: &Tree, graph: &SimilarityGraph) -> Self {
+        let n = tree.item_leaves.len();
+        let order = top_down_order(tree);
+        let mut depths = vec![0usize; tree.nodes.len()];
+        for &node in &order[1..] {
+            depths[node] = tree.nodes[node].parent.map_or(0, |p| depths[p] + 1);
+        }
+        let mut leaf_mass = vec![0.0; tree.nodes.len()];
+        for copies in &tree.item_leaves {
+            for &(leaf, mass) in copies {
+                leaf_mass[leaf] += mass;
+            }
+        }
+        // Children before parents, each summed in child order as a recursion would.
+        let mut subtree_mass = vec![0.0; tree.nodes.len()];
+        for &node in order.iter().rev() {
+            subtree_mass[node] = leaf_mass[node]
+                + tree.nodes[node]
+                    .children
+                    .iter()
+                    .map(|&child| subtree_mass[child])
+                    .sum::<f64>();
+        }
+        let mut sums = PairSums {
+            cost: 0.0,
+            outside: 0.0,
+            specificity: 0.0,
+            weight: 0.0,
+            distance: 0.0,
+        };
+        for edge in &graph.edges {
+            if edge.left >= n || edge.right >= n {
+                continue;
+            }
+            let mut pair_cost = 0.0;
+            let mut pair_outside = 0.0;
+            let mut pair_specific = 0.0;
+            let mut pair_dist = 0.0;
+            for &(a, ma) in &tree.item_leaves[edge.left] {
+                for &(b, mb) in &tree.item_leaves[edge.right] {
+                    let mass = ma * mb;
+                    let lca = lca_by_depth(tree, &depths, a, b);
+                    pair_cost += mass * subtree_mass[lca];
+                    pair_outside += mass * (n as f64 - subtree_mass[lca]);
+                    pair_specific += mass * (n as f64 / subtree_mass[lca]).ln();
+                    pair_dist += mass * (depths[a] + depths[b] - 2 * depths[lca]) as f64;
+                }
+            }
+            sums.cost += edge.weight * pair_cost;
+            sums.outside += edge.weight * pair_outside;
+            sums.specificity += edge.weight * pair_specific;
+            sums.distance += edge.weight * pair_dist;
+            sums.weight += edge.weight;
+        }
+        sums
     }
 }
 

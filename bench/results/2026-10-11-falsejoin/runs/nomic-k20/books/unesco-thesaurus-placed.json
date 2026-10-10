@@ -1,0 +1,129 @@
+{
+ "bootstrap": {
+  "method": "paired percentile bootstrap over items on the fixed graph: each draw takes n items with replacement, gives a drawn item one copy per draw under its original parent, keeps every graph edge once per pair of copies, prunes classes left without items, and rescores every run and the average-linkage reference tree (built once on the full graph) on the same draw",
+  "resamples": 1000,
+  "seed": 20261010
+ },
+ "ci": {
+  "cfj_b0.25": [
+   0.62827853651392,
+   0.6637770043294967
+  ],
+  "cfj_b0.5": [
+   0.6503579118277731,
+   0.6861555162707195
+  ],
+  "cfj_b1": [
+   0.6934058781600946,
+   0.73083626514198
+  ],
+  "cfj_b2": [
+   0.7788182615072138,
+   0.8235994627242665
+  ],
+  "cfj_b4": [
+   0.9462740855495265,
+   1.011661117994988
+  ],
+  "cfj_b8": [
+   1.2730714951299609,
+   1.394333020299973
+  ],
+  "cfjs_b0.25": [
+   0.6126189663334393,
+   0.6472886120339124
+  ],
+  "cfjs_b0.5": [
+   0.6182341758148558,
+   0.6533351396654522
+  ],
+  "cfjs_b1": [
+   0.6296462234116748,
+   0.6657254644294526
+  ],
+  "cfjs_b2": [
+   0.6533098398017139,
+   0.6893286505412485
+  ],
+  "cfjs_b4": [
+   0.6997120964768714,
+   0.738387649883672
+  ],
+  "cfjs_b8": [
+   0.7901583020613626,
+   0.8375448525260284
+  ],
+  "cost_norm": [
+   0.6070064936938104,
+   0.6410716763971884
+  ],
+  "coverage": [
+   0.916,
+   0.9346666666666666
+  ],
+  "fj_norm": [
+   0.08144144351676731,
+   0.09590311912744577
+  ],
+  "fjs_norm": [
+   0.02192315849692472,
+   0.02563900699186287
+  ],
+  "nav_log_a1": [
+   21.931805965385237,
+   22.243101474325194
+  ],
+  "skill": [
+   0.44135068402104133,
+   0.48436286460052513
+  ]
+ },
+ "condition": {
+  "k": 20,
+  "model": "nomic",
+  "universe": "books"
+ },
+ "graph_sha256": "129b5ec284f968cc5e097885e860a29e1396a15711ca0b00fa14e2f424f5e249",
+ "key": "unesco-thesaurus-placed",
+ "negatives": {
+  "beta_sweep": [
+   0.25,
+   0.5,
+   1.0,
+   2.0,
+   4.0,
+   8.0
+  ],
+  "dissimilarity": 1059.3120114679332,
+  "floor": 0.6469538553896859,
+  "objective": "cfj_b<beta> = cost_norm + beta * fj_norm and cfjs_b<beta> = cost_norm + beta * fjs_norm; fj_norm = sum d (n - |leaves(LCA)|) / (n sum d) and fjs_norm = sum d ln(n / |leaves(LCA)|) / (ln(n) sum d) over the negative pairs (cosine below the floor, not graph edges), d = floor - cosine",
+  "pairs": 30000,
+  "per_item": 10,
+  "primary_beta": 1.0,
+  "sha256": "ce3cce76f0f83bf42a7931a709a84207a05f7b741ddc064dcc6fa48ddcc181dc"
+ },
+ "placements_sha256": "0d97d02ba08f3c9349d62c9cf7a69415442fc445b919bfbe83d0b97510ac261e",
+ "point": {
+  "cfj_b0.25": 0.6465047428900141,
+  "cfj_b0.5": 0.6686586062907955,
+  "cfj_b1": 0.7129663330923584,
+  "cfj_b2": 0.801581786695484,
+  "cfj_b4": 0.9788126939017353,
+  "cfj_b8": 1.3332745083142379,
+  "cfjs_b0.25": 0.630299562472838,
+  "cfjs_b0.5": 0.6362482454564433,
+  "cfjs_b1": 0.6481456114236539,
+  "cfjs_b2": 0.671940343358075,
+  "cfjs_b4": 0.7195298072269172,
+  "cfjs_b8": 0.8147087349646017,
+  "cost_norm": 0.6243508794892327,
+  "coverage": 0.9253333333333333,
+  "fj_norm": 0.08861545360312564,
+  "fjs_norm": 0.023794731934421123,
+  "nav_log_a1": 22.169220840649796,
+  "skill": 0.46254801068144613
+ },
+ "scheme": "unesco-thesaurus",
+ "scheme_sha256": "05f0b3cefa69d9096f9736bb606aa45b1f0eaece1afb7fa01231b9f8c338e745",
+ "version": "2026-08-31"
+}
