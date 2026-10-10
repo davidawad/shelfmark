@@ -630,6 +630,8 @@ mod tests {
         assert!((b.entropy_bits - 1.0).abs() < 1e-12);
         assert!((b.alphabetic_optimum_bits - 1.0).abs() < 1e-12);
         assert!((b.nav_over_alphabetic - 1.0).abs() < 1e-12);
+        assert!((optimal_alphabetic_cost(&[1.0, 10.0, 1.0]) - 23.0 / 12.0).abs() < 1e-12);
+        assert_eq!(zipf_queries_seeded(8, 17), zipf_queries_seeded(8, 17));
     }
 
     #[test]
