@@ -86,7 +86,11 @@ class Runs:
                 m = LCC_LETTERS.match(calls[0].strip()) if calls else None
                 rows.append({"id": r["id"], "fine": m.group(1) if m else None,
                              "coarse": m.group(1)[0] if m else None})
-        path.write_text("".join(json.dumps(r) + "\n" for r in rows), encoding="utf-8")
+        # Written once before the parallel scoring, atomically, so no run
+        # reads a partial file.
+        tmp = path.with_suffix(".tmp")
+        tmp.write_text("".join(json.dumps(r) + "\n" for r in rows), encoding="utf-8")
+        tmp.replace(path)
         return path
 
     def specs(self):
@@ -159,6 +163,8 @@ class Runs:
 
 def run(a):
     runs = Runs(a)
+    for corpus in CORPORA:
+        runs.external(corpus)
     failures = {}
 
     def attempt(spec):

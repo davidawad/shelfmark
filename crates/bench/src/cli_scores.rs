@@ -1,18 +1,18 @@
 //! `scores` and `agree` subcommands: the scoring catalogue for one run, and
 //! the rank agreement between scores across runs.
 use crate::{gold_field, read_jsonl, ClassMass, PlacementRow};
-use shelfmark_bench::agree::{cluster_order, kendall, spearman};
 use shelfmark_bench::catalogue::{catalogue, Context};
 use shelfmark_bench::consistency::consistency;
 use shelfmark_bench::embedscore::Vectors;
+use shelfmark_bench::subset::{restrict_graph, restrict_vectors};
 use shelfmark_bench::{sha256_hex, CorpusRow, Hier, SimilarityGraph};
 use shelfmark_core::scheme::SchemeDoc;
 use std::collections::BTreeMap;
 use std::error::Error;
 
-type Res<T> = Result<T, Box<dyn Error>>;
+pub(crate) type Res<T> = Result<T, Box<dyn Error>>;
 
-fn options(args: &[String]) -> Res<BTreeMap<String, String>> {
+pub(crate) fn options(args: &[String]) -> Res<BTreeMap<String, String>> {
     let mut out = BTreeMap::new();
     let mut i = 2;
     while i < args.len() {
@@ -28,11 +28,15 @@ fn options(args: &[String]) -> Res<BTreeMap<String, String>> {
     Ok(out)
 }
 
-fn need<'a>(o: &'a BTreeMap<String, String>, key: &str) -> Res<&'a String> {
+pub(crate) fn need<'a>(o: &'a BTreeMap<String, String>, key: &str) -> Res<&'a String> {
     Ok(o.get(key).ok_or(format!("missing --{key}"))?)
 }
 
-fn number<T: std::str::FromStr>(o: &BTreeMap<String, String>, key: &str, default: T) -> Res<T>
+pub(crate) fn number<T: std::str::FromStr>(
+    o: &BTreeMap<String, String>,
+    key: &str,
+    default: T,
+) -> Res<T>
 where
     T::Err: Error + 'static,
 {
@@ -43,7 +47,7 @@ where
 }
 
 /// Labels per corpus row, highest mass first (ties keep source order).
-fn placement_labels(path: &str, corpus: &[CorpusRow]) -> Res<Vec<Vec<String>>> {
+pub(crate) fn placement_labels(path: &str, corpus: &[CorpusRow]) -> Res<Vec<Vec<String>>> {
     let mut by_id = BTreeMap::new();
     for row in read_jsonl::<PlacementRow>(path)? {
         let mut classes: Vec<(String, f64)> = row
@@ -97,7 +101,30 @@ fn external(path: &str, corpus: &[CorpusRow]) -> Res<[Vec<Option<usize>>; 2]> {
     Ok(out)
 }
 
-fn vectors(path: &str, dim: usize, n: usize) -> Res<Vectors> {
+/// Corpus positions of the ids listed one per line in `path`, in corpus
+/// order; every id must be in the corpus.
+fn subset_rows(path: &str, corpus: &[CorpusRow]) -> Res<Vec<usize>> {
+    let ids: std::collections::BTreeSet<String> = std::fs::read_to_string(path)?
+        .lines()
+        .map(str::trim)
+        .filter(|l| !l.is_empty())
+        .map(str::to_owned)
+        .collect();
+    let keep: Vec<usize> = (0..corpus.len())
+        .filter(|&i| ids.contains(&corpus[i].id))
+        .collect();
+    if keep.len() != ids.len() {
+        return Err(format!(
+            "{path}: {} ids, {} found in the corpus",
+            ids.len(),
+            keep.len()
+        )
+        .into());
+    }
+    Ok(keep)
+}
+
+pub(crate) fn vectors(path: &str, dim: usize, n: usize) -> Res<Vectors> {
     let bytes = std::fs::read(path)?;
     if bytes.len() != n * dim * 4 {
         return Err(format!("{path}: {} bytes, expected {n} x {dim} f32", bytes.len()).into());
@@ -116,6 +143,35 @@ fn file_hash(path: Option<&String>) -> Res<Option<String>> {
     })
 }
 
+/// Reference labels for inter-classifier consistency: source labels in a
+/// corpus-format file, or another placement file.
+fn reference_labels(
+    o: &BTreeMap<String, String>,
+    corpus: &[CorpusRow],
+    scheme: &SchemeDoc,
+) -> Res<Option<Vec<Vec<String>>>> {
+    Ok(match (o.get("compare-gold"), o.get("compare-placements")) {
+        (Some(p), _) => {
+            let rows: BTreeMap<String, CorpusRow> = read_jsonl::<CorpusRow>(p)?
+                .into_iter()
+                .map(|r| (r.id.clone(), r))
+                .collect();
+            Some(
+                corpus
+                    .iter()
+                    .map(|c| {
+                        rows.get(&c.id)
+                            .map(|r| gold_field(r, &scheme.name).to_vec())
+                            .unwrap_or_default()
+                    })
+                    .collect(),
+            )
+        }
+        (None, Some(p)) => Some(placement_labels(p, corpus)?),
+        (None, None) => None,
+    })
+}
+
 pub fn scores(args: &[String]) -> Res<()> {
     let o = options(args)?;
     let corpus: Vec<CorpusRow> = read_jsonl(need(&o, "corpus")?)?;
@@ -126,6 +182,18 @@ pub fn scores(args: &[String]) -> Res<()> {
     if graph.n != corpus.len() {
         return Err(format!("graph has {} rows but corpus has {}", graph.n, corpus.len()).into());
     }
+    let full_n = corpus.len();
+    let keep = match o.get("subset") {
+        Some(p) => Some(subset_rows(p, &corpus)?),
+        None => None,
+    };
+    let (corpus, graph) = match &keep {
+        Some(k) => (
+            k.iter().map(|&i| corpus[i].clone()).collect(),
+            restrict_graph(&graph, k),
+        ),
+        None => (corpus, graph),
+    };
     let labels = match o.get("placements") {
         Some(p) => placement_labels(p, &corpus)?,
         None => corpus
@@ -136,7 +204,13 @@ pub fn scores(args: &[String]) -> Res<()> {
     let primary: Vec<Option<String>> = labels.iter().map(|l| l.first().cloned()).collect();
     let hier = Hier::build(&scheme, &primary).map_err(|e| format!("hierarchy: {e}"))?;
     let vecs = match o.get("vectors") {
-        Some(p) => Some(vectors(p, number(&o, "dims", 384)?, corpus.len())?),
+        Some(p) => {
+            let v = vectors(p, number(&o, "dims", 384)?, full_n)?;
+            Some(match &keep {
+                Some(k) => restrict_vectors(&v, k),
+                None => v,
+            })
+        }
         None => None,
     };
     let gold = match o.get("external") {
@@ -158,29 +232,14 @@ pub fn scores(args: &[String]) -> Res<()> {
         sample: number(&o, "sample", 2000)?,
     };
     let result = catalogue(&hier, &ctx);
-    // Reference labels for inter-classifier consistency: source labels in a
-    // corpus-format file, or another placement file.
-    let reference: Option<Vec<Vec<String>>> =
-        match (o.get("compare-gold"), o.get("compare-placements")) {
-            (Some(p), _) => {
-                let rows: BTreeMap<String, CorpusRow> = read_jsonl::<CorpusRow>(p)?
-                    .into_iter()
-                    .map(|r| (r.id.clone(), r))
-                    .collect();
-                Some(
-                    corpus
-                        .iter()
-                        .map(|c| {
-                            rows.get(&c.id)
-                                .map(|r| gold_field(r, &scheme.name).to_vec())
-                                .unwrap_or_default()
-                        })
-                        .collect(),
-                )
-            }
-            (None, Some(p)) => Some(placement_labels(p, &corpus)?),
-            (None, None) => None,
-        };
+    if let Some(p) = o.get("write-covered") {
+        let ids: String = (0..hier.items())
+            .filter(|&i| hier.placed(i))
+            .map(|i| format!("{}\n", corpus[i].id))
+            .collect();
+        std::fs::write(p, ids)?;
+    }
+    let reference = reference_labels(&o, &corpus, &scheme)?;
     let compared = reference.map(|r| {
         let first: Vec<Option<String>> = r.iter().map(|l| l.first().cloned()).collect();
         consistency(&scheme, &first, &primary)
@@ -189,6 +248,7 @@ pub fn scores(args: &[String]) -> Res<()> {
         "scheme": scheme.name,
         "version": scheme.version,
         "n": corpus.len(),
+        "graph_edges": graph.edges.len(),
         "params": {"seed": ctx.seed, "reps": ctx.reps, "boot": ctx.boot, "sample": ctx.sample,
                    "insertion_capacity": 50, "author_cap": 50, "noise": [0.05, 0.1, 0.2]},
         "catalogue": result,
@@ -201,12 +261,13 @@ pub fn scores(args: &[String]) -> Res<()> {
             "vectors": file_hash(o.get("vectors"))?,
             "external": file_hash(o.get("external"))?,
             "compare": file_hash(o.get("compare-gold").or(o.get("compare-placements")))?,
+            "subset": file_hash(o.get("subset"))?,
         },
     });
     write(&o, &serde_json::to_string_pretty(&out)?)
 }
 
-fn write(o: &BTreeMap<String, String>, json: &str) -> Res<()> {
+pub(crate) fn write(o: &BTreeMap<String, String>, json: &str) -> Res<()> {
     match o.get("output") {
         Some(p) => std::fs::write(p, json)?,
         None => println!("{json}"),
@@ -214,88 +275,29 @@ fn write(o: &BTreeMap<String, String>, json: &str) -> Res<()> {
     Ok(())
 }
 
-/// Agreement input: `point[m][r]` (null when a run lacks the score),
-/// optional bootstrap replicates `boot[m][r][b]` and noisy values `noise[m][r]`.
-#[derive(serde::Deserialize)]
-struct AgreeInput {
-    metrics: Vec<String>,
-    runs: Vec<String>,
-    point: Vec<Vec<Option<f64>>>,
-    #[serde(default)]
-    boot: Vec<Vec<Vec<f64>>>,
-    #[serde(default)]
-    noise: Vec<Vec<Option<f64>>>,
-}
+#[cfg(test)]
+mod tests {
+    use super::*;
 
-/// Paired values of two rows where both are present.
-fn paired(a: &[Option<f64>], b: &[Option<f64>]) -> (Vec<f64>, Vec<f64>) {
-    a.iter()
-        .zip(b)
-        .filter_map(|(x, y)| Some(((*x)?, (*y)?)))
-        .unzip()
-}
-
-fn stability(input: &AgreeInput, m: usize) -> serde_json::Value {
-    let point = &input.point[m];
-    let mut taus = vec![];
-    let reps = input
-        .boot
-        .get(m)
-        .map_or(0, |r| r.iter().map(Vec::len).min().unwrap_or(0));
-    for b in 0..reps {
-        let replicate: Vec<Option<f64>> = (0..input.runs.len())
-            .map(|r| Some(input.boot[m][r][b]))
+    #[test]
+    fn subset_rows_keep_corpus_order_and_reject_unknown_ids() {
+        let corpus: Vec<CorpusRow> = ["a", "b", "c", "d"]
+            .iter()
+            .map(|id| CorpusRow {
+                id: (*id).into(),
+                ..CorpusRow::default()
+            })
             .collect();
-        let (x, y) = paired(point, &replicate);
-        taus.push(kendall(&x, &y));
+        let dir = std::env::temp_dir().join(format!("subset-rows-{}", std::process::id()));
+        std::fs::create_dir_all(&dir).unwrap();
+        let path = dir.join("ids.txt");
+        std::fs::write(&path, "d\nb\n\n").unwrap();
+        assert_eq!(
+            subset_rows(path.to_str().unwrap(), &corpus).unwrap(),
+            [1, 3]
+        );
+        std::fs::write(&path, "b\nz\n").unwrap();
+        assert!(subset_rows(path.to_str().unwrap(), &corpus).is_err());
+        std::fs::remove_dir_all(dir).unwrap();
     }
-    taus.sort_by(f64::total_cmp);
-    // Scores outside the noise set have no noisy values: report null.
-    let noise = input.noise.get(m).and_then(|n| {
-        let (x, y) = paired(point, n);
-        (x.len() >= 2).then(|| kendall(&x, &y))
-    });
-    serde_json::json!({
-        "boot_tau_mean": if taus.is_empty() { None } else { Some(taus.iter().sum::<f64>() / taus.len() as f64) },
-        "boot_tau_p05": taus.get(taus.len() / 20).copied(),
-        "noise_tau": noise,
-    })
-}
-
-pub fn agree(args: &[String]) -> Res<()> {
-    let o = options(args)?;
-    let input: AgreeInput = serde_json::from_slice(&std::fs::read(need(&o, "input")?)?)?;
-    let m = input.metrics.len();
-    let mut rho = vec![vec![0.0; m]; m];
-    let mut tau = vec![vec![0.0; m]; m];
-    let mut pairs = vec![vec![0usize; m]; m];
-    for a in 0..m {
-        for b in 0..m {
-            let (x, y) = paired(&input.point[a], &input.point[b]);
-            rho[a][b] = spearman(&x, &y);
-            tau[a][b] = kendall(&x, &y);
-            pairs[a][b] = x.len();
-        }
-    }
-    let dist: Vec<Vec<f64>> = rho
-        .iter()
-        .map(|r| r.iter().map(|v| 1.0 - v.abs()).collect())
-        .collect();
-    let order = cluster_order(&dist);
-    let stable: BTreeMap<&String, serde_json::Value> = input
-        .metrics
-        .iter()
-        .enumerate()
-        .map(|(i, k)| (k, stability(&input, i)))
-        .collect();
-    let out = serde_json::json!({
-        "metrics": input.metrics,
-        "runs": input.runs,
-        "spearman": rho,
-        "kendall": tau,
-        "pairs": pairs,
-        "order": order,
-        "rank_stability": stable,
-    });
-    write(&o, &serde_json::to_string_pretty(&out)?)
 }

@@ -76,6 +76,30 @@ pub fn cluster_order(dist: &[Vec<f64>]) -> Vec<usize> {
     clusters.pop().unwrap_or_default()
 }
 
+/// Partial correlation of x and y controlling for z, from the three
+/// pairwise correlations; NaN (undefined) when z explains x or y completely.
+pub fn partial(rxy: f64, rxz: f64, ryz: f64) -> f64 {
+    let d = ((1.0 - rxz * rxz) * (1.0 - ryz * ryz)).sqrt();
+    if d > 1e-12 {
+        ((rxy - rxz * ryz) / d).clamp(-1.0, 1.0)
+    } else {
+        f64::NAN
+    }
+}
+
+/// Paired-bootstrap summary of a difference: percentile 95% interval and
+/// the two-sided bootstrap p-value `2 · min(P(d ≤ 0), P(d ≥ 0))`, capped at 1.
+pub fn paired_summary(diffs: &[f64]) -> ([f64; 2], f64) {
+    let d: Vec<f64> = diffs.iter().copied().filter(|x| x.is_finite()).collect();
+    if d.is_empty() {
+        return ([f64::NAN, f64::NAN], f64::NAN);
+    }
+    let le = d.iter().filter(|&&x| x <= 0.0).count() as f64;
+    let ge = d.iter().filter(|&&x| x >= 0.0).count() as f64;
+    let p = (2.0 * le.min(ge) / d.len() as f64).min(1.0);
+    (crate::robust::interval(&d), p)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -105,5 +129,24 @@ mod tests {
             vec![0.8, 0.2, 0.9, 0.0],
         ];
         assert_eq!(cluster_order(&d), [0, 2, 1, 3]);
+    }
+
+    #[test]
+    fn partial_removes_the_control() {
+        // x and y both equal z: nothing is left once z is held fixed.
+        assert!(partial(1.0, 1.0, 1.0).is_nan());
+        // Independent control: the partial equals the raw correlation.
+        assert!((partial(0.5, 0.0, 0.0) - 0.5).abs() < 1e-12);
+        // rxy = 0.8 explained in part by z (0.6 each): (0.8-0.36)/0.64.
+        assert!((partial(0.8, 0.6, 0.6) - 0.6875).abs() < 1e-12);
+    }
+
+    #[test]
+    fn paired_summary_p_value() {
+        let ([lo, hi], p) = paired_summary(&[1.0, 2.0, 3.0, 4.0]);
+        assert!(lo >= 1.0 && hi <= 4.0);
+        assert_eq!(p, 0.0);
+        let (_, p) = paired_summary(&[-1.0, 1.0, 2.0, 3.0]);
+        assert_eq!(p, 0.5);
     }
 }

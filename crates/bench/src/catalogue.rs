@@ -2,10 +2,11 @@
 //! flat `name -> value` map, bootstrap intervals, null models and placement
 //! noise. Names are stable; `research/reports/6-scoring-catalogue.md`
 //! defines each one.
+use crate::boot::bootstrap;
 use crate::embedscore::{self, Vectors};
 use crate::goldtree::gold_tree;
 use crate::partition::compare;
-use crate::robust::{interval, mean_sd, noisy, random_shape, resample, shuffled_labels};
+use crate::robust::{interval, mean_sd, noisy, random_shape, shuffled_labels};
 use crate::search::{mdl, search_cost};
 use crate::shelf::{author_pairs, insertion, locality, same_class, shelf_tau};
 use crate::treescore::{edge_table, mean, norm_cost, tree_sampling_divergence, EdgeTable, Rng};
@@ -55,7 +56,7 @@ fn put(s: &mut Scores, key: &str, value: f64) {
     s.insert(key.to_owned(), value);
 }
 
-fn edge_pairs(t: &EdgeTable) -> Vec<(usize, usize, f64)> {
+pub(crate) fn edge_pairs(t: &EdgeTable) -> Vec<(usize, usize, f64)> {
     (0..t.weight.len())
         .map(|e| (t.left[e], t.right[e], t.weight[e]))
         .collect()
@@ -274,53 +275,6 @@ fn librarian_scores(h: &Hier, ctx: &Context, s: &mut Scores) {
     }
 }
 
-/// Bootstrap replicates: edges resampled for graph scores, items for label scores.
-fn bootstrap(h: &Hier, ctx: &Context, t: &EdgeTable) -> BTreeMap<String, Vec<f64>> {
-    let mut out = BTreeMap::<String, Vec<f64>>::new();
-    let mut rng = Rng::new(ctx.seed ^ 0xb007);
-    let pos = h.shelf_positions();
-    let pairs = edge_pairs(t);
-    let knn = embedscore::knn_probe(ctx.graph, &h.labels_at(1));
-    for _ in 0..ctx.boot {
-        let pick = resample(t.weight.len(), &mut rng);
-        let n = h.items();
-        let mut push = |k: &str, v: f64| out.entry(k.to_owned()).or_default().push(v);
-        push("dasgupta.cost_norm", norm_cost(t, &t.size, n, &pick));
-        push(
-            "dasgupta.binarized_cost_norm",
-            norm_cost(t, &t.binarized, n, &pick),
-        );
-        push("triplet.accuracy", mean(&t.triplet, &pick));
-        push("tsd.nats", tree_sampling_divergence(h, t, &pick));
-        let picked: Vec<_> = pick.iter().map(|&e| pairs[e]).collect();
-        push("order.locality", locality(&pos, &picked));
-        let kp = resample(knn.len(), &mut rng);
-        push("probe.knn_d1", mean(&knn, &kp));
-        if let Some([fine, coarse]) = &ctx.gold {
-            let items = resample(n, &mut rng);
-            let sub = Hier::from_parents(
-                &h.parent,
-                h.code.clone(),
-                items.iter().map(|&i| h.item_class[i]).collect(),
-            );
-            let gf: Vec<_> = items.iter().map(|&i| fine[i]).collect();
-            let gc: Vec<_> = items.iter().map(|&i| coarse[i]).collect();
-            let leaf: Vec<_> = sub.item_class.iter().map(|&c| Some(c)).collect();
-            let tf = gold_tree(&sub, &gf);
-            push("gold.dendrogram_purity_fine", tf.dendrogram_purity);
-            push("gold.hierarchical_f_fine", tf.hierarchical_f);
-            push(
-                "gold.dendrogram_purity_coarse",
-                gold_tree(&sub, &gc).dendrogram_purity,
-            );
-            let p = compare(&gf, &leaf);
-            push("gold.ari_fine", p.ari);
-            push("gold.v_measure_fine", p.v_measure);
-        }
-    }
-    out
-}
-
 fn nulls_and_noise(h: &Hier, ctx: &Context, point: &Scores, c: &mut Catalogue) {
     let mut rng = Rng::new(ctx.seed ^ 0x0001_0000_0000_0000);
     type Model = fn(&Hier, &mut Rng) -> Hier;
@@ -455,5 +409,31 @@ mod tests {
         let [lo, hi] = a.ci["dasgupta.cost_norm"];
         assert!(lo <= a.scores["dasgupta.cost_norm"] + 1e-12 || hi >= lo);
         assert!(a.null.contains_key("shuffled_labels") && a.noise.contains_key("0.1"));
+        // Edge and item resamples come from their own streams: dropping the
+        // gold labels or moving an item to another class (which changes the
+        // kNN probe's draws) leaves the graph-score replicates paired.
+        let plain = catalogue(&h, &Context { gold: None, ..ctx });
+        assert_eq!(
+            plain.boot["dasgupta.cost_norm"],
+            a.boot["dasgupta.cost_norm"]
+        );
+        let moved = ["A1", "A2", "A2", "B", "", ""].map(|c| (!c.is_empty()).then(|| c.to_owned()));
+        let h2 = Hier::build(&scheme(), &moved).unwrap();
+        let c = catalogue(&h2, &Context { gold: None, ..ctx });
+        let t1 = edge_table(&h, &graph, 11);
+        let t2 = edge_table(&h2, &graph, 11);
+        let mut rng = Rng::new(11 ^ 0xb007);
+        for b in 0..20 {
+            let pick = crate::robust::resample(4, &mut rng);
+            assert_eq!(
+                a.boot["dasgupta.cost_norm"][b],
+                norm_cost(&t1, &t1.size, 6, &pick)
+            );
+            assert_eq!(
+                c.boot["dasgupta.cost_norm"][b],
+                norm_cost(&t2, &t2.size, 6, &pick)
+            );
+        }
+        assert_eq!(a.boot["vertex.dasgupta.cost_norm"].len(), 20);
     }
 }

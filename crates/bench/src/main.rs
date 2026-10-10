@@ -34,13 +34,16 @@ fn one() -> f64 {
 /// Item id to its (class code, mass) placements.
 type Placements = BTreeMap<String, Vec<(String, f64)>>;
 
+mod cli_agree;
+mod cli_dense;
 mod cli_scores;
 
 fn main() {
     let args: Vec<_> = env::args().collect();
     let result = match args.get(1).map(String::as_str) {
         Some("scores") => cli_scores::scores(&args),
-        Some("agree") => cli_scores::agree(&args),
+        Some("agree") => cli_agree::agree(&args),
+        Some("dense") => cli_dense::dense(&args),
         _ => run(),
     };
     if let Err(error) = result {
@@ -109,7 +112,7 @@ fn load_placements(
 }
 
 /// The source labels of a corpus row for a scheme name, in source order.
-fn gold_field<'a>(row: &'a CorpusRow, scheme: &str) -> &'a [String] {
+pub(crate) fn gold_field<'a>(row: &'a CorpusRow, scheme: &str) -> &'a [String] {
     match scheme.to_ascii_lowercase().as_str() {
         "lcc" => row.lc_classifications.as_slice(),
         "ddc" => row.ddc.as_slice(),
