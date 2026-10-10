@@ -132,7 +132,7 @@ def parallel(jobs, fn, workers):
     def attempt(job):
         try:
             fn(job)
-        except Exception as e:  # recorded; other runs continue
+        except Exception as e:  # noqa: BLE001 - recorded; other runs continue
             failures[str(job[1])] = str(e)
             sc.log(f"FAILED {job[1]}: {e}")
     with ThreadPoolExecutor(workers) as pool:

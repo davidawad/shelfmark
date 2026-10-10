@@ -1,0 +1,20 @@
+{
+  "rows": 500,
+  "failed": 0,
+  "fallback": 458,
+  "placed": 42,
+  "flagged": 42,
+  "deciding_tiers": {
+    "vocab": 42
+  },
+  "classes_used": 31,
+  "top_class": "QH501-531",
+  "top_class_share": 0.07142857142857142,
+  "top_class_terms": {
+    "life": 3
+  },
+  "output": "bench/corpus/cache/ddc-bench/placements/holdout/lcc-placed.jsonl",
+  "classify_seconds": 2.2,
+  "profile": "profile:lexical@2",
+  "store_rules": "empty"
+}

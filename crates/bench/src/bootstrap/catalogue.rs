@@ -1,4 +1,5 @@
-//! Bootstrap replicates of the catalogue scores.
+//! Edge, vertex and item bootstrap replicates of the catalogue scores,
+//! behind `shelfmark-bench scores --boot N`.
 //!
 //! * Edge bootstrap: graph edges resampled with replacement (graph scores).
 //! * Vertex bootstrap: items resampled with replacement and every edge
@@ -9,10 +10,15 @@
 //! * Item bootstrap: the same item resample for the external-gold scores.
 //! * The kNN probe resamples its labelled items.
 //!
-//! Each kind draws from its own generator stream. Two runs over the same
+//! Each kind draws from its own generator stream (`--boot-streams split`,
+//! the default). Two runs over the same
 //! graph and item count therefore get identical edge and item resamples in
 //! every replicate, so replicate `b` of one run pairs with replicate `b` of
 //! another (paired bootstrap of score differences).
+//!
+//! `--boot-streams single` keeps the draw order of the 2026-10-10-scores
+//! results instead: one generator for the edge, kNN and item resamples in
+//! that order, and no vertex bootstrap.
 use crate::catalogue::{edge_pairs, Context};
 use crate::embedscore;
 use crate::goldtree::gold_tree;
@@ -91,6 +97,9 @@ fn gold_replicate(
 
 /// Replicates per score name, `ctx.boot` of each.
 pub fn bootstrap(h: &Hier, ctx: &Context, t: &EdgeTable) -> BTreeMap<String, Vec<f64>> {
+    if ctx.single_stream {
+        return single_stream(h, ctx, t);
+    }
     let mut out = BTreeMap::<String, Vec<f64>>::new();
     let mut edge_rng = Rng::new(ctx.seed ^ 0xb007);
     let mut item_rng = Rng::new(ctx.seed ^ 0xb008);
@@ -111,6 +120,25 @@ pub fn bootstrap(h: &Hier, ctx: &Context, t: &EdgeTable) -> BTreeMap<String, Vec
         push("probe.knn_d1".into(), mean(&knn, &kp));
         if let Some(gold) = &ctx.gold {
             gold_replicate(h, gold, &items, &mut push);
+        }
+    }
+    out
+}
+
+/// One generator for every resample, in the 2026-10-10-scores order.
+fn single_stream(h: &Hier, ctx: &Context, t: &EdgeTable) -> BTreeMap<String, Vec<f64>> {
+    let mut out = BTreeMap::<String, Vec<f64>>::new();
+    let mut rng = Rng::new(ctx.seed ^ 0xb007);
+    let knn = embedscore::knn_probe(ctx.graph, &h.labels_at(1));
+    let n = h.items();
+    let mut push = |k: String, v: f64| out.entry(k).or_default().push(v);
+    for _ in 0..ctx.boot {
+        let pick = resample(t.weight.len(), &mut rng);
+        graph_replicate(h, t, &pick, "", &mut push);
+        let kp = resample(knn.len(), &mut rng);
+        push("probe.knn_d1".into(), mean(&knn, &kp));
+        if let Some(gold) = &ctx.gold {
+            gold_replicate(h, gold, &resample(n, &mut rng), &mut push);
         }
     }
     out

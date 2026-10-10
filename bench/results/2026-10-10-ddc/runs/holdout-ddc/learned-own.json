@@ -1,0 +1,142 @@
+{
+  "scheme": "learned",
+  "version": "2026-10-10.ins500",
+  "track": "P",
+  "mode": "primary",
+  "n": 110,
+  "k": 20,
+  "edge_weight": 66.21157573380178,
+  "cost": 3382.4470401241347,
+  "cost_norm": 0.4644130305886234,
+  "revenue": 3900.8262905940614,
+  "revenue_norm": 0.5355869694113766,
+  "ref_cost_norm": 0.21619620553607932,
+  "skill": 0.6833176532115274,
+  "coverage": 1.0,
+  "structure": {
+    "mean_depth": 8.663636363636364,
+    "p50_depth": 9,
+    "p95_depth": 10,
+    "max_depth": 10,
+    "mean_branching": 4.0,
+    "p95_branching": 13,
+    "max_branching": 26,
+    "root_fanout": 2,
+    "nodes_over_50_children": 0,
+    "normalized_entropy": 0.7499168513045458,
+    "effective_classes": 14.692559936891085,
+    "gini": 0.6906880189798341,
+    "largest_class_share": 0.1269276393831554,
+    "nav_scan": 25.218181818181822,
+    "nav_log_a0": 9.917082360764827,
+    "nav_log_a1": 16.598900542583014,
+    "nav_log_a2": 23.28071872440119
+  },
+  "hashes": {
+    "graph": "f0e28851540c7d9f0b25f38f86864be04cbe4c7e60a2cefb4953f124e201421d",
+    "tree": "61d46b002cd6d320df8c6910167002e47b6cde51087f58d42ea5a2af026da55d",
+    "scheme": "4ee8a58dfca9dacaf7ca75aad1a7d93f576892cd708305b7b569087695babfc0"
+  },
+  "run": {
+    "scheme_id": "scheme:learned@2026-10-10.ins500",
+    "corpus": "holdout-ddc",
+    "placement_source": "own insertion (nearest leaf centroid, leaf splits)",
+    "placement_stats": {
+      "base": "learned@2026-10-10",
+      "classes_after": 126,
+      "classes_before": 110,
+      "inserted": 500,
+      "params": {
+        "iterations": 10,
+        "max_cos": 0.5,
+        "min_child": 5,
+        "split_after": 12
+      },
+      "scheme": "learned@2026-10-10.ins500",
+      "splits": [
+        {
+          "after_inserts": 45,
+          "cause": "distinct",
+          "centroid_cos": 0.2050887002357771,
+          "core": "01.02.01.04.01",
+          "core_new_works": 0,
+          "leaf": "01.02.01.04",
+          "new": "01.02.01.04.02",
+          "new_works": 12
+        },
+        {
+          "after_inserts": 70,
+          "cause": "distinct",
+          "centroid_cos": 0.303568259678279,
+          "core": "01.02.01.04.02.01",
+          "core_new_works": 30,
+          "leaf": "01.02.01.04.02",
+          "new": "01.02.01.04.02.02",
+          "new_works": 5
+        },
+        {
+          "after_inserts": 158,
+          "cause": "capacity",
+          "centroid_cos": 0.7799421938952531,
+          "core": "01.02.01.04.02.01.01",
+          "core_new_works": 45,
+          "leaf": "01.02.01.04.02.01",
+          "new": "01.02.01.04.02.01.02",
+          "new_works": 53
+        },
+        {
+          "after_inserts": 244,
+          "cause": "capacity",
+          "centroid_cos": 0.7879457168458366,
+          "core": "01.02.01.04.02.01.02.01",
+          "core_new_works": 56,
+          "leaf": "01.02.01.04.02.01.02",
+          "new": "01.02.01.04.02.01.02.02",
+          "new_works": 42
+        },
+        {
+          "after_inserts": 355,
+          "cause": "distinct",
+          "centroid_cos": 0.26193563876851844,
+          "core": "01.01.01.04.01",
+          "core_new_works": 4,
+          "leaf": "01.01.01.04",
+          "new": "01.01.01.04.02",
+          "new_works": 8
+        },
+        {
+          "after_inserts": 392,
+          "cause": "capacity",
+          "centroid_cos": 0.8009051836821149,
+          "core": "01.02.01.04.02.01.02.01.01",
+          "core_new_works": 50,
+          "leaf": "01.02.01.04.02.01.02.01",
+          "new": "01.02.01.04.02.01.02.01.02",
+          "new_works": 48
+        },
+        {
+          "after_inserts": 397,
+          "cause": "capacity",
+          "centroid_cos": 0.8500278579026442,
+          "core": "01.02.01.04.02.01.01.01",
+          "core_new_works": 44,
+          "leaf": "01.02.01.04.02.01.01",
+          "new": "01.02.01.04.02.01.01.02",
+          "new_works": 54
+        },
+        {
+          "after_inserts": 462,
+          "cause": "capacity",
+          "centroid_cos": 0.7725473825374879,
+          "core": "01.02.01.04.02.01.02.02.01",
+          "core_new_works": 44,
+          "leaf": "01.02.01.04.02.01.02.02",
+          "new": "01.02.01.04.02.01.02.02.02",
+          "new_works": 54
+        }
+      ],
+      "stable": true
+    },
+    "score_seconds": 0.0
+  }
+}

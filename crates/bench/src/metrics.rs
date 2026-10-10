@@ -42,24 +42,27 @@ pub fn score_tree(tree: &Tree, graph: &SimilarityGraph) -> TreeScore {
     let mut cost = 0.0;
     let mut weight = 0.0;
     let mut distance = 0.0;
+    let order = top_down_order(tree);
+    let mut depths = vec![0usize; tree.nodes.len()];
+    for &node in &order[1..] {
+        depths[node] = tree.nodes[node].parent.map_or(0, |p| depths[p] + 1);
+    }
     let mut leaf_mass = vec![0.0; tree.nodes.len()];
     for copies in &tree.item_leaves {
         for &(leaf, mass) in copies {
             leaf_mass[leaf] += mass;
         }
     }
+    // Children before parents, each summed in child order as a recursion would.
     let mut subtree_mass = vec![0.0; tree.nodes.len()];
-    fn accumulate(tree: &Tree, node: usize, leaves: &[f64], totals: &mut [f64]) -> f64 {
-        let total = leaves[node]
+    for &node in order.iter().rev() {
+        subtree_mass[node] = leaf_mass[node]
             + tree.nodes[node]
                 .children
                 .iter()
-                .map(|&child| accumulate(tree, child, leaves, totals))
+                .map(|&child| subtree_mass[child])
                 .sum::<f64>();
-        totals[node] = total;
-        total
     }
-    accumulate(tree, 0, &leaf_mass, &mut subtree_mass);
     for edge in &graph.edges {
         if edge.left >= n || edge.right >= n {
             continue;
@@ -69,9 +72,9 @@ pub fn score_tree(tree: &Tree, graph: &SimilarityGraph) -> TreeScore {
         for &(a, ma) in &tree.item_leaves[edge.left] {
             for &(b, mb) in &tree.item_leaves[edge.right] {
                 let mass = ma * mb;
-                let lca = tree.lca(a, b);
+                let lca = lca_by_depth(tree, &depths, a, b);
                 pair_cost += mass * subtree_mass[lca];
-                pair_dist += mass * tree_distance(tree, a, b) as f64;
+                pair_dist += mass * (depths[a] + depths[b] - 2 * depths[lca]) as f64;
             }
         }
         cost += edge.weight * pair_cost;
@@ -91,17 +94,29 @@ pub fn score_tree(tree: &Tree, graph: &SimilarityGraph) -> TreeScore {
     }
 }
 
-fn tree_distance(tree: &Tree, a: usize, b: usize) -> usize {
-    let l = tree.lca(a, b);
-    tree_depth(tree, a) + tree_depth(tree, b) - 2 * tree_depth(tree, l)
-}
-fn tree_depth(tree: &Tree, mut node: usize) -> usize {
-    let mut d = 0;
-    while let Some(p) = tree.nodes[node].parent {
-        d += 1;
-        node = p;
+/// Nodes reachable from the root, every parent before its children.
+fn top_down_order(tree: &Tree) -> Vec<usize> {
+    let mut order = vec![0];
+    let mut next = 0;
+    while next < order.len() {
+        order.extend_from_slice(&tree.nodes[order[next]].children);
+        next += 1;
     }
-    d
+    order
+}
+
+fn lca_by_depth(tree: &Tree, depths: &[usize], mut a: usize, mut b: usize) -> usize {
+    while depths[a] > depths[b] {
+        a = tree.nodes[a].parent.unwrap_or(0);
+    }
+    while depths[b] > depths[a] {
+        b = tree.nodes[b].parent.unwrap_or(0);
+    }
+    while a != b {
+        a = tree.nodes[a].parent.unwrap_or(0);
+        b = tree.nodes[b].parent.unwrap_or(0);
+    }
+    a
 }
 
 /// Menu-scan cost from a leaf to the root: half the fan-out of every
@@ -143,32 +158,38 @@ pub(crate) fn shelf_class(tree: &Tree, leaf: usize) -> usize {
         .unwrap_or(leaf)
 }
 
-/// Number of items with at least one placement at or beneath `node`.
-fn items_under(tree: &Tree, node: usize) -> usize {
-    tree.item_leaves
-        .iter()
-        .filter(|copies| {
-            copies
-                .iter()
-                .any(|(leaf, _)| is_descendant(tree, *leaf, node))
-        })
-        .count()
+/// Number of items with at least one placement at or beneath each node.
+fn items_under(tree: &Tree) -> Vec<usize> {
+    let mut counts = vec![0usize; tree.nodes.len()];
+    let mut seen = vec![usize::MAX; tree.nodes.len()];
+    for (item, copies) in tree.item_leaves.iter().enumerate() {
+        for &(leaf, _) in copies {
+            let mut node = Some(leaf);
+            // Stop at a node this item already counted: its ancestors are too.
+            while let Some(v) = node {
+                if seen[v] == item {
+                    break;
+                }
+                seen[v] = item;
+                counts[v] += 1;
+                node = tree.nodes[v].parent;
+            }
+        }
+    }
+    counts
 }
 
 /// Placement frequency of every used class node, and the child count of every
 /// branching node.
-fn class_sizes_and_branches(tree: &Tree) -> (Vec<f64>, Vec<usize>) {
+fn class_sizes_and_branches(tree: &Tree, under: &[usize]) -> (Vec<f64>, Vec<usize>) {
     let mut classes = Vec::new();
     let mut branches = Vec::new();
-    for node in 1..tree.nodes.len() {
-        if tree.nodes[node].code.is_some() {
-            let count = items_under(tree, node);
-            if count > 0 {
-                classes.push(count as f64);
-            }
+    for (node, &count) in tree.nodes.iter().zip(under).skip(1) {
+        if node.code.is_some() && count > 0 {
+            classes.push(count as f64);
         }
-        if !tree.nodes[node].children.is_empty() {
-            branches.push(tree.nodes[node].children.len());
+        if !node.children.is_empty() {
+            branches.push(node.children.len());
         }
     }
     (classes, branches)
@@ -217,12 +238,13 @@ fn structural_stats(tree: &Tree) -> StructuralStats {
     let mut nav_scan = 0.0;
     let mut nav_log = [0.0; 3];
     let n = tree.item_leaves.len().max(1) as f64;
+    let under = items_under(tree);
     for leaves in &tree.item_leaves {
         for &(leaf, mass) in leaves {
             depths.push(tree.item_depth(leaf));
             // Terminal scan cost includes every item attached anywhere beneath
             // the leaf's deepest class, matching a physical class shelf scan.
-            let class_items = items_under(tree, shelf_class(tree, leaf));
+            let class_items = under[shelf_class(tree, leaf)];
             nav_scan +=
                 mass * (branch_scan_cost(tree, leaf) + (class_items as f64 + 1.0) / 2.0) / n;
             for (a, slot) in nav_log.iter_mut().enumerate() {
@@ -230,7 +252,7 @@ fn structural_stats(tree: &Tree) -> StructuralStats {
             }
         }
     }
-    let (classes, mut branches) = class_sizes_and_branches(tree);
+    let (classes, mut branches) = class_sizes_and_branches(tree, &under);
     let mut sorted = depths.clone();
     sorted.sort_unstable();
     let total = classes.iter().sum::<f64>().max(1.0);
@@ -266,18 +288,6 @@ fn structural_stats(tree: &Tree) -> StructuralStats {
         nav_log_a2: nav_log[2],
     }
 }
-fn is_descendant(tree: &Tree, mut node: usize, ancestor: usize) -> bool {
-    loop {
-        if node == ancestor {
-            return true;
-        }
-        match tree.nodes[node].parent {
-            Some(p) => node = p,
-            None => return false,
-        }
-    }
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;

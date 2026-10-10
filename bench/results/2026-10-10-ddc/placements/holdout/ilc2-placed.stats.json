@@ -1,0 +1,20 @@
+{
+  "rows": 500,
+  "failed": 0,
+  "fallback": 272,
+  "placed": 228,
+  "flagged": 226,
+  "deciding_tiers": {
+    "vocab": 228
+  },
+  "classes_used": 151,
+  "top_class": "edqam",
+  "top_class_share": 0.10964912280701754,
+  "top_class_terms": {
+    "s": 25
+  },
+  "output": "bench/corpus/cache/ddc-bench/placements/holdout/ilc2-placed.jsonl",
+  "classify_seconds": 2.5,
+  "profile": "profile:lexical@2",
+  "store_rules": "empty"
+}

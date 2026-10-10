@@ -53,7 +53,7 @@ def log(msg):
 
 
 def run(cmd):
-    proc = subprocess.run([str(c) for c in cmd], capture_output=True, text=True)
+    proc = subprocess.run([str(c) for c in cmd], check=False, capture_output=True, text=True)
     if proc.returncode != 0:
         raise RuntimeError(f"{' '.join(map(str, cmd))} failed ({proc.returncode}): "
                            f"{(proc.stderr or proc.stdout).strip()[-800:]}")
@@ -283,7 +283,7 @@ def main():
     def attempt(fn, label, *args):
         try:
             fn(*args)
-        except Exception as err:  # recorded and reported; other jobs continue
+        except Exception as err:  # noqa: BLE001 - recorded and reported; other jobs continue
             failures[label] = str(err)
             log(f"FAILED {label}: {err}")
 

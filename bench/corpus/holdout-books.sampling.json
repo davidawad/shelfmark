@@ -1,0 +1,193 @@
+{
+  "seed": "openlibrary-ddc-holdout-v1-2026",
+  "classes": "ABCDEFGHJKLMNPQRSTUVZ",
+  "total": 3000,
+  "offsets_per_class": 20,
+  "page_size": 30,
+  "search": "lcc:<class>* AND ddc:*, sort=lcc_sort, fields=key",
+  "per_class": {
+    "A": {
+      "works_in_class": 20712,
+      "pages_from_anchor_at": [],
+      "candidates": 600,
+      "tried": 178,
+      "taken": 143,
+      "quota": 143
+    },
+    "B": {
+      "works_in_class": 411088,
+      "pages_from_anchor_at": [],
+      "candidates": 600,
+      "tried": 151,
+      "taken": 143,
+      "quota": 143
+    },
+    "C": {
+      "works_in_class": 77707,
+      "pages_from_anchor_at": [],
+      "candidates": 600,
+      "tried": 148,
+      "taken": 143,
+      "quota": 143
+    },
+    "D": {
+      "works_in_class": 403744,
+      "pages_from_anchor_at": [],
+      "candidates": 600,
+      "tried": 153,
+      "taken": 143,
+      "quota": 143
+    },
+    "E": {
+      "works_in_class": 94911,
+      "pages_from_anchor_at": [],
+      "candidates": 600,
+      "tried": 151,
+      "taken": 143,
+      "quota": 143
+    },
+    "F": {
+      "works_in_class": 169665,
+      "pages_from_anchor_at": [],
+      "candidates": 600,
+      "tried": 150,
+      "taken": 143,
+      "quota": 143
+    },
+    "G": {
+      "works_in_class": 168504,
+      "pages_from_anchor_at": [],
+      "candidates": 600,
+      "tried": 149,
+      "taken": 143,
+      "quota": 143
+    },
+    "H": {
+      "works_in_class": 662873,
+      "pages_from_anchor_at": [],
+      "candidates": 600,
+      "tried": 156,
+      "taken": 143,
+      "quota": 143
+    },
+    "J": {
+      "works_in_class": 129046,
+      "pages_from_anchor_at": [],
+      "candidates": 600,
+      "tried": 158,
+      "taken": 143,
+      "quota": 143
+    },
+    "K": {
+      "works_in_class": 258402,
+      "pages_from_anchor_at": [],
+      "candidates": 600,
+      "tried": 157,
+      "taken": 143,
+      "quota": 143
+    },
+    "L": {
+      "works_in_class": 172226,
+      "pages_from_anchor_at": [],
+      "candidates": 600,
+      "tried": 200,
+      "taken": 143,
+      "quota": 143
+    },
+    "M": {
+      "works_in_class": 78004,
+      "pages_from_anchor_at": [],
+      "candidates": 600,
+      "tried": 147,
+      "taken": 143,
+      "quota": 143
+    },
+    "N": {
+      "works_in_class": 199826,
+      "pages_from_anchor_at": [],
+      "candidates": 600,
+      "tried": 153,
+      "taken": 143,
+      "quota": 143
+    },
+    "P": {
+      "works_in_class": 1095616,
+      "pages_from_anchor_at": [
+        191717,
+        246498,
+        301279,
+        356060,
+        410841,
+        465621,
+        520402,
+        575183,
+        629964,
+        684745,
+        739525,
+        794306,
+        849087,
+        903868
+      ],
+      "candidates": 600,
+      "tried": 189,
+      "taken": 143,
+      "quota": 143
+    },
+    "Q": {
+      "works_in_class": 389124,
+      "pages_from_anchor_at": [],
+      "candidates": 600,
+      "tried": 146,
+      "taken": 143,
+      "quota": 143
+    },
+    "R": {
+      "works_in_class": 242011,
+      "pages_from_anchor_at": [],
+      "candidates": 600,
+      "tried": 145,
+      "taken": 143,
+      "quota": 143
+    },
+    "S": {
+      "works_in_class": 95973,
+      "pages_from_anchor_at": [],
+      "candidates": 600,
+      "tried": 153,
+      "taken": 143,
+      "quota": 143
+    },
+    "T": {
+      "works_in_class": 373527,
+      "pages_from_anchor_at": [],
+      "candidates": 600,
+      "tried": 161,
+      "taken": 143,
+      "quota": 143
+    },
+    "U": {
+      "works_in_class": 38444,
+      "pages_from_anchor_at": [],
+      "candidates": 600,
+      "tried": 147,
+      "taken": 142,
+      "quota": 142
+    },
+    "V": {
+      "works_in_class": 15580,
+      "pages_from_anchor_at": [],
+      "candidates": 600,
+      "tried": 147,
+      "taken": 142,
+      "quota": 142
+    },
+    "Z": {
+      "works_in_class": 99879,
+      "pages_from_anchor_at": [],
+      "candidates": 600,
+      "tried": 153,
+      "taken": 142,
+      "quota": 142
+    }
+  }
+}

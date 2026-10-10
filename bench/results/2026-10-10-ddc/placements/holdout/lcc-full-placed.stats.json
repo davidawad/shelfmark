@@ -1,0 +1,20 @@
+{
+  "rows": 500,
+  "failed": 0,
+  "fallback": 217,
+  "placed": 283,
+  "flagged": 283,
+  "deciding_tiers": {
+    "vocab": 283
+  },
+  "classes_used": 227,
+  "top_class": "K23",
+  "top_class_share": 0.02120141342756184,
+  "top_class_terms": {
+    "s": 6
+  },
+  "output": "bench/corpus/cache/ddc-bench/placements/holdout/lcc-full-placed.jsonl",
+  "classify_seconds": 8.2,
+  "profile": "profile:lexical@2",
+  "store_rules": "empty"
+}

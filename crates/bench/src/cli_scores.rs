@@ -230,6 +230,13 @@ pub fn scores(args: &[String]) -> Res<()> {
         reps: number(&o, "reps", 10)?,
         boot: number(&o, "boot", 200)?,
         sample: number(&o, "sample", 2000)?,
+        single_stream: match o.get("boot-streams").map(String::as_str) {
+            None | Some("split") => false,
+            Some("single") => true,
+            Some(other) => {
+                return Err(format!("--boot-streams must be split or single, not {other}").into())
+            }
+        },
     };
     let result = catalogue(&hier, &ctx);
     if let Some(p) = o.get("write-covered") {

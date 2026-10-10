@@ -1,0 +1,20 @@
+{
+  "rows": 500,
+  "failed": 0,
+  "fallback": 474,
+  "placed": 26,
+  "flagged": 26,
+  "deciding_tiers": {
+    "vocab": 26
+  },
+  "classes_used": 20,
+  "top_class": "750",
+  "top_class_share": 0.11538461538461539,
+  "top_class_terms": {
+    "art": 3
+  },
+  "output": "bench/corpus/cache/ddc-bench/placements/holdout/fdc-placed.jsonl",
+  "classify_seconds": 2.3,
+  "profile": "profile:lexical@2",
+  "store_rules": "empty"
+}

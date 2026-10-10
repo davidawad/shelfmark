@@ -1,0 +1,20 @@
+{
+  "rows": 500,
+  "failed": 0,
+  "fallback": 478,
+  "placed": 22,
+  "flagged": 22,
+  "deciding_tiers": {
+    "vocab": 22
+  },
+  "classes_used": 13,
+  "top_class": "71.32",
+  "top_class_share": 0.3181818181818182,
+  "top_class_terms": {
+    "man": 7
+  },
+  "output": "bench/corpus/cache/ddc-bench/placements/holdout/bk-placed.jsonl",
+  "classify_seconds": 2.3,
+  "profile": "profile:lexical@2",
+  "store_rules": "empty"
+}

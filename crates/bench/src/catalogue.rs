@@ -2,7 +2,7 @@
 //! flat `name -> value` map, bootstrap intervals, null models and placement
 //! noise. Names are stable; `research/reports/6-scoring-catalogue.md`
 //! defines each one.
-use crate::boot::bootstrap;
+use crate::bootstrap::catalogue::bootstrap;
 use crate::embedscore::{self, Vectors};
 use crate::goldtree::gold_tree;
 use crate::partition::compare;
@@ -31,6 +31,8 @@ pub struct Context<'a> {
     pub reps: usize,
     pub boot: usize,
     pub sample: usize,
+    /// One generator for every bootstrap resample (`--boot-streams single`).
+    pub single_stream: bool,
 }
 
 #[derive(Debug, Clone, Default, Serialize)]
@@ -397,6 +399,7 @@ mod tests {
             reps: 3,
             boot: 20,
             sample: 10,
+            single_stream: false,
         };
         let a = catalogue(&h, &ctx);
         let b = catalogue(&h, &ctx);
@@ -435,5 +438,26 @@ mod tests {
             );
         }
         assert_eq!(a.boot["vertex.dasgupta.cost_norm"].len(), 20);
+        // One stream: edge, kNN and item resamples interleave, in that order.
+        let single = catalogue(
+            &h,
+            &Context {
+                single_stream: true,
+                ..ctx
+            },
+        );
+        let knn = crate::embedscore::knn_probe(&graph, &h.labels_at(1));
+        let mut rng = Rng::new(11 ^ 0xb007);
+        for b in 0..20 {
+            let pick = crate::robust::resample(4, &mut rng);
+            assert_eq!(
+                single.boot["dasgupta.cost_norm"][b],
+                norm_cost(&t1, &t1.size, 6, &pick)
+            );
+            crate::robust::resample(knn.len(), &mut rng);
+            crate::robust::resample(6, &mut rng);
+        }
+        assert!(!single.boot.contains_key("vertex.dasgupta.cost_norm"));
+        assert_eq!(single.scores, a.scores);
     }
 }

@@ -1,0 +1,20 @@
+{
+  "rows": 3000,
+  "failed": 0,
+  "fallback": 0,
+  "placed": 3000,
+  "flagged": 3000,
+  "deciding_tiers": {
+    "vocab": 3000
+  },
+  "classes_used": 1659,
+  "top_class": "PN4140",
+  "top_class_share": 0.066,
+  "top_class_terms": {
+    "subjects": 198
+  },
+  "output": "bench/corpus/cache/ddc-bench/placements/books/lcc-full-placed.jsonl",
+  "classify_seconds": 146.3,
+  "profile": "profile:lexical@2",
+  "store_rules": "empty"
+}

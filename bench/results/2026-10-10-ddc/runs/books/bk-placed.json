@@ -1,0 +1,67 @@
+{
+  "scheme": "bk",
+  "version": "2026-10-03",
+  "track": "P",
+  "mode": "primary",
+  "n": 3000,
+  "k": 20,
+  "edge_weight": 13295.4182601465,
+  "cost": 31739898.71444911,
+  "cost_norm": 0.7957603161582014,
+  "revenue": 8146356.065990392,
+  "revenue_norm": 0.2042396838417986,
+  "ref_cost_norm": 0.22967463485582104,
+  "skill": 0.2651343095830316,
+  "coverage": 0.5543333333333333,
+  "structure": {
+    "mean_depth": 3.6746666666666665,
+    "p50_depth": 5,
+    "p95_depth": 7,
+    "max_depth": 8,
+    "mean_branching": 5.063725490196078,
+    "p95_branching": 14,
+    "max_branching": 376,
+    "root_fanout": 1342,
+    "nodes_over_50_children": 4,
+    "normalized_entropy": 0.7265273046624657,
+    "effective_classes": 78.83442270415921,
+    "gini": 0.8021041043536059,
+    "largest_class_share": 0.09857926221335991,
+    "nav_scan": 738.1898333333268,
+    "nav_log_a0": 16.710782297293758,
+    "nav_log_a1": 19.7617822972936,
+    "nav_log_a2": 22.81278229729322
+  },
+  "hashes": {
+    "graph": "1d12c791d19a068d0a0c77a56f28124747221cf833b5d9fcf5655ea172899428",
+    "tree": "7001454fe9f22b98d8582e0b2170f87249bd9d73127e0873deea144d9be11276",
+    "scheme": "32cfa836c80adeedb7c8361b9adcfb67be6d24711fca7fbb1122533828aae50c"
+  },
+  "run": {
+    "scheme_id": "scheme:bk@2026-10-03",
+    "corpus": "books",
+    "placement_source": "shelfmark profile:lexical@2",
+    "placement_stats": {
+      "rows": 3000,
+      "failed": 0,
+      "fallback": 1337,
+      "placed": 1663,
+      "flagged": 1361,
+      "deciding_tiers": {
+        "vocab": 1663
+      },
+      "classes_used": 227,
+      "top_class": "20.26",
+      "top_class_share": 0.22609741431148528,
+      "top_class_terms": {
+        "history": 376,
+        "geschichte": 4
+      },
+      "output": "bench/corpus/cache/ddc-bench/placements/books/bk-placed.jsonl",
+      "classify_seconds": 13.1,
+      "profile": "profile:lexical@2",
+      "store_rules": "empty"
+    },
+    "score_seconds": 0.1
+  }
+}

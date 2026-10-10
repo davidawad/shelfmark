@@ -1,7 +1,6 @@
 //! Reproducible scheme benchmark primitives. The similarity graph is built
 //! once and shared by all scheme trees in a run.
 pub mod agree;
-pub mod boot;
 pub mod bootstrap;
 pub mod catalogue;
 pub mod consistency;

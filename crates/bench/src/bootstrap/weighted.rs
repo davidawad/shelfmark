@@ -1,4 +1,5 @@
-//! Seeded item bootstrap on a fixed graph and tree (DESIGN.md, step 4).
+//! Multiplicity-weighted item bootstrap on a fixed graph and tree, behind
+//! `shelfmark-bench run --bootstrap N` (DESIGN.md, step 4).
 //!
 //! Each replicate draws `n` items with replacement. An item drawn `c` times
 //! counts `c` times everywhere: its leaf mass in every subtree, its graph
@@ -9,53 +10,20 @@
 //! scored on one graph sees the same resamples: intervals and differences
 //! are paired across schemes, and skill uses the reference tree's cost on
 //! the same resample.
+use super::{interval, SplitMix64};
 use crate::{SimilarityGraph, Tree};
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 
-/// Default seed of the benchmark bootstrap.
-pub const DEFAULT_SEED: u64 = 20_261_010;
-
-/// SplitMix64: small, well distributed and stable across platforms.
-struct SplitMix64(u64);
-
-impl SplitMix64 {
-    fn next_u64(&mut self) -> u64 {
-        self.0 = self.0.wrapping_add(0x9E37_79B9_7F4A_7C15);
-        let mut z = self.0;
-        z = (z ^ (z >> 30)).wrapping_mul(0xBF58_476D_1CE4_E5B9);
-        z = (z ^ (z >> 27)).wrapping_mul(0x94D0_49BB_1331_11EB);
-        z ^ (z >> 31)
-    }
-}
-
 /// How often each of `n` items is drawn in replicate `replicate`.
 pub fn multiplicities(n: usize, seed: u64, replicate: usize) -> Vec<f64> {
-    let mut start = SplitMix64(seed ^ (replicate as u64).wrapping_mul(0xD1B5_4A32_D192_ED03));
-    let mut rng = SplitMix64(start.next_u64());
+    let mut start = SplitMix64::new(seed ^ (replicate as u64).wrapping_mul(0xD1B5_4A32_D192_ED03));
+    let mut rng = SplitMix64::new(start.next_u64());
     let mut counts = vec![0.0; n];
     for _ in 0..n {
-        counts[((u128::from(rng.next_u64()) * n as u128) >> 64) as usize] += 1.0;
+        counts[rng.below(n)] += 1.0;
     }
     counts
-}
-
-/// Linear-interpolated quantile of sorted values.
-pub fn percentile(sorted: &[f64], q: f64) -> f64 {
-    if sorted.is_empty() {
-        return f64::NAN;
-    }
-    let pos = q.clamp(0.0, 1.0) * (sorted.len() - 1) as f64;
-    let (lo, hi) = (pos.floor() as usize, pos.ceil() as usize);
-    sorted[lo] + (sorted[hi] - sorted[lo]) * (pos - lo as f64)
-}
-
-/// Percentile interval of replicate values at `confidence`.
-pub fn interval(values: &[f64], confidence: f64) -> [f64; 2] {
-    let mut sorted: Vec<f64> = values.iter().copied().filter(|v| v.is_finite()).collect();
-    sorted.sort_by(f64::total_cmp);
-    let alpha = (1.0 - confidence) / 2.0;
-    [percentile(&sorted, alpha), percentile(&sorted, 1.0 - alpha)]
 }
 
 /// One graph edge with the LCA nodes of its leaf pairs and their masses.

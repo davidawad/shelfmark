@@ -1,0 +1,96 @@
+{
+  "base": "learned@2026-10-10",
+  "classes_after": 126,
+  "classes_before": 110,
+  "inserted": 500,
+  "params": {
+    "iterations": 10,
+    "max_cos": 0.5,
+    "min_child": 5,
+    "split_after": 12
+  },
+  "scheme": "learned@2026-10-10.ins500",
+  "splits": [
+    {
+      "after_inserts": 45,
+      "cause": "distinct",
+      "centroid_cos": 0.2050887002357771,
+      "core": "01.02.01.04.01",
+      "core_new_works": 0,
+      "leaf": "01.02.01.04",
+      "new": "01.02.01.04.02",
+      "new_works": 12
+    },
+    {
+      "after_inserts": 70,
+      "cause": "distinct",
+      "centroid_cos": 0.303568259678279,
+      "core": "01.02.01.04.02.01",
+      "core_new_works": 30,
+      "leaf": "01.02.01.04.02",
+      "new": "01.02.01.04.02.02",
+      "new_works": 5
+    },
+    {
+      "after_inserts": 158,
+      "cause": "capacity",
+      "centroid_cos": 0.7799421938952531,
+      "core": "01.02.01.04.02.01.01",
+      "core_new_works": 45,
+      "leaf": "01.02.01.04.02.01",
+      "new": "01.02.01.04.02.01.02",
+      "new_works": 53
+    },
+    {
+      "after_inserts": 244,
+      "cause": "capacity",
+      "centroid_cos": 0.7879457168458366,
+      "core": "01.02.01.04.02.01.02.01",
+      "core_new_works": 56,
+      "leaf": "01.02.01.04.02.01.02",
+      "new": "01.02.01.04.02.01.02.02",
+      "new_works": 42
+    },
+    {
+      "after_inserts": 355,
+      "cause": "distinct",
+      "centroid_cos": 0.26193563876851844,
+      "core": "01.01.01.04.01",
+      "core_new_works": 4,
+      "leaf": "01.01.01.04",
+      "new": "01.01.01.04.02",
+      "new_works": 8
+    },
+    {
+      "after_inserts": 392,
+      "cause": "capacity",
+      "centroid_cos": 0.8009051836821149,
+      "core": "01.02.01.04.02.01.02.01.01",
+      "core_new_works": 50,
+      "leaf": "01.02.01.04.02.01.02.01",
+      "new": "01.02.01.04.02.01.02.01.02",
+      "new_works": 48
+    },
+    {
+      "after_inserts": 397,
+      "cause": "capacity",
+      "centroid_cos": 0.8500278579026442,
+      "core": "01.02.01.04.02.01.01.01",
+      "core_new_works": 44,
+      "leaf": "01.02.01.04.02.01.01",
+      "new": "01.02.01.04.02.01.01.02",
+      "new_works": 54
+    },
+    {
+      "after_inserts": 462,
+      "cause": "capacity",
+      "centroid_cos": 0.7725473825374879,
+      "core": "01.02.01.04.02.01.02.02.01",
+      "core_new_works": 44,
+      "leaf": "01.02.01.04.02.01.02.02",
+      "new": "01.02.01.04.02.01.02.02.02",
+      "new_works": 54
+    }
+  ],
+  "stable": true
+}

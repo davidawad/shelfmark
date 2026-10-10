@@ -1,0 +1,23 @@
+{
+  "rows": 3000,
+  "failed": 0,
+  "fallback": 1498,
+  "placed": 1502,
+  "flagged": 1445,
+  "deciding_tiers": {
+    "vocab": 1502
+  },
+  "classes_used": 91,
+  "top_class": "02.02.02.02",
+  "top_class_share": 0.18841544607190414,
+  "top_class_terms": {
+    "states": 281,
+    "field": 2,
+    "hall": 2,
+    "magnetic": 2
+  },
+  "output": "bench/corpus/cache/ddc-bench/placements/books/learned-placed.jsonl",
+  "classify_seconds": 13.6,
+  "profile": "profile:lexical@2",
+  "store_rules": "empty"
+}

@@ -36,8 +36,15 @@ fn one() -> f64 {
 type Placements = BTreeMap<String, Vec<(String, f64)>>;
 
 mod cli_agree;
+mod cli_bootstrap;
 mod cli_dense;
 mod cli_scores;
+
+const USAGE: &str = "usage: shelfmark-bench run --corpus corpus.jsonl --scheme scheme.json [--placements placements.jsonl] [--track A|P] [--graph graph.json] [--k 20] [--reference-cost X] [--bootstrap N [--seed S] [--reference-replicates FILE] [--replicates-out FILE]] [--output results.json]
+       shelfmark-bench bootstrap --corpus corpus.jsonl --graph graph.json --runs runs.json [--resamples 1000] [--seed 20261010] [--confidence 0.95] [--threads 8] [--output bootstrap.json]
+       shelfmark-bench scores ...  (see cli_scores.rs)
+       shelfmark-bench agree ...   (see cli_agree.rs)
+       shelfmark-bench dense ...   (see cli_dense.rs)";
 
 fn main() {
     let args: Vec<_> = env::args().collect();
@@ -45,6 +52,7 @@ fn main() {
         Some("scores") => cli_scores::scores(&args),
         Some("agree") => cli_agree::agree(&args),
         Some("dense") => cli_dense::dense(&args),
+        Some("bootstrap") => cli_bootstrap::run(&args),
         _ => run(),
     };
     if let Err(error) = result {
@@ -57,7 +65,7 @@ fn parse_args(
     args: &[String],
 ) -> Result<(BTreeMap<String, String>, usize), Box<dyn std::error::Error>> {
     if args.len() < 6 || args[1] != "run" {
-        return Err("usage: shelfmark-bench run --corpus corpus.jsonl --scheme scheme.json [--placements placements.jsonl] [--track A|P] [--graph graph.json] [--k 20] [--reference-cost X] [--bootstrap N [--seed S] [--reference-replicates FILE] [--replicates-out FILE]] [--output results.json]".into());
+        return Err(USAGE.into());
     }
     let mut values = BTreeMap::new();
     let mut k = 20usize;

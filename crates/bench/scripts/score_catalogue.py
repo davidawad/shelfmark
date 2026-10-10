@@ -170,7 +170,7 @@ def run(a):
     def attempt(spec):
         try:
             runs.score(spec)
-        except Exception as e:  # recorded; other runs continue
+        except Exception as e:  # noqa: BLE001 - recorded; other runs continue
             failures[spec[0]] = str(e)
             log(f"FAILED {spec[0]}: {e}")
     with ThreadPoolExecutor(a.jobs) as pool:

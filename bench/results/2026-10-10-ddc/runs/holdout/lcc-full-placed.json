@@ -1,0 +1,66 @@
+{
+  "scheme": "lcc-full",
+  "version": "2024",
+  "track": "P",
+  "mode": "primary",
+  "n": 500,
+  "k": 20,
+  "edge_weight": 1459.647912408383,
+  "cost": 675054.5408478935,
+  "cost_norm": 0.9249553061519749,
+  "revenue": 54769.415356298094,
+  "revenue_norm": 0.07504469384802519,
+  "ref_cost_norm": 0.301409582139011,
+  "skill": 0.10742302203028231,
+  "coverage": 0.566,
+  "structure": {
+    "mean_depth": 4.14,
+    "p50_depth": 5,
+    "p95_depth": 9,
+    "max_depth": 11,
+    "mean_branching": 1.3837209302325582,
+    "p95_branching": 3,
+    "max_branching": 13,
+    "root_fanout": 236,
+    "nodes_over_50_children": 0,
+    "normalized_entropy": 0.8924660461132575,
+    "effective_classes": 340.7621376468893,
+    "gini": 0.49171419049029774,
+    "largest_class_share": 0.07070063694267516,
+    "nav_scan": 124.87900000000039,
+    "nav_log_a0": 11.260866816011578,
+    "nav_log_a1": 13.98286681601168,
+    "nav_log_a2": 16.704866816011577
+  },
+  "hashes": {
+    "graph": "03d67d06b82633e1ca3461e3c9f11f3ee3bd55f43079a28b2126a1a90c1f6c75",
+    "tree": "db262596c8287d8cc13b34fcc0fc1859b6945260a9059aa1747bf8856995f08e",
+    "scheme": "c38d1ffce9912f90d98da5ebb5cf3b88f4c83e03a688000ae419c30d69f06bea"
+  },
+  "run": {
+    "scheme_id": "scheme:lcc-full@2024",
+    "corpus": "holdout",
+    "placement_source": "shelfmark profile:lexical@2",
+    "placement_stats": {
+      "rows": 500,
+      "failed": 0,
+      "fallback": 217,
+      "placed": 283,
+      "flagged": 283,
+      "deciding_tiers": {
+        "vocab": 283
+      },
+      "classes_used": 227,
+      "top_class": "K23",
+      "top_class_share": 0.02120141342756184,
+      "top_class_terms": {
+        "s": 6
+      },
+      "output": "bench/corpus/cache/ddc-bench/placements/holdout/lcc-full-placed.jsonl",
+      "classify_seconds": 8.2,
+      "profile": "profile:lexical@2",
+      "store_rules": "empty"
+    },
+    "score_seconds": 1.7
+  }
+}
