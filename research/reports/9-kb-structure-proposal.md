@@ -344,7 +344,10 @@ The alphabetic optimum uses the Knuth-optimized O(n²) dynamic program.
 Permutation nulls keep the tree shape and class sizes while shuffling
 item-to-class assignments (200 permutations, seed 20261010). All displayed
 intervals are 95% bootstrap intervals; the theoretical entropy and alphabetic
-bounds condition on the observed leaf distribution.
+bounds condition on the observed leaf distribution. The baseline MiniLM
+cost_norm values reproduce exactly, so the original scheme ranking and cut
+recommendation do not change; these additions quantify query workloads,
+lower-bound overhead and how far each real assignment sits from its null.
 
 <!-- table:metrics-upgrade -->
 <!-- /table:metrics-upgrade -->

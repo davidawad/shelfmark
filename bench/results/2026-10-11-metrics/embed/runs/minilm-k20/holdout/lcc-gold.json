@@ -87,7 +87,7 @@
       "a=2": 22.418846006042276,
       "a=4": 30.082846006042303
     },
-    "alphabetic_method": "Hu-Tucker / Garsia-Wachs, O(n^2)",
+    "alphabetic_method": "Knuth-optimized alphabetic dynamic program, O(n^2)",
     "log_base": 2,
     "confidence_intervals": {
       "branch_constant.a0": [

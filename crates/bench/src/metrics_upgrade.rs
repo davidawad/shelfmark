@@ -81,7 +81,7 @@ pub fn summarize(tree: &Tree) -> UpgradeMetrics {
         })
         .collect();
     workloads.insert("uniform_placed_only".into(), navigation_pair(tree, &placed));
-    let nav = query_cost(tree, &uniform).menu_accesses;
+    let nav = branch_expected(tree, &uniform, 0);
     let mut sweep = std::collections::BTreeMap::new();
     for a in [0usize, 1, 2, 4] {
         let value = tree
@@ -202,7 +202,7 @@ fn navigation_draw_values(
         (
             "information.nav_over_entropy",
             if bounds.entropy_bits > 0.0 {
-                pair.including_unplaced.menu_accesses / bounds.entropy_bits
+                branch_expected(tree, counts, 0) / bounds.entropy_bits
             } else {
                 0.0
             },
@@ -210,7 +210,7 @@ fn navigation_draw_values(
         (
             "information.nav_over_alphabetic",
             if bounds.alphabetic_optimum_bits > 0.0 {
-                pair.including_unplaced.menu_accesses / bounds.alphabetic_optimum_bits
+                branch_expected(tree, counts, 0) / bounds.alphabetic_optimum_bits
             } else {
                 0.0
             },
@@ -616,6 +616,7 @@ mod tests {
         let summary = summarize(&t);
         assert_eq!(summary.log_base, 2);
         assert!(summary.confidence_intervals.len() >= 20);
+        assert!(summary.information_bounds.nav_over_alphabetic >= 1.0);
         assert!(
             summary.confidence_intervals["nav_scan"][0]
                 <= summary.confidence_intervals["nav_scan"][1]

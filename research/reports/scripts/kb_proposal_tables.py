@@ -228,6 +228,7 @@ def t_metrics_upgrade():
             u = m["query_workloads"]["uniform"]
             c = m["confidence_intervals"]
             null = r["permutation_null"]["cost_norm"]
+            skill_null = r["permutation_null"]["skill"]
             rows.append([
                 model, f"`{name}`", value_ci(r["coverage"], r["bootstrap"]["ci"]["coverage"], 3),
                 value_ci(u["placed_only"]["menu_accesses"], c["uniform.menu_accesses.placed"]),
@@ -236,15 +237,22 @@ def t_metrics_upgrade():
                 value_ci(m["information_bounds"]["entropy_bits"], c["information.entropy_bits"]),
                 value_ci(m["information_bounds"]["alphabetic_optimum_bits"], c["information.alphabetic_optimum_bits"]),
                 value_ci(m["information_bounds"]["nav_over_alphabetic"], c["information.nav_over_alphabetic"]),
+                *[value_ci(m["branch_constant_sweep"][f"a={a}"], c[f"branch_constant.a{a}"]) for a in (0, 1, 2, 4)],
                 value_ci(null["mean"], null["confidence_intervals"]["mean"]),
                 value_ci(null["sd"], null["confidence_intervals"]["sd"]),
                 value_ci(null["z"], null["confidence_intervals"]["z"]),
                 value_ci(null["percentile"], null["confidence_intervals"]["percentile"], 3),
+                value_ci(skill_null["mean"], skill_null["confidence_intervals"]["mean"]),
+                value_ci(skill_null["sd"], skill_null["confidence_intervals"]["sd"]),
+                value_ci(skill_null["z"], skill_null["confidence_intervals"]["z"]),
+                value_ci(skill_null["percentile"], skill_null["confidence_intervals"]["percentile"], 3),
             ])
     return table(["embedding", "scheme", "coverage", "menu accesses: placed", "menu accesses: all",
                   "items scanned: all", "entropy (bits)", "alphabetic optimum (bits)", "nav / bound",
-                  "null cost mean", "null cost SD", "null cost z", "null percentile"], rows,
-                 ["---", "---"] + ["---:"] * 11)
+                  "log2 menu cost a=0", "a=1", "a=2", "a=4",
+                  "null cost mean", "null cost SD", "null cost z", "null cost percentile",
+                  "null skill mean", "null skill SD", "null skill z", "null skill percentile"], rows,
+                 ["---", "---"] + ["---:"] * 19)
 
 
 PAIRS_BOOKS = [("fdc-ddc", "lcc-gold"), ("fdc-d3", "lcc-gold"), ("fdc-d3", "ddc-section"),
@@ -732,8 +740,10 @@ def main():
     p.add_argument("--write", action="store_true", help="rewrite the tables in the report")
     a = p.parse_args()
     if a.write:
-        CROSSWALK_FILE.parent.mkdir(parents=True, exist_ok=True)
-        CROSSWALK_FILE.write_text(json.dumps(crosswalk_file(), indent=1, sort_keys=True) + "\n", encoding="utf-8")
+        crosswalk_text = json.dumps(crosswalk_file(), indent=1, sort_keys=True) + "\n"
+        if not CROSSWALK_FILE.exists() or CROSSWALK_FILE.read_text(encoding="utf-8") != crosswalk_text:
+            CROSSWALK_FILE.parent.mkdir(parents=True, exist_ok=True)
+            CROSSWALK_FILE.write_text(crosswalk_text, encoding="utf-8")
     text = REPORT.read_text(encoding="utf-8")
     drift, missing = [], []
     for name, fn in TABLES.items():
