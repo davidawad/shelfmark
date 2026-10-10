@@ -117,7 +117,7 @@ pub fn summarize(tree: &Tree) -> UpgradeMetrics {
                 .into(),
         information_bounds: bounds,
         branch_constant_sweep: sweep,
-        alphabetic_method: "Hu-Tucker / Garsia-Wachs, O(n^2)".into(),
+        alphabetic_method: "Knuth-optimized alphabetic dynamic program, O(n^2)".into(),
         log_base: 2,
         confidence_intervals,
     }
