@@ -2,3 +2,4 @@
 /.worktrees/
 /bench/corpus/cache/
 __pycache__/
+target/
