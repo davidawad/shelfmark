@@ -652,8 +652,11 @@ mod tests {
                 },
             ],
         };
-        let a = permutation_null(&t, &graph, 1.0, 200, 7);
-        let b = permutation_null(&t, &graph, 1.0, 200, 7);
+        let reference = 0.9;
+        let real_cost = score_tree(&t, &graph).cost_norm;
+        let real_skill = (1.0 - real_cost) / (1.0 - reference);
+        let a = permutation_null(&t, &graph, reference, 200, 7);
+        let b = permutation_null(&t, &graph, reference, 200, 7);
         assert_eq!(a.permutations, 200);
         assert_eq!(a.cost_norm.mean, b.cost_norm.mean);
         assert_eq!(a.cost_norm.percentile, b.cost_norm.percentile);
@@ -662,5 +665,90 @@ mod tests {
         assert!(
             a.cost_norm.confidence_intervals["z"][0] <= a.cost_norm.confidence_intervals["z"][1]
         );
+        assert!(
+            a.skill.mean <= real_skill,
+            "shuffled assignments should not beat the coherent real grouping"
+        );
+    }
+
+    #[test]
+    fn random_balanced_assignment_lies_within_its_permutation_null() {
+        let mut tree = Tree::new();
+        let a = tree.add_node(0, Some("A".into()), None);
+        let b = tree.add_node(0, Some("B".into()), None);
+        let mut leaves = Vec::new();
+        for (class, offset) in [(a, 0), (b, 2)] {
+            for item in offset..offset + 2 {
+                leaves.push((item, tree.add_node(class, None, Some(item))));
+            }
+        }
+        tree.class_count = 2;
+        tree.item_leaves = vec![vec![]; 4];
+        let mut order = vec![0, 1, 2, 3];
+        let mut rng = crate::bootstrap::SplitMix64::new(71);
+        for i in (1..order.len()).rev() {
+            order.swap(i, rng.below(i + 1));
+        }
+        for (item, slot) in order.into_iter().enumerate() {
+            tree.item_leaves[item].push((leaves[slot].1, 1.0));
+        }
+        let graph = crate::SimilarityGraph {
+            n: 4,
+            k: 2,
+            tau: 0.0,
+            edges: vec![
+                crate::Edge {
+                    left: 0,
+                    right: 1,
+                    weight: 1.0,
+                },
+                crate::Edge {
+                    left: 0,
+                    right: 3,
+                    weight: 1.0,
+                },
+                crate::Edge {
+                    left: 1,
+                    right: 2,
+                    weight: 1.0,
+                },
+                crate::Edge {
+                    left: 2,
+                    right: 3,
+                    weight: 1.0,
+                },
+            ],
+        };
+        let null = permutation_null(&tree, &graph, 1.0, 500, 19);
+        assert!(
+            null.cost_norm.z.abs() < 3.0,
+            "random balanced assignment should be near its null: z={}",
+            null.cost_norm.z
+        );
+    }
+
+    #[test]
+    fn average_linkage_reference_reaches_the_skill_ceiling() {
+        let graph = crate::SimilarityGraph {
+            n: 3,
+            k: 1,
+            tau: 0.0,
+            edges: vec![
+                crate::Edge {
+                    left: 0,
+                    right: 1,
+                    weight: 1.0,
+                },
+                crate::Edge {
+                    left: 1,
+                    right: 2,
+                    weight: 1.0,
+                },
+            ],
+        };
+        let tree = crate::average_linkage_reference(&graph);
+        let cost = score_tree(&tree, &graph).cost_norm;
+        let skill = (1.0 - cost) / (1.0 - cost);
+        assert_eq!(skill, 1.0);
     }
 }

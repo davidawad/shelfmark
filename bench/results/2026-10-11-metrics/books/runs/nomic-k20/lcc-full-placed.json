@@ -78,8 +78,8 @@
       "entropy_bits": 11.550746785383527,
       "huffman_lower_bound_bits": 11.550746785383527,
       "alphabetic_optimum_bits": 11.634666666666645,
-      "nav_over_entropy": 0.4032639695551743,
-      "nav_over_alphabetic": 0.4003552601421418
+      "nav_over_entropy": 1.1963120668441438,
+      "nav_over_alphabetic": 1.187683167580983
     },
     "branch_constant_sweep": {
       "a=0": 13.818297760415517,
@@ -143,12 +143,12 @@
         11.550746785383527
       ],
       "information.nav_over_alphabetic": [
-        0.39674249369699316,
-        0.4041950779280352
+        1.1789640131141756,
+        1.1974347985325853
       ],
       "information.nav_over_entropy": [
-        0.3996249552026987,
-        0.4071316848492313
+        1.1875295649227224,
+        1.206134546523277
       ],
       "largest_class_share": [
         0.02926711121958121,

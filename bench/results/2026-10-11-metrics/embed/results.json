@@ -82,8 +82,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.24271295975418014,
-          "nav_over_alphabetic": 0.24137079391707453
+          "nav_over_entropy": 1.5433778599208523,
+          "nav_over_alphabetic": 1.5348432145544535
         },
         "branch_constant_sweep": {
           "a=0": 20.507961095590776,
@@ -147,12 +147,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.23903480870560653,
-            0.24372118608556656
+            1.5262127155116423,
+            1.5436738624314907
           ],
           "information.nav_over_entropy": [
-            0.2403639850691477,
-            0.24507642150752607
+            1.5346993701465013,
+            1.5522576114765398
           ],
           "largest_class_share": [
             0.0964169364021317,
@@ -544,8 +544,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.23782874807452126,
-          "nav_over_alphabetic": 0.23651359118685233
+          "nav_over_entropy": 1.1418212144891688,
+          "nav_over_alphabetic": 1.135507116438031
         },
         "branch_constant_sweep": {
           "a=0": 15.172191886998387,
@@ -609,12 +609,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.23598221769854044,
-            0.23702999640767294
+            1.13238214043861,
+            1.1387362596707375
           ],
           "information.nav_over_entropy": [
-            0.23729441983211016,
-            0.23834802481693004
+            1.138678861755968,
+            1.1450683136877144
           ],
           "largest_class_share": [
             0.13373076672701262,
@@ -1006,8 +1006,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.14224419870112262,
-          "nav_over_alphabetic": 0.1414576098670675
+          "nav_over_entropy": 1.3885959730152595,
+          "nav_over_alphabetic": 1.3809172479961624
         },
         "branch_constant_sweep": {
           "a=0": 18.451263900825516,
@@ -1071,12 +1071,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.13990053586395568,
-            0.14309663513350399
+            1.3702476267586663,
+            1.3919392571067186
           ],
           "information.nav_over_entropy": [
-            0.14067846643617676,
-            0.14389233792738443
+            1.3778670223084126,
+            1.3996792710822978
           ],
           "largest_class_share": [
             0.17761227406620267,
@@ -1468,8 +1468,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.1962941344226916,
-          "nav_over_alphabetic": 0.19520865764587184
+          "nav_over_entropy": 1.3792596393535295,
+          "nav_over_alphabetic": 1.3716325428428455
         },
         "branch_constant_sweep": {
           "a=0": 18.327205384448956,
@@ -1533,12 +1533,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.19258172673933524,
-            0.19776074721592835
+            1.3622284506301403,
+            1.3808915855726747
           ],
           "information.nav_over_entropy": [
-            0.19365259621068126,
-            0.19886041513567215
+            1.3698032547690258,
+            1.3885701678933633
           ],
           "largest_class_share": [
             0.05216399936993092,
@@ -1930,8 +1930,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.34888623922488854,
-          "nav_over_alphabetic": 0.3469569512635116
+          "nav_over_entropy": 1.5174233727098394,
+          "nav_over_alphabetic": 1.5090322517192691
         },
         "branch_constant_sweep": {
           "a=0": 20.163085334572177,
@@ -1995,12 +1995,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.3453403783979145,
-            0.34873087803867114
+            1.503700021525377,
+            1.5148484983457795
           ],
           "information.nav_over_entropy": [
-            0.3472606772482304,
-            0.35067003009286773
+            1.5120614921299762,
+            1.5232719611428938
           ],
           "largest_class_share": [
             0.04581782962234497,
@@ -2392,8 +2392,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.23924358905414508,
-          "nav_over_alphabetic": 0.23792060831055306
+          "nav_over_entropy": 1.684603230455194,
+          "nav_over_alphabetic": 1.6752876302199007
         },
         "branch_constant_sweep": {
           "a=0": 22.384523199946216,
@@ -2457,12 +2457,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.23588398844455843,
-            0.2400165399354011
+            1.6646662391130207,
+            1.6859669248036404
           ],
           "information.nav_over_entropy": [
-            0.23719564436478247,
-            0.2413511753111801
+            1.6739227780673076,
+            1.6953419082978691
           ],
           "largest_class_share": [
             0.09721299559974594,
@@ -2854,8 +2854,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.3405552340949064,
-          "nav_over_alphabetic": 0.33867201532771485
+          "nav_over_entropy": 1.4192779151332495,
+          "nav_over_alphabetic": 1.4114295236300531
         },
         "branch_constant_sweep": {
           "a=0": 18.85895672293531,
@@ -2919,12 +2919,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.33710764429421186,
-            0.34010953029588714
+            1.4050645281893361,
+            1.4171930017876424
           ],
           "information.nav_over_entropy": [
-            0.33898216422372035,
-            0.34200074250524004
+            1.4128775265146951,
+            1.4250734416731656
           ],
           "largest_class_share": [
             0.04283971957568348,
@@ -3316,8 +3316,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.37475224160225845,
-          "nav_over_alphabetic": 0.37267991857275595
+          "nav_over_entropy": 1.6808905482839314,
+          "nav_over_alphabetic": 1.6715954786176668
         },
         "branch_constant_sweep": {
           "a=0": 22.335190147097805,
@@ -3381,12 +3381,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.3711903888756947,
-            0.3741771195067623
+            1.6652266883839602,
+            1.6781554158504584
           ],
           "information.nav_over_entropy": [
-            0.37325442923006363,
-            0.3762577678680595
+            1.674486343771071,
+            1.6874869626874052
           ],
           "largest_class_share": [
             0.05987552322466234,
@@ -3778,8 +3778,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.07525749891599583,
-          "nav_over_alphabetic": 0.07484133636689518
+          "nav_over_entropy": 1.000000000000014,
+          "nav_over_alphabetic": 0.9944701517444243
         },
         "branch_constant_sweep": {
           "a=0": 13.287712379548294,
@@ -3843,12 +3843,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.07484133636689659,
-            0.07484133636689677
+            0.9944701517445037,
+            0.994470151744513
           ],
           "information.nav_over_entropy": [
-            0.07525749891599724,
-            0.07525749891599744
+            1.0000000000000937,
+            1.000000000000103
           ],
           "largest_class_share": [
             0.0,
@@ -4240,8 +4240,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.1532919995419968,
-          "nav_over_alphabetic": 0.15244431804573366
+          "nav_over_entropy": 1.3074518274674738,
+          "nav_over_alphabetic": 1.3002218172600855
         },
         "branch_constant_sweep": {
           "a=0": 17.37304383350235,
@@ -4305,12 +4305,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.15097724074959828,
-            0.15404648395400755
+            1.2926750154312605,
+            1.3072172289545854
           ],
           "information.nav_over_entropy": [
-            0.15181676441949266,
-            0.15490307445004053
+            1.2998630609111452,
+            1.3144861378308659
           ],
           "largest_class_share": [
             0.07980956418503136,
@@ -4702,8 +4702,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.4048176124191315,
-          "nav_over_alphabetic": 0.4025790324512637
+          "nav_over_entropy": 1.3158989357230932,
+          "nav_over_alphabetic": 1.3086222142888528
         },
         "branch_constant_sweep": {
           "a=0": 17.48528657844193,
@@ -4767,12 +4767,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.4009175547839778,
-            0.4041806370495728
+            1.3031574633896101,
+            1.314243073545227
           ],
           "information.nav_over_entropy": [
-            0.4031468959432559,
-            0.40642812289599173
+            1.3104037975435743,
+            1.3215510503154866
           ],
           "largest_class_share": [
             0.05081382264241884,
@@ -5164,8 +5164,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.27677450376363494,
-          "nav_over_alphabetic": 0.27524398275680595
+          "nav_over_entropy": 1.6314374482431573,
+          "nav_over_alphabetic": 1.6224158467158865
         },
         "branch_constant_sweep": {
           "a=0": 21.678071577478978,
@@ -5229,12 +5229,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.2734545264041162,
-            0.27699527002763674
+            1.6138183778942659,
+            1.6305175770847062
           ],
           "information.nav_over_entropy": [
-            0.2749750969643953,
-            0.2785355292381138
+            1.6227921723577627,
+            1.6395842290737417
           ],
           "largest_class_share": [
             0.05759918876565988,
@@ -5626,8 +5626,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.3762874945801413,
-          "nav_over_alphabetic": 0.3742066818346372
+          "nav_over_entropy": 1.0285090730148556,
+          "nav_over_alphabetic": 1.0228215739115865
         },
         "branch_constant_sweep": {
           "a=0": 13.666532741977047,
@@ -5691,12 +5691,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.374206681834616,
-            0.37420668183463496
+            1.0213710678005254,
+            1.024356926912682
           ],
           "information.nav_over_entropy": [
-            0.37628749458012,
-            0.3762874945801391
+            1.0270505012231164,
+            1.0300529634960354
           ],
           "largest_class_share": [
             0.187924375,
@@ -6088,8 +6088,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.375121003346946,
-          "nav_over_alphabetic": 0.37304664112095287
+          "nav_over_entropy": 1.0139420420207146,
+          "nav_over_alphabetic": 1.0083350963883775
         },
         "branch_constant_sweep": {
           "a=0": 13.472970223902937,
@@ -6153,12 +6153,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.37287450604729167,
-            0.37321877619458604
+            1.007342133378663,
+            1.0094891004646283
           ],
           "information.nav_over_entropy": [
-            0.3749479110994217,
-            0.37529409559444205
+            1.0129435575433547,
+            1.0151024630491652
           ],
           "largest_class_share": [
             0.12572143322102822,
@@ -6550,8 +6550,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.37466193260355946,
-          "nav_over_alphabetic": 0.3725901089691159
+          "nav_over_entropy": 1.013741813406421,
+          "nav_over_alphabetic": 1.0081359750079375
         },
         "branch_constant_sweep": {
           "a=0": 13.47030964366605,
@@ -6615,12 +6615,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.37235061669272507,
-            0.3727996647109244
+            1.0071007772991718,
+            1.0092333505178053
           ],
           "information.nav_over_entropy": [
-            0.37442110860701144,
-            0.37487265360050537
+            1.0127008593798474,
+            1.0148452909798231
           ],
           "largest_class_share": [
             0.1309580044154881,
@@ -7012,8 +7012,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.32985361774907573,
-          "nav_over_alphabetic": 0.3280295772963661
+          "nav_over_entropy": 2.0087956588413,
+          "nav_over_alphabetic": 1.9976873236714205
         },
         "branch_constant_sweep": {
           "a=0": 26.69229894396804,
@@ -7077,12 +7077,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.3263903649264637,
-            0.32979601993784574
+            1.9878855021107755,
+            2.007783933172495
           ],
           "information.nav_over_entropy": [
-            0.328205290378941,
-            0.33162988286711986
+            1.9989393332960317,
+            2.0189484115240868
           ],
           "largest_class_share": [
             0.15205757554629215,
@@ -7474,8 +7474,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.09929474406976452,
-          "nav_over_alphabetic": 0.09874565920248111
+          "nav_over_entropy": 1.0455553867157827,
+          "nav_over_alphabetic": 1.0397736240844302
         },
         "branch_constant_sweep": {
           "a=0": 13.893039255566517,
@@ -7539,12 +7539,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.09748046641120027,
-            0.09995846305830823
+            1.0365669860985476,
+            1.0429816000869283
           ],
           "information.nav_over_entropy": [
-            0.09802251605059113,
-            0.10051429183969982
+            1.0423309179066809,
+            1.048781200981672
           ],
           "largest_class_share": [
             0.033366420706382294,
@@ -7936,8 +7936,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.13918874424513325,
-          "nav_over_alphabetic": 0.1384190516105716
+          "nav_over_entropy": 1.2021805632015319,
+          "nav_over_alphabetic": 1.1955326871112082
         },
         "branch_constant_sweep": {
           "a=0": 15.974229552105113,
@@ -8001,12 +8001,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.1366973266674527,
-            0.14009549754519143
+            1.189110041111,
+            1.201686245312306
           ],
           "information.nav_over_entropy": [
-            0.1374574454825723,
-            0.14087451222085295
+            1.1957222034519284,
+            1.2083683388630775
           ],
           "largest_class_share": [
             0.03560049816688391,
@@ -8398,8 +8398,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.3311706239801027,
-          "nav_over_alphabetic": 0.3293393006827839
+          "nav_over_entropy": 1.6895115214744298,
+          "nav_over_alphabetic": 1.680168779134606
         },
         "branch_constant_sweep": {
           "a=0": 22.449743159284942,
@@ -8463,12 +8463,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.3281493234344315,
-            0.33050701263333115
+            1.6748482622113168,
+            1.6852634829890953
           ],
           "information.nav_over_entropy": [
-            0.32997402974721896,
-            0.3323448291068217
+            1.6841614192979526,
+            1.6946345549265174
           ],
           "largest_class_share": [
             0.20652311110531807,
@@ -8860,8 +8860,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.35389086290279104,
-          "nav_over_alphabetic": 0.35193390013189896
+          "nav_over_entropy": 1.6541255761179794,
+          "nav_over_alphabetic": 1.6449785126863574
         },
         "branch_constant_sweep": {
           "a=0": 21.979544895110024,
@@ -8925,12 +8925,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.35027223536114677,
-            0.3534009774279682
+            1.638742408458613,
+            1.650959841395147
           ],
           "information.nav_over_entropy": [
-            0.3522199582830421,
-            0.35536609802522867
+            1.6478547954245564,
+            1.6601401645883298
           ],
           "largest_class_share": [
             0.11624457861297333,
@@ -9322,8 +9322,8 @@
           "entropy_bits": 8.965784284662018,
           "huffman_lower_bound_bits": 8.965784284662018,
           "alphabetic_optimum_bits": 8.976,
-          "nav_over_entropy": 0.1206810208283735,
-          "nav_over_alphabetic": 0.12054367201426032
+          "nav_over_entropy": 1.0106115979901633,
+          "nav_over_alphabetic": 1.009461406323237
         },
         "branch_constant_sweep": {
           "a=0": 9.060925583157376,
@@ -9387,12 +9387,12 @@
             8.965784284662018
           ],
           "information.nav_over_alphabetic": [
-            0.11697860962566851,
-            0.12477718360071309
+            1.0026516091012507,
+            1.0170997324673838
           ],
           "information.nav_over_entropy": [
-            0.11711189636764525,
-            0.12491935612548828
+            1.0037940416087194,
+            1.01825862732893
           ],
           "largest_class_share": [
             0.07964350362027353,
@@ -9784,8 +9784,8 @@
           "entropy_bits": 8.965784284662018,
           "huffman_lower_bound_bits": 8.965784284662018,
           "alphabetic_optimum_bits": 8.976,
-          "nav_over_entropy": 0.1206810208283735,
-          "nav_over_alphabetic": 0.12054367201426032
+          "nav_over_entropy": 1.005443394580199,
+          "nav_over_alphabetic": 1.004299084920274
         },
         "branch_constant_sweep": {
           "a=0": 9.01458858624438,
@@ -9849,12 +9849,12 @@
             8.965784284662018
           ],
           "information.nav_over_alphabetic": [
-            0.11697860962566851,
-            0.12433155080213912
+            0.9999519871029143,
+            1.008871311065957
           ],
           "information.nav_over_entropy": [
-            0.11711189636764525,
-            0.12447321556789726
+            1.0010913436307498,
+            1.0100208303717182
           ],
           "largest_class_share": [
             0.06896551724137931,
@@ -10246,8 +10246,8 @@
           "entropy_bits": 8.965784284662018,
           "huffman_lower_bound_bits": 8.965784284662018,
           "alphabetic_optimum_bits": 8.976,
-          "nav_over_entropy": 0.23712370635963065,
-          "nav_over_alphabetic": 0.23685383244206631
+          "nav_over_entropy": 1.1530411012841546,
+          "nav_over_alphabetic": 1.151728808540871
         },
         "branch_constant_sweep": {
           "a=0": 10.33791778546286,
@@ -10311,12 +10311,12 @@
             8.965784284662018
           ],
           "information.nav_over_alphabetic": [
-            0.22325646167557942,
-            0.24978275401069447
+            1.1242581295645317,
+            1.177858751690574
           ],
           "information.nav_over_entropy": [
-            0.22351084259613588,
-            0.25006735928674106
+            1.1255391219075768,
+            1.1792008171846333
           ],
           "largest_class_share": [
             0.03280201138979765,
@@ -10708,8 +10708,8 @@
           "entropy_bits": 8.965784284662018,
           "huffman_lower_bound_bits": 8.965784284662018,
           "alphabetic_optimum_bits": 8.976,
-          "nav_over_entropy": 0.4860701374953976,
-          "nav_over_alphabetic": 0.485516934046317
+          "nav_over_entropy": 1.712218356317952,
+          "nav_over_alphabetic": 1.7102696558584363
         },
         "branch_constant_sweep": {
           "a=0": 15.351380430985326,
@@ -10773,12 +10773,12 @@
             8.965784284662018
           ],
           "information.nav_over_alphabetic": [
-            0.470359848484836,
-            0.5004456327985594
+            1.6641621504818107,
+            1.756717719201316
           ],
           "information.nav_over_entropy": [
-            0.470895781780349,
-            0.5010158461747113
+            1.6660583155317163,
+            1.7587193431060146
           ],
           "largest_class_share": [
             0.17305064206139978,
@@ -11170,8 +11170,8 @@
           "entropy_bits": 8.965784284662018,
           "huffman_lower_bound_bits": 8.965784284662018,
           "alphabetic_optimum_bits": 8.976,
-          "nav_over_entropy": 0.3035986494406867,
-          "nav_over_alphabetic": 0.3032531194295813
+          "nav_over_entropy": 1.2559823500634362,
+          "nav_over_alphabetic": 1.254552898397017
         },
         "branch_constant_sweep": {
           "a=0": 11.260866816011625,
@@ -11235,12 +11235,12 @@
             8.965784284662018
           ],
           "information.nav_over_alphabetic": [
-            0.2858734402852013,
-            0.3201927361853796
+            1.2197130016990931,
+            1.2859938057927298
           ],
           "information.nav_over_entropy": [
-            0.2861991676946416,
-            0.32055756738612073
+            1.2211027563958141,
+            1.2874590815822513
           ],
           "largest_class_share": [
             0.060683040693088164,
@@ -11632,8 +11632,8 @@
           "entropy_bits": 8.965784284662018,
           "huffman_lower_bound_bits": 8.965784284662018,
           "alphabetic_optimum_bits": 8.976,
-          "nav_over_entropy": 0.42740265417218365,
-          "nav_over_alphabetic": 0.42691622103384574
+          "nav_over_entropy": 1.6456838060763628,
+          "nav_over_alphabetic": 1.643810829550159
         },
         "branch_constant_sweep": {
           "a=0": 14.754846006042229,
@@ -11697,12 +11697,12 @@
             8.965784284662018
           ],
           "information.nav_over_alphabetic": [
-            0.416215463458102,
-            0.4378397950089033
+            1.6037049967987271,
+            1.68315203100733
           ],
           "information.nav_over_entropy": [
-            0.41668970403304295,
-            0.4383386745901468
+            1.6055322762885342,
+            1.6850698333404437
           ],
           "largest_class_share": [
             0.22743348683774417,
@@ -12094,8 +12094,8 @@
           "entropy_bits": 8.965784284662018,
           "huffman_lower_bound_bits": 8.965784284662018,
           "alphabetic_optimum_bits": 8.976,
-          "nav_over_entropy": 0.12603470751946586,
-          "nav_over_alphabetic": 0.12589126559714803
+          "nav_over_entropy": 1.012376077028783,
+          "nav_over_alphabetic": 1.0112238771827593
         },
         "branch_constant_sweep": {
           "a=0": 9.076745521592448,
@@ -12159,12 +12159,12 @@
             8.965784284662018
           ],
           "information.nav_over_alphabetic": [
-            0.12143493761140828,
-            0.13057598039215693
+            1.0045902140806369,
+            1.0188207438282666
           ],
           "information.nav_over_entropy": [
-            0.12157330194355556,
-            0.13072476013114154
+            1.0057348554563978,
+            1.0199815996294916
           ],
           "largest_class_share": [
             0.050955414012738856,
@@ -12556,8 +12556,8 @@
           "entropy_bits": 8.965784284662018,
           "huffman_lower_bound_bits": 8.965784284662018,
           "alphabetic_optimum_bits": 8.976,
-          "nav_over_entropy": 0.8815737417998015,
-          "nav_over_alphabetic": 0.8805704099821023
+          "nav_over_entropy": 1.5512115716167756,
+          "nav_over_alphabetic": 1.5494461153061
         },
         "branch_constant_sweep": {
           "a=0": 13.907828330987556,
@@ -12621,12 +12621,12 @@
             8.965784284662018
           ],
           "information.nav_over_alphabetic": [
-            0.8674186720142163,
-            0.8923796791443436
+            1.5202903163606993,
+            1.5765994125935419
           ],
           "information.nav_over_entropy": [
-            0.8684070185939247,
-            0.8933964665759947
+            1.5220225522265123,
+            1.5783958076761941
           ],
           "largest_class_share": [
             0.13505565627779842,
@@ -13018,8 +13018,8 @@
           "entropy_bits": 8.965784284662018,
           "huffman_lower_bound_bits": 8.965784284662018,
           "alphabetic_optimum_bits": 8.976,
-          "nav_over_entropy": 0.7959147547423333,
-          "nav_over_alphabetic": 0.7950089126559086
+          "nav_over_entropy": 1.3774155785085418,
+          "nav_over_alphabetic": 1.3758479219296484
         },
         "branch_constant_sweep": {
           "a=0": 12.349610947240526,
@@ -13083,12 +13083,12 @@
             8.965784284662018
           ],
           "information.nav_over_alphabetic": [
-            0.7858678698751834,
-            0.8034759358288381
+            1.3589520589232988,
+            1.390403238961535
           ],
           "information.nav_over_entropy": [
-            0.7867632965547708,
-            0.8043914253365869
+            1.36050046416607,
+            1.391987480032173
           ],
           "largest_class_share": [
             0.1199405304159711,
@@ -13480,8 +13480,8 @@
           "entropy_bits": 8.965784284662018,
           "huffman_lower_bound_bits": 8.965784284662018,
           "alphabetic_optimum_bits": 8.976,
-          "nav_over_entropy": 0.7724923754688069,
-          "nav_over_alphabetic": 0.7716131907307775
+          "nav_over_entropy": 1.4235820397862424,
+          "nav_over_alphabetic": 1.4219618404904846
         },
         "branch_constant_sweep": {
           "a=0": 12.76352948024259,
@@ -13545,12 +13545,12 @@
             8.965784284662018
           ],
           "information.nav_over_alphabetic": [
-            0.7586898395721575,
-            0.7838736631015708
+            1.4000162909455327,
+            1.4418942270213357
           ],
           "information.nav_over_entropy": [
-            0.7595542992986924,
-            0.7847668175595569
+            1.4016114852355968,
+            1.4435371375022326
           ],
           "largest_class_share": [
             0.12305732484076433,
@@ -13942,8 +13942,8 @@
           "entropy_bits": 8.965784284662018,
           "huffman_lower_bound_bits": 8.965784284662018,
           "alphabetic_optimum_bits": 8.976,
-          "nav_over_entropy": 0.14410340010190256,
-          "nav_over_alphabetic": 0.14393939393939403
+          "nav_over_entropy": 1.0345245837855475,
+          "nav_over_alphabetic": 1.033347176403852
         },
         "branch_constant_sweep": {
           "a=0": 9.275324255400976,
@@ -14007,12 +14007,12 @@
             8.965784284662018
           ],
           "information.nav_over_alphabetic": [
-            0.13502673796791453,
-            0.15397170231729065
+            1.019779290277154,
+            1.0485285554970534
           ],
           "information.nav_over_entropy": [
-            0.13518058895008195,
-            0.1541471394046706
+            1.0209412382569716,
+            1.0497232607126394
           ],
           "largest_class_share": [
             0.14100609756097562,
@@ -14404,8 +14404,8 @@
           "entropy_bits": 8.965784284662018,
           "huffman_lower_bound_bits": 8.965784284662018,
           "alphabetic_optimum_bits": 8.976,
-          "nav_over_entropy": 0.15592612487806484,
-          "nav_over_alphabetic": 0.15574866310160437
+          "nav_over_entropy": 1.0513997641970243,
+          "nav_over_alphabetic": 1.0502031509285907
         },
         "branch_constant_sweep": {
           "a=0": 9.426623482735032,
@@ -14469,12 +14469,12 @@
             8.965784284662018
           ],
           "information.nav_over_alphabetic": [
-            0.14594474153297693,
-            0.16555815508021401
+            1.0339865096235201,
+            1.0672770035661159
           ],
           "information.nav_over_entropy": [
-            0.14611103261106217,
-            0.16574679390203736
+            1.0351646454686685,
+            1.068493070974057
           ],
           "largest_class_share": [
             0.055551282051282055,
@@ -14866,8 +14866,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.24271295975418014,
-          "nav_over_alphabetic": 0.24137079391707453
+          "nav_over_entropy": 1.5433778599208523,
+          "nav_over_alphabetic": 1.5348432145544535
         },
         "branch_constant_sweep": {
           "a=0": 20.507961095590776,
@@ -14931,12 +14931,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.23903480870560653,
-            0.24372118608556656
+            1.5262127155116423,
+            1.5436738624314907
           ],
           "information.nav_over_entropy": [
-            0.2403639850691477,
-            0.24507642150752607
+            1.5346993701465013,
+            1.5522576114765398
           ],
           "largest_class_share": [
             0.0964169364021317,
@@ -15328,8 +15328,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.23782874807452126,
-          "nav_over_alphabetic": 0.23651359118685233
+          "nav_over_entropy": 1.1418212144891688,
+          "nav_over_alphabetic": 1.135507116438031
         },
         "branch_constant_sweep": {
           "a=0": 15.172191886998387,
@@ -15393,12 +15393,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.23598221769854044,
-            0.23702999640767294
+            1.13238214043861,
+            1.1387362596707375
           ],
           "information.nav_over_entropy": [
-            0.23729441983211016,
-            0.23834802481693004
+            1.138678861755968,
+            1.1450683136877144
           ],
           "largest_class_share": [
             0.13373076672701262,
@@ -15790,8 +15790,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.14224419870112262,
-          "nav_over_alphabetic": 0.1414576098670675
+          "nav_over_entropy": 1.3885959730152595,
+          "nav_over_alphabetic": 1.3809172479961624
         },
         "branch_constant_sweep": {
           "a=0": 18.451263900825516,
@@ -15855,12 +15855,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.13990053586395568,
-            0.14309663513350399
+            1.3702476267586663,
+            1.3919392571067186
           ],
           "information.nav_over_entropy": [
-            0.14067846643617676,
-            0.14389233792738443
+            1.3778670223084126,
+            1.3996792710822978
           ],
           "largest_class_share": [
             0.17761227406620267,
@@ -16252,8 +16252,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.1962941344226916,
-          "nav_over_alphabetic": 0.19520865764587184
+          "nav_over_entropy": 1.3792596393535295,
+          "nav_over_alphabetic": 1.3716325428428455
         },
         "branch_constant_sweep": {
           "a=0": 18.327205384448956,
@@ -16317,12 +16317,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.19258172673933524,
-            0.19776074721592835
+            1.3622284506301403,
+            1.3808915855726747
           ],
           "information.nav_over_entropy": [
-            0.19365259621068126,
-            0.19886041513567215
+            1.3698032547690258,
+            1.3885701678933633
           ],
           "largest_class_share": [
             0.05216399936993092,
@@ -16714,8 +16714,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.34888623922488854,
-          "nav_over_alphabetic": 0.3469569512635116
+          "nav_over_entropy": 1.5174233727098394,
+          "nav_over_alphabetic": 1.5090322517192691
         },
         "branch_constant_sweep": {
           "a=0": 20.163085334572177,
@@ -16779,12 +16779,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.3453403783979145,
-            0.34873087803867114
+            1.503700021525377,
+            1.5148484983457795
           ],
           "information.nav_over_entropy": [
-            0.3472606772482304,
-            0.35067003009286773
+            1.5120614921299762,
+            1.5232719611428938
           ],
           "largest_class_share": [
             0.04581782962234497,
@@ -17176,8 +17176,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.23924358905414508,
-          "nav_over_alphabetic": 0.23792060831055306
+          "nav_over_entropy": 1.684603230455194,
+          "nav_over_alphabetic": 1.6752876302199007
         },
         "branch_constant_sweep": {
           "a=0": 22.384523199946216,
@@ -17241,12 +17241,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.23588398844455843,
-            0.2400165399354011
+            1.6646662391130207,
+            1.6859669248036404
           ],
           "information.nav_over_entropy": [
-            0.23719564436478247,
-            0.2413511753111801
+            1.6739227780673076,
+            1.6953419082978691
           ],
           "largest_class_share": [
             0.09721299559974594,
@@ -17638,8 +17638,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.3405552340949064,
-          "nav_over_alphabetic": 0.33867201532771485
+          "nav_over_entropy": 1.4192779151332495,
+          "nav_over_alphabetic": 1.4114295236300531
         },
         "branch_constant_sweep": {
           "a=0": 18.85895672293531,
@@ -17703,12 +17703,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.33710764429421186,
-            0.34010953029588714
+            1.4050645281893361,
+            1.4171930017876424
           ],
           "information.nav_over_entropy": [
-            0.33898216422372035,
-            0.34200074250524004
+            1.4128775265146951,
+            1.4250734416731656
           ],
           "largest_class_share": [
             0.04283971957568348,
@@ -18100,8 +18100,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.37475224160225845,
-          "nav_over_alphabetic": 0.37267991857275595
+          "nav_over_entropy": 1.6808905482839314,
+          "nav_over_alphabetic": 1.6715954786176668
         },
         "branch_constant_sweep": {
           "a=0": 22.335190147097805,
@@ -18165,12 +18165,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.3711903888756947,
-            0.3741771195067623
+            1.6652266883839602,
+            1.6781554158504584
           ],
           "information.nav_over_entropy": [
-            0.37325442923006363,
-            0.3762577678680595
+            1.674486343771071,
+            1.6874869626874052
           ],
           "largest_class_share": [
             0.05987552322466234,
@@ -18562,8 +18562,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.07525749891599583,
-          "nav_over_alphabetic": 0.07484133636689518
+          "nav_over_entropy": 1.000000000000014,
+          "nav_over_alphabetic": 0.9944701517444243
         },
         "branch_constant_sweep": {
           "a=0": 13.287712379548294,
@@ -18627,12 +18627,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.07484133636689659,
-            0.07484133636689677
+            0.9944701517445037,
+            0.994470151744513
           ],
           "information.nav_over_entropy": [
-            0.07525749891599724,
-            0.07525749891599744
+            1.0000000000000937,
+            1.000000000000103
           ],
           "largest_class_share": [
             0.0,
@@ -19024,8 +19024,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.1532919995419968,
-          "nav_over_alphabetic": 0.15244431804573366
+          "nav_over_entropy": 1.3074518274674738,
+          "nav_over_alphabetic": 1.3002218172600855
         },
         "branch_constant_sweep": {
           "a=0": 17.37304383350235,
@@ -19089,12 +19089,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.15097724074959828,
-            0.15404648395400755
+            1.2926750154312605,
+            1.3072172289545854
           ],
           "information.nav_over_entropy": [
-            0.15181676441949266,
-            0.15490307445004053
+            1.2998630609111452,
+            1.3144861378308659
           ],
           "largest_class_share": [
             0.07980956418503136,
@@ -19486,8 +19486,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.4048176124191315,
-          "nav_over_alphabetic": 0.4025790324512637
+          "nav_over_entropy": 1.3158989357230932,
+          "nav_over_alphabetic": 1.3086222142888528
         },
         "branch_constant_sweep": {
           "a=0": 17.48528657844193,
@@ -19551,12 +19551,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.4009175547839778,
-            0.4041806370495728
+            1.3031574633896101,
+            1.314243073545227
           ],
           "information.nav_over_entropy": [
-            0.4031468959432559,
-            0.40642812289599173
+            1.3104037975435743,
+            1.3215510503154866
           ],
           "largest_class_share": [
             0.05081382264241884,
@@ -19948,8 +19948,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.27677450376363494,
-          "nav_over_alphabetic": 0.27524398275680595
+          "nav_over_entropy": 1.6314374482431573,
+          "nav_over_alphabetic": 1.6224158467158865
         },
         "branch_constant_sweep": {
           "a=0": 21.678071577478978,
@@ -20013,12 +20013,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.2734545264041162,
-            0.27699527002763674
+            1.6138183778942659,
+            1.6305175770847062
           ],
           "information.nav_over_entropy": [
-            0.2749750969643953,
-            0.2785355292381138
+            1.6227921723577627,
+            1.6395842290737417
           ],
           "largest_class_share": [
             0.05759918876565988,
@@ -20410,8 +20410,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.3762874945801413,
-          "nav_over_alphabetic": 0.3742066818346372
+          "nav_over_entropy": 1.0285090730148556,
+          "nav_over_alphabetic": 1.0228215739115865
         },
         "branch_constant_sweep": {
           "a=0": 13.666532741977047,
@@ -20475,12 +20475,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.374206681834616,
-            0.37420668183463496
+            1.0213710678005254,
+            1.024356926912682
           ],
           "information.nav_over_entropy": [
-            0.37628749458012,
-            0.3762874945801391
+            1.0270505012231164,
+            1.0300529634960354
           ],
           "largest_class_share": [
             0.187924375,
@@ -20872,8 +20872,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.375121003346946,
-          "nav_over_alphabetic": 0.37304664112095287
+          "nav_over_entropy": 1.0139420420207146,
+          "nav_over_alphabetic": 1.0083350963883775
         },
         "branch_constant_sweep": {
           "a=0": 13.472970223902937,
@@ -20937,12 +20937,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.37287450604729167,
-            0.37321877619458604
+            1.007342133378663,
+            1.0094891004646283
           ],
           "information.nav_over_entropy": [
-            0.3749479110994217,
-            0.37529409559444205
+            1.0129435575433547,
+            1.0151024630491652
           ],
           "largest_class_share": [
             0.12572143322102822,
@@ -21334,8 +21334,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.37466193260355946,
-          "nav_over_alphabetic": 0.3725901089691159
+          "nav_over_entropy": 1.013741813406421,
+          "nav_over_alphabetic": 1.0081359750079375
         },
         "branch_constant_sweep": {
           "a=0": 13.47030964366605,
@@ -21399,12 +21399,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.37235061669272507,
-            0.3727996647109244
+            1.0071007772991718,
+            1.0092333505178053
           ],
           "information.nav_over_entropy": [
-            0.37442110860701144,
-            0.37487265360050537
+            1.0127008593798474,
+            1.0148452909798231
           ],
           "largest_class_share": [
             0.1309580044154881,
@@ -21796,8 +21796,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.32985361774907573,
-          "nav_over_alphabetic": 0.3280295772963661
+          "nav_over_entropy": 2.0087956588413,
+          "nav_over_alphabetic": 1.9976873236714205
         },
         "branch_constant_sweep": {
           "a=0": 26.69229894396804,
@@ -21861,12 +21861,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.3263903649264637,
-            0.32979601993784574
+            1.9878855021107755,
+            2.007783933172495
           ],
           "information.nav_over_entropy": [
-            0.328205290378941,
-            0.33162988286711986
+            1.9989393332960317,
+            2.0189484115240868
           ],
           "largest_class_share": [
             0.15205757554629215,
@@ -22258,8 +22258,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.09929474406976452,
-          "nav_over_alphabetic": 0.09874565920248111
+          "nav_over_entropy": 1.0455553867157827,
+          "nav_over_alphabetic": 1.0397736240844302
         },
         "branch_constant_sweep": {
           "a=0": 13.893039255566517,
@@ -22323,12 +22323,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.09748046641120027,
-            0.09995846305830823
+            1.0365669860985476,
+            1.0429816000869283
           ],
           "information.nav_over_entropy": [
-            0.09802251605059113,
-            0.10051429183969982
+            1.0423309179066809,
+            1.048781200981672
           ],
           "largest_class_share": [
             0.033366420706382294,
@@ -22720,8 +22720,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.13918874424513325,
-          "nav_over_alphabetic": 0.1384190516105716
+          "nav_over_entropy": 1.2021805632015319,
+          "nav_over_alphabetic": 1.1955326871112082
         },
         "branch_constant_sweep": {
           "a=0": 15.974229552105113,
@@ -22785,12 +22785,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.1366973266674527,
-            0.14009549754519143
+            1.189110041111,
+            1.201686245312306
           ],
           "information.nav_over_entropy": [
-            0.1374574454825723,
-            0.14087451222085295
+            1.1957222034519284,
+            1.2083683388630775
           ],
           "largest_class_share": [
             0.03560049816688391,
@@ -23182,8 +23182,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.3311706239801027,
-          "nav_over_alphabetic": 0.3293393006827839
+          "nav_over_entropy": 1.6895115214744298,
+          "nav_over_alphabetic": 1.680168779134606
         },
         "branch_constant_sweep": {
           "a=0": 22.449743159284942,
@@ -23247,12 +23247,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.3281493234344315,
-            0.33050701263333115
+            1.6748482622113168,
+            1.6852634829890953
           ],
           "information.nav_over_entropy": [
-            0.32997402974721896,
-            0.3323448291068217
+            1.6841614192979526,
+            1.6946345549265174
           ],
           "largest_class_share": [
             0.20652311110531807,
@@ -23644,8 +23644,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.35389086290279104,
-          "nav_over_alphabetic": 0.35193390013189896
+          "nav_over_entropy": 1.6541255761179794,
+          "nav_over_alphabetic": 1.6449785126863574
         },
         "branch_constant_sweep": {
           "a=0": 21.979544895110024,
@@ -23709,12 +23709,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.35027223536114677,
-            0.3534009774279682
+            1.638742408458613,
+            1.650959841395147
           ],
           "information.nav_over_entropy": [
-            0.3522199582830421,
-            0.35536609802522867
+            1.6478547954245564,
+            1.6601401645883298
           ],
           "largest_class_share": [
             0.11624457861297333,
@@ -24106,8 +24106,8 @@
           "entropy_bits": 8.965784284662018,
           "huffman_lower_bound_bits": 8.965784284662018,
           "alphabetic_optimum_bits": 8.976,
-          "nav_over_entropy": 0.1206810208283735,
-          "nav_over_alphabetic": 0.12054367201426032
+          "nav_over_entropy": 1.0106115979901633,
+          "nav_over_alphabetic": 1.009461406323237
         },
         "branch_constant_sweep": {
           "a=0": 9.060925583157376,
@@ -24171,12 +24171,12 @@
             8.965784284662018
           ],
           "information.nav_over_alphabetic": [
-            0.11697860962566851,
-            0.12477718360071309
+            1.0026516091012507,
+            1.0170997324673838
           ],
           "information.nav_over_entropy": [
-            0.11711189636764525,
-            0.12491935612548828
+            1.0037940416087194,
+            1.01825862732893
           ],
           "largest_class_share": [
             0.07964350362027353,
@@ -24568,8 +24568,8 @@
           "entropy_bits": 8.965784284662018,
           "huffman_lower_bound_bits": 8.965784284662018,
           "alphabetic_optimum_bits": 8.976,
-          "nav_over_entropy": 0.1206810208283735,
-          "nav_over_alphabetic": 0.12054367201426032
+          "nav_over_entropy": 1.005443394580199,
+          "nav_over_alphabetic": 1.004299084920274
         },
         "branch_constant_sweep": {
           "a=0": 9.01458858624438,
@@ -24633,12 +24633,12 @@
             8.965784284662018
           ],
           "information.nav_over_alphabetic": [
-            0.11697860962566851,
-            0.12433155080213912
+            0.9999519871029143,
+            1.008871311065957
           ],
           "information.nav_over_entropy": [
-            0.11711189636764525,
-            0.12447321556789726
+            1.0010913436307498,
+            1.0100208303717182
           ],
           "largest_class_share": [
             0.06896551724137931,
@@ -25030,8 +25030,8 @@
           "entropy_bits": 8.965784284662018,
           "huffman_lower_bound_bits": 8.965784284662018,
           "alphabetic_optimum_bits": 8.976,
-          "nav_over_entropy": 0.23712370635963065,
-          "nav_over_alphabetic": 0.23685383244206631
+          "nav_over_entropy": 1.1530411012841546,
+          "nav_over_alphabetic": 1.151728808540871
         },
         "branch_constant_sweep": {
           "a=0": 10.33791778546286,
@@ -25095,12 +25095,12 @@
             8.965784284662018
           ],
           "information.nav_over_alphabetic": [
-            0.22325646167557942,
-            0.24978275401069447
+            1.1242581295645317,
+            1.177858751690574
           ],
           "information.nav_over_entropy": [
-            0.22351084259613588,
-            0.25006735928674106
+            1.1255391219075768,
+            1.1792008171846333
           ],
           "largest_class_share": [
             0.03280201138979765,
@@ -25492,8 +25492,8 @@
           "entropy_bits": 8.965784284662018,
           "huffman_lower_bound_bits": 8.965784284662018,
           "alphabetic_optimum_bits": 8.976,
-          "nav_over_entropy": 0.4860701374953976,
-          "nav_over_alphabetic": 0.485516934046317
+          "nav_over_entropy": 1.712218356317952,
+          "nav_over_alphabetic": 1.7102696558584363
         },
         "branch_constant_sweep": {
           "a=0": 15.351380430985326,
@@ -25557,12 +25557,12 @@
             8.965784284662018
           ],
           "information.nav_over_alphabetic": [
-            0.470359848484836,
-            0.5004456327985594
+            1.6641621504818107,
+            1.756717719201316
           ],
           "information.nav_over_entropy": [
-            0.470895781780349,
-            0.5010158461747113
+            1.6660583155317163,
+            1.7587193431060146
           ],
           "largest_class_share": [
             0.17305064206139978,
@@ -25954,8 +25954,8 @@
           "entropy_bits": 8.965784284662018,
           "huffman_lower_bound_bits": 8.965784284662018,
           "alphabetic_optimum_bits": 8.976,
-          "nav_over_entropy": 0.3035986494406867,
-          "nav_over_alphabetic": 0.3032531194295813
+          "nav_over_entropy": 1.2559823500634362,
+          "nav_over_alphabetic": 1.254552898397017
         },
         "branch_constant_sweep": {
           "a=0": 11.260866816011625,
@@ -26019,12 +26019,12 @@
             8.965784284662018
           ],
           "information.nav_over_alphabetic": [
-            0.2858734402852013,
-            0.3201927361853796
+            1.2197130016990931,
+            1.2859938057927298
           ],
           "information.nav_over_entropy": [
-            0.2861991676946416,
-            0.32055756738612073
+            1.2211027563958141,
+            1.2874590815822513
           ],
           "largest_class_share": [
             0.060683040693088164,
@@ -26416,8 +26416,8 @@
           "entropy_bits": 8.965784284662018,
           "huffman_lower_bound_bits": 8.965784284662018,
           "alphabetic_optimum_bits": 8.976,
-          "nav_over_entropy": 0.42740265417218365,
-          "nav_over_alphabetic": 0.42691622103384574
+          "nav_over_entropy": 1.6456838060763628,
+          "nav_over_alphabetic": 1.643810829550159
         },
         "branch_constant_sweep": {
           "a=0": 14.754846006042229,
@@ -26481,12 +26481,12 @@
             8.965784284662018
           ],
           "information.nav_over_alphabetic": [
-            0.416215463458102,
-            0.4378397950089033
+            1.6037049967987271,
+            1.68315203100733
           ],
           "information.nav_over_entropy": [
-            0.41668970403304295,
-            0.4383386745901468
+            1.6055322762885342,
+            1.6850698333404437
           ],
           "largest_class_share": [
             0.22743348683774417,
@@ -26878,8 +26878,8 @@
           "entropy_bits": 8.965784284662018,
           "huffman_lower_bound_bits": 8.965784284662018,
           "alphabetic_optimum_bits": 8.976,
-          "nav_over_entropy": 0.12603470751946586,
-          "nav_over_alphabetic": 0.12589126559714803
+          "nav_over_entropy": 1.012376077028783,
+          "nav_over_alphabetic": 1.0112238771827593
         },
         "branch_constant_sweep": {
           "a=0": 9.076745521592448,
@@ -26943,12 +26943,12 @@
             8.965784284662018
           ],
           "information.nav_over_alphabetic": [
-            0.12143493761140828,
-            0.13057598039215693
+            1.0045902140806369,
+            1.0188207438282666
           ],
           "information.nav_over_entropy": [
-            0.12157330194355556,
-            0.13072476013114154
+            1.0057348554563978,
+            1.0199815996294916
           ],
           "largest_class_share": [
             0.050955414012738856,
@@ -27340,8 +27340,8 @@
           "entropy_bits": 8.965784284662018,
           "huffman_lower_bound_bits": 8.965784284662018,
           "alphabetic_optimum_bits": 8.976,
-          "nav_over_entropy": 0.8815737417998015,
-          "nav_over_alphabetic": 0.8805704099821023
+          "nav_over_entropy": 1.5512115716167756,
+          "nav_over_alphabetic": 1.5494461153061
         },
         "branch_constant_sweep": {
           "a=0": 13.907828330987556,
@@ -27405,12 +27405,12 @@
             8.965784284662018
           ],
           "information.nav_over_alphabetic": [
-            0.8674186720142163,
-            0.8923796791443436
+            1.5202903163606993,
+            1.5765994125935419
           ],
           "information.nav_over_entropy": [
-            0.8684070185939247,
-            0.8933964665759947
+            1.5220225522265123,
+            1.5783958076761941
           ],
           "largest_class_share": [
             0.13505565627779842,
@@ -27802,8 +27802,8 @@
           "entropy_bits": 8.965784284662018,
           "huffman_lower_bound_bits": 8.965784284662018,
           "alphabetic_optimum_bits": 8.976,
-          "nav_over_entropy": 0.7959147547423333,
-          "nav_over_alphabetic": 0.7950089126559086
+          "nav_over_entropy": 1.3774155785085418,
+          "nav_over_alphabetic": 1.3758479219296484
         },
         "branch_constant_sweep": {
           "a=0": 12.349610947240526,
@@ -27867,12 +27867,12 @@
             8.965784284662018
           ],
           "information.nav_over_alphabetic": [
-            0.7858678698751834,
-            0.8034759358288381
+            1.3589520589232988,
+            1.390403238961535
           ],
           "information.nav_over_entropy": [
-            0.7867632965547708,
-            0.8043914253365869
+            1.36050046416607,
+            1.391987480032173
           ],
           "largest_class_share": [
             0.1199405304159711,
@@ -28264,8 +28264,8 @@
           "entropy_bits": 8.965784284662018,
           "huffman_lower_bound_bits": 8.965784284662018,
           "alphabetic_optimum_bits": 8.976,
-          "nav_over_entropy": 0.7724923754688069,
-          "nav_over_alphabetic": 0.7716131907307775
+          "nav_over_entropy": 1.4235820397862424,
+          "nav_over_alphabetic": 1.4219618404904846
         },
         "branch_constant_sweep": {
           "a=0": 12.76352948024259,
@@ -28329,12 +28329,12 @@
             8.965784284662018
           ],
           "information.nav_over_alphabetic": [
-            0.7586898395721575,
-            0.7838736631015708
+            1.4000162909455327,
+            1.4418942270213357
           ],
           "information.nav_over_entropy": [
-            0.7595542992986924,
-            0.7847668175595569
+            1.4016114852355968,
+            1.4435371375022326
           ],
           "largest_class_share": [
             0.12305732484076433,
@@ -28726,8 +28726,8 @@
           "entropy_bits": 8.965784284662018,
           "huffman_lower_bound_bits": 8.965784284662018,
           "alphabetic_optimum_bits": 8.976,
-          "nav_over_entropy": 0.14410340010190256,
-          "nav_over_alphabetic": 0.14393939393939403
+          "nav_over_entropy": 1.0345245837855475,
+          "nav_over_alphabetic": 1.033347176403852
         },
         "branch_constant_sweep": {
           "a=0": 9.275324255400976,
@@ -28791,12 +28791,12 @@
             8.965784284662018
           ],
           "information.nav_over_alphabetic": [
-            0.13502673796791453,
-            0.15397170231729065
+            1.019779290277154,
+            1.0485285554970534
           ],
           "information.nav_over_entropy": [
-            0.13518058895008195,
-            0.1541471394046706
+            1.0209412382569716,
+            1.0497232607126394
           ],
           "largest_class_share": [
             0.14100609756097562,
@@ -29188,8 +29188,8 @@
           "entropy_bits": 8.965784284662018,
           "huffman_lower_bound_bits": 8.965784284662018,
           "alphabetic_optimum_bits": 8.976,
-          "nav_over_entropy": 0.15592612487806484,
-          "nav_over_alphabetic": 0.15574866310160437
+          "nav_over_entropy": 1.0513997641970243,
+          "nav_over_alphabetic": 1.0502031509285907
         },
         "branch_constant_sweep": {
           "a=0": 9.426623482735032,
@@ -29253,12 +29253,12 @@
             8.965784284662018
           ],
           "information.nav_over_alphabetic": [
-            0.14594474153297693,
-            0.16555815508021401
+            1.0339865096235201,
+            1.0672770035661159
           ],
           "information.nav_over_entropy": [
-            0.14611103261106217,
-            0.16574679390203736
+            1.0351646454686685,
+            1.068493070974057
           ],
           "largest_class_share": [
             0.055551282051282055,
@@ -29650,8 +29650,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.24271295975418014,
-          "nav_over_alphabetic": 0.24137079391707453
+          "nav_over_entropy": 1.5433778599208523,
+          "nav_over_alphabetic": 1.5348432145544535
         },
         "branch_constant_sweep": {
           "a=0": 20.507961095590776,
@@ -29715,12 +29715,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.23903480870560653,
-            0.24372118608556656
+            1.5262127155116423,
+            1.5436738624314907
           ],
           "information.nav_over_entropy": [
-            0.2403639850691477,
-            0.24507642150752607
+            1.5346993701465013,
+            1.5522576114765398
           ],
           "largest_class_share": [
             0.0964169364021317,
@@ -30112,8 +30112,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.23782874807452126,
-          "nav_over_alphabetic": 0.23651359118685233
+          "nav_over_entropy": 1.1418212144891688,
+          "nav_over_alphabetic": 1.135507116438031
         },
         "branch_constant_sweep": {
           "a=0": 15.172191886998387,
@@ -30177,12 +30177,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.23598221769854044,
-            0.23702999640767294
+            1.13238214043861,
+            1.1387362596707375
           ],
           "information.nav_over_entropy": [
-            0.23729441983211016,
-            0.23834802481693004
+            1.138678861755968,
+            1.1450683136877144
           ],
           "largest_class_share": [
             0.13373076672701262,
@@ -30574,8 +30574,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.14224419870112262,
-          "nav_over_alphabetic": 0.1414576098670675
+          "nav_over_entropy": 1.3885959730152595,
+          "nav_over_alphabetic": 1.3809172479961624
         },
         "branch_constant_sweep": {
           "a=0": 18.451263900825516,
@@ -30639,12 +30639,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.13990053586395568,
-            0.14309663513350399
+            1.3702476267586663,
+            1.3919392571067186
           ],
           "information.nav_over_entropy": [
-            0.14067846643617676,
-            0.14389233792738443
+            1.3778670223084126,
+            1.3996792710822978
           ],
           "largest_class_share": [
             0.17761227406620267,
@@ -31036,8 +31036,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.1962941344226916,
-          "nav_over_alphabetic": 0.19520865764587184
+          "nav_over_entropy": 1.3792596393535295,
+          "nav_over_alphabetic": 1.3716325428428455
         },
         "branch_constant_sweep": {
           "a=0": 18.327205384448956,
@@ -31101,12 +31101,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.19258172673933524,
-            0.19776074721592835
+            1.3622284506301403,
+            1.3808915855726747
           ],
           "information.nav_over_entropy": [
-            0.19365259621068126,
-            0.19886041513567215
+            1.3698032547690258,
+            1.3885701678933633
           ],
           "largest_class_share": [
             0.05216399936993092,
@@ -31498,8 +31498,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.34888623922488854,
-          "nav_over_alphabetic": 0.3469569512635116
+          "nav_over_entropy": 1.5174233727098394,
+          "nav_over_alphabetic": 1.5090322517192691
         },
         "branch_constant_sweep": {
           "a=0": 20.163085334572177,
@@ -31563,12 +31563,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.3453403783979145,
-            0.34873087803867114
+            1.503700021525377,
+            1.5148484983457795
           ],
           "information.nav_over_entropy": [
-            0.3472606772482304,
-            0.35067003009286773
+            1.5120614921299762,
+            1.5232719611428938
           ],
           "largest_class_share": [
             0.04581782962234497,
@@ -31960,8 +31960,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.23924358905414508,
-          "nav_over_alphabetic": 0.23792060831055306
+          "nav_over_entropy": 1.684603230455194,
+          "nav_over_alphabetic": 1.6752876302199007
         },
         "branch_constant_sweep": {
           "a=0": 22.384523199946216,
@@ -32025,12 +32025,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.23588398844455843,
-            0.2400165399354011
+            1.6646662391130207,
+            1.6859669248036404
           ],
           "information.nav_over_entropy": [
-            0.23719564436478247,
-            0.2413511753111801
+            1.6739227780673076,
+            1.6953419082978691
           ],
           "largest_class_share": [
             0.09721299559974594,
@@ -32422,8 +32422,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.3405552340949064,
-          "nav_over_alphabetic": 0.33867201532771485
+          "nav_over_entropy": 1.4192779151332495,
+          "nav_over_alphabetic": 1.4114295236300531
         },
         "branch_constant_sweep": {
           "a=0": 18.85895672293531,
@@ -32487,12 +32487,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.33710764429421186,
-            0.34010953029588714
+            1.4050645281893361,
+            1.4171930017876424
           ],
           "information.nav_over_entropy": [
-            0.33898216422372035,
-            0.34200074250524004
+            1.4128775265146951,
+            1.4250734416731656
           ],
           "largest_class_share": [
             0.04283971957568348,
@@ -32884,8 +32884,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.37475224160225845,
-          "nav_over_alphabetic": 0.37267991857275595
+          "nav_over_entropy": 1.6808905482839314,
+          "nav_over_alphabetic": 1.6715954786176668
         },
         "branch_constant_sweep": {
           "a=0": 22.335190147097805,
@@ -32949,12 +32949,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.3711903888756947,
-            0.3741771195067623
+            1.6652266883839602,
+            1.6781554158504584
           ],
           "information.nav_over_entropy": [
-            0.37325442923006363,
-            0.3762577678680595
+            1.674486343771071,
+            1.6874869626874052
           ],
           "largest_class_share": [
             0.05987552322466234,
@@ -33346,8 +33346,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.07525749891599583,
-          "nav_over_alphabetic": 0.07484133636689518
+          "nav_over_entropy": 1.000000000000014,
+          "nav_over_alphabetic": 0.9944701517444243
         },
         "branch_constant_sweep": {
           "a=0": 13.287712379548294,
@@ -33411,12 +33411,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.07484133636689659,
-            0.07484133636689677
+            0.9944701517445037,
+            0.994470151744513
           ],
           "information.nav_over_entropy": [
-            0.07525749891599724,
-            0.07525749891599744
+            1.0000000000000937,
+            1.000000000000103
           ],
           "largest_class_share": [
             0.0,
@@ -33808,8 +33808,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.1532919995419968,
-          "nav_over_alphabetic": 0.15244431804573366
+          "nav_over_entropy": 1.3074518274674738,
+          "nav_over_alphabetic": 1.3002218172600855
         },
         "branch_constant_sweep": {
           "a=0": 17.37304383350235,
@@ -33873,12 +33873,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.15097724074959828,
-            0.15404648395400755
+            1.2926750154312605,
+            1.3072172289545854
           ],
           "information.nav_over_entropy": [
-            0.15181676441949266,
-            0.15490307445004053
+            1.2998630609111452,
+            1.3144861378308659
           ],
           "largest_class_share": [
             0.07980956418503136,
@@ -34270,8 +34270,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.4048176124191315,
-          "nav_over_alphabetic": 0.4025790324512637
+          "nav_over_entropy": 1.3158989357230932,
+          "nav_over_alphabetic": 1.3086222142888528
         },
         "branch_constant_sweep": {
           "a=0": 17.48528657844193,
@@ -34335,12 +34335,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.4009175547839778,
-            0.4041806370495728
+            1.3031574633896101,
+            1.314243073545227
           ],
           "information.nav_over_entropy": [
-            0.4031468959432559,
-            0.40642812289599173
+            1.3104037975435743,
+            1.3215510503154866
           ],
           "largest_class_share": [
             0.05081382264241884,
@@ -34732,8 +34732,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.27677450376363494,
-          "nav_over_alphabetic": 0.27524398275680595
+          "nav_over_entropy": 1.6314374482431573,
+          "nav_over_alphabetic": 1.6224158467158865
         },
         "branch_constant_sweep": {
           "a=0": 21.678071577478978,
@@ -34797,12 +34797,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.2734545264041162,
-            0.27699527002763674
+            1.6138183778942659,
+            1.6305175770847062
           ],
           "information.nav_over_entropy": [
-            0.2749750969643953,
-            0.2785355292381138
+            1.6227921723577627,
+            1.6395842290737417
           ],
           "largest_class_share": [
             0.05759918876565988,
@@ -35194,8 +35194,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.3762874945801413,
-          "nav_over_alphabetic": 0.3742066818346372
+          "nav_over_entropy": 1.0285090730148556,
+          "nav_over_alphabetic": 1.0228215739115865
         },
         "branch_constant_sweep": {
           "a=0": 13.666532741977047,
@@ -35259,12 +35259,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.374206681834616,
-            0.37420668183463496
+            1.0213710678005254,
+            1.024356926912682
           ],
           "information.nav_over_entropy": [
-            0.37628749458012,
-            0.3762874945801391
+            1.0270505012231164,
+            1.0300529634960354
           ],
           "largest_class_share": [
             0.187924375,
@@ -35656,8 +35656,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.375121003346946,
-          "nav_over_alphabetic": 0.37304664112095287
+          "nav_over_entropy": 1.0139420420207146,
+          "nav_over_alphabetic": 1.0083350963883775
         },
         "branch_constant_sweep": {
           "a=0": 13.472970223902937,
@@ -35721,12 +35721,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.37287450604729167,
-            0.37321877619458604
+            1.007342133378663,
+            1.0094891004646283
           ],
           "information.nav_over_entropy": [
-            0.3749479110994217,
-            0.37529409559444205
+            1.0129435575433547,
+            1.0151024630491652
           ],
           "largest_class_share": [
             0.12572143322102822,
@@ -36118,8 +36118,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.37466193260355946,
-          "nav_over_alphabetic": 0.3725901089691159
+          "nav_over_entropy": 1.013741813406421,
+          "nav_over_alphabetic": 1.0081359750079375
         },
         "branch_constant_sweep": {
           "a=0": 13.47030964366605,
@@ -36183,12 +36183,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.37235061669272507,
-            0.3727996647109244
+            1.0071007772991718,
+            1.0092333505178053
           ],
           "information.nav_over_entropy": [
-            0.37442110860701144,
-            0.37487265360050537
+            1.0127008593798474,
+            1.0148452909798231
           ],
           "largest_class_share": [
             0.1309580044154881,
@@ -36580,8 +36580,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.32985361774907573,
-          "nav_over_alphabetic": 0.3280295772963661
+          "nav_over_entropy": 2.0087956588413,
+          "nav_over_alphabetic": 1.9976873236714205
         },
         "branch_constant_sweep": {
           "a=0": 26.69229894396804,
@@ -36645,12 +36645,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.3263903649264637,
-            0.32979601993784574
+            1.9878855021107755,
+            2.007783933172495
           ],
           "information.nav_over_entropy": [
-            0.328205290378941,
-            0.33162988286711986
+            1.9989393332960317,
+            2.0189484115240868
           ],
           "largest_class_share": [
             0.15205757554629215,
@@ -37042,8 +37042,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.09929474406976452,
-          "nav_over_alphabetic": 0.09874565920248111
+          "nav_over_entropy": 1.0455553867157827,
+          "nav_over_alphabetic": 1.0397736240844302
         },
         "branch_constant_sweep": {
           "a=0": 13.893039255566517,
@@ -37107,12 +37107,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.09748046641120027,
-            0.09995846305830823
+            1.0365669860985476,
+            1.0429816000869283
           ],
           "information.nav_over_entropy": [
-            0.09802251605059113,
-            0.10051429183969982
+            1.0423309179066809,
+            1.048781200981672
           ],
           "largest_class_share": [
             0.033366420706382294,
@@ -37504,8 +37504,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.13918874424513325,
-          "nav_over_alphabetic": 0.1384190516105716
+          "nav_over_entropy": 1.2021805632015319,
+          "nav_over_alphabetic": 1.1955326871112082
         },
         "branch_constant_sweep": {
           "a=0": 15.974229552105113,
@@ -37569,12 +37569,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.1366973266674527,
-            0.14009549754519143
+            1.189110041111,
+            1.201686245312306
           ],
           "information.nav_over_entropy": [
-            0.1374574454825723,
-            0.14087451222085295
+            1.1957222034519284,
+            1.2083683388630775
           ],
           "largest_class_share": [
             0.03560049816688391,
@@ -37966,8 +37966,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.3311706239801027,
-          "nav_over_alphabetic": 0.3293393006827839
+          "nav_over_entropy": 1.6895115214744298,
+          "nav_over_alphabetic": 1.680168779134606
         },
         "branch_constant_sweep": {
           "a=0": 22.449743159284942,
@@ -38031,12 +38031,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.3281493234344315,
-            0.33050701263333115
+            1.6748482622113168,
+            1.6852634829890953
           ],
           "information.nav_over_entropy": [
-            0.32997402974721896,
-            0.3323448291068217
+            1.6841614192979526,
+            1.6946345549265174
           ],
           "largest_class_share": [
             0.20652311110531807,
@@ -38428,8 +38428,8 @@
           "entropy_bits": 13.28771237954811,
           "huffman_lower_bound_bits": 13.28771237954811,
           "alphabetic_optimum_bits": 13.361599999999994,
-          "nav_over_entropy": 0.35389086290279104,
-          "nav_over_alphabetic": 0.35193390013189896
+          "nav_over_entropy": 1.6541255761179794,
+          "nav_over_alphabetic": 1.6449785126863574
         },
         "branch_constant_sweep": {
           "a=0": 21.979544895110024,
@@ -38493,12 +38493,12 @@
             13.28771237954811
           ],
           "information.nav_over_alphabetic": [
-            0.35027223536114677,
-            0.3534009774279682
+            1.638742408458613,
+            1.650959841395147
           ],
           "information.nav_over_entropy": [
-            0.3522199582830421,
-            0.35536609802522867
+            1.6478547954245564,
+            1.6601401645883298
           ],
           "largest_class_share": [
             0.11624457861297333,
@@ -38890,8 +38890,8 @@
           "entropy_bits": 8.965784284662018,
           "huffman_lower_bound_bits": 8.965784284662018,
           "alphabetic_optimum_bits": 8.976,
-          "nav_over_entropy": 0.1206810208283735,
-          "nav_over_alphabetic": 0.12054367201426032
+          "nav_over_entropy": 1.0106115979901633,
+          "nav_over_alphabetic": 1.009461406323237
         },
         "branch_constant_sweep": {
           "a=0": 9.060925583157376,
@@ -38955,12 +38955,12 @@
             8.965784284662018
           ],
           "information.nav_over_alphabetic": [
-            0.11697860962566851,
-            0.12477718360071309
+            1.0026516091012507,
+            1.0170997324673838
           ],
           "information.nav_over_entropy": [
-            0.11711189636764525,
-            0.12491935612548828
+            1.0037940416087194,
+            1.01825862732893
           ],
           "largest_class_share": [
             0.07964350362027353,
@@ -39352,8 +39352,8 @@
           "entropy_bits": 8.965784284662018,
           "huffman_lower_bound_bits": 8.965784284662018,
           "alphabetic_optimum_bits": 8.976,
-          "nav_over_entropy": 0.1206810208283735,
-          "nav_over_alphabetic": 0.12054367201426032
+          "nav_over_entropy": 1.005443394580199,
+          "nav_over_alphabetic": 1.004299084920274
         },
         "branch_constant_sweep": {
           "a=0": 9.01458858624438,
@@ -39417,12 +39417,12 @@
             8.965784284662018
           ],
           "information.nav_over_alphabetic": [
-            0.11697860962566851,
-            0.12433155080213912
+            0.9999519871029143,
+            1.008871311065957
           ],
           "information.nav_over_entropy": [
-            0.11711189636764525,
-            0.12447321556789726
+            1.0010913436307498,
+            1.0100208303717182
           ],
           "largest_class_share": [
             0.06896551724137931,
@@ -39814,8 +39814,8 @@
           "entropy_bits": 8.965784284662018,
           "huffman_lower_bound_bits": 8.965784284662018,
           "alphabetic_optimum_bits": 8.976,
-          "nav_over_entropy": 0.23712370635963065,
-          "nav_over_alphabetic": 0.23685383244206631
+          "nav_over_entropy": 1.1530411012841546,
+          "nav_over_alphabetic": 1.151728808540871
         },
         "branch_constant_sweep": {
           "a=0": 10.33791778546286,
@@ -39879,12 +39879,12 @@
             8.965784284662018
           ],
           "information.nav_over_alphabetic": [
-            0.22325646167557942,
-            0.24978275401069447
+            1.1242581295645317,
+            1.177858751690574
           ],
           "information.nav_over_entropy": [
-            0.22351084259613588,
-            0.25006735928674106
+            1.1255391219075768,
+            1.1792008171846333
           ],
           "largest_class_share": [
             0.03280201138979765,
@@ -40276,8 +40276,8 @@
           "entropy_bits": 8.965784284662018,
           "huffman_lower_bound_bits": 8.965784284662018,
           "alphabetic_optimum_bits": 8.976,
-          "nav_over_entropy": 0.4860701374953976,
-          "nav_over_alphabetic": 0.485516934046317
+          "nav_over_entropy": 1.712218356317952,
+          "nav_over_alphabetic": 1.7102696558584363
         },
         "branch_constant_sweep": {
           "a=0": 15.351380430985326,
@@ -40341,12 +40341,12 @@
             8.965784284662018
           ],
           "information.nav_over_alphabetic": [
-            0.470359848484836,
-            0.5004456327985594
+            1.6641621504818107,
+            1.756717719201316
           ],
           "information.nav_over_entropy": [
-            0.470895781780349,
-            0.5010158461747113
+            1.6660583155317163,
+            1.7587193431060146
           ],
           "largest_class_share": [
             0.17305064206139978,
@@ -40738,8 +40738,8 @@
           "entropy_bits": 8.965784284662018,
           "huffman_lower_bound_bits": 8.965784284662018,
           "alphabetic_optimum_bits": 8.976,
-          "nav_over_entropy": 0.3035986494406867,
-          "nav_over_alphabetic": 0.3032531194295813
+          "nav_over_entropy": 1.2559823500634362,
+          "nav_over_alphabetic": 1.254552898397017
         },
         "branch_constant_sweep": {
           "a=0": 11.260866816011625,
@@ -40803,12 +40803,12 @@
             8.965784284662018
           ],
           "information.nav_over_alphabetic": [
-            0.2858734402852013,
-            0.3201927361853796
+            1.2197130016990931,
+            1.2859938057927298
           ],
           "information.nav_over_entropy": [
-            0.2861991676946416,
-            0.32055756738612073
+            1.2211027563958141,
+            1.2874590815822513
           ],
           "largest_class_share": [
             0.060683040693088164,
@@ -41200,8 +41200,8 @@
           "entropy_bits": 8.965784284662018,
           "huffman_lower_bound_bits": 8.965784284662018,
           "alphabetic_optimum_bits": 8.976,
-          "nav_over_entropy": 0.42740265417218365,
-          "nav_over_alphabetic": 0.42691622103384574
+          "nav_over_entropy": 1.6456838060763628,
+          "nav_over_alphabetic": 1.643810829550159
         },
         "branch_constant_sweep": {
           "a=0": 14.754846006042229,
@@ -41265,12 +41265,12 @@
             8.965784284662018
           ],
           "information.nav_over_alphabetic": [
-            0.416215463458102,
-            0.4378397950089033
+            1.6037049967987271,
+            1.68315203100733
           ],
           "information.nav_over_entropy": [
-            0.41668970403304295,
-            0.4383386745901468
+            1.6055322762885342,
+            1.6850698333404437
           ],
           "largest_class_share": [
             0.22743348683774417,
@@ -41662,8 +41662,8 @@
           "entropy_bits": 8.965784284662018,
           "huffman_lower_bound_bits": 8.965784284662018,
           "alphabetic_optimum_bits": 8.976,
-          "nav_over_entropy": 0.12603470751946586,
-          "nav_over_alphabetic": 0.12589126559714803
+          "nav_over_entropy": 1.012376077028783,
+          "nav_over_alphabetic": 1.0112238771827593
         },
         "branch_constant_sweep": {
           "a=0": 9.076745521592448,
@@ -41727,12 +41727,12 @@
             8.965784284662018
           ],
           "information.nav_over_alphabetic": [
-            0.12143493761140828,
-            0.13057598039215693
+            1.0045902140806369,
+            1.0188207438282666
           ],
           "information.nav_over_entropy": [
-            0.12157330194355556,
-            0.13072476013114154
+            1.0057348554563978,
+            1.0199815996294916
           ],
           "largest_class_share": [
             0.050955414012738856,
@@ -42124,8 +42124,8 @@
           "entropy_bits": 8.965784284662018,
           "huffman_lower_bound_bits": 8.965784284662018,
           "alphabetic_optimum_bits": 8.976,
-          "nav_over_entropy": 0.8815737417998015,
-          "nav_over_alphabetic": 0.8805704099821023
+          "nav_over_entropy": 1.5512115716167756,
+          "nav_over_alphabetic": 1.5494461153061
         },
         "branch_constant_sweep": {
           "a=0": 13.907828330987556,
@@ -42189,12 +42189,12 @@
             8.965784284662018
           ],
           "information.nav_over_alphabetic": [
-            0.8674186720142163,
-            0.8923796791443436
+            1.5202903163606993,
+            1.5765994125935419
           ],
           "information.nav_over_entropy": [
-            0.8684070185939247,
-            0.8933964665759947
+            1.5220225522265123,
+            1.5783958076761941
           ],
           "largest_class_share": [
             0.13505565627779842,
@@ -42586,8 +42586,8 @@
           "entropy_bits": 8.965784284662018,
           "huffman_lower_bound_bits": 8.965784284662018,
           "alphabetic_optimum_bits": 8.976,
-          "nav_over_entropy": 0.7959147547423333,
-          "nav_over_alphabetic": 0.7950089126559086
+          "nav_over_entropy": 1.3774155785085418,
+          "nav_over_alphabetic": 1.3758479219296484
         },
         "branch_constant_sweep": {
           "a=0": 12.349610947240526,
@@ -42651,12 +42651,12 @@
             8.965784284662018
           ],
           "information.nav_over_alphabetic": [
-            0.7858678698751834,
-            0.8034759358288381
+            1.3589520589232988,
+            1.390403238961535
           ],
           "information.nav_over_entropy": [
-            0.7867632965547708,
-            0.8043914253365869
+            1.36050046416607,
+            1.391987480032173
           ],
           "largest_class_share": [
             0.1199405304159711,
@@ -43048,8 +43048,8 @@
           "entropy_bits": 8.965784284662018,
           "huffman_lower_bound_bits": 8.965784284662018,
           "alphabetic_optimum_bits": 8.976,
-          "nav_over_entropy": 0.7724923754688069,
-          "nav_over_alphabetic": 0.7716131907307775
+          "nav_over_entropy": 1.4235820397862424,
+          "nav_over_alphabetic": 1.4219618404904846
         },
         "branch_constant_sweep": {
           "a=0": 12.76352948024259,
@@ -43113,12 +43113,12 @@
             8.965784284662018
           ],
           "information.nav_over_alphabetic": [
-            0.7586898395721575,
-            0.7838736631015708
+            1.4000162909455327,
+            1.4418942270213357
           ],
           "information.nav_over_entropy": [
-            0.7595542992986924,
-            0.7847668175595569
+            1.4016114852355968,
+            1.4435371375022326
           ],
           "largest_class_share": [
             0.12305732484076433,
@@ -43510,8 +43510,8 @@
           "entropy_bits": 8.965784284662018,
           "huffman_lower_bound_bits": 8.965784284662018,
           "alphabetic_optimum_bits": 8.976,
-          "nav_over_entropy": 0.14410340010190256,
-          "nav_over_alphabetic": 0.14393939393939403
+          "nav_over_entropy": 1.0345245837855475,
+          "nav_over_alphabetic": 1.033347176403852
         },
         "branch_constant_sweep": {
           "a=0": 9.275324255400976,
@@ -43575,12 +43575,12 @@
             8.965784284662018
           ],
           "information.nav_over_alphabetic": [
-            0.13502673796791453,
-            0.15397170231729065
+            1.019779290277154,
+            1.0485285554970534
           ],
           "information.nav_over_entropy": [
-            0.13518058895008195,
-            0.1541471394046706
+            1.0209412382569716,
+            1.0497232607126394
           ],
           "largest_class_share": [
             0.14100609756097562,
@@ -43972,8 +43972,8 @@
           "entropy_bits": 8.965784284662018,
           "huffman_lower_bound_bits": 8.965784284662018,
           "alphabetic_optimum_bits": 8.976,
-          "nav_over_entropy": 0.15592612487806484,
-          "nav_over_alphabetic": 0.15574866310160437
+          "nav_over_entropy": 1.0513997641970243,
+          "nav_over_alphabetic": 1.0502031509285907
         },
         "branch_constant_sweep": {
           "a=0": 9.426623482735032,
@@ -44037,12 +44037,12 @@
             8.965784284662018
           ],
           "information.nav_over_alphabetic": [
-            0.14594474153297693,
-            0.16555815508021401
+            1.0339865096235201,
+            1.0672770035661159
           ],
           "information.nav_over_entropy": [
-            0.14611103261106217,
-            0.16574679390203736
+            1.0351646454686685,
+            1.068493070974057
           ],
           "largest_class_share": [
             0.055551282051282055,
