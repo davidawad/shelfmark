@@ -34,8 +34,16 @@ fn one() -> f64 {
 /// Item id to its (class code, mass) placements.
 type Placements = BTreeMap<String, Vec<(String, f64)>>;
 
+mod cli_scores;
+
 fn main() {
-    if let Err(error) = run() {
+    let args: Vec<_> = env::args().collect();
+    let result = match args.get(1).map(String::as_str) {
+        Some("scores") => cli_scores::scores(&args),
+        Some("agree") => cli_scores::agree(&args),
+        _ => run(),
+    };
+    if let Err(error) = result {
         eprintln!("shelfmark-bench: {error}");
         std::process::exit(2);
     }
@@ -92,21 +100,25 @@ fn load_placements(
         }
     } else {
         for row in corpus {
-            let labels = match scheme.name.to_ascii_lowercase().as_str() {
-                "lcc" => row.lc_classifications.as_slice(),
-                "ddc" => row.ddc.as_slice(),
-                "msc" => row.msc_classes.as_slice(),
-                "acm" | "acm-ccs" | "acm_ccs" => row.acm_ccs.as_slice(),
-                "jel" => row.jel_codes.as_slice(),
-                "arxiv" => row.categories.as_slice(),
-                name => row.gold.get(name).map(Vec::as_slice).unwrap_or_default(),
-            };
-            if let Some(code) = labels.first() {
+            if let Some(code) = gold_field(row, &scheme.name).first() {
                 placements.insert(row.id.clone(), vec![(code.clone(), 1.0)]);
             }
         }
     }
     Ok(placements)
+}
+
+/// The source labels of a corpus row for a scheme name, in source order.
+fn gold_field<'a>(row: &'a CorpusRow, scheme: &str) -> &'a [String] {
+    match scheme.to_ascii_lowercase().as_str() {
+        "lcc" => row.lc_classifications.as_slice(),
+        "ddc" => row.ddc.as_slice(),
+        "msc" => row.msc_classes.as_slice(),
+        "acm" | "acm-ccs" | "acm_ccs" => row.acm_ccs.as_slice(),
+        "jel" => row.jel_codes.as_slice(),
+        "arxiv" => row.categories.as_slice(),
+        name => row.gold.get(name).map(Vec::as_slice).unwrap_or_default(),
+    }
 }
 
 /// The similarity graph from `--graph`, or one embedded from the corpus.
@@ -202,7 +214,7 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
-fn read_jsonl<T: serde::de::DeserializeOwned>(
+pub(crate) fn read_jsonl<T: serde::de::DeserializeOwned>(
     path: impl AsRef<Path>,
 ) -> Result<Vec<T>, Box<dyn std::error::Error>> {
     let reader = BufReader::new(File::open(path)?);

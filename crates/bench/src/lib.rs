@@ -1,10 +1,23 @@
 //! Reproducible scheme benchmark primitives. The similarity graph is built
 //! once and shared by all scheme trees in a run.
+pub mod agree;
+pub mod catalogue;
+pub mod consistency;
+pub mod embedscore;
+pub mod goldtree;
 mod graph;
+mod hier;
 mod metrics;
+pub mod notation;
+pub mod partition;
+pub mod robust;
+pub mod search;
+pub mod shelf;
 mod tree;
+pub mod treescore;
 
 pub use graph::{build_knn_graph, DeterministicEmbedder, Edge, EmbeddingModel, SimilarityGraph};
+pub use hier::Hier;
 pub use metrics::{score_tree, StructuralStats, TreeScore};
 pub use tree::{induce_tree, ItemPlacement, Tree, TreeNode};
 

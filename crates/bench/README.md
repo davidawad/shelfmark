@@ -59,3 +59,16 @@ those schemes. `run_benchmark.py --gold-only` and `publish_results.py
 insertion, shelfmark placement and a held-out 80/20 split), and
 `scripts/publish_learned.py` writes `bench/results/2026-10-10-learned/`.
 That directory's `REPRODUCE.md` lists the commands.
+
+## Scoring catalogue
+
+`shelfmark-bench scores` computes every score of
+`research/reports/6-scoring-catalogue.md` for one run: Dasgupta variants,
+tree-sampling divergence, triplets, embedding and probe scores, agreement
+with external gold labels, search cost against Huffman and Hu–Tucker bounds,
+MDL, shelf order, insertion, notation, granularity and collocation. It adds
+bootstrap intervals, null models and placement noise, all from a seeded
+generator. `shelfmark-bench agree` computes rank agreement between scores
+across runs. `scripts/score_catalogue.py run` and `publish` drive both over
+every benchmark run; `bench/results/2026-10-10-scores/REPRODUCE.md` lists
+the commands.
