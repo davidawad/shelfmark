@@ -333,6 +333,22 @@ Congress subject headings, which, if anything, favours LCC
 | `unesco-thesaurus-placed` | UNESCO thesaurus, lexical@2 classifier | 0.925 | 0.6287 [0.6116, 0.6456] | 0.482 [0.459, 0.504] | 22.17 | 4.50 | 196.4 | 0.6731 |
 <!-- /table:books-main -->
 
+### 4.1.1 Query workloads, information bounds and assignment null
+
+The following uses the same 3,000 sampled editions and all three k=20
+embedding graphs. Menu access, depth and item-scan expectations use uniform
+queries; a seeded Zipf(s=1) workload and its item-bootstrap intervals are
+available in the run records. The corpus has one sampled edition per work,
+so it supplies no edition-count popularity proxy. Logarithms are base 2.
+The alphabetic optimum uses the Knuth-optimized O(n²) dynamic program.
+Permutation nulls keep the tree shape and class sizes while shuffling
+item-to-class assignments (200 permutations, seed 20261010). All displayed
+intervals are 95% bootstrap intervals; the theoretical entropy and alphabetic
+bounds condition on the observed leaf distribution.
+
+<!-- table:metrics-upgrade -->
+<!-- /table:metrics-upgrade -->
+
 ### 4.2 Paired tests
 
 Δ is a − b: negative means a is better. The last column is the effect as

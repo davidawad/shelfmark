@@ -18,7 +18,32 @@ const USAGE: &str = "usage: shelfmark-bench bootstrap --corpus corpus.jsonl --gr
 [--output bootstrap.json] [--draws-out draws.json [--draw-metrics cost_norm,nav_log_a1,coverage]]";
 
 /// Metrics whose paired differences between runs are reported.
-const PAIRED: [&str; 3] = ["cost_norm", "nav_log_a1", "largest_class_share"];
+const PAIRED: &[&str] = &[
+    "cost_norm",
+    "revenue_norm",
+    "skill",
+    "coverage",
+    "expected_tree_distance",
+    "mean_depth",
+    "p50_depth",
+    "p95_depth",
+    "max_depth",
+    "mean_branching",
+    "p95_branching",
+    "max_branching",
+    "root_fanout",
+    "nodes_over_50_children",
+    "normalized_entropy",
+    "effective_classes",
+    "gini",
+    "largest_class_share",
+    "nav_scan",
+    "nav_scan_placed",
+    "nav_log_a0",
+    "nav_log_a1",
+    "nav_log_a2",
+    "nav_log_a4",
+];
 
 #[derive(serde::Deserialize)]
 struct RunSpec {
@@ -187,7 +212,7 @@ fn paired_differences(
     confidence: f64,
 ) -> Map<String, Value> {
     let mut paired = Map::new();
-    for metric in PAIRED {
+    for &metric in PAIRED {
         let mut rows = Vec::new();
         for (i, a) in runs.iter().enumerate() {
             for b in &runs[i + 1..] {

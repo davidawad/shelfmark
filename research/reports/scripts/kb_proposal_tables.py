@@ -35,6 +35,7 @@ ROOT = Path(__file__).resolve().parents[3]
 REPORT = ROOT / "research/reports/9-kb-structure-proposal.md"
 P = ROOT / "bench/results/2026-10-10-proposal"
 DDC_R = ROOT / "bench/results/2026-10-10-ddc"
+METRICS_R = ROOT / "bench/results/2026-10-11-metrics/books/results.json"
 MODELS = ["minilm", "bge-small", "nomic"]
 KS = [10, 20, 50]
 LAMBDA0 = 0.002
@@ -211,6 +212,39 @@ def t_books_main():
     return table(["run", "structure", "coverage", "cost_norm [95% CI]", "skill [95% CI]", "nav bits",
                   "mean depth", "effective classes", f"J (λ = {LAMBDA0})"], rows,
                  ["---", "---"] + ["---:"] * 7)
+
+
+def t_metrics_upgrade():
+    """Query-weighted navigation and permutation nulls on all three book graphs."""
+    runs = json.loads(METRICS_R.read_text(encoding="utf-8"))["runs"]
+    names = ["ddc-section", "fdc-d3", "lcc-gold", "learned-own"]
+    rows = []
+    def value_ci(value, ci, digits=2):
+        return f"{value:.{digits}f} [{ci[0]:.{digits}f}, {ci[1]:.{digits}f}]"
+    for model in MODELS:
+        for name in names:
+            r = runs[f"{model}-k20/{name}.json"]
+            m = r["metrics_upgrade"]
+            u = m["query_workloads"]["uniform"]
+            c = m["confidence_intervals"]
+            null = r["permutation_null"]["cost_norm"]
+            rows.append([
+                model, f"`{name}`", value_ci(r["coverage"], r["bootstrap"]["ci"]["coverage"], 3),
+                value_ci(u["placed_only"]["menu_accesses"], c["uniform.menu_accesses.placed"]),
+                value_ci(u["including_unplaced"]["menu_accesses"], c["uniform.menu_accesses.all"]),
+                value_ci(u["including_unplaced"]["items_scanned"], c["uniform.items_scanned.all"]),
+                value_ci(m["information_bounds"]["entropy_bits"], c["information.entropy_bits"]),
+                value_ci(m["information_bounds"]["alphabetic_optimum_bits"], c["information.alphabetic_optimum_bits"]),
+                value_ci(m["information_bounds"]["nav_over_alphabetic"], c["information.nav_over_alphabetic"]),
+                value_ci(null["mean"], null["confidence_intervals"]["mean"]),
+                value_ci(null["sd"], null["confidence_intervals"]["sd"]),
+                value_ci(null["z"], null["confidence_intervals"]["z"]),
+                value_ci(null["percentile"], null["confidence_intervals"]["percentile"], 3),
+            ])
+    return table(["embedding", "scheme", "coverage", "menu accesses: placed", "menu accesses: all",
+                  "items scanned: all", "entropy (bits)", "alphabetic optimum (bits)", "nav / bound",
+                  "null cost mean", "null cost SD", "null cost z", "null percentile"], rows,
+                 ["---", "---"] + ["---:"] * 11)
 
 
 PAIRS_BOOKS = [("fdc-ddc", "lcc-gold"), ("fdc-d3", "lcc-gold"), ("fdc-d3", "ddc-section"),
@@ -682,7 +716,8 @@ def t_captions():
 
 
 TABLES = {
-    "availability": t_availability, "books-main": t_books_main, "paired-books": t_paired_books,
+    "availability": t_availability, "books-main": t_books_main, "metrics-upgrade": t_metrics_upgrade,
+    "paired-books": t_paired_books,
     "ddc-reference": t_ddc_reference, "catalogue-books": t_catalogue_books, "catalogue-tests": t_catalogue_tests,
     "depth": t_depth, "embedding": t_embedding, "pipelines": t_pipelines, "holdout": t_holdout,
     "papers": t_papers, "papers-tests": t_papers_tests, "classifier": t_classifier,
