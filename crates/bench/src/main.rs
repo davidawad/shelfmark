@@ -96,8 +96,19 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
             }
         }
     }
-    let model = DeterministicEmbedder::default();
-    let graph = embed_corpus(&corpus, &model, k);
+    let graph = if let Some(path) = values.get("--graph") {
+        let graph: shelfmark_bench::SimilarityGraph =
+            serde_json::from_slice(&std::fs::read(path)?)?;
+        if graph.n != corpus.len() {
+            return Err(
+                format!("graph has {} rows but corpus has {}", graph.n, corpus.len()).into(),
+            );
+        }
+        graph
+    } else {
+        let model = DeterministicEmbedder::default();
+        embed_corpus(&corpus, &model, k)
+    };
     let item_placements: Vec<_> = corpus
         .iter()
         .map(|row| ItemPlacement {
@@ -108,8 +119,12 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
     let tree =
         induce_tree(&scheme, &item_placements).map_err(|e| format!("tree induction: {e}"))?;
     let score = score_tree(&tree, &graph);
-    let hac = average_linkage_reference(&graph);
-    let ref_score = score_tree(&hac, &graph).cost_norm;
+    let ref_score = if let Some(value) = values.get("--reference-cost") {
+        value.parse()?
+    } else {
+        let hac = average_linkage_reference(&graph);
+        score_tree(&hac, &graph).cost_norm
+    };
     let skill = if ref_score < 1.0 {
         (1.0 - score.cost_norm) / (1.0 - ref_score)
     } else {

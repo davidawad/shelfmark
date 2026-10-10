@@ -14,6 +14,15 @@ cargo run -p shelfmark-bench -- run \
   --placements placements.jsonl --k 20 --output result.json
 ```
 
+For a production run, pass a precomputed `SimilarityGraph` JSON with
+`--graph graph.json`; the graph is reused unchanged for all schemes. The
+first scoring invocation computes the average-linkage baseline. Later
+invocations may pass its `cost_norm` as `--reference-cost` to reuse that
+baseline. `crates/bench/scripts/build_graph_fastembed.py` builds the graph
+with pinned CPU sentence embeddings; model revision and weight digest are
+written to its manifest. Without `--graph`, the deterministic test embedder
+is used.
+
 Corpus files are JSONL with `id`, `title`, and `abstract` (or `description`);
 the arXiv metadata fields `msc_classes`, `acm_ccs`, `jel_codes`, and the Open
 Library `lc_classifications` field are also accepted. Without `--placements`,

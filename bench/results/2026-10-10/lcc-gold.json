@@ -1,0 +1,40 @@
+{
+  "scheme": "lcc",
+  "version": "2024",
+  "track": "A",
+  "mode": "primary",
+  "n": 500,
+  "k": 20,
+  "edge_weight": 1459.647912408383,
+  "cost": 520587.0520342034,
+  "cost_norm": 0.7133049656820974,
+  "revenue": 209236.90416998812,
+  "revenue_norm": 0.28669503431790255,
+  "ref_cost_norm": 0.301409582139011,
+  "skill": 0.41039073395213876,
+  "coverage": 0.918,
+  "structure": {
+    "mean_depth": 2.818,
+    "p50_depth": 3,
+    "p95_depth": 3,
+    "max_depth": 3,
+    "mean_branching": 9.24074074074074,
+    "p95_branching": 24,
+    "max_branching": 132,
+    "root_fanout": 55,
+    "nodes_over_50_children": 3,
+    "normalized_entropy": 0.5443969448776739,
+    "effective_classes": 8.772227176335594,
+    "gini": 0.843519537138899,
+    "largest_class_share": 0.4213421342134213,
+    "nav_scan": 107.77400000000026,
+    "nav_log_a0": 13.849249704636117,
+    "nav_log_a1": 16.61124970463616,
+    "nav_log_a2": 19.373249704636084
+  },
+  "hashes": {
+    "graph": "03d67d06b82633e1ca3461e3c9f11f3ee3bd55f43079a28b2126a1a90c1f6c75",
+    "tree": "b37c5b154d97c2bc5dce2b49616a245265a764993b0d8e74f2e1400a89c50e95",
+    "scheme": "aab91312e939007a8e705ad4d4b3207f696911c43e70e21fa923de3391548327"
+  }
+}
