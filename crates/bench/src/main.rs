@@ -277,6 +277,7 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
         skill,
         coverage,
         structure: score.structure,
+        metrics_upgrade: Some(shelfmark_bench::metrics_upgrade::summarize(&tree)),
         hashes: ContentHashes {
             graph: sha256_hex(&serde_json::to_vec(&graph)?),
             tree: sha256_hex(&serde_json::to_vec(&tree)?),

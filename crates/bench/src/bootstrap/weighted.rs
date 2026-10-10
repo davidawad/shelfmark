@@ -39,7 +39,7 @@ struct LeafCost {
     depth: f64,
     mass: f64,
     scan_branch: f64,
-    nav_log: [f64; 3],
+    nav_log: [f64; 4],
     shelf: usize,
 }
 
@@ -138,7 +138,7 @@ fn prepare_structure(tree: &Tree) -> Structure {
                 depth: tree.item_depth(leaf) as f64,
                 mass,
                 scan_branch: branch_scan_cost(tree, leaf),
-                nav_log: [0, 1, 2].map(|a| log_branch_cost(tree, leaf, a)),
+                nav_log: [0, 1, 2, 4].map(|a| log_branch_cost(tree, leaf, a)),
                 shelf: shelf_class(tree, leaf),
             });
         }
@@ -171,13 +171,19 @@ fn structure_metrics(s: &Structure, c: &[f64], node_count: usize, out: &mut Repl
         }
     }
     let (mut depth_sum, mut depth_n, mut nav_scan) = (0.0, 0.0, 0.0);
-    let mut nav_log = [0.0; 3];
+    let mut nav_log = [0.0; 4];
+    let mut nav_placed = 0.0;
+    let mut placed_weight = 0.0;
     for (item, leaves) in s.leaves.iter().enumerate() {
         for l in leaves {
             depth_sum += c[item] * l.depth;
             depth_n += c[item];
             nav_scan +=
                 c[item] * l.mass * (l.scan_branch + (count[l.shelf] + 1.0) / 2.0) / total_items;
+            if s.placed[item] {
+                nav_placed += c[item] * l.mass * (l.scan_branch + (count[l.shelf] + 1.0) / 2.0);
+                placed_weight += c[item] * l.mass;
+            }
             for (slot, cost) in nav_log.iter_mut().zip(l.nav_log) {
                 *slot += c[item] * l.mass * cost / total_items;
             }
@@ -219,9 +225,18 @@ fn structure_metrics(s: &Structure, c: &[f64], node_count: usize, out: &mut Repl
         classes.iter().copied().fold(0.0, f64::max) / total,
     );
     out.insert("nav_scan", nav_scan);
+    out.insert(
+        "nav_scan_placed",
+        if placed_weight > 0.0 {
+            nav_placed / placed_weight
+        } else {
+            0.0
+        },
+    );
     out.insert("nav_log_a0", nav_log[0]);
     out.insert("nav_log_a1", nav_log[1]);
     out.insert("nav_log_a2", nav_log[2]);
+    out.insert("nav_log_a4", nav_log[3]);
 }
 
 /// The LCA node and mass product of every leaf pair of two items.

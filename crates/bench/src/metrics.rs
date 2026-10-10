@@ -20,6 +20,8 @@ pub struct StructuralStats {
     pub nav_log_a0: f64,
     pub nav_log_a1: f64,
     pub nav_log_a2: f64,
+    pub nav_log_a4: f64,
+    pub nav_scan_placed: f64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -236,7 +238,9 @@ pub(crate) fn gini(classes: &[f64]) -> f64 {
 fn structural_stats(tree: &Tree) -> StructuralStats {
     let mut depths = Vec::new();
     let mut nav_scan = 0.0;
-    let mut nav_log = [0.0; 3];
+    let mut nav_log = [0.0; 4];
+    let mut nav_scan_placed = 0.0;
+    let mut placed_items = 0.0;
     let n = tree.item_leaves.len().max(1) as f64;
     let under = items_under(tree);
     for leaves in &tree.item_leaves {
@@ -247,7 +251,15 @@ fn structural_stats(tree: &Tree) -> StructuralStats {
             let class_items = under[shelf_class(tree, leaf)];
             nav_scan +=
                 mass * (branch_scan_cost(tree, leaf) + (class_items as f64 + 1.0) / 2.0) / n;
-            for (a, slot) in nav_log.iter_mut().enumerate() {
+            let placed = tree.nodes[leaf].parent != Some(0);
+            if placed {
+                placed_items += mass;
+            }
+            if placed {
+                nav_scan_placed +=
+                    mass * (branch_scan_cost(tree, leaf) + (class_items as f64 + 1.0) / 2.0);
+            }
+            for (slot, a) in nav_log.iter_mut().zip([0, 1, 2, 4]) {
                 *slot += mass * log_branch_cost(tree, leaf, a) / n;
             }
         }
@@ -286,6 +298,12 @@ fn structural_stats(tree: &Tree) -> StructuralStats {
         nav_log_a0: nav_log[0],
         nav_log_a1: nav_log[1],
         nav_log_a2: nav_log[2],
+        nav_log_a4: nav_log[3],
+        nav_scan_placed: if placed_items > 0.0 {
+            nav_scan_placed / placed_items
+        } else {
+            0.0
+        },
     }
 }
 #[cfg(test)]

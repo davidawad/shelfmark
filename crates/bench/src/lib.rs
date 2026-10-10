@@ -10,6 +10,7 @@ pub mod goldtree;
 mod graph;
 mod hier;
 mod metrics;
+pub mod metrics_upgrade;
 pub mod notation;
 pub mod partition;
 mod reference;
@@ -107,6 +108,9 @@ pub struct BenchmarkResult {
     pub skill: f64,
     pub coverage: f64,
     pub structure: StructuralStats,
+    /// Query workload and information bounds, with all logarithms in base 2.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub metrics_upgrade: Option<metrics_upgrade::UpgradeMetrics>,
     pub hashes: ContentHashes,
     /// Item-bootstrap intervals, when `--bootstrap` asked for them.
     #[serde(default, skip_serializing_if = "Option::is_none")]
