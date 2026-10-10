@@ -7,6 +7,8 @@ import shutil
 import subprocess
 from pathlib import Path
 
+from run_benchmark import PROFILE
+
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
 REGISTRY = ROOT / "schemes/registry.json"
@@ -75,6 +77,9 @@ def main():
     p.add_argument("--out", required=True)
     p.add_argument("--harness", required=True, help="harness binary used for scoring")
     p.add_argument("--runtime", required=True, help="JSON file of wall-clock stage timings")
+    p.add_argument("--shelfmark", help="shelfmark binary used for the placed runs")
+    p.add_argument("--baseline", help="published results directory whose graphs and gold results "
+                   "this run reuses; the placed results are compared against it")
     a = p.parse_args()
     cache, out = Path(a.cache), Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
@@ -92,12 +97,20 @@ def main():
         (out / path.name).write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
         results[path.stem] = result
 
-    # Graphs under 20 MB are published gzipped next to their manifests.
+    # Graphs under 20 MB are published gzipped next to their manifests,
+    # unless they are the baseline's, which are referenced instead.
     graphs = {}
-    (out / "graphs").mkdir(exist_ok=True)
+    baseline = Path(a.baseline) if a.baseline else None
     for corpus in ("corpus", "holdout"):
         src = cache / "graphs" / f"{corpus}-k20.json"
         manifest = load(cache / "graphs" / f"{corpus}-k20.manifest.json")
+        if baseline:
+            manifest["published"] = str((baseline / "graphs" / f"{corpus}-k20.json.gz")
+                                        .resolve().relative_to(ROOT))
+            manifest["reference"] = load(runs / f"reference-{corpus}.json")
+            graphs[corpus] = manifest
+            continue
+        (out / "graphs").mkdir(exist_ok=True)
         if src.stat().st_size <= 20 * 1024 * 1024:
             with open(src, "rb") as f, gzip.GzipFile(out / "graphs" / f"{corpus}-k20.json.gz",
                                                      "wb", mtime=0) as g:
@@ -156,8 +169,10 @@ def main():
             "binary_sha256": sha256_file(a.harness),
             "k": 20,
         },
+        "classifier": {"commit": git("rev-parse", "HEAD"), "profile": PROFILE}
+                      | ({"binary_sha256": sha256_file(a.shelfmark)} if a.shelfmark else {}),
         "placement": {"gold": "source labels, normalized to scheme codes (see REPRODUCE.md)",
-                      "placed": "shelfmark profile:lexical@1, one isolated store per scheme with "
+                      "placed": f"shelfmark {PROFILE}, one isolated store per scheme with "
                                 "an empty rules file; fallback placements (no candidate) are "
                                 "counted as unplaced"},
         "schemes": schemes,
@@ -170,10 +185,36 @@ def main():
                        "file": f"{k}.json"}
                     for k, v in results.items()},
     }
+    if baseline:
+        before = load(baseline / "results.json")
+        combined["baseline"] = {
+            "results": str((baseline / "results.json").resolve().relative_to(ROOT)),
+            "gold": "not rerun: gold placements do not depend on the classifier, so the "
+                    "baseline's gold results stand",
+            "placement_source": next(iter({v["placement_source"] for v in before["results"].values()
+                                           if v["placement_source"] != "gold"})),
+        }
+        combined["comparison"] = compare(baseline, before, results)
     (out / "results.json").write_text(json.dumps(combined, indent=2) + "\n", encoding="utf-8")
     (out / "results.md").write_text(render_md(combined, results), encoding="utf-8")
     print(json.dumps({"results": len(results), "skipped": sorted(skipped),
                       "failures": sorted(failures)}))
+
+
+def compare(baseline, before, results):
+    """Coverage, scores and the largest class share of each placed run, before and after."""
+    rows = {}
+    for key, r in sorted(results.items()):
+        if key not in before["results"] or r["run"]["placement_source"] == "gold":
+            continue
+        old = load(baseline / before["results"][key]["file"])
+        rows[key] = {"scheme": r["scheme"], "corpus": r["run"]["corpus"]} | {
+            when: {"coverage": v["coverage"], "cost_norm": v["cost_norm"], "skill": v["skill"],
+                   "top_class": v["run"]["placement_stats"]["top_class"],
+                   "top_class_share": v["run"]["placement_stats"]["top_class_share"],
+                   "top_class_terms": v["run"]["placement_stats"]["top_class_terms"]}
+            for when, v in (("before", old), ("after", r))}
+    return rows
 
 
 def render_md(c, results):
@@ -203,12 +244,13 @@ def render_md(c, results):
         f"- Graph: k = 20 mean-offset kNN cosine. Average-linkage baseline cost_norm: corpus "
         f"{ref['corpus']:.4f}, holdout {ref['holdout']:.4f}.",
         f"- Harness: `shelfmark-bench` at commit `{c['harness']['commit']}`.",
+        f"- Classifier: `shelfmark` at commit `{c['classifier']['commit']}`, `{PROFILE}`.",
         "",
         "## Classifier-bias caveat",
         "",
         "Gold and shelfmark-placed results are reported separately and should not be ranked "
         "against each other. Placed results come from shelfmark's own lexical classifier "
-        "(`profile:lexical@1`), so they measure the scheme *as reached by that classifier*: a "
+        f"(`{PROFILE}`), so they measure the scheme *as reached by that classifier*: a "
         "scheme with rich vocabulary links gets more and better placements than one with bare "
         "labels, independent of how well its hierarchy fits the corpus. Low-confidence "
         "placements (below the 0.8 target) are kept; fallback placements, where no tier "
@@ -222,17 +264,8 @@ def render_md(c, results):
         "`sum(1 + log2 fanout)` from root to item; `nav scan` adds a linear menu scan and a "
         "scan of the final class shelf.",
         "",
-        "## Gold placements",
-        "",
-        "arXiv corpus:",
-        "",
-        table(pick("gold", "corpus"), COLS),
-        "",
-        "Book holdout (LC call numbers placed at the deepest covering class):",
-        "",
-        table(pick("gold", "holdout"), COLS),
-        "",
-        "## shelfmark-placed (profile:lexical@1)",
+        *gold_section(c, pick),
+        f"## shelfmark-placed ({PROFILE})",
         "",
         "arXiv corpus:",
         "",
@@ -260,6 +293,7 @@ def render_md(c, results):
         "",
         capture_note(results),
         "",
+        *comparison_section(c),
         "## Skipped",
         "",
     ]
@@ -274,6 +308,40 @@ def render_md(c, results):
     return "\n".join(lines)
 
 
+def gold_section(c, pick):
+    if "baseline" in c:
+        return ["## Gold placements", "",
+                f"Not rerun. Gold placements use the source labels, not the classifier, so the "
+                f"gold results in `{c['baseline']['results']}` stand; they were scored on the "
+                f"same graphs against the same average-linkage baselines.", ""]
+    return ["## Gold placements", "", "arXiv corpus:", "", table(pick("gold", "corpus"), COLS), "",
+            "Book holdout (LC call numbers placed at the deepest covering class):", "",
+            table(pick("gold", "holdout"), COLS), ""]
+
+
+def comparison_section(c):
+    if not c.get("comparison"):
+        return []
+    rows = sorted(c["comparison"].values(), key=lambda r: (r["corpus"], r["scheme"]))
+
+    def top(when):
+        return lambda r: f"{r[when]['top_class_share']:.1%} `{r[when]['top_class']}`"
+
+    def delta(field):
+        return lambda r: f"{r['before'][field]:.4f} → {r['after'][field]:.4f}"
+    return [f"## Before and after ({c['baseline']['placement_source'].split()[-1]} → {PROFILE})",
+            "",
+            f"Against `{c['baseline']['results']}`, same graphs, scheme files and baselines; "
+            "only the classifier changed. `top share` is the largest single-class share of the "
+            "placed items.",
+            "",
+            table(rows, [("scheme", lambda r: r["scheme"]), ("corpus", lambda r: r["corpus"]),
+                         ("top share before", top("before")), ("top share after", top("after")),
+                         ("coverage", delta("coverage")), ("cost_norm", delta("cost_norm")),
+                         ("skill", delta("skill"))]),
+            ""]
+
+
 def capture_note(results):
     """Name the placed runs where one class took over a fifth of the placed items."""
     hits = []
@@ -285,14 +353,15 @@ def capture_note(results):
             terms = ", ".join(f'"{t}"' for t in stats["top_class_terms"])
             hits.append(f"`{key}` files {stats['top_class_share']:.1%} of its placed items "
                         f"under `{stats['top_class']}` ({label[:60]}) by the term(s) {terms}")
+    holdout = ("All 500 holdout rows are titles only (3.5 words on average, no description), "
+               "which explains the low holdout coverage.")
     if not hits:
-        return ""
-    return ("Single-class captures: the lexical vocab tier matches common words against class "
-            "labels and vocabulary, so in some schemes one class absorbs a large share of the "
-            "corpus. These placements are kept as the classifier made them, and they shape the "
-            "placed scores above: " + "; ".join(hits) + ". All 500 holdout rows are titles "
-            "only (3.5 words on average, no description), which explains the low holdout "
-            "coverage.")
+        return ("Single-class captures: no placed run files more than 20% of its placed items "
+                "under one class. " + holdout)
+    return ("Single-class captures: the lexical vocab tier matches words of the text against "
+            "class labels and vocabulary, so in some schemes one class absorbs a large share of "
+            "the corpus. These placements are kept as the classifier made them, and they shape "
+            "the placed scores above: " + "; ".join(hits) + ". " + holdout)
 
 
 def skip_reason(info):

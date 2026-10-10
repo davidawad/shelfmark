@@ -1,0 +1,66 @@
+{
+  "scheme": "eurovoc",
+  "version": "4.24",
+  "track": "P",
+  "mode": "primary",
+  "n": 10000,
+  "k": 20,
+  "edge_weight": 60220.11973891941,
+  "cost": 510576910.45743465,
+  "cost_norm": 0.8478510382759269,
+  "revenue": 91624286.93175948,
+  "revenue_norm": 0.15214896172407308,
+  "ref_cost_norm": 0.15183392202502477,
+  "skill": 0.17938581331539905,
+  "coverage": 0.9737,
+  "structure": {
+    "mean_depth": 4.9761,
+    "p50_depth": 5,
+    "p95_depth": 6,
+    "max_depth": 8,
+    "mean_branching": 8.388593155893536,
+    "p95_branching": 33,
+    "max_branching": 350,
+    "root_fanout": 284,
+    "nodes_over_50_children": 50,
+    "normalized_entropy": 0.779215031187682,
+    "effective_classes": 269.3480450570905,
+    "gini": 0.8211072947936162,
+    "largest_class_share": 0.04776036819999497,
+    "nav_scan": 268.70435000000265,
+    "nav_log_a0": 20.163085334572248,
+    "nav_log_a1": 24.798985334572087,
+    "nav_log_a2": 29.43488533457323
+  },
+  "hashes": {
+    "graph": "759d3b8461a9384d4359244c9fb42c2bc66496431e0f4681d33b7a59798ed35a",
+    "tree": "d3b5dcb7a3722a7d940662a478769395f48afefd8c5efaeb49e66e978968336c",
+    "scheme": "55d63594841783fbd49f621e89d76a006714ae60f507891f77758c8db8438426"
+  },
+  "run": {
+    "scheme_id": "scheme:eurovoc@4.24",
+    "corpus": "corpus",
+    "placement_source": "shelfmark profile:lexical@2",
+    "placement_stats": {
+      "rows": 10000,
+      "failed": 0,
+      "fallback": 263,
+      "placed": 9737,
+      "flagged": 9582,
+      "deciding_tiers": {
+        "vocab": 9737
+      },
+      "classes_used": 802,
+      "top_class": "C2228",
+      "top_class_share": 0.035945363048166784,
+      "top_class_terms": {
+        "paper": 350
+      },
+      "output": "bench/corpus/cache/placed/corpus-eurovoc/placements.jsonl",
+      "classify_seconds": 47.0,
+      "profile": "profile:lexical@2",
+      "store_rules": "empty"
+    },
+    "score_seconds": 2.8
+  }
+}

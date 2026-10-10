@@ -7,6 +7,9 @@ import re
 import subprocess
 from pathlib import Path
 
+# The classification profile every placement request names.
+PROFILE = "profile:lexical@2"
+
 
 def read_jsonl(path):
     return [json.loads(line) for line in Path(path).read_text(encoding="utf-8").splitlines() if line.strip()]
@@ -17,10 +20,10 @@ def write_jsonl(path, rows):
     Path(path).write_text("".join(json.dumps(row, ensure_ascii=False) + "\n" for row in rows), encoding="utf-8")
 
 
-def classify_request(row, scheme):
+def classify_request(row, scheme, profile=PROFILE):
     text = row.get("abstract", row.get("abstract_text", row.get("description", "")))
     return {"verb": "classify", "args": {"title": row.get("title", ""), "text": text,
-            "scheme": scheme, "profile": "profile:lexical@1"}}
+            "scheme": scheme, "profile": profile}}
 
 
 def request_key(request):
@@ -145,7 +148,7 @@ def normalize_codes(args):
 
 def requests(args):
     rows = read_jsonl(args.corpus)
-    batch = [classify_request(row, args.scheme) for row in rows]
+    batch = [classify_request(row, args.scheme, args.profile) for row in rows]
     write_jsonl(args.output, batch)
     print(json.dumps({"requests": len(batch), "scheme": args.scheme, "output": args.output}))
 
@@ -162,7 +165,7 @@ def extract(args):
     per_class = {}
     terms = {}
     for item in corpus:
-        key = request_key(classify_request(item, args.scheme))
+        key = request_key(classify_request(item, args.scheme, args.profile))
         result = result_by_key.get(key, {})
         placement = result.get("data", {}).get("placement")
         if result.get("ok") is not True or not placement:
@@ -229,15 +232,17 @@ def main():
     codes.add_argument("--field", required=True)
     codes.add_argument("--output", required=True)
     codes.set_defaults(run=normalize_codes)
-    req =sub.add_parser("requests")
+    req = sub.add_parser("requests")
     req.add_argument("--corpus", required=True)
     req.add_argument("--scheme", required=True)
+    req.add_argument("--profile", default=PROFILE)
     req.add_argument("--output", required=True)
     req.set_defaults(run=requests)
     out = sub.add_parser("extract")
     out.add_argument("--corpus", required=True)
     out.add_argument("--batch", required=True)
     out.add_argument("--scheme", required=True)
+    out.add_argument("--profile", default=PROFILE)
     out.add_argument("--output", required=True)
     out.set_defaults(run=extract)
     args = p.parse_args()

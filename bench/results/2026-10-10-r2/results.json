@@ -1,0 +1,929 @@
+{
+  "date": "2026-10-10-r2",
+  "corpus": {
+    "corpus.jsonl": "7685685d0de25d6e8a614859783dcb5376d81e4fe336a65f22b550f4c7527b8d",
+    "holdout.jsonl": "3e057eb4a257488ca1668a1ed370306e74b5b21a79cf7b4fdbd2f5b21873c833"
+  },
+  "model": {
+    "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+    "runtime": "fastembed 0.9.0 / ONNX Runtime CPU",
+    "weights_repository": "Qdrant/all-MiniLM-L6-v2-onnx",
+    "weights_revision": "d13954661f83248295ba75c1ed411eef3b7b936e",
+    "weights_sha256": "bbd7b466f6d58e646fdc2bd5fd67b2f5e93c0b687011bd4548c420f7bd46f0c5"
+  },
+  "graphs": {
+    "corpus": {
+      "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "runtime": "fastembed 0.9.0 / ONNX Runtime CPU",
+      "weights_repository": "Qdrant/all-MiniLM-L6-v2-onnx",
+      "weights_revision": "d13954661f83248295ba75c1ed411eef3b7b936e",
+      "weights_sha256": "bbd7b466f6d58e646fdc2bd5fd67b2f5e93c0b687011bd4548c420f7bd46f0c5",
+      "corpus_sha256": "7685685d0de25d6e8a614859783dcb5376d81e4fe336a65f22b550f4c7527b8d",
+      "n": 10000,
+      "dimensions": 384,
+      "graph_k": 20,
+      "tau_rule": "exact mean cosine over all unordered corpus pairs",
+      "tau": 0.1086250601229786,
+      "graph_sha256": "759d3b8461a9384d4359244c9fb42c2bc66496431e0f4681d33b7a59798ed35a",
+      "published": "bench/results/2026-10-10/graphs/corpus-k20.json.gz",
+      "reference": {
+        "corpus": "corpus",
+        "ref_cost_norm": 0.15183392202502477,
+        "graph_sha256": "759d3b8461a9384d4359244c9fb42c2bc66496431e0f4681d33b7a59798ed35a",
+        "seconds": 58.4,
+        "source": "bench/results/2026-10-10/results.json"
+      }
+    },
+    "holdout": {
+      "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "runtime": "fastembed 0.9.0 / ONNX Runtime CPU",
+      "weights_repository": "Qdrant/all-MiniLM-L6-v2-onnx",
+      "weights_revision": "d13954661f83248295ba75c1ed411eef3b7b936e",
+      "weights_sha256": "bbd7b466f6d58e646fdc2bd5fd67b2f5e93c0b687011bd4548c420f7bd46f0c5",
+      "corpus_sha256": "3e057eb4a257488ca1668a1ed370306e74b5b21a79cf7b4fdbd2f5b21873c833",
+      "n": 500,
+      "dimensions": 384,
+      "graph_k": 20,
+      "tau_rule": "exact mean cosine over all unordered corpus pairs",
+      "tau": 0.17312031335824568,
+      "graph_sha256": "03d67d06b82633e1ca3461e3c9f11f3ee3bd55f43079a28b2126a1a90c1f6c75",
+      "published": "bench/results/2026-10-10/graphs/holdout-k20.json.gz",
+      "reference": {
+        "corpus": "holdout",
+        "ref_cost_norm": 0.301409582139011,
+        "graph_sha256": "03d67d06b82633e1ca3461e3c9f11f3ee3bd55f43079a28b2126a1a90c1f6c75",
+        "seconds": 0.1,
+        "source": "bench/results/2026-10-10/results.json"
+      }
+    }
+  },
+  "harness": {
+    "commit": "092494850adc3755f09e225bfd10d76870f10df9",
+    "binary_sha256": "2b006eeed3181ea4a721ba522b7d9be18cad4f567ea7ff225ade62524f201865",
+    "k": 20
+  },
+  "classifier": {
+    "commit": "f4ce24b78eda67a03b17e80e8aef90768d0354eb",
+    "profile": "profile:lexical@2",
+    "binary_sha256": "2a008dfe88a4f744f7d390289b6bc82704b30705cd4e7548d73a1e935fdb7534"
+  },
+  "placement": {
+    "gold": "source labels, normalized to scheme codes (see REPRODUCE.md)",
+    "placed": "shelfmark profile:lexical@2, one isolated store per scheme with an empty rules file; fallback placements (no candidate) are counted as unplaced"
+  },
+  "schemes": {
+    "lcc": {
+      "status": "ok",
+      "id": "scheme:lcc@2024",
+      "version": "2024",
+      "classes": 7392,
+      "file_sha256": "aab91312e939007a8e705ad4d4b3207f696911c43e70e21fa923de3391548327",
+      "source": "data/schemes/lcc (bundled outline)"
+    },
+    "openalex-topics": {
+      "status": "ok",
+      "id": "scheme:openalex-topics@2026-10-09",
+      "version": "2026-10-09",
+      "classes": 4798,
+      "file_sha256": "70b17f20d08f3f1e9e8d2ae16e27b9efac4763b2fdbc8ddf4274e76ffb1953df",
+      "source": "schemes/registry.json (bundled)",
+      "license": "CC0 1.0"
+    },
+    "fdc": {
+      "status": "ok",
+      "id": "scheme:fdc@0.06",
+      "version": "0.06",
+      "classes": 1097,
+      "file_sha256": "066e8d10ede72fae3cc20e6b5019d10136510cdc8dd078328048b5cc80b3a4db",
+      "source": "schemes/registry.json (bundled)",
+      "license": "CC0 1.0"
+    },
+    "unesco-thesaurus": {
+      "status": "ok",
+      "id": "scheme:unesco-thesaurus@2026-08-31",
+      "version": "2026-08-31",
+      "classes": 4595,
+      "file_sha256": "05f0b3cefa69d9096f9736bb606aa45b1f0eaece1afb7fa01231b9f8c338e745",
+      "source": "schemes/registry.json (bundled)",
+      "license": "CC BY-SA 3.0 IGO (https://creativecommons.org/licenses/by-sa/3.0/igo/)"
+    },
+    "bk": {
+      "status": "ok",
+      "id": "scheme:bk@2026-10-03",
+      "version": "2026-10-03",
+      "classes": 2140,
+      "file_sha256": "32cfa836c80adeedb7c8361b9adcfb67be6d24711fca7fbb1122533828aae50c",
+      "source": "schemes/registry.json (bundled)",
+      "license": "CC0 1.0"
+    },
+    "arxiv": {
+      "status": "ok",
+      "id": "scheme:arxiv@2024-04-01",
+      "version": "2024-04-01",
+      "classes": 192,
+      "file_sha256": "97cbb680a3ffd3855bde560a52e969698aa67d1693272c22c821a38ddfbeb22f",
+      "source": "schemes/arxiv (bundled)"
+    },
+    "lcc-full": {
+      "status": "ok",
+      "id": "scheme:lcc-full@2024",
+      "version": "2024",
+      "classes": 416186,
+      "file_sha256": "c38d1ffce9912f90d98da5ebb5cf3b88f4c83e03a688000ae419c30d69f06bea",
+      "source": "schemes/registry.json (bundled)",
+      "license": "US government work, no US copyright (17 U.S.C. 105)"
+    },
+    "ipc": {
+      "status": "ok",
+      "id": "scheme:ipc@2026.01",
+      "version": "2026.01",
+      "classes": 80145,
+      "file_sha256": "bbd8652376032c96b5c46ea3969a5057025aee6147ba67d4b7ae1c437264200c",
+      "source": "schemes/registry.json (built locally; file not committed)",
+      "license": "CC BY 4.0"
+    },
+    "acm-ccs": {
+      "status": "ok",
+      "id": "scheme:acm-ccs@2012",
+      "version": "2012",
+      "classes": 2113,
+      "file_sha256": "24b0d8242b2ae613d1c7f0cafd4889ea71ed34625c4ebbe5e0de3974b5883ecf",
+      "source": "schemes/registry.json (fetch)",
+      "license": "ACM, Inc.: educational and research use; not redistributable, so not bundled"
+    },
+    "eurovoc": {
+      "status": "ok",
+      "id": "scheme:eurovoc@4.24",
+      "version": "4.24",
+      "classes": 7663,
+      "file_sha256": "55d63594841783fbd49f621e89d76a006714ae60f507891f77758c8db8438426",
+      "source": "schemes/registry.json (fetch)",
+      "license": "EU reuse terms stated inconsistently (Commission reuse notice in dataset metadata, CC0 in a third-party registry); not bundled, built from the Publications Office download"
+    },
+    "ilc2": {
+      "status": "ok",
+      "id": "scheme:ilc2@2019-10-17",
+      "version": "2019-10-17",
+      "classes": 10117,
+      "file_sha256": "85326193a8b772eae280294a6ad51f326daa17c743617660e4e1ff94caf0d72c",
+      "source": "schemes/registry.json (fetch)",
+      "license": "Unsettled: the publisher's SKOS file says CC BY 3.0, BARTOC lists CC BY-SA 3.0, no iskoi.org page states a license; not bundled"
+    },
+    "msc": {
+      "status": "ok",
+      "id": "scheme:msc@2020",
+      "version": "2020",
+      "classes": 6603,
+      "file_sha256": "7a50db75a5fb7f7656feb48d1a7a6d3ffd23a71bce244be363e064c1f9b1aac6",
+      "source": "schemes/msc (fetch and build)"
+    },
+    "jel": {
+      "status": "ok",
+      "id": "scheme:jel@2026",
+      "version": "2026",
+      "classes": 1015,
+      "file_sha256": "f8a2c7204830222bdfbe1d6bbb07874c2cb9bdfed9390b9ac7ef3626cd33116c",
+      "source": "schemes/jel (fetch and build)"
+    }
+  },
+  "skipped": {},
+  "failures": {},
+  "runtime": {
+    "scheme_builds": "about 2 min for 13 schemes (fetch, compile and build; every file sha256 equal to 2026-10-10)",
+    "average_linkage_baseline": "not recomputed: ref_cost_norm taken from ../2026-10-10/results.json after checking each graph_sha256",
+    "placement_and_scoring": "about 21 min for 19 placed jobs, 4 in parallel; the first launch was stopped after 10m 32s with 17 jobs done and lcc-full corpus at 4,775 of 10,000 rows, and the rerun resumed that batch and finished in 9m38s",
+    "lcc_full_classify": "about 16 min for 10,000 corpus rows over the two launches; its classify_seconds (468.8) covers only the resumed 5,225 rows",
+    "total_wall_clock": "about 25 min on 8 CPUs, 15 GB RAM, plus a workspace cargo test run sharing the CPUs during the last 9 minutes"
+  },
+  "results": {
+    "acm-ccs-placed": {
+      "scheme": "acm-ccs",
+      "version": "2012",
+      "track": "P",
+      "n": 10000,
+      "coverage": 0.7445,
+      "cost_norm": 0.8306377687081287,
+      "revenue_norm": 0.1693622312918714,
+      "ref_cost_norm": 0.15183392202502477,
+      "skill": 0.199680505610681,
+      "corpus": "corpus",
+      "placement_source": "shelfmark profile:lexical@2",
+      "file": "acm-ccs-placed.json"
+    },
+    "arxiv-placed": {
+      "scheme": "arxiv",
+      "version": "2024-04-01",
+      "track": "P",
+      "n": 10000,
+      "coverage": 0.426,
+      "cost_norm": 0.8912268783209213,
+      "revenue_norm": 0.10877312167907874,
+      "ref_cost_norm": 0.15183392202502477,
+      "skill": 0.12824507428872675,
+      "corpus": "corpus",
+      "placement_source": "shelfmark profile:lexical@2",
+      "file": "arxiv-placed.json"
+    },
+    "bk-placed-holdout": {
+      "scheme": "bk",
+      "version": "2026-10-03",
+      "track": "P",
+      "n": 500,
+      "coverage": 0.044,
+      "cost_norm": 0.9985076864655553,
+      "revenue_norm": 0.0014923135344447323,
+      "ref_cost_norm": 0.301409582139011,
+      "skill": 0.00213617807557966,
+      "corpus": "holdout",
+      "placement_source": "shelfmark profile:lexical@2",
+      "file": "bk-placed-holdout.json"
+    },
+    "bk-placed": {
+      "scheme": "bk",
+      "version": "2026-10-03",
+      "track": "P",
+      "n": 10000,
+      "coverage": 0.4806,
+      "cost_norm": 0.9018835921112436,
+      "revenue_norm": 0.09811640788875639,
+      "ref_cost_norm": 0.15183392202502477,
+      "skill": 0.11568065551856614,
+      "corpus": "corpus",
+      "placement_source": "shelfmark profile:lexical@2",
+      "file": "bk-placed.json"
+    },
+    "eurovoc-placed": {
+      "scheme": "eurovoc",
+      "version": "4.24",
+      "track": "P",
+      "n": 10000,
+      "coverage": 0.9737,
+      "cost_norm": 0.8478510382759269,
+      "revenue_norm": 0.15214896172407308,
+      "ref_cost_norm": 0.15183392202502477,
+      "skill": 0.17938581331539905,
+      "corpus": "corpus",
+      "placement_source": "shelfmark profile:lexical@2",
+      "file": "eurovoc-placed.json"
+    },
+    "fdc-placed-holdout": {
+      "scheme": "fdc",
+      "version": "0.06",
+      "track": "P",
+      "n": 500,
+      "coverage": 0.052,
+      "cost_norm": 0.9980996880320215,
+      "revenue_norm": 0.0019003119679784951,
+      "ref_cost_norm": 0.301409582139011,
+      "skill": 0.0027202090372167144,
+      "corpus": "holdout",
+      "placement_source": "shelfmark profile:lexical@2",
+      "file": "fdc-placed-holdout.json"
+    },
+    "fdc-placed": {
+      "scheme": "fdc",
+      "version": "0.06",
+      "track": "P",
+      "n": 10000,
+      "coverage": 0.7696,
+      "cost_norm": 0.8337024522634601,
+      "revenue_norm": 0.16629754773653996,
+      "ref_cost_norm": 0.15183392202502477,
+      "skill": 0.19606719963804833,
+      "corpus": "corpus",
+      "placement_source": "shelfmark profile:lexical@2",
+      "file": "fdc-placed.json"
+    },
+    "ilc2-placed-holdout": {
+      "scheme": "ilc2",
+      "version": "2019-10-17",
+      "track": "P",
+      "n": 500,
+      "coverage": 0.456,
+      "cost_norm": 0.9542629674173658,
+      "revenue_norm": 0.04573703258263422,
+      "ref_cost_norm": 0.301409582139011,
+      "skill": 0.06547045509538507,
+      "corpus": "holdout",
+      "placement_source": "shelfmark profile:lexical@2",
+      "file": "ilc2-placed-holdout.json"
+    },
+    "ilc2-placed": {
+      "scheme": "ilc2",
+      "version": "2019-10-17",
+      "track": "P",
+      "n": 10000,
+      "coverage": 0.9999,
+      "cost_norm": 0.8188982334447874,
+      "revenue_norm": 0.18110176655521257,
+      "ref_cost_norm": 0.15183392202502477,
+      "skill": 0.21352158646523461,
+      "corpus": "corpus",
+      "placement_source": "shelfmark profile:lexical@2",
+      "file": "ilc2-placed.json"
+    },
+    "ipc-placed": {
+      "scheme": "ipc",
+      "version": "2026.01",
+      "track": "P",
+      "n": 10000,
+      "coverage": 0.9799,
+      "cost_norm": 0.7689910629792366,
+      "revenue_norm": 0.23100893702076342,
+      "ref_cost_norm": 0.15183392202502477,
+      "skill": 0.27236285795855564,
+      "corpus": "corpus",
+      "placement_source": "shelfmark profile:lexical@2",
+      "file": "ipc-placed.json"
+    },
+    "jel-placed": {
+      "scheme": "jel",
+      "version": "2026",
+      "track": "P",
+      "n": 10000,
+      "coverage": 0.4786,
+      "cost_norm": 0.9027734514082681,
+      "revenue_norm": 0.09722654859173188,
+      "ref_cost_norm": 0.15183392202502477,
+      "skill": 0.11463149861388407,
+      "corpus": "corpus",
+      "placement_source": "shelfmark profile:lexical@2",
+      "file": "jel-placed.json"
+    },
+    "lcc-full-placed-holdout": {
+      "scheme": "lcc-full",
+      "version": "2024",
+      "track": "P",
+      "n": 500,
+      "coverage": 0.566,
+      "cost_norm": 0.9249553061519749,
+      "revenue_norm": 0.07504469384802519,
+      "ref_cost_norm": 0.301409582139011,
+      "skill": 0.10742302203028231,
+      "corpus": "holdout",
+      "placement_source": "shelfmark profile:lexical@2",
+      "file": "lcc-full-placed-holdout.json"
+    },
+    "lcc-full-placed": {
+      "scheme": "lcc-full",
+      "version": "2024",
+      "track": "P",
+      "n": 10000,
+      "coverage": 0.9999,
+      "cost_norm": 0.8228398634392914,
+      "revenue_norm": 0.1771601365607086,
+      "ref_cost_norm": 0.15183392202502477,
+      "skill": 0.20887434803297528,
+      "corpus": "corpus",
+      "placement_source": "shelfmark profile:lexical@2",
+      "file": "lcc-full-placed.json"
+    },
+    "lcc-placed-holdout": {
+      "scheme": "lcc",
+      "version": "2024",
+      "track": "P",
+      "n": 500,
+      "coverage": 0.084,
+      "cost_norm": 0.9963599622501464,
+      "revenue_norm": 0.0036400377498536037,
+      "ref_cost_norm": 0.301409582139011,
+      "skill": 0.005210546347026873,
+      "corpus": "holdout",
+      "placement_source": "shelfmark profile:lexical@2",
+      "file": "lcc-placed-holdout.json"
+    },
+    "lcc-placed": {
+      "scheme": "lcc",
+      "version": "2024",
+      "track": "P",
+      "n": 10000,
+      "coverage": 0.8765,
+      "cost_norm": 0.8487357851926361,
+      "revenue_norm": 0.15126421480736382,
+      "ref_cost_norm": 0.15183392202502477,
+      "skill": 0.17834268398060932,
+      "corpus": "corpus",
+      "placement_source": "shelfmark profile:lexical@2",
+      "file": "lcc-placed.json"
+    },
+    "msc-placed": {
+      "scheme": "msc",
+      "version": "2020",
+      "track": "P",
+      "n": 10000,
+      "coverage": 0.3916,
+      "cost_norm": 0.9497975731748167,
+      "revenue_norm": 0.05020242682518328,
+      "ref_cost_norm": 0.15183392202502477,
+      "skill": 0.05918938298622275,
+      "corpus": "corpus",
+      "placement_source": "shelfmark profile:lexical@2",
+      "file": "msc-placed.json"
+    },
+    "openalex-topics-placed": {
+      "scheme": "openalex-topics",
+      "version": "2026-10-09",
+      "track": "P",
+      "n": 10000,
+      "coverage": 0.9732,
+      "cost_norm": 0.6414084159642335,
+      "revenue_norm": 0.3585915840357665,
+      "ref_cost_norm": 0.15183392202502477,
+      "skill": 0.4227846330425238,
+      "corpus": "corpus",
+      "placement_source": "shelfmark profile:lexical@2",
+      "file": "openalex-topics-placed.json"
+    },
+    "unesco-thesaurus-placed-holdout": {
+      "scheme": "unesco-thesaurus",
+      "version": "2026-08-31",
+      "track": "P",
+      "n": 500,
+      "coverage": 0.158,
+      "cost_norm": 0.9887842454542979,
+      "revenue_norm": 0.011215754545702115,
+      "ref_cost_norm": 0.301409582139011,
+      "skill": 0.016054835936690326,
+      "corpus": "holdout",
+      "placement_source": "shelfmark profile:lexical@2",
+      "file": "unesco-thesaurus-placed-holdout.json"
+    },
+    "unesco-thesaurus-placed": {
+      "scheme": "unesco-thesaurus",
+      "version": "2026-08-31",
+      "track": "P",
+      "n": 10000,
+      "coverage": 0.9731,
+      "cost_norm": 0.7210125317999464,
+      "revenue_norm": 0.27898746820005355,
+      "ref_cost_norm": 0.15183392202502477,
+      "skill": 0.3289302360053652,
+      "corpus": "corpus",
+      "placement_source": "shelfmark profile:lexical@2",
+      "file": "unesco-thesaurus-placed.json"
+    }
+  },
+  "baseline": {
+    "results": "bench/results/2026-10-10/results.json",
+    "gold": "not rerun: gold placements do not depend on the classifier, so the baseline's gold results stand",
+    "placement_source": "shelfmark profile:lexical@1"
+  },
+  "comparison": {
+    "acm-ccs-placed": {
+      "scheme": "acm-ccs",
+      "corpus": "corpus",
+      "before": {
+        "coverage": 0.7445,
+        "cost_norm": 0.8306377687081287,
+        "skill": 0.199680505610681,
+        "top_class": "10002944.10011123.10011674",
+        "top_class_share": 0.11779717931497649,
+        "top_class_terms": {
+          "performance": 877
+        }
+      },
+      "after": {
+        "coverage": 0.7445,
+        "cost_norm": 0.8306377687081287,
+        "skill": 0.199680505610681,
+        "top_class": "10002944.10011123.10011674",
+        "top_class_share": 0.11779717931497649,
+        "top_class_terms": {
+          "performance": 877
+        }
+      }
+    },
+    "arxiv-placed": {
+      "scheme": "arxiv",
+      "corpus": "corpus",
+      "before": {
+        "coverage": 0.426,
+        "cost_norm": 0.8912268783209213,
+        "skill": 0.12824507428872675,
+        "top_class": "cs.PF",
+        "top_class_share": 0.3908450704225352,
+        "top_class_terms": {
+          "performance": 1665
+        }
+      },
+      "after": {
+        "coverage": 0.426,
+        "cost_norm": 0.8912268783209213,
+        "skill": 0.12824507428872675,
+        "top_class": "cs.PF",
+        "top_class_share": 0.3908450704225352,
+        "top_class_terms": {
+          "performance": 1665
+        }
+      }
+    },
+    "bk-placed": {
+      "scheme": "bk",
+      "corpus": "corpus",
+      "before": {
+        "coverage": 0.4806,
+        "cost_norm": 0.9018835921112436,
+        "skill": 0.11568065551856614,
+        "top_class": "01.00",
+        "top_class_share": 0.16396171452351227,
+        "top_class_terms": {
+          "general": 788
+        }
+      },
+      "after": {
+        "coverage": 0.4806,
+        "cost_norm": 0.9018835921112436,
+        "skill": 0.11568065551856614,
+        "top_class": "01.00",
+        "top_class_share": 0.16396171452351227,
+        "top_class_terms": {
+          "general": 788
+        }
+      }
+    },
+    "bk-placed-holdout": {
+      "scheme": "bk",
+      "corpus": "holdout",
+      "before": {
+        "coverage": 0.044,
+        "cost_norm": 0.9985076864655553,
+        "skill": 0.00213617807557966,
+        "top_class": "71.32",
+        "top_class_share": 0.3181818181818182,
+        "top_class_terms": {
+          "man": 7
+        }
+      },
+      "after": {
+        "coverage": 0.044,
+        "cost_norm": 0.9985076864655553,
+        "skill": 0.00213617807557966,
+        "top_class": "71.32",
+        "top_class_share": 0.3181818181818182,
+        "top_class_terms": {
+          "man": 7
+        }
+      }
+    },
+    "eurovoc-placed": {
+      "scheme": "eurovoc",
+      "corpus": "corpus",
+      "before": {
+        "coverage": 0.9744,
+        "cost_norm": 0.8483135554959255,
+        "skill": 0.17884049886341952,
+        "top_class": "C2228",
+        "top_class_share": 0.035919540229885055,
+        "top_class_terms": {
+          "paper": 350
+        }
+      },
+      "after": {
+        "coverage": 0.9737,
+        "cost_norm": 0.8478510382759269,
+        "skill": 0.17938581331539905,
+        "top_class": "C2228",
+        "top_class_share": 0.035945363048166784,
+        "top_class_terms": {
+          "paper": 350
+        }
+      }
+    },
+    "fdc-placed": {
+      "scheme": "fdc",
+      "corpus": "corpus",
+      "before": {
+        "coverage": 0.7696,
+        "cost_norm": 0.8337024522634601,
+        "skill": 0.19606719963804833,
+        "top_class": "676",
+        "top_class_share": 0.14332120582120583,
+        "top_class_terms": {
+          "paper": 1103
+        }
+      },
+      "after": {
+        "coverage": 0.7696,
+        "cost_norm": 0.8337024522634601,
+        "skill": 0.19606719963804833,
+        "top_class": "676",
+        "top_class_share": 0.14332120582120583,
+        "top_class_terms": {
+          "paper": 1103
+        }
+      }
+    },
+    "fdc-placed-holdout": {
+      "scheme": "fdc",
+      "corpus": "holdout",
+      "before": {
+        "coverage": 0.052,
+        "cost_norm": 0.9980996880320215,
+        "skill": 0.0027202090372167144,
+        "top_class": "750",
+        "top_class_share": 0.11538461538461539,
+        "top_class_terms": {
+          "art": 3
+        }
+      },
+      "after": {
+        "coverage": 0.052,
+        "cost_norm": 0.9980996880320215,
+        "skill": 0.0027202090372167144,
+        "top_class": "750",
+        "top_class_share": 0.11538461538461539,
+        "top_class_terms": {
+          "art": 3
+        }
+      }
+    },
+    "ilc2-placed": {
+      "scheme": "ilc2",
+      "corpus": "corpus",
+      "before": {
+        "coverage": 1.0,
+        "cost_norm": 0.8248877022234665,
+        "skill": 0.20645991666469368,
+        "top_class": "agy993",
+        "top_class_share": 0.737,
+        "top_class_terms": {
+          "to": 7370
+        }
+      },
+      "after": {
+        "coverage": 0.9999,
+        "cost_norm": 0.8188982334447874,
+        "skill": 0.21352158646523461,
+        "top_class": "edqam",
+        "top_class_share": 0.041704170417041705,
+        "top_class_terms": {
+          "s": 417
+        }
+      }
+    },
+    "ilc2-placed-holdout": {
+      "scheme": "ilc2",
+      "corpus": "holdout",
+      "before": {
+        "coverage": 0.568,
+        "cost_norm": 0.9339749113443714,
+        "skill": 0.09451187271905412,
+        "top_class": "agqs99",
+        "top_class_share": 0.13732394366197184,
+        "top_class_terms": {
+          "of": 39
+        }
+      },
+      "after": {
+        "coverage": 0.456,
+        "cost_norm": 0.9542629674173658,
+        "skill": 0.06547045509538507,
+        "top_class": "edqam",
+        "top_class_share": 0.10964912280701754,
+        "top_class_terms": {
+          "s": 25
+        }
+      }
+    },
+    "ipc-placed": {
+      "scheme": "ipc",
+      "corpus": "corpus",
+      "before": {
+        "coverage": 0.9941,
+        "cost_norm": 0.7806679846792304,
+        "skill": 0.2585955993953827,
+        "top_class": "C01G",
+        "top_class_share": 0.6006437984106227,
+        "top_class_terms": {
+          "to": 5971
+        }
+      },
+      "after": {
+        "coverage": 0.9799,
+        "cost_norm": 0.7689910629792366,
+        "skill": 0.27236285795855564,
+        "top_class": "G09B23/00",
+        "top_class_share": 0.08072252270639861,
+        "top_class_terms": {
+          "models": 791
+        }
+      }
+    },
+    "jel-placed": {
+      "scheme": "jel",
+      "corpus": "corpus",
+      "before": {
+        "coverage": 0.5171,
+        "cost_norm": 0.9015218570350092,
+        "skill": 0.11610714637410476,
+        "top_class": "M53",
+        "top_class_share": 0.18700444788242118,
+        "top_class_terms": {
+          "training": 967
+        }
+      },
+      "after": {
+        "coverage": 0.4786,
+        "cost_norm": 0.9027734514082681,
+        "skill": 0.11463149861388407,
+        "top_class": "M53",
+        "top_class_share": 0.20309235269536147,
+        "top_class_terms": {
+          "training": 972
+        }
+      }
+    },
+    "lcc-full-placed": {
+      "scheme": "lcc-full",
+      "corpus": "corpus",
+      "before": {
+        "coverage": 1.0,
+        "cost_norm": 0.7995188545884887,
+        "skill": 0.2363701527537705,
+        "top_class": "PL2813",
+        "top_class_share": 0.2213,
+        "top_class_terms": {
+          "to": 2213
+        }
+      },
+      "after": {
+        "coverage": 0.9999,
+        "cost_norm": 0.8228398634392914,
+        "skill": 0.20887434803297528,
+        "top_class": "QC243.3.E5",
+        "top_class_share": 0.0121012101210121,
+        "top_class_terms": {
+          "energy": 121
+        }
+      }
+    },
+    "lcc-full-placed-holdout": {
+      "scheme": "lcc-full",
+      "corpus": "holdout",
+      "before": {
+        "coverage": 0.61,
+        "cost_norm": 0.9170296159036658,
+        "skill": 0.11876828249431311,
+        "top_class": "BQ940",
+        "top_class_share": 0.03934426229508197,
+        "top_class_terms": {
+          "a": 12
+        }
+      },
+      "after": {
+        "coverage": 0.566,
+        "cost_norm": 0.9249553061519749,
+        "skill": 0.10742302203028231,
+        "top_class": "K23",
+        "top_class_share": 0.02120141342756184,
+        "top_class_terms": {
+          "s": 6
+        }
+      }
+    },
+    "lcc-placed": {
+      "scheme": "lcc",
+      "corpus": "corpus",
+      "before": {
+        "coverage": 0.884,
+        "cost_norm": 0.8483589070320041,
+        "skill": 0.1787870287503646,
+        "top_class": "QA299.6-433",
+        "top_class_share": 0.0745475113122172,
+        "top_class_terms": {
+          "analysis": 659
+        }
+      },
+      "after": {
+        "coverage": 0.8765,
+        "cost_norm": 0.8487357851926361,
+        "skill": 0.17834268398060932,
+        "top_class": "QA299.6-433",
+        "top_class_share": 0.07541357672561323,
+        "top_class_terms": {
+          "analysis": 661
+        }
+      }
+    },
+    "lcc-placed-holdout": {
+      "scheme": "lcc",
+      "corpus": "holdout",
+      "before": {
+        "coverage": 0.084,
+        "cost_norm": 0.9963599622501464,
+        "skill": 0.005210546347026873,
+        "top_class": "QH501-531",
+        "top_class_share": 0.07142857142857142,
+        "top_class_terms": {
+          "life": 3
+        }
+      },
+      "after": {
+        "coverage": 0.084,
+        "cost_norm": 0.9963599622501464,
+        "skill": 0.005210546347026873,
+        "top_class": "QH501-531",
+        "top_class_share": 0.07142857142857142,
+        "top_class_terms": {
+          "life": 3
+        }
+      }
+    },
+    "msc-placed": {
+      "scheme": "msc",
+      "corpus": "corpus",
+      "before": {
+        "coverage": 0.3916,
+        "cost_norm": 0.9497975731748167,
+        "skill": 0.05918938298622275,
+        "top_class": "51-XX",
+        "top_class_share": 0.09678243105209397,
+        "top_class_terms": {
+          "geometry": 379
+        }
+      },
+      "after": {
+        "coverage": 0.3916,
+        "cost_norm": 0.9497975731748167,
+        "skill": 0.05918938298622275,
+        "top_class": "51-XX",
+        "top_class_share": 0.09678243105209397,
+        "top_class_terms": {
+          "geometry": 379
+        }
+      }
+    },
+    "openalex-topics-placed": {
+      "scheme": "openalex-topics",
+      "corpus": "corpus",
+      "before": {
+        "coverage": 0.9735,
+        "cost_norm": 0.6414858887533489,
+        "skill": 0.4226932915103319,
+        "top_class": "F21",
+        "top_class_share": 0.05649717514124294,
+        "top_class_terms": {
+          "energy": 550
+        }
+      },
+      "after": {
+        "coverage": 0.9732,
+        "cost_norm": 0.6414084159642335,
+        "skill": 0.4227846330425238,
+        "top_class": "F21",
+        "top_class_share": 0.05651459103986847,
+        "top_class_terms": {
+          "energy": 550
+        }
+      }
+    },
+    "unesco-thesaurus-placed": {
+      "scheme": "unesco-thesaurus",
+      "corpus": "corpus",
+      "before": {
+        "coverage": 0.9886,
+        "cost_norm": 0.731813442709348,
+        "skill": 0.31619580675869086,
+        "top_class": "c493",
+        "top_class_share": 0.17802953671859195,
+        "top_class_terms": {
+          "is": 1760
+        }
+      },
+      "after": {
+        "coverage": 0.9731,
+        "cost_norm": 0.7210125317999464,
+        "skill": 0.3289302360053652,
+        "top_class": "c155",
+        "top_class_share": 0.054978933305929505,
+        "top_class_terms": {
+          "time": 535
+        }
+      }
+    },
+    "unesco-thesaurus-placed-holdout": {
+      "scheme": "unesco-thesaurus",
+      "corpus": "holdout",
+      "before": {
+        "coverage": 0.16,
+        "cost_norm": 0.9887824284714591,
+        "skill": 0.016057436863917907,
+        "top_class": "c155",
+        "top_class_share": 0.05,
+        "top_class_terms": {
+          "time": 4
+        }
+      },
+      "after": {
+        "coverage": 0.158,
+        "cost_norm": 0.9887842454542979,
+        "skill": 0.016054835936690326,
+        "top_class": "c155",
+        "top_class_share": 0.05063291139240506,
+        "top_class_terms": {
+          "time": 4
+        }
+      }
+    }
+  }
+}

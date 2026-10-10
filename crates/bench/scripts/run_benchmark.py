@@ -21,7 +21,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
 PREP = [sys.executable, str(HERE / "prepare_placements.py")]
-PROFILE = "profile:lexical@1"
+PROFILE = "profile:lexical@2"
 # Gold label sources: scheme -> (corpus, normalizer args). The field names
 # are the corpus fields the harness reads for that scheme name.
 GOLD = {
@@ -71,6 +71,10 @@ class Bench:
         self.corpora = {"corpus": ROOT / "bench/corpus/corpus.jsonl",
                         "holdout": ROOT / "bench/corpus/holdout.jsonl"}
         self.graphs = {name: self.cache / "graphs" / f"{name}-k20.json" for name in self.corpora}
+        for name, graph in self.graphs.items():
+            manifest = json.loads(graph.with_name(f"{name}-k20.manifest.json").read_text())
+            if sha256(graph) != manifest["graph_sha256"]:
+                raise SystemExit(f"{graph}: sha256 does not match its manifest")
         # One job per scheme at a time: its store is not shared between writers.
         self.locks = defaultdict(threading.Lock)
 
@@ -131,7 +135,7 @@ class Bench:
         scheme_id = self.scheme_id(name)
         requests, batch = work / "requests.jsonl", work / "batch.jsonl"
         run(PREP + ["requests", "--corpus", self.corpora[corpus], "--scheme", scheme_id,
-                    "--output", requests])
+                    "--profile", PROFILE, "--output", requests])
         timing = work / "timing.json"
         started = time.monotonic()
         resume = ["--resume"] if batch.exists() else []
@@ -142,7 +146,8 @@ class Bench:
             timing.write_text(json.dumps({"classify_seconds": round(time.monotonic() - started, 1)}))
         seconds = json.loads(timing.read_text())["classify_seconds"]
         stats = last_json(run(PREP + ["extract", "--corpus", self.corpora[corpus], "--batch", batch,
-                                      "--scheme", scheme_id, "--output", out]))
+                                      "--scheme", scheme_id, "--profile", PROFILE,
+                                      "--output", out]))
         stats.update(classify_seconds=seconds, profile=PROFILE, store_rules="empty")
         stats_path.write_text(json.dumps(stats, indent=2) + "\n", encoding="utf-8")
         return out, stats
@@ -150,6 +155,13 @@ class Bench:
     def reference(self, corpus):
         """Average-linkage baseline cost_norm for a graph, computed once."""
         path = self.runs / f"reference-{corpus}.json"
+        if not path.exists() and self.a.reference_from:
+            # Reuse a published baseline; it is only valid for the same graph.
+            ref = json.loads(Path(self.a.reference_from).read_text())["graphs"][corpus]["reference"]
+            if ref["graph_sha256"] != sha256(self.graphs[corpus]):
+                raise SystemExit(f"{self.a.reference_from}: {corpus} reference is for another graph")
+            ref = dict(ref, source=self.a.reference_from)
+            path.write_text(json.dumps(ref, indent=2) + "\n", encoding="utf-8")
         if not path.exists():
             # Any scheme without a gold field works: only the reference score is kept.
             started = time.monotonic()
@@ -183,7 +195,7 @@ class Bench:
         """(scheme, key, thunk) triples for every gold and placed result."""
         built = self.built()
         jobs = []
-        for name in GOLD:
+        for name in [] if self.a.placed_only else GOLD:
             if name in built:
                 jobs.append((name, f"{name}-gold", lambda n=name: self.gold_job(n)))
         for name in built:
@@ -218,6 +230,11 @@ def main():
     p.add_argument("--shelfmark", required=True)
     p.add_argument("--harness", required=True)
     p.add_argument("--jobs", type=int, default=4)
+    p.add_argument("--placed-only", action="store_true",
+                   help="skip the gold runs (they do not depend on the classifier)")
+    p.add_argument("--reference-from", metavar="RESULTS_JSON",
+                   help="take the average-linkage baselines from a published results.json "
+                        "instead of recomputing them; the graph hashes must match")
     a = p.parse_args()
     bench = Bench(a)
     started = time.monotonic()
