@@ -49,7 +49,7 @@ def log(msg):
 
 
 def run(cmd, **kw):
-    proc = subprocess.run([str(c) for c in cmd], capture_output=True, text=True, **kw)
+    proc = subprocess.run([str(c) for c in cmd], capture_output=True, text=True, check=False, **kw)
     if proc.returncode != 0:
         raise RuntimeError(f"{' '.join(map(str, cmd))} failed ({proc.returncode}): "
                            f"{(proc.stderr or proc.stdout).strip()[-800:]}")
@@ -251,7 +251,7 @@ def main():
         try:
             with bench.locks[name]:
                 thunk()
-        except Exception as e:  # recorded and reported; other jobs continue
+        except Exception as e:  # noqa: BLE001 -- recorded and reported; other jobs continue
             failures[key] = str(e)
             log(f"FAILED {key}: {e}")
 

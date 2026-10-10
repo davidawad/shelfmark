@@ -7,7 +7,8 @@ bibliography: references.bib
 
 <!--
 DRAFT. Every number in the tables, and every number in the prose wrapped in a
-`v:` marker, is generated from bench/results/2026-10-10 (gold) and
+`v:` marker, is generated from bench/results/2026-10-10 (gold),
+bench/results/2026-10-10-r3 (gold rescored on the fixed corpus) and
 bench/results/2026-10-10-r2 (shelfmark-placed) by scripts/make_tables.py.
 Do not edit generated text by hand; rerun the script. Citation keys refer to
 references.bib. TODO(cite) marks a claim with no verified source yet.
@@ -307,8 +308,8 @@ metadata [@arxivlicense]. Datestamps follow record updates, so older papers
 appear: <!-- v:share_2026_ids -->69.7%<!-- /v --> of identifiers carry a
 2026 prefix. Computer science, mathematics and physics make up
 <!-- v:share_physical_math_cs -->86.4%<!-- /v --> of the sample. Gold
-labels in other schemes are sparse. <!-- v:n_msc_rows -->1,348<!-- /v -->
-papers carry an MSC code, <!-- v:n_acm_rows -->132<!-- /v --> an ACM class
+labels in other schemes are sparse. <!-- v:n_msc_rows -->1,325<!-- /v -->
+papers carry an MSC code, <!-- v:n_acm_rows -->317<!-- /v --> an ACM class
 field and <!-- v:n_jel_rows -->2<!-- /v --> a JEL code.
 
 Table 1. Composition of the arXiv corpus by primary category.
@@ -385,13 +386,14 @@ Every table in this section is generated from the published JSON (Section
 
 ## 5.1 Gold placements
 
-Table 3. Gold placements on the arXiv corpus (bench/results/2026-10-10).
+Table 3. Gold placements on the arXiv corpus (bench/results/2026-10-10;
+`msc` rescored on the fixed corpus in bench/results/2026-10-10-r3).
 
 <!-- table:gold_corpus -->
 | scheme | version | coverage | cost_norm | revenue_norm | skill | eff. classes | mean depth | max depth | max fan-out | Gini | nav_log (a=1) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | `arxiv` | 2024-04-01 | 100.0% | 0.333 | 0.667 | 0.786 | 36.5 | 3.90 | 4 | 797 | 0.795 | 18.3 |
-| `msc` | 2020 | 13.1% | 0.984 | 0.016 | 0.018 | 461.3 | 1.39 | 4 | 25 | 0.598 | 15.2 |
+| `msc` | 2020 | 13.2% | 0.984 | 0.016 | 0.018 | 461.5 | 1.39 | 4 | 25 | 0.599 | 15.2 |
 | `jel` | 2026 | 0.02% | 1.000 | 0.000 | 0.000 | 6.0 | 1.00 | 4 | 1 | 0.000 | 14.3 |
 <!-- /table:gold_corpus -->
 
@@ -428,12 +430,11 @@ reward the finer LCC distinctions. This does not mean the distinctions are
 useless; it is a limit of what the graph can see.
 
 MSC and JEL gold results are uninformative. With
-<!-- v:gold_msc_cov -->13.1%<!-- /v --> and
+<!-- v:gold_msc_cov -->13.2%<!-- /v --> and
 <!-- v:gold_jel_cov -->0.02%<!-- /v --> coverage, almost every pair
 involves an item under the root. ACM CCS has no gold run at all. The
-corpus's `acm_ccs` field holds arXiv's free-text ACM-class field, and no
-value in it is a CCS 2012 concept path. The run log records: "<!-- v:skipped_acm_note -->the corpus acm_ccs field (433 values on 132 papers) holds MSC-style codes and Primary/Secondary markers copied from arXiv's ACM-class field; none is an ACM CCS 2012 concept path, and no CCS 1998 to 2012 crosswalk is used<!-- /v -->".
-The field is being repaired.
+corpus's `acm_ccs` field holds the ACM classes submitted to arXiv, and no
+value in it is a CCS 2012 concept path. The run log records: "<!-- v:skipped_acm_note -->the corpus acm_ccs field (690 values on 317 papers) holds ACM CCS 1998 codes such as `I.2.6`, as submitted to arXiv; the scheme is CCS 2012, whose codes are paths of 8-digit concept IDs, and no CCS 1998 to 2012 crosswalk is used<!-- /v -->".
 
 ## 5.2 shelfmark-placed results
 
@@ -538,7 +539,7 @@ Table 8. Gold vs classifier placement on identical items.
 | scheme | corpus | gold coverage | placed coverage | gold skill | placed skill | placed − gold |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
 | `arxiv` | corpus | 100.0% | 42.6% | 0.786 | 0.128 | -0.658 |
-| `msc` | corpus | 13.1% | 39.2% | 0.018 | 0.059 | +0.041 |
+| `msc` | corpus | 13.2% | 39.2% | 0.018 | 0.059 | +0.041 |
 | `jel` | corpus | 0.02% | 47.9% | 0.000 | 0.115 | +0.115 |
 | `lcc` | holdout | 92.2% | 8.4% | 0.419 | 0.005 | -0.413 |
 | `lcc-full` | holdout | 92.2% | 56.6% | 0.421 | 0.107 | -0.314 |
@@ -571,7 +572,7 @@ menu included).
 | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | `arxiv` | gold | corpus | 4 | 4 | 8 | 15.2 | 18.3 | 21.5 | 291 |
 | `jel` | gold | corpus | 1 | 1 | 10000 | 13.3 | 14.3 | 15.3 | 5001 |
-| `msc` | gold | corpus | 1 | 4 | 8746 | 13.9 | 15.2 | 16.5 | 4376 |
+| `msc` | gold | corpus | 1 | 4 | 8738 | 13.9 | 15.2 | 16.5 | 4372 |
 | `lcc` | gold | holdout | 4 | 6 | 53 | 14.8 | 18.6 | 22.4 | 69 |
 | `lcc-full` | gold | holdout | 5 | 7 | 53 | 15.4 | 19.7 | 24.1 | 56 |
 | `acm-ccs` | placed | corpus | 4 | 6 | 2568 | 20.5 | 23.7 | 27.0 | 1476 |
@@ -729,15 +730,14 @@ quality in every sense that matters to libraries.
   schemes (arXiv, MSC, ACM CCS) are scored on their home ground and general
   schemes are not, so no cross-type comparison is fair.
 - **Low gold coverage for MSC and JEL.** Only
-  <!-- v:gold_msc_cov -->13.1%<!-- /v --> of papers carry a valid MSC code
+  <!-- v:gold_msc_cov -->13.2%<!-- /v --> of papers carry a valid MSC code
   and <!-- v:gold_jel_cov -->0.02%<!-- /v --> a JEL code. Unplaced items
   hang under the root, so these gold scores measure coverage, not
   structure. A covered-subset score, restricted to labelled items and their
   edges, is not yet implemented.
 - **ACM CCS gold missing.** The corpus field meant to carry ACM CCS labels
-  holds arXiv's free-text ACM-class values, mostly 1998-era codes and
-  markers. No value is a CCS 2012 concept path, so the gold run was skipped.
-  The corpus field is under repair.
+  holds the ACM classes submitted to arXiv, which are CCS 1998 codes. No
+  value is a CCS 2012 concept path, so the gold run was skipped.
 - **Scheme licensing.** Several schemes cannot be redistributed: ACM CCS
   (educational and research use only), JEL (no open licence), MSC
   (non-commercial, share-alike), EuroVoc (terms stated inconsistently) and
@@ -789,8 +789,9 @@ All inputs and outputs are in the repository or pinned by hash.
   are rebuilt by `crates/bench/scripts/build_schemes.sh` from the
   publishers' downloads, checked against committed `sources.lock.json`
   files, and must match the `file_sha256` recorded in `results.json`.
-- **Commands.** `bench/results/2026-10-10/REPRODUCE.md` and
-  `bench/results/2026-10-10-r2/REPRODUCE.md` list every command. The first
+- **Commands.** `bench/results/2026-10-10/REPRODUCE.md`,
+  `bench/results/2026-10-10-r2/REPRODUCE.md` and
+  `bench/results/2026-10-10-r3/REPRODUCE.md` list every command. The first
   run took about 45 minutes and the r2 rerun about 25 minutes, both on 8
   CPUs.
 - **Determinism.** With the same graph and scheme files, gold scores
@@ -798,8 +799,8 @@ All inputs and outputs are in the repository or pinned by hash.
   classifier build.
 - **This paper.** `paper/paper1/scripts/make_tables.py` regenerates every
   table and marked number from the JSON. `--check` fails if `paper.md` is
-  stale. It also checks that the r2 run used the 2026-10-10 graphs and
-  scheme files, and that the corpus files match their recorded hashes.
+  stale. It also checks that the r2 and r3 runs used the 2026-10-10 graphs
+  and scheme files, and that the corpus files match their recorded hashes.
 
 # Acknowledgements
 

@@ -2,7 +2,13 @@
 //! published JSON Schema, round-trips through `SchemeDoc`, passes the
 //! scheme compiler's own checks and answers validate, browse and search
 //! the way the classifier uses them.
+//!
+//! `ipc.json` is not committed (see the README); build it with the builder's
+//! `fetch` and `build`. Without it every test skips, says so on stderr and
+//! appends one line to `$TEST_SKIP_LOG`; `IPC_REQUIRE_BUILD=1` makes the skip
+//! a failure.
 
+use std::io::Write;
 use std::path::PathBuf;
 use std::sync::OnceLock;
 
@@ -12,6 +18,29 @@ use shelfmark_core::scheme::{CodeCheck, CompiledIndex, SchemeDoc};
 
 fn root() -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../..")
+}
+
+/// Whether `schemes/ipc/ipc.json` is built; logs a skip when it is not.
+fn built() -> bool {
+    if root().join("schemes/ipc/ipc.json").exists() {
+        return true;
+    }
+    let why = "schemes/ipc/ipc.json is not built (run the builder's fetch and build)";
+    assert!(
+        std::env::var("IPC_REQUIRE_BUILD").as_deref() != Ok("1"),
+        "{why}, and IPC_REQUIRE_BUILD=1 makes that a failure"
+    );
+    let test = std::thread::current().name().unwrap_or("?").to_string();
+    let line = format!("SKIP: {why} [{test}]");
+    eprintln!("{line}");
+    if let Some(log) = std::env::var_os("TEST_SKIP_LOG") {
+        let _ = std::fs::OpenOptions::new()
+            .create(true)
+            .append(true)
+            .open(log)
+            .and_then(|mut f| f.write_all(format!("{line}\n").as_bytes()));
+    }
+    false
 }
 
 fn bytes() -> &'static [u8] {
@@ -34,6 +63,9 @@ fn codes(records: Vec<shelfmark_core::scheme::ClassRecord>) -> Vec<String> {
 
 #[test]
 fn validates_against_the_published_schema() {
+    if !built() {
+        return;
+    }
     let schema = json("schemas/scheme.schema.json");
     let v = jsonschema::validator_for(&schema).unwrap();
     let doc = json("schemes/ipc/ipc.json");
@@ -47,6 +79,9 @@ fn validates_against_the_published_schema() {
 
 #[test]
 fn round_trips_through_the_model() {
+    if !built() {
+        return;
+    }
     let doc = json("schemes/ipc/ipc.json");
     let model: SchemeDoc = serde_json::from_value(doc.clone()).unwrap();
     assert_eq!(model.id().to_string(), "scheme:ipc@2026.01");
@@ -55,6 +90,9 @@ fn round_trips_through_the_model() {
 
 #[test]
 fn passes_the_scheme_compilers_checks() {
+    if !built() {
+        return;
+    }
     if let Err(problems) = shelfmark_scheme::validate_bytes(bytes()) {
         panic!(
             "{} problems, first: {:?}",
@@ -66,6 +104,9 @@ fn passes_the_scheme_compilers_checks() {
 
 #[test]
 fn records_provenance_and_license() {
+    if !built() {
+        return;
+    }
     let doc: SchemeDoc = serde_json::from_slice(bytes()).unwrap();
     let source = doc.source.unwrap();
     assert!(source.license.unwrap().starts_with("CC BY 4.0"));
@@ -83,6 +124,9 @@ fn records_provenance_and_license() {
 
 #[test]
 fn browses_sections_classes_and_subclasses() {
+    if !built() {
+        return;
+    }
     let idx = index();
     assert_eq!(
         codes(idx.children(None)),
@@ -112,6 +156,9 @@ fn browses_sections_classes_and_subclasses() {
 
 #[test]
 fn nests_groups_by_dot_level() {
+    if !built() {
+        return;
+    }
     let idx = index();
     assert_eq!(
         codes(idx.ancestors("H01B1/02")),
@@ -129,6 +176,9 @@ fn nests_groups_by_dot_level() {
 
 #[test]
 fn checks_codes_against_the_grammar_and_the_hierarchy() {
+    if !built() {
+        return;
+    }
     let idx = index();
     match idx.check_code("H01B1/02") {
         CodeCheck::Exact { class } => assert_eq!(class.to_string(), "class:ipc@2026.01:H01B1/02"),
@@ -148,6 +198,9 @@ fn checks_codes_against_the_grammar_and_the_hierarchy() {
 
 #[test]
 fn class_ids_round_trip() {
+    if !built() {
+        return;
+    }
     let id: ClassId = "class:ipc@2026.01:A01B3/421".parse().unwrap();
     assert_eq!(id.code, "A01B3/421");
     assert_eq!(id.to_string(), "class:ipc@2026.01:A01B3/421");
@@ -156,6 +209,9 @@ fn class_ids_round_trip() {
 
 #[test]
 fn searches_labels_and_catchwords() {
+    if !built() {
+        return;
+    }
     let idx = index();
     let hits = idx.search("abacuses", 5);
     assert!(hits.iter().any(|h| h.class.code == "G06C1/00"), "{hits:?}");
@@ -181,6 +237,9 @@ fn searches_labels_and_catchwords() {
 
 #[test]
 fn every_class_has_a_clean_label_and_no_lcc_or_lcsh_vocab() {
+    if !built() {
+        return;
+    }
     let doc: SchemeDoc = serde_json::from_slice(bytes()).unwrap();
     for c in &doc.classes {
         assert!(!c.label.trim().is_empty(), "{} has no label", c.code);

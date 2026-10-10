@@ -272,16 +272,17 @@ def compare_gold(before, results, skipped):
 def gold_comparison_section(c):
     def cell(field):
         def get(r):
-            b, a = r["before"], r["after"]
-            show = lambda v: "skipped" if v.get("skipped") else (
-                f"{v[field]:.4f}" if field in v else "not run")
-            return f"{show(b)} → {show(a)}"
+            def show(v):
+                if v.get("skipped"):
+                    return "skipped"
+                return f"{v[field]:.4f}" if field in v else "not run"
+            return f"{show(r['before'])} → {show(r['after'])}"
         return get
     rows = sorted(c["comparison"].values(), key=lambda r: (r["corpus"], r["scheme"]))
     return ["## Before and after", "",
-            f"Against the gold results in `{c['baseline']['results']}` (corpus.jsonl sha256 "
-            f"`{c['baseline']['corpus']['corpus.jsonl']}`), on the same graphs and "
-            "average-linkage baselines with the same scheme files.", "",
+            (f"Against the gold results in `{c['baseline']['results']}` (corpus.jsonl sha256 "
+             f"`{c['baseline']['corpus']['corpus.jsonl']}`), on the same graphs and "
+             "average-linkage baselines with the same scheme files."), "",
             table(rows, [("scheme", lambda r: r["scheme"]), ("corpus", lambda r: r["corpus"]),
                          ("coverage", cell("coverage")), ("cost_norm", cell("cost_norm")),
                          ("skill", cell("skill"))]),
@@ -300,21 +301,21 @@ def render_md(c, results, notes=None):
     lines = [
         f"# Scheme benchmark results, {c['date']}",
         "",
-        "Every scheme is scored as a hierarchy over a fixed similarity graph: Dasgupta cost and "
-        "Moseley-Wang revenue (both normalized to [0, 1]; lower cost and higher revenue are "
-        "better), skill relative to the average-linkage baseline built on the same graph "
-        "(`(1 - cost_norm) / (1 - ref_cost_norm)`; 1.0 matches the baseline), placement "
-        "coverage, and structure and navigation statistics. Items without a placement attach "
-        "to the root, so low coverage pushes cost toward 1.",
+        ("Every scheme is scored as a hierarchy over a fixed similarity graph: Dasgupta cost and "
+         "Moseley-Wang revenue (both normalized to [0, 1]; lower cost and higher revenue are "
+         "better), skill relative to the average-linkage baseline built on the same graph "
+         "(`(1 - cost_norm) / (1 - ref_cost_norm)`; 1.0 matches the baseline), placement "
+         "coverage, and structure and navigation statistics. Items without a placement attach "
+         "to the root, so low coverage pushes cost toward 1."),
         "",
         f"- Corpus: 10,000 arXiv papers, `corpus.jsonl` sha256 `{c['corpus']['corpus.jsonl']}`.",
-        f"- Holdout: 500 Open Library editions, `holdout.jsonl` sha256 "
-        f"`{c['corpus']['holdout.jsonl']}`.",
-        f"- Model: `{c['model']['model_id']}` ({c['model']['runtime']}), weights "
-        f"`{c['model']['weights_repository']}` revision `{c['model']['weights_revision']}`, "
-        f"`model.onnx` sha256 `{c['model']['weights_sha256']}`.",
-        f"- Graph: k = 20 mean-offset kNN cosine. Average-linkage baseline cost_norm: corpus "
-        f"{ref['corpus']:.4f}, holdout {ref['holdout']:.4f}.",
+        (f"- Holdout: 500 Open Library editions, `holdout.jsonl` sha256 "
+         f"`{c['corpus']['holdout.jsonl']}`."),
+        (f"- Model: `{c['model']['model_id']}` ({c['model']['runtime']}), weights "
+         f"`{c['model']['weights_repository']}` revision `{c['model']['weights_revision']}`, "
+         f"`model.onnx` sha256 `{c['model']['weights_sha256']}`."),
+        (f"- Graph: k = 20 mean-offset kNN cosine. Average-linkage baseline cost_norm: corpus "
+         f"{ref['corpus']:.4f}, holdout {ref['holdout']:.4f}."),
         f"- Harness: `shelfmark-bench` at commit `{c['harness']['commit']}`.",
         *([] if gold_only else
           [f"- Classifier: `shelfmark` at commit `{c['classifier']['commit']}`, `{PROFILE}`."]),
@@ -337,8 +338,8 @@ def render_md(c, results, notes=None):
 
 def gold_only_lines(c, pick):
     """Gold tables of a gold-only run, then its comparison with the baseline."""
-    lines = ["Only gold placements were scored: the source labels, normalized to scheme codes. "
-             "Items without a label attach to the root.", "", COLUMN_NOTES, "",
+    lines = [("Only gold placements were scored: the source labels, normalized to scheme codes. "
+              "Items without a label attach to the root."), "", COLUMN_NOTES, "",
              "## Gold placements", "", "arXiv corpus:", "", table(pick("gold", "corpus"), COLS), ""]
     if pick("gold", "holdout"):
         lines += ["Book holdout:", "", table(pick("gold", "holdout"), COLS), ""]
@@ -349,16 +350,16 @@ def placed_lines(c, results, pick):
     return [
         "## Classifier-bias caveat",
         "",
-        "Gold and shelfmark-placed results are reported separately and should not be ranked "
-        "against each other. Placed results come from shelfmark's own lexical classifier "
-        f"(`{PROFILE}`), so they measure the scheme *as reached by that classifier*: a "
-        "scheme with rich vocabulary links gets more and better placements than one with bare "
-        "labels, independent of how well its hierarchy fits the corpus. Low-confidence "
-        "placements (below the 0.8 target) are kept; fallback placements, where no tier "
-        "produced any candidate and shelfmark files the item under the first top-level class, "
-        "are counted as unplaced. Gold results use the labels the source supplied (arXiv "
-        "categories, MSC, JEL; LC call numbers for the holdout) and cover only the items that "
-        "carry them.",
+        ("Gold and shelfmark-placed results are reported separately and should not be ranked "
+         "against each other. Placed results come from shelfmark's own lexical classifier "
+         f"(`{PROFILE}`), so they measure the scheme *as reached by that classifier*: a "
+         "scheme with rich vocabulary links gets more and better placements than one with bare "
+         "labels, independent of how well its hierarchy fits the corpus. Low-confidence "
+         "placements (below the 0.8 target) are kept; fallback placements, where no tier "
+         "produced any candidate and shelfmark files the item under the first top-level class, "
+         "are counted as unplaced. Gold results use the labels the source supplied (arXiv "
+         "categories, MSC, JEL; LC call numbers for the holdout) and cover only the items that "
+         "carry them."),
         "",
         COLUMN_NOTES,
         "",
@@ -398,9 +399,9 @@ def placed_lines(c, results, pick):
 def gold_section(c, pick):
     if "baseline" in c:
         return ["## Gold placements", "",
-                f"Not rerun. Gold placements use the source labels, not the classifier, so the "
-                f"gold results in `{c['baseline']['results']}` stand; they were scored on the "
-                f"same graphs against the same average-linkage baselines.", ""]
+                (f"Not rerun. Gold placements use the source labels, not the classifier, so the "
+                 f"gold results in `{c['baseline']['results']}` stand; they were scored on the "
+                 f"same graphs against the same average-linkage baselines."), ""]
     return ["## Gold placements", "", "arXiv corpus:", "", table(pick("gold", "corpus"), COLS), "",
             "Book holdout (LC call numbers placed at the deepest covering class):", "",
             table(pick("gold", "holdout"), COLS), ""]
@@ -418,9 +419,9 @@ def comparison_section(c):
         return lambda r: f"{r['before'][field]:.4f} → {r['after'][field]:.4f}"
     return [f"## Before and after ({c['baseline']['placement_source'].split()[-1]} → {PROFILE})",
             "",
-            f"Against `{c['baseline']['results']}`, same graphs, scheme files and baselines; "
-            "only the classifier changed. `top share` is the largest single-class share of the "
-            "placed items.",
+            (f"Against `{c['baseline']['results']}`, same graphs, scheme files and baselines; "
+             "only the classifier changed. `top share` is the largest single-class share of the "
+             "placed items."),
             "",
             table(rows, [("scheme", lambda r: r["scheme"]), ("corpus", lambda r: r["corpus"]),
                          ("top share before", top("before")), ("top share after", top("after")),

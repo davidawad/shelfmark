@@ -33,7 +33,8 @@ def main():
     p.add_argument("--vectors", help="also write the L2-normalized vectors here "
                    "(little-endian f32, row-major, n x dimensions)")
     a = p.parse_args()
-    rows = [json.loads(line) for line in open(a.corpus, encoding="utf-8") if line.strip()]
+    with open(a.corpus, encoding="utf-8") as f:
+        rows = [json.loads(line) for line in f if line.strip()]
     texts = [f"{r.get('title', '')}. {r.get('abstract', r.get('abstract_text', r.get('description', '')))}" for r in rows]
     model_path = snapshot_download(MODEL_REPO, revision=MODEL_REVISION, cache_dir=MODEL_CACHE)
     model = TextEmbedding("sentence-transformers/all-MiniLM-L6-v2", threads=min(4, os.cpu_count() or 1),

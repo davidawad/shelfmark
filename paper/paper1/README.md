@@ -20,7 +20,9 @@ Claims with no verified source are marked `TODO(cite)` in `paper.md`.
 
 ## Sources
 
-- Gold results: `bench/results/2026-10-10/` (source labels; not rerun).
+- Gold results: `bench/results/2026-10-10/` (source labels), with the
+  `msc` gold run and the `acm-ccs` skip taken from
+  `bench/results/2026-10-10-r3/` (rescored on the fixed corpus).
 - Placed results: `bench/results/2026-10-10-r2/` (shelfmark
   `profile:lexical@2`, after the stopword fix). Its `results.json` also
   holds the before/after comparison with `profile:lexical@1`, which the
@@ -43,8 +45,8 @@ Generated regions are delimited in `paper.md` by
 `<!-- v:NAME -->value<!-- /v -->`. Do not type numbers into them by hand.
 To add a number to the prose, add a value to `build()` in the script and a
 marker in the text. The script stops with an error on an unknown marker.
-It also asserts that the r2 run reused the 2026-10-10 graphs and scheme
-files and that the corpus files match their recorded SHA-256.
+It also asserts that the r2 and r3 runs reused the 2026-10-10 graphs and
+scheme files and that the corpus files match their recorded SHA-256.
 
 To render a PDF (not needed for the draft):
 
@@ -54,5 +56,6 @@ pandoc paper/paper1/paper.md --citeproc \
 ```
 
 To regenerate the underlying results, follow
-`bench/results/2026-10-10/REPRODUCE.md` and then
-`bench/results/2026-10-10-r2/REPRODUCE.md`.
+`bench/results/2026-10-10/REPRODUCE.md`, then
+`bench/results/2026-10-10-r2/REPRODUCE.md` and
+`bench/results/2026-10-10-r3/REPRODUCE.md`.

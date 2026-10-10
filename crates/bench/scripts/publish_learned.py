@@ -136,7 +136,7 @@ def main():
     build = load(lb / "build-report.json")
     ins = load(lb / "insert-report.json")
     split_ins = load(lb / "split/insert-report.json")
-    commit = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True, cwd=ROOT).stdout.strip()
+    commit = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True, check=False, cwd=ROOT).stdout.strip()
     result = {
         "date": "2026-10-10-learned",
         "objective": {

@@ -29,7 +29,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
 sys.path.insert(0, str(HERE))
-import run_benchmark  # noqa: E402
+import run_benchmark  # noqa: E402, RUF100
 
 LEARNED = ROOT / "schemes/learned"
 SPLIT_SEED = "learned-split-2026-10-10"
@@ -46,7 +46,7 @@ def log(msg):
 
 
 def run(cmd):
-    proc = subprocess.run([str(c) for c in cmd], capture_output=True, text=True)
+    proc = subprocess.run([str(c) for c in cmd], capture_output=True, text=True, check=False)
     if proc.returncode != 0:
         raise SystemExit(f"{' '.join(map(str, cmd))} failed: {(proc.stderr or proc.stdout)[-800:]}")
     return proc.stdout
@@ -54,7 +54,8 @@ def run(cmd):
 
 def lines_for(path, ids):
     keep = set(ids)
-    return [l for l in Path(path).read_text().splitlines() if l.strip() and json.loads(l)["id"] in keep]
+    return [line for line in Path(path).read_text().splitlines()
+            if line.strip() and json.loads(line)["id"] in keep]
 
 
 class Learned:
@@ -118,7 +119,7 @@ class Learned:
         if not target.exists() or target.read_bytes() != (LEARNED / "learned.json").read_bytes():
             shutil.copy(LEARNED / "learned.json", target)
         status = schemes / "status.tsv"
-        rows = [l for l in status.read_text().splitlines() if not l.startswith("learned\t")]
+        rows = [line for line in status.read_text().splitlines() if not line.startswith("learned\t")]
         rows.append(f"learned\tok\t{sha256(target)}")
         status.write_text("\n".join(rows) + "\n")
         bench = run_benchmark.Bench(argparse.Namespace(cache=str(self.cache), shelfmark=self.a.shelfmark,
@@ -155,7 +156,10 @@ class Learned:
                 self.learned("subset", "--corpus", corpus, "--graph", self.graphs["corpus"], "--ids",
                              w / f"{part}-ids.txt", "--out-corpus", w / f"{part}-corpus.jsonl",
                              "--out-graph", w / f"{part}-graph.json")
-        sub = lambda name, src, ids: (w / name).write_text("".join(l + "\n" for l in lines_for(src, ids)))
+
+        def sub(name, src, ids):
+            (w / name).write_text("".join(line + "\n" for line in lines_for(src, ids)))
+
         sub("test-placements.jsonl", w / "all-placements.jsonl", test)
         sub("test-full-placements.jsonl", self.work / "corpus-placements.jsonl", test)
         tg, tc = w / "test-graph.json", w / "test-corpus.jsonl"

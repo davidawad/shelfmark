@@ -27,6 +27,9 @@ ROOT = Path(__file__).resolve().parents[3]
 PAPER = ROOT / "paper/paper1/paper.md"
 GOLD_DIR = ROOT / "bench/results/2026-10-10"
 PLACED_DIR = ROOT / "bench/results/2026-10-10-r2"
+# Gold rescored on the fixed corpus (acm_ccs from arXivOld, msc MSC 2020 only).
+# Its runs and skips replace the 2026-10-10 ones of the same name.
+GOLD_FIX_DIR = ROOT / "bench/results/2026-10-10-r3"
 CORPUS = ROOT / "bench/corpus/corpus.jsonl"
 HOLDOUT = ROOT / "bench/corpus/holdout.jsonl"
 
@@ -144,7 +147,11 @@ SCORE_HEADER = [
 def build():
     gold = load(GOLD_DIR / "results.json")
     placed = load(PLACED_DIR / "results.json")
+    fix = load(GOLD_FIX_DIR / "results.json")
     runs_g = {k: load(GOLD_DIR / v["file"]) for k, v in gold["results"].items()}
+    runs_g.update({k: load(GOLD_FIX_DIR / v["file"]) for k, v in fix["results"].items()})
+    gold["results"].update(fix["results"])
+    gold["skipped"].update(fix["skipped"])
     runs_p = {k: load(PLACED_DIR / v["file"]) for k, v in placed["results"].items()}
     corpus, holdout = rows(CORPUS), rows(HOLDOUT)
     tables, values = {}, {}
@@ -154,8 +161,15 @@ def build():
         assert gold["graphs"][g]["graph_sha256"] == placed["graphs"][g]["graph_sha256"], g
     for name, s in placed["schemes"].items():
         assert s["file_sha256"] == gold["schemes"][name]["file_sha256"], name
-    assert sha256(CORPUS) == gold["corpus"]["corpus.jsonl"]
-    assert sha256(HOLDOUT) == gold["corpus"]["holdout.jsonl"]
+    # The r3 rescore must sit on the same graphs and scheme files, and the
+    # pinned corpus is the fixed one it was scored on.
+    assert fix["baseline"]["results"] == "bench/results/2026-10-10/results.json"
+    for g in ("corpus", "holdout"):
+        assert fix["graphs"][g]["graph_sha256"] == gold["graphs"][g]["graph_sha256"], g
+    for name, s in fix["schemes"].items():
+        assert s["file_sha256"] == gold["schemes"][name]["file_sha256"], name
+    assert sha256(CORPUS) == fix["corpus"]["corpus.jsonl"]
+    assert sha256(HOLDOUT) == gold["corpus"]["holdout.jsonl"] == fix["corpus"]["holdout.jsonl"]
 
     # Corpus composition.
     groups = collections.Counter()
@@ -355,7 +369,7 @@ def build():
     return tables, values
 
 
-TABLE_RE = re.compile(r"(<!-- table:([\w-]+) -->\n)(.*?)(\n<!-- /table:\2 -->)", re.S)
+TABLE_RE = re.compile(r"(<!-- table:([\w-]+) -->\n)(.*?)(\n<!-- /table:\2 -->)", re.DOTALL)
 VALUE_RE = re.compile(r"(<!-- v:([\w.-]+) -->)(.*?)(<!-- /v -->)")
 
 
