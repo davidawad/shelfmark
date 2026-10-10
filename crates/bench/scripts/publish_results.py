@@ -74,6 +74,14 @@ COLS = [
     ("gini", lambda r: r["structure"]["gini"]),
     ("nav log a=1", lambda r: r["structure"]["nav_log_a1"]),
     ("nav scan", lambda r: r["structure"]["nav_scan"]),
+    ("nav placed only", lambda r: r["structure"]["nav_scan_placed"]),
+    ("nav incl. unplaced", lambda r: r["structure"]["nav_scan"]),
+    ("uniform menu accesses (placed)", lambda r: r["metrics_upgrade"]["query_workloads"]["uniform"]["placed_only"]["menu_accesses"]),
+    ("uniform menu accesses (all)", lambda r: r["metrics_upgrade"]["query_workloads"]["uniform"]["including_unplaced"]["menu_accesses"]),
+    ("uniform items scanned (all)", lambda r: r["metrics_upgrade"]["query_workloads"]["uniform"]["including_unplaced"]["items_scanned"]),
+    ("entropy bits", lambda r: r["metrics_upgrade"]["information_bounds"]["entropy_bits"]),
+    ("alphabetic optimum bits", lambda r: r["metrics_upgrade"]["information_bounds"]["alphabetic_optimum_bits"]),
+    ("nav / alphabetic bound", lambda r: r["metrics_upgrade"]["information_bounds"]["nav_over_alphabetic"]),
 ]
 COLUMN_NOTES = ("Column notes: `classes used` is the effective number of classes "
                 "(exp of placement entropy); `nav log a=1` is the expected menu cost "

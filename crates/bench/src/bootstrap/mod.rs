@@ -19,6 +19,60 @@ pub use resample::{
 };
 pub use weighted::{multiplicities, run, BootstrapSummary, Prepared, Replicate, Replicates};
 
+/// Edge-bootstrap confidence intervals on fixed-tree graph scores. Uses the
+/// shared seeded generator and percentile rule used by every bench API.
+pub fn edge_bootstrap(
+    tree: &crate::Tree,
+    graph: &crate::SimilarityGraph,
+    reference_cost: f64,
+    resamples: usize,
+    seed: u64,
+) -> BootstrapSummary {
+    use crate::{score_tree, Edge};
+    let mut rng = SplitMix64::new(seed ^ 0x4544_4745);
+    let mut values = std::collections::BTreeMap::<String, Vec<f64>>::new();
+    for _ in 0..resamples {
+        let edges: Vec<Edge> = (0..graph.edges.len())
+            .filter_map(|_| {
+                graph
+                    .edges
+                    .get(rng.below(graph.edges.len().max(1)))
+                    .cloned()
+            })
+            .collect();
+        let sample = crate::SimilarityGraph {
+            n: graph.n,
+            k: graph.k,
+            tau: graph.tau,
+            edges,
+        };
+        let score = score_tree(tree, &sample);
+        let skill = if reference_cost < 1.0 {
+            (1.0 - score.cost_norm) / (1.0 - reference_cost)
+        } else {
+            0.0
+        };
+        for (name, value) in [
+            ("cost_norm", score.cost_norm),
+            ("revenue_norm", score.revenue_norm),
+            ("expected_tree_distance", score.expected_tree_distance),
+            ("skill", skill),
+        ] {
+            values.entry(name.into()).or_default().push(value);
+        }
+    }
+    BootstrapSummary {
+        resamples,
+        seed,
+        confidence: 0.95,
+        method: "percentile; graph edges resampled with replacement on the fixed tree".into(),
+        ci: values
+            .iter()
+            .map(|(name, vals)| (name.clone(), interval(vals, 0.95)))
+            .collect(),
+    }
+}
+
 /// Default seed of the benchmark bootstrap.
 pub const DEFAULT_SEED: u64 = 20_261_010;
 

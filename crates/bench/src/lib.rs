@@ -117,6 +117,9 @@ pub struct BenchmarkResult {
     /// Item-bootstrap intervals, when `--bootstrap` asked for them.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub bootstrap: Option<BootstrapSummary>,
+    /// Edge-resample intervals for graph-dependent scores.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub edge_bootstrap: Option<BootstrapSummary>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

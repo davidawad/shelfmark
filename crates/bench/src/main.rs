@@ -177,12 +177,9 @@ fn bootstrap_replicates(
     graph: &SimilarityGraph,
     hac: Option<&Tree>,
 ) -> Result<Option<Replicates>, Box<dyn std::error::Error>> {
-    let resamples: usize = match values.get("--bootstrap") {
-        Some(v) => v.parse()?,
-        None => return Ok(None),
-    };
-    if resamples == 0 {
-        return Ok(None);
+    let resamples: usize = values.get("--bootstrap").map_or(Ok(1000), |v| v.parse())?;
+    if resamples < 1000 {
+        return Err("--bootstrap must be at least 1000 for published uncertainty intervals".into());
     }
     let seed = match values.get("--seed") {
         Some(v) => v.parse()?,
@@ -203,7 +200,10 @@ fn bootstrap_replicates(
                     .to_vec(),
             )
         }
-        None => None,
+        None => match values.get("--reference-cost") {
+            Some(value) => Some(vec![value.parse()?; resamples]),
+            None => None,
+        },
     };
     let prepared = bootstrap::Prepared::new(tree, graph, true);
     let hac = match (&reference, hac) {
@@ -291,6 +291,13 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
             scheme: sha256_hex(&scheme_bytes),
         },
         bootstrap: replicates.map(|r| r.summary()),
+        edge_bootstrap: Some(bootstrap::edge_bootstrap(
+            &tree,
+            &graph,
+            ref_score,
+            1000,
+            bootstrap::DEFAULT_SEED,
+        )),
     };
     let json = serde_json::to_string_pretty(&result)?;
     if let Some(path) = values.get("--output") {

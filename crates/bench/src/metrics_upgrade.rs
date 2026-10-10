@@ -13,6 +13,8 @@ pub struct UpgradeMetrics {
     pub branch_constant_sweep: std::collections::BTreeMap<String, f64>,
     pub alphabetic_method: String,
     pub log_base: u8,
+    /// Paired percentile intervals from 1,000 shared item resamples.
+    pub confidence_intervals: std::collections::BTreeMap<String, [f64; 2]>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -106,6 +108,7 @@ pub fn summarize(tree: &Tree) -> UpgradeMetrics {
         sweep.insert(format!("a={a}"), value);
     }
     let bounds = information_bounds(&uniform, nav, 0);
+    let confidence_intervals = navigation_intervals(tree, &zipf);
     UpgradeMetrics {
         query_workloads: workloads,
         popularity_proxy:
@@ -115,7 +118,66 @@ pub fn summarize(tree: &Tree) -> UpgradeMetrics {
         branch_constant_sweep: sweep,
         alphabetic_method: "Hu-Tucker / Garsia-Wachs, O(n^2)".into(),
         log_base: 2,
+        confidence_intervals,
     }
+}
+
+fn navigation_intervals(tree: &Tree, zipf: &[f64]) -> std::collections::BTreeMap<String, [f64; 2]> {
+    let n = tree.item_leaves.len();
+    let mut draws = std::collections::BTreeMap::<String, Vec<f64>>::new();
+    for replicate in 0..1000 {
+        let counts = crate::bootstrap::multiplicities(n, crate::bootstrap::DEFAULT_SEED, replicate);
+        let pair = navigation_pair(tree, &counts);
+        let vals = [
+            (
+                "uniform.menu_accesses.placed",
+                pair.placed_only.menu_accesses,
+            ),
+            (
+                "uniform.menu_accesses.all",
+                pair.including_unplaced.menu_accesses,
+            ),
+            (
+                "uniform.depth_traversed.placed",
+                pair.placed_only.depth_traversed,
+            ),
+            (
+                "uniform.depth_traversed.all",
+                pair.including_unplaced.depth_traversed,
+            ),
+            (
+                "uniform.items_scanned.placed",
+                pair.placed_only.items_scanned,
+            ),
+            (
+                "uniform.items_scanned.all",
+                pair.including_unplaced.items_scanned,
+            ),
+        ];
+        for (key, value) in vals {
+            draws.entry(key.into()).or_default().push(value);
+        }
+        let zipf_pair = navigation_pair(
+            tree,
+            &zipf
+                .iter()
+                .zip(&counts)
+                .map(|(p, c)| p * c)
+                .collect::<Vec<_>>(),
+        );
+        draws
+            .entry("zipf_s1_seed_20261010.menu_accesses.placed".into())
+            .or_default()
+            .push(zipf_pair.placed_only.menu_accesses);
+        draws
+            .entry("zipf_s1_seed_20261010.menu_accesses.all".into())
+            .or_default()
+            .push(zipf_pair.including_unplaced.menu_accesses);
+    }
+    draws
+        .into_iter()
+        .map(|(key, values)| (key, crate::bootstrap::interval(&values, 0.95)))
+        .collect()
 }
 
 /// Permutes item-to-leaf assignments among placed items while preserving the
@@ -421,5 +483,34 @@ mod tests {
         assert!((b.entropy_bits - 1.0).abs() < 1e-12);
         assert!((b.alphabetic_optimum_bits - 1.0).abs() < 1e-12);
         assert!((b.nav_over_alphabetic - 1.0).abs() < 1e-12);
+    }
+
+    #[test]
+    fn assignment_null_is_seeded_and_preserves_class_size_distribution() {
+        let t = hand_tree();
+        let graph = crate::SimilarityGraph {
+            n: 4,
+            k: 1,
+            tau: 0.0,
+            edges: vec![
+                crate::Edge {
+                    left: 0,
+                    right: 3,
+                    weight: 1.0,
+                },
+                crate::Edge {
+                    left: 0,
+                    right: 1,
+                    weight: 1.0,
+                },
+            ],
+        };
+        let a = permutation_null(&t, &graph, 1.0, 200, 7);
+        let b = permutation_null(&t, &graph, 1.0, 200, 7);
+        assert_eq!(a.permutations, 200);
+        assert_eq!(a.cost_norm.mean, b.cost_norm.mean);
+        assert_eq!(a.cost_norm.percentile, b.cost_norm.percentile);
+        assert!(a.cost_norm.mean.is_finite());
+        assert!(a.skill.mean.is_finite());
     }
 }
