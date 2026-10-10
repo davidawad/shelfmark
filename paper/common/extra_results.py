@@ -25,6 +25,7 @@ Standard library only.
 """
 import collections
 import json
+import math
 import statistics
 from pathlib import Path
 
@@ -127,6 +128,16 @@ def _validity(root, V, T):
     V["x_val_rho_c"] = _f2(res["cross_run"]["spearman_cost_vs_C_incorrect"])
     V["x_val_rho_all"] = _f2(res["cross_run"]["spearman_cost_vs_all_incorrect"])
     V["x_val_runs"] = str(len(res["runs"]))
+    for st in ("A", "B", "C"):
+        s = res["strata"][st]
+        V[f"x_val_{st}_n"] = str(s["n"])
+        V[f"x_val_{st}_incorrect"] = _f2(s["judge_incorrect"])
+        V[f"x_val_{st}_flagged"] = _f2(s["metric_flagged"])
+    V["x_val_self_n"] = str(res["consistency"]["scheme_decision"]["n"])
+    V["x_val_run_n"] = str(res["runs"]["fdc-placed"]["n"])
+    V["x_val_edge_together"] = _f2(a["edge_judged_together"])
+    V["x_val_false_join"] = _f2(a["false_join"])
+    V["x_val_false_split"] = _f2(a["false_split"])
 
     pooled = fj["groups"]["all runs"]
     assert len(pooled) == len(VARIANTS)
@@ -141,6 +152,8 @@ def _validity(root, V, T):
     V["x_val_auc_base"] = _f2(pooled[0]["auc"])
     fjs_alone = pooled[ix["fjs"]]
     V["x_val_kappa_fjs_alone"] = _f2(fjs_alone["kappa"])
+    ks = [pooled[ix[f"c+{b}fjs"]]["kappa"] for b in BETAS]
+    V["x_val_kappa_fjs_min"], V["x_val_kappa_fjs_max"] = _f2(min(ks)), _f2(max(ks))
     c4 = pooled[ix["c+4fjs"]]
     V["x_val_kappa_fj_b4"] = _f2(c4["kappa"])
 
@@ -252,11 +265,17 @@ def _books(root, V, T):
         V[f"x_dl_{key}_min"] = _s4(d[obj]["diff_range"][0])
         V[f"x_dl_{key}_max"] = _s4(d[obj]["diff_range"][1])
     V["x_dl_settings"] = str(d["C"]["settings"])
+    V["x_bs_resamples"] = f"{bs['bootstrap']['resamples']:,}"
     reg = bs["regret"]
     V["x_regret_ddc9"] = _f3(reg["published_graphs_only"]["ddc-section"])
     V["x_regret_lcc9"] = _f3(reg["published_graphs_only"]["lcc-gold"])
     V["x_regret_ddc27"] = _f3(reg["all_settings"]["ddc-section"])
     V["x_regret_lcc27"] = _f3(reg["all_settings"]["lcc-gold"])
+    sec = claims["section-vs-fdc-d3"]["objectives"]["C"]["diff_range"]
+    V["x_sec_fdc_max"] = f"{max(abs(sec[0]), abs(sec[1])):.4f}"
+    lj = claims["learned-vs-section"]["objectives"]["J'"]
+    V["x_learn_match"] = str(round(lj["share_sign_matches"] * lj["settings"]))
+    V["x_learn_against"] = str(lj["significant_against_claim"])
     rk = claims["rank-structures"]["objectives"]
     V["x_rank_struct_min_c"] = f"{rk['C']['min_spearman']:.2f}"
     V["x_rank_struct_min_j"] = "{:.2f}".format(rk["J'"]["min_spearman"])
@@ -289,6 +308,35 @@ def _books(root, V, T):
                    "C difference", "J' difference"],
         "rows": rows}
 
+
+    # the 3,000-book sample and the main book table
+    man = _load(root / "bench/results/2026-10-10-ddc/graphs/books-k20.manifest.json")
+    V["x_books_n"] = f"{man['n']:,}"
+    V["x_books_tau"] = f"{man['tau']:.3f}"
+    n_desc = 0
+    with (root / "bench/corpus/holdout-books.jsonl").open(encoding="utf-8") as f:
+        for line in f:
+            if line.strip() and json.loads(line).get("ol_description"):
+                n_desc += 1
+    V["x_books_desc"] = str(n_desc)
+    main = [("ddc-gold", "Dewey, librarian number, full depth"),
+            ("ddc-section", "Dewey, cut to section (3 digits)"),
+            ("fdc-d3", "FDC from Dewey, depth 3"),
+            ("fdc-d2", "FDC from Dewey, depth 2"),
+            ("lcc-gold", "LCC, librarian call number (outline)"),
+            ("lcc-full-gold", "LCC, librarian call number (complete schedules)"),
+            ("learned-own", "learned scheme, own insertion"),
+            ("fdc-placed", "FDC, lexical classifier"),
+            ("lcc-lcsh-placed", "LCC outline with LCSH vocabulary, lexical classifier"),
+            ("lcc-placed", "LCC outline, lexical classifier"),
+            ("unesco-thesaurus-placed", "UNESCO Thesaurus, lexical classifier")]
+    s = pts["minilm-k20-q00"]
+    T["book_main"] = {
+        "header": ["run", "structure", "coverage", "C", "C + FJs", "nav bits", "J'", "skill"],
+        "rows": [[f"`{r}`", d, _f3(s[r]["coverage"]), _f3(s[r]["C"]), _f3(s[r]["C+FJs"]),
+                  f"{s[r]['nav_log_a1']:.1f}", _f3(s[r]["J'"]), _f3(s[r]["skill"])]
+                 for r, d in main]}
+
     # cross-fit of the learned scheme (held-out split skill)
     emb = _load(root / "bench/results/2026-10-10-embed/results.json")
     cf = emb["cross_fit"]
@@ -308,6 +356,14 @@ def _books(root, V, T):
         if cf[f"{s}@{s}-k20"]["split_skill"] == max(cf[f"{f}@{s}-k20"]["split_skill"] for f in names)))
 
 
+def _learned(root, V, T):
+    r = _load(root / "bench/results/2026-10-10-learned/results.json")["runs"]
+    V["x_l_insample_skill"] = _f3(r["learned-own"]["skill"])
+    V["x_l_heldout_skill"] = _f3(r["learned-split-heldout"]["skill"])
+    V["x_l_book_skill"] = _f3(r["learned-own-holdout"]["skill"])
+    V["x_l_placed_skill"] = _f3(r["learned-placed"]["skill"])
+
+
 def _covered(root, V, T):
     cv = _load(root / "bench/results/2026-10-10-covered/results.json")
     g = cv["analysis"]["groups"]["placed-corpus"]["agree"]
@@ -320,11 +376,9 @@ def _covered(root, V, T):
     V["x_cov_msc_both"] = f"{cv['both']['msc-gold']['items']:,}"
     V["x_cov_msc_items"] = f"{cv['families']['msc-gold']['items']:,}"
     d = cv["dense"]["corpus"]
-    sp = []
-    for size, lst in d["sizes"].items():
-        for e in lst:
-            sp.append(e["agreement"]["graph-restricted"]["placed"]["spearman"])
-    V["x_dense_min_rho"] = _f2(min(sp))
+    sp = [e["agreement"]["knn20"]["placed"]["spearman"]
+          for lst in d["sizes"].values() for e in lst]
+    V["x_dense_min_rho"] = f"{math.floor(min(sp) * 100) / 100:.2f}"
 
 
 def _semantic(root, V, T):
@@ -411,6 +465,7 @@ def collect(root):
     _validity(root, V, T)
     _stability(root, V, T)
     _books(root, V, T)
+    _learned(root, V, T)
     _covered(root, V, T)
     _semantic(root, V, T)
     _external(root, V, T)

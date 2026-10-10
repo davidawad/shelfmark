@@ -9,7 +9,10 @@ bibliography: references.bib
 DRAFT. Every number in the tables, and every number in the prose wrapped in a
 `v:` marker, is generated from bench/results/2026-10-10 (gold),
 bench/results/2026-10-10-r3 (gold rescored on the fixed corpus) and
-bench/results/2026-10-10-r2 (shelfmark-placed) by scripts/make_tables.py.
+bench/results/2026-10-10-r2 (shelfmark-placed), and, for Sections 5.6 to 5.11,
+from docs/validity, bench/results/2026-10-10-covered, -embed, -semantic,
+-learned, 2026-10-11-falsejoin, -stability and -book-stability, through
+paper/common/extra_results.py, all run by scripts/make_tables.py.
 Do not edit generated text by hand; rerun the script. Citation keys refer to
 references.bib, the cited subset of docs/research/references.bib written
 by docs/research/subset_bib.py.
@@ -24,35 +27,46 @@ they measure retrieval effectiveness on a test collection
 schemes [@oneill1987; @connaway1996], or coverage of a reference map of
 knowledge [@zins2011]. We found no study that scores the hierarchy of
 several universal or near-universal schemes on one structural objective
-over the same set of works. We propose such a comparison, built on objectives from the theory of hierarchical
-clustering. A scheme, restricted to the classes that a corpus actually uses,
-is a rooted tree over the works. We score that tree with Dasgupta's cost
-[@dasgupta2016] and Moseley and Wang's revenue [@moseley2023] on a fixed
-k-nearest-neighbour cosine graph of text embeddings, and normalize revenue
-against an average-linkage tree built on the same graph. We call this ratio skill. We
-report coverage, structural statistics and expected navigation cost next to
-skill. The corpus is <!-- v:n_corpus -->10,000<!-- /v --> arXiv papers with
-CC0 metadata plus a holdout of <!-- v:n_holdout -->500<!-- /v --> Open
-Library editions with librarian-assigned LC call numbers. We separate
-source-assigned ("gold") placements from placements made by one lexical
-classifier, shelfmark. On gold labels, arXiv's own taxonomy reaches skill
+over the same set of works. We propose such a comparison, built on
+objectives from the theory of hierarchical clustering, and we test how far
+it can be trusted. A scheme, restricted to the classes that a corpus
+actually uses, is a rooted tree over the works. We score that tree with
+Dasgupta's cost [@dasgupta2016] and Moseley and Wang's revenue
+[@moseley2023] on a fixed k-nearest-neighbour cosine graph of text
+embeddings, and normalize revenue against an average-linkage tree. We call
+this ratio skill. The corpus is <!-- v:n_corpus -->10,000<!-- /v --> arXiv
+papers with CC0 metadata, a holdout of <!-- v:n_holdout -->500<!-- /v -->
+Open Library editions with librarian-assigned LC call numbers, and a sample
+of <!-- v:x_books_n -->3,000<!-- /v --> books that also carry Dewey numbers. We keep source-assigned
+("gold") placements apart from placements made by one lexical classifier. On
+gold labels, arXiv's own taxonomy reaches skill
 <!-- v:gold_arxiv_skill -->0.786<!-- /v --> on arXiv papers and LCC reaches
 <!-- v:gold_lcc_skill -->0.419<!-- /v --> on the book holdout. With the
 classifier's placements, the same two schemes fall to
 <!-- v:placed_arxiv_corpus_skill -->0.128<!-- /v --> and
-<!-- v:placed_lcc_holdout_skill -->0.005<!-- /v -->. Across
-<!-- v:n_placed_corpus -->13<!-- /v --> schemes placed by the classifier,
-skill ranges from <!-- v:placed_worst_skill -->0.059<!-- /v -->
+<!-- v:placed_lcc_holdout_skill -->0.005<!-- /v -->. The findings are mostly
+cautions. (1) Coverage drives most classifier-placed rankings: across
+<!-- v:n_placed_corpus -->13<!-- /v --> schemes, skill ranges from
+<!-- v:placed_worst_skill -->0.059<!-- /v -->
 (<!-- v:placed_worst -->msc<!-- /v -->) to
 <!-- v:placed_best_skill -->0.423<!-- /v -->
-(<!-- v:placed_best -->openalex-topics<!-- /v -->), and its Spearman
-correlation with coverage is <!-- v:rho_cov_skill -->0.76<!-- /v -->. The measurement is
-cheap and its inputs are pinned by hash. Its weak point is the classifier: in this
-run, classifier-placed scores rank how well the classifier reaches a scheme
-more than they rank the scheme itself. We also report a classifier fix found
-by the benchmark. Before the fix, the classifier matched class labels made
-only of stopwords; afterwards, the largest single-class capture in ILC2
-fell from <!-- v:sw_ilc2_before -->73.7%<!-- /v --> to
+(<!-- v:placed_best -->openalex-topics<!-- /v -->), its Spearman correlation
+with coverage is <!-- v:rho_cov_skill -->0.76<!-- /v -->, and coverage
+explains <!-- v:x_cov_rho_sq -->59%<!-- /v --> of the rank variance of cost. (2) The metric
+agrees only weakly with a blind LLM judge of librarian-style decisions
+(Cohen's $\kappa$ = <!-- v:x_val_kappa -->0.27<!-- /v --> on <!-- v:x_val_n -->953<!-- /v --> pairs). A false-join term raises
+$\kappa$ to <!-- v:x_val_kappa_fj -->0.48<!-- /v -->, but it does not raise agreement with citation or
+subject-heading signals. (3) Rankings of the schemes on the papers are
+stable across embedding model, k and graph threshold within one classifier
+(minimum Spearman $\rho$ <!-- v:x_stab_cost_min_same -->0.90<!-- /v -->) and not across classifier tiers
+(minimum <!-- v:x_stab_cost_min_diff -->0.04<!-- /v -->), and objectives disagree about FDC against LCC. (4) On
+<!-- v:x_books_n -->3,000<!-- /v --> books, Dewey sections against LCC is a tie that depends on the
+setting. (5) A learned scheme's lead over every human scheme is partly home
+advantage. The measurement is cheap and its inputs are pinned by hash. Its
+weak points are the classifier and, for now, the single annotator behind
+the validity check. We also report a classifier fix found by the benchmark:
+the largest single-class capture in ILC2 fell from
+<!-- v:sw_ilc2_before -->73.7%<!-- /v --> to
 <!-- v:sw_ilc2_after -->4.2%<!-- /v --> of placed papers.
 
 # 1. Introduction
@@ -115,9 +129,15 @@ coverage, structure and navigation statistics are reported with it
 <!-- v:n_holdout -->500<!-- /v -->-edition LC holdout (Section 4).
 (iii) Results for <!-- v:n_schemes -->13<!-- /v --> schemes. Gold
 placements and classifier placements are kept apart, and the classifier
-bias is calibrated where both exist (Section 5). (iv) A methods note on a
-classifier defect that the benchmark exposed, with its before-and-after
-effect (Section 5.5).
+bias is calibrated where both exist (Section 5.1 to 5.4). (iv) A methods
+note on a classifier defect that the benchmark exposed, with its
+before-and-after effect (Section 5.5). (v) A validity check of the cost
+against a blind judge, a false-join correction, and non-LLM checks
+(Sections 5.6 and 5.7). (vi) Stability tests: a coverage control, a second
+classifier tier, and a sweep over embedding model, k and graph threshold on
+the papers (Sections 5.8 and 5.9), and the same sweep for the claims of a
+book-structure proposal on <!-- v:x_books_n -->3,000<!-- /v --> books with Dewey numbers (Sections
+5.10 and 5.11).
 
 # 2. Related work
 
@@ -228,7 +248,8 @@ maximum, and zero-weight edges are dropped. That leaves
 <!-- v:edges_holdout -->7,297<!-- /v --> on the holdout. Every scheme and
 the reference tree are scored on this one graph, so all comparisons on a
 corpus are paired. We used a different embedding model for similarity than
-the classifier's optional embedding tier (BGE-small, not used in this run).
+the classifier's optional embedding tier (BGE-small, used only in the
+semantic-tier comparison of Section 5.8).
 This follows the benchmark design, which aims to avoid a circular advantage
 for schemes whose labels embed well (research/benchmark/DESIGN.md §2.2).
 
@@ -340,6 +361,29 @@ tree has $\mathrm{cost_{norm}} = 1$, and that the embedder, the graph and
 the reference are deterministic. Each result records the SHA-256 of the
 graph, the induced tree and the scheme file.
 
+## 3.7 Validity check and false-join term
+
+Dasgupta cost charges a scheme for separating similar items. It charges
+nothing for joining dissimilar items, except through the graph edges the
+join happens to contain. To ask whether the cost tracks what a librarian
+would call a good decision, we drew <!-- v:x_val_n -->953<!-- /v --> pairs from eight runs in three
+strata (similar pairs the scheme splits at depth one or less, dissimilar
+pairs it joins deep, and random placed pairs) and had one LLM judge label
+each blind under a rubric fixed before judging (`docs/validity`). The
+metric flags a pair when its cost contribution exceeds the run's mean
+contribution per graph edge. Agreement is Cohen's $\kappa$ [@cohen1960],
+with percentile bootstrap intervals that resample pairs within strata
+[@efron1979]. The correction adds a false-join term. For a seeded sample of
+non-edge pairs whose cosine is below $\tau$, weighted by dissimilarity
+$d = \tau - \cos$, the specificity form is
+$\mathrm{FJs} = \sum d \ln(n/N(\mathrm{lca})) / (\ln n \sum d)$, so
+that deep joins of dissimilar items cost more than shallow ones. The
+corrected objective is $J' = C + \beta\,\mathrm{FJs} + \lambda N$ with
+$\beta = 1$, $\lambda = 0.002$ and $N$ the `nav_log` cost in bits. An
+outside-mass form is also computed. Paired differences between runs use an
+item bootstrap on the same draws, and multiple comparisons are
+Holm-adjusted [@holm1979].
+
 # 4. Corpus
 
 **arXiv corpus.** The arXiv OAI-PMH endpoint (`arXivRaw`) was harvested for
@@ -386,6 +430,18 @@ class P (language and literature). The other
 the array. Open Library asks contributors to share under CC0 1.0
 [@openlibraryfaq]. Both
 files are pinned by SHA-256 and by ID lists.
+
+**Book sample with Dewey numbers.** A third file holds <!-- v:x_books_n -->3,000<!-- /v --> Open
+Library editions that each carry an LC call number, a Dewey number and
+subjects (<!-- v:x_books_desc -->320<!-- /v --> also have a description). The 21 LCC main classes
+have equal quotas, and no edition shares a work with the 500-book holdout.
+The graph text is the description followed by up to 30 subject headings, so
+it is mostly Library of Congress subject headings
+(`bench/corpus/holdout-books.jsonl`). The sample's $\tau$ is <!-- v:x_books_tau -->0.157<!-- /v -->.
+Dewey numbers are used as notation only: the tree is the digit prefixes,
+and no Dewey caption, schedule or table is read (Section 7). A work-level
+lookup finds a Dewey number for many more of the 500-book holdout's works
+than its edition records carry (research/reports/9, Section 3).
 
 **Schemes.** Table 2 lists the
 <!-- v:n_schemes -->13<!-- /v --> schemes as built for the run. Five are
@@ -564,7 +620,7 @@ That fits the expectation that a vocabulary matched to the corpus domain
 organizes it better. But Table 7 shows the classifier produces many
 low-confidence placements: in <!-- v:n_flagged_over90 -->9<!-- /v --> of the
 <!-- v:n_placed_corpus -->13<!-- /v --> corpus runs, over 90% of placed items are flagged. The classifier's reach is itself part of the score
-(Section 5.3).
+(Sections 5.3 and 5.8).
 
 The holdout results are near zero for every scheme except `lcc-full` and
 `ilc2`. On titles of <!-- v:holdout_title_words -->3.5<!-- /v --> words, the lexical classifier finds a candidate
@@ -722,6 +778,310 @@ same-class pairs the class size: one large class still beats the root. It is
 also why we always report largest-class share and placement statistics
 next to skill.
 
+## 5.6 Does the cost agree with a judge?
+
+Table 11 is the pooled result of the validity check (Section 3.7). The
+judge labels a pair's scheme decision correct or incorrect. Over
+<!-- v:x_val_n -->953<!-- /v --> pairs the metric's flag agrees with the judge at $\kappa$ =
+<!-- v:x_val_kappa -->0.27<!-- /v --> [<!-- v:x_val_kappa_lo -->0.22<!-- /v -->, <!-- v:x_val_kappa_hi -->0.32<!-- /v -->], with agreement
+<!-- v:x_val_agree -->0.63<!-- /v --> and an AUC of <!-- v:x_val_auc -->0.65<!-- /v --> for the raw contribution. That is
+weak agreement. The judge is stable against itself ($\kappa$ =
+<!-- v:x_val_self_kappa -->0.92<!-- /v --> on a blind second pass of <!-- v:x_val_self_n -->238<!-- /v --> pairs). Strata show where
+the gap is. Among similar pairs the scheme splits (stratum A), the judge
+calls <!-- v:x_val_A_incorrect -->0.70<!-- /v --> incorrect and the metric flags <!-- v:x_val_A_flagged -->0.84<!-- /v -->. Among
+dissimilar pairs the scheme joins deep (stratum B), the judge also calls
+<!-- v:x_val_B_incorrect -->0.70<!-- /v --> incorrect and the metric flags <!-- v:x_val_B_flagged -->0.00<!-- /v -->: those pairs have zero
+weight, so the cost is blind to them by construction. Shares are over a
+stratified sample, one third per stratum, not over all pairs. Across the
+eight runs, the Spearman correlation between a run's `cost_norm` and the
+judge's error rate on random pairs is <!-- v:x_val_rho_c -->0.23<!-- /v -->, and over all strata
+<!-- v:x_val_rho_all -->0.42<!-- /v -->, from eight points. This is descriptive only. The pair sample
+is small per run (<!-- v:x_val_run_n -->120<!-- /v --> pairs), so per-run intervals are wide.
+
+Table 11. Agreement of the metric's flag with the judge, pooled and with
+the false-join variants (same 953 pairs and same labels).
+
+<!-- table:validity_variants -->
+| variant | flagged | kappa [95% CI] | AUC [95% CI] |
+| --- | ---: | ---: | ---: |
+| Dasgupta cost C | 0.28 | 0.27 [0.22, 0.32] | 0.65 [0.62, 0.67] |
+| FJs alone | 0.34 | 0.21 [0.15, 0.26] | 0.61 [0.59, 0.64] |
+| C + 0.5 FJs | 0.60 | 0.49 [0.44, 0.55] | 0.80 [0.77, 0.83] |
+| C + FJs | 0.62 | 0.48 [0.43, 0.53] | 0.78 [0.75, 0.81] |
+| C + 4 FJs | 0.65 | 0.45 [0.40, 0.51] | 0.76 [0.73, 0.79] |
+| C + FJ (outside mass) | 0.61 | 0.47 [0.41, 0.52] | 0.78 [0.75, 0.81] |
+<!-- /table:validity_variants -->
+
+## 5.7 A cost that sees false joins
+
+Adding the specificity false-join term to the cost raises agreement with
+the judge to $\kappa$ = <!-- v:x_val_kappa_fj -->0.48<!-- /v --> [<!-- v:x_val_kappa_fj_lo -->0.43<!-- /v -->, <!-- v:x_val_kappa_fj_hi -->0.53<!-- /v -->], a paired
+change of <!-- v:x_val_dkappa_fj -->+0.21<!-- /v --> [<!-- v:x_val_dkappa_fj_lo -->+0.15<!-- /v -->, <!-- v:x_val_dkappa_fj_hi -->+0.27<!-- /v -->], and the AUC from <!-- v:x_val_auc_base -->0.65<!-- /v --> to
+<!-- v:x_val_auc_fj -->0.78<!-- /v --> (Table 11). The false-join term alone does not do it
+($\kappa$ = <!-- v:x_val_kappa_fjs_alone -->0.21<!-- /v -->); the gain comes from the sum. Weights from 0.25 to 8
+give $\kappa$ between <!-- v:x_val_kappa_fjs_min -->0.45<!-- /v --> and
+<!-- v:x_val_kappa_fjs_max -->0.49<!-- /v -->, so the choice of $\beta$ is not
+critical in this range. Table 12 breaks the change down by
+run. The correction helps the placed runs that join dissimilar items: every
+placed run except the learned scheme gains, with intervals that exclude
+zero. It does nothing for arXiv's own taxonomy or for the learned scheme,
+where the judge rarely finds a false join.
+
+Table 12. Judge agreement before and after adding the false-join term, per
+run.
+
+<!-- table:validity_runs -->
+| run | kappa, C [95% CI] | kappa, C + FJs [95% CI] | change in kappa |
+| --- | ---: | ---: | ---: |
+| arxiv-gold | 0.24 [0.05, 0.43] | 0.11 [0.05, 0.18] | -0.13 [-0.28, +0.04] |
+| msc-gold | 0.20 [0.01, 0.38] | 0.33 [0.21, 0.46] | +0.13 [-0.07, +0.33] |
+| fdc-placed | 0.29 [0.21, 0.38] | 0.63 [0.48, 0.78] | +0.34 [+0.19, +0.47] |
+| ilc2-placed | 0.25 [0.18, 0.33] | 0.66 [0.50, 0.79] | +0.40 [+0.28, +0.50] |
+| lcc-full-placed | 0.25 [0.19, 0.32] | 0.68 [0.54, 0.81] | +0.43 [+0.33, +0.52] |
+| openalex-topics-placed | 0.26 [0.16, 0.35] | 0.66 [0.52, 0.79] | +0.40 [+0.28, +0.50] |
+| unesco-thesaurus-placed | 0.24 [0.17, 0.32] | 0.54 [0.38, 0.69] | +0.30 [+0.16, +0.43] |
+| learned-placed | 0.33 [0.16, 0.50] | 0.30 [0.18, 0.43] | -0.03 [-0.20, +0.14] |
+<!-- /table:validity_runs -->
+
+Two checks that do not use an LLM temper this. The first signal is a
+shared Library of Congress subject heading between books. The second is
+bibliographic coupling or co-citation between arXiv papers, from OpenAlex
+reference lists (research/reports/9, Section 4.6). Table 13 gives the
+agreement of the pair-level flag with each signal, and the separation each
+signal finds between an FDC backbone and an LCC backbone. The false-join
+term does *not* raise pair-level agreement with any of the three
+(coupling <!-- v:x_ext_coupling_k0 -->0.13<!-- /v --> to <!-- v:x_ext_coupling_k1 -->0.06<!-- /v -->, co-citation <!-- v:x_ext_cocitation_k0 -->0.23<!-- /v --> to <!-- v:x_ext_cocitation_k1 -->0.19<!-- /v -->, subject headings
+<!-- v:x_ext_lcsh_k0 -->0.24<!-- /v --> to <!-- v:x_ext_lcsh_k1 -->0.21<!-- /v -->). At scheme level, rank agreement is unchanged. So the
+corrected metric is better supported than the original, by one annotator
+model, and it is not better supported by independent signals. Citation
+and subject-heading signals have their own limits: most 2025 to 2026
+preprints in the corpus have no OpenAlex reference list, and LC assigns
+subject headings and call numbers in one record, so that signal is not
+independent of LCC.
+
+Table 13. Pair-level agreement ($\kappa$) and scheme-level rank
+agreement ($\rho$) of the cost and the corrected cost with non-LLM signals.
+
+<!-- table:external -->
+| external signal | kappa, C | kappa, C + FJs | scheme-level rho, C | scheme-level rho, C + FJs | FDC-backbone minus LCC-backbone separation [95% CI] |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| shared LCSH heading (books) | 0.24 | 0.21 | 0.88 | 0.89 | ddc-section - lcc-gold: -0.002 [-0.011, +0.007] |
+| bibliographic coupling (papers) | 0.13 | 0.06 | 0.90 | 0.90 | fdc-arxiv-nested - lcc-arxiv-nested: +0.004 [-0.001, +0.010] |
+| co-citation (papers) | 0.23 | 0.19 | 0.87 | 0.87 | fdc-arxiv-nested - lcc-arxiv-nested: +0.001 [-0.026, +0.025] |
+<!-- /table:external -->
+
+Part of the judge's verdict is also about the schemes. The judge's
+together-or-apart call agrees with whether the pair is an edge of the graph
+at $\kappa$ = <!-- v:x_val_together_kappa -->0.62<!-- /v -->, and disagrees with whether the scheme put the pair
+together ($\kappa$ = <!-- v:x_val_scheme_together_kappa -->-0.31<!-- /v -->). The judge finds, on its sample, a false-join share
+of <!-- v:x_val_false_join -->0.24<!-- /v --> and a false-split share of <!-- v:x_val_false_split -->0.27<!-- /v --> of all sampled pairs, shares
+that depend on how the strata were drawn.
+
+## 5.8 Coverage control and the classifier tier
+
+A gold run's unlabelled items hang under the root and are charged the
+maximum, so coverage enters the cost directly. The covered-subset analysis
+rescored the placed runs on each run's own covered items. Coverage explains
+<!-- v:x_cov_rho_sq -->59%<!-- /v --> of the rank variance of Dasgupta cost over the
+<!-- v:x_cov_runs -->14<!-- /v --> placed runs on the papers ($\rho$ = <!-- v:x_cov_rho -->-0.77<!-- /v -->), and the ranking by cost on
+all items and on each run's own covered items barely agrees (Kendall
+$\tau$ = <!-- v:x_cov_tau -->0.10<!-- /v -->). Low-coverage schemes move from the bottom to the middle once
+their unplaced papers are dropped. The sparse graph is not the cause: on random subsets of 1,000 to 5,000
+papers, the kNN-sparse cost and a dense cost rank the placed runs with
+Spearman $\rho \ge$ <!-- v:x_dense_min_rho -->0.92<!-- /v -->.
+
+A second classifier tier tests the same point from the other side. The
+shortlist profile adds a BGE-small embedding shortlist after the lexical
+tiers and files every item, so coverage is <!-- v:x_sem_min_cov -->1.000<!-- /v --> for all
+<!-- v:x_sem_n -->13<!-- /v --> schemes. The rerank profile is unavailable in this build and
+reproduces the shortlist placements. Table 14 compares the tiers on the
+same graph and schemes. Skill rises for <!-- v:x_sem_up -->12<!-- /v --> of <!-- v:x_sem_n -->13<!-- /v --> schemes, by much more where
+the lexical tier placed few papers. arXiv's own taxonomy moves from
+<!-- v:x_sem_arxiv_lex -->0.128<!-- /v --> to <!-- v:x_sem_arxiv_sh -->0.502<!-- /v --> and now leads, with openalex-topics second
+(<!-- v:x_sem_second_skill -->0.465<!-- /v -->), and the Spearman correlation between the two tiers' skill values
+is <!-- v:x_sem_rho -->0.14<!-- /v -->. The ranking of schemes under a classifier is therefore a
+property of the classifier-scheme pair. The run is marked pending in
+`bench/results/README.md`: the numbers here are read from the committed
+JSON of that directory and should be treated as preliminary, and the tier
+that places by embedding uses a different model from the graph's.
+
+Table 14. Lexical and shortlist placement on the papers (`profile:lexical@2`
+and `profile:shortlist@2`; bench/results/2026-10-10-semantic).
+
+<!-- table:semantic_tier -->
+| scheme | coverage lexical | coverage shortlist | skill lexical | skill shortlist | change in skill |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| acm-ccs | 0.745 | 1.000 | 0.200 | 0.278 | +0.078 |
+| arxiv | 0.426 | 1.000 | 0.128 | 0.502 | +0.373 |
+| bk | 0.481 | 1.000 | 0.116 | 0.360 | +0.244 |
+| eurovoc | 0.974 | 1.000 | 0.179 | 0.175 | -0.004 |
+| fdc | 0.770 | 1.000 | 0.196 | 0.258 | +0.062 |
+| ilc2 | 1.000 | 1.000 | 0.214 | 0.244 | +0.031 |
+| ipc | 0.980 | 1.000 | 0.272 | 0.296 | +0.023 |
+| jel | 0.479 | 1.000 | 0.115 | 0.303 | +0.189 |
+| lcc | 0.876 | 1.000 | 0.178 | 0.212 | +0.033 |
+| lcc-full | 1.000 | 1.000 | 0.209 | 0.217 | +0.008 |
+| msc | 0.392 | 1.000 | 0.059 | 0.230 | +0.171 |
+| openalex-topics | 0.973 | 1.000 | 0.423 | 0.465 | +0.042 |
+| unesco-thesaurus | 0.973 | 1.000 | 0.329 | 0.338 | +0.009 |
+<!-- /table:semantic_tier -->
+
+## 5.9 Rank stability on the papers
+
+The stability sweep rescored the 13 schemes on the papers under
+<!-- v:x_stab_settings -->54<!-- /v --> controlled settings: three embedding models, k of 10, 20 and 50,
+three graph thresholds, and the lexical and shortlist tiers. A ranking
+claim is called robust when the minimum Spearman $\rho$ over every pair of
+settings is at least <!-- v:x_stab_threshold -->0.8<!-- /v --> (the sweep's own rule). Table 15 gives the minimum
+and median $\rho$ between settings that use the same classifier tier and
+between settings that do not.
+
+Table 15. Rank agreement of the 13 schemes between controlled settings, by
+objective, and the number of settings in which FDC ranks above LCC.
+
+<!-- table:stability -->
+| objective | min rho, same tier | median rho, same tier | min rho, across tiers | median rho, across tiers | FDC above LCC (settings) |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Dasgupta cost | 0.896 | 0.978 | 0.038 | 0.154 | 0 of 54 |
+| Moseley-Wang revenue | 0.896 | 0.978 | 0.038 | 0.154 | 0 of 54 |
+| skill | 0.896 | 0.978 | 0.038 | 0.154 | 0 of 54 |
+| triplet accuracy | 0.808 | 0.984 | -0.280 | -0.104 | 27 of 54 |
+| shelf-order locality | 0.780 | 0.962 | 0.549 | 0.736 | 0 of 54 |
+<!-- /table:stability -->
+
+Within a tier, rankings are stable: cost, revenue and skill have a minimum
+$\rho$ of <!-- v:x_stab_cost_min_same -->0.90<!-- /v --> over the embedding, k and threshold sweep. Across tiers they
+are not: the minimum is <!-- v:x_stab_cost_min_diff -->0.04<!-- /v --> and the median <!-- v:x_stab_cost_med_diff -->0.15<!-- /v -->. The leader under
+cost is <!-- v:x_stab_lead_lexical -->openalex-topics<!-- /v --> under the lexical tier and <!-- v:x_stab_lead_shortlist -->arxiv<!-- /v --> under the
+shortlist tier. Objectives also disagree. FDC ranks above LCC by cost,
+revenue, skill and locality in <!-- v:x_stab_cost_fdc_wins -->0<!-- /v --> settings. By triplet accuracy it
+ranks above LCC in <!-- v:x_stab_triplet_fdc_wins -->27<!-- /v --> of <!-- v:x_stab_settings -->54<!-- /v -->, and the triplet ranking can be
+reversed between settings (minimum $\rho$ <!-- v:x_stab_triplet_min_diff -->-0.28<!-- /v -->). A claim that one
+scheme beats another on these papers therefore depends on the classifier
+and on the objective. The graph settings matter much less.
+
+## 5.10 Books with Dewey numbers: Dewey against LCC
+
+On the <!-- v:x_books_n -->3,000<!-- /v --> books every item has both a Dewey number and an LC call
+number from librarians, so the Dewey and LCC runs are gold on the same
+items and coverage is 1.000 for both. Table 16 gives the runs on the MiniLM
+$k = 20$ graph. Table 17 gives the comparisons that a book-structure
+proposal drew from them, rechecked in each of <!-- v:x_dl_settings -->27<!-- /v --> settings (three
+embedding models, three values of k and three graph thresholds, with <!-- v:x_bs_resamples -->1,000<!-- /v -->
+paired item-bootstrap draws each).
+
+Table 16. Books, MiniLM, $k = 20$, published graph. $C$ is `cost_norm`,
+FJs enters at $\beta = 1$, $J'$ adds $0.002 N$.
+
+<!-- table:book_main -->
+| run | structure | coverage | C | C + FJs | nav bits | J' | skill |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `ddc-gold` | Dewey, librarian number, full depth | 1.000 | 0.493 | 0.520 | 19.3 | 0.558 | 0.658 |
+| `ddc-section` | Dewey, cut to section (3 digits) | 1.000 | 0.494 | 0.521 | 17.1 | 0.555 | 0.657 |
+| `fdc-d3` | FDC from Dewey, depth 3 | 1.000 | 0.496 | 0.523 | 17.7 | 0.559 | 0.654 |
+| `fdc-d2` | FDC from Dewey, depth 2 | 1.000 | 0.502 | 0.528 | 16.1 | 0.561 | 0.647 |
+| `lcc-gold` | LCC, librarian call number (outline) | 1.000 | 0.523 | 0.531 | 16.2 | 0.563 | 0.619 |
+| `lcc-full-gold` | LCC, librarian call number (complete schedules) | 1.000 | 0.522 | 0.530 | 16.8 | 0.563 | 0.620 |
+| `learned-own` | learned scheme, own insertion | 1.000 | 0.339 | 0.391 | 29.7 | 0.450 | 0.858 |
+| `fdc-placed` | FDC, lexical classifier | 0.839 | 0.654 | 0.680 | 23.4 | 0.727 | 0.450 |
+| `lcc-lcsh-placed` | LCC outline with LCSH vocabulary, lexical classifier | 0.985 | 0.674 | 0.689 | 18.6 | 0.726 | 0.423 |
+| `lcc-placed` | LCC outline, lexical classifier | 0.915 | 0.733 | 0.750 | 20.6 | 0.791 | 0.346 |
+| `unesco-thesaurus-placed` | UNESCO Thesaurus, lexical classifier | 0.925 | 0.629 | 0.656 | 22.2 | 0.700 | 0.482 |
+<!-- /table:book_main -->
+
+Table 17. Pair claims across <!-- v:x_dl_settings -->27<!-- /v --> settings. "Claimed" is the sign the
+proposal reported. "Sign matches" counts settings where the difference has
+that sign. "Significant" counts settings whose 95% interval excludes zero,
+for and against the claim. A tie claim fails when any interval excludes
+zero.
+
+<!-- table:book_claims -->
+| comparison (a vs b) | objective | claimed | sign matches | significant for / against | range of a - b | verdict |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Dewey sections vs LCC, librarian numbers | C | a < b | 13 of 27 | 10 / 9 | [-0.0753, +0.0750] | not stable |
+| Dewey sections vs LCC, librarian numbers | J' | tie | 8 of 27 | - / 19 | [-0.0564, +0.0948] | not stable |
+| Dewey sections vs FDC depth 3 | C | a < b | 27 of 27 | 27 / 0 | [-0.0044, -0.0010] | stable |
+| FDC depth 3 vs depth 2 | J' | a < b | 27 of 27 | 24 / 0 | [-0.0085, -0.0001] | stable |
+| FDC depth 3 vs full FDC number | J' | a < b | 15 of 27 | 9 / 1 | [-0.0005, +0.0004] | not stable |
+| Full Dewey number vs section | J' | a > b | 27 of 27 | 27 / 0 | [+0.0013, +0.0036] | stable |
+| Learned scheme vs Dewey sections | J' | a < b | 19 of 27 | 13 / 6 | [-0.1520, +0.0917] | not stable |
+| Placed: FDC vs LCC outline | J' | a < b | 27 of 27 | 24 / 0 | [-0.0897, -0.0237] | stable |
+| Placed: FDC vs LCC outline + LCSH | J' | a < b | 9 of 27 | 5 / 8 | [-0.0434, +0.0729] | not stable |
+<!-- /table:book_claims -->
+
+Dewey sections beat LCC on cost on the published graph for all three
+embedding models (<!-- v:x_dl_c_minilm -->-0.0292<!-- /v --> [<!-- v:x_dl_c_minilm_lo -->-0.0438<!-- /v -->, <!-- v:x_dl_c_minilm_hi -->-0.0141<!-- /v -->] on MiniLM,
+<!-- v:x_dl_c_bgesmall -->-0.0411<!-- /v --> on bge-small, <!-- v:x_dl_c_nomic -->-0.0239<!-- /v --> on nomic, at $k = 20$). Across the
+<!-- v:x_dl_settings -->27<!-- /v --> settings the sign matches in <!-- v:x_dl_c_match -->13<!-- /v -->, with <!-- v:x_dl_c_for -->10<!-- /v --> significant for and
+<!-- v:x_dl_c_against -->9<!-- /v --> significant against, and the difference ranges from <!-- v:x_dl_c_min -->-0.0753<!-- /v --> to
+<!-- v:x_dl_c_max -->+0.0750<!-- /v -->. Under the corrected objective the claim becomes a tie, and the tie
+holds in <!-- v:x_dl_jp_match -->8<!-- /v --> settings with <!-- v:x_dl_jp_against -->19<!-- /v --> significant departures. The
+worst-case regret that earlier favoured Dewey sections (<!-- v:x_regret_ddc9 -->0.060<!-- /v --> against
+<!-- v:x_regret_lcc9 -->0.067<!-- /v --> for LCC over the nine published graphs) reverses over all
+<!-- v:x_dl_settings -->27<!-- /v --> settings (<!-- v:x_regret_ddc27 -->0.116<!-- /v --> against <!-- v:x_regret_lcc27 -->0.067<!-- /v -->). The non-LLM signals do not separate them
+either: shared subject headings <!-- v:x_ext_lcsh_diff -->-0.002<!-- /v --> [<!-- v:x_ext_lcsh_lo -->-0.011<!-- /v -->, <!-- v:x_ext_lcsh_hi -->+0.007<!-- /v -->], and for papers shelved
+under an FDC or an LCC backbone, coupling <!-- v:x_ext_coupling_diff -->+0.004<!-- /v -->
+[<!-- v:x_ext_coupling_lo -->-0.001<!-- /v -->, <!-- v:x_ext_coupling_hi -->+0.010<!-- /v -->] and co-citation <!-- v:x_ext_cocitation_diff -->+0.001<!-- /v -->
+[<!-- v:x_ext_cocitation_lo -->-0.026<!-- /v -->, <!-- v:x_ext_cocitation_hi -->+0.025<!-- /v -->]. We read this as a
+tie that depends on the setting: Dewey and LCC are not separated by these
+metrics on these books. The sample is stratified equally over LCC's main
+classes, which favours LCC's false-join term, and its text is mostly LC
+subject headings.
+
+Smaller comparisons are stable in every setting. A three-digit Dewey
+section beats FDC depth 3 by less than
+<!-- v:x_sec_fdc_max -->0.0044<!-- /v --> of cost (a caption-versus-number
+difference). Three levels beat two. The full Dewey number gains cost and
+loses on $J'$. Through the same classifier, FDC beats the LCC outline
+without subject-heading vocabulary in all <!-- v:x_dl_settings -->27<!-- /v --> settings. It does not
+beat the bundled LCC outline with LCSH vocabulary, which places
+<!-- v:x_bead_cov_lcclcsh -->0.99<!-- /v --> of the books against <!-- v:x_bead_cov_fdc -->0.84<!-- /v --> for FDC: that comparison
+turns on vocabulary and coverage, not on the scheme. On the 500-book
+title-only holdout no placed run reaches the coverage floor of
+<!-- v:x_bead_floor -->0.80<!-- /v -->, and the best reaches <!-- v:x_hold_best_cov -->0.57<!-- /v -->.
+
+## 5.11 The learned scheme and home advantage
+
+A scheme fitted to the objective by order-preserving dynamic programming
+and local search (the companion draft in `paper/paper2`) scores far below
+every human scheme on its own corpus: in-sample skill
+<!-- v:x_l_insample_skill -->0.976<!-- /v --> on the papers, and
+<!-- v:x_l_heldout_skill -->0.922<!-- /v --> on a held-out 20% split. Through the
+lexical classifier it falls to <!-- v:x_l_placed_skill -->0.732<!-- /v -->. On books, its cost is lower than Dewey sections' on every graph, but the
+margin is largest on the graph it was fitted on (Table 18). Refits on the
+other two models score best on their own graph (Table 19): on the
+held-out split, a fit scored on its own model's graph averages
+<!-- v:x_cf_diag_mean -->0.926<!-- /v --> skill against <!-- v:x_cf_off_mean -->0.904<!-- /v --> elsewhere, and is best on its own graph for
+<!-- v:x_cf_diag_wins -->3<!-- /v --> of 3 models. Part of the learned scheme's lead is therefore home
+advantage. Across the <!-- v:x_dl_settings -->27<!-- /v --> settings, the claim that it beats Dewey sections is
+not stable (sign matches in <!-- v:x_learn_match -->19<!-- /v --> of
+<!-- v:x_dl_settings -->27<!-- /v --> under $J'$, with
+<!-- v:x_learn_against -->6<!-- /v --> significant reversals; Table 17). It also needs the embedding model to file a new item
+and has an opaque notation. We use it as a reference for how low a fitted
+tree can go, not as a candidate scheme.
+
+Table 18. Learned scheme against Dewey sections on books, by graph (all
+$k = 20$; the scheme was fitted on MiniLM).
+
+<!-- table:learned_margin -->
+| graph (books, k = 20) | C learned | C Dewey sections | C difference | J' difference |
+| --- | ---: | ---: | ---: | ---: |
+| minilm (fit graph) | 0.339 | 0.494 | -0.155 | -0.105 |
+| bge-small | 0.376 | 0.483 | -0.108 | -0.052 |
+| nomic | 0.361 | 0.473 | -0.112 | -0.058 |
+<!-- /table:learned_margin -->
+
+Table 19. Held-out skill of each learned fit on each model's $k = 20$ papers
+graph.
+
+<!-- table:cross_fit -->
+| learned fit | scored on minilm | scored on bge-small | scored on nomic |
+| --- | ---: | ---: | ---: |
+| fitted on minilm | 0.922 | 0.901 | 0.891 |
+| fitted on bge-small | 0.913 | 0.938 | 0.909 |
+| fitted on nomic | 0.899 | 0.912 | 0.918 |
+<!-- /table:cross_fit -->
+
 # 6. Discussion
 
 **What the measurement supports.** The method gives one scale for schemes of
@@ -729,28 +1089,62 @@ different size, depth and domain. It costs little: no scoring run took more
 than <!-- v:score_seconds_max -->6.9<!-- /v --> s, and the reference tree took
 <!-- v:ref_seconds_corpus -->58<!-- /v --> s on the corpus graph. Its inputs are pinned by hash. On gold labels it separates a
 well-fitted scheme (arXiv on arXiv) from a general scheme on books (LCC on
-the holdout) and from schemes with too little gold to judge (MSC, JEL).
+the holdout) and from schemes with too little gold to judge (MSC, JEL). Within
+one classifier, the order of schemes on the papers does not depend on the
+embedding model, k or graph threshold (Section 5.9). Several book-side
+comparisons are stable in every setting we tried: the cut depth of a
+Dewey-derived scheme, and the cost of the full number against its
+three-digit section (Section 5.10).
 
-**What it does not yet support.** It does not support a ranking of universal
-schemes. The general schemes that matter most for libraries (LCC, BK, FDC,
-ILC2) have gold labels only for LCC, and only on a small title-only
-holdout. Classifier placement, the only way to reach the other schemes,
-moves skill by as much as the differences we would want to detect
-(Table 8). The stopword fix shows the second risk. A classifier defect can
-change placements drastically while skill barely moves, or moves the
-wrong way.
+**What it does not support.** It does not support a ranking of universal
+schemes, for four reasons that each have a number behind them.
 
-**Toward a fair comparison.** The benchmark design already lays out the
-controls needed (research/benchmark/DESIGN.md §2.5 and §3). These are a
-cost–resolution curve against the reference cut at matched class counts; a
-permutation null that keeps each scheme's shape and class-size histogram;
-item bootstrap intervals; a label-intrinsic track that needs no works; and
-a noise-injection curve that calibrates classifier error on LCC, where
-both tracks exist. None of these was run for this draft. The largest gain
-would come from a large gold set of books that carry both LCC and DDC.
-The design estimates about 3.9M English Open Library records with both
-labels (DESIGN.md §0). DDC could be scored by its digit tree alone, which
-needs no captions.
+1. *Coverage.* Classifier placement is the only way to reach most of the
+   schemes, and coverage explains <!-- v:x_cov_rho_sq -->59%<!-- /v --> of the rank variance of cost over the
+   placed runs (Section 5.8). Gold placement does not escape this: MSC's and
+   JEL's gold scores measure how few papers carry a code.
+2. *The classifier.* The order of schemes changes when the classifier does:
+   the Spearman correlation between the lexical and shortlist tiers' skill
+   is <!-- v:x_sem_rho -->0.14<!-- /v -->, and the leader changes from <!-- v:x_stab_lead_lexical -->openalex-topics<!-- /v --> to <!-- v:x_stab_lead_shortlist -->arxiv<!-- /v --> (Sections 5.8
+   and 5.9). The stopword fix shows the same risk from the other side: a
+   classifier defect can change placements drastically while skill barely
+   moves, or moves the wrong way.
+3. *The objective.* FDC ranks above LCC under triplet accuracy in
+   <!-- v:x_stab_triplet_fdc_wins -->27<!-- /v --> of <!-- v:x_stab_settings -->54<!-- /v --> settings and under cost in <!-- v:x_stab_cost_fdc_wins -->0<!-- /v -->. Dewey sections against LCC on
+   books is a setting-dependent tie (<!-- v:x_dl_c_match -->13<!-- /v --> of <!-- v:x_dl_settings -->27<!-- /v --> settings match the claimed sign
+   under cost, <!-- v:x_dl_jp_match -->8<!-- /v --> the tie under the corrected objective).
+4. *The metric's validity.* The cost agrees with a blind judge at $\kappa$ =
+   <!-- v:x_val_kappa -->0.27<!-- /v -->. The false-join correction raises that to <!-- v:x_val_kappa_fj -->0.48<!-- /v --> against the
+   judge and not against citation or subject-heading signals, and the judge is
+   one model (Sections 5.6 and 5.7).
+
+A scheme's rank on this metric is therefore a statement about a similarity
+graph, a classifier and an objective. It is not a statement about the
+scheme's quality in use. The benchmark's own consumers should read it that
+way. The tool that produced the placements has not fixed a default scheme on
+the strength of these numbers: the metrics do not separate Dewey from LCC,
+and the choice between FDC to depth 3 and the bundled LCC outline rests on
+openness, notation length and catalogue availability, and is an open decision
+for the tool's owner (`docs/decisions/default-scheme.md`).
+
+**The learned scheme.** A tree fitted to the objective sets the floor for
+how low the cost can go on a given graph. Its lead over human schemes is real
+in the sense that it holds on graphs it was not fitted to, and partly home
+advantage: it is larger on the fit graph (Section 5.11). It cannot be a
+scheme in the library sense without a notation and a way to file a new item
+that does not need the embedding model.
+
+**Toward a fair comparison.** The benchmark design lays out controls
+(research/benchmark/DESIGN.md §2.5 and §3). A coverage control and a second
+classifier tier, an embedding, k and threshold sweep, item bootstrap
+intervals and a judge-based validity check have now been run. A
+permutation null that keeps each scheme's shape and class-size histogram, a
+label-intrinsic track that needs no works, a noise-injection curve that
+calibrates classifier error on LCC, and a placement by a classifier other
+than shelfmark's (Annif or a prompted LLM) have not. The largest remaining
+gain would come from a second annotator model and a human annotator on the
+validity sample, and from a graph that is not built from embeddings (co-use
+or citations).
 
 **Interpretation of skill.** Skill compares a scheme with a tree fitted to
 the same similarity graph. A scheme encodes many relations besides textual
@@ -762,53 +1156,83 @@ quality in every sense that matters to libraries.
 # 7. Limitations
 
 - **Classifier bias.** Every non-gold placement comes from shelfmark's own
-  lexical classifier. It matches class labels and attached vocabulary, so
-  a scheme with rich vocabulary is reached better than one with bare
-  labels, independent of its structure. Most placements are below the
-  classifier's own confidence target (Table 7). Table 8 shows the classifier
-  effect is as large as the effects we want to measure. No other
-  classifier (for example Annif or an LLM) was run for comparison.
+  classifier: the lexical profile for the main tables, and a BGE-small
+  shortlist profile for Section 5.8. The lexical profile matches class
+  labels and attached vocabulary, so a scheme with rich vocabulary is
+  reached better than one with bare labels, independent of its structure.
+  Most placements are below the classifier's own confidence target
+  (Table 7). Table 8 and Section 5.8 show the classifier effect is as
+  large as the effects we want to measure. No classifier outside this
+  project (for example Annif or a prompted LLM) was run for comparison. The
+  semantic tier's directory is marked pending in the results index, so
+  those numbers are preliminary.
+- **One annotator for validity.** The validity check used one LLM judge, on
+  <!-- v:x_val_n -->953<!-- /v --> pairs from <!-- v:x_val_runs -->8<!-- /v --> runs in three strata, so its shares describe the
+  sample and not the population of pairs. The judge is self-consistent
+  ($\kappa$ = <!-- v:x_val_self_kappa -->0.92<!-- /v -->), but self-consistency is not validity. There is no human
+  annotator and no second model. The non-LLM signals (subject headings,
+  citations) are partial, and the citation signal is thin for recent
+  preprints.
 - **Science-heavy corpus.** <!-- v:share_physical_math_cs -->86.4%<!-- /v -->
   of the corpus is computer science, mathematics or physics. Humanities,
   law, arts and general nonfiction appear only in the 500-record holdout,
-  which is itself <!-- v:holdout_p_share -->76.4%<!-- /v --> class P. Domain
-  schemes (arXiv, MSC, ACM CCS) are scored on their home ground and general
-  schemes are not, so no cross-type comparison is fair.
+  which is itself <!-- v:holdout_p_share -->76.4%<!-- /v --> class P, and
+  in the <!-- v:x_books_n -->3,000<!-- /v -->-book sample, whose graph text is mostly LC subject headings.
+  Domain schemes (arXiv, MSC, ACM CCS) are scored on their home ground and
+  general schemes are not, so no cross-type comparison is fair.
 - **Low gold coverage for MSC and JEL.** Only
   <!-- v:gold_msc_cov -->13.2%<!-- /v --> of papers carry a valid MSC code
   and <!-- v:gold_jel_cov -->0.02%<!-- /v --> a JEL code. Unplaced items
   hang under the root, so these gold scores measure coverage, not
-  structure. A covered-subset score, restricted to labelled items and their
-  edges, is not yet implemented.
-- **ACM CCS gold missing.** The corpus field meant to carry ACM CCS labels
-  holds the ACM classes submitted to arXiv, which are CCS 1998 codes. No
-  value is a CCS 2012 concept path, so the gold run was skipped.
-- **Scheme licensing.** Several schemes cannot be redistributed: ACM CCS
-  (educational and research use only), JEL (no open licence), MSC
-  (non-commercial, share-alike), EuroVoc (terms stated inconsistently) and
-  ILC2 (conflicting licence statements) (Table 2). Their files are built
-  locally from the publishers' downloads and verified by hash, but they are
-  not published. Exact reproduction therefore depends on the upstream
-  downloads staying available and unchanged. DDC, which OCLC describes as
-  the world's most widely used way to organize library collections, is
-  absent because OCLC holds its copyright [@deweyrights]. Even LCC's open status depends on jurisdiction. The
-  Library of Congress calls its linked data a public-domain data set
-  [@idloc], but its Classification Web notice says LC-originated
-  classification data are copyrighted except within the USA
+  structure. The covered-subset analysis (Section 5.8) is the control for
+  this, and its subset scores use a restricted graph.
+- **ACM CCS gold missing, and no official crosswalk.** The corpus field
+  meant to carry ACM CCS labels holds the ACM classes submitted to arXiv,
+  which are CCS 1998 codes. No value is a CCS 2012 concept path, so the gold
+  run was skipped. ACM publishes no CCS 1998 to CCS 2012 mapping: it says it
+  built one for its own digital library and exposes it only as terms on
+  each article's page, and the published CCS 2012 SKOS file holds no
+  mapping or 1998 codes (research/reports/5). We did not build a mapping,
+  because any we made would be ours and not ACM's, so the ACM CCS placed run
+  has no gold counterpart.
+- **Scheme licensing and the DDC position.** Several schemes cannot be
+  redistributed: ACM CCS (educational and research use only), JEL (no open
+  licence), MSC (non-commercial, share-alike), EuroVoc (terms stated
+  inconsistently) and ILC2 (conflicting licence statements) (Table 2).
+  Their files are built locally from the publishers' downloads and verified
+  by hash, but they are not published. Exact reproduction therefore depends
+  on the upstream downloads staying available and unchanged. DDC, which OCLC
+  describes as the world's most widely used way to organize library
+  collections, is owned by OCLC [@deweyrights]. We use Dewey class *numbers*
+  from public catalogue records, and the tree is the notation's digit
+  prefixes. No Dewey caption, schedule, table, Manual entry or relative-index
+  term from any edition is used, and nothing is taken from OCLC services. The
+  position rests on class numbers being short numeric strings in public
+  catalogue data; it is an engineering position, not legal advice, and it is
+  written for the United States and the European Union only
+  (research/reports/7). The Dewey-derived scheme that can be bundled and
+  used to *place* items is FDC [@fdc]. Even LCC's open status depends on
+  jurisdiction. The Library of Congress calls its linked data a
+  public-domain data set [@idloc], but its Classification Web notice says
+  LC-originated classification data are copyrighted except within the USA
   [@classweblegal].
 - **Titles-only holdout.** The book holdout has no descriptions. Its
   similarity graph is built from titles averaging
   <!-- v:holdout_title_words -->3.5<!-- /v --> words, and the
   classifier finds candidates for few of them. The holdout is also small
-  (n = <!-- v:n_holdout -->500<!-- /v -->), and no confidence intervals are reported.
-- **Method limits.** The kNN-sparsified cost has not been checked against
-  the dense cost (DESIGN.md §1 proposes a rank-agreement check at
-  n ≤ 5k). There is one embedding model and one value of k, with no
-  sensitivity runs. Polyhierarchies are reduced to one parent per class.
-  Only one placement per item is used, although 35.5% of a 200-work Open
-  Library sample had more than one LCC value (DESIGN.md §0). The balance
-  statistics count each item at every ancestor class (Section 3.5). The
-  navigation models are unfitted.
+  (n = <!-- v:n_holdout -->500<!-- /v -->). Tables 3 to 10 give point values;
+  intervals for the placed runs are in the bootstrap runs of
+  `bench/results/2026-10-10-covered` and `-semantic`.
+- **Method limits.** The kNN-sparsified cost agrees with a dense cost on
+  random subsets (Section 5.8) but has not been checked on the full corpus.
+  The embedding-model, k and threshold sweep uses three models; the
+  similarity is always an embedding. Polyhierarchies are reduced to one
+  parent per class. Only one placement per item is used, although 35.5% of a
+  200-work Open Library sample had more than one LCC value (DESIGN.md §0).
+  The balance statistics count each item at every ancestor class (Section
+  3.5). The navigation models are unfitted. The 3,000-book sample is
+  stratified equally over LCC's main classes, which favours LCC's
+  false-join term.
 - **Search for prior work.** The novelty claim rests on the search in
   research/reports/8-prior-work-search.md: 94 Crossref queries over the
   JASIS/JASIST family, Knowledge Organization, Cataloging & Classification
@@ -844,17 +1268,28 @@ All inputs and outputs are in the repository or pinned by hash.
   `bench/results/2026-10-10-r3/REPRODUCE.md` list every command. The first
   run took about 45 minutes and the r2 rerun about 25 minutes, both on 8
   CPUs.
+- **Later results.** `docs/validity/` (sample, rubric, labels and tables),
+  `bench/results/2026-10-10-covered`, `-embed`, `-semantic`, `-learned`,
+  `2026-10-11-falsejoin`, `-stability` and `-book-stability`, each with a
+  `REPRODUCE.md`. The judge's labels are in `docs/validity/sample.jsonl`;
+  rerunning the judge needs the same model and rubric.
 - **Determinism.** With the same graph and scheme files, gold scores
   reproduce exactly. Placed scores reproduce exactly with the same
   classifier build.
 - **This paper.** `paper/paper1/scripts/make_tables.py` regenerates every
-  table and marked number from the JSON. `--check` fails if `paper.md` is
-  stale. It also checks that the r2 and r3 runs used the 2026-10-10 graphs
-  and scheme files, and that the corpus files match their recorded hashes.
+  table and marked number from the JSON, using `paper/common/extra_results.py`
+  for the validity, stability, book and semantic-tier values. `--check` fails
+  if `paper.md` is stale. It also checks that the r2 and r3 runs used the
+  2026-10-10 graphs and scheme files, and that the corpus files match their
+  recorded hashes.
 
 # Acknowledgements
 
-TODO.
+The author thanks Hetzner for offering an API for autonomous server
+provisioning; DeepSeek for releasing open-source models; and Anthropic for
+Claude, which assisted with the analysis, code and drafting. The validity
+labels were produced by an Anthropic model acting as the judge (Section
+3.7).
 
 # References
 

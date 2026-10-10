@@ -1,7 +1,9 @@
 # Paper 1: Scoring universal classification schemes with hierarchical-clustering objectives
 
 **Status: DRAFT, not submitted.** Nothing here has been submitted, posted or
-shared. The author line is a placeholder (`AUTHOR TBD`).
+shared. The text is complete: every section is written, every number is
+generated, and no citation is unresolved. The author line is a placeholder
+(`AUTHOR TBD`).
 
 Candidate venues: JASIST, Knowledge Organization, JCDL, TPDL.
 
@@ -13,10 +15,12 @@ Candidate venues: JASIST, Knowledge Organization, JCDL, TPDL.
   The comment above each entry records how it was verified (Crossref,
   arXiv API, proceedings page or page title).
 - `scripts/make_tables.py`: generates every table and every marked number
-  in `paper.md` (standard-library Python 3).
+  in `paper.md` (standard-library Python 3). The validity, stability, book
+  and semantic-tier values come from `paper/common/extra_results.py`, which
+  `paper/method-survey/scripts/gen_tables.py` also uses.
 
 Prior work was searched systematically in
-`research/reports/8-prior-work-search.md`; no `TODO(cite)` markers remain.
+`research/reports/8-prior-work-search.md`; no unresolved citation markers remain.
 
 ## Sources
 
@@ -27,7 +31,13 @@ Prior work was searched systematically in
   `profile:lexical@2`, after the stopword fix). Its `results.json` also
   holds the before/after comparison with `profile:lexical@1`, which the
   paper reports as a methods note.
-- Corpus: `bench/corpus/corpus.jsonl`, `bench/corpus/holdout.jsonl`.
+- Later results (Sections 5.6 to 5.11): `docs/validity/` (judge agreement and
+  the false-join variants), `bench/results/2026-10-10-covered/`, `-embed/`,
+  `-semantic/`, `-learned/`, `2026-10-11-falsejoin/`, `-stability/` and
+  `-book-stability/`; the default-scheme decision is in
+  `docs/decisions/default-scheme.md`.
+- Corpus: `bench/corpus/corpus.jsonl`, `bench/corpus/holdout.jsonl`,
+  `bench/corpus/holdout-books.jsonl`.
 - Background: `research/reports/1-4`, `research/benchmark/DESIGN.md`,
   `bench/corpus/README.md`, `crates/bench/README.md`.
 

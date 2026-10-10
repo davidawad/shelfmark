@@ -366,6 +366,14 @@ def build():
     values["harness_commit"] = gold["harness"]["commit"][:12]
     values["classifier_commit"] = placed["classifier"]["commit"][:12]
     values["graph_corpus_sha"] = gold["graphs"]["corpus"]["graph_sha256"][:16]
+
+    # Results added after the first draft: judge validity, false-join term,
+    # rank stability, book comparison, semantic tier. See paper/common.
+    sys.path.insert(0, str(ROOT / "paper/common"))
+    import extra_results
+    xv, xt = extra_results.collect(ROOT)
+    values.update(xv)
+    tables.update({k: extra_results.md_table(v) for k, v in xt.items()})
     return tables, values
 
 
