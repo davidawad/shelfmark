@@ -158,7 +158,7 @@ def build():
             pub = r2["results"][f"{r['scheme']}-placed-holdout"]
             check(close(r["cost_norm"], pub["cost_norm"]), f"placed holdout {r['scheme']} vs r2")
     check(len(scheme["classes"]) == shape["classes"], "scheme class count")
-    check(sum(l["n"] for l in centroids["leaves"]) == build_["inputs"]["n"], "centroid sizes")
+    check(sum(leaf["n"] for leaf in centroids["leaves"]) == build_["inputs"]["n"], "centroid sizes")
     check(ins_report["stable"] and res["insertion"]["split"]["stable"], "insertion not stable")
     check(len(ins_scheme["classes"]) == ins_report["classes_after"], "inserted scheme size")
 
@@ -334,7 +334,7 @@ def build():
         {"D (cost_norm)", "N (nav, a = 1)", "J", "classes", "seconds"},
     )
 
-    leaf_n = {l["code"]: l["n"] for l in centroids["leaves"]}
+    leaf_n = {leaf["code"]: leaf["n"] for leaf in centroids["leaves"]}
     def under(code):
         return [c for c in leaf_n if c == code or c.startswith(code + ".")]
     outline = []

@@ -3,7 +3,7 @@
   "version": "2026-10-10",
   "title": "Learned general classification (similarity- and navigation-optimized prototype)",
   "source": {
-    "description": "Fitted by schemes/learned (learned-scheme build) to 10000 works of the benchmark corpus (corpus.jsonl sha256 7685685d0de25d6e8a614859783dcb5376d81e4fe336a65f22b550f4c7527b8d) on the k=20 kNN cosine graph (sha256 759d3b8461a9384d4359244c9fb42c2bc66496431e0f4681d33b7a59798ed35a). Objective: normalized Dasgupta cost + 0.005 x expected navigation cost (per-branch cost 1 bits + log2 fan-out); 2-12 child classes, at most 4 levels, leaf classes of at least 5 works; seed 20261010. Labels: written by hand from each class's c-TF-IDF terms and most central titles; the terms are the class vocabulary (source ctfidf).",
+    "description": "Fitted by schemes/learned (learned-scheme build) to 10000 works of the benchmark corpus (corpus.jsonl sha256 1027bf9d34928f470ed8b0d7b5ddc5c983fde49bc0cd33eaa162bbd1f830fea5) on the k=20 kNN cosine graph (sha256 759d3b8461a9384d4359244c9fb42c2bc66496431e0f4681d33b7a59798ed35a). Objective: normalized Dasgupta cost + 0.005 x expected navigation cost (per-branch cost 1 bits + log2 fan-out); 2-12 child classes, at most 4 levels, leaf classes of at least 5 works; seed 20261010. Labels: written by hand from each class's c-TF-IDF terms and most central titles; the terms are the class vocabulary (source ctfidf).",
     "license": "CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/)"
   },
   "code_grammar": "[0-9]{2}(\\.[0-9]{2})*",

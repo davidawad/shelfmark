@@ -9,8 +9,8 @@
     {
       "file": "bench/corpus/corpus.jsonl",
       "role": "fitting corpus (titles and abstracts for labels and c-TF-IDF terms)",
-      "bytes": 17354842,
-      "sha256": "7685685d0de25d6e8a614859783dcb5376d81e4fe336a65f22b550f4c7527b8d"
+      "bytes": 17343370,
+      "sha256": "1027bf9d34928f470ed8b0d7b5ddc5c983fde49bc0cd33eaa162bbd1f830fea5"
     },
     {
       "file": "bench/results/2026-10-10/graphs/corpus-k20.json.gz",
