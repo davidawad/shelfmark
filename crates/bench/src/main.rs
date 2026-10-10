@@ -31,14 +31,19 @@ fn one() -> f64 {
     1.0
 }
 
+/// Item id to its (class code, mass) placements.
+type Placements = BTreeMap<String, Vec<(String, f64)>>;
+
 fn main() {
     if let Err(error) = run() {
         eprintln!("shelfmark-bench: {error}");
         std::process::exit(2);
     }
 }
-fn run() -> Result<(), Box<dyn std::error::Error>> {
-    let args: Vec<_> = env::args().collect();
+/// Command-line options after `run`: `--key value` pairs plus `--k`.
+fn parse_args(
+    args: &[String],
+) -> Result<(BTreeMap<String, String>, usize), Box<dyn std::error::Error>> {
     if args.len() < 6 || args[1] != "run" {
         return Err("usage: shelfmark-bench run --corpus corpus.jsonl --scheme scheme.json [--placements placements.jsonl] [--k 20] [--output results.json]".into());
     }
@@ -62,12 +67,17 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
         }
         i += 1;
     }
-    let corpus_path = values.get("--corpus").ok_or("missing --corpus")?;
-    let scheme_path = values.get("--scheme").ok_or("missing --scheme")?;
-    let corpus: Vec<CorpusRow> = read_jsonl(corpus_path)?;
-    let scheme_bytes = std::fs::read(scheme_path)?;
-    let scheme: SchemeDoc = serde_json::from_slice(&scheme_bytes)?;
-    let mut placements = BTreeMap::<String, Vec<(String, f64)>>::new();
+    Ok((values, k))
+}
+
+/// Placements from `--placements`, or the first source label of each corpus
+/// row for the scheme when no placement file is given.
+fn load_placements(
+    values: &BTreeMap<String, String>,
+    corpus: &[CorpusRow],
+    scheme: &SchemeDoc,
+) -> Result<Placements, Box<dyn std::error::Error>> {
+    let mut placements = Placements::new();
     if let Some(path) = values.get("--placements") {
         for row in read_jsonl::<PlacementRow>(path)? {
             let classes = row
@@ -81,7 +91,7 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
             placements.insert(row.id, classes);
         }
     } else {
-        for row in &corpus {
+        for row in corpus {
             let labels = match scheme.name.to_ascii_lowercase().as_str() {
                 "lcc" => row.lc_classifications.as_slice(),
                 "ddc" => row.ddc.as_slice(),
@@ -96,7 +106,16 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
             }
         }
     }
-    let graph = if let Some(path) = values.get("--graph") {
+    Ok(placements)
+}
+
+/// The similarity graph from `--graph`, or one embedded from the corpus.
+fn load_graph(
+    values: &BTreeMap<String, String>,
+    corpus: &[CorpusRow],
+    k: usize,
+) -> Result<shelfmark_bench::SimilarityGraph, Box<dyn std::error::Error>> {
+    if let Some(path) = values.get("--graph") {
         let graph: shelfmark_bench::SimilarityGraph =
             serde_json::from_slice(&std::fs::read(path)?)?;
         if graph.n != corpus.len() {
@@ -104,11 +123,23 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
                 format!("graph has {} rows but corpus has {}", graph.n, corpus.len()).into(),
             );
         }
-        graph
+        Ok(graph)
     } else {
         let model = DeterministicEmbedder::default();
-        embed_corpus(&corpus, &model, k)
-    };
+        Ok(embed_corpus(corpus, &model, k))
+    }
+}
+
+fn run() -> Result<(), Box<dyn std::error::Error>> {
+    let args: Vec<_> = env::args().collect();
+    let (values, k) = parse_args(&args)?;
+    let corpus_path = values.get("--corpus").ok_or("missing --corpus")?;
+    let scheme_path = values.get("--scheme").ok_or("missing --scheme")?;
+    let corpus: Vec<CorpusRow> = read_jsonl(corpus_path)?;
+    let scheme_bytes = std::fs::read(scheme_path)?;
+    let scheme: SchemeDoc = serde_json::from_slice(&scheme_bytes)?;
+    let mut placements = load_placements(&values, &corpus, &scheme)?;
+    let graph = load_graph(&values, &corpus, k)?;
     let item_placements: Vec<_> = corpus
         .iter()
         .map(|row| ItemPlacement {

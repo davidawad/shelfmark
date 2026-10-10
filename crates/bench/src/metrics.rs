@@ -104,70 +104,65 @@ fn tree_depth(tree: &Tree, mut node: usize) -> usize {
     d
 }
 
-fn structural_stats(tree: &Tree) -> StructuralStats {
-    let mut depths = Vec::new();
+/// Menu-scan cost from a leaf to the root: half the fan-out of every
+/// branching ancestor, plus half a step for the choice itself.
+fn branch_scan_cost(tree: &Tree, leaf: usize) -> f64 {
+    let mut cost = 0.0;
+    let mut node = leaf;
+    while let Some(parent) = tree.nodes[node].parent {
+        let fanout = tree.nodes[parent].children.len();
+        if fanout > 1 {
+            cost += (fanout as f64 + 1.0) / 2.0;
+        }
+        node = parent;
+    }
+    cost
+}
+
+/// Binary-search menu cost from a leaf to the root with per-branch cost `a`.
+fn log_branch_cost(tree: &Tree, leaf: usize, a: usize) -> f64 {
+    let mut cost = 0.0;
+    let mut node = leaf;
+    while let Some(parent) = tree.nodes[node].parent {
+        let fanout = tree.nodes[parent].children.len().max(1);
+        if fanout > 1 {
+            cost += a as f64 + (fanout as f64).log2();
+        }
+        node = parent;
+    }
+    cost
+}
+
+/// The deepest class (a node with a code) at or above a leaf's parent, or the
+/// leaf itself when none exists.
+fn shelf_class(tree: &Tree, leaf: usize) -> usize {
+    tree.ancestors(leaf)
+        .into_iter()
+        .skip(1)
+        .find(|&v| tree.nodes[v].code.is_some())
+        .unwrap_or(leaf)
+}
+
+/// Number of items with at least one placement at or beneath `node`.
+fn items_under(tree: &Tree, node: usize) -> usize {
+    tree.item_leaves
+        .iter()
+        .filter(|copies| {
+            copies
+                .iter()
+                .any(|(leaf, _)| is_descendant(tree, *leaf, node))
+        })
+        .count()
+}
+
+/// Placement frequency of every used class node, and the child count of every
+/// branching node.
+fn class_sizes_and_branches(tree: &Tree) -> (Vec<f64>, Vec<usize>) {
     let mut classes = Vec::new();
     let mut branches = Vec::new();
-    let mut nav_scan = 0.0;
-    let mut nav_log = [0.0; 3];
-    let n = tree.item_leaves.len().max(1) as f64;
-    for leaves in &tree.item_leaves {
-        for &(leaf, mass) in leaves {
-            let d = tree.item_depth(leaf);
-            depths.push(d);
-            let mut branch_cost = 0.0;
-            let mut node = leaf;
-            while let Some(parent) = tree.nodes[node].parent {
-                let fanout = tree.nodes[parent].children.len();
-                if fanout > 1 {
-                    branch_cost += (fanout as f64 + 1.0) / 2.0;
-                }
-                node = parent;
-            }
-            // Terminal scan cost includes every item attached anywhere beneath
-            // the leaf's deepest class, matching a physical class shelf scan.
-            let class = tree
-                .ancestors(leaf)
-                .into_iter()
-                .skip(1)
-                .find(|&v| tree.nodes[v].code.is_some())
-                .unwrap_or(leaf);
-            let class_items = tree
-                .item_leaves
-                .iter()
-                .filter(|copies| {
-                    copies
-                        .iter()
-                        .any(|(other, _)| is_descendant(tree, *other, class))
-                })
-                .count();
-            nav_scan += mass * (branch_cost + (class_items as f64 + 1.0) / 2.0) / n;
-            for a in 0..3 {
-                let mut log_cost = 0.0;
-                let mut node = leaf;
-                while let Some(parent) = tree.nodes[node].parent {
-                    let fanout = tree.nodes[parent].children.len().max(1);
-                    if fanout > 1 {
-                        log_cost += a as f64 + (fanout as f64).log2();
-                    }
-                    node = parent;
-                }
-                nav_log[a] += mass * log_cost / n;
-            }
-        }
-    }
-    // Number of items at each used class node (placement frequency).
     for node in 1..tree.nodes.len() {
         if tree.nodes[node].code.is_some() {
-            let count = tree
-                .item_leaves
-                .iter()
-                .filter(|copies| {
-                    copies
-                        .iter()
-                        .any(|(leaf, _)| is_descendant(tree, *leaf, node))
-                })
-                .count();
+            let count = items_under(tree, node);
             if count > 0 {
                 classes.push(count as f64);
             }
@@ -176,17 +171,19 @@ fn structural_stats(tree: &Tree) -> StructuralStats {
             branches.push(tree.nodes[node].children.len());
         }
     }
-    let mut sorted = depths.clone();
-    sorted.sort_unstable();
-    let quant = |v: &[usize], q: f64| {
-        if v.is_empty() {
-            0
-        } else {
-            v[((v.len() - 1) as f64 * q).round() as usize]
-        }
-    };
-    let total = classes.iter().sum::<f64>().max(1.0);
-    let entropy = -classes
+    (classes, branches)
+}
+
+fn quantile(v: &[usize], q: f64) -> usize {
+    if v.is_empty() {
+        0
+    } else {
+        v[((v.len() - 1) as f64 * q).round() as usize]
+    }
+}
+
+fn entropy_nats(classes: &[f64], total: f64) -> f64 {
+    -classes
         .iter()
         .map(|c| {
             let p = c / total;
@@ -196,22 +193,49 @@ fn structural_stats(tree: &Tree) -> StructuralStats {
                 0.0
             }
         })
-        .sum::<f64>();
-    let k = classes.len().max(1) as f64;
-    let mut sorted_sizes = classes.clone();
+        .sum::<f64>()
+}
+
+fn gini(classes: &[f64]) -> f64 {
+    if classes.is_empty() {
+        return 0.0;
+    }
+    let mut sorted_sizes = classes.to_vec();
     sorted_sizes.sort_by(f64::total_cmp);
-    let gini = if classes.is_empty() {
-        0.0
-    } else {
-        let sum = sorted_sizes.iter().sum::<f64>();
-        let weighted = sorted_sizes
-            .iter()
-            .enumerate()
-            .map(|(i, x)| (i + 1) as f64 * x)
-            .sum::<f64>();
-        2.0 * weighted / (classes.len() as f64 * sum)
-            - (classes.len() as f64 + 1.0) / (classes.len() as f64)
-    };
+    let sum = sorted_sizes.iter().sum::<f64>();
+    let weighted = sorted_sizes
+        .iter()
+        .enumerate()
+        .map(|(i, x)| (i + 1) as f64 * x)
+        .sum::<f64>();
+    2.0 * weighted / (classes.len() as f64 * sum)
+        - (classes.len() as f64 + 1.0) / (classes.len() as f64)
+}
+
+fn structural_stats(tree: &Tree) -> StructuralStats {
+    let mut depths = Vec::new();
+    let mut nav_scan = 0.0;
+    let mut nav_log = [0.0; 3];
+    let n = tree.item_leaves.len().max(1) as f64;
+    for leaves in &tree.item_leaves {
+        for &(leaf, mass) in leaves {
+            depths.push(tree.item_depth(leaf));
+            // Terminal scan cost includes every item attached anywhere beneath
+            // the leaf's deepest class, matching a physical class shelf scan.
+            let class_items = items_under(tree, shelf_class(tree, leaf));
+            nav_scan +=
+                mass * (branch_scan_cost(tree, leaf) + (class_items as f64 + 1.0) / 2.0) / n;
+            for (a, slot) in nav_log.iter_mut().enumerate() {
+                *slot += mass * log_branch_cost(tree, leaf, a) / n;
+            }
+        }
+    }
+    let (classes, mut branches) = class_sizes_and_branches(tree);
+    let mut sorted = depths.clone();
+    sorted.sort_unstable();
+    let total = classes.iter().sum::<f64>().max(1.0);
+    let entropy = entropy_nats(&classes, total);
+    let k = classes.len().max(1) as f64;
     branches.sort_unstable();
     let mean_branching = if branches.is_empty() {
         0.0
@@ -224,17 +248,17 @@ fn structural_stats(tree: &Tree) -> StructuralStats {
         } else {
             depths.iter().sum::<usize>() as f64 / depths.len() as f64
         },
-        p50_depth: quant(&sorted, 0.5),
-        p95_depth: quant(&sorted, 0.95),
+        p50_depth: quantile(&sorted, 0.5),
+        p95_depth: quantile(&sorted, 0.95),
         max_depth: sorted.last().copied().unwrap_or(0),
         mean_branching,
-        p95_branching: quant(&branches, 0.95),
+        p95_branching: quantile(&branches, 0.95),
         max_branching: branches.last().copied().unwrap_or(0),
         root_fanout: tree.nodes[0].children.len(),
         nodes_over_50_children: branches.iter().filter(|&&b| b > 50).count(),
         normalized_entropy: if k > 1.0 { entropy / k.ln() } else { 0.0 },
         effective_classes: entropy.exp(),
-        gini,
+        gini: gini(&classes),
         largest_class_share: classes.iter().copied().fold(0.0, f64::max) / total,
         nav_scan,
         nav_log_a0: nav_log[0],

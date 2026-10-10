@@ -24,6 +24,12 @@ pub struct Tree {
     pub class_count: usize,
 }
 
+impl Default for Tree {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl Tree {
     pub fn new() -> Self {
         Self {
