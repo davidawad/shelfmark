@@ -32,6 +32,7 @@ struct PairEdge {
     right: usize,
     weight: f64,
     lcas: Vec<(usize, f64)>,
+    distance: f64,
 }
 
 /// One item leaf with its fixed, tree-shape-only costs.
@@ -76,11 +77,25 @@ impl Prepared {
             .edges
             .iter()
             .filter(|e| e.left < n && e.right < n)
-            .map(|e| PairEdge {
-                left: e.left,
-                right: e.right,
-                weight: e.weight,
-                lcas: lca_masses(tree, e.left, e.right),
+            .map(|e| {
+                let lcas = lca_masses(tree, e.left, e.right);
+                let mut distance = 0.0;
+                for &(a, ma) in &tree.item_leaves[e.left] {
+                    for &(b, mb) in &tree.item_leaves[e.right] {
+                        let lca = tree.lca(a, b);
+                        distance += ma
+                            * mb
+                            * (tree.item_depth(a) + tree.item_depth(b) - 2 * tree.item_depth(lca))
+                                as f64;
+                    }
+                }
+                PairEdge {
+                    left: e.left,
+                    right: e.right,
+                    weight: e.weight,
+                    lcas,
+                    distance,
+                }
             })
             .collect();
         Prepared {
@@ -103,17 +118,25 @@ impl Prepared {
         for &(node, parent) in &self.post_order {
             mass[parent] += mass[node];
         }
-        let (mut cost, mut weight) = (0.0, 0.0);
+        let (mut cost, mut weight, mut distance) = (0.0, 0.0, 0.0);
         for e in &self.edges {
             let w = e.weight * c[e.left] * c[e.right];
             if w != 0.0 {
                 cost += w * e.lcas.iter().map(|&(v, m)| m * mass[v]).sum::<f64>();
                 weight += w;
+                distance += w * e.distance;
             }
         }
         let denom = c.iter().sum::<f64>() * weight;
         let cost_norm = if denom > 0.0 { cost / denom } else { 0.0 };
         let mut out = Replicate::new();
+        out.insert("cost", cost);
+        out.insert("edge_weight", weight);
+        out.insert("revenue", denom - cost);
+        out.insert(
+            "expected_tree_distance",
+            if weight > 0.0 { distance / weight } else { 0.0 },
+        );
         out.insert("cost_norm", cost_norm);
         out.insert(
             "revenue_norm",

@@ -24,6 +24,7 @@ pub struct NullSummary {
     pub z: f64,
     /// Fraction of null replicates at or below the observed score.
     pub percentile: f64,
+    pub confidence_intervals: std::collections::BTreeMap<String, [f64; 2]>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -108,7 +109,7 @@ pub fn summarize(tree: &Tree) -> UpgradeMetrics {
         sweep.insert(format!("a={a}"), value);
     }
     let bounds = information_bounds(&uniform, nav, 0);
-    let confidence_intervals = navigation_intervals(tree, &zipf);
+    let confidence_intervals = navigation_intervals(tree, &zipf, bounds);
     UpgradeMetrics {
         query_workloads: workloads,
         popularity_proxy:
@@ -122,62 +123,166 @@ pub fn summarize(tree: &Tree) -> UpgradeMetrics {
     }
 }
 
-fn navigation_intervals(tree: &Tree, zipf: &[f64]) -> std::collections::BTreeMap<String, [f64; 2]> {
+fn navigation_intervals(
+    tree: &Tree,
+    zipf: &[f64],
+    bounds: InformationBounds,
+) -> std::collections::BTreeMap<String, [f64; 2]> {
     let n = tree.item_leaves.len();
     let mut draws = std::collections::BTreeMap::<String, Vec<f64>>::new();
+    let empty_graph = SimilarityGraph {
+        n,
+        k: 0,
+        tau: 0.0,
+        edges: vec![],
+    };
+    let prepared = crate::bootstrap::Prepared::new(tree, &empty_graph, true);
     for replicate in 0..1000 {
         let counts = crate::bootstrap::multiplicities(n, crate::bootstrap::DEFAULT_SEED, replicate);
-        let pair = navigation_pair(tree, &counts);
-        let vals = [
-            (
-                "uniform.menu_accesses.placed",
-                pair.placed_only.menu_accesses,
-            ),
-            (
-                "uniform.menu_accesses.all",
-                pair.including_unplaced.menu_accesses,
-            ),
-            (
-                "uniform.depth_traversed.placed",
-                pair.placed_only.depth_traversed,
-            ),
-            (
-                "uniform.depth_traversed.all",
-                pair.including_unplaced.depth_traversed,
-            ),
-            (
-                "uniform.items_scanned.placed",
-                pair.placed_only.items_scanned,
-            ),
-            (
-                "uniform.items_scanned.all",
-                pair.including_unplaced.items_scanned,
-            ),
-        ];
-        for (key, value) in vals {
+        let values = navigation_draw_values(tree, zipf, bounds, &prepared, &counts);
+        for (key, value) in values {
             draws.entry(key.into()).or_default().push(value);
         }
-        let zipf_pair = navigation_pair(
-            tree,
-            &zipf
-                .iter()
-                .zip(&counts)
-                .map(|(p, c)| p * c)
-                .collect::<Vec<_>>(),
-        );
-        draws
-            .entry("zipf_s1_seed_20261010.menu_accesses.placed".into())
-            .or_default()
-            .push(zipf_pair.placed_only.menu_accesses);
-        draws
-            .entry("zipf_s1_seed_20261010.menu_accesses.all".into())
-            .or_default()
-            .push(zipf_pair.including_unplaced.menu_accesses);
     }
     draws
         .into_iter()
         .map(|(key, values)| (key, crate::bootstrap::interval(&values, 0.95)))
         .collect()
+}
+
+fn navigation_draw_values(
+    tree: &Tree,
+    zipf: &[f64],
+    bounds: InformationBounds,
+    prepared: &crate::bootstrap::Prepared,
+    counts: &[f64],
+) -> std::collections::BTreeMap<&'static str, f64> {
+    let mut values = std::collections::BTreeMap::<&'static str, f64>::new();
+    let structural = prepared.replicate(counts);
+    for (key, value) in &structural {
+        if *key != "cost_norm" && *key != "revenue_norm" {
+            values.insert(*key, *value);
+        }
+    }
+    let pair = navigation_pair(tree, counts);
+    let vals = [
+        (
+            "uniform.menu_accesses.placed",
+            pair.placed_only.menu_accesses,
+        ),
+        (
+            "uniform.menu_accesses.all",
+            pair.including_unplaced.menu_accesses,
+        ),
+        (
+            "uniform.depth_traversed.placed",
+            pair.placed_only.depth_traversed,
+        ),
+        (
+            "uniform.depth_traversed.all",
+            pair.including_unplaced.depth_traversed,
+        ),
+        (
+            "uniform.items_scanned.placed",
+            pair.placed_only.items_scanned,
+        ),
+        (
+            "uniform.items_scanned.all",
+            pair.including_unplaced.items_scanned,
+        ),
+        ("information.entropy_bits", bounds.entropy_bits),
+        (
+            "information.huffman_lower_bound_bits",
+            bounds.huffman_lower_bound_bits,
+        ),
+        (
+            "information.alphabetic_optimum_bits",
+            bounds.alphabetic_optimum_bits,
+        ),
+        (
+            "information.nav_over_entropy",
+            if bounds.entropy_bits > 0.0 {
+                pair.including_unplaced.menu_accesses / bounds.entropy_bits
+            } else {
+                0.0
+            },
+        ),
+        (
+            "information.nav_over_alphabetic",
+            if bounds.alphabetic_optimum_bits > 0.0 {
+                pair.including_unplaced.menu_accesses / bounds.alphabetic_optimum_bits
+            } else {
+                0.0
+            },
+        ),
+        ("branch_constant.a0", branch_expected(tree, counts, 0)),
+        ("branch_constant.a1", branch_expected(tree, counts, 1)),
+        ("branch_constant.a2", branch_expected(tree, counts, 2)),
+        ("branch_constant.a4", branch_expected(tree, counts, 4)),
+    ];
+    values.extend(vals);
+    let zipf_pair = navigation_pair(
+        tree,
+        &zipf
+            .iter()
+            .zip(counts)
+            .map(|(p, c)| p * c)
+            .collect::<Vec<_>>(),
+    );
+    values.insert(
+        "zipf_s1_seed_20261010.menu_accesses.placed",
+        zipf_pair.placed_only.menu_accesses,
+    );
+    values.insert(
+        "zipf_s1_seed_20261010.menu_accesses.all",
+        zipf_pair.including_unplaced.menu_accesses,
+    );
+    values.insert(
+        "zipf_s1_seed_20261010.depth_traversed.placed",
+        zipf_pair.placed_only.depth_traversed,
+    );
+    values.insert(
+        "zipf_s1_seed_20261010.depth_traversed.all",
+        zipf_pair.including_unplaced.depth_traversed,
+    );
+    values.insert(
+        "zipf_s1_seed_20261010.items_scanned.placed",
+        zipf_pair.placed_only.items_scanned,
+    );
+    values.insert(
+        "zipf_s1_seed_20261010.items_scanned.all",
+        zipf_pair.including_unplaced.items_scanned,
+    );
+    values
+}
+
+fn branch_expected(tree: &Tree, weights: &[f64], a: usize) -> f64 {
+    let total: f64 = weights.iter().sum();
+    if total <= 0.0 {
+        return 0.0;
+    }
+    tree.item_leaves
+        .iter()
+        .enumerate()
+        .map(|(item, leaves)| {
+            let cost = leaves
+                .iter()
+                .map(|&(leaf, mass)| {
+                    let mut value = 0.0;
+                    let mut node = leaf;
+                    while let Some(parent) = tree.nodes[node].parent {
+                        let fanout = tree.nodes[parent].children.len();
+                        if fanout > 1 {
+                            value += a as f64 + (fanout as f64).log2();
+                        }
+                        node = parent;
+                    }
+                    mass * value
+                })
+                .sum::<f64>();
+            weights[item] * cost / total
+        })
+        .sum()
 }
 
 /// Permutes item-to-leaf assignments among placed items while preserving the
@@ -231,12 +336,45 @@ pub fn permutation_null(
             0.0
         });
     }
-    let summarize = |values: &[f64], observed: f64| {
+    let mut null_boot_rng = crate::bootstrap::SplitMix64::new(seed ^ 0x5045_524d_4349);
+    let mut summarize = |values: &[f64], observed: f64| {
         let mean = values.iter().sum::<f64>() / values.len().max(1) as f64;
         let variance = values.iter().map(|x| (x - mean).powi(2)).sum::<f64>()
             / values.len().saturating_sub(1).max(1) as f64;
         let mut sorted = values.to_vec();
         sorted.sort_by(f64::total_cmp);
+        let mut draws = std::collections::BTreeMap::<String, Vec<f64>>::new();
+        for _ in 0..1000 {
+            let sample: Vec<f64> = (0..values.len())
+                .map(|_| values[null_boot_rng.below(values.len().max(1))])
+                .collect();
+            let sample_mean = sample.iter().sum::<f64>() / sample.len().max(1) as f64;
+            let sample_sd = (sample
+                .iter()
+                .map(|x| (x - sample_mean).powi(2))
+                .sum::<f64>()
+                / sample.len().saturating_sub(1).max(1) as f64)
+                .sqrt();
+            let sample_z = if sample_sd > 0.0 {
+                (observed - sample_mean) / sample_sd
+            } else {
+                0.0
+            };
+            let sample_percentile = sample.iter().filter(|&&x| x <= observed).count() as f64
+                / sample.len().max(1) as f64;
+            for (key, value) in [
+                ("mean", sample_mean),
+                ("sd", sample_sd),
+                ("z", sample_z),
+                ("percentile", sample_percentile),
+            ] {
+                draws.entry(key.into()).or_default().push(value);
+            }
+        }
+        let confidence_intervals = draws
+            .into_iter()
+            .map(|(key, values)| (key, crate::bootstrap::interval(&values, 0.95)))
+            .collect();
         NullSummary {
             mean,
             sd: variance.sqrt(),
@@ -247,6 +385,7 @@ pub fn permutation_null(
             },
             percentile: sorted.iter().filter(|&&x| x <= observed).count() as f64
                 / sorted.len().max(1) as f64,
+            confidence_intervals,
         }
     };
     PermutationNull {

@@ -261,6 +261,21 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
         None if values.contains_key("--placements") => "P".into(),
         None => "A".into(),
     };
+    let mut bootstrap_summary = replicates.map(|r| r.summary());
+    if let Some(summary) = bootstrap_summary.as_mut() {
+        let values = serde_json::to_value(&score.structure)?;
+        if let serde_json::Value::Object(fields) = values {
+            for (name, value) in fields {
+                if let Some(point) = value.as_f64() {
+                    summary.ci.entry(name).or_insert([point, point]);
+                }
+            }
+        }
+        summary
+            .ci
+            .entry("ref_cost_norm".into())
+            .or_insert([ref_score, ref_score]);
+    }
     let result = BenchmarkResult {
         scheme: scheme.name,
         version: scheme.version,
@@ -290,7 +305,7 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
             tree: sha256_hex(&serde_json::to_vec(&tree)?),
             scheme: sha256_hex(&scheme_bytes),
         },
-        bootstrap: replicates.map(|r| r.summary()),
+        bootstrap: bootstrap_summary,
         edge_bootstrap: Some(bootstrap::edge_bootstrap(
             &tree,
             &graph,

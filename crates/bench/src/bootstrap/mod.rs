@@ -53,6 +53,9 @@ pub fn edge_bootstrap(
             0.0
         };
         for (name, value) in [
+            ("cost", score.cost),
+            ("revenue", score.revenue),
+            ("edge_weight", score.edge_weight),
             ("cost_norm", score.cost_norm),
             ("revenue_norm", score.revenue_norm),
             ("expected_tree_distance", score.expected_tree_distance),

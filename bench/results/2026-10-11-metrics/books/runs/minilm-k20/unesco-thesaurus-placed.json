@@ -1,0 +1,250 @@
+{
+  "scheme": "unesco-thesaurus",
+  "version": "2026-08-31",
+  "track": "P",
+  "mode": "primary",
+  "n": 3000,
+  "k": 20,
+  "edge_weight": 13295.4182601465,
+  "cost": 25077890.584123928,
+  "cost_norm": 0.6287351550595395,
+  "revenue": 14808364.196315575,
+  "revenue_norm": 0.3712648449404605,
+  "ref_cost_norm": 0.22967463485582104,
+  "skill": 0.4819584836999003,
+  "coverage": 0.9253333333333333,
+  "structure": {
+    "mean_depth": 4.500333333333334,
+    "p50_depth": 5,
+    "p95_depth": 6,
+    "max_depth": 8,
+    "mean_branching": 3.8605371900826446,
+    "p95_branching": 11,
+    "max_branching": 366,
+    "root_fanout": 231,
+    "nodes_over_50_children": 5,
+    "normalized_entropy": 0.7680261756703178,
+    "effective_classes": 196.44022898353148,
+    "gini": 0.7638728424919783,
+    "largest_class_share": 0.09189600990381869,
+    "nav_scan": 191.64266666666435,
+    "nav_log_a0": 18.03955417398323,
+    "nav_log_a1": 22.169220840649796,
+    "nav_log_a2": 26.298887507316383,
+    "nav_log_a4": 34.558220840649575,
+    "nav_scan_placed": 197.6657060518732
+  },
+  "metrics_upgrade": {
+    "query_workloads": {
+      "uniform": {
+        "placed_only": {
+          "menu_accesses": 4.382204610951808,
+          "depth_traversed": 4.782780979827988,
+          "items_scanned": 162.34456051873207
+        },
+        "including_unplaced": {
+          "menu_accesses": 4.129666666666451,
+          "depth_traversed": 4.500333333333571,
+          "items_scanned": 158.884166666666
+        }
+      },
+      "uniform_placed_only": {
+        "placed_only": {
+          "menu_accesses": 4.382204610951808,
+          "depth_traversed": 4.782780979827988,
+          "items_scanned": 162.34456051873207
+        },
+        "including_unplaced": {
+          "menu_accesses": 4.382204610951808,
+          "depth_traversed": 4.782780979827988,
+          "items_scanned": 162.34456051873207
+        }
+      },
+      "zipf_s1_seed_20261010": {
+        "placed_only": {
+          "menu_accesses": 4.485360934015013,
+          "depth_traversed": 4.813089974720303,
+          "items_scanned": 156.7336011853843
+        },
+        "including_unplaced": {
+          "menu_accesses": 4.333078377471913,
+          "depth_traversed": 4.646488265263925,
+          "items_scanned": 154.95386673516296
+        }
+      }
+    },
+    "popularity_proxy": "none available: corpus has one sampled record per work and no edition-count field",
+    "information_bounds": {
+      "entropy_bits": 11.550746785383527,
+      "huffman_lower_bound_bits": 11.550746785383527,
+      "alphabetic_optimum_bits": 11.634666666666645,
+      "nav_over_entropy": 0.3575237812235818,
+      "nav_over_alphabetic": 0.35494499197797896
+    },
+    "branch_constant_sweep": {
+      "a=0": 18.0395541739832,
+      "a=1": 22.169220840649952,
+      "a=2": 26.29888750731669,
+      "a=4": 34.55822084065016
+    },
+    "alphabetic_method": "Hu-Tucker / Garsia-Wachs, O(n^2)",
+    "log_base": 2,
+    "confidence_intervals": {
+      "uniform.depth_traversed.all": [
+        4.451324999999926,
+        4.545999999999893
+      ],
+      "uniform.depth_traversed.placed": [
+        4.748986661322227,
+        4.8158482222378085
+      ],
+      "uniform.items_scanned.all": [
+        156.72852500000107,
+        161.0432958333334
+      ],
+      "uniform.items_scanned.placed": [
+        159.9904530297832,
+        164.6870715112509
+      ],
+      "uniform.menu_accesses.all": [
+        4.0906666666663805,
+        4.170008333333083
+      ],
+      "uniform.menu_accesses.placed": [
+        4.356598701186142,
+        4.407936227491915
+      ],
+      "zipf_s1_seed_20261010.menu_accesses.all": [
+        4.126208584403517,
+        4.509567773911054
+      ],
+      "zipf_s1_seed_20261010.menu_accesses.placed": [
+        4.311446678591013,
+        4.626932729192886
+      ]
+    }
+  },
+  "permutation_null": {
+    "permutations": 200,
+    "seed": 20261010,
+    "cost_norm": {
+      "mean": 0.8587469316935794,
+      "sd": 0.002017347197665301,
+      "z": -114.01695102371828,
+      "percentile": 0.0
+    },
+    "skill": {
+      "mean": 0.18336806068950173,
+      "sd": 0.002618824835513136,
+      "z": 114.01695102371838,
+      "percentile": 1.0
+    }
+  },
+  "hashes": {
+    "graph": "1d12c791d19a068d0a0c77a56f28124747221cf833b5d9fcf5655ea172899428",
+    "tree": "e99eb7e46b7f5d8ba9d47121645331cef8e25be6ce1ba962e6d1f8802c48a010",
+    "scheme": "05f0b3cefa69d9096f9736bb606aa45b1f0eaece1afb7fa01231b9f8c338e745"
+  },
+  "bootstrap": {
+    "resamples": 1000,
+    "seed": 20261010,
+    "confidence": 0.95,
+    "method": "percentile; items resampled with replacement on the fixed graph and tree",
+    "ci": {
+      "cost_norm": [
+        0.6120718971584965,
+        0.6458132557156517
+      ],
+      "coverage": [
+        0.9163333333333333,
+        0.9346666666666666
+      ],
+      "effective_classes": [
+        179.1105482486487,
+        194.81273184607932
+      ],
+      "gini": [
+        0.7358357554010309,
+        0.7513197078434751
+      ],
+      "largest_class_share": [
+        0.08662443458172696,
+        0.09721149202818484
+      ],
+      "mean_depth": [
+        4.451325,
+        4.546
+      ],
+      "nav_log_a0": [
+        17.889247715572736,
+        18.1802852446073
+      ],
+      "nav_log_a1": [
+        21.987320584577713,
+        22.345235739518202
+      ],
+      "nav_log_a2": [
+        26.08885245074931,
+        26.513731370373087
+      ],
+      "nav_log_a4": [
+        34.27457559087562,
+        34.853579526698155
+      ],
+      "nav_scan": [
+        185.82684166666627,
+        198.8062708333324
+      ],
+      "nav_scan_placed": [
+        191.41852411689783,
+        205.31740560606522
+      ],
+      "normalized_entropy": [
+        0.7744731434384751,
+        0.7857025926355586
+      ],
+      "ref_cost_norm": [
+        0.22967463485582104,
+        0.22967463485582104
+      ],
+      "revenue_norm": [
+        0.3541867442843483,
+        0.38792810284150353
+      ],
+      "skill": [
+        0.45978850017233497,
+        0.5035899379593926
+      ]
+    }
+  },
+  "edge_bootstrap": {
+    "resamples": 1000,
+    "seed": 20261010,
+    "confidence": 0.95,
+    "method": "percentile; graph edges resampled with replacement on the fixed tree",
+    "ci": {
+      "cost_norm": [
+        0.624229990756989,
+        0.6332241553647181
+      ],
+      "expected_tree_distance": [
+        7.054626897801539,
+        7.117218133555495
+      ],
+      "revenue_norm": [
+        0.3667758446352819,
+        0.375770009243011
+      ],
+      "skill": [
+        0.4761310755574481,
+        0.4878068751801773
+      ]
+    }
+  },
+  "run": {
+    "model": "minilm",
+    "universe": "books",
+    "key": "unesco-thesaurus-placed",
+    "source_result": "bench/results/2026-10-10-ddc/runs/books/unesco-thesaurus-placed.json"
+  }
+}
