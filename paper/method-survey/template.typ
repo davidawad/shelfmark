@@ -6,16 +6,6 @@
 #let mono-font = "DejaVu Sans Mono"
 #let draft-text = "DRAFT, not submitted"
 
-// Visible marker for a claim with no verified source yet.
-#let cq = box(
-  fill: rgb("#fff2a8"),
-  stroke: 0.4pt + rgb("#b59b00"),
-  inset: (x: 1.5pt, y: 0pt),
-  outset: (y: 1.5pt),
-  radius: 1pt,
-  text(size: 0.72em, weight: "bold", font: mono-font)[cite?],
-)
-
 // Monospace identifier.
 #let id(s) = raw(s)
 

@@ -64,9 +64,14 @@ the early twentieth century @fraser2020.
 *DDC* is owned by OCLC @deweyrights. Full schedules are available through
 the subscription WebDewey, and OCLC's terms for Dewey linked data prohibit
 scraping, indexing and long-term storage; the base set is free to view only.
-The DDC 22 Summaries PDF carries "All rights reserved". DDC is therefore absent from
-the benchmark, although OCLC describes it as the world's most widely used way
-to organize library collections @deweyrights. The
+The DDC 22 Summaries PDF carries "All rights reserved". DDC schedules and captions are
+therefore absent from the benchmark, although OCLC describes DDC as the
+world's most widely used way to organize library collections @deweyrights.
+The later book comparison (@sec:books) uses only Dewey class _numbers_ taken
+from public catalogue records, with the tree built from the digit prefixes of
+the notation and no caption, schedule or table. That is an engineering
+position, not legal advice, and it is written for the United States and the
+European Union only. The
 FDC was written from the out-of-copyright 1922 eleventh edition of DDC and
 checked only for compatibility.
 
@@ -113,7 +118,11 @@ arXiv's carries an open software licence, and JEL publishes no open licence.
 *ACM CCS, 1998 and 2012.* The 2012 system replaced the 1998 edition. ACM
 says it mapped the old scheme to the new one and shows both terms on article
 citation pages, but publishes no 1998-to-2012 mapping file; its public
-download contains the 2012 tree only. We found no mapping file. This matters
+downloads (SKOS, Word and HTML) contain the 2012 tree only, and the SKOS file
+carries no match relations, notes or 1998 codes. The only public trace of the
+mapping is the pair of terms on each article's page, which ACM's policy does
+not allow scripts to harvest. We found no mapping file and did not build one.
+This matters
 below, because the arXiv `acm-class` field of the corpus carries CCS 1998
 codes (@sec:corpus).
 

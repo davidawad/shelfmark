@@ -599,9 +599,11 @@ artefact.
 - Insertion does not keep the depth bound: holdout insertion produced
   classes {{ins_max_class_depth}} levels deep and a mean work depth of
   {{h_mean_depth}} in the harness's tree (Table 6).
-- One corpus, one graph, one objective weighting. No bootstrap intervals
-  or permutation nulls are reported for the learned rows (DESIGN.md
-  section 2.5 proposes both). TODO: add them before submission.
+- One corpus, one graph, one objective weighting. This paper reports no
+  bootstrap intervals or permutation nulls for the learned rows (DESIGN.md
+  section 2.5 proposes both). Item-bootstrap intervals for the learned runs
+  are in `bench/results/2026-10-10-covered` and `-embed`, and a permutation
+  null has not been run.
 - No user study: N is a model of navigation cost [@hick1952; @hyman1953],
   not a measurement. User studies of menu depth and breadth disagree on
   the best shape: speed and accuracy improved with breadth in one
@@ -632,7 +634,7 @@ for the holdout insertion), and the stability guarantee of Section 4 is
 part of the release: a future version that grows by insertion keeps every
 code of this one.
 
-Repository URL: TODO (to be added on release; not stated in this draft).
+Repository location: not stated in this draft; it is to be given on release.
 
 ## 10. Reproducibility
 

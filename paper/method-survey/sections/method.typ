@@ -10,11 +10,11 @@ for the book holdout, which has no descriptions). It is embedded with
 `sentence-transformers/all-MiniLM-L6-v2` at a pinned ONNX revision @reimers2019 @wang2020minilm @minilmcard @minilm,
 and vectors are L2-normalized. Raw cosine similarities between unrelated
 texts are not centred on zero, so we subtract the exact mean cosine $tau$ over
-all unordered pairs: $tau = 0.109$ on the arXiv corpus and $tau = 0.173$ on
+all unordered pairs: $tau = #v.c_tau_corpus$ on the arXiv corpus and $tau = #v.c_tau_holdout$ on
 the holdout. Each item keeps its $k = 20$ most similar items. The weight of
 an edge is $w_(i j) = max(0, cos_(i j) - tau)$. The graph is symmetrized by
-taking the maximum, and zero-weight edges are dropped. That leaves 148,111
-edges on the corpus and 7,297 on the holdout. Every scheme and the reference
+taking the maximum, and zero-weight edges are dropped. That leaves #v.c_edges_corpus
+edges on the corpus and #v.c_edges_holdout on the holdout. Every scheme and the reference
 tree are scored on this one graph, so all comparisons on a corpus are paired.
 The classifier's optional embedding tier uses a different model (BGE-small,
 not used in this run). This follows the benchmark design, which aims to avoid

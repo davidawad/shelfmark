@@ -60,7 +60,11 @@ Gold placements and classifier placements are kept apart, and the classifier
 bias is calibrated where both exist (@sec:results). (v) A methods note on a
 classifier defect that the benchmark exposed, with its before-and-after
 effect (@sec:stopword). (vi) A short account of an order-preserving scheme
-fitted to the same objective, with its caveats (@sec:learned).
+fitted to the same objective, with its caveats (@sec:learned). (vii) A
+validity check of the cost against a blind judge, a false-join correction and
+non-LLM checks (@sec:validity); a coverage control, a second classifier tier
+and a rank-stability sweep (@sec:stability); and a book comparison of Dewey
+and LCC that is a setting-dependent tie (@sec:books).
 
 == Related work <sec:related>
 

@@ -56,8 +56,13 @@ def f3(x):
 
 
 def pct(x):
-    # Two decimals below 0.1% so that small nonzero shares do not print as 0.0%.
-    return f"{100 * x:.2f}%" if 0 < x < 0.001 else f"{100 * x:.1f}%"
+    # Round half up on the decimal text of x, so that 0.8765 prints as 87.7%
+    # (binary formatting prints 87.6%). Two decimals below 0.1% so that small
+    # nonzero shares do not print as 0.0%.
+    from decimal import Decimal, ROUND_HALF_UP
+    p = Decimal(repr(float(x))) * 100
+    nd = 2 if 0 < p < Decimal("0.1") else 1
+    return f"{p.quantize(Decimal(1).scaleb(-nd), rounding=ROUND_HALF_UP)}%"
 
 
 def delta(x):

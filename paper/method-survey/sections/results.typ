@@ -59,7 +59,7 @@ moved from #v.gold_msc_cov_r1 to #v.gold_msc_cov and skill from
 #v.gold_msc_skill_r1 to #v.gold_msc_skill. The corrected run is reported here.
 ACM CCS still has no gold run. The corpus's `acm_ccs` field originally held
 the MSC-style `msc-class` text copied from arXiv's ACM-class field. After the
-correction it holds 690 ACM CCS 1998 codes such as `I.2.6` on 317 papers, but
+correction it holds ACM CCS 1998 codes such as `I.2.6` on #v.c_n_acm_rows papers, but
 the scheme is CCS 2012, whose codes are paths of 8-digit concept IDs, and no
 1998-to-2012 crosswalk is available (@sec:survey). The run log records the
 run as skipped for that reason.
@@ -137,7 +137,7 @@ score (@sec:bias).
 ) <fig:cov>
 
 The holdout results are near zero for every scheme except `lcc-full` and
-`ilc2` (@tab:placed-holdout). On titles of 3.5 words, the lexical classifier
+`ilc2` (@tab:placed-holdout). On titles of #v.c_holdout_title_words words, the lexical classifier
 finds a candidate for only #v.placed_bk_holdout_cov (BK) to
 #v.placed_lccfull_holdout_cov (complete LCC) of the books.
 
@@ -160,7 +160,7 @@ same items and graph.
 Where gold coverage is high (arXiv, LCC), the classifier loses most of the
 skill. For arXiv, skill falls from #v.gold_arxiv_skill to
 #v.placed_arxiv_skill. The classifier places only #v.placed_arxiv_cov of the
-papers and sends 39.1% of those to `cs.PF` (Performance) on the word
+papers and sends #v.c_arxiv_placed_top_share of those to `cs.PF` (Performance) on the word
 "performance" (@tab:placement). For the LCC outline on books, skill falls
 from #v.gold_lcc_skill to #v.placed_lcc_holdout_skill. Where gold coverage is
 tiny (MSC, JEL), the classifier scores _higher_ than the gold labels, only
@@ -168,7 +168,8 @@ because it places more items. Neither direction measures scheme quality. In
 this run, the classifier, not the scheme, accounts for most of the
 differences in classifier-placed skill. The ranking in @tab:placed-corpus is
 therefore a ranking of _scheme as reached by this classifier_. We do not
-present it as a ranking of schemes.
+present it as a ranking of schemes. @sec:stability controls coverage and the
+classifier tier and finds the same.
 
 == Navigation <sec:nav>
 

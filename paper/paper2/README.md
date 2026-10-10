@@ -67,11 +67,13 @@ text matches); see `docs/research/README.md`.
 
 ## Open items before any submission
 
-- Author line (`AUTHOR TBD`) and repository URL (marked TODO in section 9).
+- Author line (`AUTHOR TBD`) and repository location (omitted from section 9).
 - A second, independent similarity (another embedding model, citations
   or subject headings) to remove the embedding circularity in the held-out
   and holdout results.
-- Bootstrap intervals and permutation nulls for the learned rows.
+- Permutation nulls for the learned rows, and bootstrap intervals in this
+  paper's own tables (item-bootstrap intervals exist in
+  `bench/results/2026-10-10-covered` and `-embed`).
 - A human evaluation of the hand-written and automatic labels.
 - Venue choice and formatting. Citations are written as pandoc-style
   `[@key]` and are not yet rendered.
