@@ -7,7 +7,7 @@
 #show: paper.with(
   title: [Scoring Library Classification Schemes with Hierarchical-Clustering Objectives: A Survey of Open Schemes and a Common Benchmark],
   short-title: [Scoring classification schemes with hierarchical-clustering objectives],
-  authors: "AUTHOR TBD",
+  authors: "David Awad",
   keywords: (
     "library classification",
     "hierarchical clustering",
@@ -58,7 +58,10 @@
 #include "sections/repro.typ"
 
 #unnumbered[Acknowledgements]
-To be added.
+The author thanks Hetzner for offering an API for autonomous server
+provisioning; DeepSeek for
+releasing open-source models; and Anthropic for Claude, which assisted with
+the analysis, code and drafting.
 
 #show bibliography: set text(size: 8pt)
 #show bibliography: set par(justify: false)

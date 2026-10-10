@@ -88,6 +88,16 @@ become a general one is open (@sec:learned).
   graph is built from titles averaging 3.5 words, and the classifier finds
   candidates for few of them. The holdout is also small ($n = 500$), and no
   confidence intervals are reported.
+- *No uncertainty or null model on the headline numbers.* Skill is a point
+  estimate relative to average linkage alone, so tree shape and class-size
+  distribution are confounded with scheme content, and no interval is
+  reported. A permutation null, bootstrap intervals, a rank-stability report
+  over $k$, embedding and objective, and a librarian-validity sample are
+  specified but not run (project beads dot-8mj8m.33 to .36). Rankings in
+  this draft are therefore indicative.
+- *Navigation mixes coverage with structure.* Unplaced items sit under the
+  root, so low coverage inflates root fan-out and every navigation cost.
+  Navigation columns must be read next to coverage (@tab:placement).
 - *Method limits.* The $k$NN-sparsified cost has not been checked against the
   dense cost. Polyhierarchies are reduced to one parent per class. Only one
   placement per item is used, although 35.5% of a 200-work Open Library
