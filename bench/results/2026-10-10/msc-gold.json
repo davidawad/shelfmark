@@ -36,5 +36,16 @@
     "graph": "759d3b8461a9384d4359244c9fb42c2bc66496431e0f4681d33b7a59798ed35a",
     "tree": "6310d7844ec8583d66136ae0f40b252613c6cd052560df4a75b97bcb1f384db0",
     "scheme": "7a50db75a5fb7f7656feb48d1a7a6d3ffd23a71bce244be363e064c1f9b1aac6"
+  },
+  "run": {
+    "scheme_id": "scheme:msc@2020",
+    "corpus": "corpus",
+    "placement_source": "gold",
+    "placement_stats": {
+      "rows": 10000,
+      "rows_with_valid_msc": 1314,
+      "output": "bench/corpus/cache/gold/corpus-msc.jsonl"
+    },
+    "score_seconds": 0.8
   }
 }

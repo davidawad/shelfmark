@@ -40,3 +40,11 @@ uses the deterministic test embedder; production runs should call the library
 with a pinned model implementation of `EmbeddingModel` and record that model's
 revision alongside the result. Graph, induced tree, and scheme file SHA-256
 digests are included in the JSON result.
+
+## Full benchmark run
+
+`scripts/build_schemes.sh` builds every benchmark scheme into the ignored
+`bench/corpus/cache/schemes/`, `scripts/run_benchmark.py` prepares gold and
+shelfmark-placed placements and scores them, and `scripts/publish_results.py`
+writes a dated results directory. `bench/results/2026-10-10/REPRODUCE.md`
+lists the exact commands.
