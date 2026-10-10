@@ -1,0 +1,114 @@
+# Hand-written class labels for schemes/learned/learned.json.
+# code<TAB>label<TAB>fingerprint (the class's top three c-TF-IDF terms when the label
+# was written). The builder refuses a label whose fingerprint no longer matches.
+# Written from each class's c-TF-IDF terms and most central titles (learned-scheme build --sheet).
+01	Computing, AI and engineering	learning, language, training
+01.01	Language models, security and computing systems	llm, language, training
+01.01.01	Language, speech and LLM agents	language, reasoning, llm
+01.01.01.01	Retrieval, knowledge graphs and recommendation	graph, retrieval, query
+01.01.01.02	LLM agents	agent, agents, llm
+01.01.01.03	LLM reasoning and reinforcement fine-tuning	reasoning, language, training
+01.01.01.04	Language technology, society and bias	human, language, social
+01.01.01.05	Speech, audio and music	speech, audio, speaker
+01.01.02	Security, privacy and software	privacy, code, security
+01.01.02.01	Agent security and AI governance	security, agent, governance
+01.01.02.02	Agent reliability, verification and repair	repair, harness, code
+01.01.02.03	Software engineering and code generation	code, software, bugs
+01.01.02.04	Adversarial attacks and defences	attacks, adversarial, attack
+01.01.02.05	Differential privacy and federated learning	privacy, federated, federated learning
+01.01.02.06	Anomaly and intrusion detection	anomaly, anomaly detection, detection
+01.01.03	Efficient computing, networks and energy systems	power, memory, networks
+01.01.03.01	Efficient attention, quantization and long context	attention, quantization, memory
+01.01.03.02	GPU systems and LLM serving	gpu, moe, inference
+01.01.03.03	Spiking and neuromorphic neural networks	neural, networks, spiking
+01.01.03.04	Network control and learning for wireless networks	network, networks, multi
+01.01.03.05	Wireless communication and sensing	channel, sensing, wireless
+01.01.03.06	Power grids and energy systems	power, grid, energy
+01.01.03.07	Combinatorial optimization and planning	cost, optimal, optimization
+01.02	Vision, robotics, dynamics and medicine	learning, visual, image
+01.02.01	Computer vision and multimodal models	visual, image, video
+01.02.01.01	Vision-language models	visual, multimodal, reasoning
+01.02.01.02	Segmentation and object detection	object, vision, segmentation
+01.02.01.03	Video, 3D reconstruction and tracking	video, motion, view
+01.02.01.04	Image generation and editing	editing, image, generation
+01.02.02	Robotics and control	control, robot, manipulation
+01.02.02.01	Robot manipulation and vision-language-action policies	action, manipulation, robot
+01.02.02.02	Robot navigation and spatial reasoning	navigation, spatial, robot
+01.02.02.03	Safe motion planning and autonomous vehicles	safety, safe, control
+01.02.02.04	Model predictive and learning-based control	control, predictive control, predictive
+01.02.02.05	Multi-agent consensus and nonlinear control	consensus, control, observer
+01.02.03	Machine learning for physical and dynamical systems	prediction, neural, learning
+01.02.03.01	Remote sensing and earth observation	change, change detection, detection
+01.02.03.02	Trajectory prediction, traffic and mobility	prediction, trajectory, trajectory prediction
+01.02.03.03	Climate and weather modelling	climate, rainfall, sea
+01.02.03.04	Turbulence and fluid flows	flow, turbulence, reynolds
+01.02.03.05	Vibration and fault diagnosis	fault, frequency, vibration
+01.02.03.06	System identification, filtering and reduced-order models	nonlinear, identification, linear
+01.02.03.07	Physics-informed neural networks and PDE learning	neural, pde, physics
+01.02.03.08	Nonlinear dynamics and oscillators	ice, kuramoto, dynamics
+01.02.04	Medical imaging and health	clinical, medical, image
+01.02.04.01	Image reconstruction and inverse problems	reconstruction, image, diffusion
+01.02.04.02	Geometric modelling and shape interpolation	shape, geometric, manifold
+01.02.04.03	Medical image analysis and pathology	segmentation, cell, medical
+01.02.04.04	Physiological signals (EEG, ECG)	eeg, clinical, brain
+01.02.04.05	Clinical language models and health AI	clinical, medical, patient
+01.03	Statistics, economics and decision-making	risk, learning, market
+01.03.01	Statistical and causal inference	causal, bayesian, regression
+01.03.01.01	Treatment effects and clinical trials	treatment, causal, trial
+01.03.01.02	Causal discovery	causal, causal discovery, discovery
+01.03.01.03	Bayesian inference	bayesian, posterior, inference
+01.03.01.04	Regression and estimation theory	regression, estimator, estimation
+01.03.01.05	Change detection, testing and calibration	risk, change, labels
+01.03.02	Financial forecasting and markets	forecasting, volatility, series
+01.03.03	Decision-making, learning and games	policy, optimal, risk
+01.03.03.01	Mathematical finance, pricing and auctions	risk, market, price
+01.03.03.02	Bandits and regret minimization	regret, bandits, bandit
+01.03.03.03	Reinforcement learning and Markov decision processes	policy, reinforcement learning, reinforcement
+01.03.03.04	Game theory, voting and strategic agents	games, game, strategic
+02	Mathematics and physical sciences	quantum, non, order
+02.01	Mathematics	prove, finite, order
+02.01.01	Applied mathematics, analysis and probability	order, equations, equation
+02.01.01.01	Convex and nonconvex optimization	convex, optimization, gradient
+02.01.01.02	Matrix, tensor and polynomial computation	matrix, tensor, matrices
+02.01.01.03	Finite element and numerical methods for PDEs	element, finite element, finite
+02.01.01.04	Stochastic and fractional differential equations	equations, stochastic, equation
+02.01.01.05	Fluid and dispersive PDEs (Navier-Stokes, Schrödinger)	equation, solutions, schr
+02.01.01.06	Probability and random structures	random, brownian, gaussian
+02.01.01.07	Network, epidemic and population dynamics	networks, network, social
+02.01.02	Pure mathematics	prove, graphs, groups
+02.01.02.01	Differential geometry and curvature	curvature, ricci, hyperbolic
+02.01.02.02	Functional analysis and operator theory	spaces, operators, hardy
+02.01.02.03	Groups, Lie algebras and topology	groups, group, lie
+02.01.02.04	Algebraic geometry	varieties, curves, conjecture
+02.01.02.05	Category theory, algebra and logic	category, algebras, categories
+02.01.02.06	Number theory and integer sequences	prime, functions, conjecture
+02.01.02.07	Graph theory and extremal combinatorics	graphs, graph, vertex
+02.02	Physics	quantum, energy, spin
+02.02.01	Quantum information and quantum computing	quantum, entanglement, classical
+02.02.01.01	Quantum algorithms and optimization	quantum, algorithm, classical
+02.02.01.02	Quantum circuits, qubits and error correction	quantum, circuit, qubit
+02.02.01.03	Quantum cryptography and coding	codes, quantum, code
+02.02.01.04	Entanglement and quantum foundations	entanglement, quantum, bell
+02.02.01.05	Quantum optics, atoms and sensing	photon, quantum, rydberg
+02.02.01.06	Quantum many-body dynamics and thermalization	quantum, thermalization, langevin
+02.02.02	Condensed matter, materials and chemistry	spin, quantum, magnetic
+02.02.02.01	Strongly correlated and many-body systems	spin, quantum, interactions
+02.02.02.02	Magnetism and topological states	spin, magnetic, quantum
+02.02.02.03	Electronic materials and moiré systems	electronic, phonon, temperature
+02.02.02.04	Photonics and nonlinear optics	optical, photonic, quantum
+02.02.02.05	Electronic structure and molecular physics	electron, ion, molecular
+02.02.02.06	Molecular machine learning and drug design	protein, molecular, chemical
+02.02.02.07	Soft matter, polymers and colloids	droplet, droplets, polymer
+02.02.03	Astrophysics and particle physics	mass, galaxies, galaxy
+02.02.03.01	Particle physics and colliders	neutrino, qcd, quark
+02.02.03.02	Nuclear physics and neutron stars	neutron, nuclear, neutron star
+02.02.03.03	Planets, stars and space plasmas	plasma, magnetic, solar
+02.02.03.04	Galaxies and star formation	galaxies, star, galaxy
+02.02.03.05	Dark matter and cosmology	dark, galaxy, matter
+02.02.03.06	Gravitational waves and black hole binaries	gravitational, black, gravitational wave
+02.02.04	Gravitation and theoretical physics	black, theory, black hole
+02.02.04.01	Cosmology and the early universe	gravitational, cosmological, universe
+02.02.04.02	Black holes	black, black hole, hole
+02.02.04.03	Quantum gravity and relativistic foundations	quantum, gravity, relativistic
+02.02.04.04	Gauge and string theory	gauge, theory, string
+02.02.04.05	Symmetries and topological phases	symmetries, symmetry, topological

@@ -30,6 +30,8 @@ def main():
     p.add_argument("graph")
     p.add_argument("manifest")
     p.add_argument("--k", type=int, default=20)
+    p.add_argument("--vectors", help="also write the L2-normalized vectors here "
+                   "(little-endian f32, row-major, n x dimensions)")
     a = p.parse_args()
     rows = [json.loads(line) for line in open(a.corpus, encoding="utf-8") if line.strip()]
     texts = [f"{r.get('title', '')}. {r.get('abstract', r.get('abstract_text', r.get('description', '')))}" for r in rows]
@@ -44,6 +46,9 @@ def main():
             print(f"embedded {i}/{len(texts)} rows in {time.monotonic() - started:.1f}s", flush=True)
     vectors = np.asarray(embedded, dtype=np.float32)
     vectors /= np.maximum(np.linalg.norm(vectors, axis=1, keepdims=True), 1e-12)
+    if a.vectors:
+        Path(a.vectors).parent.mkdir(parents=True, exist_ok=True)
+        vectors.astype("<f4").tofile(a.vectors)
     n = len(vectors)
     # Exact all-pairs mean cosine, accumulated in bounded blocks.
     cosine_sum = 0.0

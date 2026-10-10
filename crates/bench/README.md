@@ -51,3 +51,11 @@ lists the exact commands. `build_schemes.sh` takes scheme names to build only
 those schemes. `run_benchmark.py --gold-only` and `publish_results.py
 --gold-only` rescore only the source labels, as in
 `bench/results/2026-10-10-r3/`.
+
+## Learned scheme
+
+`scripts/learned_benchmark.py` scores the fitted scheme from
+`schemes/learned` against the Paper 1 runs (own placements, holdout
+insertion, shelfmark placement and a held-out 80/20 split), and
+`scripts/publish_learned.py` writes `bench/results/2026-10-10-learned/`.
+That directory's `REPRODUCE.md` lists the commands.

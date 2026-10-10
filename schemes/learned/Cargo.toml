@@ -1,0 +1,25 @@
+[package]
+name = "learned-scheme"
+description = "Fits a learned, order-preserving general classification to the benchmark similarity graph and emits it as a shelfmark scheme file"
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+publish = false
+
+# A standalone tool, not a member of the shelfmark workspace.
+[workspace]
+
+[dependencies]
+shelfmark-core = { path = "../../crates/core" }
+shelfmark-bench = { path = "../../crates/bench" }
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["float_roundtrip"] }
+flate2 = "1"
+
+[dev-dependencies]
+jsonschema = { version = "0.56", default-features = false }
+shelfmark-scheme = { path = "../../crates/scheme" }
+
+# The committed-data tests fit the full 10,000-work corpus.
+[profile.test]
+opt-level = 3
