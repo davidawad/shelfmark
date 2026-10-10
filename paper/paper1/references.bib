@@ -1,0 +1,496 @@
+% References for paper/paper1/paper.md (DRAFT).
+%
+% Every entry below is taken from a source recorded in research/reports/1-4
+% or research/benchmark/DESIGN.md, or from the official page given in `url`.
+% Author fields carry surnames only, as recorded in those reports; complete
+% the given names from the DOI or URL before any submission. The `note`
+% field records how the link was checked in the reports (fetched, DOI
+% resolves, or not fetched). Claims in the paper with no entry here are
+% marked TODO(cite) in the text.
+
+% ---------------------------------------------------------------------------
+% Hierarchical clustering objectives
+
+@inproceedings{dasgupta2016,
+  author    = {Dasgupta},
+  title     = {A cost function for similarity-based hierarchical clustering},
+  booktitle = {Proceedings of the 48th Annual ACM Symposium on Theory of Computing (STOC)},
+  year      = {2016},
+  doi       = {10.1145/2897518.2897527},
+  eprint    = {1510.05043},
+  archivePrefix = {arXiv},
+  url       = {https://arxiv.org/abs/1510.05043},
+  note      = {arXiv page fetched (research/reports/2, research/benchmark/DESIGN.md); the ACM DOI returned HTTP 403 to automated checks}
+}
+
+@article{moseley2023,
+  author  = {Moseley and Wang},
+  title   = {Approximation Bounds for Hierarchical Clustering: Average Linkage, Bisecting K-means, and Local Search},
+  journal = {Journal of Machine Learning Research},
+  volume  = {24},
+  year    = {2023},
+  url     = {https://jmlr.org/papers/v24/18-080.html},
+  note    = {JMLR page and PDF fetched and read (research/benchmark/DESIGN.md): cost + revenue = n sum w; average linkage is a 1/3-approximation to maximum revenue. Earlier version at NeurIPS 2017}
+}
+
+@inproceedings{moseley2017,
+  author    = {Moseley and Wang},
+  title     = {Approximation Bounds for Hierarchical Clustering: Average Linkage, Bisecting K-means, and Local Search},
+  booktitle = {Advances in Neural Information Processing Systems 30 (NeurIPS 2017)},
+  year      = {2017},
+  url       = {https://proceedings.neurips.cc/paper/2017/hash/d8d31bd778da8bdd536187c36e48892b-Abstract.html},
+  note      = {fetched (research/reports/2)}
+}
+
+@misc{cohenaddad2017,
+  author = {Cohen-Addad and Kanade and Mallmann-Trenn and Mathieu},
+  title  = {Hierarchical Clustering: Objective Functions and Algorithms},
+  year   = {2017},
+  eprint = {1704.02147},
+  archivePrefix = {arXiv},
+  url    = {https://arxiv.org/abs/1704.02147},
+  note   = {fetched and read (research/benchmark/DESIGN.md). DESIGN.md records a JACM 2019 version; its DOI was not checked}
+}
+
+@misc{charikar2016,
+  author = {Charikar and Chatziafratis},
+  title  = {Approximate Hierarchical Clustering via Sparsest Cut and Spreading Metrics},
+  year   = {2016},
+  eprint = {1609.09548},
+  archivePrefix = {arXiv},
+  url    = {https://arxiv.org/abs/1609.09548},
+  note   = {fetched (research/reports/2). Title as recorded on arXiv; check before submission}
+}
+
+@misc{roy2016,
+  author = {Roy and Pokutta},
+  title  = {Hierarchical Clustering via Spreading Metrics},
+  year   = {2016},
+  eprint = {1610.09269},
+  archivePrefix = {arXiv},
+  url    = {https://arxiv.org/abs/1610.09269},
+  note   = {fetched (research/reports/2). Title as recorded on arXiv; check before submission}
+}
+
+@inproceedings{chami2020,
+  author    = {Chami and Gu and Chatziafratis and R{\'e}},
+  title     = {From Trees to Continuous Embeddings and Back: Hyperbolic Hierarchical Clustering},
+  booktitle = {Advances in Neural Information Processing Systems 33 (NeurIPS 2020)},
+  year      = {2020},
+  eprint    = {2010.00402},
+  archivePrefix = {arXiv},
+  url       = {https://arxiv.org/abs/2010.00402},
+  note      = {fetched (research/reports/2); code https://github.com/HazyResearch/HypHC}
+}
+
+@misc{chatziafratis2018,
+  author = {Chatziafratis and others},
+  title  = {Hierarchical Clustering with Structural Constraints},
+  year   = {2018},
+  eprint = {1805.09476},
+  archivePrefix = {arXiv},
+  url    = {https://arxiv.org/abs/1805.09476},
+  note   = {fetched (research/reports/2). Title as recorded on arXiv; check before submission}
+}
+
+@inproceedings{kleinberg2002,
+  author    = {Kleinberg},
+  title     = {An Impossibility Theorem for Clustering},
+  booktitle = {Advances in Neural Information Processing Systems 15 (NIPS 2002)},
+  year      = {2002},
+  url       = {https://papers.nips.cc/paper_files/paper/2002/hash/43e4e6a6f341e00671e123714de019a8-Abstract.html},
+  note      = {fetched (research/reports/2)}
+}
+
+@article{carlsson2010,
+  author  = {Carlsson and M{\'e}moli},
+  title   = {Characterization, Stability and Convergence of Hierarchical Clustering Methods},
+  journal = {Journal of Machine Learning Research},
+  volume  = {11},
+  year    = {2010},
+  url     = {https://www.jmlr.org/papers/v11/carlsson10a.html},
+  note    = {fetched (research/reports/2)}
+}
+
+@misc{sknetwork,
+  title  = {scikit-network: hierarchy module (dasgupta\_cost, dasgupta\_score)},
+  year   = {2026},
+  url    = {https://scikit-network.readthedocs.io/en/latest/reference/hierarchy.html},
+  note   = {documentation and source fetched (research/benchmark/DESIGN.md); BSD licence, v0.33.5}
+}
+
+% ---------------------------------------------------------------------------
+% Navigation and categorisation
+
+@article{huffman1952,
+  author  = {Huffman},
+  title   = {A Method for the Construction of Minimum-Redundancy Codes},
+  journal = {Proceedings of the IRE},
+  year    = {1952},
+  doi     = {10.1109/JRPROC.1952.273898},
+  note    = {DOI resolves; content not read (research/reports/2)}
+}
+
+@article{knuth1971,
+  author  = {Knuth},
+  title   = {Optimum binary search trees},
+  journal = {Acta Informatica},
+  year    = {1971},
+  doi     = {10.1007/BF00264289},
+  note    = {DOI resolves; content not read (research/reports/2)}
+}
+
+@misc{watts2002,
+  author = {Watts and Dodds and Newman},
+  title  = {Identity and Search in Social Networks},
+  year   = {2002},
+  eprint = {cond-mat/0205383},
+  archivePrefix = {arXiv},
+  url    = {https://arxiv.org/abs/cond-mat/0205383},
+  note   = {fetched (research/reports/2); published in Science 2002}
+}
+
+@article{rosch1976,
+  author  = {Rosch and others},
+  title   = {Basic objects in natural categories},
+  journal = {Cognitive Psychology},
+  year    = {1976},
+  doi     = {10.1016/0010-0285(76)90013-X},
+  note    = {DOI resolves; content not read (research/reports/2)}
+}
+
+% ---------------------------------------------------------------------------
+% Data-driven and LLM taxonomies, taxonomy evaluation
+
+@misc{waltman2012,
+  author = {Waltman and van Eck},
+  title  = {A new methodology for constructing a publication-level classification system of science},
+  year   = {2012},
+  eprint = {1203.0532},
+  archivePrefix = {arXiv},
+  url    = {https://arxiv.org/abs/1203.0532},
+  note   = {fetched (research/reports/2). Title as recorded on arXiv; check before submission}
+}
+
+@misc{traag2019,
+  author = {Traag and Waltman and van Eck},
+  title  = {From Louvain to Leiden: guaranteeing well-connected communities},
+  year   = {2019},
+  eprint = {1810.08473},
+  archivePrefix = {arXiv},
+  url    = {https://arxiv.org/abs/1810.08473},
+  note   = {fetched (research/reports/2). Authors and title as recorded on arXiv; check before submission}
+}
+
+@misc{priem2022,
+  author = {Priem and Piwowar and Orr},
+  title  = {OpenAlex: A fully-open index of scholarly works, authors, venues, institutions, and concepts},
+  year   = {2022},
+  eprint = {2205.01833},
+  archivePrefix = {arXiv},
+  url    = {https://arxiv.org/abs/2205.01833},
+  note   = {fetched (research/reports/2). Authors and title as recorded on arXiv; check before submission}
+}
+
+@misc{openalextopics,
+  title  = {OpenAlex Topics},
+  author = {{OurResearch}},
+  year   = {2026},
+  url    = {https://help.openalex.org/hc/en-us/articles/24736129405719-Topics},
+  note   = {fetched (research/reports/2): 4 domains, 26 fields, 252 subfields, 4,516 topics; upper levels mapped from Scopus ASJC}
+}
+
+@inproceedings{zhang2018taxogen,
+  title     = {TaxoGen: Unsupervised Topic Taxonomy Construction by Adaptive Term Embedding and Clustering},
+  author    = {Zhang and others},
+  booktitle = {Proceedings of KDD 2018},
+  year      = {2018},
+  eprint    = {1812.09551},
+  archivePrefix = {arXiv},
+  url       = {https://arxiv.org/abs/1812.09551},
+  note      = {fetched (research/reports/2)}
+}
+
+@inproceedings{shen2020taxoexpan,
+  title     = {TaxoExpan: Self-supervised Taxonomy Expansion with Position-Enhanced Graph Neural Network},
+  author    = {Shen and others},
+  booktitle = {Proceedings of The Web Conference 2020},
+  year      = {2020},
+  eprint    = {2001.09522},
+  archivePrefix = {arXiv},
+  url       = {https://arxiv.org/abs/2001.09522},
+  note      = {fetched (research/reports/2)}
+}
+
+@misc{zeng2024chainoflayer,
+  title  = {Chain-of-Layer: Iteratively Prompting Large Language Models for Taxonomy Induction from Limited Examples},
+  author = {Zeng and others},
+  year   = {2024},
+  eprint = {2402.07386},
+  archivePrefix = {arXiv},
+  url    = {https://arxiv.org/abs/2402.07386},
+  note   = {fetched (research/reports/2). Authors and title as recorded on arXiv; check before submission}
+}
+
+@misc{wan2024tntllm,
+  title  = {TnT-LLM: Text Mining at Scale with Large Language Models},
+  author = {Wan and others},
+  year   = {2024},
+  eprint = {2403.12173},
+  archivePrefix = {arXiv},
+  url    = {https://arxiv.org/abs/2403.12173},
+  note   = {fetched (research/reports/2). Authors as recorded on arXiv; check before submission}
+}
+
+@misc{kargupta2025taxoadapt,
+  title  = {TaxoAdapt: Aligning LLM-Based Multidimensional Taxonomy Construction to Evolving Research Corpora},
+  author = {Kargupta and others},
+  year   = {2025},
+  eprint = {2506.10737},
+  archivePrefix = {arXiv},
+  url    = {https://arxiv.org/abs/2506.10737},
+  note   = {fetched (research/reports/2); code https://github.com/pkargupta/taxoadapt. Title as recorded on arXiv; check before submission}
+}
+
+@article{unterkalmsteiner2023,
+  author  = {Unterkalmsteiner and Abdeen},
+  title   = {A compendium and evaluation of taxonomy quality attributes},
+  journal = {Expert Systems},
+  year    = {2023},
+  eprint  = {2403.00111},
+  archivePrefix = {arXiv},
+  url     = {https://arxiv.org/abs/2403.00111},
+  note    = {fetched (research/reports/2). Title as recorded on arXiv; check before submission}
+}
+
+@misc{wullschleger2025,
+  author = {Wullschleger and others},
+  title  = {Reference-free evaluation of taxonomies},
+  year   = {2025},
+  eprint = {2505.11470},
+  archivePrefix = {arXiv},
+  url    = {https://arxiv.org/abs/2505.11470},
+  note   = {fetched (research/reports/2). Title here is descriptive; take the exact title from arXiv before submission}
+}
+
+% ---------------------------------------------------------------------------
+% Automatic subject classification tools and studies
+
+@misc{annif,
+  title  = {Annif: automated subject indexing toolkit},
+  author = {{National Library of Finland}},
+  year   = {2026},
+  url    = {https://github.com/NatLibFi/Annif},
+  note   = {fetched (research/reports/3); Apache-2.0}
+}
+
+@article{libris2024ddc,
+  title   = {Automated Dewey Decimal Classification of Swedish [title completed from the page before submission]},
+  journal = {Journal of Documentation},
+  volume  = {80},
+  number  = {5},
+  year    = {2024},
+  url     = {https://www.emerald.com/jd/article/80/5/1057/1236186/Automated-Dewey-Decimal-Classification-of-Swedish},
+  note    = {abstract fetched (research/reports/3): ensemble 66.82\% accuracy at 3-digit DDC, 44.87\% precision@1 at full DDC, 230k Libris records. Authors and exact title not recorded in the report; take them from the page}
+}
+
+@misc{semeval2025task5,
+  title  = {SemEval-2025 Task 5: LLMs4Subjects},
+  author = {D'Souza and others},
+  year   = {2025},
+  eprint = {2504.07199},
+  archivePrefix = {arXiv},
+  url    = {https://arxiv.org/abs/2504.07199},
+  note   = {abstract fetched (research/reports/3). Title as recorded in the report; check before submission}
+}
+
+@misc{annifsemeval2025,
+  title  = {Annif at SemEval-2025 Task 5},
+  author = {{National Library of Finland}},
+  year   = {2025},
+  eprint = {2504.19675},
+  archivePrefix = {arXiv},
+  url    = {https://arxiv.org/abs/2504.19675},
+  note   = {fetched (research/reports/3). Authors and full title to be taken from arXiv}
+}
+
+@misc{oclcclassify,
+  title  = {Why is OCLC discontinuing OCLC Classify?},
+  author = {{OCLC}},
+  year   = {2024},
+  url    = {https://help.oclc.org/Librarian_Toolbox/Troubleshooting/Why_is_OCLC_discontinuing_OCLC_Classify},
+  note   = {fetched (research/reports/3): service shut down 2024-01-31. See also https://www.oclc.org/research/areas/data-science/classify.html (fetched, research/reports/4)}
+}
+
+@misc{lcecd2025,
+  title  = {Exploring Computational Description (Library of Congress), IFLA WLIC 2025},
+  year   = {2025},
+  url    = {https://repository.ifla.org/handle/20.500.14598/6861},
+  note   = {fetched (research/reports/3): subject and genre prediction below 50\%; 95\% automation threshold not met. Authors and exact title to be taken from the record}
+}
+
+@article{llmlcc2026,
+  title   = {LLM classifiers for Library of Congress Classification (Journal of Information Science)},
+  year    = {2026},
+  journal = {Journal of Information Science},
+  doi     = {10.1177/01655515261425547},
+  note    = {abstract read via https://www.synapsesocial.com/papers/69d893406c1944d70ce04452 (research/reports/3); the DOI itself was not fetched. Authors and exact title to be taken from the DOI}
+}
+
+@misc{llm4ddc2025,
+  title  = {LLM4DDC: prompted LLMs and fine-tuned models for DDC classification of research data},
+  year   = {2025},
+  url    = {https://madoc.bib.uni-mannheim.de/71151/},
+  note   = {fetched (research/reports/3). Authors and exact title to be taken from the record}
+}
+
+@article{nasko2025,
+  title   = {ChatGPT and Copilot for cataloging and classification (NASKO)},
+  year    = {2025},
+  journal = {NASKO},
+  url     = {https://journals.lib.washington.edu/index.php/nasko/article/view/16375},
+  note    = {fetched (research/reports/3). Authors and exact title to be taken from the page}
+}
+
+@misc{autolcc,
+  title = {auto\_lcc},
+  year  = {2026},
+  url   = {https://github.com/ahmad-PH/auto_lcc},
+  note  = {fetched (research/reports/3): 15 of 21 LCC top-level classes; 76.03\% accuracy (LSTM + BERT)}
+}
+
+% ---------------------------------------------------------------------------
+% Schemes, data and licences (official pages)
+
+@misc{lccfree,
+  title  = {Library of Congress Classification PDF Files},
+  author = {{Library of Congress}},
+  year   = {2024},
+  url    = {https://www.loc.gov/aba/publications/FreeLCC/freelcc.html},
+  note   = {fetched (research/reports/4)}
+}
+
+@misc{idloc,
+  title  = {About: Library of Congress Linked Data Service},
+  author = {{Library of Congress}},
+  year   = {2026},
+  url    = {https://id.loc.gov/about/},
+  note   = {fetched (research/reports/4): "a public domain data set"}
+}
+
+@misc{usc105,
+  title = {17 U.S. Code {\S} 105},
+  url   = {https://www.law.cornell.edu/uscode/text/17/105},
+  note  = {fetched (research/reports/4)}
+}
+
+@misc{classweblegal,
+  title  = {Classification Web: legal notice},
+  author = {{Library of Congress}},
+  url    = {https://classweb.loc.gov/legal.html},
+  note   = {fetched (research/reports/4)}
+}
+
+@misc{deweyrights,
+  title  = {Dewey resources},
+  author = {{OCLC}},
+  url    = {https://www.oclc.org/en/dewey/resources},
+  note   = {fetched (research/reports/4): copyright in DDC owned by OCLC}
+}
+
+@misc{udclicences,
+  title  = {UDC licences and terms},
+  author = {{UDC Consortium}},
+  url    = {https://udcc.org/licences_terms.htm},
+  note   = {fetched (research/reports/4)}
+}
+
+@misc{bk,
+  title  = {Basisklassifikation (BK), BARTOC record},
+  url    = {https://bartoc.org/en/node/18785},
+  note   = {fetched (research/reports/1): CC0 1.0, 2,139 classes}
+}
+
+@misc{ilc2,
+  title  = {Integrative Levels Classification, edition 2},
+  author = {{ISKO Italy}},
+  url    = {https://www.iskoi.org/ilc/},
+  note   = {fetched (research/reports/1, 4). SKOS: https://www.iskoi.org/ilc/2/skos/ILC2.ttl (states CC BY 3.0); BARTOC https://bartoc.org/en/node/472 lists CC BY-SA 3.0}
+}
+
+@misc{fdc,
+  title  = {Free Decimal Correspondence},
+  author = {Ockerbloom},
+  url    = {https://everybodyslibraries.com/free-decimal-correspondence/},
+  note   = {fetched (research/reports/1); public domain (CC0); v0.06, 2010}
+}
+
+@misc{unesco,
+  title  = {UNESCO Thesaurus: about},
+  author = {{UNESCO}},
+  url    = {https://vocabularies.unesco.org/en/about},
+  note   = {fetched (research/reports/1): CC BY-SA 3.0 IGO}
+}
+
+@misc{eurovoc,
+  title  = {EuroVoc dataset},
+  author = {{Publications Office of the European Union}},
+  url    = {https://op.europa.eu/en/web/eu-vocabularies/th-dataset/-/resource/dataset/eurovoc},
+  note   = {fetched (research/reports/1)}
+}
+
+@misc{acmccs,
+  title  = {The 2012 ACM Computing Classification System},
+  author = {{ACM}},
+  url    = {https://web.archive.org/web/2023/https://www.acm.org/publications/class-2012},
+  note   = {Wayback copy fetched (research/reports/4); live acm.org returned HTTP 403. "freely available for educational and research purposes in HTML format"}
+}
+
+@misc{ipc,
+  title  = {International Patent Classification, edition 2026.01, master files},
+  author = {{WIPO}},
+  url    = {https://www.wipo.int/classifications/data/ipc/ITSupport_and_download_area/20260101/MasterFiles/ipc_scheme_20260101.zip},
+  note   = {URL and hash pinned in schemes/ipc/sources.lock.json; CC BY 4.0 per schemes/ipc/README.md}
+}
+
+@misc{msc2020,
+  title  = {Mathematics Subject Classification MSC2020},
+  author = {{Mathematical Reviews and zbMATH Open}},
+  url    = {https://msc2020.org/},
+  note   = {CC BY-NC-SA 4.0 as stated on msc2020.org (checked 2026-10-08, schemes/msc/README.md)}
+}
+
+@misc{jel,
+  title  = {JEL Classification System},
+  author = {{American Economic Association}},
+  url    = {https://www.aeaweb.org/econlit/jelCodes.php},
+  note   = {schemes/jel/README.md: no open licence published}
+}
+
+@misc{arxivtaxonomy,
+  title  = {arXiv Category Taxonomy},
+  author = {{arXiv}},
+  url    = {https://arxiv.org/category_taxonomy},
+  note   = {source definitions in https://github.com/arXiv/arxiv-base (MIT), pinned in schemes/arxiv/sources.lock.json}
+}
+
+@misc{arxivlicense,
+  title  = {arXiv licence information},
+  author = {{arXiv}},
+  url    = {https://info.arxiv.org/help/license/index.html},
+  note   = {cited in bench/corpus/README.md: CC0 1.0 applies to metadata}
+}
+
+@misc{openlibrarylicensing,
+  title  = {Open Library: licensing},
+  author = {{Open Library}},
+  url    = {https://openlibrary.org/developers/licensing},
+  note   = {cited in bench/corpus/README.md; DESIGN.md notes the CC0 statement was not located in the extracted page text}
+}
+
+@misc{minilm,
+  title  = {all-MiniLM-L6-v2 (ONNX export), revision d13954661f83248295ba75c1ed411eef3b7b936e},
+  author = {{Qdrant}},
+  url    = {https://huggingface.co/Qdrant/all-MiniLM-L6-v2-onnx},
+  note   = {model pinned in bench/results/2026-10-10/graphs/*.manifest.json; the underlying model paper is TODO(cite)}
+}
