@@ -2,7 +2,7 @@
 //!
 //! All logarithms in these metrics are base 2. Alphabetic binary search uses
 //! the optimal alphabetic prefix code, computed with Knuth's O(n²) DP.
-use crate::Tree;
+use crate::{score_tree, SimilarityGraph, Tree};
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -11,6 +11,25 @@ pub struct UpgradeMetrics {
     pub popularity_proxy: String,
     pub information_bounds: InformationBounds,
     pub branch_constant_sweep: std::collections::BTreeMap<String, f64>,
+    pub alphabetic_method: String,
+    pub log_base: u8,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct NullSummary {
+    pub mean: f64,
+    pub sd: f64,
+    pub z: f64,
+    /// Fraction of null replicates at or below the observed score.
+    pub percentile: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct PermutationNull {
+    pub permutations: usize,
+    pub seed: u64,
+    pub cost_norm: NullSummary,
+    pub skill: NullSummary,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize)]
@@ -94,6 +113,85 @@ pub fn summarize(tree: &Tree) -> UpgradeMetrics {
                 .into(),
         information_bounds: bounds,
         branch_constant_sweep: sweep,
+        alphabetic_method: "Hu-Tucker / Garsia-Wachs, O(n^2)".into(),
+        log_base: 2,
+    }
+}
+
+/// Permutes item-to-leaf assignments among placed items while preserving the
+/// tree shape, every class size, and the unplaced assignments.
+pub fn permutation_null(
+    tree: &Tree,
+    graph: &SimilarityGraph,
+    reference_cost: f64,
+    permutations: usize,
+    seed: u64,
+) -> PermutationNull {
+    use crate::bootstrap::SplitMix64;
+    let observed = score_tree(tree, graph).cost_norm;
+    let observed_skill = if reference_cost < 1.0 {
+        (1.0 - observed) / (1.0 - reference_cost)
+    } else {
+        0.0
+    };
+    let placed: Vec<usize> = tree
+        .item_leaves
+        .iter()
+        .enumerate()
+        .filter_map(|(i, leaves)| {
+            leaves
+                .iter()
+                .any(|&(leaf, _)| tree.nodes[leaf].parent != Some(0))
+                .then_some(i)
+        })
+        .collect();
+    let assignments: Vec<_> = placed
+        .iter()
+        .map(|&i| tree.item_leaves[i].clone())
+        .collect();
+    let mut rng = SplitMix64::new(seed);
+    let mut costs = Vec::with_capacity(permutations);
+    let mut skills = Vec::with_capacity(permutations);
+    for _ in 0..permutations {
+        let mut shuffled = assignments.clone();
+        for i in (1..shuffled.len()).rev() {
+            shuffled.swap(i, rng.below(i + 1));
+        }
+        let mut candidate = tree.clone();
+        for (&item, leaves) in placed.iter().zip(shuffled) {
+            candidate.item_leaves[item] = leaves;
+        }
+        let cost = score_tree(&candidate, graph).cost_norm;
+        costs.push(cost);
+        skills.push(if reference_cost < 1.0 {
+            (1.0 - cost) / (1.0 - reference_cost)
+        } else {
+            0.0
+        });
+    }
+    let summarize = |values: &[f64], observed: f64| {
+        let mean = values.iter().sum::<f64>() / values.len().max(1) as f64;
+        let variance = values.iter().map(|x| (x - mean).powi(2)).sum::<f64>()
+            / values.len().saturating_sub(1).max(1) as f64;
+        let mut sorted = values.to_vec();
+        sorted.sort_by(f64::total_cmp);
+        NullSummary {
+            mean,
+            sd: variance.sqrt(),
+            z: if variance > 0.0 {
+                (observed - mean) / variance.sqrt()
+            } else {
+                0.0
+            },
+            percentile: sorted.iter().filter(|&&x| x <= observed).count() as f64
+                / sorted.len().max(1) as f64,
+        }
+    };
+    PermutationNull {
+        permutations,
+        seed,
+        cost_norm: summarize(&costs, observed),
+        skill: summarize(&skills, observed_skill),
     }
 }
 

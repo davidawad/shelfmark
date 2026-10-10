@@ -278,6 +278,13 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
         coverage,
         structure: score.structure,
         metrics_upgrade: Some(shelfmark_bench::metrics_upgrade::summarize(&tree)),
+        permutation_null: Some(shelfmark_bench::metrics_upgrade::permutation_null(
+            &tree,
+            &graph,
+            ref_score,
+            200,
+            bootstrap::DEFAULT_SEED,
+        )),
         hashes: ContentHashes {
             graph: sha256_hex(&serde_json::to_vec(&graph)?),
             tree: sha256_hex(&serde_json::to_vec(&tree)?),
