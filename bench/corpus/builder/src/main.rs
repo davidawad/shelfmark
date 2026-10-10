@@ -1,5 +1,8 @@
-use quick_xml::{events::Event, Reader};
-use serde::Serialize;
+mod oai;
+mod relabel;
+
+use oai::parse;
+use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 use std::{
     collections::BTreeMap,
@@ -7,7 +10,7 @@ use std::{
     io::{self, Write},
 };
 
-#[derive(Clone, Debug, Serialize, PartialEq, Eq)]
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
 struct Paper {
     id: String,
     title: String,
@@ -17,16 +20,16 @@ struct Paper {
     msc: Vec<String>,
     acm_ccs: Vec<String>,
     jel: Vec<String>,
-    license: &'static str,
+    license: String,
     source: Source,
 }
 
-#[derive(Clone, Debug, Serialize, PartialEq, Eq)]
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
 struct Source {
-    kind: &'static str,
+    kind: String,
     url: String,
-    metadata_license: &'static str,
-    label_sources: BTreeMap<&'static str, Vec<String>>,
+    metadata_license: String,
+    label_sources: BTreeMap<String, Vec<String>>,
 }
 
 fn source_for(
@@ -37,174 +40,16 @@ fn source_for(
     jel: &[String],
 ) -> Source {
     Source {
-        kind: "arxiv",
+        kind: "arxiv".into(),
         url: format!("https://arxiv.org/abs/{id}"),
-        metadata_license: "CC0 1.0",
+        metadata_license: "CC0 1.0".into(),
         label_sources: BTreeMap::from([
-            ("arxiv", categories.to_vec()),
-            ("msc", msc.to_vec()),
-            ("acm_ccs", acm.to_vec()),
-            ("jel", jel.to_vec()),
+            ("arxiv".into(), categories.to_vec()),
+            ("msc".into(), msc.to_vec()),
+            ("acm_ccs".into(), acm.to_vec()),
+            ("jel".into(), jel.to_vec()),
         ]),
     }
-}
-
-fn local_name(name: &[u8]) -> String {
-    String::from_utf8_lossy(name)
-        .rsplit(':')
-        .next()
-        .unwrap_or("")
-        .to_string()
-}
-
-fn split_codes(s: &str) -> Vec<String> {
-    s.split(|c: char| c == ',' || c.is_whitespace() || c == ';')
-        .filter(|s| {
-            !s.is_empty()
-                && !s.eq_ignore_ascii_case("none")
-                && !s.eq_ignore_ascii_case("n/a")
-                && !s.eq_ignore_ascii_case("na")
-        })
-        .map(str::to_string)
-        .collect()
-}
-
-fn jel_code_tokens(text: &str) -> Vec<String> {
-    let bytes = text.as_bytes();
-    bytes
-        .windows(3)
-        .enumerate()
-        .filter(|(i, w)| {
-            w[0].is_ascii_uppercase()
-                && w[1].is_ascii_digit()
-                && w[2].is_ascii_digit()
-                && (*i == 0 || !bytes[*i - 1].is_ascii_alphanumeric())
-                && (*i + 3 == bytes.len() || !bytes[*i + 3].is_ascii_alphanumeric())
-        })
-        .map(|(_, w)| String::from_utf8_lossy(w).into_owned())
-        .collect()
-}
-
-fn jel_from_comments(text: &str) -> Vec<String> {
-    let Some(index) = text.to_ascii_lowercase().find("jel") else {
-        return Vec::new();
-    };
-    jel_code_tokens(&text[index + 3..])
-}
-
-fn parse(xml: &str) -> Result<Vec<Paper>, String> {
-    let mut r = Reader::from_str(xml);
-    r.config_mut().trim_text(true);
-    let (mut out, mut cur, mut field, mut author, mut forenames, mut comments) = (
-        Vec::new(),
-        None::<Paper>,
-        String::new(),
-        String::new(),
-        String::new(),
-        String::new(),
-    );
-    loop {
-        match r.read_event().map_err(|e| e.to_string())? {
-            Event::Start(e) => {
-                let n = local_name(e.name().as_ref());
-                if n == "record" {
-                    continue;
-                }
-                if n == "arXiv" || n == "arXivRaw" {
-                    comments.clear();
-                    cur = Some(Paper {
-                        id: String::new(),
-                        title: String::new(),
-                        abstract_text: String::new(),
-                        authors: vec![],
-                        categories: vec![],
-                        msc: vec![],
-                        acm_ccs: vec![],
-                        jel: vec![],
-                        license: "CC0 1.0",
-                        source: source_for("", &[], &[], &[], &[]),
-                    });
-                }
-                if n == "author" {
-                    author.clear();
-                    forenames.clear();
-                }
-                field = n;
-            }
-            Event::Text(t) => {
-                let val = t.unescape().map_err(|e| e.to_string())?.into_owned();
-                if let Some(p) = cur.as_mut() {
-                    match field.as_str() {
-                        "id" => p.id.push_str(&val),
-                        "title" => {
-                            if !p.title.is_empty() {
-                                p.title.push(' ');
-                            }
-                            p.title.push_str(&val);
-                        }
-                        "abstract" => {
-                            if !p.abstract_text.is_empty() {
-                                p.abstract_text.push(' ');
-                            }
-                            p.abstract_text.push_str(&val);
-                        }
-                        "keyname" => author = val,
-                        "forenames" => forenames = val,
-                        "authors" => {
-                            p.authors = val
-                                .split(',')
-                                .flat_map(|s| s.split(" and "))
-                                .map(str::trim)
-                                .map(|s| s.trim_start_matches("and "))
-                                .filter(|s| !s.is_empty())
-                                .map(str::to_string)
-                                .collect()
-                        }
-                        "categories" => p.categories.extend(split_codes(&val)),
-                        "msc-class" => p.msc.extend(split_codes(&val)),
-                        "acm-class" => p.acm_ccs.extend(split_codes(&val)),
-                        "jel" => p.jel.extend(split_codes(&val)),
-                        "comments" => comments.push_str(&val),
-                        _ => {}
-                    }
-                }
-            }
-            Event::End(e) => {
-                let n = local_name(e.name().as_ref());
-                if n == "author" {
-                    let name = [forenames.as_str(), author.as_str()]
-                        .into_iter()
-                        .filter(|s| !s.is_empty())
-                        .collect::<Vec<_>>()
-                        .join(" ");
-                    if !name.is_empty() {
-                        if let Some(p) = cur.as_mut() {
-                            p.authors.push(name)
-                        }
-                    }
-                }
-                if n == "arXiv" || n == "arXivRaw" {
-                    if let Some(p) = cur.take() {
-                        if !p.id.is_empty() {
-                            let mut p = p;
-                            p.jel.extend(jel_from_comments(&comments));
-                            p.jel
-                                .extend(p.categories.iter().flat_map(|c| jel_code_tokens(c)));
-                            p.jel.sort();
-                            p.jel.dedup();
-                            p.source = source_for(&p.id, &p.categories, &p.msc, &p.acm_ccs, &p.jel);
-                            out.push(p)
-                        }
-                    }
-                }
-            }
-            Event::Eof => break,
-            _ => {}
-        }
-    }
-    out.sort_by(|a, b| a.id.cmp(&b.id));
-    out.dedup_by(|a, b| a.id == b.id);
-    Ok(out)
 }
 
 fn rank(id: &str, seed: &str) -> [u8; 32] {
@@ -293,10 +138,38 @@ fn sample(papers: Vec<Paper>, n: usize, floor: usize, seed: &str) -> Vec<Paper> 
     chosen
 }
 
+fn write_jsonl(path: &str, papers: &[Paper]) -> io::Result<()> {
+    let mut out = io::BufWriter::new(fs::File::create(path)?);
+    for p in papers {
+        serde_json::to_writer(&mut out, p)?;
+        writeln!(out)?;
+    }
+    out.flush()
+}
+
+/// Rewrite ACM classes of a pinned corpus from arXivOld records only.
+fn relabel_acm(corpus: &str, xml: &str, output: &str) -> Result<(), Box<dyn std::error::Error>> {
+    let mut rows = fs::read_to_string(corpus)?
+        .lines()
+        .map(serde_json::from_str)
+        .collect::<Result<Vec<Paper>, _>>()?;
+    let records = oai::parse_records(&fs::read_to_string(xml)?).map_err(io::Error::other)?;
+    let summary = relabel::relabel(&mut rows, &records).map_err(io::Error::other)?;
+    eprintln!("{summary:?}");
+    write_jsonl(output, &rows)?;
+    Ok(())
+}
+
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args: Vec<_> = env::args().collect();
+    if args.len() == 5 && args[1] == "--relabel-acm" {
+        return relabel_acm(&args[2], &args[3], &args[4]);
+    }
     if args.len() != 4 {
         eprintln!("usage: paper-corpus-builder <OAI-XML> <COUNT> <OUTPUT.jsonl>");
+        eprintln!(
+            "       paper-corpus-builder --relabel-acm <CORPUS.jsonl> <OAI-XML> <OUTPUT.jsonl>"
+        );
         std::process::exit(2);
     }
     let xml = fs::read_to_string(&args[1])?;
@@ -310,11 +183,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         )
         .into());
     }
-    let mut out = fs::File::create(&args[3])?;
-    for p in selected {
-        serde_json::to_writer(&mut out, &p)?;
-        writeln!(out)?;
-    }
+    write_jsonl(&args[3], &selected)?;
     Ok(())
 }
 
@@ -341,6 +210,102 @@ mod tests {
         );
     }
 
+    const RAW_NS: &str = r#"xmlns="http://arxiv.org/OAI/arXivRaw/""#;
+
+    fn raw_record(id: &str, msc: &str, acm: &str) -> String {
+        format!(
+            "<record><metadata><arXivRaw {RAW_NS}><id>{id}</id><title>T</title>\
+             <categories>cs.LG math.OC</categories><msc-class>{msc}</msc-class>\
+             <acm-class>{acm}</acm-class><abstract>A.</abstract></arXivRaw></metadata></record>"
+        )
+    }
+
+    fn old_record(id: &str, msc: &str, acm: &str) -> String {
+        format!(
+            "<record><metadata><arXivOld xmlns=\"http://arxiv.org/OAI/arXivOld/\">\
+             <id>{id}</id><title>T</title><categories>cs.LG math.OC</categories>\
+             <msc-class>{msc}</msc-class><acm-class>{acm}</acm-class>\
+             </arXivOld></metadata></record>"
+        )
+    }
+
+    #[test]
+    fn arxiv_raw_record_keeps_msc_and_acm_fields_separate() {
+        let xml = format!(
+            "<OAI-PMH>{}</OAI-PMH>",
+            raw_record("2602.00001", "68T05, 90C26", "I.2.6; G.1.6")
+        );
+        let parsed = parse(&xml).unwrap();
+        let p = &parsed[0];
+        assert_eq!(p.msc, vec!["68T05", "90C26"]);
+        assert_eq!(p.acm_ccs, vec!["I.2.6", "G.1.6"]);
+        assert_eq!(p.source.label_sources["msc"], p.msc);
+        assert_eq!(p.source.label_sources["acm_ccs"], p.acm_ccs);
+    }
+
+    #[test]
+    fn mirrored_acm_class_is_dropped_or_taken_from_arxiv_old() {
+        let mirrored = raw_record("2602.00002", "93C10, 34D45", "93C10, 34D45");
+        let xml = format!("<OAI-PMH>{mirrored}</OAI-PMH>");
+        let p = &parse(&xml).unwrap()[0];
+        assert_eq!(p.msc, vec!["93C10", "34D45"]);
+        assert!(p.acm_ccs.is_empty());
+        assert!(p.source.label_sources["acm_ccs"].is_empty());
+
+        let old = old_record(
+            "2602.00002",
+            "93C10, 34D45",
+            "I.2.8 [Problem Solving]: Graph search, scheduling; I.6",
+        );
+        let merged = parse(&format!("<OAI-PMH>{old}{mirrored}</OAI-PMH>")).unwrap();
+        assert_eq!(merged.len(), 1);
+        assert_eq!(merged[0].msc, vec!["93C10", "34D45"]);
+        assert_eq!(merged[0].acm_ccs, vec!["I.2.8", "I.6"]);
+        assert_eq!(
+            merged[0].source.label_sources["acm_ccs"],
+            vec!["I.2.8", "I.6"]
+        );
+    }
+
+    #[test]
+    fn relabel_replaces_only_acm_classes_of_pinned_rows() {
+        let mut rows = vec![
+            Paper {
+                acm_ccs: vec!["93C10".into()],
+                ..parse(&raw_record("2602.00003", "93C10", "93C10")).unwrap()[0].clone()
+            },
+            parse(&raw_record("2602.00004", "", "")).unwrap()[0].clone(),
+        ];
+        let before = rows.clone();
+        let xml = format!(
+            "<OAI-PMH>{}{}</OAI-PMH>",
+            old_record("2602.00003", "93C10", "I.2.8"),
+            old_record("2602.00004", "05C85", "")
+        );
+        let records = oai::parse_records(&xml).unwrap();
+        let summary = relabel::relabel(&mut rows, &records).unwrap();
+        assert_eq!(rows[0].acm_ccs, vec!["I.2.8"]);
+        assert_eq!(rows[0].source.label_sources["acm_ccs"], vec!["I.2.8"]);
+        assert_eq!(rows[1], before[1]);
+        assert_eq!(
+            (rows[0].title.as_str(), &rows[0].msc),
+            (before[0].title.as_str(), &before[0].msc)
+        );
+        assert_eq!(
+            summary,
+            relabel::Summary {
+                rows: 2,
+                acm_rows_before: 1,
+                acm_values_before: 1,
+                acm_rows_after: 1,
+                acm_values_after: 1,
+                msc_mismatches: vec!["2602.00004".into()],
+            }
+        );
+        let partial = oai::parse_records(&old_record("2602.00003", "", "I.2.8")).unwrap();
+        assert!(relabel::relabel(&mut rows, &partial).is_err());
+    }
+
     #[test]
     fn sample_is_proportional_with_a_per_archive_floor() {
         let mut papers = parse(FIXTURE).unwrap();
@@ -354,7 +319,7 @@ mod tests {
                 msc: vec![],
                 acm_ccs: vec![],
                 jel: vec![],
-                license: "CC0 1.0",
+                license: "CC0 1.0".into(),
                 source: source_for("", &[], &[], &[], &[]),
             });
         }

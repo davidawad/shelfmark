@@ -15,6 +15,13 @@ remaining categories are cross-lists. MSC, ACM CCS, and JEL values are the
 source-provided labels. JEL codes are also extracted from comments when a JEL
 marker is present.
 
+ACM classes come from the `arXivOld` OAI format. The `arXivRaw` and `arXiv`
+formats served by `oaipmh.arxiv.org` repeat the `msc-class` value inside
+`acm-class`; for example, 1310.2306 has ACM classes `I.2.8; I.6` on its abstract
+page and in `arXivOld`, but its MSC codes in `arXivRaw`. The builder drops an
+`arXivRaw` `acm-class` that mirrors `msc-class` and uses the `arXivOld` ACM
+classes whenever an `arXivOld` record exists for the ID.
+
 `holdout.jsonl` contains 500 separate Open Library edition records. Each row
 has a nonempty `lc_classifications` array copied from the edition record.
 `sample-ids.txt` and `holdout-ids.txt` pin both datasets by ID. Open Library
@@ -24,11 +31,11 @@ and states its [catalog licensing terms](https://openlibrary.org/developers/lice
 ## Harvest and sampling
 
 The arXiv harvest uses the keyless OAI-PMH endpoint
-`https://oaipmh.arxiv.org/oai`, `metadataPrefix=arXivRaw`, and the inclusive
-date window 2026-01-01 through 2026-10-09 for the top-level sets `cs`, `math`,
-`physics`, `q-bio`, `q-fin`, `stat`, `econ`, and `eess`. Resumption tokens are
-followed on one persistent connection with at least 3.15 seconds between
-requests. Open Library is queried through its Search and works-editions APIs
+`https://oaipmh.arxiv.org/oai`, `metadataPrefix=arXivRaw` (plus `arXivOld`
+for ACM classes), and the inclusive date window 2026-01-01 through 2026-10-09
+for the top-level sets `cs`, `math`, `physics`, `q-bio`, `q-fin`, `stat`,
+`econ`, and `eess`. Resumption tokens are followed on one persistent
+connection with at least 3.15 seconds between requests. Open Library is queried through its Search and works-editions APIs
 with at least 1.05 seconds between requests. The harvest scripts checkpoint
 raw pages and progress under the ignored `cache/` directory; raw harvest
 responses are not part of this release.
@@ -50,10 +57,20 @@ cargo run --manifest-path bench/corpus/builder/Cargo.toml -- \
 python3 bench/corpus/builder/harvest_openlibrary.py
 ```
 
-The OAI harvester resumes from its checkpoint if interrupted. The Open Library
-harvester writes the holdout after reaching 500 qualifying editions. Unit tests
-use a synthetic XML fixture to check parsing, labels, deterministic sampling,
-and archive floors:
+The OAI harvester resumes from its checkpoint if interrupted. To refresh only
+the ACM classes of the pinned sample, harvest `arXivOld` records for the pinned
+IDs (ListRecords over the same window, then GetRecord for IDs whose datestamp
+moved out of it), then rewrite `acm_ccs`; every other field is kept:
+
+```sh
+python3 bench/corpus/builder/harvest_arxiv.py --pinned bench/corpus/sample-ids.txt
+cargo run --manifest-path bench/corpus/builder/Cargo.toml -- --relabel-acm \
+  bench/corpus/corpus.jsonl bench/corpus/cache/arXivOld-pinned.xml corpus.new.jsonl
+```
+
+The Open Library harvester writes the holdout after reaching 500 qualifying
+editions. Unit tests use synthetic XML records to check parsing, MSC and ACM
+labels, the ACM relabel, deterministic sampling, and archive floors:
 
 ```sh
 cargo test --manifest-path bench/corpus/builder/Cargo.toml
@@ -63,8 +80,11 @@ cargo test --manifest-path bench/corpus/builder/Cargo.toml
 
 arXiv records: **10,000**. Open Library holdout records: **500**.
 
-- `corpus.jsonl` SHA-256: `7685685d0de25d6e8a614859783dcb5376d81e4fe336a65f22b550f4c7527b8d`
+- `corpus.jsonl` SHA-256: `80c4adb1bff89f997bbf75245a77e41c1c9a3eb68a1f89ba500efb7aa0bd5664`
 - ID files: `sample-ids.txt`, `holdout-ids.txt`
+- ACM classes: 690 codes on 317 papers, re-harvested from `arXivOld` on
+  2026-10-10 for the pinned IDs; no other field changed. The previous pin
+  (`7685685d…`) carried 433 MSC codes on 132 papers in `acm_ccs`.
 
 Sample counts by top-level archive:
 
