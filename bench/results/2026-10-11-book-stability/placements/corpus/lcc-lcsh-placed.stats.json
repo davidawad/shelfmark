@@ -1,0 +1,8 @@
+{
+  "rows": 10000,
+  "placed": 9989,
+  "profile": "profile:lexical@2",
+  "scheme": "scheme:lcc@2024 bundled in the shelfmark binary (data/schemes/lcc/lcc-lcsh.json.gz: lcc.json plus LCSH vocabulary)",
+  "store": "empty store, empty rules file, low-confidence placements kept, fallbacks unplaced",
+  "scored_with": "data/schemes/lcc/lcc.json (the same 7,392 classes in the same order)"
+}
