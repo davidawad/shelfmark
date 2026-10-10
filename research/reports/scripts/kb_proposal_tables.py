@@ -6,7 +6,9 @@ Reads only committed files: `bench/results/2026-10-10-proposal/` (written by
 `2026-10-10-embed` and `2026-10-10-covered`. Each table sits in the report
 between `<!-- table:NAME -->` and `<!-- /table:NAME -->`. With no option the
 script rebuilds every table and exits 1 if any differs from the report;
-`--write` rewrites them in place.
+`--write` rewrites them in place, and rewrites the LCC-to-FDC crosswalk
+`bench/results/2026-10-10-proposal/crosswalk/lcc-fdc.json` that the
+check compares with its inputs.
 
 Tests are paired: every run of a universe and graph is scored on the same
 1,000 item draws (seed 20261010), so the difference of two runs is computed
@@ -19,11 +21,13 @@ step-down adjustment is applied within each table's family of tests.
 """
 import argparse
 import gzip
+import hashlib
 import importlib.util
 import json
 import math
 import re
 import sys
+from collections import Counter
 from functools import cache
 from pathlib import Path
 
@@ -249,7 +253,7 @@ def catalogue_test(a, b, boot_key, score_key, prefix="books-"):
 
 def t_catalogue_tests():
     tests = []
-    for a, b in (("fdc-d3", "lcc-gold"), ("learned-own", "fdc-d3")):
+    for a, b in (("ddc-section", "lcc-gold"), ("fdc-d3", "lcc-gold"), ("learned-own", "ddc-section")):
         for key, boot_key, label in [("dasgupta.cost_norm", "vertex.dasgupta.cost_norm", "cost_norm")] + CATALOGUE:
             tests.append((a, b, label.split(" (")[0], catalogue_test(a, b, boot_key, key)))
     holm([t for *_, t in tests])
@@ -285,9 +289,11 @@ def t_depth():
                  f(point("books", run, "effective_classes"), 1)]
         cells += [f(j_point("books", run, lam)) for lam in LAMBDAS]
         cells.append(f(worst[run]) if run in worst else "")
+        ls = lambda_star("books", run, "fdc-d3", "minilm", 20) if run != "fdc-d3" else None
+        cells.append(f(ls) if ls else "")
         rows.append(cells)
     return table(["run", "cost_norm", "nav bits", "eff. classes"] + [f"J, λ = {lam}" for lam in LAMBDAS]
-                 + ["max regret, FDC cuts"], rows)
+                 + ["max regret, FDC cuts", "λ where J = J(`fdc-d3`)"], rows)
 
 
 def lambda_star(universe, a, b, model, k):
@@ -437,11 +443,252 @@ def t_ddc_reference():
                                                                                            "---:", "---:"])
 
 
+def t_hybrid():
+    """FDC sections with the learned scheme's paths nested inside, against plain sections and the learned
+    scheme, on each model's k = 20 books graph."""
+    tests, rows = [], []
+    for model in MODELS:
+        for a, b in (("fdc-learned1", "fdc-d3"), ("fdc-learned2", "fdc-d3"), ("fdc-learned3", "fdc-d3"),
+                     ("learned-own", "fdc-learned3")):
+            t = run_test("books", a, b, "cost_norm", model, 20)
+            tj = run_test("books", a, b, "J", model, 20)
+            tests += [t, tj]
+            rows.append([model, f"`{a}` − `{b}`", f(point("books", a, "cost_norm", model)),
+                         f(point("books", a, "nav_log_a1", model), 2), t, tj])
+    holm(tests)
+    return table(["graph (k = 20)", "comparison", "cost a", "nav bits a", "Δ cost", "95% CI", "p (Holm)",
+                  f"Δ J (λ = {LAMBDA0})", "p (Holm)"],
+                 [r[:4] + [sf(r[4]["diff"]), interval(r[4]["lo"], r[4]["hi"], signed=True), pv(r[4]["p_holm"]),
+                           sf(r[5]["diff"]), pv(r[5]["p_holm"])] for r in rows], ["---", "---"] + ["---:"] * 7)
+
+
+def fold(item_id, folds=5):
+    return int.from_bytes(hashlib.sha256(f"kb-crosswalk|{item_id}".encode()).digest()[:8], "big") % folds
+
+
+def crosswalk(train, lcc_parents, fdc_parents, depth):
+    """LCC class (and every ancestor) -> modal FDC class at `depth` over the training books."""
+    votes = {}
+    for lcc, fdc in train:
+        target = ancestor_at(fdc, fdc_parents, depth)
+        for a in chain_of(lcc, lcc_parents):
+            votes.setdefault(a, Counter())[target] += 1
+    return {a: min(c, key=lambda x: (-c[x], x)) for a, c in votes.items()}
+
+
+def chain_of(code, parents):
+    out = []
+    while code:
+        out.append(code)
+        code = parents.get(code)
+    return out
+
+
+def predict(lcc, table_, lcc_parents):
+    """The deepest ancestor of the LCC class that the crosswalk has seen."""
+    return next((table_[a] for a in chain_of(lcc, lcc_parents) if a in table_), None)
+
+
+def t_crosswalk():
+    """LCC call number -> FDC class, learned from books carrying both numbers: 5-fold cross-validation on
+    the 3,000 books, and trained on all 3,000 and tested on the 500-book holdout's works."""
+    lp = {c["code"]: c.get("parent") for c in json.loads((ROOT / "data/schemes/lcc/lcc.json").read_text())["classes"]}
+    fp = {c["code"]: c.get("parent") for c in json.loads((ROOT / "schemes/fdc/fdc.json").read_text())["classes"]}
+    src, hold = DDC_R / "placements/books", DDC_R / "placements/holdout"
+    lcc = {r["id"]: r["classes"][0] for r in jsonl(src / "lcc-gold.jsonl") if r["classes"]}
+    fdc = {r["id"]: r["classes"][0] for r in jsonl(src / "fdc-ddc.jsonl") if r["classes"]}
+    books = sorted(i for i in lcc if i in fdc)
+    hl = {r["id"]: r["classes"][0] for r in jsonl(hold / "lcc-gold.jsonl") if r["classes"]}
+    hf = {r["id"]: r["classes"][0] for r in jsonl(P / "placements/holdout/fdc-work.jsonl") if r["classes"]}
+    held = sorted(i for i in hl if i in hf)
+    rows = []
+    for depth in (1, 2, 3):
+        hits = 0
+        for k in range(5):
+            cw = crosswalk([(lcc[i], fdc[i]) for i in books if fold(i) != k], lp, fp, depth)
+            hits += sum(predict(lcc[i], cw, lp) == ancestor_at(fdc[i], fp, depth) for i in books if fold(i) == k)
+        lo, hi = wilson(hits, len(books))
+        rows.append(["3,000 books, 5-fold", depth, f"{hits}/{len(books)}", f(hits / len(books), 3),
+                     interval(lo, hi, 3)])
+        cw = crosswalk([(lcc[i], fdc[i]) for i in books], lp, fp, depth)
+        hits = sum(predict(hl[i], cw, lp) == ancestor_at(hf[i], fp, depth) for i in held)
+        lo, hi = wilson(hits, len(held))
+        rows.append(["500-book holdout works, trained on the 3,000", depth, f"{hits}/{len(held)}",
+                     f(hits / len(held), 3), interval(lo, hi, 3)])
+    return table(["test", "FDC depth", "same class as the Dewey number", "accuracy", "95% Wilson interval"],
+                 rows, ["---"] + ["---:"] * 4)
+
+
+CROSSWALK_TAU, CROSSWALK_MIN = 0.8, 5
+CROSSWALK_FILE = P / "crosswalk/lcc-fdc.json"
+
+
+def crosswalk_inputs():
+    lp = {c["code"]: c.get("parent") for c in json.loads((ROOT / "data/schemes/lcc/lcc.json").read_text())["classes"]}
+    fp = {c["code"]: c.get("parent") for c in json.loads((ROOT / "schemes/fdc/fdc.json").read_text())["classes"]}
+    src, hold = DDC_R / "placements/books", DDC_R / "placements/holdout"
+    lcc = {r["id"]: r["classes"][0] for r in jsonl(src / "lcc-gold.jsonl") if r["classes"]}
+    fdc = {r["id"]: r["classes"][0] for r in jsonl(src / "fdc-ddc.jsonl") if r["classes"]}
+    hl = {r["id"]: r["classes"][0] for r in jsonl(hold / "lcc-gold.jsonl") if r["classes"]}
+    hf = {r["id"]: r["classes"][0] for r in jsonl(P / "placements/holdout/fdc-work.jsonl") if r["classes"]}
+    return lp, fp, lcc, fdc, hl, hf
+
+
+def crosswalk_votes(train, lcc_parents, fdc_parents):
+    """{depth: {LCC class or ancestor: Counter of FDC classes at that depth}}."""
+    votes = {d: {} for d in (1, 2, 3)}
+    for lcc, fdc in train:
+        for d in (1, 2, 3):
+            target = ancestor_at(fdc, fdc_parents, d)
+            for a in chain_of(lcc, lcc_parents):
+                votes[d].setdefault(a, Counter())[target] += 1
+    return votes
+
+
+def crosswalk_rule(lcc, votes, lcc_parents):
+    """Deepest FDC depth whose vote, at the deepest LCC ancestor with >= CROSSWALK_MIN books, has a modal
+    share >= CROSSWALK_TAU; (depth, class) or None (review queue)."""
+    for d in (3, 2, 1):
+        for a in chain_of(lcc, lcc_parents):
+            c = votes[d].get(a)
+            if c and sum(c.values()) >= CROSSWALK_MIN:
+                top, n = min(c.items(), key=lambda x: (-x[1], x[0]))
+                if n / sum(c.values()) >= CROSSWALK_TAU:
+                    return d, top
+                break
+    return None
+
+
+def crosswalk_file():
+    """The crosswalk trained on all 3,000 books, as committed for the placement rule of report 9."""
+    lp, fp, lcc, fdc, _, _ = crosswalk_inputs()
+    books = sorted(i for i in lcc if i in fdc)
+    votes = crosswalk_votes([(lcc[i], fdc[i]) for i in books], lp, fp)
+    entries = {}
+    for d in (1, 2, 3):
+        for a, c in sorted(votes[d].items()):
+            total = sum(c.values())
+            if total < CROSSWALK_MIN:
+                continue
+            top, n = min(c.items(), key=lambda x: (-x[1], x[0]))
+            entries.setdefault(a, {})[str(d)] = {"fdc": top, "books": total, "share": round(n / total, 4)}
+    return {"description": "LCC class (bench LCC scheme code) -> modal FDC class at FDC depth 1-3 over the "
+                           "3,000 books carrying both a Dewey and an LC call number (report 9). Apply with "
+                           "the rule: deepest depth whose entry, at the deepest LCC ancestor listed, has "
+                           f"share >= {CROSSWALK_TAU}; else review.",
+            "tau": CROSSWALK_TAU, "min_books": CROSSWALK_MIN, "sources": [
+                "bench/results/2026-10-10-ddc/placements/books/lcc-gold.jsonl",
+                "bench/results/2026-10-10-ddc/placements/books/fdc-ddc.jsonl"],
+            "classes": entries}
+
+
+def t_crosswalk_rule():
+    lp, fp, lcc, fdc, hl, hf = crosswalk_inputs()
+    books = sorted(i for i in lcc if i in fdc)
+    held = sorted(i for i in hl if i in hf)
+    rows = []
+
+    def tally(outcomes, label, n):
+        decided = [o for o in outcomes if o]
+        ok = sum(o[1] for o in decided)
+        lo, hi = wilson(ok, len(decided))
+        depth = Counter(o[0] for o in decided)
+        rows.append([label, f"{len(decided)}/{n}", f(len(decided) / n, 3), " / ".join(str(depth[d]) for d in (1, 2, 3)),
+                     f"{ok}/{len(decided)}", f(ok / len(decided), 3), interval(lo, hi, 3)])
+
+    def outcome(lcc_code, fdc_code, votes):
+        r = crosswalk_rule(lcc_code, votes, lp)
+        return r and (r[0], r[1] == ancestor_at(fdc_code, fp, r[0]))
+
+    outcomes = []
+    for k in range(5):
+        votes = crosswalk_votes([(lcc[i], fdc[i]) for i in books if fold(i) != k], lp, fp)
+        outcomes += [outcome(lcc[i], fdc[i], votes) for i in books if fold(i) == k]
+    tally(outcomes, "3,000 books, 5-fold", len(books))
+    votes = crosswalk_votes([(lcc[i], fdc[i]) for i in books], lp, fp)
+    tally([outcome(hl[i], hf[i], votes) for i in held], "500-book holdout works, trained on the 3,000", len(held))
+    if json.loads(CROSSWALK_FILE.read_text()) != crosswalk_file():
+        sys.exit(f"{CROSSWALK_FILE.relative_to(ROOT)} drifted from its inputs (rerun with --write)")
+    return table(["test", "decided", "share decided", "at FDC depth 1 / 2 / 3", "correct", "accuracy",
+                  "95% Wilson interval"], rows, ["---"] + ["---:"] * 6)
+
+
+CUTS = ["fdc-d1", "fdc-d2", "fdc-d3", "fdc-ddc", "ddc-d1", "ddc-d2", "ddc-section", "ddc-d4", "ddc-gold"]
+
+
+def t_dewey_cut():
+    """The librarian's Dewey number cut to its digits (main class / division / section) against the same
+    number mapped into the FDC tree and cut at depth 3, on every books graph; minimax regret over all cuts."""
+    tests, rows = [], []
+    for model in MODELS:
+        for k in KS:
+            t = run_test("books", "ddc-section", "fdc-d3", "cost_norm", model, k)
+            tj = run_test("books", "ddc-section", "fdc-d3", "J", model, k)
+            tests += [t, tj]
+            worst = regret(CUTS, model, k)
+            pick = min(worst, key=worst.get)
+            ls = lambda_star("books", "ddc-d2", "ddc-section", model, k)
+            rows.append([f"{model} k = {k}", t, tj, f"`{pick}`", f(worst["ddc-section"]), f(worst["ddc-d2"]),
+                         f(worst["fdc-d3"]), f(ls) if ls else "never"])
+    holm(tests)
+    return table(["graph", "Δ cost `ddc-section` − `fdc-d3`", "95% CI", "p (Holm)", f"Δ J (λ = {LAMBDA0})",
+                  "95% CI", "p (Holm)", "minimax cut", "max regret `ddc-section`", "max regret `ddc-d2`",
+                  "max regret `fdc-d3`", "λ where `ddc-d2` = `ddc-section`"],
+                 [[r[0], sf(r[1]["diff"]), interval(r[1]["lo"], r[1]["hi"], signed=True), pv(r[1]["p_holm"]),
+                   sf(r[2]["diff"]), interval(r[2]["lo"], r[2]["hi"], signed=True), pv(r[2]["p_holm"])] + r[3:]
+                  for r in rows])
+
+
+def t_section_lcc():
+    """Dewey sections against the librarians' LCC call numbers on every books graph."""
+    tests, rows = [], []
+    for model in MODELS:
+        for k in KS:
+            t = run_test("books", "ddc-section", "lcc-gold", "cost_norm", model, k)
+            tj = run_test("books", "ddc-section", "lcc-gold", "J", model, k)
+            tests += [t, tj]
+            ls = lambda_star("books", "ddc-section", "lcc-gold", model, k)
+            rows.append([f"{model} k = {k}", f(point("books", "ddc-section", "cost_norm", model, k)),
+                         f(point("books", "lcc-gold", "cost_norm", model, k)), t, tj, f(ls) if ls else "never"])
+    holm(tests)
+    return table(["graph", "`ddc-section`", "`lcc-gold`", "Δ cost", "95% CI", "p (Holm)", f"Δ J (λ = {LAMBDA0})",
+                  "95% CI", "p (Holm)", "λ where J equal"],
+                 [r[:3] + [sf(r[3]["diff"]), interval(r[3]["lo"], r[3]["hi"], signed=True), pv(r[3]["p_holm"]),
+                           sf(r[4]["diff"]), interval(r[4]["lo"], r[4]["hi"], signed=True), pv(r[4]["p_holm"]), r[5]]
+                  for r in rows])
+
+
+def t_locality_weight():
+    """J − μ · locality: the μ above which LCC's better shelf-order locality outweighs its higher J."""
+    rows = []
+    lam_nav = {r: point("books", r, "nav_log_a1") for r in ("ddc-section", "fdc-d3", "lcc-gold")}
+    for a in ("ddc-section", "fdc-d3"):
+        sa, sb = scores(f"books-{a}")["catalogue"]["scores"], scores("books-lcc-gold")["catalogue"]["scores"]
+        dj = (sa["dasgupta.cost_norm"] + LAMBDA0 * lam_nav[a]) - (sb["dasgupta.cost_norm"] + LAMBDA0 * lam_nav["lcc-gold"])
+        dl = sa["order.locality"] - sb["order.locality"]
+        rows.append([f"`{a}` − `lcc-gold`", sf(dj), sf(dl), f(dj / dl, 2) if dl < 0 < -dj else "never"])
+    return table(["comparison", f"Δ J (λ = {LAMBDA0})", "Δ locality", "μ* (LCC preferred above)"], rows)
+
+
+def t_captions():
+    """How many of the Dewey sections the 3,000 books use have an FDC class (and caption) of the same number."""
+    fdc = {c["code"] for c in json.loads((ROOT / "schemes/fdc/fdc.json").read_text())["classes"]}
+    used = Counter(r["classes"][0] for r in jsonl(DDC_R / "placements/books/ddc-section.jsonl") if r["classes"])
+    own = [s for s in used if s in fdc]
+    return table(["sections used", "with an FDC class of the same number", "books in those sections"],
+                 [[len(used), f"{len(own)} ({f(len(own) / len(used), 3)})",
+                   f"{sum(used[s] for s in own)}/{sum(used.values())} ({f(sum(used[s] for s in own) / sum(used.values()), 3)})"]],
+                 ["---:"] * 3)
+
+
 TABLES = {
     "availability": t_availability, "books-main": t_books_main, "paired-books": t_paired_books,
     "ddc-reference": t_ddc_reference, "catalogue-books": t_catalogue_books, "catalogue-tests": t_catalogue_tests,
     "depth": t_depth, "embedding": t_embedding, "pipelines": t_pipelines, "holdout": t_holdout,
     "papers": t_papers, "papers-tests": t_papers_tests, "classifier": t_classifier,
+    "hybrid": t_hybrid, "crosswalk": t_crosswalk, "crosswalk-rule": t_crosswalk_rule,
+    "dewey-cut": t_dewey_cut, "section-lcc": t_section_lcc,
+    "locality-weight": t_locality_weight, "captions": t_captions,
 }
 
 
@@ -449,6 +696,9 @@ def main():
     p = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     p.add_argument("--write", action="store_true", help="rewrite the tables in the report")
     a = p.parse_args()
+    if a.write:
+        CROSSWALK_FILE.parent.mkdir(parents=True, exist_ok=True)
+        CROSSWALK_FILE.write_text(json.dumps(crosswalk_file(), indent=1, sort_keys=True) + "\n", encoding="utf-8")
     text = REPORT.read_text(encoding="utf-8")
     drift, missing = [], []
     for name, fn in TABLES.items():

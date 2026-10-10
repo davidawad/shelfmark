@@ -12,6 +12,7 @@ One directory per run; each has `results.md`, `results.json` and a
 | `2026-10-10-covered/` | covered-subset scores, coverage analysis, dense-vs-sparse cost, paired split-stream bootstrap | published |
 | `2026-10-10-embed/` | cross-embedding robustness: MiniLM, bge-small, nomic at k = 10, 20, 50, item bootstrap | published |
 | `2026-10-10-ddc/` | gold Dewey numbers against LCC, FDC and the placed schemes; 3,000-book DDC holdout (report 7) | published |
+| `2026-10-10-proposal/` | depth cuts, availability pipelines, work-level lookups, papers under a book backbone and paired bootstraps on all three models for report 9 (knowledge-base structure proposal) | published |
 | `2026-10-10-semantic/` | the placed runs once per classifier profile (lexical, shortlist, rerank) | **pending**: the run was not completed and published no results, so it is not merged |
 
 `crates/bench/scripts/check_published.py` rescores a sample of the
