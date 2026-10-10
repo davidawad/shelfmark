@@ -12,9 +12,9 @@ fn builtins_are_declared_cheapest_first() {
     assert_eq!(
         ids,
         [
-            "profile:lexical@1",
-            "profile:shortlist@1",
-            "profile:rerank@1"
+            "profile:lexical@2",
+            "profile:shortlist@2",
+            "profile:rerank@2"
         ]
     );
     assert_eq!(ps[0].tiers, ["identifier", "vocab", "rules"]);
@@ -45,7 +45,7 @@ fn profile_costs_sum_their_tiers() {
 #[test]
 fn find_by_name_or_id() {
     assert_eq!(find("rerank").unwrap(), rerank());
-    assert_eq!(find("profile:lexical@1").unwrap(), lexical());
+    assert_eq!(find("profile:lexical@2").unwrap(), lexical());
     let err = find("llm").unwrap_err();
     assert_eq!(err.code, ErrorCode::ProfileNotFound);
     assert!(err.next_command.is_some());
@@ -72,10 +72,11 @@ fn lexical_infos() -> Vec<TierInfo> {
 #[test]
 fn profile_hash_is_pinned() {
     // Changing this value stales every stored lexical placement; do it
-    // only on purpose.
+    // only on purpose. Last changed for profile:lexical@2 (stopword-only
+    // labels no longer match).
     assert_eq!(
         profile_hash(&lexical(), &lexical_infos()),
-        "s256:48c1405cae031d1f582d65531c1ec33e5dbddf3d50a657d0164691b04d7821fb"
+        "s256:9680d351c4ff231fc701d6a81a26bf5129bc539f035ff1e6a2e818c477c480ae"
     );
 }
 

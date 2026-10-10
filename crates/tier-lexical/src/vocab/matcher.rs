@@ -7,6 +7,7 @@ use shelfmark_core::error::{Error, ErrorCode};
 use shelfmark_core::id::{normalize_text_v1, SchemeId};
 use shelfmark_core::scheme::CompiledIndex;
 
+use super::stopwords::is_uninformative;
 use super::trie::TokenTrie;
 
 /// Source name recorded for matches against a class's own label.
@@ -112,8 +113,9 @@ struct Table {
 }
 
 impl Table {
+    /// Phrases made only of stopwords are dropped (see `stopwords`).
     fn add(&mut self, phrase: String, class: u32, source: u32, weight: f64) {
-        if !phrase.is_empty() {
+        if !is_uninformative(&phrase) {
             self.entries
                 .entry(phrase)
                 .or_default()

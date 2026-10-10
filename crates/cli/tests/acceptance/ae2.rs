@@ -12,7 +12,7 @@ fn no_clear_margin_flags_the_top_class_with_its_candidates() {
         "--text",
         "Notes on law and the social sciences",
         "--profile",
-        "profile:lexical@1",
+        "profile:lexical@2",
     ]);
     let p = &out["placement"];
     assert_eq!(p["status"], "flagged");

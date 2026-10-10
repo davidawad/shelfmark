@@ -12,8 +12,10 @@ use shelfmark_core::error::{Error, ErrorCode};
 use shelfmark_core::tier::Profile;
 use shelfmark_core::ProfileId;
 
-/// Version of every built-in profile definition.
-pub const PROFILE_VERSION: &str = "1";
+/// Version of every built-in profile definition. Every built-in runs the
+/// `vocab` tier, so all move together: 2 stopped matching labels and
+/// terms made only of stopwords (`vocab-2`).
+pub const PROFILE_VERSION: &str = "2";
 /// Default target confidence of the built-in profiles (R10).
 pub const DEFAULT_TARGET: f64 = 0.8;
 /// Margin below which a decision is flagged even at the target.
@@ -123,7 +125,7 @@ pub fn builtins() -> Vec<Profile> {
 }
 
 /// Look up a built-in profile by bare name (`lexical`) or full ID
-/// (`profile:lexical@1`).
+/// (`profile:lexical@2`).
 pub fn find(name_or_id: &str) -> Result<Profile, Error> {
     builtins()
         .into_iter()

@@ -49,7 +49,7 @@ fn corrections_feed_eval_and_a_commit_sets_calibration() {
     // Both labels kept their text, so both are re-run.
     assert_eq!(change["gold"]["evaluated"], 2);
     assert_eq!(change["gold"]["unusable"]["no_input"], 0);
-    let lexical = &change["eval"]["per_profile"]["profile:lexical@1"];
+    let lexical = &change["eval"]["per_profile"]["profile:lexical@2"];
     assert_eq!(lexical["n"], 2);
     assert_eq!(lexical["k"], 5);
     // Only built-in profiles are evaluated; shortlist only with its feature.
@@ -58,9 +58,9 @@ fn corrections_feed_eval_and_a_commit_sets_calibration() {
         .as_object()
         .unwrap()
         .keys()
-        .all(|k| k.starts_with("profile:lexical@1/")
-            || (shortlist && k.starts_with("profile:shortlist@1/"))));
-    assert_eq!(change["eval"]["per_level"]["profile:lexical@1/1"]["n"], 2);
+        .all(|k| k.starts_with("profile:lexical@2/")
+            || (shortlist && k.starts_with("profile:shortlist@2/"))));
+    assert_eq!(change["eval"]["per_level"]["profile:lexical@2/1"]["n"], 2);
     assert!(change["calibration"]["tiers"]["vocab"]["bins"]
         .as_array()
         .is_some_and(|b| b.len() == 10));
@@ -85,7 +85,7 @@ fn corrections_feed_eval_and_a_commit_sets_calibration() {
     assert_eq!(st["calibration"]["stale"], false);
     assert_eq!(st["calibration"]["gold_count"], 2);
     assert_eq!(st["eval"]["gold_hash"], st["gold"]["hash"]);
-    assert_eq!(st["eval"]["per_profile"]["profile:lexical@1"]["n"], 2);
+    assert_eq!(st["eval"]["per_profile"]["profile:lexical@2"]["n"], 2);
 
     // The calibration now feeds the config hash, so earlier claims do not
     // memo-hit; a new correction makes it stale (R17).
@@ -108,7 +108,7 @@ fn corrections_feed_eval_and_a_commit_sets_calibration() {
 fn eval_errors_name_a_next_command() {
     let s = service("eval-errors");
     label(&s, json!({"text": "law and social sciences"}), Some("K"));
-    let e = error(call(&s, Verb::Eval, json!({"profile": "profile:rerank@1"})));
+    let e = error(call(&s, Verb::Eval, json!({"profile": "profile:rerank@2"})));
     assert_eq!(e.code, ErrorCode::TierUnavailable);
     let missing = if cfg!(feature = "semantic-shortlist") {
         "rerank"
@@ -151,7 +151,7 @@ fn a_gold_file_imports_once_and_skips_classes_outside_the_scheme() {
     assert_eq!(gold["imported"], 1);
     assert_eq!(gold["evaluated"], 1);
     assert_eq!(gold["skipped"][0]["id"], "gold:b");
-    let per = &preview["change"]["eval"]["per_profile"]["profile:lexical@1"];
+    let per = &preview["change"]["eval"]["per_profile"]["profile:lexical@2"];
     assert_eq!(per["top1"], 1.0, "the vocab tier finds QA76: {per}");
 
     let rev = preview["revision"].as_str().unwrap();

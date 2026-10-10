@@ -41,12 +41,12 @@ fn big_simd_machine_gets_rerank() {
     let cap = machine(16_384, 8, true, false);
     assert_eq!(
         recommended(&cap, &all_tiers()).as_deref(),
-        Some("profile:rerank@1")
+        Some("profile:rerank@2")
     );
     let cap = machine(16_384, 8, false, true);
     assert_eq!(
         recommended(&cap, &all_tiers()).as_deref(),
-        Some("profile:rerank@1")
+        Some("profile:rerank@2")
     );
 }
 
@@ -55,7 +55,7 @@ fn mid_memory_machine_gets_shortlist() {
     // Budget 1024 MB: shortlist (664) fits, rerank (1564) does not.
     let cap = machine(2_048, 4, true, false);
     let r = assess(&cap, &builtins(), &all_tiers());
-    assert_eq!(r.recommended.unwrap().to_string(), "profile:shortlist@1");
+    assert_eq!(r.recommended.unwrap().to_string(), "profile:shortlist@2");
     let rerank = &r.profiles[2];
     assert!(!rerank.fits);
     assert!(
@@ -69,7 +69,7 @@ fn mid_memory_machine_gets_shortlist() {
 fn no_simd_or_one_cpu_falls_back_to_lexical() {
     let cap = machine(16_384, 8, false, false);
     let r = assess(&cap, &builtins(), &all_tiers());
-    assert_eq!(r.recommended.unwrap().to_string(), "profile:lexical@1");
+    assert_eq!(r.recommended.unwrap().to_string(), "profile:lexical@2");
     assert!(r.profiles[1]
         .reasons
         .iter()
@@ -78,7 +78,7 @@ fn no_simd_or_one_cpu_falls_back_to_lexical() {
     let cap = machine(16_384, 1, true, false);
     assert_eq!(
         recommended(&cap, &all_tiers()).as_deref(),
-        Some("profile:lexical@1")
+        Some("profile:lexical@2")
     );
 }
 
@@ -86,7 +86,7 @@ fn no_simd_or_one_cpu_falls_back_to_lexical() {
 fn unbuilt_semantic_tiers_fall_back_to_lexical() {
     let cap = machine(16_384, 8, true, false);
     let r = assess(&cap, &builtins(), &lexical_only());
-    assert_eq!(r.recommended.unwrap().to_string(), "profile:lexical@1");
+    assert_eq!(r.recommended.unwrap().to_string(), "profile:lexical@2");
     assert!(r.profiles[1].reasons[0].contains("shortlist"));
 }
 

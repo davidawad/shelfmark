@@ -38,9 +38,9 @@ fn describe_lists_every_verb_profile_noun_and_scheme() {
     assert_eq!(
         profiles,
         [
-            "profile:lexical@1",
-            "profile:shortlist@1",
-            "profile:rerank@1"
+            "profile:lexical@2",
+            "profile:shortlist@2",
+            "profile:rerank@2"
         ]
     );
     let recommended: Vec<&Value> = d["profiles"]
@@ -213,7 +213,7 @@ fn classify_decides_flags_and_memoizes() {
     let flagged = data(call(
         &s,
         Verb::Classify,
-        json!({"text": "law and social sciences", "profile": "profile:lexical@1"}),
+        json!({"text": "law and social sciences", "profile": "profile:lexical@2"}),
     ));
     assert_eq!(flagged["placement"]["status"], "flagged");
     assert_eq!(
@@ -245,7 +245,7 @@ fn classify_decides_flags_and_memoizes() {
     let rr = data(call(
         &s,
         Verb::Classify,
-        json!({"text": "compilers (computer programs) again", "profile": "profile:rerank@1", "target": 0.5}),
+        json!({"text": "compilers (computer programs) again", "profile": "profile:rerank@2", "target": 0.5}),
     ));
     let states: Vec<&str> = rr["placement"]["trace"]["tiers"]
         .as_array()
@@ -261,9 +261,9 @@ fn classify_decides_flags_and_memoizes() {
     assert_eq!(st["placements"]["claims"], 4);
     // R9: the richest profile this build and machine can run.
     let richest = if cfg!(feature = "semantic-shortlist") {
-        "profile:shortlist@1"
+        "profile:shortlist@2"
     } else {
-        "profile:lexical@1"
+        "profile:lexical@2"
     };
     assert_eq!(st["recommended_profile"], richest);
     let lf = data(call(&s, Verb::ListFlagged, json!({})));
@@ -309,7 +309,7 @@ fn resolve_explain_browse_search_validate_and_name() {
         "machine"
     );
     assert_eq!(
-        data(call(&s, Verb::Resolve, json!({"id": "profile:lexical@1"})))["resolved"]["runnable"],
+        data(call(&s, Verb::Resolve, json!({"id": "profile:lexical@2"})))["resolved"]["runnable"],
         true
     );
 

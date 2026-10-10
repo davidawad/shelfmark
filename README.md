@@ -33,6 +33,13 @@ downloads on first use into the user's cache (`FASTEMBED_CACHE_DIR`
 overrides it). Each store keeps derived data in `<store>/cache/`
 (compiled schemes, vocab matchers, label vectors); it is safe to delete.
 
+The built-in profiles are at version 2 (`profile:lexical@2`). The `vocab`
+tier (`vocab-2`) ignores class labels and vocabulary terms made only of
+English stopwords, such as a class labelled `To`. Version 1 matched them,
+so one such class could take most placements. Labels with at least one
+other word, such as `History of the arts`, still match in full. Placements
+made under version 1 report as stale.
+
 ## Scheme ports
 
 Schemes beyond the bundled LCC each live in `schemes/<name>/`, with a
@@ -65,7 +72,7 @@ builder, tests and a README. Load the built file with
 |---|---|---|
 | L0 | Work, Item | `work:nt1s256:<hex>`, `item:s256:<hex>` |
 | L1 | Scheme, Class | `scheme:lcc@2024`, `class:lcc@2024:QA76.76.C65` |
-| L2 | Profile, Tier | `profile:lexical@1` |
+| L2 | Profile, Tier | `profile:lexical@2` |
 | L3 | Placement | `placement:s256:<hex>` |
 
 Every ID names its kind, and a hash ID names its algorithm, so one
