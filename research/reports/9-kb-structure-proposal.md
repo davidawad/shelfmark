@@ -1472,6 +1472,24 @@ built by `crates/bench/scripts/build_graph_fastembed.py` in
 `bench/corpus/cache/proposal/graphs/`. The committed `.json.gz` graphs
 and manifests replace that step for rescoring.
 
+## Rank-stability follow-up
+
+The 2026-10-11 controlled factorial is published in
+[`bench/results/2026-10-11-stability/results.md`](../../bench/results/2026-10-11-stability/results.md),
+with the complete rank matrix, all setting-pair correlations and bootstrap
+intervals in `results.json`. Its threshold is Spearman ρ ≥ 0.8 for every
+pair of controlled settings. The paper-corpus FDC/LCC cost ranking, triplet
+ranking and shelf-order locality ranking do not clear that threshold.
+
+The book-specific ranking claims in §§4.3–6.3 (Dewey cuts, learned scheme,
+hybrids, classifier pipelines and locality-weighted J) are marked not
+cleared in the follow-up: those book candidates and outcomes are not part of
+the 13-scheme paper-corpus factorial, so the paper-corpus matrix cannot
+validate the book claims. The semantic-classifier threshold in §8 is also
+not cleared because the rerun reports the paper corpus, not book agreement.
+These entries distinguish unavailable book evidence from a passing ranking
+claim.
+
 ## References
 
 Bibliography keys refer to `docs/research/references.bib`: `dasgupta2016`,

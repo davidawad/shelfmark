@@ -6,10 +6,17 @@ Inputs come from the ignored cache (`build_schemes.sh` and
 `<cache>/runs` and is skipped when that output already exists, so an
 interrupted run resumes. `publish` copies the per-run JSON into the results
 directory and writes the combined `results.json`.
+
+`--profile` picks the classification profile of the placed runs and `--tag`
+keeps a profile's stores, placements and scores under `<cache>/stores/<tag>`,
+`<cache>/placed/<tag>` and `<cache>/runs/<tag>`, so several profiles share one
+cache. `--bootstrap N` adds item-bootstrap intervals to every score.
 """
 import argparse
 import hashlib
 import json
+import os
+import queue
 import subprocess
 import sys
 import threading
@@ -64,7 +71,11 @@ class Bench:
     def __init__(self, a):
         self.a = a
         self.cache = Path(a.cache)
-        self.runs = self.cache / "runs"
+        self.profile = a.profile
+        tag = [a.tag] if a.tag else []
+        self.runs = self.cache.joinpath("runs", *tag)
+        self.stores = self.cache.joinpath("stores", *tag)
+        self.placements = self.cache.joinpath("placed", *tag)
         self.runs.mkdir(parents=True, exist_ok=True)
         self.status = {line.split("\t")[0]: line.rstrip("\n").split("\t")
                        for line in (self.cache / "schemes" / "status.tsv").open()}
@@ -77,6 +88,14 @@ class Bench:
                 raise SystemExit(f"{graph}: sha256 does not match its manifest")
         # One job per scheme at a time: its store is not shared between writers.
         self.locks = defaultdict(threading.Lock)
+        # With --cpus-per-job, every batch runs pinned to its own CPUs.
+        self.slots = None
+        if a.cpus_per_job:
+            cpus = sorted(os.sched_getaffinity(0))
+            n = a.cpus_per_job
+            self.slots = queue.Queue()
+            for i in range(0, len(cpus) - n + 1, n):
+                self.slots.put(",".join(map(str, cpus[i:i + n])))
 
     def scheme_file(self, name):
         return self.cache / "schemes" / f"{name}.json"
@@ -90,7 +109,7 @@ class Bench:
 
     def store(self, name):
         """An isolated store holding only this scheme and an empty rules file."""
-        store = self.cache / "stores" / name
+        store = self.stores / name
         marker = store / "compiled.json"
         if marker.exists():
             return store
@@ -124,8 +143,8 @@ class Bench:
         return (out, stats) if placed else (None, stats)
 
     def placed(self, name, corpus):
-        """shelfmark lexical placements for `name` over `corpus`."""
-        work = self.cache / "placed" / f"{corpus}-{name}"
+        """shelfmark placements for `name` over `corpus`."""
+        work = self.placements / f"{corpus}-{name}"
         out = work / "placements.jsonl"
         stats_path = work / "stats.json"
         if stats_path.exists():
@@ -135,20 +154,28 @@ class Bench:
         scheme_id = self.scheme_id(name)
         requests, batch = work / "requests.jsonl", work / "batch.jsonl"
         run(PREP + ["requests", "--corpus", self.corpora[corpus], "--scheme", scheme_id,
-                    "--profile", PROFILE, "--output", requests])
+                    "--profile", self.profile, "--output", requests])
         timing = work / "timing.json"
         started = time.monotonic()
         resume = ["--resume"] if batch.exists() else []
-        run([self.a.shelfmark, "--json", "--store", store, "batch", "--requests", requests,
-             "--out", batch] + resume)
+        cmd = [self.a.shelfmark, "--json", "--store", store, "batch", "--requests", requests,
+               "--out", batch] + resume
+        if self.slots is None:
+            run(cmd)
+        else:
+            slot = self.slots.get()
+            try:
+                run(["taskset", "-c", slot] + cmd)
+            finally:
+                self.slots.put(slot)
         # Keep the first complete batch's time; a resumed rerun skips the work.
         if not timing.exists():
             timing.write_text(json.dumps({"classify_seconds": round(time.monotonic() - started, 1)}))
         seconds = json.loads(timing.read_text())["classify_seconds"]
         stats = last_json(run(PREP + ["extract", "--corpus", self.corpora[corpus], "--batch", batch,
-                                      "--scheme", scheme_id, "--profile", PROFILE,
+                                      "--scheme", scheme_id, "--profile", self.profile,
                                       "--output", out]))
-        stats.update(classify_seconds=seconds, profile=PROFILE, store_rules="empty")
+        stats.update(classify_seconds=seconds, profile=self.profile, store_rules="empty")
         stats_path.write_text(json.dumps(stats, indent=2) + "\n", encoding="utf-8")
         return out, stats
 
@@ -183,6 +210,10 @@ class Bench:
                "--reference-cost", repr(self.reference(corpus))]
         if placements:
             cmd += ["--placements", placements]
+        if self.a.bootstrap:
+            cmd += ["--bootstrap", self.a.bootstrap, "--seed", self.a.seed]
+            if self.a.score_threads:
+                cmd += ["--threads", self.a.score_threads]
         started = time.monotonic()
         result = json.loads(run(cmd))
         result["run"] = {"scheme_id": self.scheme_id(name), "corpus": corpus,
@@ -194,12 +225,18 @@ class Bench:
     def jobs(self):
         """(scheme, key, thunk) triples for every gold and placed result."""
         built = self.built()
+        if self.a.only:
+            built = [n for n in built if n in self.a.only]
         jobs = []
         for name in [] if self.a.placed_only else GOLD:
             if name in built:
                 jobs.append((name, f"{name}-gold", lambda n=name: self.gold_job(n)))
-        for name in [] if self.a.gold_only else built:
+        placed = [] if self.a.gold_only else built
+        for name in [] if self.a.holdout_only else placed:
             jobs.append((name, f"{name}-placed", lambda n=name: self.placed_job(n, "corpus")))
+        # Holdout jobs last: queued next to the same scheme's corpus job, a
+        # worker would only wait on that scheme's store lock.
+        for name in placed:
             if name in GENERAL:
                 jobs.append((name, f"{name}-placed-holdout",
                              lambda n=name: self.placed_job(n, "holdout")))
@@ -220,7 +257,7 @@ class Bench:
         if (self.runs / f"{name}-placed{suffix}.json").exists():
             return
         placements, stats = self.placed(name, corpus)
-        self.score(f"{name}-placed{suffix}", name, corpus, f"shelfmark {PROFILE}",
+        self.score(f"{name}-placed{suffix}", name, corpus, f"shelfmark {self.profile}",
                    self.corpora[corpus], placements, stats)
 
 
@@ -237,6 +274,21 @@ def main():
     p.add_argument("--reference-from", metavar="RESULTS_JSON",
                    help="take the average-linkage baselines from a published results.json "
                         "instead of recomputing them; the graph hashes must match")
+    p.add_argument("--profile", default=PROFILE,
+                   help=f"classification profile of the placed runs (default {PROFILE})")
+    p.add_argument("--tag", help="keep stores, placements and scores under this subdirectory")
+    p.add_argument("--bootstrap", type=int, metavar="N",
+                   help="add N-resample item-bootstrap intervals to every score")
+    p.add_argument("--seed", type=int, default=1, help="bootstrap seed (default 1)")
+    p.add_argument("--score-threads", type=int, metavar="N",
+                   help="bootstrap threads per scoring run (default: every available CPU)")
+    p.add_argument("--cpus-per-job", type=int, metavar="N",
+                   help="pin each shelfmark batch to its own N CPUs (a model tier sizes its "
+                        "threads from them); at most --jobs batches run at once either way")
+    p.add_argument("--only", nargs="+", metavar="SCHEME",
+                   help="limit the runs to these schemes (default: every built scheme)")
+    p.add_argument("--holdout-only", action="store_true",
+                   help="only the holdout placed runs of the general schemes")
     a = p.parse_args()
     if a.gold_only and a.placed_only:
         p.error("--gold-only and --placed-only exclude each other")
