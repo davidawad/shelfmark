@@ -11,16 +11,20 @@ DRAFT. Every number in the tables, and every number in the prose wrapped in a
 bench/results/2026-10-10-r3 (gold rescored on the fixed corpus) and
 bench/results/2026-10-10-r2 (shelfmark-placed) by scripts/make_tables.py.
 Do not edit generated text by hand; rerun the script. Citation keys refer to
-references.bib. TODO(cite) marks a claim with no verified source yet.
+references.bib, the cited subset of docs/research/references.bib written
+by docs/research/subset_bib.py.
 -->
 
 # Abstract
 
 Library classification schemes are compared mostly by description: their
-history, notation, coverage and licence. We are not aware of a published
-comparison that scores several universal or near-universal schemes on one
-quantitative objective over the same set of works. We propose such a
-comparison, built on objectives from the theory of hierarchical
+history, notation, coverage and licence. Quantitative comparisons exist, but
+they measure retrieval effectiveness on a test collection
+[@cleverdon1960; @carpenter1978], the scatter of a topic or class across
+schemes [@oneill1987; @connaway1996], or coverage of a reference map of
+knowledge [@zins2011]. We found no study that scores the hierarchy of
+several universal or near-universal schemes on one structural objective
+over the same set of works. We propose such a comparison, built on objectives from the theory of hierarchical
 clustering. A scheme, restricted to the classes that a corpus actually uses,
 is a rooted tree over the works. We score that tree with Dasgupta's cost
 [@dasgupta2016] and Moseley and Wang's revenue [@moseley2023] on a fixed
@@ -60,12 +64,18 @@ each claim to arrange all of knowledge. A practitioner choosing among them, or
 a researcher designing a new one, needs to ask which arrangement keeps
 related works close together, and at what navigation cost. The literature
 answers this mostly qualitatively, by notation, facet structure, history and
-institutional adoption. TODO(cite: a knowledge-organization survey of scheme
-evaluation criteria). In our search we found no published study that
-scores several universal schemes on a common quantitative objective over the
-same corpus. Our search was not systematic (see Limitations), so this is
-absence of evidence, not proof. TODO(cite: systematic search of JASIST,
-Knowledge Organization and ISKO proceedings).
+institutional adoption [@nocetti1978; @zins2011; @oh2023; @wu2023].
+Quantitative comparisons have measured retrieval performance
+[@cleverdon1960; @keen1973; @carpenter1978] or the scatter of a subject
+across schemes [@oneill1987; @connaway1996], not the structure of the
+hierarchy itself (Section 2). A structured search of JASIST, Knowledge
+Organization, Cataloging & Classification Quarterly, ISKO and SIG/CR
+proceedings, JCDL and TPDL (research/reports/8-prior-work-search.md) found
+no study that scores several universal schemes on a common hierarchical
+objective over the same corpus, and no use of Dasgupta cost or Moseley–Wang
+revenue on a human-built scheme. The search covered titles and abstracts,
+not full texts (see Limitations), so this is absence of evidence, not
+proof.
 
 Three developments make the question more pressing.
 
@@ -76,11 +86,13 @@ Three developments make the question more pressing.
    which is open only to subscribers.
 2. **Automatic placement has not closed the gap.** Annif, the most mature open
    subject-indexing toolkit, is trained separately for each vocabulary
-   [@annif]. On Swedish national-bibliography records it reaches 66.82%
-   accuracy at three-digit DDC and 44.87% precision@1 at full DDC
-   [@libris2024ddc]. Recent work that uses large language models (LLMs)
-   for LCC and DDC assignment reports weakness at fine-grained classes
-   [@llmlcc2026; @llm4ddc2025; @nasko2025]. The Library of Congress's
+   [@annif]. On more than 230,000 Swedish union-catalogue records its
+   best (ensemble) configuration reaches 66.82% accuracy at three-digit
+   DDC [@libris2024ddc]. Recent work that uses large language models (LLMs)
+   for LCC and DDC assignment reports weakness with more granular
+   classes [@llmlcc2026] and a lack of specificity [@nasko2025], and
+   prompted LLMs fall well short of fine-tuned smaller models on DDC
+   classes for research data [@llm4ddc2025]. The Library of Congress's
    own experiments predicted subject and genre with under 50% accuracy,
    short of a 95% automation threshold [@lcecd2025]. Placement is getting
    cheaper, so the open question shifts towards *which scheme* to place
@@ -90,7 +102,7 @@ Three developments make the question more pressing.
    universal schemes are shallow, such as BK [@bk] and FDC [@fdc], or their
    licence terms are unsettled, as for ILC2 [@ilc2]. Data-driven
    vocabularies such as OpenAlex Topics are open but cover research
-   literature only [@openalextopics]. A quantitative comparison helps
+   literature only [@openalextopics; @openalexpricing]. A quantitative comparison helps
    decide whether an open scheme is good enough to adopt.
 
 **Contributions.** (i) A scheme-agnostic scoring method. It induces a tree
@@ -108,6 +120,29 @@ classifier defect that the benchmark exposed, with its before-and-after
 effect (Section 5.5).
 
 # 2. Related work
+
+**Comparing classification schemes.** The Cranfield project compared the
+Universal Decimal Classification, an alphabetical subject catalogue, a
+faceted classification and Uniterm coordinate indexing, applied to 18,000
+aeronautics documents [@cleverdon1960; @jahoda1961]. Keen compared five
+index languages built for a test collection on retrieval effectiveness
+[@keen1973], and Carpenter et al. compared five patent classifications on
+recall and precision for the same questions [@carpenter1978]. O'Neill et
+al. measured how the classes of LCC and DDC disperse into each other on
+MARC records [@oneill1987], and Connaway and Sievert compared the scatter
+of one subject across LCC, DDC and the NLM Classification [@connaway1996].
+Zins and Santos mapped the top two levels of LCC, DDC and UDC onto one
+reference model of knowledge [@zins2011]. In bibliometrics, research
+classifications are scored on citation-based criteria: algorithmic journal
+maps against the ISI Subject Categories [@rafols2009], the Web of Science
+and Scopus journal classifications against each other [@wang2016], and
+taxonomies built from different citation relations against one gold
+standard [@klavans2017]. These studies score schemes by retrieval, by the
+scatter of a mapping or by citation coherence. None scores the tree itself.
+For a single vocabulary, corpus-weighted pruning measures how much of a
+subject tree a collection needs [@julien2013], checking functions detect
+quality defects in SKOS vocabularies [@mader2012], and structural analysis
+is one of the established ways to evaluate a thesaurus [@owens2004].
 
 **Objectives for hierarchical clustering.** Dasgupta defined the cost of a
 tree $T$ over items with pairwise similarities $w_{ij}$ as
@@ -141,8 +176,16 @@ depth under an access distribution [@huffman1952; @knuth1971]. The
 hierarchical-identity model of Watts, Dodds and Newman makes greedy
 navigation on a hierarchy a measurable success criterion [@watts2002].
 Basic-level categories explain why a natural middle level carries most
-human use [@rosch1976]. We report simple, uniform-use navigation costs. We
-fit no user model.
+human use [@rosch1976]. User studies of menu hierarchies disagree on the
+best shape. Speed and accuracy improved with breadth in one study
+[@snowberry1983], and task time rose with depth for web links
+[@zaphiris2000], but others found an optimum at moderate breadth
+[@miller1981; @larson1998]. Landauer and Nachbar fit the time per menu
+screen as $k + c \log b$ for $b$ choices [@landauer1985], the form of our
+`nav_log` model (Section 3.5). For a two-level card file, the optimum number of records
+per guide is proportional to the square root of the file size
+[@lipetz1970]. We report simple, uniform-use navigation costs. We fit no
+user model.
 
 **Data-driven and LLM-built taxonomies.** Waltman and van Eck cluster
 publications on direct citation at several resolutions [@waltman2012],
@@ -173,7 +216,7 @@ classifiers.
 Each item's text is `title + ". " + abstract` (titles only for the book
 holdout, which has no descriptions). It is embedded with
 <!-- v:model -->sentence-transformers/all-MiniLM-L6-v2<!-- /v --> at a
-pinned ONNX revision [@minilm], and vectors are L2-normalized. Raw cosine
+pinned ONNX revision [@reimers2019; @wang2020minilm; @minilmcard; @minilm], and vectors are L2-normalized. Raw cosine
 similarities between unrelated texts are not centred on zero, so we
 subtract the exact mean cosine $\tau$ over all unordered pairs:
 $\tau$ = <!-- v:tau_corpus -->0.109<!-- /v --> on the arXiv corpus and
@@ -340,7 +383,8 @@ class P (language and literature). The other
 <!-- v:holdout_letter_count -->14<!-- /v --> letters seen are
 <!-- v:holdout_other_top -->B 32, H 19, Q 8, D 5, M 4, R 3, U 2, N 2, C 2, J 1, G 1, E 1, L 1<!-- /v -->.
 <!-- v:holdout_empty -->37<!-- /v --> records hold only an empty string in
-the array. Open Library asks contributors to share under CC0 1.0. Both
+the array. Open Library asks contributors to share under CC0 1.0
+[@openlibraryfaq]. Both
 files are pinned by SHA-256 and by ID lists.
 
 **Schemes.** Table 2 lists the
@@ -375,8 +419,8 @@ The scheme READMEs give the licences for the rows marked "see scheme
 README". arXiv's taxonomy comes from arxiv-base, under MIT
 [@arxivtaxonomy]. MSC2020 is CC BY-NC-SA 4.0 [@msc2020]. JEL publishes no
 open licence [@jel]. The LCC outline is built from Library of Congress
-publications [@lccfree; @idloc; @usc105]. Sources for the others: IPC
-[@ipc], ACM CCS [@acmccs], EuroVoc [@eurovoc], UNESCO Thesaurus
+publications [@freelcc; @idloc; @usc105]. Sources for the others: IPC
+[@ipc; @wipoterms], ACM CCS [@acmccs], EuroVoc [@eurovoc], UNESCO Thesaurus
 [@unesco].
 
 # 5. Results
@@ -605,9 +649,10 @@ linearly. Among high-coverage runs, the complete LCC schedules have the
 lowest scan cost (`nav_scan` <!-- v:lccfull_placed_navscan -->52<!-- /v --> on the corpus) and the most effective
 classes. This is the deep, narrow-shelf trade-off: more levels to descend,
 but short shelves at the bottom. The models' parameters are assumptions,
-so Table 9 shows the trade-off and does not settle it. TODO(cite: menu
-depth/breadth user studies; research/reports/2 lists Miller 1981 and
-Larson–Czerwinski 1998 as unverified).
+so Table 9 shows the trade-off and does not settle it. The menu studies
+cited in Section 2 disagree on the best depth and breadth
+[@miller1981; @snowberry1983; @larson1998], so they do not fix the
+parameters either.
 
 ## 5.5 Methods note: the stopword fix
 
@@ -744,9 +789,9 @@ quality in every sense that matters to libraries.
   ILC2 (conflicting licence statements) (Table 2). Their files are built
   locally from the publishers' downloads and verified by hash, but they are
   not published. Exact reproduction therefore depends on the upstream
-  downloads staying available and unchanged. DDC, the most widely used
-  universal scheme, is absent because OCLC holds its copyright
-  [@deweyrights]. Even LCC's open status depends on jurisdiction. The
+  downloads staying available and unchanged. DDC, which OCLC describes as
+  the world's most widely used way to organize library collections, is
+  absent because OCLC holds its copyright [@deweyrights]. Even LCC's open status depends on jurisdiction. The
   Library of Congress calls its linked data a public-domain data set
   [@idloc], but its Classification Web notice says LC-originated
   classification data are copyrighted except within the USA
@@ -764,9 +809,14 @@ quality in every sense that matters to libraries.
   Library sample had more than one LCC value (DESIGN.md §0). The balance
   statistics count each item at every ancestor class (Section 3.5). The
   navigation models are unfitted.
-- **Search for prior work.** The claim that no common-objective comparison
-  of universal schemes exists rests on the searches recorded in
-  research/reports/1–4. Those searches were not systematic.
+- **Search for prior work.** The novelty claim rests on the search in
+  research/reports/8-prior-work-search.md: 94 Crossref queries over the
+  JASIS/JASIST family, Knowledge Organization, Cataloging & Classification
+  Quarterly, ISKO, SIG/CR and NASKO proceedings, JCDL and TPDL/ECDL, plus
+  five web searches. It screened titles and abstracts only. Full texts and
+  non-English literature were not searched, one person screened, and
+  Crossref's coverage of proceedings is incomplete (ISKO proceedings before
+  2012 are missing).
 
 # 8. Reproducibility statement
 
