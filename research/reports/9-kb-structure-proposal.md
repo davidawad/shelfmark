@@ -31,6 +31,10 @@ Inputs:
   the false-join term, on the same paired item draws, together with the
   external citation and LCSH signals. `docs/validity/falsejoin-results.md`
   re-runs the judge agreement on the stored labels.
+- `bench/results/2026-10-11-book-stability/`: the book-side claims of this
+  report across 27 settings (3 embedding models × k ∈ {10, 20, 50} × 3 graph
+  thresholds) under C, J, C + FJs and J′, with the placed-classifier rule.
+  The scheme decision is recorded in `docs/decisions/default-scheme.md`.
 
 The semantic-tier rerun (`bench/results/2026-10-10-semantic/`) published
 no results and is **pending** (`bench/results/README.md`). Every
@@ -70,13 +74,20 @@ not separate the schemes either:
 
 **What changes.**
 
-- **The scheme claim.** Dewey sections and LCC tie on arrangement.
-  Dewey numbers with FDC captions stay the default, but only narrowly. Over
-  all nine graphs, λ ∈ [0.0005, 0.005] and β ∈ [0.5, 2], they have the
-  lowest worst-case regret, 0.060 against 0.067 for LCC (`fj-cuts`). They
-  also have the shorter notation, and papers still join them better than
-  they join LCC (§5.2). LCC becomes an equally supported alternative, with
-  an explicit rule for choosing it (§6.1).
+- **The scheme claim.** Dewey sections and LCC are a setting-dependent
+  tie on arrangement. Across 27 settings (3 embedding models × k ∈ {10, 20,
+  50} × 3 graph thresholds) the sign of `ddc-section` − `lcc-gold` matches
+  the claim in 13/27 under C and 8/27 under the tie claim for J′, with
+  significant differences in both directions
+  (`bench/results/2026-10-11-book-stability/results.md`). The nine-graph
+  regret lead of Dewey sections, 0.060 against 0.067 for LCC (`fj-cuts`),
+  does not hold over all 27 settings: 0.1156 against 0.0670. Dewey numbers
+  with FDC captions stay the default, chosen on non-metric grounds: open
+  CC0 captions, the shorter notation, papers nest better (§5.2), and the
+  catalogue pipeline of §6.3. LCC is an equally supported alternative, with
+  an explicit rule for choosing it (§6.1). The decision, the rule applied
+  to classifier-placed runs and what would overturn it are in
+  `docs/decisions/default-scheme.md`.
 - **The depth rule does not change.** FJs is flat from two digits to the
   full number (0.0267–0.0269), so the cut is still set by C and N.
 - **The placement rule does not change**, except that LC call numbers file
@@ -1172,13 +1183,31 @@ class that contains it, written as "<number> (in <FDC caption>)".
 **LCC is an equal alternative, not a loser.** Under C alone, LCC loses on
 J at k ≥ 20 by 0.024–0.075 (`section-lcc`). Under the corrected J′ it ties
 Dewey sections at k = 20 on two of three models (`fj-section-lcc`), and
-LCSH does not separate the two (`ext-books`). Dewey numbers stay the
-default for three reasons, none of them decisive:
+LCSH does not separate the two (`ext-books`). The book-side stability
+sweep (`bench/results/2026-10-11-book-stability/`, 27 settings × four
+objectives) confirms that this is a setting-dependent tie: the sign of
+`ddc-section` − `lcc-gold` matches in 13/27 settings under C and J, with 10
+settings significant for Dewey and 9 against, and the paired difference
+ranges over [−0.0753, +0.0750]. Dewey numbers stay the default for reasons
+that are not metric results:
 
-- the lowest worst-case regret over all graphs, λ and β (0.060 against
-  0.067; `fj-cuts`);
+- open CC0 captions through FDC, which can ship with the tool, and a
+  three-digit notation against LCC's 7.6 characters (`catalogue-books`);
 - papers nest better under the FDC backbone than under LCC (`fj-papers`);
-- a three-digit notation, against LCC's 7.6 characters (`catalogue-books`).
+- the placement pipeline of §6.3 starts from catalogue Dewey numbers.
+
+The nine-graph worst-case regret of Dewey sections (0.060 against 0.067;
+`fj-cuts`) is no longer a reason: over the 27 settings LCC's is lower
+(0.0670 against 0.1156).
+
+The sweep also places every scheme through the same lexical classifier, the
+question of a fully automatic pipeline rather than of this report. At
+coverage ≥ 0.90 the bundled LCC outline with LCSH vocabulary
+(`lcc-lcsh-placed`) wins the bundleable schemes in 27/27 settings, while
+FDC (`fdc-placed`, coverage 0.839) is below the floor; FDC beats the LCC
+outline without LCSH vocabulary in 27/27. That ranking is largely a
+vocabulary effect and answers a different question from the librarian-number
+pipeline above (`docs/decisions/default-scheme.md`).
 
 **Choose LCC instead** when any of these holds:
 
@@ -1426,6 +1455,11 @@ Two rules for every name and caption:
   3,000 books with coverage ≥ 0.95. It could then replace review for
   items without numbers. The pipelines show that would move the 0% row
   of `pipelines` toward the gold row.
+- **Classifier-only placement.** If the tool places every item with the
+  lexical classifier and no catalogue lookup, the classifier-placed rule of
+  the stability sweep applies and the bundled LCC outline with LCSH
+  vocabulary is the default, unless FDC gains a search vocabulary that
+  lifts its coverage from 0.839 to at least 0.90 without a worse J′.
 - **A non-embedding similarity graph.** Suppose LCC beat Dewey sections
   on a graph built from co-use, citations or the owner's own links, at
   k ≥ 20. The scheme choice would then flip to LCC with the same
@@ -1481,14 +1515,17 @@ intervals in `results.json`. Its threshold is Spearman ρ ≥ 0.8 for every
 pair of controlled settings. The paper-corpus FDC/LCC cost ranking, triplet
 ranking and shelf-order locality ranking do not clear that threshold.
 
-The book-specific ranking claims in §§4.3–6.3 (Dewey cuts, learned scheme,
-hybrids, classifier pipelines and locality-weighted J) are marked not
-cleared in the follow-up: those book candidates and outcomes are not part of
-the 13-scheme paper-corpus factorial, so the paper-corpus matrix cannot
-validate the book claims. The semantic-classifier threshold in §8 is also
-not cleared because the rerun reports the paper corpus, not book agreement.
-These entries distinguish unavailable book evidence from a passing ranking
-claim.
+The book-side counterpart is
+[`bench/results/2026-10-11-book-stability/results.md`](../../bench/results/2026-10-11-book-stability/results.md):
+27 settings on the 3,000 books under C, J, C + FJs and J′. Dewey sections
+against LCC is **not stable** (sign matches in 13/27 under C and J, 8/27 for
+the J′ tie), so the scheme choice is a setting-dependent tie (§6.1). Stable
+in 27/27: Dewey sections beat FDC depth 3, three levels beat two, full-depth
+Dewey gains cost but loses on J, and one nested learned level helps while
+three raise J. Not stable: the learned scheme against Dewey sections, and
+three FDC levels against the full FDC number on J. The pair and ranking
+claims of §§4.3–6.3 are classified there claim by claim; the semantic
+classifier threshold in §8 still waits for the pending rerun.
 
 ## References
 
