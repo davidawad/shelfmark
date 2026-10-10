@@ -1035,10 +1035,10 @@ difference). Three levels beat two. The full Dewey number gains cost and
 loses on $J'$. Through the same classifier, FDC beats the LCC outline
 without subject-heading vocabulary in all <!-- v:x_dl_settings -->27<!-- /v --> settings. It does not
 beat the bundled LCC outline with LCSH vocabulary, which places
-<!-- v:x_bead_cov_lcclcsh -->0.99<!-- /v --> of the books against <!-- v:x_bead_cov_fdc -->0.84<!-- /v --> for FDC: that comparison
+<!-- v:x_floor_cov_lcclcsh -->0.99<!-- /v --> of the books against <!-- v:x_floor_cov_fdc -->0.84<!-- /v --> for FDC: that comparison
 turns on vocabulary and coverage, not on the scheme. On the 500-book
 title-only holdout no placed run reaches the coverage floor of
-<!-- v:x_bead_floor -->0.80<!-- /v -->, and the best reaches <!-- v:x_hold_best_cov -->0.57<!-- /v -->.
+<!-- v:x_floor_floor -->0.80<!-- /v -->, and the best reaches <!-- v:x_hold_best_cov -->0.57<!-- /v -->.
 
 ## 5.11 The learned scheme and home advantage
 

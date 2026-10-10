@@ -282,11 +282,11 @@ def _books(root, V, T):
 
     # coverage floor and placed-run winners
     br = bs["bead_rule"]["books"]
-    V["x_bead_floor"] = f"{bs['coverage_floor']:.2f}"
+    V["x_floor_floor"] = f"{bs['coverage_floor']:.2f}"
     cov = br["coverage"]
-    V["x_bead_cov_fdc"] = _f2(cov["fdc-placed"])
-    V["x_bead_cov_lcclcsh"] = _f2(cov["lcc-lcsh-placed"])
-    V["x_bead_cov_lcc"] = _f2(cov["lcc-placed"])
+    V["x_floor_cov_fdc"] = _f2(cov["fdc-placed"])
+    V["x_floor_cov_lcclcsh"] = _f2(cov["lcc-lcsh-placed"])
+    V["x_floor_cov_lcc"] = _f2(cov["lcc-placed"])
     hold = bs["bead_rule"]["holdout"]["coverage"]
     V["x_hold_best_cov"] = _f2(max(hold.values()))
 
