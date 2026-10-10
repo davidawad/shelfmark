@@ -613,6 +613,13 @@ mod tests {
         assert!((all.items_scanned - 2.75).abs() < 1e-12);
         assert!((placed.menu_accesses - 5.0 / 3.0).abs() < 1e-12);
         assert_eq!(zipf_queries(3), vec![1.0, 0.5, 1.0 / 3.0]);
+        let summary = summarize(&t);
+        assert_eq!(summary.log_base, 2);
+        assert!(summary.confidence_intervals.len() >= 20);
+        assert!(
+            summary.confidence_intervals["nav_scan"][0]
+                <= summary.confidence_intervals["nav_scan"][1]
+        );
     }
 
     #[test]
@@ -651,5 +658,8 @@ mod tests {
         assert_eq!(a.cost_norm.percentile, b.cost_norm.percentile);
         assert!(a.cost_norm.mean.is_finite());
         assert!(a.skill.mean.is_finite());
+        assert!(
+            a.cost_norm.confidence_intervals["z"][0] <= a.cost_norm.confidence_intervals["z"][1]
+        );
     }
 }
