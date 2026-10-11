@@ -7,11 +7,16 @@
 //! weight evenly. The LCC outline (U2) only links headings whose number is
 //! exactly a class; this links every heading the outline covers.
 //!
+//! With `inherit > 0`, an active heading with no LCC number of its own
+//! borrows the numbers of its nearest broader headings that have one (up to
+//! `inherit` levels up), at half the weight per level. That is how headings
+//! without an LCC number (most of LCSH) reach a class at all.
+//!
 //! Terms already on a class (case-insensitively) are not repeated, and
 //! headings go in table order (sorted by id), so the output is a pure
 //! function of the two inputs.
 
-use std::collections::{BTreeMap, BTreeSet};
+use std::collections::{BTreeMap, BTreeSet, HashMap};
 
 use serde::Serialize;
 use serde_json::{json, Value};
@@ -21,7 +26,11 @@ use crate::table::Heading;
 
 #[derive(Debug, Default, Serialize, PartialEq, Eq)]
 pub struct Stats {
+    /// Active (not deprecated) headings in the table.
+    pub headings_active: usize,
     pub headings_with_lcc: usize,
+    /// Active headings without a number that borrowed one from a broader heading.
+    pub headings_inherited: usize,
     /// Headings at least one of whose numbers falls in a class.
     pub headings_placed: usize,
     pub numbers: usize,
@@ -50,25 +59,76 @@ fn uninverted(label: &str) -> Option<String> {
     (plain(head) && plain(tail)).then(|| format!("{tail} {head}"))
 }
 
+/// What to fold in.
+#[derive(Debug, Clone, Copy, Default)]
+pub struct Options {
+    /// Also add alternate labels and uninverted preferred labels.
+    pub alt: bool,
+    /// Broader levels a heading without an LCC number may borrow from (0: none).
+    pub inherit: usize,
+}
+
+/// The LCC numbers of `h`'s nearest broader headings that have any, within
+/// `max` levels, with the level they were found at.
+fn borrowed<'a>(
+    h: &Heading,
+    by_id: &HashMap<&str, &'a Heading>,
+    max: usize,
+) -> Option<(usize, BTreeSet<&'a str>)> {
+    let mut seen: BTreeSet<&str> = BTreeSet::new();
+    let mut frontier: Vec<&str> = h.broader.iter().map(String::as_str).collect();
+    for level in 1..=max {
+        let next: Vec<&'a Heading> = frontier
+            .iter()
+            .filter(|id| seen.insert(**id))
+            .filter_map(|id| by_id.get(id).copied())
+            .filter(|b| !b.deprecated)
+            .collect();
+        let numbers: BTreeSet<&str> = next
+            .iter()
+            .flat_map(|b| b.lcc.iter().map(String::as_str))
+            .collect();
+        if !numbers.is_empty() {
+            return Some((level, numbers));
+        }
+        frontier = next
+            .iter()
+            .flat_map(|b| b.broader.iter().map(String::as_str))
+            .collect();
+        if frontier.is_empty() {
+            break;
+        }
+    }
+    None
+}
+
 /// Add the headings' labels to `scheme` (a scheme document) in place.
-/// `with_alt` also adds alternate labels and uninverted preferred labels.
 pub fn enrich(
     scheme: &mut Value,
     headings: &[Heading],
     index: &dyn CompiledIndex,
-    with_alt: bool,
+    opts: &Options,
 ) -> Result<Stats, String> {
     let mut stats = Stats::default();
     let mut holder: BTreeMap<String, Option<String>> = BTreeMap::new();
     let mut additions: BTreeMap<String, Vec<Value>> = BTreeMap::new();
-    for h in headings
-        .iter()
-        .filter(|h| !h.deprecated && !h.lcc.is_empty())
-    {
-        stats.headings_with_lcc += 1;
+    let by_id: HashMap<&str, &Heading> = headings.iter().map(|h| (h.id.as_str(), h)).collect();
+    for h in headings.iter().filter(|h| !h.deprecated) {
+        stats.headings_active += 1;
+        let (level, numbers): (usize, Vec<&str>) = if !h.lcc.is_empty() {
+            stats.headings_with_lcc += 1;
+            (0, h.lcc.iter().map(String::as_str).collect())
+        } else if opts.inherit > 0 {
+            match borrowed(h, &by_id, opts.inherit) {
+                Some((level, numbers)) => (level, numbers.into_iter().collect()),
+                None => continue,
+            }
+        } else {
+            continue;
+        };
         let mut held = BTreeSet::new();
-        for lcc in &h.lcc {
-            let class = holder.entry(lcc.clone()).or_insert_with(|| {
+        for lcc in numbers {
+            let class = holder.entry(lcc.to_string()).or_insert_with(|| {
                 match index.check_code(&scheme_code(lcc)) {
                     CodeCheck::Exact { class } | CodeCheck::Within { class } => {
                         Some(class.code.clone())
@@ -81,13 +141,17 @@ pub fn enrich(
         if held.is_empty() {
             continue;
         }
-        stats.headings_placed += 1;
+        if level == 0 {
+            stats.headings_placed += 1;
+        } else {
+            stats.headings_inherited += 1;
+        }
         let mut terms = vec![h.pref_label.clone()];
-        if with_alt {
+        if opts.alt {
             terms.extend(h.alt_labels.iter().cloned());
             terms.extend(uninverted(&h.pref_label));
         }
-        let weight = 1.0 / held.len() as f64;
+        let weight = 0.5f64.powi(level as i32) / held.len() as f64;
         for class in held {
             for term in &terms {
                 let mut link = json!({"term": term, "source": h.vocab, "source_id": h.id});
