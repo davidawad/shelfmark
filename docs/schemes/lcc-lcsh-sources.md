@@ -165,7 +165,9 @@ Verified on a box on 2026-10-11 (`research/vocab/stats/bundle-candidates.json`
 and the box report): `lcc-outline check` passes with the committed lock and
 records; the rebuilt `lcc.json` is byte-identical; `build-lcc-lcsh.sh check`
 reproduces `lcc-lcsh.json.gz` byte for byte (decompressed); `lcc-full` fetch
-matches all 44 PDFs and its rebuild matches the committed classes.
+matches all 44 PDFs and `lcc-full check` against the recreated outline passes
+(the committed `lcc-full.json.gz`, `COVERAGE.md` and `coverage-failures.txt`
+are what the locked sources build).
 
 ## Can the bundled scheme be the full LCC and full LCSH?
 
