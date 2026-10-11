@@ -202,28 +202,25 @@ fn link_previews_commits_and_resolves_the_item() {
     assert_ne!(b["placement"]["work"].as_str().unwrap(), work);
 
     // Link args truth table: neither name is an error; both naming
-    // different specimens is an error; both naming the same one, or
-    // `specimen:` for `work:`, is fine.
+    // different content is an error; both naming the same one, or
+    // `content:` for `work:`, is fine.
     let e = error(call(&s, Verb::Link, json!({"item": item})));
-    assert!(
-        e.message.contains("`specimen` is required"),
-        "{}",
-        e.message
-    );
+    assert!(e.message.contains("`content` is required"), "{}", e.message);
     let other = b["placement"]["work"].as_str().unwrap();
     let e = error(call(
         &s,
         Verb::Link,
-        json!({"item": item, "specimen": other, "work": work}),
+        json!({"item": item, "content": other, "work": work}),
     ));
-    assert!(e.message.contains("different specimens"), "{}", e.message);
-    let alias = work.replacen("work:", "specimen:", 1);
+    assert!(e.message.contains("different content"), "{}", e.message);
+    let alias = work.replacen("work:", "content:", 1);
     let both = data(call(
         &s,
         Verb::Link,
-        json!({"item": item, "specimen": alias, "work": work}),
+        json!({"item": item, "content": alias, "work": work}),
     ));
-    assert_eq!(both["change"]["specimen"], work);
+    assert_eq!(both["change"]["content"], work);
+    assert_eq!(both["change"]["specimen"], item);
 
     let args = json!({"item": item, "work": work});
     let rev = data(call(&s, Verb::Link, args.clone()))["revision"]

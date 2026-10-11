@@ -69,7 +69,7 @@ impl Shelfmark {
                 }
             }
             if !reasons.is_empty() {
-                out.push(json!({"placement": p.id, "specimen": p.work, "work": p.work, "class": p.class, "status": p.status, "reasons": reasons}));
+                out.push(json!({"placement": p.id, "content": p.work, "work": p.work, "class": p.class, "status": p.status, "reasons": reasons}));
             }
         }
         Ok(out)

@@ -97,15 +97,16 @@ impl Shelfmark {
 
     pub(super) fn link(&self, req: &Request, args: &Args) -> Result<Value, Error> {
         let item: ItemId = args.require_id("item")?;
-        // `work` is the pre-0.2 name of `specimen`, read for one release.
-        let work: WorkId = match (args.id::<WorkId>("specimen")?, args.id::<WorkId>("work")?) {
-            (Some(s), Some(w)) if s != w => return Err(crate::args::bad(
-                args.verb(),
-                "`specimen` and its old name `work` name different specimens; pass only `specimen`",
-            )),
-            (Some(s), _) | (None, Some(s)) => s,
-            (None, None) => return Err(crate::args::bad(args.verb(), "`specimen` is required")),
-        };
+        // `work` is the pre-0.2 name of `content`, read for one release.
+        let work: WorkId =
+            match (args.id::<WorkId>("content")?, args.id::<WorkId>("work")?) {
+                (Some(s), Some(w)) if s != w => return Err(crate::args::bad(
+                    args.verb(),
+                    "`content` and its old name `work` name different content; pass only `content`",
+                )),
+                (Some(s), _) | (None, Some(s)) => s,
+                (None, None) => return Err(crate::args::bad(args.verb(), "`content` is required")),
+            };
         let mut store = self.store()?;
         let existing: Vec<WorkId> = store
             .links()?
@@ -120,9 +121,9 @@ impl Shelfmark {
                     .next("shelfmark classify --file <the file>"),
             );
         }
-        // `work` duplicates `specimen` for one release (read-compat).
-        let change =
-            json!({ "item": item, "specimen": work, "work": work, "already_linked_to": existing });
+        // `work` duplicates `content` for one release (read-compat);
+        // `specimen` is the public name of `item`.
+        let change = json!({ "item": item, "specimen": item, "content": work, "work": work, "already_linked_to": existing });
         self.mutate(req, store.as_mut(), change, |s| {
             s.append_link(&item, &work).map(drop)
         })

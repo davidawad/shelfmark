@@ -102,7 +102,7 @@ impl Shelfmark {
                 return Err(bad(
                     Verb::Name,
                     format!(
-                        "name takes a placement: or specimen (work:) ID, not {}:",
+                        "name takes a placement: or content (work:) ID, not {}:",
                         other.kind()
                     ),
                 ))

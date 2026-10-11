@@ -85,20 +85,26 @@ fn near_duplicate_copy_is_proposed_and_linked_to_the_existing_work() {
     let copy = b.file("essay-ocr.md", noisy);
     let out = b.ok(&["classify", "--file", &copy]);
     assert_eq!(out["ingest"]["new_work"], true);
+    assert_eq!(out["ingest"]["new_content"], true);
     assert_eq!(out["ingest"]["new_specimen"], true);
     let proposals = out["ingest"]["proposals"].as_array().unwrap();
     assert_eq!(proposals.len(), 1, "{out}");
     assert_eq!(proposals[0]["work"], work.as_str());
     let item = out["item"].as_str().unwrap();
+    assert_eq!(out["specimen"], item);
     assert_eq!(
         out["next_command"],
-        format!("shelfmark link --item {item} --specimen {work}")
+        format!("shelfmark link --item {item} --content {work}")
     );
 
-    // `specimen:` is an input alias; the stored ID keeps its `work:` form.
-    let alias = work.replacen("work:", "specimen:", 1);
-    b.commit(&["link", "--item", item, "--specimen", &alias]);
-    let r = b.ok(&["resolve", item]);
-    assert_eq!(r["resolved"]["specimen"], work.as_str());
+    // `content:` and `specimen:` are input aliases; stored IDs keep their
+    // `work:` and `item:` forms.
+    let content = work.replacen("work:", "content:", 1);
+    let specimen = item.replacen("item:", "specimen:", 1);
+    b.commit(&["link", "--specimen", &specimen, "--content", &content]);
+    let r = b.ok(&["resolve", &specimen]);
+    assert_eq!(r["id"], item);
+    assert_eq!(r["noun"], "specimen");
+    assert_eq!(r["resolved"]["content"], work.as_str());
     assert_eq!(r["resolved"]["work"], work.as_str());
 }
