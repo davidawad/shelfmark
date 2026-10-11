@@ -145,13 +145,13 @@ Every ID names its kind, and a hash ID names its algorithm, so one
 
 `shelfmark eval` re-runs each runnable profile on the gold set and
 reports top-1/top-k accuracy, calibration error (ECE), flagged rate and
-latency per profile, per deciding tier and per hierarchy level (R16). It
+latency per profile, per deciding tier and per hierarchy level. It
 fits a per-tier calibration from the same run: raw scores in 10 bins,
-made monotone by pool-adjacent-violators (plan PD3). Like any mutation it
+made monotone by pool-adjacent-violators. Like any mutation it
 previews first. `--commit` writes `calibration.json` and `eval.json` to
 the store; `classify` then applies the calibration and `status` reports
-both, including whether the calibration is stale against newer gold
-(R17, R23). Gold comes from `confirm`/`correct`, which label the input the
+both, including whether the calibration is stale against newer gold.
+Gold comes from `confirm`/`correct`, which label the input the
 Work was classified from, or from `--gold FILE`, an NDJSON file of gold
 examples or mc-eval gold items, which a commit adds to the gold set once.
 The metrics are in-sample: the calibration is scored on the examples it
@@ -178,6 +178,18 @@ cargo build --release --features semantic-shortlist   # needs rustc 1.88+
 
 This workspace has no dependency outside its own directory. A test checks
 that, and the directory can be split into its own repository unchanged.
+
+## Research: scoring classification schemes
+
+`bench/` holds a benchmark that scores schemes as trees over a corpus with
+hierarchical-clustering objectives (Dasgupta cost, Moseley-Wang revenue, a
+false-join term). `bench/results/README.md` lists every run; each run
+directory has its results and a `REPRODUCE.md`. Three draft papers are
+built from those results: `paper/paper1` (the benchmark), `paper/paper2` (a
+learned, order-preserving scheme) and `paper/method-survey` (a Typst
+edition of the benchmark paper with a survey of open schemes). Every number
+in them is generated from committed JSON by the scripts in each paper
+directory.
 
 License: MIT OR Apache-2.0.
 
