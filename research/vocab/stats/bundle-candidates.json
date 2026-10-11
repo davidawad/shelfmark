@@ -1,0 +1,323 @@
+{
+  "measured": "2026-10-11",
+  "host": "newbox Hetzner box, 8 vCPU, 16 GiB",
+  "lcsh_dump_sha256": "f57e6dcf40d510e8be37ef25ba9e78f6f6768d24118563dd5898bc394596eebd",
+  "gold": "research/eval/gold/starter-v1.ndjson (104 items), profile:lexical@2, no identifier table, 95% bootstrap CI (mc-eval defaults)",
+  "note": "A candidate replaces the bundled lcc@2024 for the run (SHELFMARK_SCHEME). lcc-full candidates predict codes deeper than mc-eval's grammar (double cutters, cutter ranges); those candidates were truncated to the deepest prefix mc-eval reads before scoring, which can only help them at levels 1-3. Wall time and peak RSS are one `shelfmark classify` process: no store (no compile cache), the first call in a new store, then a warm call.",
+  "candidates": {
+    "baseline": {
+      "what": "bundled lcc-lcsh.json.gz: outline + LCSH headings with an LCC number",
+      "accuracy": {
+        "class": {
+          "n": 104,
+          "top1": 0.4615,
+          "top1_ci": [
+            0.375,
+            0.5577
+          ],
+          "top5": 0.7788
+        },
+        "subclass": {
+          "n": 104,
+          "top1": 0.3462,
+          "top1_ci": [
+            0.2596,
+            0.4423
+          ],
+          "top5": 0.5769
+        },
+        "caption": {
+          "n": 104,
+          "top1": 0.2115,
+          "top1_ci": [
+            0.1442,
+            0.2981
+          ],
+          "top5": 0.3654
+        },
+        "number": {
+          "n": 42,
+          "top1": 0.0,
+          "top1_ci": [
+            0.0,
+            0.0
+          ],
+          "top5": 0.0
+        },
+        "cutter": {
+          "n": 31,
+          "top1": 0.0,
+          "top1_ci": [
+            0.0,
+            0.0
+          ],
+          "top5": 0.0
+        }
+      },
+      "probe": {
+        "binary_bytes": 12724288,
+        "no_cache": {
+          "rc": 0,
+          "wall_s": 0.785,
+          "max_rss_kb": 216504
+        },
+        "first_with_cache": {
+          "rc": 0,
+          "wall_s": 0.865,
+          "max_rss_kb": 216520
+        },
+        "warm": {
+          "rc": 0,
+          "wall_s": 0.198,
+          "max_rss_kb": 93724
+        }
+      }
+    },
+    "outline-inherit3": {
+      "what": "outline + LCSH, headings without a number borrow from broader headings up to 3 levels",
+      "accuracy": {
+        "class": {
+          "n": 104,
+          "top1": 0.5096,
+          "top1_ci": [
+            0.4135,
+            0.5962
+          ],
+          "top5": 0.7885
+        },
+        "subclass": {
+          "n": 104,
+          "top1": 0.3846,
+          "top1_ci": [
+            0.2981,
+            0.4808
+          ],
+          "top5": 0.5865
+        },
+        "caption": {
+          "n": 104,
+          "top1": 0.2019,
+          "top1_ci": [
+            0.1346,
+            0.2788
+          ],
+          "top5": 0.375
+        },
+        "number": {
+          "n": 42,
+          "top1": 0.0,
+          "top1_ci": [
+            0.0,
+            0.0
+          ],
+          "top5": 0.0
+        },
+        "cutter": {
+          "n": 31,
+          "top1": 0.0,
+          "top1_ci": [
+            0.0,
+            0.0
+          ],
+          "top5": 0.0
+        }
+      },
+      "probe": {
+        "binary_bytes": 14161944,
+        "no_cache": {
+          "rc": 0,
+          "wall_s": 1.547,
+          "max_rss_kb": 425348
+        },
+        "first_with_cache": {
+          "rc": 0,
+          "wall_s": 1.708,
+          "max_rss_kb": 425236
+        },
+        "warm": {
+          "rc": 0,
+          "wall_s": 0.343,
+          "max_rss_kb": 150848
+        }
+      },
+      "size": {
+        "raw": 18216877,
+        "gz": 2778087
+      },
+      "enrich_stats": {
+        "headings_active": 513470,
+        "headings_with_lcc": 91580,
+        "headings_inherited": 74150,
+        "headings_placed": 91499,
+        "numbers": 63843,
+        "numbers_placed": 63754,
+        "terms_added": 206266,
+        "classes_with_vocab": 3647
+      }
+    },
+    "full-direct": {
+      "what": "lcc-full (416,186 classes) + LCSH headings with an LCC number",
+      "accuracy": {
+        "class": {
+          "n": 104,
+          "top1": 0.375,
+          "top1_ci": [
+            0.2788,
+            0.4712
+          ],
+          "top5": 0.5865
+        },
+        "subclass": {
+          "n": 104,
+          "top1": 0.2404,
+          "top1_ci": [
+            0.1635,
+            0.3269
+          ],
+          "top5": 0.3846
+        },
+        "caption": {
+          "n": 104,
+          "top1": 0.1058,
+          "top1_ci": [
+            0.0481,
+            0.1731
+          ],
+          "top5": 0.1923
+        },
+        "number": {
+          "n": 42,
+          "top1": 0.0476,
+          "top1_ci": [
+            0.0,
+            0.1304
+          ],
+          "top5": 0.0952
+        },
+        "cutter": {
+          "n": 31,
+          "top1": 0.0323,
+          "top1_ci": [
+            0.0,
+            0.1111
+          ],
+          "top5": 0.0968
+        }
+      },
+      "probe": {
+        "binary_bytes": 20102208,
+        "no_cache": {
+          "rc": 0,
+          "wall_s": 8.238,
+          "max_rss_kb": 1242364
+        },
+        "first_with_cache": {
+          "rc": 0,
+          "wall_s": 8.387,
+          "max_rss_kb": 1242364
+        },
+        "warm": {
+          "rc": 0,
+          "wall_s": 1.336,
+          "max_rss_kb": 664704
+        }
+      },
+      "size": {
+        "raw": 75820265,
+        "gz": 8718413
+      },
+      "enrich_stats": {
+        "headings_active": 513470,
+        "headings_with_lcc": 91580,
+        "headings_inherited": 0,
+        "headings_placed": 91499,
+        "numbers": 63843,
+        "numbers_placed": 63754,
+        "terms_added": 99314,
+        "classes_with_vocab": 57339
+      }
+    },
+    "full-inherit3": {
+      "what": "lcc-full + LCSH with broader inheritance up to 3 levels",
+      "accuracy": {
+        "class": {
+          "n": 104,
+          "top1": 0.3846,
+          "top1_ci": [
+            0.2885,
+            0.4808
+          ],
+          "top5": 0.625
+        },
+        "subclass": {
+          "n": 104,
+          "top1": 0.2596,
+          "top1_ci": [
+            0.1731,
+            0.3462
+          ],
+          "top5": 0.4327
+        },
+        "caption": {
+          "n": 104,
+          "top1": 0.1058,
+          "top1_ci": [
+            0.0481,
+            0.1731
+          ],
+          "top5": 0.2019
+        },
+        "number": {
+          "n": 42,
+          "top1": 0.0476,
+          "top1_ci": [
+            0.0,
+            0.1304
+          ],
+          "top5": 0.0952
+        },
+        "cutter": {
+          "n": 31,
+          "top1": 0.0323,
+          "top1_ci": [
+            0.0,
+            0.1111
+          ],
+          "top5": 0.0968
+        }
+      },
+      "probe": {
+        "binary_bytes": 21763480,
+        "no_cache": {
+          "rc": 0,
+          "wall_s": 9.662,
+          "max_rss_kb": 1571236
+        },
+        "first_with_cache": {
+          "rc": 0,
+          "wall_s": 9.469,
+          "max_rss_kb": 1570976
+        },
+        "warm": {
+          "rc": 0,
+          "wall_s": 1.485,
+          "max_rss_kb": 732544
+        }
+      },
+      "size": {
+        "raw": 86346451,
+        "gz": 10379612
+      },
+      "enrich_stats": {
+        "headings_active": 513470,
+        "headings_with_lcc": 91580,
+        "headings_inherited": 74150,
+        "headings_placed": 91499,
+        "numbers": 63843,
+        "numbers_placed": 63754,
+        "terms_added": 214677,
+        "classes_with_vocab": 57339
+      }
+    }
+  }
+}

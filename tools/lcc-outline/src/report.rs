@@ -47,7 +47,10 @@ pub fn sources_md(lock: &Lock, s: &Stats, doc: &SchemeDoc) -> String {
          cargo run --release -- build --cache /tmp/lcc-sources   # offline; deterministic from the lock\n\
          cargo run --release -- check --cache /tmp/lcc-sources   # fails if lcc.json or SOURCES.md is stale\n\
          ```\n\n\
-         `build` refuses any cached file whose sha256 differs from `sources.lock.json`.\n\n\
+         `build` refuses any source whose sha256 differs from `sources.lock.json`. The PDFs and the\n\
+         LCSH dump are read from the cache. The id.loc.gov classification records are read from\n\
+         `sources/id-classification/`, committed next to the lock, because id.loc.gov serves a\n\
+         record's JSON-LD with different bytes on each request; `fetch` rewrites them.\n\n\
          ## License\n\n\
          All inputs are published by the Library of Congress. As works of the US government they are\n\
          not subject to copyright in the United States (17 U.S.C. 105). LC asks that the source be\n\

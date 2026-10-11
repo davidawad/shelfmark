@@ -184,9 +184,12 @@ fn cmd_sample(flags: &Flags) -> Result<(), String> {
     Ok(())
 }
 
-/// `--scheme lcc.json --table lcsh.tsv.gz --out lcc-lcsh.json [--alt true]`
-/// [`--stats stats.json`]: the scheme with every placed heading in its
-/// vocabulary.
+/// `--scheme lcc.json --table lcsh.tsv.gz --out lcc-lcsh.json [--alt true]
+/// [--inherit N] [--title T] [--description D] [--canonical true]
+/// [--stats stats.json]`: the scheme with every placed heading in its
+/// vocabulary. `--canonical true` writes the bytes shelfmark hashes
+/// (`serde_json::to_vec` of the parsed `SchemeDoc`, no trailing newline),
+/// which is what the bundled `lcc-lcsh.json.gz` holds.
 fn cmd_enrich(flags: &Flags) -> Result<(), String> {
     let scheme_path = flags.path("scheme")?;
     let bytes = std::fs::read(&scheme_path).map_err(err(&scheme_path))?;
@@ -195,11 +198,30 @@ fn cmd_enrich(flags: &Flags) -> Result<(), String> {
     let mut doc: serde_json::Value =
         serde_json::from_slice(&bytes).map_err(|e| format!("{}: {e}", scheme_path.display()))?;
     let headings = load_table(&flags.path("table")?)?;
-    let with_alt = flags.get("alt") == Some("true");
-    let stats = enrich::enrich(&mut doc, &headings, &index, with_alt)?;
+    let opts = enrich::Options {
+        alt: flags.get("alt") == Some("true"),
+        inherit: flags
+            .get("inherit")
+            .unwrap_or("0")
+            .parse()
+            .map_err(|e| format!("--inherit: {e}"))?,
+    };
+    let stats = enrich::enrich(&mut doc, &headings, &index, &opts)?;
+    if let Some(title) = flags.get("title") {
+        doc["title"] = title.into();
+    }
+    if let Some(description) = flags.get("description") {
+        doc["source"]["description"] = description.into();
+    }
     let out = flags.path("out")?;
-    let text = serde_json::to_string(&doc).map_err(|e| e.to_string())? + "\n";
-    std::fs::write(&out, text).map_err(err(&out))?;
+    let bytes = if flags.get("canonical") == Some("true") {
+        let parsed: shelfmark_core::scheme::SchemeDoc =
+            serde_json::from_value(doc).map_err(|e| format!("enriched scheme: {e}"))?;
+        serde_json::to_vec(&parsed).map_err(|e| e.to_string())?
+    } else {
+        (serde_json::to_string(&doc).map_err(|e| e.to_string())? + "\n").into_bytes()
+    };
+    std::fs::write(&out, bytes).map_err(err(&out))?;
     if let Some(path) = flags.get("stats") {
         io::write_json(Path::new(path), &stats).map_err(err(Path::new(path)))?;
     }

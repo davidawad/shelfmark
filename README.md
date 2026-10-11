@@ -88,6 +88,11 @@ Schemes beyond the bundled LCC each live in `schemes/<name>/`, with a
 builder, tests and a README. Load the built file with
 `shelfmark scheme compile <file>`.
 
+The LCC and LCSH data (outline, bundled LCSH vocabulary, complete
+schedules): what is complete, every source file with its sha256, the
+license, the rebuild commands and the known gaps are in
+[`docs/schemes/lcc-lcsh-sources.md`](docs/schemes/lcc-lcsh-sources.md).
+
 | Scheme | Directory | Source license | Bundled | Official page |
 |---|---|---|---|---|
 | `lcc` (LCC outline + LCSH links) | [`data/schemes/lcc/`](data/schemes/lcc/) | US government work, no US copyright | yes: data file committed and pre-compiled | <https://www.loc.gov/catdir/cpso/lcco/> |

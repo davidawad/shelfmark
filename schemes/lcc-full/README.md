@@ -56,6 +56,13 @@ cargo run --release -- check --cache /tmp/lcc-text            # fails if any of 
 shelfmark scheme compile schemes/lcc-full/lcc-full.json       # from the repo root; preview, then --commit
 ```
 
+The lock's `outline_sha256` (`b21e4c66...`) is `lcc.json` as committed before
+the path in its `source.description` changed; the classes are the same. To
+check against that exact file, recreate it from the repo root with
+`sed 's|Built by tools/lcc-outline;|Built by src/shelfmark/tools/lcc-outline;|' data/schemes/lcc/lcc.json > /tmp/lcc-outline-b21e4c.json` and pass `--outline /tmp/lcc-outline-b21e4c.json` to `build` and `check`
+(verified 2026-10-11). Every source, the license and the gaps across LCC and
+LCSH are in `docs/schemes/lcc-lcsh-sources.md`.
+
 `build` refuses a PDF whose sha256 differs from `sources.lock.json` and an
 outline file that differs from the lock's `outline_sha256`, so the same lock
 always builds the same bytes. A parse takes about 7 seconds (files parse in

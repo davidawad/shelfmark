@@ -212,6 +212,21 @@ binary would grow by 9 MB. Bundling needs a persisted compiled form and a persis
 the file is generated data, like the identifier tables: build it
 from the public LCSH dump and compile it into a store.
 
+### Since: bundled, inheritance, full schedules
+
+The preferred-label file is now the bundled scheme
+(`data/schemes/lcc/lcc-lcsh.json.gz`); `scripts/build-lcc-lcsh.sh CACHE
+build|check` rebuilds or checks it in one command. `enrich-scheme` also takes
+`--inherit N` (a heading without an LCC number borrows its nearest broader
+heading's numbers, up to N levels, at half weight per level), `--title`,
+`--description` and `--canonical true` (write the bytes shelfmark hashes).
+`scripts/reproduce-lcc-lcsh.sh` re-fetches every LC source, checks `lcc.json`,
+`lcc-full` and `lcc-lcsh` against their locks, and measures bundle candidates
+(outline or full schedules, with or without inheritance) for size, start-up
+time, memory and gold-set accuracy; results are in
+`stats/bundle-candidates.json` and discussed in
+`docs/schemes/lcc-lcsh-sources.md`.
+
 ## Commands
 
 ```sh
