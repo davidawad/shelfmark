@@ -1,0 +1,20 @@
+{
+  "rows": 3000,
+  "failed": 0,
+  "fallback": 0,
+  "placed": 3000,
+  "flagged": 3000,
+  "deciding_tiers": {
+    "vocab": 3000
+  },
+  "classes_used": 649,
+  "top_class": "qpg",
+  "top_class_share": 0.062,
+  "top_class_terms": {
+    "subjects": 186
+  },
+  "output": "bench/corpus/cache/ddc-bench/placements/books/ilc2-placed.jsonl",
+  "classify_seconds": 14.7,
+  "profile": "profile:lexical@2",
+  "store_rules": "empty"
+}

@@ -1,0 +1,18 @@
+{
+  "corpus": "bench/corpus/holdout-books.jsonl",
+  "dimensions": 384,
+  "graph": "bench/results/2026-10-10-proposal/graphs/minilm-books-k10.json.gz",
+  "graph_sha256": "f47711ca1a5d494dd455849ffa6b394fd060b84dcb80e4a27bae1812d18ee4fd",
+  "mean_dissimilarity": 0.0703853546355852,
+  "n": 3000,
+  "negatives_sha256": "31d68e30b87a6c4abda9269b84c21c38bbfd37d69f198947a6c91f85ac7b5da3",
+  "pairs": 30000,
+  "spec": {
+    "floor": 0.15719942488399,
+    "per_item": 10,
+    "seed": 20261010
+  },
+  "vectors": "bench/corpus/cache/falsejoin/vectors/minilm-holdout-books.f32",
+  "vectors_rule": "build_graph_fastembed.py --vectors on this corpus and model (nomic: --max-length 512)",
+  "vectors_sha256": "b67658d8d043ebef66d8b997109ca5616662f6360e43ec86744f66feeeb62e9d"
+}

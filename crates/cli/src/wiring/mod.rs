@@ -16,7 +16,8 @@
 //!
 //! `<store>/cache/` holds derived data only, safe to delete: compiled
 //! schemes (`schemes/`, U1's compile cache keyed by content hash), built
-//! vocab matchers (`vocab/`) and shortlist label vectors (`shortlist/`).
+//! vocab matchers (`vocab/`), shortlist label vectors (`shortlist/`) and
+//! Open Library search responses (`openlibrary/`).
 //! It is used once the store directory exists, so a process that only
 //! reads an absent store writes nothing. Model files live outside the
 //! store, in the user's cache (`shelfmark_tier_shortlist::model_dir`).

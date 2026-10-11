@@ -1,0 +1,114 @@
+{
+  "scheme": "openalex-topics",
+  "version": "2026-10-09",
+  "track": "P",
+  "mode": "primary",
+  "n": 2000,
+  "k": 50,
+  "edge_weight": 2596.5315346640787,
+  "cost": 3430961.0569328032,
+  "cost_norm": 0.6606815690718498,
+  "revenue": 1762102.012395354,
+  "revenue_norm": 0.33931843092815017,
+  "ref_cost_norm": 0.16053525587757314,
+  "skill": 0.4042080781878128,
+  "coverage": 0.975,
+  "structure": {
+    "mean_depth": 4.435,
+    "p50_depth": 5,
+    "p95_depth": 5,
+    "max_depth": 5,
+    "mean_branching": 4.287162162162162,
+    "p95_branching": 15,
+    "max_branching": 119,
+    "root_fanout": 54,
+    "nodes_over_50_children": 5,
+    "normalized_entropy": 0.6671280338107168,
+    "effective_classes": 70.71206649683135,
+    "gini": 0.8299775758291041,
+    "largest_class_share": 0.20902474526928674,
+    "nav_scan": 76.77974999999995,
+    "nav_log_a0": 17.023976284985686,
+    "nav_log_a1": 21.215476284985737,
+    "nav_log_a2": 25.40697628498574
+  },
+  "hashes": {
+    "graph": "13bff061245462f1275ef7e7d370fe38ace0009eacf099c8844e099e35f40216",
+    "tree": "ec85f72f6d319fca426eeb23e63f2433ed3bacbd0110fdab078e76fe8cebfad2",
+    "scheme": "70b17f20d08f3f1e9e8d2ae16e27b9efac4763b2fdbc8ddf4274e76ffb1953df"
+  },
+  "bootstrap": {
+    "resamples": 1000,
+    "seed": 20261010,
+    "confidence": 0.95,
+    "method": "percentile; items resampled with replacement on the fixed graph and tree",
+    "ci": {
+      "cost_norm": [
+        0.6452103270039469,
+        0.6754456911694622
+      ],
+      "coverage": [
+        0.968,
+        0.982
+      ],
+      "effective_classes": [
+        64.84980034569355,
+        70.37912647901614
+      ],
+      "gini": [
+        0.806377329017472,
+        0.818088335155454
+      ],
+      "largest_class_share": [
+        0.20326043323382212,
+        0.21466677251246802
+      ],
+      "mean_depth": [
+        4.3965,
+        4.4700125
+      ],
+      "nav_log_a0": [
+        16.88296800722905,
+        17.160499809494578
+      ],
+      "nav_log_a1": [
+        21.038044959371845,
+        21.37954369874702
+      ],
+      "nav_log_a2": [
+        25.1934704465928,
+        25.600808082092247
+      ],
+      "nav_scan": [
+        75.00614999999996,
+        79.72649374999993
+      ],
+      "normalized_entropy": [
+        0.6789802317025633,
+        0.6903134997367474
+      ],
+      "ref_cost_norm": [
+        0.1486797653836942,
+        0.17462331749587837
+      ],
+      "revenue_norm": [
+        0.3245543088305379,
+        0.35478967299605313
+      ],
+      "skill": [
+        0.3865787969769839,
+        0.4237534851517714
+      ]
+    }
+  },
+  "run": {
+    "condition": "nomic-k50",
+    "model": "nomic",
+    "graph_k": 50,
+    "universe": "split",
+    "key": "openalex-topics-placed",
+    "placement_source": "shelfmark lexical@2, restricted to the 20%",
+    "placements": "bench/corpus/cache/embed-bench/placements/split/test-openalex-topics-placed.jsonl",
+    "score_seconds": 0.4
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "corpus": "bench/corpus/corpus.jsonl",
+  "dimensions": 768,
+  "graph": "bench/results/2026-10-11-metrics/embed/graphs/nomic-corpus-k20.json",
+  "graph_sha256": "e5abcae63e02b68ddf11c150bed478a5f2d7760f68606566e1837e2cfeaaf073",
+  "mean_dissimilarity": 0.048469207289353944,
+  "n": 10000,
+  "negatives_sha256": "62a145b9fcc9e50cf639c9fdb5a2acbe48cdfc267ff03f14eb8e5bead406d98b",
+  "pairs": 100000,
+  "spec": {
+    "floor": 0.5628243078892845,
+    "per_item": 10,
+    "seed": 20261010
+  },
+  "vectors": "bench/corpus/cache/falsejoin/vectors/nomic-corpus.f32",
+  "vectors_rule": "build_graph_fastembed.py --vectors on this corpus and model (nomic: --max-length 512)",
+  "vectors_sha256": "b4351bfab6b97763d54d5bc56efcbedfe2d565925b3590716900671bc0df05fd"
+}

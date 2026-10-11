@@ -1,0 +1,68 @@
+{
+  "scheme": "learned",
+  "version": "2026-10-10",
+  "track": "P",
+  "mode": "primary",
+  "n": 110,
+  "k": 20,
+  "edge_weight": 66.21157573380178,
+  "cost": 7181.294942936617,
+  "cost_norm": 0.9859982753425618,
+  "revenue": 101.97838778157893,
+  "revenue_norm": 0.014001724657438189,
+  "ref_cost_norm": 0.21619620553607932,
+  "skill": 0.01786381331186924,
+  "coverage": 0.08181818181818182,
+  "structure": {
+    "mean_depth": 1.3272727272727274,
+    "p50_depth": 1,
+    "p95_depth": 5,
+    "max_depth": 5,
+    "mean_branching": 1.35,
+    "p95_branching": 2,
+    "max_branching": 3,
+    "root_fanout": 103,
+    "nodes_over_50_children": 0,
+    "normalized_entropy": 0.9316574905324038,
+    "effective_classes": 16.29725049483962,
+    "gini": 0.3138888888888889,
+    "largest_class_share": 0.19444444444444445,
+    "nav_scan": 53.30909090909098,
+    "nav_log_a0": 6.896452686320012,
+    "nav_log_a1": 8.069179959047275,
+    "nav_log_a2": 9.241907231774576
+  },
+  "hashes": {
+    "graph": "f0e28851540c7d9f0b25f38f86864be04cbe4c7e60a2cefb4953f124e201421d",
+    "tree": "1ffc560a0c8776b2d8242938bc71e558f00a6f74fb2457c5009655e9ba23d034",
+    "scheme": "de2ece687cafb7c3df3a8afc9818db02414c6ade455894bdacb7a2099af5a7de"
+  },
+  "run": {
+    "scheme_id": "scheme:learned@2026-10-10",
+    "corpus": "holdout-ddc",
+    "placement_source": "shelfmark profile:lexical@2",
+    "placement_stats": {
+      "rows": 500,
+      "failed": 0,
+      "fallback": 457,
+      "placed": 43,
+      "flagged": 43,
+      "deciding_tiers": {
+        "vocab": 43
+      },
+      "classes_used": 23,
+      "top_class": "01.03.03.04",
+      "top_class_share": 0.11627906976744186,
+      "top_class_terms": {
+        "game": 2,
+        "games": 2,
+        "player": 1
+      },
+      "output": "bench/corpus/cache/ddc-bench/placements/holdout/learned-placed.jsonl",
+      "classify_seconds": 2.3,
+      "profile": "profile:lexical@2",
+      "store_rules": "empty"
+    },
+    "score_seconds": 0.0
+  }
+}

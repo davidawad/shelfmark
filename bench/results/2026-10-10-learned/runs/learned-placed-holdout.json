@@ -1,0 +1,66 @@
+{
+  "scheme": "learned",
+  "version": "2026-10-10",
+  "track": "P",
+  "mode": "primary",
+  "n": 500,
+  "k": 20,
+  "edge_weight": 1459.647912408383,
+  "cost": 723622.7116221433,
+  "cost_norm": 0.9915030953295904,
+  "revenue": 6201.244582048268,
+  "revenue_norm": 0.008496904670409684,
+  "ref_cost_norm": 0.301409582139011,
+  "skill": 0.012162927594149203,
+  "coverage": 0.086,
+  "structure": {
+    "mean_depth": 1.342,
+    "p50_depth": 1,
+    "p95_depth": 5,
+    "max_depth": 5,
+    "mean_branching": 1.9318181818181819,
+    "p95_branching": 4,
+    "max_branching": 5,
+    "root_fanout": 459,
+    "nodes_over_50_children": 0,
+    "normalized_entropy": 0.861747914906436,
+    "effective_classes": 26.076056730415853,
+    "gini": 0.5245879851143009,
+    "largest_class_share": 0.17543859649122806,
+    "nav_scan": 231.63999999999825,
+    "nav_log_a0": 9.275324255400953,
+    "nav_log_a1": 10.567324255400935,
+    "nav_log_a2": 11.859324255401024
+  },
+  "hashes": {
+    "graph": "03d67d06b82633e1ca3461e3c9f11f3ee3bd55f43079a28b2126a1a90c1f6c75",
+    "tree": "ecd647ad0d396cb5c4215a509a4a772b67a0acaffd2009b75d16b51c8f97f1ce",
+    "scheme": "379f746e99ad4302ddfdf85051b987b9d685efd6e4cbcb5e5a45fcb889d996da"
+  },
+  "run": {
+    "placement_source": "shelfmark profile:lexical@2",
+    "placement_stats": {
+      "rows": 500,
+      "failed": 0,
+      "fallback": 457,
+      "placed": 43,
+      "flagged": 43,
+      "deciding_tiers": {
+        "vocab": 43
+      },
+      "classes_used": 23,
+      "top_class": "01.03.03.04",
+      "top_class_share": 0.11627906976744186,
+      "top_class_terms": {
+        "game": 2,
+        "games": 2,
+        "player": 1
+      },
+      "output": "/work/repo/bench/corpus/cache/placed/holdout-learned/placements.jsonl",
+      "classify_seconds": 4.9,
+      "profile": "profile:lexical@2",
+      "store_rules": "empty"
+    },
+    "score_seconds": 0.0
+  }
+}

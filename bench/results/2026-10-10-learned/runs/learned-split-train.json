@@ -1,0 +1,44 @@
+{
+  "scheme": "learned",
+  "version": "2026-10-10-split80",
+  "track": "P",
+  "mode": "primary",
+  "n": 8000,
+  "k": 20,
+  "edge_weight": 38499.400217273695,
+  "cost": 51266367.46814701,
+  "cost_norm": 0.16645183814170533,
+  "revenue": 256728834.27004257,
+  "revenue_norm": 0.8335481618582947,
+  "ref_cost_norm": 0.1474245693718942,
+  "skill": 0.9776825978250471,
+  "coverage": 1.0,
+  "structure": {
+    "mean_depth": 5.0,
+    "p50_depth": 5,
+    "p95_depth": 5,
+    "max_depth": 5,
+    "mean_branching": 94.0,
+    "p95_branching": 203,
+    "max_branching": 259,
+    "root_fanout": 2,
+    "nodes_over_50_children": 64,
+    "normalized_entropy": 0.7897961192307418,
+    "effective_classes": 33.71781080523704,
+    "gini": 0.6606540697674419,
+    "largest_class_share": 0.12653125,
+    "nav_scan": 147.07343750000075,
+    "nav_log_a0": 13.111049621978387,
+    "nav_log_a1": 18.111049621978907,
+    "nav_log_a2": 23.111049621979042
+  },
+  "hashes": {
+    "graph": "5d4678ca2ee67fb86e6f979d7622135f56ddcd9138f65386de0ea6a564699ef0",
+    "tree": "46a375148070ec0e6fca7e84d420535092ab563e97899a528a57ef049bd81341",
+    "scheme": "c9ccbe76c7c1f7243f1cdcb98ce5aca1b0c43ac176fb268c1c3a4795d9cf83f5"
+  },
+  "run": {
+    "placement_source": "own (the 80% the split scheme was fitted on: in-sample)",
+    "score_seconds": 63.9
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "scheme": "ilc2",
+  "version": "2019-10-17",
+  "track": "P",
+  "mode": "primary",
+  "n": 10000,
+  "k": 20,
+  "edge_weight": 60220.11973891941,
+  "cost": 493141496.7203468,
+  "cost_norm": 0.8188982334447874,
+  "revenue": 109059700.66884732,
+  "revenue_norm": 0.18110176655521257,
+  "ref_cost_norm": 0.15183392202502477,
+  "skill": 0.21352158646523461,
+  "coverage": 0.9999,
+  "structure": {
+    "mean_depth": 5.0901,
+    "p50_depth": 5,
+    "p95_depth": 7,
+    "max_depth": 13,
+    "mean_branching": 7.219160926737633,
+    "p95_branching": 28,
+    "max_branching": 417,
+    "root_fanout": 68,
+    "nodes_over_50_children": 35,
+    "normalized_entropy": 0.771052155072554,
+    "effective_classes": 295.0632753178242,
+    "gini": 0.8242225523189712,
+    "largest_class_share": 0.044473240263074254,
+    "nav_scan": 135.60100000000085,
+    "nav_log_a0": 18.858956722935076,
+    "nav_log_a1": 23.384156722934524,
+    "nav_log_a2": 27.909356722935673
+  },
+  "hashes": {
+    "graph": "759d3b8461a9384d4359244c9fb42c2bc66496431e0f4681d33b7a59798ed35a",
+    "tree": "6a0ad9f977dce7a4283df200049271f2b4bd5990bc94490d7727fc5709e93145",
+    "scheme": "85326193a8b772eae280294a6ad51f326daa17c743617660e4e1ff94caf0d72c"
+  },
+  "run": {
+    "scheme_id": "scheme:ilc2@2019-10-17",
+    "corpus": "corpus",
+    "placement_source": "shelfmark profile:lexical@2",
+    "placement_stats": {
+      "rows": 10000,
+      "failed": 0,
+      "fallback": 1,
+      "placed": 9999,
+      "flagged": 9999,
+      "deciding_tiers": {
+        "vocab": 9999
+      },
+      "classes_used": 1103,
+      "top_class": "edqam",
+      "top_class_share": 0.041704170417041705,
+      "top_class_terms": {
+        "s": 417
+      },
+      "output": "bench/corpus/cache/placed/corpus-ilc2/placements.jsonl",
+      "classify_seconds": 60.7,
+      "profile": "profile:lexical@2",
+      "store_rules": "empty"
+    },
+    "score_seconds": 3.2
+  }
+}

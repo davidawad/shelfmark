@@ -1,0 +1,155 @@
+{
+  "date": "2026-10-10-r3",
+  "corpus": {
+    "corpus.jsonl": "1027bf9d34928f470ed8b0d7b5ddc5c983fde49bc0cd33eaa162bbd1f830fea5",
+    "holdout.jsonl": "3e057eb4a257488ca1668a1ed370306e74b5b21a79cf7b4fdbd2f5b21873c833"
+  },
+  "model": {
+    "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+    "runtime": "fastembed 0.9.0 / ONNX Runtime CPU",
+    "weights_repository": "Qdrant/all-MiniLM-L6-v2-onnx",
+    "weights_revision": "d13954661f83248295ba75c1ed411eef3b7b936e",
+    "weights_sha256": "bbd7b466f6d58e646fdc2bd5fd67b2f5e93c0b687011bd4548c420f7bd46f0c5"
+  },
+  "graphs": {
+    "corpus": {
+      "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "runtime": "fastembed 0.9.0 / ONNX Runtime CPU",
+      "weights_repository": "Qdrant/all-MiniLM-L6-v2-onnx",
+      "weights_revision": "d13954661f83248295ba75c1ed411eef3b7b936e",
+      "weights_sha256": "bbd7b466f6d58e646fdc2bd5fd67b2f5e93c0b687011bd4548c420f7bd46f0c5",
+      "corpus_sha256": "7685685d0de25d6e8a614859783dcb5376d81e4fe336a65f22b550f4c7527b8d",
+      "n": 10000,
+      "dimensions": 384,
+      "graph_k": 20,
+      "tau_rule": "exact mean cosine over all unordered corpus pairs",
+      "tau": 0.1086250601229786,
+      "graph_sha256": "759d3b8461a9384d4359244c9fb42c2bc66496431e0f4681d33b7a59798ed35a",
+      "published": "bench/results/2026-10-10/graphs/corpus-k20.json.gz",
+      "reference": {
+        "corpus": "corpus",
+        "ref_cost_norm": 0.15183392202502477,
+        "graph_sha256": "759d3b8461a9384d4359244c9fb42c2bc66496431e0f4681d33b7a59798ed35a",
+        "seconds": 58.4,
+        "source": "bench/results/2026-10-10/results.json"
+      }
+    },
+    "holdout": {
+      "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "runtime": "fastembed 0.9.0 / ONNX Runtime CPU",
+      "weights_repository": "Qdrant/all-MiniLM-L6-v2-onnx",
+      "weights_revision": "d13954661f83248295ba75c1ed411eef3b7b936e",
+      "weights_sha256": "bbd7b466f6d58e646fdc2bd5fd67b2f5e93c0b687011bd4548c420f7bd46f0c5",
+      "corpus_sha256": "3e057eb4a257488ca1668a1ed370306e74b5b21a79cf7b4fdbd2f5b21873c833",
+      "n": 500,
+      "dimensions": 384,
+      "graph_k": 20,
+      "tau_rule": "exact mean cosine over all unordered corpus pairs",
+      "tau": 0.17312031335824568,
+      "graph_sha256": "03d67d06b82633e1ca3461e3c9f11f3ee3bd55f43079a28b2126a1a90c1f6c75",
+      "published": "bench/results/2026-10-10/graphs/holdout-k20.json.gz",
+      "reference": {
+        "corpus": "holdout",
+        "ref_cost_norm": 0.301409582139011,
+        "graph_sha256": "03d67d06b82633e1ca3461e3c9f11f3ee3bd55f43079a28b2126a1a90c1f6c75",
+        "seconds": 0.1,
+        "source": "bench/results/2026-10-10/results.json"
+      }
+    }
+  },
+  "harness": {
+    "commit": "092494850adc3755f09e225bfd10d76870f10df9",
+    "binary_sha256": "2b006eeed3181ea4a721ba522b7d9be18cad4f567ea7ff225ade62524f201865",
+    "k": 20
+  },
+  "placement": {
+    "gold": "source labels, normalized to scheme codes (see REPRODUCE.md)"
+  },
+  "schemes": {
+    "acm-ccs": {
+      "status": "ok",
+      "id": "scheme:acm-ccs@2012",
+      "version": "2012",
+      "classes": 2113,
+      "file_sha256": "24b0d8242b2ae613d1c7f0cafd4889ea71ed34625c4ebbe5e0de3974b5883ecf",
+      "source": "schemes/registry.json (fetch)",
+      "license": "ACM, Inc.: educational and research use; not redistributable, so not bundled"
+    },
+    "msc": {
+      "status": "ok",
+      "id": "scheme:msc@2020",
+      "version": "2020",
+      "classes": 6603,
+      "file_sha256": "7a50db75a5fb7f7656feb48d1a7a6d3ffd23a71bce244be363e064c1f9b1aac6",
+      "source": "schemes/msc (fetch and build)"
+    }
+  },
+  "skipped": {
+    "acm-ccs-gold": {
+      "scheme": "acm-ccs",
+      "corpus": "corpus",
+      "stats": {
+        "rows": 10000,
+        "field": "acm_ccs",
+        "rows_with_valid_codes": 0,
+        "output": "bench/corpus/cache/gold/corpus-acm-ccs.jsonl"
+      },
+      "note": "the corpus acm_ccs field (690 values on 317 papers) holds ACM CCS 1998 codes such as `I.2.6`, as submitted to arXiv; the scheme is CCS 2012, whose codes are paths of 8-digit concept IDs, and no CCS 1998 to 2012 crosswalk is used"
+    }
+  },
+  "failures": {},
+  "runtime": {
+    "schemes (build_schemes.sh acm-ccs msc)": "not timed; fetch-and-build of two schemes",
+    "gold normalization and scoring (run_benchmark.py --gold-only)": "1.4 s"
+  },
+  "results": {
+    "msc-gold": {
+      "scheme": "msc",
+      "version": "2020",
+      "track": "A",
+      "n": 10000,
+      "coverage": 0.1322,
+      "cost_norm": 0.9843302821963407,
+      "revenue_norm": 0.015669717803659364,
+      "ref_cost_norm": 0.15183392202502477,
+      "skill": 0.018474822573747947,
+      "corpus": "corpus",
+      "placement_source": "gold",
+      "file": "msc-gold.json"
+    }
+  },
+  "baseline": {
+    "results": "bench/results/2026-10-10/results.json",
+    "corpus": {
+      "corpus.jsonl": "7685685d0de25d6e8a614859783dcb5376d81e4fe336a65f22b550f4c7527b8d",
+      "holdout.jsonl": "3e057eb4a257488ca1668a1ed370306e74b5b21a79cf7b4fdbd2f5b21873c833"
+    },
+    "placed": "not rerun: this run scores only the source labels"
+  },
+  "comparison": {
+    "msc-gold": {
+      "scheme": "msc",
+      "corpus": "corpus",
+      "before": {
+        "coverage": 0.1314,
+        "cost_norm": 0.9844436931342893,
+        "skill": 0.01834110944739967
+      },
+      "after": {
+        "coverage": 0.1322,
+        "cost_norm": 0.9843302821963407,
+        "skill": 0.018474822573747947
+      }
+    },
+    "acm-ccs-gold": {
+      "scheme": "acm-ccs",
+      "corpus": "corpus",
+      "before": {
+        "skipped": true
+      },
+      "after": {
+        "skipped": true
+      }
+    }
+  }
+}

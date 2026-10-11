@@ -1,0 +1,66 @@
+{
+  "scheme": "lcc-full",
+  "version": "2024",
+  "track": "P",
+  "mode": "primary",
+  "n": 3000,
+  "k": 20,
+  "edge_weight": 13295.4182601465,
+  "cost": 30400697.58088448,
+  "cost_norm": 0.762184811490328,
+  "revenue": 9485557.199555025,
+  "revenue_norm": 0.23781518850967195,
+  "ref_cost_norm": 0.22967463485582104,
+  "skill": 0.30872044368571583,
+  "coverage": 1.0,
+  "structure": {
+    "mean_depth": 5.961333333333333,
+    "p50_depth": 6,
+    "p95_depth": 8,
+    "max_depth": 12,
+    "mean_branching": 1.871817383669886,
+    "p95_branching": 5,
+    "max_branching": 198,
+    "root_fanout": 21,
+    "nodes_over_50_children": 2,
+    "normalized_entropy": 0.8343464862650981,
+    "effective_classes": 887.7368989139037,
+    "gini": 0.6768287575512262,
+    "largest_class_share": 0.03124160171996775,
+    "nav_scan": 43.59216666666644,
+    "nav_log_a0": 13.818297760415508,
+    "nav_log_a1": 18.476297760415452,
+    "nav_log_a2": 23.134297760415553
+  },
+  "hashes": {
+    "graph": "1d12c791d19a068d0a0c77a56f28124747221cf833b5d9fcf5655ea172899428",
+    "tree": "e2ad2ad30eab8be558bbbd4074e592908cc4206703ff82af986f06789c153584",
+    "scheme": "c38d1ffce9912f90d98da5ebb5cf3b88f4c83e03a688000ae419c30d69f06bea"
+  },
+  "run": {
+    "scheme_id": "scheme:lcc-full@2024",
+    "corpus": "books",
+    "placement_source": "shelfmark profile:lexical@2",
+    "placement_stats": {
+      "rows": 3000,
+      "failed": 0,
+      "fallback": 0,
+      "placed": 3000,
+      "flagged": 3000,
+      "deciding_tiers": {
+        "vocab": 3000
+      },
+      "classes_used": 1659,
+      "top_class": "PN4140",
+      "top_class_share": 0.066,
+      "top_class_terms": {
+        "subjects": 198
+      },
+      "output": "bench/corpus/cache/ddc-bench/placements/books/lcc-full-placed.jsonl",
+      "classify_seconds": 146.3,
+      "profile": "profile:lexical@2",
+      "store_rules": "empty"
+    },
+    "score_seconds": 1.7
+  }
+}

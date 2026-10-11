@@ -15,7 +15,7 @@ use super::matcher::VocabMatcher;
 /// Leading bytes of every matcher file.
 const MAGIC: &[u8; 8] = b"SMVOCAB\0";
 /// Bumped whenever the saved form or the build changes, so old files miss.
-pub const FORMAT: u32 = 1;
+pub const FORMAT: u32 = 2;
 
 /// Where the matcher for the index with `content_hash` lives in `dir`.
 fn path(dir: &Path, content_hash: &str) -> PathBuf {

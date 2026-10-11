@@ -1,0 +1,18 @@
+{
+  "corpus": "bench/corpus/holdout.jsonl",
+  "dimensions": 384,
+  "graph": "bench/results/2026-10-11-metrics/embed/graphs/bge-small-holdout-k20.json",
+  "graph_sha256": "4b1117237198d9ec1e3457029058b32e3e94bd2ee242d58c48807486ece2b063",
+  "mean_dissimilarity": 0.04371202485022617,
+  "n": 500,
+  "negatives_sha256": "3ff532d05a6324d3b2b85418b8c1aebdcc3fea0027211229ae7c5f45d94d7c5e",
+  "pairs": 5000,
+  "spec": {
+    "floor": 0.5506812762819933,
+    "per_item": 10,
+    "seed": 20261010
+  },
+  "vectors": "bench/corpus/cache/falsejoin/vectors/bge-small-holdout.f32",
+  "vectors_rule": "build_graph_fastembed.py --vectors on this corpus and model (nomic: --max-length 512)",
+  "vectors_sha256": "6ce8f8e84e717102ba077c90a603e498a2bbdff51d963a8c56b59f6a68705117"
+}

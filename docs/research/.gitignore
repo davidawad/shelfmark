@@ -1,0 +1,2 @@
+pdf/restricted/*
+!pdf/restricted/.gitkeep

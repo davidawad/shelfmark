@@ -1,0 +1,51 @@
+{
+  "scheme": "lcc-full",
+  "version": "2024",
+  "track": "P",
+  "mode": "primary",
+  "n": 3000,
+  "k": 20,
+  "edge_weight": 13295.4182601465,
+  "cost": 20834798.297396194,
+  "cost_norm": 0.5223553430143991,
+  "revenue": 19051456.48304331,
+  "revenue_norm": 0.4776446569856009,
+  "ref_cost_norm": 0.22967463485582104,
+  "skill": 0.6200557304720219,
+  "coverage": 1.0,
+  "structure": {
+    "mean_depth": 5.156,
+    "p50_depth": 5,
+    "p95_depth": 7,
+    "max_depth": 10,
+    "mean_branching": 3.1633986928104574,
+    "p95_branching": 9,
+    "max_branching": 49,
+    "root_fanout": 21,
+    "nodes_over_50_children": 0,
+    "normalized_entropy": 0.8868995927998087,
+    "effective_classes": 608.0219157858156,
+    "gini": 0.5882005792490359,
+    "largest_class_share": 0.012431825473211422,
+    "nav_scan": 29.31449999999978,
+    "nav_log_a0": 12.507175344989292,
+    "nav_log_a1": 16.773842011656022,
+    "nav_log_a2": 21.040508678322677
+  },
+  "hashes": {
+    "graph": "1d12c791d19a068d0a0c77a56f28124747221cf833b5d9fcf5655ea172899428",
+    "tree": "22b8b5095273cd503e6f5c5837ecdc38e376ff149903e3a74b79104a3d28e0cb",
+    "scheme": "c38d1ffce9912f90d98da5ebb5cf3b88f4c83e03a688000ae419c30d69f06bea"
+  },
+  "run": {
+    "scheme_id": "scheme:lcc-full@2024",
+    "corpus": "books",
+    "placement_source": "gold LC call number",
+    "placement_stats": {
+      "rows": 3000,
+      "rows_with_lcc_class": 3000,
+      "output": "bench/corpus/cache/ddc-bench/gold/books-lcc-full.jsonl"
+    },
+    "score_seconds": 1.7
+  }
+}

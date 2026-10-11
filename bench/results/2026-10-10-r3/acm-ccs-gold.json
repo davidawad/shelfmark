@@ -1,0 +1,13 @@
+{
+  "skipped": true,
+  "reason": "no acm_ccs label in corpus is a code of the scheme (10000 rows checked); the corpus acm_ccs field (690 values on 317 papers) holds ACM CCS 1998 codes such as `I.2.6`, as submitted to arXiv; the scheme is CCS 2012, whose codes are paths of 8-digit concept IDs, and no CCS 1998 to 2012 crosswalk is used",
+  "scheme": "acm-ccs",
+  "corpus": "corpus",
+  "stats": {
+    "rows": 10000,
+    "field": "acm_ccs",
+    "rows_with_valid_codes": 0,
+    "output": "bench/corpus/cache/gold/corpus-acm-ccs.jsonl"
+  },
+  "note": "the corpus acm_ccs field (690 values on 317 papers) holds ACM CCS 1998 codes such as `I.2.6`, as submitted to arXiv; the scheme is CCS 2012, whose codes are paths of 8-digit concept IDs, and no CCS 1998 to 2012 crosswalk is used"
+}

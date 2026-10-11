@@ -1,0 +1,22 @@
+[package]
+name = "shelfmark-bench"
+description = "Deterministic similarity and classification scheme benchmark"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[[bin]]
+name = "shelfmark-bench"
+path = "src/main.rs"
+
+[dependencies]
+shelfmark-core.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+regex = "1"
+
+[lints]
+workspace = true

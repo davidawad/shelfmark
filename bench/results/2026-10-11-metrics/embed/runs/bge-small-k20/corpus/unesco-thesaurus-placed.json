@@ -1,0 +1,462 @@
+{
+  "scheme": "unesco-thesaurus",
+  "version": "2026-08-31",
+  "track": "P",
+  "mode": "primary",
+  "n": 10000,
+  "k": 20,
+  "edge_weight": 28520.583267183934,
+  "cost": 206545312.74947318,
+  "cost_norm": 0.7241973658621711,
+  "revenue": 78660519.92236617,
+  "revenue_norm": 0.27580263413782896,
+  "ref_cost_norm": 0.14093555628099108,
+  "skill": 0.32104999357654834,
+  "coverage": 0.9731,
+  "structure": {
+    "mean_depth": 4.8982,
+    "p50_depth": 5,
+    "p95_depth": 7,
+    "max_depth": 9,
+    "mean_branching": 10.2697807435653,
+    "p95_branching": 41,
+    "max_branching": 535,
+    "root_fanout": 276,
+    "nodes_over_50_children": 46,
+    "normalized_entropy": 0.7171408975179554,
+    "effective_classes": 146.66336490135438,
+    "gini": 0.8523828479610667,
+    "largest_class_share": 0.11874711405263969,
+    "nav_scan": 304.6872000000106,
+    "nav_log_a0": 21.979544895110212,
+    "nav_log_a1": 26.681944895110526,
+    "nav_log_a2": 31.3843448951104,
+    "nav_log_a4": 40.78914489511029,
+    "nav_scan_placed": 309.2535710615559
+  },
+  "metrics_upgrade": {
+    "query_workloads": {
+      "uniform": {
+        "placed_only": {
+          "menu_accesses": 4.804747713492018,
+          "depth_traversed": 5.005960332954961,
+          "items_scanned": 230.29709176858273
+        },
+        "including_unplaced": {
+          "menu_accesses": 4.702400000002379,
+          "depth_traversed": 4.898200000001923,
+          "items_scanned": 227.8277499999835
+        }
+      },
+      "uniform_placed_only": {
+        "placed_only": {
+          "menu_accesses": 4.804747713492018,
+          "depth_traversed": 5.005960332954961,
+          "items_scanned": 230.29709176858273
+        },
+        "including_unplaced": {
+          "menu_accesses": 4.804747713492018,
+          "depth_traversed": 5.005960332954961,
+          "items_scanned": 230.29709176858273
+        }
+      },
+      "zipf_s1_seed_20261010": {
+        "placed_only": {
+          "menu_accesses": 4.908907605155868,
+          "depth_traversed": 5.113495668570947,
+          "items_scanned": 245.42834861232885
+        },
+        "including_unplaced": {
+          "menu_accesses": 4.795402242422158,
+          "depth_traversed": 4.994049555966761,
+          "items_scanned": 242.32340415681549
+        }
+      }
+    },
+    "popularity_proxy": "none available: corpus has one sampled record per work and no edition-count field",
+    "information_bounds": {
+      "entropy_bits": 13.28771237954811,
+      "huffman_lower_bound_bits": 13.28771237954811,
+      "alphabetic_optimum_bits": 13.361599999999994,
+      "nav_over_entropy": 1.6541255761179794,
+      "nav_over_alphabetic": 1.6449785126863574
+    },
+    "branch_constant_sweep": {
+      "a=0": 21.979544895110024,
+      "a=1": 26.68194489510999,
+      "a=2": 31.384344895110395,
+      "a=4": 40.78914489511068
+    },
+    "alphabetic_method": "Knuth-optimized alphabetic dynamic program, O(n^2)",
+    "log_base": 2,
+    "confidence_intervals": {
+      "branch_constant.a0": [
+        21.896220564860595,
+        22.059465016785385
+      ],
+      "branch_constant.a1": [
+        26.581296661366938,
+        26.775571773336026
+      ],
+      "branch_constant.a2": [
+        31.269595470140292,
+        31.497938592896322
+      ],
+      "branch_constant.a4": [
+        40.634362499348235,
+        40.937378446071826
+      ],
+      "cost": [
+        0.0,
+        0.0
+      ],
+      "coverage": [
+        0.9698,
+        0.9762
+      ],
+      "edge_weight": [
+        0.0,
+        0.0
+      ],
+      "effective_classes": [
+        141.26662760386935,
+        147.6999934621696
+      ],
+      "expected_tree_distance": [
+        0.0,
+        0.0
+      ],
+      "gini": [
+        0.8310326464780158,
+        0.8391904880287258
+      ],
+      "information.alphabetic_optimum_bits": [
+        13.361599999999994,
+        13.361599999999994
+      ],
+      "information.entropy_bits": [
+        13.28771237954811,
+        13.28771237954811
+      ],
+      "information.huffman_lower_bound_bits": [
+        13.28771237954811,
+        13.28771237954811
+      ],
+      "information.nav_over_alphabetic": [
+        1.638742408458613,
+        1.650959841395147
+      ],
+      "information.nav_over_entropy": [
+        1.6478547954245564,
+        1.6601401645883298
+      ],
+      "largest_class_share": [
+        0.11624457861297333,
+        0.12118243304558723
+      ],
+      "mean_depth": [
+        4.873290000000001,
+        4.9187025
+      ],
+      "nav_log_a0": [
+        21.896220564860595,
+        22.059465016785385
+      ],
+      "nav_log_a1": [
+        26.581296661366938,
+        26.775571773336026
+      ],
+      "nav_log_a2": [
+        31.269595470140292,
+        31.497938592896322
+      ],
+      "nav_log_a4": [
+        40.634362499348235,
+        40.937378446071826
+      ],
+      "nav_scan": [
+        300.58705875000175,
+        309.87539875000107
+      ],
+      "nav_scan_placed": [
+        305.20228065083296,
+        314.4856355628081
+      ],
+      "normalized_entropy": [
+        0.726688952395831,
+        0.7332965193392397
+      ],
+      "revenue": [
+        0.0,
+        0.0
+      ],
+      "uniform.depth_traversed.all": [
+        4.873290000001547,
+        4.918702500001561
+      ],
+      "uniform.depth_traversed.placed": [
+        4.986627208349533,
+        5.024256693466263
+      ],
+      "uniform.items_scanned.all": [
+        226.29718125000147,
+        229.33282750000208
+      ],
+      "uniform.items_scanned.placed": [
+        228.7334924075078,
+        231.86705761633604
+      ],
+      "uniform.menu_accesses.all": [
+        4.680197500001497,
+        4.722002500001539
+      ],
+      "uniform.menu_accesses.placed": [
+        4.787890214499595,
+        4.821436279029162
+      ],
+      "zipf_s1_seed_20261010.depth_traversed.all": [
+        4.735896542319969,
+        5.231337395759993
+      ],
+      "zipf_s1_seed_20261010.depth_traversed.placed": [
+        4.9314265981728385,
+        5.321228234072368
+      ],
+      "zipf_s1_seed_20261010.items_scanned.all": [
+        215.4586062013859,
+        279.91946334796216
+      ],
+      "zipf_s1_seed_20261010.items_scanned.placed": [
+        217.2798507549956,
+        283.8939994398469
+      ],
+      "zipf_s1_seed_20261010.menu_accesses.all": [
+        4.536247592322112,
+        5.079929738195263
+      ],
+      "zipf_s1_seed_20261010.menu_accesses.placed": [
+        4.713756915389439,
+        5.149550525984409
+      ]
+    }
+  },
+  "permutation_null": {
+    "permutations": 200,
+    "seed": 20261010,
+    "cost_norm": {
+      "mean": 0.8166159910164258,
+      "sd": 0.0011792277959051965,
+      "z": -78.37215631718763,
+      "percentile": 0.0,
+      "confidence_intervals": {
+        "mean": [
+          0.816451533520578,
+          0.8167850417857543
+        ],
+        "percentile": [
+          0.0,
+          0.0
+        ],
+        "sd": [
+          0.0010720377802517487,
+          0.0012945774108515783
+        ],
+        "z": [
+          -86.08189370732266,
+          -71.3980893855902
+        ]
+      }
+    },
+    "skill": {
+      "mean": 0.2134694437936218,
+      "sd": 0.0013726883990217967,
+      "z": 78.37215631718783,
+      "percentile": 1.0,
+      "confidence_intervals": {
+        "mean": [
+          0.21328734932890292,
+          0.21365232414096616
+        ],
+        "percentile": [
+          1.0,
+          1.0
+        ],
+        "sd": [
+          0.0012407853298855298,
+          0.001493741771593651
+        ],
+        "z": [
+          72.01074248423974,
+          86.65763842675025
+        ]
+      }
+    }
+  },
+  "hashes": {
+    "graph": "68df716f9b8dc292c0b6136fd03ef25941316f47a1db40cb762330b78437b6f1",
+    "tree": "a2f76993cedf5d60699e3d2d8da89bf721eacd9370d61976d5c1fa912910f735",
+    "scheme": "05f0b3cefa69d9096f9736bb606aa45b1f0eaece1afb7fa01231b9f8c338e745"
+  },
+  "bootstrap": {
+    "resamples": 1000,
+    "seed": 20261010,
+    "confidence": 0.95,
+    "method": "percentile; items resampled with replacement on the fixed graph and tree",
+    "ci": {
+      "cost": [
+        202539342.56533295,
+        211007617.30772454
+      ],
+      "cost_norm": [
+        0.7173145868001646,
+        0.7308301422437765
+      ],
+      "coverage": [
+        0.9698,
+        0.9762
+      ],
+      "edge_weight": [
+        28009.87301974243,
+        29056.776981119583
+      ],
+      "effective_classes": [
+        141.26662760386935,
+        147.6999934621696
+      ],
+      "expected_tree_distance": [
+        8.276160650061081,
+        8.3954705469114
+      ],
+      "gini": [
+        0.8310326464780158,
+        0.8391904880287258
+      ],
+      "largest_class_share": [
+        0.11624457861297333,
+        0.12118243304558723
+      ],
+      "max_branching": [
+        535.0,
+        535.0
+      ],
+      "max_depth": [
+        9.0,
+        9.0
+      ],
+      "mean_branching": [
+        10.2697807435653,
+        10.2697807435653
+      ],
+      "mean_depth": [
+        4.873290000000001,
+        4.9187025
+      ],
+      "nav_log_a0": [
+        21.896220564860595,
+        22.059465016785385
+      ],
+      "nav_log_a1": [
+        26.581296661366938,
+        26.775571773336026
+      ],
+      "nav_log_a2": [
+        31.269595470140292,
+        31.497938592896322
+      ],
+      "nav_log_a4": [
+        40.634362499348235,
+        40.937378446071826
+      ],
+      "nav_scan": [
+        300.58705875000175,
+        309.87539875000107
+      ],
+      "nav_scan_placed": [
+        305.20228065083296,
+        314.4856355628081
+      ],
+      "nodes_over_50_children": [
+        46.0,
+        46.0
+      ],
+      "normalized_entropy": [
+        0.726688952395831,
+        0.7332965193392397
+      ],
+      "p50_depth": [
+        5.0,
+        5.0
+      ],
+      "p95_branching": [
+        41.0,
+        41.0
+      ],
+      "p95_depth": [
+        7.0,
+        7.0
+      ],
+      "ref_cost_norm": [
+        0.14093555628099108,
+        0.14093555628099108
+      ],
+      "revenue": [
+        76444491.4261313,
+        81096302.22697571
+      ],
+      "revenue_norm": [
+        0.26916985775622354,
+        0.2826854131998355
+      ],
+      "root_fanout": [
+        276.0,
+        276.0
+      ],
+      "skill": [
+        0.3133290636392189,
+        0.32906194089008173
+      ]
+    }
+  },
+  "edge_bootstrap": {
+    "resamples": 1000,
+    "seed": 20261010,
+    "confidence": 0.95,
+    "method": "percentile; graph edges resampled with replacement on the fixed tree",
+    "ci": {
+      "cost": [
+        205952250.78868663,
+        207170287.31203994
+      ],
+      "cost_norm": [
+        0.7221908346805096,
+        0.7262552736861813
+      ],
+      "edge_weight": [
+        28498.78126602864,
+        28542.803813409075
+      ],
+      "expected_tree_distance": [
+        8.320280752295846,
+        8.349696072449678
+      ],
+      "revenue": [
+        78068204.67951201,
+        79251653.64024553
+      ],
+      "revenue_norm": [
+        0.2737447263138188,
+        0.2778091653194904
+      ],
+      "skill": [
+        0.3186544715187372,
+        0.3233857102929508
+      ]
+    }
+  },
+  "source_result": "bench/results/2026-10-10-embed/runs/bge-small-k20/corpus/unesco-thesaurus-placed.json",
+  "run": {
+    "condition": "bge-small-k20",
+    "universe": "corpus",
+    "key": "unesco-thesaurus-placed"
+  }
+}

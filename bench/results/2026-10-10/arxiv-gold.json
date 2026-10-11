@@ -1,0 +1,52 @@
+{
+  "scheme": "arxiv",
+  "version": "2024-04-01",
+  "track": "A",
+  "mode": "primary",
+  "n": 10000,
+  "k": 20,
+  "edge_weight": 60220.11973891941,
+  "cost": 200711464.18073967,
+  "cost_norm": 0.33329635518978,
+  "revenue": 401489733.2084545,
+  "revenue_norm": 0.66670364481022,
+  "ref_cost_norm": 0.15183392202502477,
+  "skill": 0.7860531824168175,
+  "coverage": 1.0,
+  "structure": {
+    "mean_depth": 3.8976,
+    "p50_depth": 4,
+    "p95_depth": 4,
+    "max_depth": 4,
+    "mean_branching": 60.83233532934132,
+    "p95_branching": 200,
+    "max_branching": 797,
+    "root_fanout": 8,
+    "nodes_over_50_children": 52,
+    "normalized_entropy": 0.7027774672679232,
+    "effective_classes": 36.481698686133974,
+    "gini": 0.7951432860397372,
+    "largest_class_share": 0.13694091662065158,
+    "nav_scan": 291.2549000000038,
+    "nav_log_a0": 15.172191886997975,
+    "nav_log_a1": 18.33239188699816,
+    "nav_log_a2": 21.49259188699768
+  },
+  "hashes": {
+    "graph": "759d3b8461a9384d4359244c9fb42c2bc66496431e0f4681d33b7a59798ed35a",
+    "tree": "f4cb8153c9a89d0f2ab64a3f8927da3b5a2dbb01b275d87e0d8282d2ca92e652",
+    "scheme": "97cbb680a3ffd3855bde560a52e969698aa67d1693272c22c821a38ddfbeb22f"
+  },
+  "run": {
+    "scheme_id": "scheme:arxiv@2024-04-01",
+    "corpus": "corpus",
+    "placement_source": "gold",
+    "placement_stats": {
+      "rows": 10000,
+      "field": "categories",
+      "rows_with_valid_codes": 10000,
+      "output": "bench/corpus/cache/gold/corpus-arxiv.jsonl"
+    },
+    "score_seconds": 1.2
+  }
+}

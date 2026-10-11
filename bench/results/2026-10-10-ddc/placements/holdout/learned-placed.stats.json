@@ -1,0 +1,22 @@
+{
+  "rows": 500,
+  "failed": 0,
+  "fallback": 457,
+  "placed": 43,
+  "flagged": 43,
+  "deciding_tiers": {
+    "vocab": 43
+  },
+  "classes_used": 23,
+  "top_class": "01.03.03.04",
+  "top_class_share": 0.11627906976744186,
+  "top_class_terms": {
+    "game": 2,
+    "games": 2,
+    "player": 1
+  },
+  "output": "bench/corpus/cache/ddc-bench/placements/holdout/learned-placed.jsonl",
+  "classify_seconds": 2.3,
+  "profile": "profile:lexical@2",
+  "store_rules": "empty"
+}

@@ -1,0 +1,114 @@
+{
+  "scheme": "learned",
+  "version": "2026-10-10-split80.ins2000",
+  "track": "P",
+  "mode": "primary",
+  "n": 2000,
+  "k": 20,
+  "edge_weight": 1145.782160755081,
+  "cost": 424830.2249189903,
+  "cost_norm": 0.1853887411892603,
+  "revenue": 1866734.0965911713,
+  "revenue_norm": 0.8146112588107396,
+  "ref_cost_norm": 0.09586283158830573,
+  "skill": 0.900981938660673,
+  "coverage": 1.0,
+  "structure": {
+    "mean_depth": 5.0,
+    "p50_depth": 5,
+    "p95_depth": 5,
+    "max_depth": 5,
+    "mean_branching": 24.232558139534884,
+    "p95_branching": 48,
+    "max_branching": 69,
+    "root_fanout": 2,
+    "nodes_over_50_children": 3,
+    "normalized_entropy": 0.7912474868043676,
+    "effective_classes": 33.936499056036276,
+    "gini": 0.6583139534883722,
+    "largest_class_share": 0.12775,
+    "nav_scan": 43.842249999999886,
+    "nav_log_a0": 11.104913717591986,
+    "nav_log_a1": 16.104913717592044,
+    "nav_log_a2": 21.104913717591973
+  },
+  "hashes": {
+    "graph": "78a001162f0f3ec0698e8627b116e96502a381f4bbf4e8ffb2fdbef1fae1ed81",
+    "tree": "fd2db6e04b79b9abc48e97ecd7534a4ace03b517387605f3307e1fb70537a17d",
+    "scheme": "d7aa65664e189b1c2f5a9c87d32a3d7e1e9c9ee39a404f665a82ea937d28626c"
+  },
+  "bootstrap": {
+    "resamples": 1000,
+    "seed": 20261010,
+    "confidence": 0.95,
+    "method": "percentile; items resampled with replacement on the fixed graph and tree",
+    "ci": {
+      "cost_norm": [
+        0.16860270707916444,
+        0.20343081889368048
+      ],
+      "coverage": [
+        1.0,
+        1.0
+      ],
+      "effective_classes": [
+        33.50647904977201,
+        34.00825265192719
+      ],
+      "gini": [
+        0.6575993459302325,
+        0.6675529069767442
+      ],
+      "largest_class_share": [
+        0.125125,
+        0.13325
+      ],
+      "mean_depth": [
+        5.0,
+        5.0
+      ],
+      "nav_log_a0": [
+        11.0748161536664,
+        11.133109289566981
+      ],
+      "nav_log_a1": [
+        16.07481615366642,
+        16.133109289567024
+      ],
+      "nav_log_a2": [
+        21.074816153666386,
+        21.133109289566924
+      ],
+      "nav_scan": [
+        43.480456249999875,
+        45.2975249999999
+      ],
+      "normalized_entropy": [
+        0.7883846029583182,
+        0.7917216565448795
+      ],
+      "ref_cost_norm": [
+        0.08539109397579529,
+        0.10872682568521325
+      ],
+      "revenue_norm": [
+        0.7965691811063196,
+        0.8313972929208355
+      ],
+      "skill": [
+        0.8814653666870222,
+        0.92057678832844
+      ]
+    }
+  },
+  "run": {
+    "condition": "bge-small-k20",
+    "model": "bge-small",
+    "graph_k": 20,
+    "universe": "split",
+    "key": "learned-heldout",
+    "placement_source": "own insertion into the MiniLM 80% fit (held out)",
+    "placements": "bench/corpus/cache/learned-bench/split/test-placements.jsonl",
+    "score_seconds": 0.2
+  }
+}

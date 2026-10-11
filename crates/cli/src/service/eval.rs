@@ -21,6 +21,7 @@ use shelfmark_core::scheme::{CodeCheck, CompiledIndex};
 use shelfmark_core::tier::{ClassifyInput, Profile, Tier};
 use shelfmark_core::{Error, ErrorCode, ProfileId, Request};
 use shelfmark_eval::{Outcome, Sample, DEFAULT_K};
+use shelfmark_profile::builtin::needs_network;
 
 use super::{gold_file, Shelfmark};
 use crate::args::Args;
@@ -137,8 +138,8 @@ impl Shelfmark {
         })
     }
 
-    /// The profile asked for, else every runnable one, plus the ones
-    /// skipped and the tiers each is missing.
+    /// The profile asked for, else every runnable one that sends no
+    /// network requests, plus the ones skipped and why.
     fn eval_profiles(&self, args: &Args) -> Result<(Vec<Profile>, Vec<Value>), Error> {
         let missing = |p: &Profile| -> Vec<String> {
             p.tiers
@@ -159,11 +160,23 @@ impl Shelfmark {
             }
             return Ok((vec![p], Vec::new()));
         }
-        let (run, skip): (Vec<&Profile>, Vec<&Profile>) =
-            self.wiring.profiles.iter().partition(|p| self.runnable(p));
+        let (run, skip): (Vec<&Profile>, Vec<&Profile>) = self
+            .wiring
+            .profiles
+            .iter()
+            .partition(|p| self.runnable(p) && !needs_network(p));
         let skipped = skip
             .iter()
-            .map(|p| json!({ "profile": p.id, "missing_tiers": missing(p) }))
+            .map(|p| {
+                let mut v = json!({ "profile": p.id, "missing_tiers": missing(p) });
+                if needs_network(p) {
+                    v["reason"] = json!(format!(
+                        "sends network requests; run it with --profile {}",
+                        p.id.0.name
+                    ));
+                }
+                v
+            })
             .collect();
         Ok((run.into_iter().cloned().collect(), skipped))
     }

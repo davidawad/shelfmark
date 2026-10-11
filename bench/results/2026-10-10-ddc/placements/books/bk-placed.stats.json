@@ -1,0 +1,21 @@
+{
+  "rows": 3000,
+  "failed": 0,
+  "fallback": 1337,
+  "placed": 1663,
+  "flagged": 1361,
+  "deciding_tiers": {
+    "vocab": 1663
+  },
+  "classes_used": 227,
+  "top_class": "20.26",
+  "top_class_share": 0.22609741431148528,
+  "top_class_terms": {
+    "history": 376,
+    "geschichte": 4
+  },
+  "output": "bench/corpus/cache/ddc-bench/placements/books/bk-placed.jsonl",
+  "classify_seconds": 13.1,
+  "profile": "profile:lexical@2",
+  "store_rules": "empty"
+}

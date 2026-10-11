@@ -1,0 +1,51 @@
+{
+  "scheme": "lcc",
+  "version": "2024",
+  "track": "P",
+  "mode": "primary",
+  "n": 110,
+  "k": 20,
+  "edge_weight": 66.21157573380178,
+  "cost": 5336.975441284474,
+  "cost_norm": 0.7327715436375365,
+  "revenue": 1946.297889433722,
+  "revenue_norm": 0.26722845636246356,
+  "ref_cost_norm": 0.21619620553607932,
+  "skill": 0.3409379467794402,
+  "coverage": 1.0,
+  "structure": {
+    "mean_depth": 4.6454545454545455,
+    "p50_depth": 5,
+    "p95_depth": 6,
+    "max_depth": 7,
+    "mean_branching": 1.9528301886792452,
+    "p95_branching": 6,
+    "max_branching": 22,
+    "root_fanout": 9,
+    "nodes_over_50_children": 0,
+    "normalized_entropy": 0.7707404788538822,
+    "effective_classes": 36.3902645154238,
+    "gini": 0.643932621276996,
+    "largest_class_share": 0.2119700748129676,
+    "nav_scan": 20.281818181818174,
+    "nav_log_a0": 9.768223465617147,
+    "nav_log_a1": 13.477314374708047,
+    "nav_log_a2": 17.18640528379895
+  },
+  "hashes": {
+    "graph": "f0e28851540c7d9f0b25f38f86864be04cbe4c7e60a2cefb4953f124e201421d",
+    "tree": "a5f8b6d380aba4b2514b5e08b2321c3ce441e85f54b94a35cd76fb3f8c81696c",
+    "scheme": "aab91312e939007a8e705ad4d4b3207f696911c43e70e21fa923de3391548327"
+  },
+  "run": {
+    "scheme_id": "scheme:lcc@2024",
+    "corpus": "holdout-ddc",
+    "placement_source": "gold LC call number",
+    "placement_stats": {
+      "rows": 500,
+      "rows_with_lcc_class": 461,
+      "output": "bench/corpus/cache/ddc-bench/gold/holdout-lcc.jsonl"
+    },
+    "score_seconds": 0.1
+  }
+}

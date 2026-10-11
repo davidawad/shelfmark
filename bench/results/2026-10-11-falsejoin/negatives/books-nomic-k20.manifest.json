@@ -1,0 +1,18 @@
+{
+  "corpus": "bench/corpus/holdout-books.jsonl",
+  "dimensions": 768,
+  "graph": "bench/results/2026-10-11-metrics/books/graphs/nomic-books-k20.json",
+  "graph_sha256": "129b5ec284f968cc5e097885e860a29e1396a15711ca0b00fa14e2f424f5e249",
+  "mean_dissimilarity": 0.03531040038226444,
+  "n": 3000,
+  "negatives_sha256": "ce3cce76f0f83bf42a7931a709a84207a05f7b741ddc064dcc6fa48ddcc181dc",
+  "pairs": 30000,
+  "spec": {
+    "floor": 0.6469538553896859,
+    "per_item": 10,
+    "seed": 20261010
+  },
+  "vectors": "bench/corpus/cache/falsejoin/vectors/nomic-holdout-books.f32",
+  "vectors_rule": "build_graph_fastembed.py --vectors on this corpus and model (nomic: --max-length 512)",
+  "vectors_sha256": "b93ccecc49e4b51ddb9ee8df0b821215b3b2fd0020a30f46ca9b0e3c18d91513"
+}

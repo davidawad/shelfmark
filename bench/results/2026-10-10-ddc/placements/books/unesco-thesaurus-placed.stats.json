@@ -1,0 +1,20 @@
+{
+  "rows": 3000,
+  "failed": 0,
+  "fallback": 224,
+  "placed": 2776,
+  "flagged": 2495,
+  "deciding_tiers": {
+    "vocab": 2776
+  },
+  "classes_used": 611,
+  "top_class": "c302",
+  "top_class_share": 0.13112391930835735,
+  "top_class_terms": {
+    "history": 364
+  },
+  "output": "bench/corpus/cache/ddc-bench/placements/books/unesco-thesaurus-placed.jsonl",
+  "classify_seconds": 13.9,
+  "profile": "profile:lexical@2",
+  "store_rules": "empty"
+}

@@ -1,0 +1,114 @@
+{
+  "scheme": "lcc-full",
+  "version": "2024",
+  "track": "A",
+  "mode": "primary",
+  "n": 500,
+  "k": 20,
+  "edge_weight": 1459.647912408383,
+  "cost": 515063.2848089876,
+  "cost_norm": 0.7057363360444175,
+  "revenue": 214760.67139520397,
+  "revenue_norm": 0.2942636639555825,
+  "ref_cost_norm": 0.301409582139011,
+  "skill": 0.4212248786013801,
+  "coverage": 0.922,
+  "structure": {
+    "mean_depth": 5.194,
+    "p50_depth": 5,
+    "p95_depth": 7,
+    "max_depth": 10,
+    "mean_branching": 1.9351464435146444,
+    "p95_branching": 5,
+    "max_branching": 68,
+    "root_fanout": 53,
+    "nodes_over_50_children": 1,
+    "normalized_entropy": 0.7204634972535916,
+    "effective_classes": 85.19811635010997,
+    "gini": 0.7181538479956424,
+    "largest_class_share": 0.1821649976156414,
+    "nav_scan": 55.63899999999992,
+    "nav_log_a0": 15.351380430985316,
+    "nav_log_a1": 19.709380430985373,
+    "nav_log_a2": 24.067380430985303
+  },
+  "hashes": {
+    "graph": "03d67d06b82633e1ca3461e3c9f11f3ee3bd55f43079a28b2126a1a90c1f6c75",
+    "tree": "a2e8701b99ee06e99ae3bd7ac26b725a2406a27018ae30a3c95de7484eead6ae",
+    "scheme": "c38d1ffce9912f90d98da5ebb5cf3b88f4c83e03a688000ae419c30d69f06bea"
+  },
+  "bootstrap": {
+    "resamples": 1000,
+    "seed": 20261010,
+    "confidence": 0.95,
+    "method": "percentile; items resampled with replacement on the fixed graph and tree",
+    "ci": {
+      "cost_norm": [
+        0.6824914037639612,
+        0.7285876543381027
+      ],
+      "coverage": [
+        0.896,
+        0.944
+      ],
+      "effective_classes": [
+        65.83305323128778,
+        84.78597079703493
+      ],
+      "gini": [
+        0.7004457465381227,
+        0.7375323303307506
+      ],
+      "largest_class_share": [
+        0.17305064206139978,
+        0.19064047116380703
+      ],
+      "mean_depth": [
+        5.04,
+        5.332
+      ],
+      "nav_log_a0": [
+        14.937519462724735,
+        15.768298247551014
+      ],
+      "nav_log_a1": [
+        19.165981057841137,
+        20.243089081539036
+      ],
+      "nav_log_a2": [
+        23.388036790802254,
+        24.725605221629287
+      ],
+      "nav_scan": [
+        52.95177499999995,
+        59.659324999999995
+      ],
+      "normalized_entropy": [
+        0.7196395823859422,
+        0.7535897342822903
+      ],
+      "ref_cost_norm": [
+        0.27451753500890613,
+        0.3313869325350249
+      ],
+      "revenue_norm": [
+        0.2714123456618973,
+        0.31750859623603883
+      ],
+      "skill": [
+        0.38447664409406335,
+        0.4601520836307736
+      ]
+    }
+  },
+  "run": {
+    "condition": "minilm-k20",
+    "model": "minilm",
+    "graph_k": 20,
+    "universe": "holdout",
+    "key": "lcc-full-gold",
+    "placement_source": "gold (source labels)",
+    "placements": "bench/corpus/cache/embed-bench/placements/holdout-lcc-full-gold.jsonl",
+    "score_seconds": 0.7
+  }
+}

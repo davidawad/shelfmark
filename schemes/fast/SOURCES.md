@@ -46,7 +46,7 @@ The content hash is shelfmark's: sha256 over the document's canonical JSON (`ser
 
 | file | scheme | classes | bytes | file sha256 | content hash |
 |---|---|---|---|---|---|
-| out/fast.json (not committed) | `scheme:fast@2024` | 440612 | 79309844 | `cc20d820aadad5ac3b6f3a72095d01f61a0eda4e6de13acd9b54294470549e47` | `s256:9cd2169c6e712a4890df1144fc14b5f1874b7c717164891f10ed99970b3c8cec` |
-| fast-sample.json | `scheme:fast@2024-sample` | 1486 | 345813 | `e48afe6a47dbb0d1372d88ff3aee39d3335e8ffedee5c590eced0759fd10e6d1` | `s256:58c33e5cacc367b5599789dc7c111f359f24b6cdab419eb70ca3c7d0f17caace` |
+| out/fast.json (not committed) | `scheme:fast@2024` | 440612 | 79309830 | `b70f2da49fc897a3502aab6bb1f52c26010a8bf153ee2fdc4739d7a1e778ad0d` | `s256:61b9ba64cc029f88126358da6b06255199422182b8a76e39f54e43067c0cb794` |
+| fast-sample.json | `scheme:fast@2024-sample` | 1486 | 345799 | `0018bb0bb73d298e2dd3aae51cb3607113519e006b0027a1d2a917e8616e5ed5` | `s256:ee7a47b7f701e5bc8f4786188a1b62c2d508d72e6284825d0f638fad92bf80d4` |
 
 The sample is seeds fst00872451, fst01004795, fst00997341, fst00863572, fst01136458, fst00988184, fst01754966 with their ancestors and 2 levels of descendants.

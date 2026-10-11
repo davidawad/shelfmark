@@ -1,0 +1,51 @@
+{
+  "scheme": "ddc",
+  "version": "numbers-2026-10-10",
+  "track": "P",
+  "mode": "primary",
+  "n": 500,
+  "k": 20,
+  "edge_weight": 1459.647912408383,
+  "cost": 712206.2254355348,
+  "cost_norm": 0.9758603008042016,
+  "revenue": 17617.730768656707,
+  "revenue_norm": 0.02413969919579837,
+  "ref_cost_norm": 0.301409582139011,
+  "skill": 0.03455486731368523,
+  "coverage": 0.22,
+  "structure": {
+    "mean_depth": 1.66,
+    "p50_depth": 1,
+    "p95_depth": 4,
+    "max_depth": 4,
+    "mean_branching": 2.4571428571428573,
+    "p95_branching": 4,
+    "max_branching": 41,
+    "root_fanout": 398,
+    "nodes_over_50_children": 0,
+    "normalized_entropy": 0.7119550606072792,
+    "effective_classes": 20.588603355672927,
+    "gini": 0.6952380952380952,
+    "largest_class_share": 0.24848484848484848,
+    "nav_scan": 206.04200000000148,
+    "nav_log_a0": 10.15386484180171,
+    "nav_log_a1": 11.715864841801556,
+    "nav_log_a2": 13.277864841801614
+  },
+  "hashes": {
+    "graph": "03d67d06b82633e1ca3461e3c9f11f3ee3bd55f43079a28b2126a1a90c1f6c75",
+    "tree": "665f44c4526927c00cffb604b1e119d29edd52f0977e3957b609b5761f9114f3",
+    "scheme": "9242deed76f0daf7aadc2d80801008a237c34f7d3787a1975d46cd728bea3020"
+  },
+  "run": {
+    "scheme_id": "scheme:ddc@numbers-2026-10-10",
+    "corpus": "holdout",
+    "placement_source": "gold Dewey number cut to its section",
+    "placement_stats": {
+      "rows": 500,
+      "rows_with_ddc_number": 110,
+      "output": "bench/corpus/cache/ddc-bench/placements/holdout/ddc-section.jsonl"
+    },
+    "score_seconds": 0.0
+  }
+}

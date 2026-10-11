@@ -1,0 +1,462 @@
+{
+  "scheme": "ddc",
+  "version": "numbers-2026-10-10",
+  "track": "A",
+  "mode": "primary",
+  "n": 3000,
+  "k": 20,
+  "edge_weight": 7181.498043631268,
+  "cost": 10414136.481827242,
+  "cost_norm": 0.48337809273014465,
+  "revenue": 11130357.649066562,
+  "revenue_norm": 0.5166219072698554,
+  "ref_cost_norm": 0.24495572224487952,
+  "skill": 0.6842272996305107,
+  "coverage": 1.0,
+  "structure": {
+    "mean_depth": 4.0,
+    "p50_depth": 4,
+    "p95_depth": 4,
+    "max_depth": 4,
+    "mean_branching": 7.052631578947368,
+    "p95_branching": 23,
+    "max_branching": 102,
+    "root_fanout": 10,
+    "nodes_over_50_children": 6,
+    "normalized_entropy": 0.7759756642212008,
+    "effective_classes": 123.10241088972445,
+    "gini": 0.7561097615834458,
+    "largest_class_share": 0.09866666666666667,
+    "nav_scan": 40.743000000000045,
+    "nav_log_a0": 13.18729968493684,
+    "nav_log_a1": 17.138299684936708,
+    "nav_log_a2": 21.089299684936996,
+    "nav_log_a4": 28.99129968493672,
+    "nav_scan_placed": 40.743
+  },
+  "metrics_upgrade": {
+    "query_workloads": {
+      "uniform": {
+        "placed_only": {
+          "menu_accesses": 3.9509999999996315,
+          "depth_traversed": 3.999999999999626,
+          "items_scanned": 27.78833333333419
+        },
+        "including_unplaced": {
+          "menu_accesses": 3.9509999999996315,
+          "depth_traversed": 3.999999999999626,
+          "items_scanned": 27.78833333333419
+        }
+      },
+      "uniform_placed_only": {
+        "placed_only": {
+          "menu_accesses": 3.9509999999996315,
+          "depth_traversed": 3.999999999999626,
+          "items_scanned": 27.78833333333419
+        },
+        "including_unplaced": {
+          "menu_accesses": 3.9509999999996315,
+          "depth_traversed": 3.999999999999626,
+          "items_scanned": 27.78833333333419
+        }
+      },
+      "zipf_s1_seed_20261010": {
+        "placed_only": {
+          "menu_accesses": 3.9692252881578853,
+          "depth_traversed": 3.9999999999999916,
+          "items_scanned": 30.313635300616877
+        },
+        "including_unplaced": {
+          "menu_accesses": 3.9692252881578853,
+          "depth_traversed": 3.9999999999999916,
+          "items_scanned": 30.313635300616877
+        }
+      }
+    },
+    "popularity_proxy": "none available: corpus has one sampled record per work and no edition-count field",
+    "information_bounds": {
+      "entropy_bits": 11.550746785383527,
+      "huffman_lower_bound_bits": 11.550746785383527,
+      "alphabetic_optimum_bits": 11.634666666666645,
+      "nav_over_entropy": 1.1416837309276084,
+      "nav_over_alphabetic": 1.1334488612998599
+    },
+    "branch_constant_sweep": {
+      "a=0": 13.187299684936745,
+      "a=1": 17.138299684936914,
+      "a=2": 21.089299684937036,
+      "a=4": 28.991299684937257
+    },
+    "alphabetic_method": "Knuth-optimized alphabetic dynamic program, O(n^2)",
+    "log_base": 2,
+    "confidence_intervals": {
+      "branch_constant.a0": [
+        13.114853152201988,
+        13.25979394697307
+      ],
+      "branch_constant.a1": [
+        17.05993867877702,
+        17.21578050427384
+      ],
+      "branch_constant.a2": [
+        21.004033362785034,
+        21.169823400818586
+      ],
+      "branch_constant.a4": [
+        28.892928937973593,
+        29.080975199820678
+      ],
+      "cost": [
+        0.0,
+        0.0
+      ],
+      "coverage": [
+        1.0,
+        1.0
+      ],
+      "edge_weight": [
+        0.0,
+        0.0
+      ],
+      "effective_classes": [
+        116.10182374248745,
+        123.11746576950804
+      ],
+      "expected_tree_distance": [
+        0.0,
+        0.0
+      ],
+      "gini": [
+        0.7306536758563074,
+        0.7451637300596475
+      ],
+      "information.alphabetic_optimum_bits": [
+        11.634666666666645,
+        11.634666666666645
+      ],
+      "information.entropy_bits": [
+        11.550746785383527,
+        11.550746785383527
+      ],
+      "information.huffman_lower_bound_bits": [
+        11.550746785383527,
+        11.550746785383527
+      ],
+      "information.nav_over_alphabetic": [
+        1.1272220793205947,
+        1.1396797456142358
+      ],
+      "information.nav_over_entropy": [
+        1.1354117093794924,
+        1.147959884615616
+      ],
+      "largest_class_share": [
+        0.09333333333333334,
+        0.10433611111111112
+      ],
+      "mean_depth": [
+        4.0,
+        4.0
+      ],
+      "nav_log_a0": [
+        13.114853152201988,
+        13.25979394697307
+      ],
+      "nav_log_a1": [
+        17.05993867877702,
+        17.21578050427384
+      ],
+      "nav_log_a2": [
+        21.004033362785034,
+        21.169823400818586
+      ],
+      "nav_log_a4": [
+        28.892928937973593,
+        29.080975199820678
+      ],
+      "nav_scan": [
+        39.91709166666671,
+        42.62574166666665
+      ],
+      "nav_scan_placed": [
+        39.917091666666664,
+        42.62574166666667
+      ],
+      "normalized_entropy": [
+        0.7813852928916911,
+        0.7903586685579618
+      ],
+      "revenue": [
+        0.0,
+        0.0
+      ],
+      "uniform.depth_traversed.all": [
+        3.999999999999668,
+        3.999999999999683
+      ],
+      "uniform.depth_traversed.placed": [
+        3.999999999999668,
+        3.999999999999683
+      ],
+      "uniform.items_scanned.all": [
+        27.320775000000527,
+        28.249762500000596
+      ],
+      "uniform.items_scanned.placed": [
+        27.320775000000527,
+        28.249762500000596
+      ],
+      "uniform.menu_accesses.all": [
+        3.9429999999996803,
+        3.95899999999968
+      ],
+      "uniform.menu_accesses.placed": [
+        3.9429999999996803,
+        3.95899999999968
+      ],
+      "zipf_s1_seed_20261010.depth_traversed.all": [
+        3.99999999999996,
+        4.000000000000033
+      ],
+      "zipf_s1_seed_20261010.depth_traversed.placed": [
+        3.99999999999996,
+        4.000000000000033
+      ],
+      "zipf_s1_seed_20261010.items_scanned.all": [
+        26.31008103777475,
+        34.89099668271641
+      ],
+      "zipf_s1_seed_20261010.items_scanned.placed": [
+        26.31008103777475,
+        34.89099668271641
+      ],
+      "zipf_s1_seed_20261010.menu_accesses.all": [
+        3.9493097963610273,
+        3.9808271301313214
+      ],
+      "zipf_s1_seed_20261010.menu_accesses.placed": [
+        3.9493097963610273,
+        3.9808271301313214
+      ]
+    }
+  },
+  "permutation_null": {
+    "permutations": 200,
+    "seed": 20261010,
+    "cost_norm": {
+      "mean": 0.8614286182136495,
+      "sd": 0.002137300671723573,
+      "z": -176.88223771465687,
+      "percentile": 0.0,
+      "confidence_intervals": {
+        "mean": [
+          0.861136070314131,
+          0.8617316531421726
+        ],
+        "percentile": [
+          0.0,
+          0.0
+        ],
+        "sd": [
+          0.001905153486589071,
+          0.0023685416234498647
+        ],
+        "z": [
+          -198.35253990117855,
+          -159.61808508887475
+        ]
+      }
+    },
+    "skill": {
+      "mean": 0.1835274908623205,
+      "sd": 0.002830695807771888,
+      "z": 176.88223771465704,
+      "percentile": 1.0,
+      "confidence_intervals": {
+        "mean": [
+          0.1831482019483895,
+          0.18390063586117242
+        ],
+        "percentile": [
+          1.0,
+          1.0
+        ],
+        "sd": [
+          0.002512164596198507,
+          0.003119686422502502
+        ],
+        "z": [
+          160.52629186375722,
+          199.36723090433907
+        ]
+      }
+    }
+  },
+  "hashes": {
+    "graph": "1fce5cae9e2639134ecb67ef1010c9f70dc2266f46d5677333239d609ab5b8f6",
+    "tree": "167add8fddbe8cc5a923e2a708fd9a1adfb739fad67d14aae429b27270404985",
+    "scheme": "9242deed76f0daf7aadc2d80801008a237c34f7d3787a1975d46cd728bea3020"
+  },
+  "bootstrap": {
+    "resamples": 1000,
+    "seed": 20261010,
+    "confidence": 0.95,
+    "method": "percentile; items resampled with replacement on the fixed graph and tree",
+    "ci": {
+      "cost": [
+        9778845.223576065,
+        11085641.250620052
+      ],
+      "cost_norm": [
+        0.4647255283353996,
+        0.5030690933510513
+      ],
+      "coverage": [
+        1.0,
+        1.0
+      ],
+      "edge_weight": [
+        6902.248269513992,
+        7476.766972981563
+      ],
+      "effective_classes": [
+        116.10182374248745,
+        123.11746576950804
+      ],
+      "expected_tree_distance": [
+        5.534757207120851,
+        5.750135241745913
+      ],
+      "gini": [
+        0.7306536758563074,
+        0.7451637300596475
+      ],
+      "largest_class_share": [
+        0.09333333333333334,
+        0.10433611111111112
+      ],
+      "max_branching": [
+        102.0,
+        102.0
+      ],
+      "max_depth": [
+        4.0,
+        4.0
+      ],
+      "mean_branching": [
+        7.052631578947368,
+        7.052631578947368
+      ],
+      "mean_depth": [
+        4.0,
+        4.0
+      ],
+      "nav_log_a0": [
+        13.114853152201988,
+        13.25979394697307
+      ],
+      "nav_log_a1": [
+        17.05993867877702,
+        17.21578050427384
+      ],
+      "nav_log_a2": [
+        21.004033362785034,
+        21.169823400818586
+      ],
+      "nav_log_a4": [
+        28.892928937973593,
+        29.080975199820678
+      ],
+      "nav_scan": [
+        39.91709166666671,
+        42.62574166666665
+      ],
+      "nav_scan_placed": [
+        39.917091666666664,
+        42.62574166666667
+      ],
+      "nodes_over_50_children": [
+        6.0,
+        6.0
+      ],
+      "normalized_entropy": [
+        0.7813852928916911,
+        0.7903586685579618
+      ],
+      "p50_depth": [
+        4.0,
+        4.0
+      ],
+      "p95_branching": [
+        23.0,
+        23.0
+      ],
+      "p95_depth": [
+        4.0,
+        4.0
+      ],
+      "ref_cost_norm": [
+        0.24495572224487952,
+        0.24495572224487952
+      ],
+      "revenue": [
+        10576318.104632834,
+        11643568.574489944
+      ],
+      "revenue_norm": [
+        0.49693090664894873,
+        0.5352744716646004
+      ],
+      "root_fanout": [
+        10.0,
+        10.0
+      ],
+      "skill": [
+        0.6581480335516372,
+        0.7089312341470432
+      ]
+    }
+  },
+  "edge_bootstrap": {
+    "resamples": 1000,
+    "seed": 20261010,
+    "confidence": 0.95,
+    "method": "percentile; graph edges resampled with replacement on the fixed tree",
+    "ci": {
+      "cost": [
+        10320514.930792551,
+        10510308.42868392
+      ],
+      "cost_norm": [
+        0.4787820808311665,
+        0.4879587209863779
+      ],
+      "edge_weight": [
+        7160.556970080822,
+        7202.080984568766
+      ],
+      "expected_tree_distance": [
+        5.615956909874081,
+        5.665695641349624
+      ],
+      "revenue": [
+        11021920.37238215,
+        11241866.892274678
+      ],
+      "revenue_norm": [
+        0.5120412790136221,
+        0.5212179191688334
+      ],
+      "skill": [
+        0.6781605981254648,
+        0.6903143756264282
+      ]
+    }
+  },
+  "run": {
+    "model": "bge-small",
+    "universe": "books",
+    "key": "ddc-section",
+    "source_result": "bench/results/2026-10-10-ddc/runs/books/ddc-section.json"
+  }
+}

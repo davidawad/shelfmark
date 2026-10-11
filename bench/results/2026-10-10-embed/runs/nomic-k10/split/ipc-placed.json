@@ -1,0 +1,114 @@
+{
+  "scheme": "ipc",
+  "version": "2026.01",
+  "track": "P",
+  "mode": "primary",
+  "n": 2000,
+  "k": 10,
+  "edge_weight": 632.7433353240142,
+  "cost": 965772.8828045634,
+  "cost_norm": 0.7631632202890071,
+  "revenue": 299713.787843465,
+  "revenue_norm": 0.23683677971099296,
+  "ref_cost_norm": 0.050043767478201794,
+  "skill": 0.24931335950317937,
+  "coverage": 0.9815,
+  "structure": {
+    "mean_depth": 6.325,
+    "p50_depth": 6,
+    "p95_depth": 9,
+    "max_depth": 10,
+    "mean_branching": 2.6024590163934427,
+    "p95_branching": 8,
+    "max_branching": 152,
+    "root_fanout": 45,
+    "nodes_over_50_children": 5,
+    "normalized_entropy": 0.8039516748575676,
+    "effective_classes": 302.88945591519195,
+    "gini": 0.7350661125221274,
+    "largest_class_share": 0.06403755868544601,
+    "nav_scan": 76.23799999999936,
+    "nav_log_a0": 16.140333321734303,
+    "nav_log_a1": 20.651333321734317,
+    "nav_log_a2": 25.162333321734412
+  },
+  "hashes": {
+    "graph": "3c6ccb30c9a8510a23abe746686dae6e5de52b7d636991d5cf0755680d7b24a5",
+    "tree": "93a16280fae97d89cd35591a7d591f8b7f78197f77b9abbd13c4e5f86fac97fa",
+    "scheme": "bbd8652376032c96b5c46ea3969a5057025aee6147ba67d4b7ae1c437264200c"
+  },
+  "bootstrap": {
+    "resamples": 1000,
+    "seed": 20261010,
+    "confidence": 0.95,
+    "method": "percentile; items resampled with replacement on the fixed graph and tree",
+    "ci": {
+      "cost_norm": [
+        0.7380283123456651,
+        0.7861947947508372
+      ],
+      "coverage": [
+        0.975,
+        0.987
+      ],
+      "effective_classes": [
+        270.9587841810897,
+        299.2357702765952
+      ],
+      "gini": [
+        0.7003268810170509,
+        0.7224819027744165
+      ],
+      "largest_class_share": [
+        0.06056620743614307,
+        0.06814192856846506
+      ],
+      "mean_depth": [
+        6.2604750000000005,
+        6.39105
+      ],
+      "nav_log_a0": [
+        15.983775425939251,
+        16.287168802523006
+      ],
+      "nav_log_a1": [
+        20.464956204084533,
+        20.833979196976937
+      ],
+      "nav_log_a2": [
+        24.936900217860185,
+        25.380616079125073
+      ],
+      "nav_scan": [
+        73.2016749999999,
+        80.05102500000015
+      ],
+      "normalized_entropy": [
+        0.8104982123188554,
+        0.8229167212490142
+      ],
+      "ref_cost_norm": [
+        0.04145460755234497,
+        0.061597772990695465
+      ],
+      "revenue_norm": [
+        0.21380520524916277,
+        0.26197168765433493
+      ],
+      "skill": [
+        0.22411678232082255,
+        0.27750778212588306
+      ]
+    }
+  },
+  "run": {
+    "condition": "nomic-k10",
+    "model": "nomic",
+    "graph_k": 10,
+    "universe": "split",
+    "key": "ipc-placed",
+    "placement_source": "shelfmark lexical@2, restricted to the 20%",
+    "placements": "bench/corpus/cache/embed-bench/placements/split/test-ipc-placed.jsonl",
+    "score_seconds": 0.4
+  }
+}

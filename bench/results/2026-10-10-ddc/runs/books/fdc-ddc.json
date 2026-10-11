@@ -1,0 +1,56 @@
+{
+  "scheme": "fdc",
+  "version": "0.06",
+  "track": "P",
+  "mode": "primary",
+  "n": 3000,
+  "k": 20,
+  "edge_weight": 13295.4182601465,
+  "cost": 19777198.128217433,
+  "cost_norm": 0.49583993877300075,
+  "revenue": 20109056.65222207,
+  "revenue_norm": 0.5041600612269992,
+  "ref_cost_norm": 0.22967463485582104,
+  "skill": 0.6544767757097515,
+  "coverage": 1.0,
+  "structure": {
+    "mean_depth": 3.941,
+    "p50_depth": 4,
+    "p95_depth": 5,
+    "max_depth": 7,
+    "mean_branching": 7.457883369330453,
+    "p95_branching": 23,
+    "max_branching": 122,
+    "root_fanout": 10,
+    "nodes_over_50_children": 6,
+    "normalized_entropy": 0.7654472703270458,
+    "effective_classes": 109.73917562874739,
+    "gini": 0.7687565069598921,
+    "largest_class_share": 0.10064603876232574,
+    "nav_scan": 54.04466666666664,
+    "nav_log_a0": 14.176157030719304,
+    "nav_log_a1": 18.068823697386044,
+    "nav_log_a2": 21.961490364052732
+  },
+  "hashes": {
+    "graph": "1d12c791d19a068d0a0c77a56f28124747221cf833b5d9fcf5655ea172899428",
+    "tree": "f3e0879cff3652622506785f569fc07baa321d09640988c974d2ddbee6516edf",
+    "scheme": "066e8d10ede72fae3cc20e6b5019d10136510cdc8dd078328048b5cc80b3a4db"
+  },
+  "run": {
+    "scheme_id": "scheme:fdc@0.06",
+    "corpus": "books",
+    "placement_source": "gold Dewey number mapped to FDC",
+    "placement_stats": {
+      "rows": 3000,
+      "rows_with_fdc_class": 3000,
+      "match": {
+        "range": 283,
+        "prefix": 2401,
+        "exact": 316
+      },
+      "output": "bench/corpus/cache/ddc-bench/placements/books/fdc-ddc.jsonl"
+    },
+    "score_seconds": 0.0
+  }
+}

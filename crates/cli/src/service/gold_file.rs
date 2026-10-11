@@ -34,6 +34,8 @@ struct Item {
     #[serde(default)]
     title: Option<String>,
     #[serde(default)]
+    authors: Vec<String>,
+    #[serde(default)]
     text: String,
     #[serde(default)]
     identifiers: BTreeMap<String, Value>,
@@ -144,6 +146,7 @@ fn item_examples(item: &Item, index: &dyn CompiledIndex) -> Result<Vec<GoldExamp
     let input = with_work(ClassifyInput {
         work: None,
         title: item.title.clone(),
+        authors: item.authors.clone(),
         text: item.text.clone(),
         identifiers,
         url: None,

@@ -1,0 +1,66 @@
+{
+  "scheme": "unesco-thesaurus",
+  "version": "2026-08-31",
+  "track": "P",
+  "mode": "primary",
+  "n": 10000,
+  "k": 20,
+  "edge_weight": 60220.11973891941,
+  "cost": 434194609.98254216,
+  "cost_norm": 0.7210125317999464,
+  "revenue": 168006587.40665197,
+  "revenue_norm": 0.27898746820005355,
+  "ref_cost_norm": 0.15183392202502477,
+  "skill": 0.3289302360053652,
+  "coverage": 0.9731,
+  "structure": {
+    "mean_depth": 4.8982,
+    "p50_depth": 5,
+    "p95_depth": 7,
+    "max_depth": 9,
+    "mean_branching": 10.2697807435653,
+    "p95_branching": 41,
+    "max_branching": 535,
+    "root_fanout": 276,
+    "nodes_over_50_children": 46,
+    "normalized_entropy": 0.7171408975179554,
+    "effective_classes": 146.66336490135438,
+    "gini": 0.8523828479610667,
+    "largest_class_share": 0.11874711405263969,
+    "nav_scan": 304.6872000000106,
+    "nav_log_a0": 21.979544895110212,
+    "nav_log_a1": 26.681944895110526,
+    "nav_log_a2": 31.3843448951104
+  },
+  "hashes": {
+    "graph": "759d3b8461a9384d4359244c9fb42c2bc66496431e0f4681d33b7a59798ed35a",
+    "tree": "a2f76993cedf5d60699e3d2d8da89bf721eacd9370d61976d5c1fa912910f735",
+    "scheme": "05f0b3cefa69d9096f9736bb606aa45b1f0eaece1afb7fa01231b9f8c338e745"
+  },
+  "run": {
+    "scheme_id": "scheme:unesco-thesaurus@2026-08-31",
+    "corpus": "corpus",
+    "placement_source": "shelfmark profile:lexical@2",
+    "placement_stats": {
+      "rows": 10000,
+      "failed": 0,
+      "fallback": 269,
+      "placed": 9731,
+      "flagged": 9529,
+      "deciding_tiers": {
+        "vocab": 9731
+      },
+      "classes_used": 675,
+      "top_class": "c155",
+      "top_class_share": 0.054978933305929505,
+      "top_class_terms": {
+        "time": 535
+      },
+      "output": "bench/corpus/cache/placed/corpus-unesco-thesaurus/placements.jsonl",
+      "classify_seconds": 47.0,
+      "profile": "profile:lexical@2",
+      "store_rules": "empty"
+    },
+    "score_seconds": 2.8
+  }
+}

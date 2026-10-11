@@ -27,12 +27,12 @@ fn rerank_profile_stops_at_the_lexical_tier_that_meets_the_target() {
         "--identifier",
         "isbn:9780262033848",
         "--profile",
-        "profile:rerank@1",
+        "profile:rerank@2",
         "--target",
         "0.9",
     ]);
     let p = &out["placement"];
-    assert_eq!(p["profile"], "profile:rerank@1");
+    assert_eq!(p["profile"], "profile:rerank@2");
     assert_eq!(p["status"], "machine");
     assert_eq!(p["trace"]["deciding_tier"], "identifier");
     assert_eq!(p["trace"]["cost"]["model_calls"], 0);
@@ -56,7 +56,7 @@ fn vocabulary_tier_can_decide_for_the_rerank_profile_too() {
         "--text",
         "Computer software",
         "--profile",
-        "profile:rerank@1",
+        "profile:rerank@2",
         "--target",
         "0.5",
     ]);

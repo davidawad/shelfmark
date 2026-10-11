@@ -14,6 +14,10 @@
 //!   factor grows with the amount of evidence, the second is the share
 //!   against unrelated classes, so two classes matched equally both score
 //!   at most one half and the cascade flags the decision (AE2).
+//!
+//! Labels and terms made only of English stopwords are never matched
+//! (`vocab-2`); `vocab-1` matched them, so a class labelled `To` drew
+//! most inputs.
 
 use std::collections::BTreeMap;
 use std::path::PathBuf;
@@ -29,6 +33,7 @@ use crate::{micros_since, normalized_fields, rank};
 
 mod matcher;
 mod persist;
+mod stopwords;
 mod trie;
 
 pub use matcher::{VocabMatcher, LABEL_SOURCE, QUALIFIER_DISCOUNT};
@@ -45,7 +50,7 @@ pub struct VocabTier {
 
 impl VocabTier {
     pub const NAME: &'static str = "vocab";
-    pub const VERSION: &'static str = "vocab-1";
+    pub const VERSION: &'static str = "vocab-2";
 
     pub fn new() -> Self {
         VocabTier::default()

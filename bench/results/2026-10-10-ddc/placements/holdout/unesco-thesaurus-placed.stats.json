@@ -1,0 +1,20 @@
+{
+  "rows": 500,
+  "failed": 0,
+  "fallback": 421,
+  "placed": 79,
+  "flagged": 77,
+  "deciding_tiers": {
+    "vocab": 79
+  },
+  "classes_used": 60,
+  "top_class": "c155",
+  "top_class_share": 0.05063291139240506,
+  "top_class_terms": {
+    "time": 4
+  },
+  "output": "bench/corpus/cache/ddc-bench/placements/holdout/unesco-thesaurus-placed.jsonl",
+  "classify_seconds": 2.4,
+  "profile": "profile:lexical@2",
+  "store_rules": "empty"
+}

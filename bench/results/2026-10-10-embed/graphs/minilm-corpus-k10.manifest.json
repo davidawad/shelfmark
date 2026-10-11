@@ -1,0 +1,16 @@
+{
+  "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+  "runtime": "fastembed 0.9.0 / ONNX Runtime CPU",
+  "weights_repository": "Qdrant/all-MiniLM-L6-v2-onnx",
+  "weights_revision": "d13954661f83248295ba75c1ed411eef3b7b936e",
+  "weights_sha256": "bbd7b466f6d58e646fdc2bd5fd67b2f5e93c0b687011bd4548c420f7bd46f0c5",
+  "corpus_sha256": "1027bf9d34928f470ed8b0d7b5ddc5c983fde49bc0cd33eaa162bbd1f830fea5",
+  "n": 10000,
+  "dimensions": 384,
+  "graph_k": 10,
+  "tau_rule": "exact mean cosine over all unordered corpus pairs",
+  "tau": 0.10862506011963294,
+  "graph_sha256": "c199b9c31806f62c9eaab1398caa21de55534f75bac8dbddc91670127ce8cfaa",
+  "published": "graphs/minilm-corpus-k10.json.gz",
+  "gz_mb": 1.04
+}

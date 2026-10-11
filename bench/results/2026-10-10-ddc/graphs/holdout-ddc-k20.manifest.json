@@ -1,0 +1,9 @@
+{
+  "subset_of": "holdout",
+  "ids": 110,
+  "ids_sha256": "dfcaa43ccaeca95698c860e44498718f854220cec1a0ebbb42e4d15398b6016d",
+  "rule": "graph induced on the ids (edges among them kept, same k and tau)",
+  "corpus_sha256": "966be621a7a0a7e44fe7f2ad380d53f46feb35542b709aa6464f69f493ee6866",
+  "graph_sha256": "f0e28851540c7d9f0b25f38f86864be04cbe4c7e60a2cefb4953f124e201421d",
+  "published": "graphs/holdout-ddc-k20.json.gz"
+}

@@ -1,0 +1,44 @@
+{
+  "scheme": "openalex-topics",
+  "version": "2026-10-09",
+  "track": "P",
+  "mode": "primary",
+  "n": 2000,
+  "k": 20,
+  "edge_weight": 2406.6870629717546,
+  "cost": 3137788.226286505,
+  "cost_norm": 0.6518895361518239,
+  "revenue": 1675585.899657004,
+  "revenue_norm": 0.34811046384817607,
+  "ref_cost_norm": 0.10239446169696316,
+  "skill": 0.38782120763904204,
+  "coverage": 0.975,
+  "structure": {
+    "mean_depth": 4.435,
+    "p50_depth": 5,
+    "p95_depth": 5,
+    "max_depth": 5,
+    "mean_branching": 4.287162162162162,
+    "p95_branching": 15,
+    "max_branching": 119,
+    "root_fanout": 54,
+    "nodes_over_50_children": 5,
+    "normalized_entropy": 0.6671280338107168,
+    "effective_classes": 70.71206649683135,
+    "gini": 0.8299775758291041,
+    "largest_class_share": 0.20902474526928674,
+    "nav_scan": 76.77974999999995,
+    "nav_log_a0": 17.023976284985686,
+    "nav_log_a1": 21.215476284985737,
+    "nav_log_a2": 25.40697628498574
+  },
+  "hashes": {
+    "graph": "209b0076121b81b8a2b38d2e1480533da4245313d01558060ea21fb98180c1b0",
+    "tree": "ec85f72f6d319fca426eeb23e63f2433ed3bacbd0110fdab078e76fe8cebfad2",
+    "scheme": "70b17f20d08f3f1e9e8d2ae16e27b9efac4763b2fdbc8ddf4274e76ffb1953df"
+  },
+  "run": {
+    "placement_source": "shelfmark profile:lexical@2, restricted to the 20%",
+    "score_seconds": 0.4
+  }
+}

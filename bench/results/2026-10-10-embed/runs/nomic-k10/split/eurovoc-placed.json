@@ -1,0 +1,114 @@
+{
+  "scheme": "eurovoc",
+  "version": "4.24",
+  "track": "P",
+  "mode": "primary",
+  "n": 2000,
+  "k": 10,
+  "edge_weight": 632.7433353240142,
+  "cost": 1050655.258676363,
+  "cost_norm": 0.8302381076351797,
+  "revenue": 214831.41197166545,
+  "revenue_norm": 0.16976189236482034,
+  "ref_cost_norm": 0.050043767478201794,
+  "skill": 0.17870496192668,
+  "coverage": 0.9775,
+  "structure": {
+    "mean_depth": 4.995,
+    "p50_depth": 5,
+    "p95_depth": 6,
+    "max_depth": 8,
+    "mean_branching": 3.42964824120603,
+    "p95_branching": 12,
+    "max_branching": 75,
+    "root_fanout": 66,
+    "nodes_over_50_children": 3,
+    "normalized_entropy": 0.8269920994805445,
+    "effective_classes": 250.62950034539767,
+    "gini": 0.7284532801680492,
+    "largest_class_share": 0.0493116395494368,
+    "nav_scan": 64.99974999999999,
+    "nav_log_a0": 14.564911200089877,
+    "nav_log_a1": 18.944911200089877,
+    "nav_log_a2": 23.324911200089872
+  },
+  "hashes": {
+    "graph": "3c6ccb30c9a8510a23abe746686dae6e5de52b7d636991d5cf0755680d7b24a5",
+    "tree": "d76c02c7b377ba8452a5231f66034b51c94760fdc76959ce4ec924f1c537e0c9",
+    "scheme": "55d63594841783fbd49f621e89d76a006714ae60f507891f77758c8db8438426"
+  },
+  "bootstrap": {
+    "resamples": 1000,
+    "seed": 20261010,
+    "confidence": 0.95,
+    "method": "percentile; items resampled with replacement on the fixed graph and tree",
+    "ci": {
+      "cost_norm": [
+        0.8052956765682547,
+        0.8565972179692463
+      ],
+      "coverage": [
+        0.971,
+        0.9835
+      ],
+      "effective_classes": [
+        227.40841364137563,
+        248.5579881180926
+      ],
+      "gini": [
+        0.6900864063141757,
+        0.7118940664564368
+      ],
+      "largest_class_share": [
+        0.04470138832589055,
+        0.05370093683133123
+      ],
+      "mean_depth": [
+        4.9404875,
+        5.047
+      ],
+      "nav_log_a0": [
+        14.440743411238508,
+        14.692558300208297
+      ],
+      "nav_log_a1": [
+        18.775230816529838,
+        19.10719056312419
+      ],
+      "nav_log_a2": [
+        23.10773746427159,
+        23.529663151005526
+      ],
+      "nav_scan": [
+        64.10265624999991,
+        67.0652
+      ],
+      "normalized_entropy": [
+        0.8347053760260444,
+        0.8470095157363617
+      ],
+      "ref_cost_norm": [
+        0.04145460755234497,
+        0.061597772990695465
+      ],
+      "revenue_norm": [
+        0.1434027820307537,
+        0.1947043234317452
+      ],
+      "skill": [
+        0.15109584840034126,
+        0.20521484030671583
+      ]
+    }
+  },
+  "run": {
+    "condition": "nomic-k10",
+    "model": "nomic",
+    "graph_k": 10,
+    "universe": "split",
+    "key": "eurovoc-placed",
+    "placement_source": "shelfmark lexical@2, restricted to the 20%",
+    "placements": "bench/corpus/cache/embed-bench/placements/split/test-eurovoc-placed.jsonl",
+    "score_seconds": 0.2
+  }
+}

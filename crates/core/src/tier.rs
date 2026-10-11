@@ -46,6 +46,9 @@ pub struct ClassifyInput {
     pub work: Option<WorkId>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub title: Option<String>,
+    /// Author names as supplied (any order of given and family name).
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub authors: Vec<String>,
     /// Extracted text (may be truncated by the caller).
     #[serde(default, skip_serializing_if = "String::is_empty")]
     pub text: String,
@@ -76,6 +79,18 @@ pub enum Evidence {
     },
     Similarity {
         model: String,
+    },
+    /// A matching record in an external catalog, and the call number
+    /// read from it.
+    Catalog {
+        /// Catalog name, e.g. `openlibrary`.
+        catalog: String,
+        /// The record's key in that catalog, e.g. `/works/OL27482W`.
+        record: String,
+        /// The call number as the catalog gave it.
+        call_number: String,
+        /// How closely the record matched the input, in [0, 1].
+        similarity: f64,
     },
 }
 

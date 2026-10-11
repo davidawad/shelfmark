@@ -1,0 +1,114 @@
+{
+  "scheme": "ilc2",
+  "version": "2019-10-17",
+  "track": "P",
+  "mode": "primary",
+  "n": 10000,
+  "k": 10,
+  "edge_weight": 15277.89460684813,
+  "cost": 124164941.4452057,
+  "cost_norm": 0.8127097655821652,
+  "revenue": 28614004.623275593,
+  "revenue_norm": 0.18729023441783474,
+  "ref_cost_norm": 0.12261009352487255,
+  "skill": 0.21346294621767925,
+  "coverage": 0.9999,
+  "structure": {
+    "mean_depth": 5.0901,
+    "p50_depth": 5,
+    "p95_depth": 7,
+    "max_depth": 13,
+    "mean_branching": 7.219160926737633,
+    "p95_branching": 28,
+    "max_branching": 417,
+    "root_fanout": 68,
+    "nodes_over_50_children": 35,
+    "normalized_entropy": 0.771052155072554,
+    "effective_classes": 295.0632753178242,
+    "gini": 0.8242225523189712,
+    "largest_class_share": 0.044473240263074254,
+    "nav_scan": 135.60100000000085,
+    "nav_log_a0": 18.858956722935076,
+    "nav_log_a1": 23.384156722934524,
+    "nav_log_a2": 27.909356722935673
+  },
+  "hashes": {
+    "graph": "931040170b5abb815da67d79276a20750cb5e5d83d1add9f4e1e1d90110cea8a",
+    "tree": "6a0ad9f977dce7a4283df200049271f2b4bd5990bc94490d7727fc5709e93145",
+    "scheme": "85326193a8b772eae280294a6ad51f326daa17c743617660e4e1ff94caf0d72c"
+  },
+  "bootstrap": {
+    "resamples": 1000,
+    "seed": 20261010,
+    "confidence": 0.95,
+    "method": "percentile; items resampled with replacement on the fixed graph and tree",
+    "ci": {
+      "cost_norm": [
+        0.8053133468536031,
+        0.820015187771217
+      ],
+      "coverage": [
+        0.9997,
+        1.0
+      ],
+      "effective_classes": [
+        282.6516262848343,
+        295.0202459233287
+      ],
+      "gini": [
+        0.7999096063858118,
+        0.8083141423429103
+      ],
+      "largest_class_share": [
+        0.04283971957568348,
+        0.046264778034612264
+      ],
+      "mean_depth": [
+        5.063490000000001,
+        5.1164024999999995
+      ],
+      "nav_log_a0": [
+        18.773910199854626,
+        18.935966012685753
+      ],
+      "nav_log_a1": [
+        23.28179690153,
+        23.476259509325644
+      ],
+      "nav_log_a2": [
+        27.793557453744107,
+        28.01663018862704
+      ],
+      "nav_scan": [
+        133.34497875000017,
+        139.2927887499993
+      ],
+      "normalized_entropy": [
+        0.7810024452463022,
+        0.7870690581194321
+      ],
+      "ref_cost_norm": [
+        0.11753392610608994,
+        0.12867813707354295
+      ],
+      "revenue_norm": [
+        0.17998481222878304,
+        0.1946866531463969
+      ],
+      "skill": [
+        0.205212588990198,
+        0.22193057619215276
+      ]
+    }
+  },
+  "run": {
+    "condition": "bge-small-k10",
+    "model": "bge-small",
+    "graph_k": 10,
+    "universe": "corpus",
+    "key": "ilc2-placed",
+    "placement_source": "shelfmark lexical@2",
+    "placements": "bench/corpus/cache/placed/corpus-ilc2/placements.jsonl",
+    "score_seconds": 4.3
+  }
+}

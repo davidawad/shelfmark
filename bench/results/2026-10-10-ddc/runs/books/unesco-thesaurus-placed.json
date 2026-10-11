@@ -1,0 +1,66 @@
+{
+  "scheme": "unesco-thesaurus",
+  "version": "2026-08-31",
+  "track": "P",
+  "mode": "primary",
+  "n": 3000,
+  "k": 20,
+  "edge_weight": 13295.4182601465,
+  "cost": 25077890.584123928,
+  "cost_norm": 0.6287351550595395,
+  "revenue": 14808364.196315575,
+  "revenue_norm": 0.3712648449404605,
+  "ref_cost_norm": 0.22967463485582104,
+  "skill": 0.4819584836999003,
+  "coverage": 0.9253333333333333,
+  "structure": {
+    "mean_depth": 4.500333333333334,
+    "p50_depth": 5,
+    "p95_depth": 6,
+    "max_depth": 8,
+    "mean_branching": 3.8605371900826446,
+    "p95_branching": 11,
+    "max_branching": 366,
+    "root_fanout": 231,
+    "nodes_over_50_children": 5,
+    "normalized_entropy": 0.7680261756703178,
+    "effective_classes": 196.44022898353148,
+    "gini": 0.7638728424919783,
+    "largest_class_share": 0.09189600990381869,
+    "nav_scan": 191.64266666666435,
+    "nav_log_a0": 18.03955417398323,
+    "nav_log_a1": 22.169220840649796,
+    "nav_log_a2": 26.298887507316383
+  },
+  "hashes": {
+    "graph": "1d12c791d19a068d0a0c77a56f28124747221cf833b5d9fcf5655ea172899428",
+    "tree": "e99eb7e46b7f5d8ba9d47121645331cef8e25be6ce1ba962e6d1f8802c48a010",
+    "scheme": "05f0b3cefa69d9096f9736bb606aa45b1f0eaece1afb7fa01231b9f8c338e745"
+  },
+  "run": {
+    "scheme_id": "scheme:unesco-thesaurus@2026-08-31",
+    "corpus": "books",
+    "placement_source": "shelfmark profile:lexical@2",
+    "placement_stats": {
+      "rows": 3000,
+      "failed": 0,
+      "fallback": 224,
+      "placed": 2776,
+      "flagged": 2495,
+      "deciding_tiers": {
+        "vocab": 2776
+      },
+      "classes_used": 611,
+      "top_class": "c302",
+      "top_class_share": 0.13112391930835735,
+      "top_class_terms": {
+        "history": 364
+      },
+      "output": "bench/corpus/cache/ddc-bench/placements/books/unesco-thesaurus-placed.jsonl",
+      "classify_seconds": 13.9,
+      "profile": "profile:lexical@2",
+      "store_rules": "empty"
+    },
+    "score_seconds": 0.1
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "scheme": "jel",
+  "version": "2026",
+  "track": "P",
+  "mode": "primary",
+  "n": 2000,
+  "k": 20,
+  "edge_weight": 2406.6870629717546,
+  "cost": 4345786.789293065,
+  "cost_norm": 0.9028566397674752,
+  "revenue": 467587.3366504442,
+  "revenue_norm": 0.09714336023252473,
+  "ref_cost_norm": 0.10239446169696316,
+  "skill": 0.10822500094660582,
+  "coverage": 0.478,
+  "structure": {
+    "mean_depth": 2.2835,
+    "p50_depth": 1,
+    "p95_depth": 4,
+    "max_depth": 4,
+    "mean_branching": 12.325301204819278,
+    "p95_branching": 83,
+    "max_branching": 207,
+    "root_fanout": 1060,
+    "nodes_over_50_children": 5,
+    "normalized_entropy": 0.7579661304904228,
+    "effective_classes": 28.483686410707435,
+    "gini": 0.7420785596613177,
+    "largest_class_share": 0.0884300740163615,
+    "nav_scan": 584.7742500000139,
+    "nav_log_a0": 13.760514262882984,
+    "nav_log_a1": 15.738014262883437,
+    "nav_log_a2": 17.71551426288372
+  },
+  "hashes": {
+    "graph": "209b0076121b81b8a2b38d2e1480533da4245313d01558060ea21fb98180c1b0",
+    "tree": "27ee034571db5f222fa68434d365d172fcb1cfaa4bfa1dff5c7fabecb9efdafa",
+    "scheme": "f8a2c7204830222bdfbe1d6bbb07874c2cb9bdfed9390b9ac7ef3626cd33116c"
+  },
+  "run": {
+    "placement_source": "shelfmark profile:lexical@2, restricted to the 20%",
+    "score_seconds": 0.1
+  }
+}

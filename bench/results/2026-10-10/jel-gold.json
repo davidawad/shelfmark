@@ -1,0 +1,52 @@
+{
+  "scheme": "jel",
+  "version": "2026",
+  "track": "A",
+  "mode": "primary",
+  "n": 10000,
+  "k": 20,
+  "edge_weight": 60220.11973891941,
+  "cost": 602201197.3889459,
+  "cost_norm": 0.9999999999995879,
+  "revenue": 0.00024819374084472656,
+  "revenue_norm": 4.121442167846147e-13,
+  "ref_cost_norm": 0.15183392202502477,
+  "skill": 4.858892585338898e-13,
+  "coverage": 0.0002,
+  "structure": {
+    "mean_depth": 1.0006,
+    "p50_depth": 1,
+    "p95_depth": 1,
+    "max_depth": 4,
+    "mean_branching": 1.0,
+    "p95_branching": 1,
+    "max_branching": 1,
+    "root_fanout": 10000,
+    "nodes_over_50_children": 0,
+    "normalized_entropy": 0.9999999999999999,
+    "effective_classes": 5.999999999999998,
+    "gini": 0.0,
+    "largest_class_share": 0.16666666666666666,
+    "nav_scan": 5001.4999999992315,
+    "nav_log_a0": 13.28771237954811,
+    "nav_log_a1": 14.287712379546416,
+    "nav_log_a2": 15.287712379552525
+  },
+  "hashes": {
+    "graph": "759d3b8461a9384d4359244c9fb42c2bc66496431e0f4681d33b7a59798ed35a",
+    "tree": "2f6d490d34ea30111dcb0e4c9215b966eaf063f68cbe17bec3bf43bb29b66799",
+    "scheme": "f8a2c7204830222bdfbe1d6bbb07874c2cb9bdfed9390b9ac7ef3626cd33116c"
+  },
+  "run": {
+    "scheme_id": "scheme:jel@2026",
+    "corpus": "corpus",
+    "placement_source": "gold",
+    "placement_stats": {
+      "rows": 10000,
+      "field": "jel",
+      "rows_with_valid_codes": 2,
+      "output": "bench/corpus/cache/gold/corpus-jel.jsonl"
+    },
+    "score_seconds": 0.5
+  }
+}

@@ -127,7 +127,7 @@ fn add_ingest(out: &mut Value, ingested: Option<&Ingested>) {
     }
 }
 
-/// The classify input from `text`/`file`, `title`, `identifiers`, `url`
+/// The classify input from `text`/`file`, `title`, `authors`, `identifiers`, `url`
 /// and `headings`, with its Work ID, plus the minted file if one was given.
 pub(super) fn classify_input(args: &Args) -> Result<(ClassifyInput, Option<Minted>), Error> {
     let mut minted = None;
@@ -164,6 +164,7 @@ pub(super) fn classify_input(args: &Args) -> Result<(ClassifyInput, Option<Minte
     let input = ClassifyInput {
         work: None,
         title: args.str("title")?.map(str::to_string),
+        authors: args.strings("authors")?,
         text: text.unwrap_or_default(),
         identifiers,
         url,
@@ -183,6 +184,7 @@ pub(super) fn classify_input(args: &Args) -> Result<(ClassifyInput, Option<Minte
 pub(super) fn with_work(input: ClassifyInput) -> Option<ClassifyInput> {
     let basis = if input.text.trim().is_empty() {
         let mut parts: Vec<String> = input.title.iter().cloned().collect();
+        parts.extend(input.authors.iter().cloned());
         parts.extend(input.identifiers.iter().map(|i| i.key()));
         parts.extend(input.headings.iter().cloned());
         parts.join("\n")

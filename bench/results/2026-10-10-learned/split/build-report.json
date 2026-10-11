@@ -1,0 +1,99 @@
+{
+  "config": {
+    "params": {
+      "branch_cost": 1.0,
+      "lambda": 0.005,
+      "max_children": 12,
+      "max_depth": 4,
+      "min_children": 2,
+      "min_leaf": 5
+    },
+    "rotation_passes": 20,
+    "search_rounds": 10,
+    "seed": 20261010
+  },
+  "inputs": {
+    "corpus_sha256": "7685685d0de25d6e8a614859783dcb5376d81e4fe336a65f22b550f4c7527b8d",
+    "edge_weight": 38499.400217273695,
+    "edges": 94745,
+    "graph_sha256": "759d3b8461a9384d4359244c9fb42c2bc66496431e0f4681d33b7a59798ed35a",
+    "n": 8000,
+    "subset": 8000
+  },
+  "objective": {
+    "dasgupta": 0.16645183814170533,
+    "nav": 18.111049621978726,
+    "total": 0.25700708625159896
+  },
+  "scheme": "learned@2026-10-10-split80",
+  "scheme_sha256": "c9ccbe76c7c1f7243f1cdcb98ce5aca1b0c43ac176fb268c1c3a4795d9cf83f5",
+  "shape": {
+    "children": {
+      "max": 9,
+      "mean": 4.777777777777778,
+      "min": 2,
+      "root": 2
+    },
+    "classes": 86,
+    "classes_by_depth": {
+      "1": 2,
+      "2": 4,
+      "3": 11,
+      "4": 69
+    },
+    "internal_classes": 17,
+    "leaf_classes": 69,
+    "leaf_size": {
+      "max": 259,
+      "median": 105,
+      "min": 36
+    },
+    "mean_item_class_depth": 4.0
+  },
+  "stages": [
+    {
+      "dasgupta": 0.1474245693718942,
+      "detail": {},
+      "name": "average_linkage",
+      "nav": null,
+      "seconds": 0.468917901,
+      "total": null
+    },
+    {
+      "dasgupta": 0.1474245693718942,
+      "detail": {
+        "rotations": 0
+      },
+      "name": "rotation_local_search",
+      "nav": null,
+      "seconds": 0.03007341,
+      "total": null
+    },
+    {
+      "dasgupta": 0.1677108922476414,
+      "detail": {
+        "classes": 92,
+        "dp_total": 0.2586528097239128
+      },
+      "name": "collapse",
+      "nav": 18.188383495256815,
+      "seconds": 0.039097738,
+      "total": 0.25865280972392546
+    },
+    {
+      "dasgupta": 0.16645183814170533,
+      "detail": {
+        "classes": 86,
+        "stats": {
+          "rounds": 3,
+          "shifts": 33,
+          "structure_moves": 9
+        }
+      },
+      "name": "order_preserving_local_search",
+      "nav": 18.111049621978726,
+      "seconds": 0.487265029,
+      "total": 0.25700708625159896
+    }
+  ]
+}

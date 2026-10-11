@@ -1,0 +1,18 @@
+{
+  "corpus": "bench/corpus/corpus.jsonl",
+  "dimensions": 384,
+  "graph": "bench/results/2026-10-11-metrics/embed/graphs/minilm-corpus-k20.json",
+  "graph_sha256": "759d3b8461a9384d4359244c9fb42c2bc66496431e0f4681d33b7a59798ed35a",
+  "mean_dissimilarity": 0.08185777977658115,
+  "n": 10000,
+  "negatives_sha256": "dc20e983ec5a441aa401b2600e6e925da3514193e80b986cd6d89370168c4edf",
+  "pairs": 100000,
+  "spec": {
+    "floor": 0.1086250601229786,
+    "per_item": 10,
+    "seed": 20261010
+  },
+  "vectors": "bench/corpus/cache/falsejoin/vectors/minilm-corpus.f32",
+  "vectors_rule": "build_graph_fastembed.py --vectors on this corpus and model (nomic: --max-length 512)",
+  "vectors_sha256": "60f84624485d17f6c8f09ed540686f8936081c29ea38c53db8bb2c3922489b86"
+}

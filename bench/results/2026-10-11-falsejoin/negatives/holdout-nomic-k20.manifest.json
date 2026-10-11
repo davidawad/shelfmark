@@ -1,0 +1,18 @@
+{
+  "corpus": "bench/corpus/holdout.jsonl",
+  "dimensions": 768,
+  "graph": "bench/results/2026-10-11-metrics/embed/graphs/nomic-holdout-k20.json",
+  "graph_sha256": "bb0b8e0fb51181e48b5b866fa05d1aab1afb97632ed9044c8552e6687285bc88",
+  "mean_dissimilarity": 0.027390521177261276,
+  "n": 500,
+  "negatives_sha256": "e8db06940bcbfdf32704fd811199c4450399c8dab141c747e29571751af3102b",
+  "pairs": 5000,
+  "spec": {
+    "floor": 0.6579564235176973,
+    "per_item": 10,
+    "seed": 20261010
+  },
+  "vectors": "bench/corpus/cache/falsejoin/vectors/nomic-holdout.f32",
+  "vectors_rule": "build_graph_fastembed.py --vectors on this corpus and model (nomic: --max-length 512)",
+  "vectors_sha256": "84b0ee2189624928d7c4eea91d979bb9fd9cf165c766cbb7b350dba79fb6a425"
+}

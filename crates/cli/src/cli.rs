@@ -57,6 +57,9 @@ pub struct Classify {
     pub text: Option<String>,
     #[arg(long)]
     pub title: Option<String>,
+    /// Author name (repeatable).
+    #[arg(long = "author")]
+    pub authors: Vec<String>,
     #[arg(long)]
     pub file: Option<String>,
     /// isbn:, lccn:, doi:, arxiv: or domain: (repeatable).
@@ -238,6 +241,7 @@ pub fn to_request(command: Command) -> Result<(Verb, Value), Error> {
             let mut pairs = vec![
                 ("text", s(c.text)),
                 ("title", s(c.title)),
+                ("authors", list(c.authors)),
                 ("file", s(c.file)),
                 ("identifiers", list(c.identifiers)),
                 ("url", s(c.url)),

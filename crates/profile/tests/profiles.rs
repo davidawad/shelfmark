@@ -2,7 +2,7 @@
 
 use shelfmark_core::error::ErrorCode;
 use shelfmark_core::tier::TierInfo;
-use shelfmark_profile::builtin::{find, lexical, rerank, tier_spec};
+use shelfmark_profile::builtin::{find, lexical, needs_network, openlibrary, rerank, tier_spec};
 use shelfmark_profile::{builtins, profile_hash};
 
 #[test]
@@ -12,18 +12,35 @@ fn builtins_are_declared_cheapest_first() {
     assert_eq!(
         ids,
         [
-            "profile:lexical@1",
-            "profile:shortlist@1",
-            "profile:rerank@1"
+            "profile:lexical@2",
+            "profile:openlibrary@2",
+            "profile:shortlist@2",
+            "profile:rerank@2"
         ]
     );
     assert_eq!(ps[0].tiers, ["identifier", "vocab", "rules"]);
-    assert_eq!(ps[1].tiers.last().unwrap(), "shortlist");
-    assert_eq!(ps[2].tiers[3..], ["shortlist", "rerank"]);
-    for w in ps.windows(2) {
+    assert_eq!(ps[2].tiers.last().unwrap(), "shortlist");
+    assert_eq!(ps[3].tiers[3..], ["shortlist", "rerank"]);
+    // The local profiles rise in cost; the network one waits on a paced
+    // request, so it is slower than all of them but small in memory.
+    let local: Vec<_> = ps.iter().filter(|p| !needs_network(p)).collect();
+    for w in local.windows(2) {
         assert!(w[0].expected_memory_mb < w[1].expected_memory_mb);
         assert!(w[0].expected_micros_per_item < w[1].expected_micros_per_item);
     }
+}
+
+#[test]
+fn openlibrary_runs_after_identifiers_and_before_lexical() {
+    let p = openlibrary();
+    assert_eq!(p.tiers, ["identifier", "openlibrary", "vocab", "rules"]);
+    assert!(needs_network(&p));
+    assert!(!tier_spec("openlibrary").unwrap().needs_model);
+    assert!(builtins()
+        .iter()
+        .filter(|p| needs_network(p))
+        .all(|p| p.id == openlibrary().id));
+    assert_eq!(find("openlibrary").unwrap(), p);
 }
 
 #[test]
@@ -45,7 +62,7 @@ fn profile_costs_sum_their_tiers() {
 #[test]
 fn find_by_name_or_id() {
     assert_eq!(find("rerank").unwrap(), rerank());
-    assert_eq!(find("profile:lexical@1").unwrap(), lexical());
+    assert_eq!(find("profile:lexical@2").unwrap(), lexical());
     let err = find("llm").unwrap_err();
     assert_eq!(err.code, ErrorCode::ProfileNotFound);
     assert!(err.next_command.is_some());
@@ -72,10 +89,11 @@ fn lexical_infos() -> Vec<TierInfo> {
 #[test]
 fn profile_hash_is_pinned() {
     // Changing this value stales every stored lexical placement; do it
-    // only on purpose.
+    // only on purpose. Last changed for profile:lexical@2 (stopword-only
+    // labels no longer match).
     assert_eq!(
         profile_hash(&lexical(), &lexical_infos()),
-        "s256:48c1405cae031d1f582d65531c1ec33e5dbddf3d50a657d0164691b04d7821fb"
+        "s256:9680d351c4ff231fc701d6a81a26bf5129bc539f035ff1e6a2e818c477c480ae"
     );
 }
 

@@ -1,6 +1,10 @@
 //! The built-in profiles (R8, R9) and the declared cost of each built-in
 //! tier.
 //!
+//! A profile with a network tier (`openlibrary`) is never picked on its
+//! own: not as the recommended profile and not by a default eval. It runs
+//! when a caller names it.
+//!
 //! Profile costs are the sum of their tiers' declared costs, so the two
 //! never drift apart. The `shortlist` figures are the CPU benchmark
 //! spike's (spike 4) for BGE-small-en-v1.5
@@ -12,8 +16,10 @@ use shelfmark_core::error::{Error, ErrorCode};
 use shelfmark_core::tier::Profile;
 use shelfmark_core::ProfileId;
 
-/// Version of every built-in profile definition.
-pub const PROFILE_VERSION: &str = "1";
+/// Version of every built-in profile definition. Every built-in runs the
+/// `vocab` tier, so all move together: 2 stopped matching labels and
+/// terms made only of stopwords (`vocab-2`).
+pub const PROFILE_VERSION: &str = "2";
 /// Default target confidence of the built-in profiles (R10).
 pub const DEFAULT_TARGET: f64 = 0.8;
 /// Margin below which a decision is flagged even at the target.
@@ -25,27 +31,42 @@ pub struct TierSpec {
     pub name: &'static str,
     /// Whether the tier needs a model download.
     pub needs_model: bool,
+    /// Whether the tier sends requests to a remote service. A profile
+    /// with such a tier runs only when asked for by name.
+    pub needs_network: bool,
     pub expected_memory_mb: u32,
     pub expected_micros_per_item: u64,
 }
 
 /// Every built-in tier, in the order a full cascade runs them.
-pub const TIERS: [TierSpec; 5] = [
+pub const TIERS: [TierSpec; 6] = [
     TierSpec {
         name: "identifier",
         needs_model: false,
+        needs_network: false,
         expected_memory_mb: 8,
         expected_micros_per_item: 20,
+    },
+    // One Open Library search, paced at one request a second; a cache
+    // hit costs well under a millisecond.
+    TierSpec {
+        name: "openlibrary",
+        needs_model: false,
+        needs_network: true,
+        expected_memory_mb: 4,
+        expected_micros_per_item: 1_000_000,
     },
     TierSpec {
         name: "vocab",
         needs_model: false,
+        needs_network: false,
         expected_memory_mb: 48,
         expected_micros_per_item: 300,
     },
     TierSpec {
         name: "rules",
         needs_model: false,
+        needs_network: false,
         expected_memory_mb: 8,
         expected_micros_per_item: 50,
     },
@@ -54,6 +75,7 @@ pub const TIERS: [TierSpec; 5] = [
     TierSpec {
         name: "shortlist",
         needs_model: true,
+        needs_network: false,
         expected_memory_mb: 600,
         expected_micros_per_item: 50_000,
     },
@@ -61,6 +83,7 @@ pub const TIERS: [TierSpec; 5] = [
     TierSpec {
         name: "rerank",
         needs_model: true,
+        needs_network: false,
         expected_memory_mb: 900,
         expected_micros_per_item: 400_000,
     },
@@ -95,6 +118,25 @@ pub fn lexical() -> Profile {
     )
 }
 
+/// The identifier tier, then an Open Library title and author lookup,
+/// then the vocabulary and rules tiers. Sends requests to
+/// openlibrary.org, so it never runs unless asked for by name.
+pub fn openlibrary() -> Profile {
+    profile(
+        "openlibrary",
+        "Identifier lookup, then Open Library title+author lookup (network), then vocabulary match and rules",
+        &["identifier", "openlibrary", "vocab", "rules"],
+    )
+}
+
+/// Whether any tier of `profile` sends requests to a remote service.
+pub fn needs_network(profile: &Profile) -> bool {
+    profile
+        .tiers
+        .iter()
+        .any(|t| tier_spec(t).is_some_and(|s| s.needs_network))
+}
+
 /// The lexical tiers, then an embedding shortlist.
 pub fn shortlist() -> Profile {
     let mut tiers = LEXICAL_TIERS.to_vec();
@@ -117,13 +159,14 @@ pub fn rerank() -> Profile {
     )
 }
 
-/// Every built-in profile, cheapest first.
+/// Every built-in profile: `lexical`, the network `openlibrary`, then
+/// the model profiles, cheapest first.
 pub fn builtins() -> Vec<Profile> {
-    vec![lexical(), shortlist(), rerank()]
+    vec![lexical(), openlibrary(), shortlist(), rerank()]
 }
 
 /// Look up a built-in profile by bare name (`lexical`) or full ID
-/// (`profile:lexical@1`).
+/// (`profile:lexical@2`).
 pub fn find(name_or_id: &str) -> Result<Profile, Error> {
     builtins()
         .into_iter()

@@ -1,0 +1,16 @@
+{
+  "model_id": "BAAI/bge-small-en-v1.5",
+  "runtime": "fastembed 0.9.0 / ONNX Runtime CPU",
+  "weights_repository": "Qdrant/bge-small-en-v1.5-onnx-Q",
+  "weights_revision": "aa8f8b060edb00e03bfdd08813a2949946c8ba55",
+  "weights_sha256": "51f1bd0addd6e859e42c2c8021a5e5461385bb676a649f4b269aa445449f2431",
+  "corpus_sha256": "38e5463bf5907de4c5a5413bf812efba433f955e168afbb8853b91028e6c905d",
+  "n": 3000,
+  "dimensions": 384,
+  "graph_k": 50,
+  "tau_rule": "exact mean cosine over all unordered corpus pairs",
+  "tau": 0.5553888446433128,
+  "graph_sha256": "ad6c489320ab5edb2098c8dc38c237d7ef69bb0ed0ec7766b66819c8a44d9624",
+  "weights_file": "model_optimized.onnx",
+  "text_prefix": ""
+}

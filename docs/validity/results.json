@@ -1,0 +1,901 @@
+{
+  "all": {
+    "agree": 0.6327387198321092,
+    "agree_dense": 0.6306400839454355,
+    "auc": 0.6491784502885335,
+    "auc_dense": 0.6068763490595128,
+    "ci": {
+      "agree": [
+        0.6054564533053515,
+        0.6589716684155299
+      ],
+      "auc": [
+        0.6249812783577816,
+        0.674297480620155
+      ],
+      "kappa": [
+        0.21965539469328724,
+        0.32075598411601475
+      ],
+      "together_kappa": [
+        0.5643176610557857,
+        0.6688324807460745
+      ]
+    },
+    "edge_judged_together": 0.5714285714285714,
+    "edge_n": 322,
+    "false_join": 0.23819517313746066,
+    "false_split": 0.26862539349422876,
+    "judge_incorrect": 0.5068205666316894,
+    "judge_together": 0.2025183630640084,
+    "kappa": 0.2698149307577464,
+    "kappa_dense": 0.2656006445172251,
+    "metric_flagged": 0.28226652675760755,
+    "n": 953,
+    "scheme_vs_judge_together_kappa": -0.30790875715738136,
+    "together_agree": 0.8457502623294858,
+    "together_kappa": 0.6177630196751458
+  },
+  "consistency": {
+    "relation": {
+      "agree": 0.9243697478991597,
+      "kappa": 0.8690629011553275,
+      "n": 238
+    },
+    "scheme_decision": {
+      "agree": 0.9621848739495799,
+      "ci": [
+        0.8731433444673442,
+        0.9663675545820674
+      ],
+      "kappa": 0.9243056046363701,
+      "n": 238
+    },
+    "together": {
+      "agree": 0.9537815126050421,
+      "kappa": 0.867389322257117,
+      "n": 238
+    }
+  },
+  "cross_run": {
+    "spearman_cost_vs_C_incorrect": 0.22893227903814295,
+    "spearman_cost_vs_all_incorrect": 0.4191691916696407
+  },
+  "runs": {
+    "arxiv-gold": {
+      "agree": 0.7916666666666666,
+      "agree_dense": 0.7833333333333333,
+      "auc": 0.7452452452452453,
+      "auc_dense": 0.7272272272272272,
+      "by_stratum": {
+        "A": {
+          "agree": 0.45,
+          "agree_dense": 0.45,
+          "auc": 0.8186274509803921,
+          "auc_dense": 0.8186274509803921,
+          "edge_judged_together": 0.375,
+          "edge_n": 40,
+          "false_join": 0.0,
+          "false_split": 0.15,
+          "judge_incorrect": 0.15,
+          "judge_together": 0.375,
+          "kappa": 0.14062500000000003,
+          "kappa_dense": 0.14062500000000003,
+          "metric_flagged": 0.7,
+          "n": 40,
+          "scheme_vs_judge_together_kappa": 0.0,
+          "together_agree": 0.375,
+          "together_kappa": 0.0
+        },
+        "B": {
+          "agree": 0.925,
+          "agree_dense": 0.925,
+          "auc": 0.5,
+          "auc_dense": 0.5,
+          "edge_judged_together": null,
+          "edge_n": 0,
+          "false_join": 0.075,
+          "false_split": 0.0,
+          "judge_incorrect": 0.075,
+          "judge_together": 0.075,
+          "kappa": 0.0,
+          "kappa_dense": 0.0,
+          "metric_flagged": 0.0,
+          "n": 40,
+          "scheme_vs_judge_together_kappa": 0.0,
+          "together_agree": 0.925,
+          "together_kappa": 0.0
+        },
+        "C": {
+          "agree": 1.0,
+          "agree_dense": 0.975,
+          "auc": null,
+          "auc_dense": null,
+          "edge_judged_together": null,
+          "edge_n": 0,
+          "false_join": 0.0,
+          "false_split": 0.0,
+          "judge_incorrect": 0.0,
+          "judge_together": 0.0,
+          "kappa": null,
+          "kappa_dense": 0.0,
+          "metric_flagged": 0.0,
+          "n": 40,
+          "scheme_vs_judge_together_kappa": 0.0,
+          "together_agree": 1.0,
+          "together_kappa": null
+        }
+      },
+      "ci": {
+        "agree": [
+          0.7333333333333333,
+          0.85
+        ],
+        "auc": [
+          0.52275600505689,
+          0.9452160493827161
+        ],
+        "kappa": [
+          0.04290429042904301,
+          0.43209876543209885
+        ],
+        "together_kappa": [
+          0.22222222222222254,
+          0.5594405594405594
+        ]
+      },
+      "class_rejected": 0.0125,
+      "edge_judged_together": 0.375,
+      "edge_n": 40,
+      "false_join": 0.025,
+      "false_split": 0.05,
+      "judge_incorrect": 0.075,
+      "judge_together": 0.15,
+      "kappa": 0.2378048780487803,
+      "kappa_dense": 0.2273402674591384,
+      "metric_flagged": 0.23333333333333334,
+      "n": 120,
+      "scheme_vs_judge_together_kappa": -0.15913555992141423,
+      "together_agree": 0.7666666666666667,
+      "together_kappa": 0.39130434782608703
+    },
+    "fdc-placed": {
+      "agree": 0.5916666666666667,
+      "agree_dense": 0.5916666666666667,
+      "auc": 0.7183327906219472,
+      "auc_dense": 0.6615109084988603,
+      "by_stratum": {
+        "A": {
+          "agree": 0.875,
+          "agree_dense": 0.875,
+          "auc": 0.2564102564102564,
+          "auc_dense": 0.2564102564102564,
+          "edge_judged_together": 0.725,
+          "edge_n": 40,
+          "false_join": 0.0,
+          "false_split": 0.975,
+          "judge_incorrect": 0.975,
+          "judge_together": 0.725,
+          "kappa": -0.04166666666666574,
+          "kappa_dense": -0.04166666666666574,
+          "metric_flagged": 0.9,
+          "n": 40,
+          "scheme_vs_judge_together_kappa": 0.0,
+          "together_agree": 0.725,
+          "together_kappa": 0.0
+        },
+        "B": {
+          "agree": 0.075,
+          "agree_dense": 0.075,
+          "auc": 0.5,
+          "auc_dense": 0.5,
+          "edge_judged_together": null,
+          "edge_n": 0,
+          "false_join": 0.925,
+          "false_split": 0.0,
+          "judge_incorrect": 0.925,
+          "judge_together": 0.0,
+          "kappa": 0.0,
+          "kappa_dense": 0.0,
+          "metric_flagged": 0.0,
+          "n": 40,
+          "scheme_vs_judge_together_kappa": 0.0,
+          "together_agree": 1.0,
+          "together_kappa": null
+        },
+        "C": {
+          "agree": 0.825,
+          "agree_dense": 0.825,
+          "auc": 0.5,
+          "auc_dense": 0.6190476190476191,
+          "edge_judged_together": null,
+          "edge_n": 0,
+          "false_join": 0.05,
+          "false_split": 0.125,
+          "judge_incorrect": 0.175,
+          "judge_together": 0.0,
+          "kappa": 0.0,
+          "kappa_dense": 0.0,
+          "metric_flagged": 0.0,
+          "n": 40,
+          "scheme_vs_judge_together_kappa": 0.0,
+          "together_agree": 1.0,
+          "together_kappa": null
+        }
+      },
+      "ci": {
+        "agree": [
+          0.5333333333333333,
+          0.65
+        ],
+        "auc": [
+          0.6679530719357827,
+          0.75
+        ],
+        "kappa": [
+          0.21391138637446397,
+          0.3740458015267176
+        ],
+        "together_kappa": [
+          0.6433566433566432,
+          0.8831168831168831
+        ]
+      },
+      "class_rejected": 0.8916666666666667,
+      "edge_judged_together": 0.725,
+      "edge_n": 40,
+      "false_join": 0.325,
+      "false_split": 0.36666666666666664,
+      "judge_incorrect": 0.6916666666666667,
+      "judge_together": 0.24166666666666667,
+      "kappa": 0.29190751445086704,
+      "kappa_dense": 0.29190751445086704,
+      "metric_flagged": 0.3,
+      "n": 120,
+      "scheme_vs_judge_together_kappa": -0.4003944773175543,
+      "together_agree": 0.9083333333333333,
+      "together_kappa": 0.7785234899328859
+    },
+    "ilc2-placed": {
+      "agree": 0.5583333333333333,
+      "agree_dense": 0.5583333333333333,
+      "auc": 0.6933124346917451,
+      "auc_dense": 0.6349703935910832,
+      "by_stratum": {
+        "A": {
+          "agree": 0.9,
+          "agree_dense": 0.9,
+          "auc": 0.6973684210526315,
+          "auc_dense": 0.6973684210526315,
+          "edge_judged_together": 0.65,
+          "edge_n": 40,
+          "false_join": 0.0,
+          "false_split": 0.95,
+          "judge_incorrect": 0.95,
+          "judge_together": 0.65,
+          "kappa": 0.2857142857142859,
+          "kappa_dense": 0.2857142857142859,
+          "metric_flagged": 0.9,
+          "n": 40,
+          "scheme_vs_judge_together_kappa": 0.0,
+          "together_agree": 0.65,
+          "together_kappa": 0.0
+        },
+        "B": {
+          "agree": 0.05,
+          "agree_dense": 0.05,
+          "auc": 0.5,
+          "auc_dense": 0.5,
+          "edge_judged_together": null,
+          "edge_n": 0,
+          "false_join": 0.95,
+          "false_split": 0.0,
+          "judge_incorrect": 0.95,
+          "judge_together": 0.0,
+          "kappa": 0.0,
+          "kappa_dense": 0.0,
+          "metric_flagged": 0.0,
+          "n": 40,
+          "scheme_vs_judge_together_kappa": 0.0,
+          "together_agree": 1.0,
+          "together_kappa": null
+        },
+        "C": {
+          "agree": 0.725,
+          "agree_dense": 0.725,
+          "auc": 0.5,
+          "auc_dense": 0.7053291536050157,
+          "edge_judged_together": null,
+          "edge_n": 0,
+          "false_join": 0.0,
+          "false_split": 0.275,
+          "judge_incorrect": 0.275,
+          "judge_together": 0.0,
+          "kappa": 0.0,
+          "kappa_dense": 0.0,
+          "metric_flagged": 0.0,
+          "n": 40,
+          "scheme_vs_judge_together_kappa": null,
+          "together_agree": 1.0,
+          "together_kappa": null
+        }
+      },
+      "ci": {
+        "agree": [
+          0.5,
+          0.6166666666666667
+        ],
+        "auc": [
+          0.6413690476190477,
+          0.7325581395348837
+        ],
+        "kappa": [
+          0.17597765363128487,
+          0.3313953488372094
+        ],
+        "together_kappa": [
+          0.5714285714285715,
+          0.8421052631578948
+        ]
+      },
+      "class_rejected": 0.8666666666666667,
+      "edge_judged_together": 0.65,
+      "edge_n": 40,
+      "false_join": 0.31666666666666665,
+      "false_split": 0.4083333333333333,
+      "judge_incorrect": 0.725,
+      "judge_together": 0.21666666666666667,
+      "kappa": 0.25141242937853103,
+      "kappa_dense": 0.25141242937853103,
+      "metric_flagged": 0.3,
+      "n": 120,
+      "scheme_vs_judge_together_kappa": -0.3561643835616434,
+      "together_agree": 0.8833333333333333,
+      "together_kappa": 0.7123287671232876
+    },
+    "lcc-full-placed": {
+      "agree": 0.55,
+      "agree_dense": 0.55,
+      "auc": 0.7143852316266109,
+      "auc_dense": 0.6687565308254964,
+      "by_stratum": {
+        "A": {
+          "agree": 0.85,
+          "agree_dense": 0.85,
+          "auc": 0.8974358974358975,
+          "auc_dense": 0.8974358974358975,
+          "edge_judged_together": 0.55,
+          "edge_n": 40,
+          "false_join": 0.0,
+          "false_split": 0.975,
+          "judge_incorrect": 0.975,
+          "judge_together": 0.55,
+          "kappa": 0.21568627450980393,
+          "kappa_dense": 0.21568627450980393,
+          "metric_flagged": 0.825,
+          "n": 40,
+          "scheme_vs_judge_together_kappa": 0.0,
+          "together_agree": 0.55,
+          "together_kappa": 0.0
+        },
+        "B": {
+          "agree": 0.025,
+          "agree_dense": 0.025,
+          "auc": 0.5,
+          "auc_dense": 0.5,
+          "edge_judged_together": null,
+          "edge_n": 0,
+          "false_join": 0.975,
+          "false_split": 0.0,
+          "judge_incorrect": 0.975,
+          "judge_together": 0.0,
+          "kappa": 0.0,
+          "kappa_dense": 0.0,
+          "metric_flagged": 0.0,
+          "n": 40,
+          "scheme_vs_judge_together_kappa": 0.0,
+          "together_agree": 1.0,
+          "together_kappa": null
+        },
+        "C": {
+          "agree": 0.775,
+          "agree_dense": 0.775,
+          "auc": 0.5,
+          "auc_dense": 0.7562724014336918,
+          "edge_judged_together": null,
+          "edge_n": 0,
+          "false_join": 0.05,
+          "false_split": 0.175,
+          "judge_incorrect": 0.225,
+          "judge_together": 0.0,
+          "kappa": 0.0,
+          "kappa_dense": 0.0,
+          "metric_flagged": 0.0,
+          "n": 40,
+          "scheme_vs_judge_together_kappa": 0.0,
+          "together_agree": 1.0,
+          "together_kappa": null
+        }
+      },
+      "ci": {
+        "agree": [
+          0.48333333333333334,
+          0.6083333333333333
+        ],
+        "auc": [
+          0.6809006211180124,
+          0.7380952380952381
+        ],
+        "kappa": [
+          0.18421052631578944,
+          0.3188405797101449
+        ],
+        "together_kappa": [
+          0.4705882352941179,
+          0.7567567567567569
+        ]
+      },
+      "class_rejected": 0.9166666666666666,
+      "edge_judged_together": 0.55,
+      "edge_n": 40,
+      "false_join": 0.3416666666666667,
+      "false_split": 0.38333333333333336,
+      "judge_incorrect": 0.725,
+      "judge_together": 0.18333333333333332,
+      "kappa": 0.25155925155925163,
+      "kappa_dense": 0.25155925155925163,
+      "metric_flagged": 0.275,
+      "n": 120,
+      "scheme_vs_judge_together_kappa": -0.32024373730534883,
+      "together_agree": 0.85,
+      "together_kappa": 0.6197183098591549
+    },
+    "learned-placed": {
+      "agree": 0.7083333333333334,
+      "agree_dense": 0.7,
+      "auc": 0.6821882123086942,
+      "auc_dense": 0.6484858352328232,
+      "by_stratum": {
+        "A": {
+          "agree": 0.525,
+          "agree_dense": 0.525,
+          "auc": 0.5989974937343359,
+          "auc_dense": 0.5989974937343359,
+          "edge_judged_together": 0.725,
+          "edge_n": 40,
+          "false_join": 0.0,
+          "false_split": 0.525,
+          "judge_incorrect": 0.525,
+          "judge_together": 0.725,
+          "kappa": 0.0,
+          "kappa_dense": 0.0,
+          "metric_flagged": 1.0,
+          "n": 40,
+          "scheme_vs_judge_together_kappa": 0.0,
+          "together_agree": 0.725,
+          "together_kappa": 0.0
+        },
+        "B": {
+          "agree": 0.625,
+          "agree_dense": 0.625,
+          "auc": 0.5,
+          "auc_dense": 0.5,
+          "edge_judged_together": null,
+          "edge_n": 0,
+          "false_join": 0.375,
+          "false_split": 0.0,
+          "judge_incorrect": 0.375,
+          "judge_together": 0.0,
+          "kappa": 0.0,
+          "kappa_dense": 0.0,
+          "metric_flagged": 0.0,
+          "n": 40,
+          "scheme_vs_judge_together_kappa": 0.0,
+          "together_agree": 1.0,
+          "together_kappa": null
+        },
+        "C": {
+          "agree": 0.975,
+          "agree_dense": 0.95,
+          "auc": 0.5,
+          "auc_dense": 0.8717948717948718,
+          "edge_judged_together": null,
+          "edge_n": 0,
+          "false_join": 0.0,
+          "false_split": 0.025,
+          "judge_incorrect": 0.025,
+          "judge_together": 0.0,
+          "kappa": 0.0,
+          "kappa_dense": -0.025641025641025057,
+          "metric_flagged": 0.0,
+          "n": 40,
+          "scheme_vs_judge_together_kappa": 0.0,
+          "together_agree": 1.0,
+          "together_kappa": null
+        }
+      },
+      "ci": {
+        "agree": [
+          0.6333333333333333,
+          0.7833333333333333
+        ],
+        "auc": [
+          0.58890625,
+          0.769389047166825
+        ],
+        "kappa": [
+          0.15094339622641506,
+          0.5000000000000001
+        ],
+        "together_kappa": [
+          0.6433566433566432,
+          0.8831168831168831
+        ]
+      },
+      "class_rejected": 0.225,
+      "edge_judged_together": 0.725,
+      "edge_n": 40,
+      "false_join": 0.125,
+      "false_split": 0.18333333333333332,
+      "judge_incorrect": 0.30833333333333335,
+      "judge_together": 0.24166666666666667,
+      "kappa": 0.33121019108280264,
+      "kappa_dense": 0.3171040151754663,
+      "metric_flagged": 0.3333333333333333,
+      "n": 120,
+      "scheme_vs_judge_together_kappa": -0.42135186355022103,
+      "together_agree": 0.9083333333333333,
+      "together_kappa": 0.7785234899328859
+    },
+    "msc-gold": {
+      "agree": 0.7256637168141593,
+      "agree_dense": 0.7256637168141593,
+      "auc": 0.6009316770186336,
+      "auc_dense": 0.5232919254658385,
+      "by_stratum": {
+        "A": {
+          "agree": 0.525,
+          "agree_dense": 0.525,
+          "auc": 0.9247311827956989,
+          "auc_dense": 0.9247311827956989,
+          "edge_judged_together": 0.35,
+          "edge_n": 40,
+          "false_join": 0.0,
+          "false_split": 0.225,
+          "judge_incorrect": 0.225,
+          "judge_together": 0.35,
+          "kappa": 0.2213114754098361,
+          "kappa_dense": 0.2213114754098361,
+          "metric_flagged": 0.7,
+          "n": 40,
+          "scheme_vs_judge_together_kappa": 0.0,
+          "together_agree": 0.35,
+          "together_kappa": 0.0
+        },
+        "B": {
+          "agree": 0.6363636363636364,
+          "agree_dense": 0.6363636363636364,
+          "auc": 0.5,
+          "auc_dense": 0.5,
+          "edge_judged_together": null,
+          "edge_n": 0,
+          "false_join": 0.36363636363636365,
+          "false_split": 0.0,
+          "judge_incorrect": 0.36363636363636365,
+          "judge_together": 0.12121212121212122,
+          "kappa": 0.0,
+          "kappa_dense": 0.0,
+          "metric_flagged": 0.0,
+          "n": 33,
+          "scheme_vs_judge_together_kappa": 0.0,
+          "together_agree": 0.8787878787878788,
+          "together_kappa": 0.0
+        },
+        "C": {
+          "agree": 1.0,
+          "agree_dense": 1.0,
+          "auc": null,
+          "auc_dense": null,
+          "edge_judged_together": 0.0,
+          "edge_n": 2,
+          "false_join": 0.0,
+          "false_split": 0.0,
+          "judge_incorrect": 0.0,
+          "judge_together": 0.0,
+          "kappa": null,
+          "kappa_dense": null,
+          "metric_flagged": 0.0,
+          "n": 40,
+          "scheme_vs_judge_together_kappa": null,
+          "together_agree": 0.95,
+          "together_kappa": 0.0
+        }
+      },
+      "ci": {
+        "agree": [
+          0.6548672566371682,
+          0.7964601769911505
+        ],
+        "auc": [
+          0.4616977225672878,
+          0.7382418812989922
+        ],
+        "kappa": [
+          0.001962708537781838,
+          0.4021164021164023
+        ],
+        "together_kappa": [
+          0.1570475068708285,
+          0.48420668249041443
+        ]
+      },
+      "class_rejected": 0.084070796460177,
+      "edge_judged_together": 0.3333333333333333,
+      "edge_n": 42,
+      "false_join": 0.10619469026548672,
+      "false_split": 0.07964601769911504,
+      "judge_incorrect": 0.18584070796460178,
+      "judge_together": 0.1592920353982301,
+      "kappa": 0.19674386608576036,
+      "kappa_dense": 0.19674386608576036,
+      "metric_flagged": 0.24778761061946902,
+      "n": 113,
+      "scheme_vs_judge_together_kappa": -0.06207650273224066,
+      "together_agree": 0.7168141592920354,
+      "together_kappa": 0.31359149582384216
+    },
+    "openalex-topics-placed": {
+      "agree": 0.5916666666666667,
+      "agree_dense": 0.5916666666666667,
+      "auc": 0.679855028692238,
+      "auc_dense": 0.6173361522198731,
+      "by_stratum": {
+        "A": {
+          "agree": 0.825,
+          "agree_dense": 0.825,
+          "auc": 0.7028571428571428,
+          "auc_dense": 0.7028571428571428,
+          "edge_judged_together": 0.7,
+          "edge_n": 40,
+          "false_join": 0.0,
+          "false_split": 0.875,
+          "judge_incorrect": 0.875,
+          "judge_together": 0.7,
+          "kappa": -0.07692307692307661,
+          "kappa_dense": -0.07692307692307661,
+          "metric_flagged": 0.95,
+          "n": 40,
+          "scheme_vs_judge_together_kappa": 0.0,
+          "together_agree": 0.7,
+          "together_kappa": 0.0
+        },
+        "B": {
+          "agree": 0.05,
+          "agree_dense": 0.05,
+          "auc": 0.5,
+          "auc_dense": 0.5,
+          "edge_judged_together": null,
+          "edge_n": 0,
+          "false_join": 0.95,
+          "false_split": 0.0,
+          "judge_incorrect": 0.95,
+          "judge_together": 0.0,
+          "kappa": 0.0,
+          "kappa_dense": 0.0,
+          "metric_flagged": 0.0,
+          "n": 40,
+          "scheme_vs_judge_together_kappa": 0.0,
+          "together_agree": 1.0,
+          "together_kappa": null
+        },
+        "C": {
+          "agree": 0.9,
+          "agree_dense": 0.9,
+          "auc": 0.5,
+          "auc_dense": 0.8055555555555556,
+          "edge_judged_together": null,
+          "edge_n": 0,
+          "false_join": 0.05,
+          "false_split": 0.05,
+          "judge_incorrect": 0.1,
+          "judge_together": 0.0,
+          "kappa": 0.0,
+          "kappa_dense": 0.0,
+          "metric_flagged": 0.0,
+          "n": 40,
+          "scheme_vs_judge_together_kappa": 0.0,
+          "together_agree": 1.0,
+          "together_kappa": null
+        }
+      },
+      "ci": {
+        "agree": [
+          0.5333333333333333,
+          0.6416666666666667
+        ],
+        "auc": [
+          0.6226215644820295,
+          0.7292429792429792
+        ],
+        "kappa": [
+          0.15680473372781073,
+          0.35143288084464563
+        ],
+        "together_kappa": [
+          0.6197183098591549,
+          0.8627450980392156
+        ]
+      },
+      "class_rejected": 0.575,
+      "edge_judged_together": 0.7,
+      "edge_n": 40,
+      "false_join": 0.3333333333333333,
+      "false_split": 0.30833333333333335,
+      "judge_incorrect": 0.6416666666666667,
+      "judge_together": 0.23333333333333334,
+      "kappa": 0.2601912430800202,
+      "kappa_dense": 0.2601912430800202,
+      "metric_flagged": 0.31666666666666665,
+      "n": 120,
+      "scheme_vs_judge_together_kappa": -0.40862944162436565,
+      "together_agree": 0.9,
+      "together_kappa": 0.7567567567567569
+    },
+    "unesco-thesaurus-placed": {
+      "agree": 0.55,
+      "agree_dense": 0.55,
+      "auc": 0.6851732991014121,
+      "auc_dense": 0.6097560975609756,
+      "by_stratum": {
+        "A": {
+          "agree": 0.8,
+          "agree_dense": 0.8,
+          "auc": 0.8958333333333334,
+          "auc_dense": 0.8958333333333334,
+          "edge_judged_together": 0.525,
+          "edge_n": 40,
+          "false_join": 0.0,
+          "false_split": 0.9,
+          "judge_incorrect": 0.9,
+          "judge_together": 0.525,
+          "kappa": 0.3333333333333333,
+          "kappa_dense": 0.3333333333333333,
+          "metric_flagged": 0.75,
+          "n": 40,
+          "scheme_vs_judge_together_kappa": 0.0,
+          "together_agree": 0.525,
+          "together_kappa": 0.0
+        },
+        "B": {
+          "agree": 0.075,
+          "agree_dense": 0.075,
+          "auc": 0.5,
+          "auc_dense": 0.5,
+          "edge_judged_together": null,
+          "edge_n": 0,
+          "false_join": 0.925,
+          "false_split": 0.0,
+          "judge_incorrect": 0.925,
+          "judge_together": 0.025,
+          "kappa": 0.0,
+          "kappa_dense": 0.0,
+          "metric_flagged": 0.0,
+          "n": 40,
+          "scheme_vs_judge_together_kappa": 0.0,
+          "together_agree": 0.975,
+          "together_kappa": 0.0
+        },
+        "C": {
+          "agree": 0.775,
+          "agree_dense": 0.775,
+          "auc": 0.5,
+          "auc_dense": 0.5448028673835126,
+          "edge_judged_together": null,
+          "edge_n": 0,
+          "false_join": 0.05,
+          "false_split": 0.175,
+          "judge_incorrect": 0.225,
+          "judge_together": 0.025,
+          "kappa": 0.0,
+          "kappa_dense": 0.0,
+          "metric_flagged": 0.0,
+          "n": 40,
+          "scheme_vs_judge_together_kappa": -0.03896103896103811,
+          "together_agree": 0.975,
+          "together_kappa": 0.0
+        }
+      },
+      "ci": {
+        "agree": [
+          0.48333333333333334,
+          0.6083333333333333
+        ],
+        "auc": [
+          0.6314484126984127,
+          0.7283376123234917
+        ],
+        "kappa": [
+          0.1618625277161862,
+          0.3175217812197482
+        ],
+        "together_kappa": [
+          0.39160839160839156,
+          0.6979865771812082
+        ]
+      },
+      "class_rejected": 0.8083333333333333,
+      "edge_judged_together": 0.525,
+      "edge_n": 40,
+      "false_join": 0.325,
+      "false_split": 0.35833333333333334,
+      "judge_incorrect": 0.6833333333333333,
+      "judge_together": 0.19166666666666668,
+      "kappa": 0.23943661971830996,
+      "kappa_dense": 0.23943661971830996,
+      "metric_flagged": 0.25,
+      "n": 120,
+      "scheme_vs_judge_together_kappa": -0.2924941097273645,
+      "together_agree": 0.825,
+      "together_kappa": 0.5594405594405594
+    }
+  },
+  "strata": {
+    "A": {
+      "agree": 0.71875,
+      "agree_dense": 0.71875,
+      "auc": 0.7420831214460728,
+      "auc_dense": 0.7420831214460728,
+      "edge_judged_together": 0.575,
+      "edge_n": 320,
+      "false_join": 0.0,
+      "false_split": 0.696875,
+      "judge_incorrect": 0.696875,
+      "judge_together": 0.575,
+      "kappa": 0.23130304809694116,
+      "kappa_dense": 0.23130304809694116,
+      "metric_flagged": 0.840625,
+      "n": 320,
+      "scheme_vs_judge_together_kappa": 0.0,
+      "together_agree": 0.575,
+      "together_kappa": 0.0
+    },
+    "B": {
+      "agree": 0.3003194888178914,
+      "agree_dense": 0.3003194888178914,
+      "auc": 0.5,
+      "auc_dense": 0.5,
+      "edge_judged_together": null,
+      "edge_n": 0,
+      "false_join": 0.6996805111821086,
+      "false_split": 0.0,
+      "judge_incorrect": 0.6996805111821086,
+      "judge_together": 0.025559105431309903,
+      "kappa": 0.0,
+      "kappa_dense": 0.0,
+      "metric_flagged": 0.0,
+      "n": 313,
+      "scheme_vs_judge_together_kappa": 0.0,
+      "together_agree": 0.9744408945686901,
+      "together_kappa": 0.0
+    },
+    "C": {
+      "agree": 0.871875,
+      "agree_dense": 0.865625,
+      "auc": 0.496415770609319,
+      "auc_dense": 0.6504065040650406,
+      "edge_judged_together": 0.0,
+      "edge_n": 2,
+      "false_join": 0.025,
+      "false_split": 0.103125,
+      "judge_incorrect": 0.128125,
+      "judge_together": 0.003125,
+      "kappa": 0.0,
+      "kappa_dense": -0.012062371285673,
+      "metric_flagged": 0.0,
+      "n": 320,
+      "scheme_vs_judge_together_kappa": -0.0060633280934197535,
+      "together_agree": 0.990625,
+      "together_kappa": -0.00418410041840621
+    }
+  }
+}

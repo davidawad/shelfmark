@@ -1,0 +1,54 @@
+{
+  "version": "2026-10-10",
+  "license": {
+    "terms": "The generated scheme (learned.json), its labels and the derived data files are dedicated to the public domain under CC0 1.0. The inputs are the benchmark corpus (arXiv metadata, CC0 1.0) and the Open Library holdout (CC0 1.0).",
+    "terms_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "redistributable": true
+  },
+  "sources": [
+    {
+      "file": "bench/corpus/corpus.jsonl",
+      "role": "fitting corpus (titles and abstracts for labels and c-TF-IDF terms)",
+      "bytes": 17343370,
+      "sha256": "1027bf9d34928f470ed8b0d7b5ddc5c983fde49bc0cd33eaa162bbd1f830fea5"
+    },
+    {
+      "file": "bench/results/2026-10-10/graphs/corpus-k20.json.gz",
+      "role": "similarity graph the objective is defined on",
+      "bytes": 2008360,
+      "sha256": "e790ce3ef751fa30c1edb5c44fe806e390859dffa3ba50798ed0f550acafa6ff",
+      "decompressed_sha256": "759d3b8461a9384d4359244c9fb42c2bc66496431e0f4681d33b7a59798ed35a"
+    },
+    {
+      "file": "schemes/learned/labels.tsv",
+      "role": "hand-written class labels",
+      "bytes": 8551,
+      "sha256": "b630699dd3c7ecd2a048ce88bf95ee74097c74c51f9d2967d29234af3e501f04"
+    },
+    {
+      "file": "bench/corpus/holdout.jsonl",
+      "role": "holdout inserted as new works",
+      "bytes": 173750,
+      "sha256": "3e057eb4a257488ca1668a1ed370306e74b5b21a79cf7b4fdbd2f5b21873c833"
+    },
+    {
+      "file": "schemes/learned/data/centroids.json.gz",
+      "role": "leaf centroids (i8) for insertion, derived from the corpus vectors",
+      "bytes": 42799,
+      "sha256": "95d839eee3197641cd64bf3cc7d2e8506e03eb2e62ac153bf5a9ca3f0326d3b6"
+    },
+    {
+      "file": "schemes/learned/data/holdout-vectors.json.gz",
+      "role": "holdout vectors (i8) for insertion",
+      "bytes": 236567,
+      "sha256": "d180008d6ea330dc75aacb54a45c977f6fb19b10a3a8c49a8816e87ea7a95e02"
+    }
+  ],
+  "embedding": {
+    "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+    "weights_repository": "Qdrant/all-MiniLM-L6-v2-onnx",
+    "weights_revision": "d13954661f83248295ba75c1ed411eef3b7b936e",
+    "weights_sha256": "bbd7b466f6d58e646fdc2bd5fd67b2f5e93c0b687011bd4548c420f7bd46f0c5",
+    "runtime": "fastembed 0.9.0, onnxruntime 1.31.0 (CPU)"
+  }
+}
