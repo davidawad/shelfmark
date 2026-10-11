@@ -224,8 +224,10 @@ compiled into the binary today.
 - **Owner shelf.** If locality of one physical shelf outweighs about 0.45
   units of cost (`R9` §8, `locality-weight`), use LCC.
 - **A semantic classifier** that reaches ≥ 0.85 main-class agreement at
-  coverage ≥ 0.95 (the pending semantic rerun) would re-open the
-  classifier-only comparison on equal terms.
+  coverage ≥ 0.95 would re-open the classifier-only comparison on equal
+  terms. The BGE-small shortlist tier does not reach that: it has coverage
+  1.0 but agreement of 0.51 (FDC) and 0.56 (LCC + LCSH) on the 3,000 books
+  (`bench/results/2026-10-11-books-semantic/`).
 - **A repeat on a different corpus** (not the 3,000-book Open Library
   sample, stratified equally over LCC's 21 main classes, which `R9` §4.5
   flags as favouring LCC's false-join term).

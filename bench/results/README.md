@@ -15,7 +15,8 @@ One directory per run; each has `results.md`, `results.json` and a
 | `2026-10-10-proposal/` | depth cuts, availability pipelines, work-level lookups, papers under a book backbone and paired bootstraps on all three models for report 9 (knowledge-base structure proposal) | published |
 | `2026-10-11-metrics/` | query workloads, information bounds, branch-cost sweep and permutation nulls for the papers, holdout and books runs on three k = 20 graphs | published |
 | `2026-10-11-falsejoin/` | every published run rescored with the false-join term (`crates/bench/src/falsejoin.rs`) on paired item draws; OpenAlex citation and LCSH signals and their agreement with each metric variant | published |
-| `2026-10-10-semantic/` | the placed runs once per classifier profile (lexical, shortlist, rerank) | **pending**: the run was not completed and published no results, so it is not merged |
+| `2026-10-10-semantic/` | the placed runs once per classifier profile (lexical, shortlist, rerank); `rerank` is still a stub, so its placements equal `shortlist`'s byte for byte | published |
+| `2026-10-11-books-semantic/` | lexical and shortlist profiles on the 3,000 books against the librarians' Dewey and LC numbers (main-class agreement at depth 1 to 3) | published |
 
 `crates/bench/scripts/check_published.py` rescores a sample of the
 `embed`, `ddc`, `scores` and `covered` runs from committed inputs and fails

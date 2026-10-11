@@ -903,10 +903,9 @@ the lexical tier placed few papers. arXiv's own taxonomy moves from
 <!-- v:x_sem_arxiv_lex -->0.128<!-- /v --> to <!-- v:x_sem_arxiv_sh -->0.502<!-- /v --> and now leads, with openalex-topics second
 (<!-- v:x_sem_second_skill -->0.465<!-- /v -->), and the Spearman correlation between the two tiers' skill values
 is <!-- v:x_sem_rho -->0.14<!-- /v -->. The ranking of schemes under a classifier is therefore a
-property of the classifier-scheme pair. The run is marked pending in
-`bench/results/README.md`: the numbers here are read from the committed
-JSON of that directory and should be treated as preliminary, and the tier
-that places by embedding uses a different model from the graph's.
+property of the classifier-scheme pair. The numbers are read from the
+committed JSON of that directory. The tier that places by embedding uses a
+different model from the graph's.
 
 Table 14. Lexical and shortlist placement on the papers (`profile:lexical@2`
 and `profile:shortlist@2`; bench/results/2026-10-10-semantic).
@@ -1228,8 +1227,8 @@ quality in every sense that matters to libraries.
   (Table 7). Table 8 and Section 5.8 show the classifier effect is as
   large as the effects we want to measure. No classifier outside this
   project (for example Annif or a prompted LLM) was run for comparison. The
-  semantic tier's directory is marked pending in the results index, so
-  those numbers are preliminary.
+  rerank profile is still a stub, so only the shortlist profile was
+  measured.
 - **One annotator for validity.** The validity check used one LLM judge, on
   <!-- v:x_val_n -->953<!-- /v --> pairs from <!-- v:x_val_runs -->8<!-- /v --> runs in three strata, so its shares describe the
   sample and not the population of pairs. The judge is self-consistent

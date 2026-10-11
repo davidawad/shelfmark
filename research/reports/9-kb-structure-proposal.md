@@ -1110,9 +1110,14 @@ Lexical placement into FDC agrees with the librarian on the main class
 of books unplaced. The classifier is not a placement method for this
 library, only a hint for the review queue.
 
-**Lexical vs semantic classifier.** The semantic-tier rerun is pending,
-so this comparison cannot be made. What would change if it happens is in
-§8.
+**Lexical vs semantic classifier.** `profile:shortlist@2` was run on the
+same 3,000 books (`bench/results/2026-10-11-books-semantic/`). It places
+every book, but main-class agreement stays where it was: FDC 0.514
+[0.496, 0.532], LCC outline 0.438, LCC + LCSH 0.558. Agreement at depth 3
+falls (FDC 0.179). The tier runs after vocab, so it mostly fills the books
+vocab leaves unplaced, and on those books it agrees with the librarian on
+the main class 0.349 of the time for FDC. Neither tier is a placement
+method; both are hints for the review queue.
 
 ### 5.4 A better fallback: LCC call number to FDC
 
@@ -1450,9 +1455,10 @@ Two rules for every name and caption:
 
 ## 8. What would change the recommendation
 
-- **A semantic classifier.** Suppose a semantic classifier (the pending
-  `2026-10-10-semantic` rerun) reached ≥ 0.85 main-class agreement on the
-  3,000 books with coverage ≥ 0.95. It could then replace review for
+- **A semantic classifier.** Suppose a semantic classifier reached ≥ 0.85
+  main-class agreement on the 3,000 books with coverage ≥ 0.95. (The
+  shortlist tier, measured in `bench/results/2026-10-11-books-semantic/`,
+  reaches coverage 1.0 but only 0.51 to 0.56.) It could then replace review for
   items without numbers. The pipelines show that would move the 0% row
   of `pipelines` toward the gold row.
 - **Classifier-only placement.** If the tool places every item with the
