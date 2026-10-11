@@ -105,3 +105,30 @@ fn headings_without_a_number_borrow_from_the_nearest_broader_one() {
     let grandchild = qa76.iter().find(|v| v["source_id"] == "sh3").unwrap();
     assert_eq!(grandchild["weight"], 0.25);
 }
+
+#[test]
+fn inheritance_skips_deprecated_and_missing_broader_headings_and_stops_on_cycles() {
+    let path = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join(MINI);
+    let bytes = std::fs::read(&path).unwrap();
+    let index = shelfmark_scheme::compile_bytes(&bytes, "mini").unwrap();
+    let mut old = heading("sh1", "Old functional programming", &["QA76.62"]);
+    old.deprecated = true;
+    let mut via_old = heading("sh2", "Child of a deprecated heading", &[]);
+    via_old.broader = vec!["sh1".into()];
+    let mut missing = heading("sh3", "Child of an unknown heading", &[]);
+    missing.broader = vec!["sh999".into()];
+    let mut a = heading("sh4", "Cycle A", &[]);
+    a.broader = vec!["sh5".into()];
+    let mut b = heading("sh5", "Cycle B", &[]);
+    b.broader = vec!["sh4".into()];
+    let headings = vec![old, via_old, missing, a, b];
+    let mut doc: Value = serde_json::from_slice(&bytes).unwrap();
+    let opts = Options {
+        inherit: 10,
+        ..Options::default()
+    };
+    let stats = enrich(&mut doc, &headings, &index, &opts).unwrap();
+    assert_eq!(stats.headings_active, 4);
+    assert_eq!(stats.headings_inherited, 0);
+    assert_eq!(stats.terms_added, 0);
+}
