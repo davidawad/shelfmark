@@ -178,6 +178,12 @@ def _validity(root, V, T):
         rows.append([run, f"{_f2(g0['kappa'])} {_ci2(*g0['kappa_ci'])}",
                      f"{_f2(g1['kappa'])} {_ci2(*g1['kappa_ci'])}",
                      f"{g1['dkappa']:+.2f} [{g1['dkappa_ci'][0]:+.2f}, {g1['dkappa_ci'][1]:+.2f}]"])
+    g0, g1 = fj["groups"]["learned-placed"][ix["dasgupta"]], fj["groups"]["learned-placed"][ix["c+1fjs"]]
+    V["x_val_learned_k0"] = _f2(g0["kappa"])
+    V["x_val_learned_k1"] = _f2(g1["kappa"])
+    V["x_val_learned_dk"] = f"{g1['dkappa']:+.2f}"
+    V["x_val_learned_dk_lo"] = f"{g1['dkappa_ci'][0]:+.2f}"
+    V["x_val_learned_dk_hi"] = f"{g1['dkappa_ci'][1]:+.2f}"
     T["validity_runs"] = {
         "header": ["run", "kappa, C [95% CI]", "kappa, C + FJs [95% CI]", "change in kappa"],
         "rows": rows}
