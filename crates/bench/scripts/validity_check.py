@@ -21,12 +21,23 @@ Subcommands, all deterministic for fixed inputs:
   report  Agreement between judge labels and the metric's cost contribution,
           with bootstrap intervals; writes docs/validity/results.md and
           results.json.
+  human   Write the human-librarian packet (docs/validity/human/): a seeded
+          subset of the sample, HUMAN_PER_CELL pairs per run and stratum,
+          blinded and shuffled as for the judge, as packet.md and a blank
+          labels.csv. Needs only the eight scheme files (committed ones are
+          used when the cache has none); each is checked against
+          sample-meta.json. The uid is a hash of the pair id, so no key file
+          is written.
+  human-report  Agreement of the filled labels.csv with the metric and with
+          the LLM judge's pass-1 labels; writes docs/validity/human/results.md
+          and results.json.
 
 Inputs are the ignored cache of run_benchmark.py / learned_benchmark.py and
 the embedding vectors of build_graph_fastembed.py --vectors (see
 docs/validity/README.md). Only the Python standard library is used.
 """
 import argparse
+import gzip
 import hashlib
 import json
 import math
@@ -600,6 +611,155 @@ def report(a):
     print("\n".join(L))
 
 
+# Human-librarian packet. Committed copies of the scheme files, used when the
+# cache has none; ilc2 and msc are fetch-only and must be built
+# (crates/bench/scripts/build_schemes.sh ilc2 msc).
+HUMAN_PER_CELL = 5
+HUMAN = OUT / "human"
+COMMITTED_SCHEMES = {
+    "lcc-full-placed": "schemes/lcc-full/lcc-full.json.gz",
+    "fdc-placed": "schemes/fdc/fdc.json",
+    "unesco-thesaurus-placed": "schemes/unesco-thesaurus/unesco-thesaurus.json",
+    "openalex-topics-placed": "schemes/openalex-topics/openalex-topics.json",
+    "arxiv-gold": "schemes/arxiv/arxiv.json",
+    "learned-placed": "schemes/learned/learned.json",
+}
+HUMAN_FIELDS = ["relation", "together", "scheme_decision", "class_1_ok", "class_2_ok"]
+
+
+def human_uid(pid):
+    return hashlib.sha256(f"{SEED}:human:{pid}".encode()).hexdigest()[:10]
+
+
+def human_works(r):
+    """The two works in packet order (work 1, work 2), seeded per pair."""
+    works = [(r["id_a"], r["class_a"], "a"), (r["id_b"], r["class_b"], "b")]
+    if int(hashlib.sha256(f"{SEED}:human-order:{r['pair_id']}".encode()).hexdigest()[:8], 16) & 1:
+        works.reverse()
+    return works
+
+
+def human_subset(rows):
+    """HUMAN_PER_CELL pairs per (run, stratum), seeded, in sample order."""
+    out = []
+    for key in RUNS:
+        for st in STRATA:
+            cell = sorted((r for r in rows if r["run"] == key and r["stratum"] == st), key=lambda r: r["pair_id"])
+            out += rng_for("human", key, st).sample(cell, min(HUMAN_PER_CELL, len(cell)))
+    return out
+
+
+def scheme_doc(cache, key, want):
+    paths = [cache / RUNS[key][1]]
+    if key in COMMITTED_SCHEMES:
+        paths.append(ROOT / COMMITTED_SCHEMES[key])
+    for path in paths:
+        if not path.exists():
+            continue
+        raw = path.read_bytes()
+        if path.suffix == ".gz":
+            raw = gzip.decompress(raw)
+        if hashlib.sha256(raw).hexdigest() == want:
+            return json.loads(raw)
+    raise SystemExit(f"{key}: no scheme file with sha256 {want[:12]}… in {[str(p) for p in paths]}")
+
+
+def class_path(classes, code):
+    out = []
+    while code:
+        c = classes[code]
+        out.append(f"{code} — {c.get('label', '')[:LABEL_CHARS]}")
+        code = c.get("parent")
+    return list(reversed(out))
+
+
+def human(a):
+    rows = jsonl(OUT / "sample.jsonl")
+    meta = json.loads((OUT / "sample-meta.json").read_text())
+    corpus = {r["id"]: r for r in jsonl(CORPUS)}
+    cache = Path(a.cache)
+    docs = {k: scheme_doc(cache, k, meta["runs"][k]["scheme_sha256"]) for k in RUNS}
+    classes = {k: {c["code"]: c for c in d["classes"]} for k, d in docs.items()}
+    chosen = human_subset(rows)
+    rng = rng_for("human", "order")
+    rng.shuffle(chosen)
+    L = ["# Human-librarian validity packet", "",
+         f"{len(chosen)} pairs. Label each pair in `labels.csv` (one row per uid) by the rubric in",
+         "`../rubric.md`, section \"Labels\": `relation` (same-topic, same-field, different-field),",
+         "`together` (together, apart), `scheme_decision` (correct, incorrect), `class_1_ok` and",
+         "`class_2_ok` (yes, no), and an optional one-line `reason`. Judge from the titles,",
+         "abstracts and class paths below only. Do not open `../sample.jsonl`, `../results.md`",
+         "or any benchmark result before you finish: they hold the metric's and the LLM judge's",
+         "view of the same pairs.", "",
+         "Annotator, date and any rubric questions go in `annotator.md`.", ""]
+    for n, r in enumerate(chosen, start=1):
+        L += [f"## {n}. uid `{human_uid(r['pair_id'])}`", "",
+              f"Scheme: {docs[r['run']].get('title', RUNS[r['run']][0])}", ""]
+        for m, (wid, code, _) in enumerate(human_works(r), start=1):
+            row = corpus[wid]
+            text = re.sub(r"\s+", " ", row.get("abstract_text") or row.get("description") or "").strip()
+            if len(text) > ABSTRACT_CHARS:
+                text = text[:ABSTRACT_CHARS].rsplit(" ", 1)[0] + " …"
+            title = re.sub(r"\s+", " ", row["title"]).strip()
+            L += [f"**Work {m}.** {title}", "", f"> {text}", "",
+                  "Class path: " + " › ".join(class_path(classes[r["run"]], code)), ""]
+    HUMAN.mkdir(parents=True, exist_ok=True)
+    (HUMAN / "packet.md").write_text("\n".join(L), encoding="utf-8")
+    csv_rows = ["uid," + ",".join(HUMAN_FIELDS) + ",reason"]
+    csv_rows += [human_uid(r["pair_id"]) + "," * (len(HUMAN_FIELDS) + 1) for r in chosen]
+    (HUMAN / "labels.csv").write_text("\n".join(csv_rows) + "\n", encoding="utf-8")
+    print(f"wrote {len(chosen)} pairs to {HUMAN}")
+
+
+def human_report(a):
+    import csv
+    rows = jsonl(OUT / "sample.jsonl")
+    chosen = {human_uid(r["pair_id"]): r for r in human_subset(rows)}
+    with open(HUMAN / "labels.csv", encoding="utf-8") as f:
+        labels = list(csv.DictReader(f))
+    filled = [lab for lab in labels if any(lab.get(k) for k in HUMAN_FIELDS)]
+    for lab in filled:
+        if lab["uid"] not in chosen:
+            raise SystemExit(f"labels.csv: unknown uid {lab['uid']}")
+        for f in HUMAN_FIELDS:
+            if lab.get(f) not in LABELS[f]:
+                raise SystemExit(f"labels.csv: {lab['uid']} has invalid {f}={lab.get(f)!r}")
+    if not filled:
+        raise SystemExit("labels.csv has no labels yet")
+    pairs = [(chosen[lab["uid"]], lab) for lab in filled]
+    res = {"n": len(pairs), "of": len(chosen)}
+    human_bad = [lab["scheme_decision"] == "incorrect" for _, lab in pairs]
+    llm_bad = [r["labels"]["pass1"]["scheme_decision"] == "incorrect" for r, _ in pairs]
+    flag = [r["metric_flag"] for r, _ in pairs]
+    res["human_vs_metric"] = {"agree": sum(x == y for x, y in zip(human_bad, flag)) / len(pairs),
+                              "kappa": kappa(human_bad, flag)}
+    res["human_vs_llm"] = {}
+    for f in ["scheme_decision", "together", "relation"]:
+        x = [lab[f] for _, lab in pairs]
+        y = [r["labels"]["pass1"][f] for r, _ in pairs]
+        res["human_vs_llm"][f] = {"agree": sum(p == q for p, q in zip(x, y)) / len(pairs), "kappa": kappa(x, y)}
+    # class_1_ok / class_2_ok refer to packet order; map them back to a / b.
+    agree_cls = []
+    for r, lab in pairs:
+        for m, (_, _, side) in enumerate(human_works(r), start=1):
+            agree_cls.append((lab[f"class_{m}_ok"], r["labels"]["pass1"][f"class_{side}_ok"]))
+    res["human_vs_llm"]["class_ok"] = {"agree": sum(p == q for p, q in agree_cls) / len(agree_cls),
+                                       "kappa": kappa([p for p, _ in agree_cls], [q for _, q in agree_cls])}
+    res["llm_vs_metric_same_pairs"] = {"agree": sum(x == y for x, y in zip(llm_bad, flag)) / len(pairs),
+                                       "kappa": kappa(llm_bad, flag)}
+    (HUMAN / "results.json").write_text(json.dumps(res, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    L = ["# Human-librarian labels: agreement", "", f"{res['n']} of {res['of']} pairs labelled.", "",
+         "| comparison | agreement | Cohen κ |", "|---|---|---|",
+         f"| human scheme_decision vs metric flag | {fmt(res['human_vs_metric']['agree'])} | "
+         f"{fmt(res['human_vs_metric']['kappa'])} |",
+         f"| LLM judge vs metric flag, same pairs | {fmt(res['llm_vs_metric_same_pairs']['agree'])} | "
+         f"{fmt(res['llm_vs_metric_same_pairs']['kappa'])} |"]
+    for f, c in res["human_vs_llm"].items():
+        L.append(f"| human vs LLM judge: {f} | {fmt(c['agree'])} | {fmt(c['kappa'])} |")
+    (HUMAN / "results.md").write_text("\n".join(L) + "\n", encoding="utf-8")
+    print("\n".join(L))
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--cache", default=str(ROOT / "bench/corpus/cache"))
@@ -611,8 +771,11 @@ def main():
     m = sub.add_parser("merge")
     m.add_argument("--labels", required=True)
     sub.add_parser("report")
+    sub.add_parser("human")
+    sub.add_parser("human-report")
     a = p.parse_args()
-    {"sample": sample, "blind": blind, "merge": merge, "report": report}[a.cmd](a)
+    {"sample": sample, "blind": blind, "merge": merge, "report": report,
+     "human": human, "human-report": human_report}[a.cmd](a)
 
 
 if __name__ == "__main__":
