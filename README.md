@@ -1,7 +1,7 @@
 # shelfmark
 
 An open-source, cross-platform, CPU-first materials classifier. It gives
-every Work a permanent content-derived ID, places it into any
+every specimen a permanent content-derived ID, places it into any
 classification scheme supplied as a data file, and records each result as
 an append-only placement claim with a confidence, a replayable trace, and
 the hashes of its inputs.
@@ -112,7 +112,7 @@ builder, tests and a README. Load the built file with
 
 | Layer | Noun | ID form |
 |---|---|---|
-| L0 | Work, Item | `work:nt1s256:<hex>`, `item:s256:<hex>` |
+| L0 | Specimen, Item | `work:nt1s256:<hex>` (`specimen:` accepted), `item:s256:<hex>` |
 | L1 | Scheme, Class | `scheme:lcc@2024`, `class:lcc@2024:QA76.76.C65` |
 | L2 | Profile, Tier | `profile:lexical@2` |
 | L3 | Placement | `placement:s256:<hex>` |
@@ -120,11 +120,53 @@ builder, tests and a README. Load the built file with
 Every ID names its kind, and a hash ID names its algorithm, so one
 `resolve` verb accepts any of them.
 
+### Specimen, formerly Work
+
+The L0 noun is a **specimen**: one piece of content, whatever its file
+format. shelfmark called it a Work before 0.2. Specimen IDs keep the
+`work:nt1s256:<hex>` form, and always will: the ID string is hashed into
+every placement ID and memo key (`crates/core/src/placement.rs`,
+`Placement::compute_id`, `InputHashes::memo_key`), so renaming the prefix
+would change the ID of every existing placement. `specimen:nt1s256:<hex>`
+is accepted wherever an ID is read and parses to the same ID
+(`crates/core/src/id.rs`, `SPECIMEN_ALIAS`); output always prints `work:`.
+`resolve` and `describe` report the noun as `"noun": "specimen"` next to
+the stable `"kind": "work"`.
+
+Read-compat for one release (removed in the next): `link --work` is an
+alias of `link --specimen`, the `link` request accepts `work` for
+`specimen`, and JSON output carries the old keys `work`, `new_work` and
+`minted_work` next to the new `specimen`, `new_specimen` and
+`minted_specimen`. The stored placement claim keeps its `work` field: it is
+part of the claim's hashed canonical JSON.
+
+### Placement is by ID, never by location
+
+A placement is stored by specimen ID, separately from where any file
+lives. Reorganizing a library is a re-render of ID to class, never a
+re-classification:
+
+- A placement claim names a specimen, a scheme, a class and a profile; it
+  has no file path (`crates/core/src/placement.rs`, `Placement`). The log
+  is indexed by `(specimen, scheme)` (`crates/store/src/index.rs`,
+  `LogIndex::pair`).
+- Files are Items: `item:s256:` hashes of their bytes, linked to a
+  specimen (`crates/identity/src/identity.rs`, `Link { item, work }`). A
+  link records no path either, so moving or renaming a file changes
+  nothing in the store.
+- The folder and file name come from `shelfmark name`, a read-only verb
+  that renders a path from the current placement and a template
+  (`crates/naming`). The naming crate never touches the file system, and
+  nothing it renders is stored. A new template, or a new scheme version
+  rendered over the same placements, re-files a library without
+  re-running a classifier.
+
 ## Contracts (`crates/core`)
 
-- `id`: typed IDs and their derivation. A Work ID is the SHA-256 of the
-  text under normalization v1 (lowercase; runs of non-alphanumerics become
-  one space), so a PDF and its markdown conversion share a Work.
+- `id`: typed IDs and their derivation. A specimen ID is the SHA-256 of
+  the text under normalization v1 (lowercase; runs of non-alphanumerics
+  become one space), so a PDF and its markdown conversion share a
+  specimen.
 - `scheme`: the scheme data model, mirrored by
   [`schemas/scheme.schema.json`](schemas/scheme.schema.json), and the
   `CompiledIndex` trait that compiled schemes implement.
@@ -152,7 +194,7 @@ previews first. `--commit` writes `calibration.json` and `eval.json` to
 the store; `classify` then applies the calibration and `status` reports
 both, including whether the calibration is stale against newer gold.
 Gold comes from `confirm`/`correct`, which label the input the
-Work was classified from, or from `--gold FILE`, an NDJSON file of gold
+specimen was classified from, or from `--gold FILE`, an NDJSON file of gold
 examples or mc-eval gold items, which a commit adds to the gold set once.
 The metrics are in-sample: the calibration is scored on the examples it
 was fitted on.

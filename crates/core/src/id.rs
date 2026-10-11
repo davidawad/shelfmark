@@ -5,6 +5,12 @@
 //! (`work:nt1s256:<hex>`) so the derivation can change without breaking
 //! old IDs; scheme-bound IDs carry the scheme version
 //! (`class:lcc@2024:QA76.76.C65`).
+//!
+//! Vocabulary: the `work:` kind names a *specimen* (shelfmark's public noun
+//! since 0.2; it was "Work"). The rendered prefix stays `work:` because an
+//! ID's string is hashed into every placement ID and memo key, so it must
+//! never change for an existing specimen. `specimen:` is accepted as an
+//! input alias for `work:` and parses to the same ID.
 
 use std::fmt;
 use std::str::FromStr;
@@ -12,6 +18,10 @@ use std::str::FromStr;
 use serde::{de, Deserialize, Deserializer, Serialize, Serializer};
 use sha2::{Digest as _, Sha256};
 use unicode_normalization::UnicodeNormalization;
+
+/// Input alias for the `work:` prefix (a specimen ID). Parses to the same
+/// ID; IDs always render with `work:`.
+pub const SPECIMEN_ALIAS: &str = "specimen";
 
 /// The noun an ID names.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Serialize, Deserialize)]
@@ -46,7 +56,18 @@ impl Kind {
         }
     }
 
+    /// The public noun: `specimen` for [`Kind::Work`], else the prefix.
+    pub fn noun(self) -> &'static str {
+        match self {
+            Kind::Work => SPECIMEN_ALIAS,
+            other => other.as_str(),
+        }
+    }
+
     fn parse(s: &str) -> Option<Kind> {
+        if s == SPECIMEN_ALIAS {
+            return Some(Kind::Work);
+        }
         Kind::ALL.into_iter().find(|k| k.as_str() == s)
     }
 }
@@ -62,7 +83,9 @@ impl fmt::Display for Kind {
 pub enum IdError {
     #[error("`{0}` has no `<kind>:` prefix")]
     NoKind(String),
-    #[error("`{0}` is not a known kind (work, item, scheme, class, profile, placement)")]
+    #[error(
+        "`{0}` is not a known kind (work or specimen, item, scheme, class, profile, placement)"
+    )]
     UnknownKind(String),
     #[error("`{id}` is not a {kind} ID: {reason}")]
     Malformed {

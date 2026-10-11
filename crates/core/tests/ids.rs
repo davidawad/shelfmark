@@ -95,3 +95,18 @@ fn nfkc_makes_decomposed_accents_and_ligatures_match() {
     assert_eq!(normalize_text_v1(nfc), "résumé of the field");
     assert_eq!(WorkId::from_text(nfc), WorkId::from_text(nfd));
 }
+
+#[test]
+fn specimen_prefix_is_an_input_alias_that_renders_as_work() {
+    let work: WorkId = format!("work:nt1s256:{HEX}").parse().unwrap();
+    let specimen: WorkId = format!("specimen:nt1s256:{HEX}").parse().unwrap();
+    assert_eq!(specimen, work);
+    // The rendered ID never changes: it is hashed into placement IDs.
+    assert_eq!(specimen.to_string(), format!("work:nt1s256:{HEX}"));
+    let any: AnyId = format!("specimen:nt1s256:{HEX}").parse().unwrap();
+    assert_eq!(any.kind(), Kind::Work);
+    assert_eq!(Kind::Work.noun(), "specimen");
+    assert_eq!(Kind::Item.noun(), "item");
+    let json = format!("\"specimen:nt1s256:{HEX}\"");
+    assert_eq!(serde_json::from_str::<WorkId>(&json).unwrap(), work);
+}

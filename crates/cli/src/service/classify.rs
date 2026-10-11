@@ -114,6 +114,9 @@ fn add_ingest(out: &mut Value, ingested: Option<&Ingested>) {
     let Some(ing) = ingested else { return };
     out["ingest"] = json!({
         "new_item": ing.new_item,
+        "new_specimen": ing.new_work,
+        "minted_specimen": ing.minted_work,
+        // Pre-0.2 names, kept for one release.
         "new_work": ing.new_work,
         "minted_work": ing.minted_work,
         "format": ing.format.as_str(),
@@ -121,7 +124,7 @@ fn add_ingest(out: &mut Value, ingested: Option<&Ingested>) {
     });
     if let Some(p) = ing.proposals.first() {
         out["next_command"] = json!(format!(
-            "shelfmark link --item {} --work {}",
+            "shelfmark link --item {} --specimen {}",
             ing.item, p.work
         ));
     }

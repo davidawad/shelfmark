@@ -96,9 +96,9 @@ pub enum Command {
     Status,
     /// Resolve any typed ID.
     Resolve { id: String },
-    /// Place a Work into a scheme.
+    /// Place a specimen into a scheme.
     Classify(Classify),
-    /// The full trace of a placement or a Work's placements.
+    /// The full trace of a placement or a specimen's placements.
     Explain {
         id: String,
         #[arg(long)]
@@ -133,14 +133,16 @@ pub enum Command {
     /// Accuracy and calibration from the gold set (preview; --commit
     /// writes eval.json and calibration.json).
     Eval(EvalArgs),
-    /// Link a file to an existing Work (preview; --commit to apply).
+    /// Link a file to an existing specimen (preview; --commit to apply).
     Link {
         #[arg(long)]
         item: String,
-        #[arg(long)]
-        work: String,
+        /// The specimen ID (`work:...`; `specimen:...` is accepted too).
+        /// `--work` is the deprecated spelling, kept for one release.
+        #[arg(long, alias = "work")]
+        specimen: String,
     },
-    /// Preview the path for a Work's placement.
+    /// Preview the path for a specimen's placement.
     Name {
         id: String,
         #[arg(long)]
@@ -283,7 +285,7 @@ pub fn to_request(command: Command) -> Result<(Verb, Value), Error> {
         ),
         C::Stale(sc) => (Verb::Stale, obj(scoped(sc))),
         C::Eval(e) => (Verb::Eval, eval_args(e)),
-        C::Link { item, work } => (Verb::Link, json!({ "item": item, "work": work })),
+        C::Link { item, specimen } => (Verb::Link, json!({ "item": item, "specimen": specimen })),
         C::Name {
             id,
             scheme,
