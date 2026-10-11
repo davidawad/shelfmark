@@ -69,9 +69,6 @@ pandoc paper.md --citeproc --bibliography references.bib --pdf-engine=xelatex \
 
 ## Pending
 
-- The semantic-tier rerun (`bench/results/2026-10-10-semantic/`, Section
-  5.8) is marked pending in `bench/results/README.md`; its numbers are
-  preliminary.
 - The full LCC and LCSH sources and a measured full bundled `lcc-lcsh` are
   not yet in this draft; Section 5.12 uses the bundled outline with LCSH
   vocabulary.
