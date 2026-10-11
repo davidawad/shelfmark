@@ -388,10 +388,9 @@ def build():
 
 
 # Shared tables Paper 2 prints, and their left-aligned columns besides the first.
-SHARED_TABLES = ["learned_edge", "learned_fj", "cross_fit", "validity_runs", "book_claims"]
+SHARED_TABLES = ["learned_edge", "learned_fj", "cross_fit"]
 LEFT_SHARED = {
     "learned_fj": {"model", "best other by J'", "best other by C + FJ"},
-    "book_claims": {"objective", "claimed", "verdict"},
 }
 
 

@@ -39,6 +39,11 @@ is typed by hand. The inputs are:
 - `bench/results/2026-10-10/results.json` (Paper 1 gold runs)
 - `schemes/learned/learned.json` and `schemes/learned/data/centroids.json.gz`
 - `bench/corpus/corpus.jsonl` (primary categories only)
+- through `paper/common/extra_results.py` (Section 6.6):
+  `bench/results/2026-10-10-embed/results.json`,
+  `bench/results/2026-10-11-falsejoin/` (`results.json` and the paired
+  draws in `bootstrap/*.draws.json.gz`), `docs/validity/` and
+  `bench/results/2026-10-11-book-stability/results.json`
 
 The script also cross-checks the inputs and stops on any mismatch. It
 checks that J equals `cost_norm + lambda * nav_log_a1` for every row, that
@@ -67,13 +72,19 @@ text matches); see `docs/research/README.md`.
 
 ## Open items before any submission
 
-- Author line (`AUTHOR TBD`) and repository location (omitted from section 9).
-- A second, independent similarity (another embedding model, citations
-  or subject headings) to remove the embedding circularity in the held-out
-  and holdout results.
-- Permutation nulls for the learned rows, and bootstrap intervals in this
-  paper's own tables (item-bootstrap intervals exist in
-  `bench/results/2026-10-10-covered` and `-embed`).
+- Repository location (omitted from section 9).
+- A similarity that is not an embedding (citations or subject headings) to
+  score the scheme; Section 6.6 rescored it on two independent embedding
+  models, which removes the circularity of the scoring graph but not of
+  filing.
+- Permutation nulls for the learned rows.
 - A human evaluation of the hand-written and automatic labels.
-- Venue choice and formatting. Citations are written as pandoc-style
-  `[@key]` and are not yet rendered.
+- Venue choice and formatting.
+
+`paper.pdf` is the rendered draft. To rebuild it, from `paper/paper2`:
+
+```sh
+pandoc paper.md --citeproc --bibliography references.bib --pdf-engine=xelatex \
+  -H ../common/pandoc.tex -V mainfont="STIX Two Text" -V mathfont="STIX Two Math" \
+  -V geometry:margin=1in -V fontsize=10pt -o paper.pdf
+```

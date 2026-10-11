@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Values and tables shared by paper/paper1 and paper/method-survey.
+"""Values and tables shared by paper/paper1, paper/paper2 and paper/method-survey.
 
 Everything here is read from committed JSON under the repository root; no
 number is typed by hand. The two table scripts import `collect()` and render
@@ -20,6 +20,8 @@ Sources (all committed):
 * bench/results/2026-10-10-embed/       cross-fit of the learned scheme
 * bench/results/2026-10-10-semantic/    lexical vs shortlist tier
 * bench/results/2026-10-10-learned/     learned scheme
+* bench/results/2026-10-11-falsejoin/   false-join rescoring and its paired draws
+* bench/results/2026-10-11-book-stability/ bead_rule   default-scheme winners
 
 Standard library only.
 """
@@ -495,6 +497,7 @@ def _default(root, V, T):
     V["x_def_cov_unesco"] = _f3(cov["unesco-thesaurus-placed"])
     V["x_def_cov_lcclcsh"] = _f3(cov["lcc-lcsh-placed"])
     V["x_def_cov_fdc"] = _f3(cov["fdc-placed"])
+    V["x_def_cov_lcc"] = _f3(cov["lcc-placed"])
 
 
 EDGE_ROWS = [

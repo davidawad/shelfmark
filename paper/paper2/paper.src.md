@@ -1,6 +1,6 @@
 ---
 title: "A learned, order-preserving open general classification: objective, algorithm, stable identifiers and a first benchmark"
-author: "AUTHOR TBD"
+author: "David Awad"
 status: "DRAFT. Not submitted, posted or shared. Proposal paper."
 bibliography: references.bib
 ---
@@ -37,9 +37,15 @@ the best existing scheme reached through the same lexical classifier
 {{best_p1_cost}}). Fitted on {{train_pct}}% and tested on the other
 {{test_pct}}%, it scores {{ho_cost}}. Filing {{n_holdout}} library books as
 new works created {{ins_new_classes}} classes and changed no existing
-identifier. These numbers flatter the method: the held-out and holdout
-filings use the same embedding as the graph, the scheme has seen only
-arXiv, and labels for inserted classes are weak. We state those limits
+identifier. Rescored on graphs from two independent embedding models, the
+scheme still leads every existing scheme in all {{x_edge_conditions}}
+graph conditions, with a smaller margin. Under a corrected objective that
+also charges for joining dissimilar works, it still leads on the papers,
+but on {{x_books_n}} library books its lead over librarian-assigned Dewey
+and LCC numbers depends on the graph setting. These numbers flatter the
+method: the held-out and holdout filings use the same embedding as the
+fit, the scheme has seen only arXiv, and labels for inserted classes are
+weak. We state those limits
 plainly, release the scheme as CC0 open data, and ask whether a learned,
 open, order-preserving classification can become a general one.
 
@@ -551,8 +557,8 @@ the judge rarely finds a false join in it.
 Table 11 compares the learned scheme, with its own placements, against the
 best non-learned run under each form, on the 15 graphs of the false-join
 rescoring (`bench/results/2026-10-11-falsejoin`). "Best other" is chosen by
-point value among about 30 runs per universe, including gold Dewey and LCC
-numbers on the books, before the interval is computed.
+point value among all non-learned runs of that universe, including gold
+Dewey and LCC numbers on the books, before the interval is computed.
 
 {{table:learned_fj}}
 
@@ -566,13 +572,15 @@ both forms in every graph ({{x_lfj_corpus_jp_ahead}} of
 {{x_lfj_corpus_n}} and {{x_lfj_holdout_jp_ahead}} of {{x_lfj_holdout_n}}
 under $J'$). On the {{x_books_n}} books it does not hold. Under $J'$ it
 leads in {{x_lfj_books_jp_ahead}} of {{x_lfj_books_n}} graphs, ties in
-{{x_lfj_books_jp_tie}} and is behind in {{x_lfj_books_jp_behind}}, all at
-k = 10, where LCC's librarian numbers are best. Under the outside-mass form
+{{x_lfj_books_jp_tie}} and is behind in {{x_lfj_books_jp_behind}}; the
+ties and the loss are against LCC's librarian numbers on the k = 10
+graphs. Under the outside-mass form
 it is behind in {{x_lfj_books_cfj_behind}} of {{x_lfj_books_n}}, ties in
 {{x_lfj_books_cfj_tie}} and leads in {{x_lfj_books_cfj_ahead}}. The
-outside-mass form charges a join at the root's first split almost as much
-as a deep one, and the learned scheme's binary root (Section 8.3) is the
-structure it punishes most.
+outside-mass form charges a shallow join almost as much as a deep one, so
+it rewards a wide top level (`bench/results/2026-10-11-falsejoin/README.md`).
+The learned scheme has a binary root (Section 8.3), so every dissimilar
+pair that lands in the same half of it pays at least half the maximum.
 
 **The 27-setting book sweep.** The book comparison was repeated in
 {{x_dl_settings}} settings: three models, three values of k and three
@@ -603,6 +611,13 @@ point. A hand-built scheme can now be described as "this far from a fitted
 scheme with the same number of levels on the same graph", and the cost of
 each constraint (order preservation, the depth bound, stable insertion) can
 be measured rather than argued.
+
+**What survives the checks.** The lead holds when the scoring graph comes
+from another embedding model, and part of it, a few hundredths of skill, is
+home advantage (Section 6.6). It does not hold on books once false joins
+are charged. A fitted scheme that is excellent on its own kind of material
+and only level with librarian numbers on books is a reference point, not a
+replacement.
 
 **The price of order preservation is not yet measured.** The DP collapse
 and the local search work only within one fixed shelf order, and the
@@ -640,10 +655,13 @@ the circularity the benchmark design warns about (DESIGN.md, finding 6) and
 it favours the learned rows in Tables 4 and 6. It is worst on the holdout,
 where both the graph and the insertion see only title embeddings. The
 published schemes' placed rows, and the learned scheme's own placed rows,
-use the lexical classifier and do not share this advantage. A fair test
-needs a second, independent similarity (another embedding model, citation
-coupling, or subject-heading overlap; DESIGN.md section 2.2), which this
-draft does not have.
+use the lexical classifier and do not share this advantage. Section 6.6
+removes the circularity of the scoring graph by rescoring on graphs from
+two other embedding models, and the lead survives. It does not remove the
+circularity of filing: inserted works are still placed by their MiniLM
+vectors, and a similarity that is not an embedding at all (citation
+coupling or subject-heading overlap; DESIGN.md section 2.2) has been used
+only to validate the metric, not to score this scheme.
 
 ### 8.2 Fitted on arXiv only
 
@@ -706,11 +724,12 @@ artefact.
 - Insertion does not keep the depth bound: holdout insertion produced
   classes {{ins_max_class_depth}} levels deep and a mean work depth of
   {{h_mean_depth}} in the harness's tree (Table 6).
-- One corpus, one graph, one objective weighting. This paper reports no
-  bootstrap intervals or permutation nulls for the learned rows (DESIGN.md
-  section 2.5 proposes both). Item-bootstrap intervals for the learned runs
-  are in `bench/results/2026-10-10-covered` and `-embed`, and a permutation
-  null has not been run.
+- One corpus to fit. Tables 1 to 8 are point values on the fit graph;
+  the paired intervals are in Section 6.6. A permutation null for the
+  learned rows (DESIGN.md section 2.5) has not been run.
+- The false-join validity check rests on one LLM judge, and it does not
+  raise agreement with citation or subject-heading signals (Paper 1,
+  Section 5.7).
 - No user study: N is a model of navigation cost [@hick1952; @hyman1953],
   not a measurement. User studies of menu depth and breadth disagree on
   the best shape: speed and accuracy improved with breadth in one

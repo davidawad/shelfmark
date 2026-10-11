@@ -245,6 +245,45 @@
   ("co-citation (papers)", "0.23", "0.19", "0.87", "0.87", "fdc-arxiv-nested - lcc-arxiv-nested: +0.001 [-0.026, +0.025]",),
 )
 
+#let default-floors-header = ("coverage floor", "winner, all placed schemes (settings)", "winner, bundleable open schemes (settings)",)
+
+#let default-floors = (
+  ("0.70", "lcc-lcsh-placed 15, unesco-thesaurus-placed 12", "lcc-lcsh-placed 18, fdc-placed 9",),
+  ("0.80", "lcc-lcsh-placed 15, unesco-thesaurus-placed 12", "lcc-lcsh-placed 18, fdc-placed 9",),
+  ("0.85", "lcc-lcsh-placed 15, unesco-thesaurus-placed 12", "lcc-lcsh-placed 27",),
+  ("0.90", "lcc-lcsh-placed 15, unesco-thesaurus-placed 12", "lcc-lcsh-placed 27",),
+  ("0.95", "lcc-lcsh-placed 27", "lcc-lcsh-placed 27",),
+)
+
+#let learned-edge-header = ("comparison", "learned first by skill", "skill margin CI > 0", "J margin CI > 0", "tightest condition: skill margin [95% CI]",)
+
+#let learned-edge = (
+  ("held out 20% (MiniLM fit, inserted)", "9 of 9", "9 of 9", "9 of 9", "bge-small-k10: 0.155 [0.122, 0.189]",),
+  ("in sample (full MiniLM fit)", "9 of 9", "9 of 9", "9 of 9", "bge-small-k50: 0.160 [0.151, 0.169]",),
+  ("500 holdout books, inserted", "9 of 9", "9 of 9", "9 of 9", "nomic-k10: 0.280 [0.214, 0.340]",),
+  ("placed by lexical@2", "9 of 9", "9 of 9", "9 of 9", "nomic-k10: 0.290 [0.277, 0.302]",),
+)
+
+#let learned-fj-header = ("universe", "model", "k", "best other by J'", "J' learned - best [95% CI]", "best other by C + FJ", "C + FJ learned - best [95% CI]",)
+
+#let learned-fj = (
+  ("3,000 books", "minilm", "10", "lcc-gold", "-0.016 [-0.043, +0.007]", "lcc-gold", "+0.140 [+0.111, +0.167]",),
+  ("3,000 books", "minilm", "20", "ddc-section", "-0.105 [-0.129, -0.083]", "lcc-full-gold", "+0.045 [+0.020, +0.068]",),
+  ("3,000 books", "minilm", "50", "ddc-d2", "-0.152 [-0.171, -0.134]", "lcc-gold", "-0.037 [-0.059, -0.016]",),
+  ("3,000 books", "bge-small", "10", "lcc-gold", "+0.018 [-0.008, +0.040]", "lcc-gold", "+0.183 [+0.155, +0.209]",),
+  ("3,000 books", "bge-small", "20", "ddc-section", "-0.052 [-0.075, -0.032]", "lcc-full-gold", "+0.092 [+0.068, +0.115]",),
+  ("3,000 books", "bge-small", "50", "ddc-d2", "-0.097 [-0.116, -0.079]", "ddc-gold", "+0.015 [-0.007, +0.038]",),
+  ("3,000 books", "nomic", "10", "lcc-gold", "+0.036 [+0.010, +0.060]", "lcc-gold", "+0.195 [+0.168, +0.223]",),
+  ("3,000 books", "nomic", "20", "ddc-section", "-0.058 [-0.082, -0.036]", "lcc-full-gold", "+0.098 [+0.072, +0.123]",),
+  ("3,000 books", "nomic", "50", "ddc-section", "-0.108 [-0.129, -0.090]", "lcc-gold", "+0.010 [-0.012, +0.033]",),
+  ("10,000 papers (in sample)", "minilm", "20", "fdc-arxiv-nested", "-0.136 [-0.145, -0.128]", "arxiv-gold", "-0.041 [-0.051, -0.031]",),
+  ("10,000 papers (in sample)", "bge-small", "20", "fdc-arxiv-nested", "-0.115 [-0.122, -0.106]", "arxiv-gold", "-0.046 [-0.056, -0.036]",),
+  ("10,000 papers (in sample)", "nomic", "20", "fdc-arxiv-nested", "-0.116 [-0.124, -0.108]", "arxiv-gold", "-0.036 [-0.047, -0.027]",),
+  ("500 holdout books (title only)", "minilm", "20", "lcc-pipeline", "-0.264 [-0.309, -0.221]", "lcc-full-gold", "-0.249 [-0.306, -0.192]",),
+  ("500 holdout books (title only)", "bge-small", "20", "fdc-pipeline", "-0.181 [-0.226, -0.137]", "fdc-work", "-0.110 [-0.168, -0.053]",),
+  ("500 holdout books (title only)", "nomic", "20", "fdc-work", "-0.184 [-0.235, -0.126]", "fdc-work", "-0.134 [-0.198, -0.066]",),
+)
+
 #let v = (
   gold_arxiv_skill: "0.786",
   gold_arxiv_cost: "0.333",
@@ -454,6 +493,11 @@
   x_val_kappa_fjs_min: "0.45",
   x_val_kappa_fjs_max: "0.49",
   x_val_kappa_fj_b4: "0.45",
+  x_val_learned_k0: "0.33",
+  x_val_learned_k1: "0.30",
+  x_val_learned_dk: "-0.03",
+  x_val_learned_dk_lo: "-0.20",
+  x_val_learned_dk_hi: "+0.14",
   x_stab_settings: "54",
   x_stab_threshold: "0.8",
   x_stab_cost_min_same: "0.90",
@@ -581,4 +625,48 @@
   x_ext_cocitation_diff: "+0.001",
   x_ext_cocitation_lo: "-0.026",
   x_ext_cocitation_hi: "+0.025",
+  x_def_floor: "0.90",
+  x_def_winner: "lcc-lcsh-placed",
+  x_def_wins: "27",
+  x_def_settings: "27",
+  x_def_all_lcclcsh: "15",
+  x_def_all_unesco: "12",
+  x_def_min_floor_unique: "0.85",
+  x_def_cov_unesco: "0.925",
+  x_def_cov_lcclcsh: "0.985",
+  x_def_cov_fdc: "0.839",
+  x_def_cov_lcc: "0.915",
+  x_edge_conditions: "9",
+  x_edge_all: "yes",
+  x_edge_tight_cond: "bge-small-k10",
+  x_edge_tight: "0.155",
+  x_edge_tight_lo: "0.122",
+  x_edge_tight_hi: "0.189",
+  x_edge_margin_minilm: "0.190",
+  x_edge_skill_minilm: "0.922",
+  x_edge_margin_bgesmall: "0.166",
+  x_edge_skill_bgesmall: "0.901",
+  x_edge_margin_nomic: "0.167",
+  x_edge_skill_nomic: "0.891",
+  x_lfj_books_jp_ahead: "6",
+  x_lfj_books_jp_tie: "2",
+  x_lfj_books_jp_behind: "1",
+  x_lfj_books_n: "9",
+  x_lfj_books_cfj_ahead: "1",
+  x_lfj_books_cfj_tie: "2",
+  x_lfj_books_cfj_behind: "6",
+  x_lfj_corpus_jp_ahead: "3",
+  x_lfj_corpus_jp_tie: "0",
+  x_lfj_corpus_jp_behind: "0",
+  x_lfj_corpus_n: "3",
+  x_lfj_corpus_cfj_ahead: "3",
+  x_lfj_corpus_cfj_tie: "0",
+  x_lfj_corpus_cfj_behind: "0",
+  x_lfj_holdout_jp_ahead: "3",
+  x_lfj_holdout_jp_tie: "0",
+  x_lfj_holdout_jp_behind: "0",
+  x_lfj_holdout_n: "3",
+  x_lfj_holdout_cfj_ahead: "3",
+  x_lfj_holdout_cfj_tie: "0",
+  x_lfj_holdout_cfj_behind: "0",
 )

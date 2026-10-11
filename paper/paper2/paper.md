@@ -1,6 +1,6 @@
 ---
 title: "A learned, order-preserving open general classification: objective, algorithm, stable identifiers and a first benchmark"
-author: "AUTHOR TBD"
+author: "David Awad"
 status: "DRAFT. Not submitted, posted or shared. Proposal paper."
 bibliography: references.bib
 ---
@@ -39,9 +39,15 @@ the best existing scheme reached through the same lexical classifier
 0.6414). Fitted on 80% and tested on the other
 20%, it scores 0.1722. Filing 500 library books as
 new works created 16 classes and changed no existing
-identifier. These numbers flatter the method: the held-out and holdout
-filings use the same embedding as the graph, the scheme has seen only
-arXiv, and labels for inserted classes are weak. We state those limits
+identifier. Rescored on graphs from two independent embedding models, the
+scheme still leads every existing scheme in all 9
+graph conditions, with a smaller margin. Under a corrected objective that
+also charges for joining dissimilar works, it still leads on the papers,
+but on 3,000 library books its lead over librarian-assigned Dewey
+and LCC numbers depends on the graph setting. These numbers flatter the
+method: the held-out and holdout filings use the same embedding as the
+fit, the scheme has seen only arXiv, and labels for inserted classes are
+weak. We state those limits
 plainly, release the scheme as CC0 open data, and ask whether a learned,
 open, order-preserving classification can become a general one.
 
@@ -596,6 +602,140 @@ children in 27 of the 36 fits; the
 0.02, and the widest root has
 6 children.
 
+### 6.6 Independent embeddings and a cost that sees false joins
+
+Sections 6.1 to 6.4 score the scheme on the graph it was fitted to. Three
+later runs test whether its lead survives a different similarity, a
+corrected objective and a sweep of graph settings. All intervals in this
+section are paired item-bootstrap 95% percentile intervals over 1,000
+draws.
+
+**A second and third embedding model.** The corpus and holdout were
+re-embedded with two open models from other families, BAAI/bge-small-en-v1.5
+and nomic-embed-text-v1.5, and graphs were built at k = 10, 20 and 50,
+giving 9 conditions with MiniLM
+(`bench/results/2026-10-10-embed`). The placements do not change; each is
+rescored on every graph. Table 9 counts the conditions in which the learned
+scheme leads the best other row of the same comparison (any Paper 1
+scheme, gold or placed) and gives the tightest one.
+
+| comparison | learned first by skill | skill margin CI > 0 | J margin CI > 0 | tightest condition: skill margin [95% CI] |
+| --- | ---: | ---: | ---: | ---: |
+| held out 20% (MiniLM fit, inserted) | 9 of 9 | 9 of 9 | 9 of 9 | bge-small-k10: 0.155 [0.122, 0.189] |
+| in sample (full MiniLM fit) | 9 of 9 | 9 of 9 | 9 of 9 | bge-small-k50: 0.160 [0.151, 0.169] |
+| 500 holdout books, inserted | 9 of 9 | 9 of 9 | 9 of 9 | nomic-k10: 0.280 [0.214, 0.340] |
+| placed by lexical@2 | 9 of 9 | 9 of 9 | 9 of 9 | nomic-k10: 0.290 [0.277, 0.302] |
+
+*Table 9. The learned scheme against the best other row in each of
+9 graph conditions (three models, k = 10, 20, 50).
+Skill margin is learned skill minus the best other skill; J margin is the
+best other J minus learned J, so positive means the learned scheme is
+ahead on both. J here is the fitted objective, cost_norm + 0.005 N.*
+
+The edge survives the change of embedding: in every comparison and every
+condition the learned scheme ranks first by skill, and both margins have
+intervals above zero. The tightest case is the held-out split on
+bge-small-k10, a skill margin of 0.155
+[0.122, 0.189]. The edge does shrink off the
+fit graph. On the held-out split at k = 20 the skill margin is
+0.190 on MiniLM, 0.166 on bge-small
+and 0.167 on nomic, and held-out skill falls from
+0.922 to 0.901 and
+0.891. Refitting on each of the other two models gives the
+mirror image (Table 10): each fit scores best on its own model's graph, by
+0.926 against 0.904 held-out skill on average.
+That difference is home advantage, and it is a small part of the margin.
+
+| learned fit | scored on minilm | scored on bge-small | scored on nomic |
+| --- | ---: | ---: | ---: |
+| fitted on minilm | 0.922 | 0.901 | 0.891 |
+| fitted on bge-small | 0.913 | 0.938 | 0.909 |
+| fitted on nomic | 0.899 | 0.912 | 0.918 |
+
+*Table 10. Held-out skill of each learned fit (rows) on each model's
+k = 20 papers graph (columns).*
+
+This test removes the circularity of the *scoring* graph only. The
+held-out and holdout works are still filed by their MiniLM vectors
+(Section 8.1).
+
+**A cost that sees false joins.** Dasgupta cost charges for separating
+similar works and nothing for joining dissimilar ones. A blind LLM judge of
+librarian-style pair decisions agrees with the cost's flag at Cohen's
+$\kappa$ = 0.27 on 953 pairs [@cohen1960]; adding a
+false-join term raises that to 0.48 (Paper 1, Sections 3.7
+and 5.6 to 5.7). For a seeded sample of non-edge pairs whose cosine is
+below the graph's mean pair cosine $\tau$, weighted by $d = \tau - \cos$,
+the specificity form is
+$\mathrm{FJs} = \sum d \ln(n/N(\mathrm{lca})) / (\ln n \sum d)$ and the
+outside-mass form is $\mathrm{FJ} = \sum d\,(n - N(\mathrm{lca})) / (n \sum d)$,
+one minus the normalised dissimilarity objective of Cohen-Addad et al.
+[@cohenaddad2017]. The corrected objective is
+$J' = C + \mathrm{FJs} + 0.002\,N$. Its weight on N is Paper 1's, not the
+0.005 the scheme was fitted with. For the learned scheme placed by the
+lexical classifier, the judge's agreement does not change with the term
+($\kappa$ 0.33 to 0.30, change
+-0.03 [-0.20, +0.14]):
+the judge rarely finds a false join in it.
+
+Table 11 compares the learned scheme, with its own placements, against the
+best non-learned run under each form, on the 15 graphs of the false-join
+rescoring (`bench/results/2026-10-11-falsejoin`). "Best other" is chosen by
+point value among all non-learned runs of that universe, including gold
+Dewey and LCC numbers on the books, before the interval is computed.
+
+| universe | model | k | best other by J' | J' learned - best [95% CI] | best other by C + FJ | C + FJ learned - best [95% CI] |
+| --- | --- | ---: | --- | ---: | --- | ---: |
+| 3,000 books | minilm | 10 | `lcc-gold` | -0.016 [-0.043, +0.007] | `lcc-gold` | +0.140 [+0.111, +0.167] |
+| 3,000 books | minilm | 20 | `ddc-section` | -0.105 [-0.129, -0.083] | `lcc-full-gold` | +0.045 [+0.020, +0.068] |
+| 3,000 books | minilm | 50 | `ddc-d2` | -0.152 [-0.171, -0.134] | `lcc-gold` | -0.037 [-0.059, -0.016] |
+| 3,000 books | bge-small | 10 | `lcc-gold` | +0.018 [-0.008, +0.040] | `lcc-gold` | +0.183 [+0.155, +0.209] |
+| 3,000 books | bge-small | 20 | `ddc-section` | -0.052 [-0.075, -0.032] | `lcc-full-gold` | +0.092 [+0.068, +0.115] |
+| 3,000 books | bge-small | 50 | `ddc-d2` | -0.097 [-0.116, -0.079] | `ddc-gold` | +0.015 [-0.007, +0.038] |
+| 3,000 books | nomic | 10 | `lcc-gold` | +0.036 [+0.010, +0.060] | `lcc-gold` | +0.195 [+0.168, +0.223] |
+| 3,000 books | nomic | 20 | `ddc-section` | -0.058 [-0.082, -0.036] | `lcc-full-gold` | +0.098 [+0.072, +0.123] |
+| 3,000 books | nomic | 50 | `ddc-section` | -0.108 [-0.129, -0.090] | `lcc-gold` | +0.010 [-0.012, +0.033] |
+| 10,000 papers (in sample) | minilm | 20 | `fdc-arxiv-nested` | -0.136 [-0.145, -0.128] | `arxiv-gold` | -0.041 [-0.051, -0.031] |
+| 10,000 papers (in sample) | bge-small | 20 | `fdc-arxiv-nested` | -0.115 [-0.122, -0.106] | `arxiv-gold` | -0.046 [-0.056, -0.036] |
+| 10,000 papers (in sample) | nomic | 20 | `fdc-arxiv-nested` | -0.116 [-0.124, -0.108] | `arxiv-gold` | -0.036 [-0.047, -0.027] |
+| 500 holdout books (title only) | minilm | 20 | `lcc-pipeline` | -0.264 [-0.309, -0.221] | `lcc-full-gold` | -0.249 [-0.306, -0.192] |
+| 500 holdout books (title only) | bge-small | 20 | `fdc-pipeline` | -0.181 [-0.226, -0.137] | `fdc-work` | -0.110 [-0.168, -0.053] |
+| 500 holdout books (title only) | nomic | 20 | `fdc-work` | -0.184 [-0.235, -0.126] | `fdc-work` | -0.134 [-0.198, -0.066] |
+
+*Table 11. Learned scheme minus the best other run under $J'$ and under
+$C + \mathrm{FJ}$ (both at $\beta$ = 1). Negative means the learned scheme
+is ahead. Books and holdout are inserted as new works; the papers are the
+fitted sample.*
+
+On the papers and the title-only holdout, the learned scheme leads under
+both forms in every graph (3 of
+3 and 3 of 3
+under $J'$). On the 3,000 books it does not hold. Under $J'$ it
+leads in 6 of 9 graphs, ties in
+2 and is behind in 1; the
+ties and the loss are against LCC's librarian numbers on the k = 10
+graphs. Under the outside-mass form
+it is behind in 6 of 9, ties in
+2 and leads in 1. The
+outside-mass form charges a shallow join almost as much as a deep one, so
+it rewards a wide top level (`bench/results/2026-10-11-falsejoin/README.md`).
+The learned scheme has a binary root (Section 8.3), so every dissimilar
+pair that lands in the same half of it pays at least half the maximum.
+
+**The 27-setting book sweep.** The book comparison was repeated in
+27 settings: three models, three values of k and three
+graph thresholds (`bench/results/2026-10-11-book-stability`). The claim
+that the learned scheme beats Dewey sections under $J'$ has the claimed
+sign in 19 of 27 settings and is
+significantly reversed in 6. By that run's own rule the
+claim is not stable.
+
+**Verdict.** The learned scheme's edge survives an independent embedding.
+On arXiv papers it also survives the false-join correction. On library
+books, which it was not fitted to, it does not survive: under the corrected
+objective its lead over librarian-assigned Dewey and LCC numbers depends on
+the graph setting, and under the outside-mass form it is usually behind.
+
 ## 7. Discussion
 
 **What the prototype shows.** Under a stated objective, a fitted
@@ -611,6 +751,13 @@ point. A hand-built scheme can now be described as "this far from a fitted
 scheme with the same number of levels on the same graph", and the cost of
 each constraint (order preservation, the depth bound, stable insertion) can
 be measured rather than argued.
+
+**What survives the checks.** The lead holds when the scoring graph comes
+from another embedding model, and part of it, a few hundredths of skill, is
+home advantage (Section 6.6). It does not hold on books once false joins
+are charged. A fitted scheme that is excellent on its own kind of material
+and only level with librarian numbers on books is a reference point, not a
+replacement.
 
 **The price of order preservation is not yet measured.** The DP collapse
 and the local search work only within one fixed shelf order, and the
@@ -648,10 +795,13 @@ the circularity the benchmark design warns about (DESIGN.md, finding 6) and
 it favours the learned rows in Tables 4 and 6. It is worst on the holdout,
 where both the graph and the insertion see only title embeddings. The
 published schemes' placed rows, and the learned scheme's own placed rows,
-use the lexical classifier and do not share this advantage. A fair test
-needs a second, independent similarity (another embedding model, citation
-coupling, or subject-heading overlap; DESIGN.md section 2.2), which this
-draft does not have.
+use the lexical classifier and do not share this advantage. Section 6.6
+removes the circularity of the scoring graph by rescoring on graphs from
+two other embedding models, and the lead survives. It does not remove the
+circularity of filing: inserted works are still placed by their MiniLM
+vectors, and a similarity that is not an embedding at all (citation
+coupling or subject-heading overlap; DESIGN.md section 2.2) has been used
+only to validate the metric, not to score this scheme.
 
 ### 8.2 Fitted on arXiv only
 
@@ -714,11 +864,12 @@ artefact.
 - Insertion does not keep the depth bound: holdout insertion produced
   classes 9 levels deep and a mean work depth of
   8.79 in the harness's tree (Table 6).
-- One corpus, one graph, one objective weighting. This paper reports no
-  bootstrap intervals or permutation nulls for the learned rows (DESIGN.md
-  section 2.5 proposes both). Item-bootstrap intervals for the learned runs
-  are in `bench/results/2026-10-10-covered` and `-embed`, and a permutation
-  null has not been run.
+- One corpus to fit. Tables 1 to 8 are point values on the fit graph;
+  the paired intervals are in Section 6.6. A permutation null for the
+  learned rows (DESIGN.md section 2.5) has not been run.
+- The false-join validity check rests on one LLM judge, and it does not
+  raise agreement with citation or subject-heading signals (Paper 1,
+  Section 5.7).
 - No user study: N is a model of navigation cost [@hick1952; @hyman1953],
   not a measurement. User studies of menu depth and breadth disagree on
   the best shape: speed and accuracy improved with breadth in one

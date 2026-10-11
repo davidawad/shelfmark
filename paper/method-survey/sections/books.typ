@@ -77,8 +77,36 @@ comparison turns on vocabulary and coverage, not on the scheme. On the
 500-book title-only holdout no placed run reaches the coverage floor of
 #v.x_floor_floor, and the best reaches #v.x_hold_best_cov.
 
-The default scheme of the tool that produced the placements is not decided by
-these results. A draft decision record ships FDC to depth 3 on non-metric
-grounds (open captions, shorter notation, availability of catalogue numbers),
-and the tool currently files into the bundled LCC outline; the choice remains
-an open decision for the tool's owner.
+*The default scheme.* The tool needs one default scheme for a general
+library of mostly books, filed by its classifier alone. Its decision record
+states a rule: among placed runs whose coverage is at least a floor, take the
+highest skill; every run whose paired difference to it has a 95% interval
+covering zero is tied; the tied run with the lowest navigation cost wins. The
+floor is #v.x_def_floor, so that at most one book in ten waits for a person.
+@tab:default gives the winners in the #v.x_def_settings settings. At the
+#v.x_def_floor floor the LCC outline with LCSH headings as search vocabulary
+(`lcc-lcsh`) wins all #v.x_def_wins of #v.x_def_settings settings among the
+open schemes the tool may bundle (FDC, the LCC outline with and without LCSH
+vocabulary, LCC full, BK and the fitted scheme), and it is the only winner at
+every floor from #v.x_def_min_floor_unique up. Over all placed schemes it wins
+#v.x_def_all_lcclcsh and the UNESCO Thesaurus, which may not be bundled,
+#v.x_def_all_unesco. Part of the win is vocabulary: LCSH lifts the outline's
+coverage from #v.x_def_cov_lcc to #v.x_def_cov_lcclcsh, while FDC places
+#v.x_def_cov_fdc with its captions alone. The bundled default of the tool is
+this scheme. The decision record also documents a catalogue-first
+alternative, FDC cut to Dewey sections, which rests on the gold-number tie
+above and on openness and notation length rather than on a metric result.
+
+#col-table(
+  tbl(
+    default-floors-header,
+    default-floors,
+    align: (right, left, left),
+    mono-first: false,
+    size: 7pt,
+  ),
+  [Winner of the default-scheme rule on the books: settings won out of
+   #v.x_def_settings, by coverage floor, over all placed schemes and over the
+   open schemes the tool may bundle.],
+  label: <tab:default>,
+)

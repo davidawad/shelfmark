@@ -1,6 +1,6 @@
 ---
 title: "Scoring universal classification schemes with hierarchical-clustering objectives"
-author: "AUTHOR TBD"
+author: "David Awad"
 status: "DRAFT. Not submitted, posted or shared."
 bibliography: references.bib
 ---
@@ -61,8 +61,11 @@ stable across embedding model, k and graph threshold within one classifier
 (minimum Spearman $\rho$ <!-- v:x_stab_cost_min_same -->0.90<!-- /v -->) and not across classifier tiers
 (minimum <!-- v:x_stab_cost_min_diff -->0.04<!-- /v -->), and objectives disagree about FDC against LCC. (4) On
 <!-- v:x_books_n -->3,000<!-- /v --> books, Dewey sections against LCC is a tie that depends on the
-setting. (5) A learned scheme's lead over every human scheme is partly home
-advantage. The measurement is cheap and its inputs are pinned by hash. Its
+setting. (5) A learned scheme's lead over every human scheme survives
+rescoring on two independent embedding models, is partly home advantage,
+and on books does not survive the false-join correction. (6) Under a
+coverage-floor rule, the LCC outline with LCSH vocabulary is the default
+among open schemes in <!-- v:x_def_wins -->27<!-- /v --> of <!-- v:x_def_settings -->27<!-- /v --> book settings, partly through its vocabulary. The measurement is cheap and its inputs are pinned by hash. Its
 weak points are the classifier and, for now, the single annotator behind
 the validity check. We also report a classifier fix found by the benchmark:
 the largest single-class capture in ILC2 fell from
@@ -1043,8 +1046,8 @@ title-only holdout no placed run reaches the coverage floor of
 ## 5.11 The learned scheme and home advantage
 
 A scheme fitted to the objective by order-preserving dynamic programming
-and local search (the companion draft in `paper/paper2`) scores far below
-every human scheme on its own corpus: in-sample skill
+and local search (the companion draft in `paper/paper2`) scores far better
+than every human scheme on its own corpus: in-sample skill
 <!-- v:x_l_insample_skill -->0.976<!-- /v --> on the papers, and
 <!-- v:x_l_heldout_skill -->0.922<!-- /v --> on a held-out 20% split. Through the
 lexical classifier it falls to <!-- v:x_l_placed_skill -->0.732<!-- /v -->. On books, its cost is lower than Dewey sections' on every graph, but the
@@ -1059,6 +1062,23 @@ not stable (sign matches in <!-- v:x_learn_match -->19<!-- /v --> of
 <!-- v:x_learn_against -->6<!-- /v --> significant reversals; Table 17). It also needs the embedding model to file a new item
 and has an opaque notation. We use it as a reference for how low a fitted
 tree can go, not as a candidate scheme.
+
+Two further checks bound the claim. Rescored on graphs from the two other
+embedding models at k = 10, 20 and 50, it still ranks first by skill in all
+<!-- v:x_edge_conditions -->9<!-- /v --> conditions for the held-out split, the in-sample
+fit, the inserted book holdout and the placed run, with paired intervals of
+the margin above zero (tightest: <!-- v:x_edge_tight -->0.155<!-- /v --> [<!-- v:x_edge_tight_lo -->0.122<!-- /v -->,
+<!-- v:x_edge_tight_hi -->0.189<!-- /v -->] on <!-- v:x_edge_tight_cond -->bge-small-k10<!-- /v -->). Under the corrected
+objective, against the best non-learned run of each universe on the
+false-join rescoring's graphs, it leads on the papers in
+<!-- v:x_lfj_corpus_jp_ahead -->3<!-- /v --> of <!-- v:x_lfj_corpus_n -->3<!-- /v --> graphs and on the
+title-only holdout in <!-- v:x_lfj_holdout_jp_ahead -->3<!-- /v --> of <!-- v:x_lfj_holdout_n -->3<!-- /v -->.
+On the <!-- v:x_books_n -->3,000<!-- /v --> books it leads in <!-- v:x_lfj_books_jp_ahead -->6<!-- /v --> of
+<!-- v:x_lfj_books_n -->9<!-- /v -->, ties in <!-- v:x_lfj_books_jp_tie -->2<!-- /v --> and is behind in
+<!-- v:x_lfj_books_jp_behind -->1<!-- /v -->; under the outside-mass form it is behind in
+<!-- v:x_lfj_books_cfj_behind -->6<!-- /v --> of <!-- v:x_lfj_books_n -->9<!-- /v -->. Its edge survives a
+change of embedding and does not survive the false-join correction on
+books. Paper 2, Section 6.6, gives the tables.
 
 Table 18. Learned scheme against Dewey sections on books, by graph (all
 $k = 20$; the scheme was fitted on MiniLM).
@@ -1081,6 +1101,48 @@ graph.
 | fitted on bge-small | 0.913 | 0.938 | 0.909 |
 | fitted on nomic | 0.899 | 0.912 | 0.918 |
 <!-- /table:cross_fit -->
+
+## 5.12 The default scheme under a stated rule
+
+The tool needs one default scheme for a general library of mostly books,
+filed by its classifier alone. The decision record
+(`docs/decisions/default-scheme.md`) states the rule: among
+placed runs whose coverage is at least a floor, take the highest skill;
+every run whose paired difference to it has a 95% interval covering zero is
+tied; the tied run with the lowest navigation cost wins. The floor is
+<!-- v:x_def_floor -->0.90<!-- /v -->, so that at most one book in ten waits for a person. The
+rule was applied in each of the <!-- v:x_def_settings -->27<!-- /v --> book settings of
+Section 5.10. Table 20 gives the winners by floor, over all placed schemes and
+over the open schemes the tool may bundle (FDC, the LCC outline with and
+without LCSH vocabulary, LCC full, BK and the learned scheme).
+
+Table 20. Winner of the default-scheme rule on the <!-- v:x_books_n -->3,000<!-- /v --> books,
+settings won out of <!-- v:x_def_settings -->27<!-- /v -->, by coverage floor.
+
+<!-- table:default_floors -->
+| coverage floor | winner, all placed schemes (settings) | winner, bundleable open schemes (settings) |
+| --- | ---: | ---: |
+| 0.70 | `lcc-lcsh-placed` 15, `unesco-thesaurus-placed` 12 | `lcc-lcsh-placed` 18, `fdc-placed` 9 |
+| 0.80 | `lcc-lcsh-placed` 15, `unesco-thesaurus-placed` 12 | `lcc-lcsh-placed` 18, `fdc-placed` 9 |
+| 0.85 | `lcc-lcsh-placed` 15, `unesco-thesaurus-placed` 12 | `lcc-lcsh-placed` 27 |
+| 0.90 | `lcc-lcsh-placed` 15, `unesco-thesaurus-placed` 12 | `lcc-lcsh-placed` 27 |
+| 0.95 | `lcc-lcsh-placed` 27 | `lcc-lcsh-placed` 27 |
+<!-- /table:default_floors -->
+
+At the <!-- v:x_def_floor -->0.90<!-- /v --> floor, `<!-- v:x_def_winner -->lcc-lcsh-placed<!-- /v -->`, the LCC outline
+with LCSH headings as search vocabulary, wins all <!-- v:x_def_wins -->27<!-- /v --> of
+<!-- v:x_def_settings -->27<!-- /v --> settings among the open schemes, and it is the only
+winner at every floor from <!-- v:x_def_min_floor_unique -->0.85<!-- /v --> up. Over all placed
+schemes it wins <!-- v:x_def_all_lcclcsh -->15<!-- /v --> and the UNESCO Thesaurus
+<!-- v:x_def_all_unesco -->12<!-- /v -->; the thesaurus is not among the schemes the tool may
+bundle. Part of the win is vocabulary, not scheme: LCSH lifts the outline's
+coverage from <!-- v:x_def_cov_lcc -->0.915<!-- /v --> to <!-- v:x_def_cov_lcclcsh -->0.985<!-- /v -->, while FDC
+places <!-- v:x_def_cov_fdc -->0.839<!-- /v --> with its captions alone and falls below the
+floor. The bundled default of the tool is this scheme (`lcc@2024`). The
+decision record also documents an alternative for a catalogue-first
+pipeline, FDC cut to Dewey sections, which rests on the gold-number tie of
+Section 5.10 and on openness and notation length rather than on a metric
+result.
 
 # 6. Discussion
 
@@ -1121,11 +1183,13 @@ schemes, for four reasons that each have a number behind them.
 A scheme's rank on this metric is therefore a statement about a similarity
 graph, a classifier and an objective. It is not a statement about the
 scheme's quality in use. The benchmark's own consumers should read it that
-way. The tool that produced the placements has not fixed a default scheme on
-the strength of these numbers: the metrics do not separate Dewey from LCC,
-and the choice between FDC to depth 3 and the bundled LCC outline rests on
-openness, notation length and catalogue availability, and is an open decision
-for the tool's owner (`docs/decisions/default-scheme.md`).
+way. The default scheme follows a stated rule rather than a
+ranking: the bundled LCC outline with LCSH vocabulary wins it in
+<!-- v:x_def_wins -->27<!-- /v --> of <!-- v:x_def_settings -->27<!-- /v --> book settings among the open
+schemes (Section 5.12), and that win is partly a vocabulary effect. On
+librarian-assigned numbers the metrics do not separate Dewey from LCC, so a
+catalogue-first pipeline could choose either on other grounds
+(`docs/decisions/default-scheme.md`).
 
 **The learned scheme.** A tree fitted to the objective sets the floor for
 how low the cost can go on a given graph. Its lead over human schemes is real

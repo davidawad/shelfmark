@@ -48,10 +48,14 @@
     classifier (minimum $rho$ #v.x_stab_cost_min_same) and not across
     classifier tiers (minimum #v.x_stab_cost_min_diff), and objectives
     disagree about FDC against LCC. On #v.x_books_n books, Dewey sections
-    against LCC is a tie that depends on the setting. A fitted
-    order-preserving scheme leads every human scheme on its own graph, and
-    part of that lead is home advantage. We also report a classifier defect
-    that the benchmark exposed.
+    against LCC is a tie that depends on the setting. Under a coverage-floor
+    rule, the LCC outline with LCSH vocabulary is the default among open
+    schemes in #v.x_def_wins of #v.x_def_settings book settings, partly
+    through its vocabulary. A fitted order-preserving scheme leads every
+    human scheme on its own graph; the lead survives rescoring on two
+    independent embedding models, part of it is home advantage, and on books
+    it does not survive the false-join correction. We also report a
+    classifier defect that the benchmark exposed.
   ],
 )
 
