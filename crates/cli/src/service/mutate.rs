@@ -98,11 +98,13 @@ impl Shelfmark {
     pub(super) fn link(&self, req: &Request, args: &Args) -> Result<Value, Error> {
         let item: ItemId = args.require_id("item")?;
         // `work` is the pre-0.2 name of `specimen`, read for one release.
-        let work: WorkId = match args.id("specimen")? {
-            Some(w) => w,
-            None => args
-                .id("work")?
-                .ok_or_else(|| crate::args::bad(args.verb(), "`specimen` is required"))?,
+        let work: WorkId = match (args.id::<WorkId>("specimen")?, args.id::<WorkId>("work")?) {
+            (Some(s), Some(w)) if s != w => return Err(crate::args::bad(
+                args.verb(),
+                "`specimen` and its old name `work` name different specimens; pass only `specimen`",
+            )),
+            (Some(s), _) | (None, Some(s)) => s,
+            (None, None) => return Err(crate::args::bad(args.verb(), "`specimen` is required")),
         };
         let mut store = self.store()?;
         let existing: Vec<WorkId> = store
