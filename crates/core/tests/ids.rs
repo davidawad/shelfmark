@@ -95,3 +95,27 @@ fn nfkc_makes_decomposed_accents_and_ligatures_match() {
     assert_eq!(normalize_text_v1(nfc), "résumé of the field");
     assert_eq!(WorkId::from_text(nfc), WorkId::from_text(nfd));
 }
+
+#[test]
+fn content_and_specimen_prefixes_are_input_aliases() {
+    let work: WorkId = format!("work:nt1s256:{HEX}").parse().unwrap();
+    let content: WorkId = format!("content:nt1s256:{HEX}").parse().unwrap();
+    assert_eq!(content, work);
+    // Rendered IDs never change: they are hashed into placement IDs.
+    assert_eq!(content.to_string(), format!("work:nt1s256:{HEX}"));
+    let item: ItemId = format!("item:s256:{HEX}").parse().unwrap();
+    let specimen: ItemId = format!("specimen:s256:{HEX}").parse().unwrap();
+    assert_eq!(specimen, item);
+    assert_eq!(specimen.to_string(), format!("item:s256:{HEX}"));
+    let any: AnyId = format!("content:nt1s256:{HEX}").parse().unwrap();
+    assert_eq!(any.kind(), Kind::Work);
+    let any: AnyId = format!("specimen:s256:{HEX}").parse().unwrap();
+    assert_eq!(any.kind(), Kind::Item);
+    // `specimen:` names an item, never content.
+    assert!(format!("specimen:nt1s256:{HEX}").parse::<WorkId>().is_err());
+    assert_eq!(Kind::Work.noun(), "content");
+    assert_eq!(Kind::Item.noun(), "specimen");
+    assert_eq!(Kind::Class.noun(), "class");
+    let json = format!("\"content:nt1s256:{HEX}\"");
+    assert_eq!(serde_json::from_str::<WorkId>(&json).unwrap(), work);
+}

@@ -5,6 +5,14 @@
 //! (`work:nt1s256:<hex>`) so the derivation can change without breaking
 //! old IDs; scheme-bound IDs carry the scheme version
 //! (`class:lcc@2024:QA76.76.C65`).
+//!
+//! Vocabulary (public nouns since 0.2): the `work:` kind names *content*
+//! (it was "Work"), and the `item:` kind names a *specimen*: one held file,
+//! identified by its bytes. Rendered prefixes stay `work:` and `item:`
+//! because an ID's string is hashed into placement IDs and memo keys, so it
+//! must never change for an existing ID. `content:` is accepted as an input
+//! alias for `work:` and `specimen:` for `item:`; each parses to the same
+//! ID.
 
 use std::fmt;
 use std::str::FromStr;
@@ -12,6 +20,13 @@ use std::str::FromStr;
 use serde::{de, Deserialize, Deserializer, Serialize, Serializer};
 use sha2::{Digest as _, Sha256};
 use unicode_normalization::UnicodeNormalization;
+
+/// Input alias for the `work:` prefix (a content ID). Parses to the same
+/// ID; IDs always render with `work:`.
+pub const CONTENT_ALIAS: &str = "content";
+/// Input alias for the `item:` prefix (a specimen ID). Parses to the same
+/// ID; IDs always render with `item:`.
+pub const SPECIMEN_ALIAS: &str = "specimen";
 
 /// The noun an ID names.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Serialize, Deserialize)]
@@ -46,8 +61,22 @@ impl Kind {
         }
     }
 
+    /// The public noun: `content` for [`Kind::Work`], `specimen` for
+    /// [`Kind::Item`], else the prefix.
+    pub fn noun(self) -> &'static str {
+        match self {
+            Kind::Work => CONTENT_ALIAS,
+            Kind::Item => SPECIMEN_ALIAS,
+            other => other.as_str(),
+        }
+    }
+
     fn parse(s: &str) -> Option<Kind> {
-        Kind::ALL.into_iter().find(|k| k.as_str() == s)
+        match s {
+            CONTENT_ALIAS => Some(Kind::Work),
+            SPECIMEN_ALIAS => Some(Kind::Item),
+            _ => Kind::ALL.into_iter().find(|k| k.as_str() == s),
+        }
     }
 }
 
@@ -62,7 +91,9 @@ impl fmt::Display for Kind {
 pub enum IdError {
     #[error("`{0}` has no `<kind>:` prefix")]
     NoKind(String),
-    #[error("`{0}` is not a known kind (work, item, scheme, class, profile, placement)")]
+    #[error(
+        "`{0}` is not a known kind (work or content, item or specimen, scheme, class, profile, placement)"
+    )]
     UnknownKind(String),
     #[error("`{id}` is not a {kind} ID: {reason}")]
     Malformed {

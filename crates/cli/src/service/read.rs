@@ -16,13 +16,13 @@ const NOUNS: [(Kind, &str, &str, &str); 6] = [
         Kind::Work,
         "L0",
         "work:nt1s256:<64 hex>",
-        "a piece of content, whatever its file format",
+        "content: a piece of text, whatever file format holds it (`content:` accepted as input)",
     ),
     (
         Kind::Item,
         "L0",
         "item:s256:<64 hex>",
-        "one file (hash of its bytes), linked to a Work",
+        "a specimen: one held file (hash of its bytes), linked to its content (`specimen:` accepted as input)",
     ),
     (
         Kind::Scheme,
@@ -46,7 +46,7 @@ const NOUNS: [(Kind, &str, &str, &str); 6] = [
         Kind::Placement,
         "L3",
         "placement:s256:<64 hex>",
-        "an append-only claim that a Work belongs in a class",
+        "an append-only claim that content belongs in a class",
     ),
 ];
 
@@ -54,7 +54,7 @@ impl Shelfmark {
     pub(super) fn describe(&self, args: &Args) -> Result<Value, Error> {
         let nouns: Vec<Value> = NOUNS
             .iter()
-            .map(|(k, layer, form, what)| json!({"kind": k, "layer": layer, "id_form": form, "names": what}))
+            .map(|(k, layer, form, what)| json!({"kind": k, "noun": k.noun(), "layer": layer, "id_form": form, "names": what}))
             .collect();
         let errors: Vec<Value> = ErrorCode::ALL
             .iter()
@@ -182,7 +182,7 @@ impl Shelfmark {
                     .filter(|(_, lw)| lw == w)
                     .map(|(i, _)| i)
                     .collect();
-                json!({"placements": self.work_placements(store.as_ref(), w, None)?, "items": items})
+                json!({"placements": self.work_placements(store.as_ref(), w, None)?, "items": items, "specimens": items})
             }
             AnyId::Item(i) => {
                 let work = store
@@ -194,7 +194,7 @@ impl Shelfmark {
                     Error::new(ErrorCode::NotFound, format!("{i} has not been ingested"))
                         .next("shelfmark classify --file <the file>")
                 })?;
-                json!({ "work": work })
+                json!({ "content": work, "work": work })
             }
             AnyId::Scheme(s) => {
                 let index = self.index(store.as_ref(), Some(s))?;
@@ -225,7 +225,7 @@ impl Shelfmark {
                 json!({"placement": found, "status": effective_status(found, &superseded_ids(&claims))})
             }
         };
-        Ok(json!({ "id": id, "kind": id.kind(), "resolved": data }))
+        Ok(json!({ "id": id, "kind": id.kind(), "noun": id.kind().noun(), "resolved": data }))
     }
 
     pub(super) fn explain(&self, args: &Args) -> Result<Value, Error> {
@@ -250,7 +250,7 @@ impl Shelfmark {
                 return Err(bad(
                     Verb::Explain,
                     format!(
-                        "explain takes a placement: or work: ID, not {}:",
+                        "explain takes a placement: or content (work:) ID, not {}:",
                         other.kind()
                     ),
                 ))
@@ -283,7 +283,7 @@ impl Shelfmark {
             .iter()
             .take(limit)
             .map(|p| json!({
-                "placement": p.id, "work": p.work, "class": p.class, "confidence": p.confidence,
+                "placement": p.id, "content": p.work, "work": p.work, "class": p.class, "confidence": p.confidence,
                 "flag_reason": p.trace.flag_reason, "next_command": format!("shelfmark explain {}", p.id),
             }))
             .collect();

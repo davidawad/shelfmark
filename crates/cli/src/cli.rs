@@ -96,9 +96,9 @@ pub enum Command {
     Status,
     /// Resolve any typed ID.
     Resolve { id: String },
-    /// Place a Work into a scheme.
+    /// Place content (a file or text) into a scheme.
     Classify(Classify),
-    /// The full trace of a placement or a Work's placements.
+    /// The full trace of a placement or of content's placements.
     Explain {
         id: String,
         #[arg(long)]
@@ -133,14 +133,18 @@ pub enum Command {
     /// Accuracy and calibration from the gold set (preview; --commit
     /// writes eval.json and calibration.json).
     Eval(EvalArgs),
-    /// Link a file to an existing Work (preview; --commit to apply).
+    /// Link a specimen (a file) to existing content (preview; --commit to
+    /// apply).
     Link {
-        #[arg(long)]
+        /// The specimen ID (`item:...`; `specimen:...` is accepted too).
+        #[arg(long, visible_alias = "specimen")]
         item: String,
-        #[arg(long)]
-        work: String,
+        /// The content ID (`work:...`; `content:...` is accepted too).
+        /// `--work` is the deprecated spelling, kept for one release.
+        #[arg(long, alias = "work")]
+        content: String,
     },
-    /// Preview the path for a Work's placement.
+    /// Preview the path for content's placement.
     Name {
         id: String,
         #[arg(long)]
@@ -283,7 +287,7 @@ pub fn to_request(command: Command) -> Result<(Verb, Value), Error> {
         ),
         C::Stale(sc) => (Verb::Stale, obj(scoped(sc))),
         C::Eval(e) => (Verb::Eval, eval_args(e)),
-        C::Link { item, work } => (Verb::Link, json!({ "item": item, "work": work })),
+        C::Link { item, content } => (Verb::Link, json!({ "item": item, "content": content })),
         C::Name {
             id,
             scheme,
