@@ -1,0 +1,20 @@
+{
+  "rows": 3000,
+  "failed": 0,
+  "fallback": 0,
+  "placed": 3000,
+  "flagged": 2805,
+  "deciding_tiers": {
+    "vocab": 1628,
+    "shortlist": 1372
+  },
+  "classes_used": 603,
+  "top_class": "Z5051-7999",
+  "top_class_share": 0.026333333333333334,
+  "top_class_terms": {},
+  "output": "/work/repo/bench/corpus/cache/books-semantic/shortlist/lcc-placed/placements.jsonl",
+  "classify_seconds": 109.4,
+  "profile": "profile:shortlist@2",
+  "scheme": "scheme:lcc@2024",
+  "store_rules": "empty"
+}

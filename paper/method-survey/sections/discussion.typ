@@ -83,8 +83,8 @@ learned, order-preserving classification can become a general one is open.
   below the classifier's own confidence target (@tab:placement). @tab:bias and
   @sec:tier show the classifier effect is as large as the effects we want to
   measure. No classifier from outside this project (for example Annif or an
-  LLM) was run for comparison. The semantic tier's directory is marked pending
-  in the results index, so those numbers are preliminary.
+  LLM) was run for comparison. The semantic tier's rerank profile is still a
+  stub, so only the shortlist profile was measured.
 - *One annotator for validity.* The validity check used one LLM judge, on
   #v.x_val_n pairs from #v.x_val_runs runs in three strata, so its shares
   describe the sample and not the population of pairs. The judge is

@@ -1,0 +1,21 @@
+{
+  "rows": 3000,
+  "failed": 0,
+  "fallback": 482,
+  "placed": 2518,
+  "flagged": 1895,
+  "deciding_tiers": {
+    "vocab": 2518
+  },
+  "classes_used": 372,
+  "top_class": "973-979",
+  "top_class_share": 0.06632247815726768,
+  "top_class_terms": {
+    "united states": 167
+  },
+  "output": "/work/repo/bench/corpus/cache/books-semantic/lexical/fdc-placed/placements.jsonl",
+  "classify_seconds": 11.8,
+  "profile": "profile:lexical@2",
+  "scheme": "scheme:fdc@0.06",
+  "store_rules": "empty"
+}

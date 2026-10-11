@@ -1,0 +1,21 @@
+{
+  "rows": 3000,
+  "failed": 0,
+  "fallback": 256,
+  "placed": 2744,
+  "flagged": 2549,
+  "deciding_tiers": {
+    "vocab": 2744
+  },
+  "classes_used": 593,
+  "top_class": "CS",
+  "top_class_share": 0.02259475218658892,
+  "top_class_terms": {
+    "genealogy": 62
+  },
+  "output": "/work/repo/bench/corpus/cache/books-semantic/lexical/lcc-placed/placements.jsonl",
+  "classify_seconds": 17.2,
+  "profile": "profile:lexical@2",
+  "scheme": "scheme:lcc@2024",
+  "store_rules": "empty"
+}

@@ -214,6 +214,26 @@ It does **not** show agreement with human librarians.
 - The results cover one corpus (10,000 arXiv papers),
   one embedding model and one k = 20 graph.
 
+## Human-librarian check (pending a librarian)
+
+`human/` holds the packet for the missing human labels. It is a seeded subset of
+`sample.jsonl`: 5 pairs per run and stratum, 120 pairs in all, blinded and
+shuffled the same way as for the judge. `packet.md` shows each pair's two
+works and class paths. `labels.csv` is blank, with one row per pair, and
+`annotator.md` records who labelled. The labeller follows `rubric.md` and
+does not open the sample or the results first.
+
+Running `python3 crates/bench/scripts/validity_check.py human` regenerates the
+packet. It needs the eight scheme files and checks each against
+`sample-meta.json`: six are committed, and `ilc2` and `msc` come from
+`crates/bench/scripts/build_schemes.sh ilc2 msc`. The uid is a hash of the
+pair id, so there is no key file. Once `labels.csv` is filled in,
+`python3 crates/bench/scripts/validity_check.py human-report` writes
+`human/results.md` and `human/results.json`. These give the human labels'
+agreement and Cohen κ with the metric flag and with the LLM judge's pass-1
+labels on the same pairs, which shows how far the judge-based numbers above
+stand in for a librarian.
+
 ## False-join re-validation (2026-10-11)
 
 This check found that the metric never charges a false join. The bench

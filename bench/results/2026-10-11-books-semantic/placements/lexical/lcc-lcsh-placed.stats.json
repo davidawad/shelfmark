@@ -1,0 +1,25 @@
+{
+  "rows": 3000,
+  "failed": 0,
+  "fallback": 44,
+  "placed": 2956,
+  "flagged": 2847,
+  "deciding_tiers": {
+    "vocab": 2956
+  },
+  "classes_used": 797,
+  "top_class": "ML",
+  "top_class_share": 0.02875507442489851,
+  "top_class_terms": {
+    "opera": 17,
+    "musicians": 15,
+    "jazz": 14,
+    "opera italy": 12,
+    "music history and criticism": 10
+  },
+  "output": "/work/repo/bench/corpus/cache/books-semantic/lexical/lcc-lcsh-placed/placements.jsonl",
+  "classify_seconds": 19.1,
+  "profile": "profile:lexical@2",
+  "scheme": "scheme:lcc@2024",
+  "store_rules": "empty"
+}

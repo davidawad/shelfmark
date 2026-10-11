@@ -28,9 +28,8 @@ from #v.x_sem_arxiv_lex to #v.x_sem_arxiv_sh and now leads, with
 #raw(v.x_sem_second) second (#v.x_sem_second_skill), and the Spearman
 correlation between the two tiers' skill values is #v.x_sem_rho. The order of
 schemes under a classifier is a property of the classifier--scheme pair. The
-run's directory is marked pending in the results index, so the numbers are
-read from its committed JSON and should be treated as preliminary. The tier
-that places by embedding also uses a different model from the graph's.
+numbers are read from the run's committed JSON. The tier that places by
+embedding also uses a different model from the graph's.
 
 #wide-table(
   tbl(

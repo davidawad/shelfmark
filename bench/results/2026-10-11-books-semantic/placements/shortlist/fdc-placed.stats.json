@@ -1,0 +1,22 @@
+{
+  "rows": 3000,
+  "failed": 0,
+  "fallback": 0,
+  "placed": 3000,
+  "flagged": 2377,
+  "deciding_tiers": {
+    "vocab": 2515,
+    "shortlist": 485
+  },
+  "classes_used": 431,
+  "top_class": "973-979",
+  "top_class_share": 0.05566666666666667,
+  "top_class_terms": {
+    "united states": 167
+  },
+  "output": "/work/repo/bench/corpus/cache/books-semantic/shortlist/fdc-placed/placements.jsonl",
+  "classify_seconds": 92.8,
+  "profile": "profile:shortlist@2",
+  "scheme": "scheme:fdc@0.06",
+  "store_rules": "empty"
+}
