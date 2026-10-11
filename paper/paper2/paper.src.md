@@ -481,6 +481,113 @@ children in {{sweep_binary_root}} of the {{sweep_fits}} fits; the
 {{sweep_nonbinary_min_lambda}}, and the widest root has
 {{sweep_max_root}} children.
 
+### 6.6 Independent embeddings and a cost that sees false joins
+
+Sections 6.1 to 6.4 score the scheme on the graph it was fitted to. Three
+later runs test whether its lead survives a different similarity, a
+corrected objective and a sweep of graph settings. All intervals in this
+section are paired item-bootstrap 95% percentile intervals over 1,000
+draws.
+
+**A second and third embedding model.** The corpus and holdout were
+re-embedded with two open models from other families, BAAI/bge-small-en-v1.5
+and nomic-embed-text-v1.5, and graphs were built at k = 10, 20 and 50,
+giving {{x_edge_conditions}} conditions with MiniLM
+(`bench/results/2026-10-10-embed`). The placements do not change; each is
+rescored on every graph. Table 9 counts the conditions in which the learned
+scheme leads the best other row of the same comparison (any Paper 1
+scheme, gold or placed) and gives the tightest one.
+
+{{table:learned_edge}}
+
+*Table 9. The learned scheme against the best other row in each of
+{{x_edge_conditions}} graph conditions (three models, k = 10, 20, 50).
+Skill margin is learned skill minus the best other skill; J margin is the
+best other J minus learned J, so positive means the learned scheme is
+ahead on both. J here is the fitted objective, cost_norm + {{lambda}} N.*
+
+The edge survives the change of embedding: in every comparison and every
+condition the learned scheme ranks first by skill, and both margins have
+intervals above zero. The tightest case is the held-out split on
+{{x_edge_tight_cond}}, a skill margin of {{x_edge_tight}}
+[{{x_edge_tight_lo}}, {{x_edge_tight_hi}}]. The edge does shrink off the
+fit graph. On the held-out split at k = 20 the skill margin is
+{{x_edge_margin_minilm}} on MiniLM, {{x_edge_margin_bgesmall}} on bge-small
+and {{x_edge_margin_nomic}} on nomic, and held-out skill falls from
+{{x_edge_skill_minilm}} to {{x_edge_skill_bgesmall}} and
+{{x_edge_skill_nomic}}. Refitting on each of the other two models gives the
+mirror image (Table 10): each fit scores best on its own model's graph, by
+{{x_cf_diag_mean}} against {{x_cf_off_mean}} held-out skill on average.
+That difference is home advantage, and it is a small part of the margin.
+
+{{table:cross_fit}}
+
+*Table 10. Held-out skill of each learned fit (rows) on each model's
+k = 20 papers graph (columns).*
+
+This test removes the circularity of the *scoring* graph only. The
+held-out and holdout works are still filed by their MiniLM vectors
+(Section 8.1).
+
+**A cost that sees false joins.** Dasgupta cost charges for separating
+similar works and nothing for joining dissimilar ones. A blind LLM judge of
+librarian-style pair decisions agrees with the cost's flag at Cohen's
+$\kappa$ = {{x_val_kappa}} on {{x_val_n}} pairs [@cohen1960]; adding a
+false-join term raises that to {{x_val_kappa_fj}} (Paper 1, Sections 3.7
+and 5.6 to 5.7). For a seeded sample of non-edge pairs whose cosine is
+below the graph's mean pair cosine $\tau$, weighted by $d = \tau - \cos$,
+the specificity form is
+$\mathrm{FJs} = \sum d \ln(n/N(\mathrm{lca})) / (\ln n \sum d)$ and the
+outside-mass form is $\mathrm{FJ} = \sum d\,(n - N(\mathrm{lca})) / (n \sum d)$,
+one minus the normalised dissimilarity objective of Cohen-Addad et al.
+[@cohenaddad2017]. The corrected objective is
+$J' = C + \mathrm{FJs} + 0.002\,N$. Its weight on N is Paper 1's, not the
+{{lambda}} the scheme was fitted with. For the learned scheme placed by the
+lexical classifier, the judge's agreement does not change with the term
+($\kappa$ {{x_val_learned_k0}} to {{x_val_learned_k1}}, change
+{{x_val_learned_dk}} [{{x_val_learned_dk_lo}}, {{x_val_learned_dk_hi}}]):
+the judge rarely finds a false join in it.
+
+Table 11 compares the learned scheme, with its own placements, against the
+best non-learned run under each form, on the 15 graphs of the false-join
+rescoring (`bench/results/2026-10-11-falsejoin`). "Best other" is chosen by
+point value among about 30 runs per universe, including gold Dewey and LCC
+numbers on the books, before the interval is computed.
+
+{{table:learned_fj}}
+
+*Table 11. Learned scheme minus the best other run under $J'$ and under
+$C + \mathrm{FJ}$ (both at $\beta$ = 1). Negative means the learned scheme
+is ahead. Books and holdout are inserted as new works; the papers are the
+fitted sample.*
+
+On the papers and the title-only holdout, the learned scheme leads under
+both forms in every graph ({{x_lfj_corpus_jp_ahead}} of
+{{x_lfj_corpus_n}} and {{x_lfj_holdout_jp_ahead}} of {{x_lfj_holdout_n}}
+under $J'$). On the {{x_books_n}} books it does not hold. Under $J'$ it
+leads in {{x_lfj_books_jp_ahead}} of {{x_lfj_books_n}} graphs, ties in
+{{x_lfj_books_jp_tie}} and is behind in {{x_lfj_books_jp_behind}}, all at
+k = 10, where LCC's librarian numbers are best. Under the outside-mass form
+it is behind in {{x_lfj_books_cfj_behind}} of {{x_lfj_books_n}}, ties in
+{{x_lfj_books_cfj_tie}} and leads in {{x_lfj_books_cfj_ahead}}. The
+outside-mass form charges a join at the root's first split almost as much
+as a deep one, and the learned scheme's binary root (Section 8.3) is the
+structure it punishes most.
+
+**The 27-setting book sweep.** The book comparison was repeated in
+{{x_dl_settings}} settings: three models, three values of k and three
+graph thresholds (`bench/results/2026-10-11-book-stability`). The claim
+that the learned scheme beats Dewey sections under $J'$ has the claimed
+sign in {{x_learn_match}} of {{x_dl_settings}} settings and is
+significantly reversed in {{x_learn_against}}. By that run's own rule the
+claim is not stable.
+
+**Verdict.** The learned scheme's edge survives an independent embedding.
+On arXiv papers it also survives the false-join correction. On library
+books, which it was not fitted to, it does not survive: under the corrected
+objective its lead over librarian-assigned Dewey and LCC numbers depends on
+the graph setting, and under the outside-mass form it is usually behind.
+
 ## 7. Discussion
 
 **What the prototype shows.** Under a stated objective, a fitted
