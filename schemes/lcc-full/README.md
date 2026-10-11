@@ -58,9 +58,8 @@ shelfmark scheme compile schemes/lcc-full/lcc-full.json       # from the repo ro
 
 The lock's `outline_sha256` (`b21e4c66...`) is `lcc.json` as committed before
 the path in its `source.description` changed; the classes are the same. To
-check against that exact file: `git cat-file blob
-70d8c8628088a7b30cd35655d7fa4ba7421c3003 > /tmp/lcc-outline-b21e4c.json`, then
-pass `--outline /tmp/lcc-outline-b21e4c.json` to `build` and `check`
+check against that exact file, recreate it from the repo root with
+`sed 's|Built by tools/lcc-outline;|Built by src/shelfmark/tools/lcc-outline;|' data/schemes/lcc/lcc.json > /tmp/lcc-outline-b21e4c.json` and pass `--outline /tmp/lcc-outline-b21e4c.json` to `build` and `check`
 (verified 2026-10-11). Every source, the license and the gaps across LCC and
 LCSH are in `docs/schemes/lcc-lcsh-sources.md`.
 

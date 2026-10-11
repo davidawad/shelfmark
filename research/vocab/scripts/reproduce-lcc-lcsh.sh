@@ -82,10 +82,11 @@ run outline-check "$lo" check --cache "$cache/outline"
 (cd "$root/schemes/lcc-full" && cargo build --release) > "$out/logs/full-build.log" 2>&1
 lf=$CARGO_TARGET_DIR/release/lcc-full
 run full-fetch "$lf" fetch --cache "$cache/text"
-# lcc-full was built on the outline as committed before its description's
-# path changed (sha256 b21e4c66..., the lock's outline_sha256; git blob
-# 70d8c862...); the classes are the same. Check against that exact file.
-git -C "$root" cat-file blob 70d8c8628088a7b30cd35655d7fa4ba7421c3003 > "$cache/lcc-outline-for-full.json"
+# lcc-full was built on the outline as committed before the path in its
+# source.description changed (the lock's outline_sha256, b21e4c66...); the
+# classes are the same. That file is today's lcc.json with the old path.
+sed 's|Built by tools/lcc-outline;|Built by src/shelfmark/tools/lcc-outline;|' \
+  "$root/data/schemes/lcc/lcc.json" > "$cache/lcc-outline-for-full.json"
 run full-check "$lf" check --cache "$cache/text" --outline "$cache/lcc-outline-for-full.json"
 
 # 3. bundled lcc-lcsh (the dump is the one the outline fetch cached)

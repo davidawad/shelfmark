@@ -145,15 +145,17 @@ cargo run --release -- check --cache /tmp/lcc-sources   # fails if lcc.json or S
 research/vocab/scripts/build-lcc-lcsh.sh /tmp/lcc-sources build   # or: check
 
 # lcc-full.json.gz
+sed 's|Built by tools/lcc-outline;|Built by src/shelfmark/tools/lcc-outline;|' data/schemes/lcc/lcc.json > /tmp/lcc-outline-b21e4c.json
 cd schemes/lcc-full
-git cat-file blob 70d8c8628088a7b30cd35655d7fa4ba7421c3003 > /tmp/lcc-outline-b21e4c.json
 cargo run --release -- fetch --cache /tmp/lcc-text
 cargo run --release -- check --cache /tmp/lcc-text --outline /tmp/lcc-outline-b21e4c.json
 ```
 
 `lcc-full` layers on the outline file whose sha256 its lock records
 (`b21e4c66...`). That is `lcc.json` as committed before the path in its
-`source.description` changed; the classes are identical. Rebuilding against
+`source.description` changed (`src/shelfmark/tools/lcc-outline` became
+`tools/lcc-outline`); the `sed` above recreates it byte for byte, and the
+classes are identical. Rebuilding against
 today's `lcc.json` (`fetch --relock`, then `build`) gives the same 416,186
 classes and differs only in the outline hash quoted in the description. It
 is not done because published benchmark results pin the current file's
