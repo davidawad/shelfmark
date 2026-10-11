@@ -1,7 +1,11 @@
 # Default scheme: decision record
 
-Status: decided on existing results only; no new run. The code change that
-makes the CLI follow it is a separate step (see "Where the code stands").
+Status: decided 2026-10-11 on existing results only; no new run. The
+default stays the bundled `lcc@2024` (LCC outline + LCSH), which is what the
+CLI already does, so no code change follows. This amends the first version of
+this record, which chose FDC; that reasoning is kept below as the considered
+alternative. The decision was made by the project manager; David can
+overturn it.
 
 All numbers below come from committed results. `BS` is
 `bench/results/2026-10-11-book-stability/` (`results.md`, `results.json`,
@@ -159,70 +163,81 @@ the rule returns no winner there and says nothing about the default.
 
 ## Decision
 
-1. **The default is the FDC scheme, `fdc` @ 0.06 (`schemes/registry.json`
-   entry `fdc`, CC0, `may_bundle: true`), filed to depth 3.** Depth 3 is
-   main class, division and section (`8xx`, `82x`, `823`): the cut named
-   `fdc-d3` in the bench and `ddc-section` where the number comes from a
-   librarian. The full Dewey number stays as item metadata and orders items
-   inside a section.
-2. **Placement order**: catalogue Dewey number (Open Library work lookup),
-   then LC call number through the measured crosswalk, then the
-   classifier, then the review queue (`R9` §6.3). Captions are FDC's.
-   Sections without an FDC class of the same number take the containing
-   class's caption (`R9` §6.1; 371 of 392 sections have one).
-3. **Smaller libraries** (under about 2,000 items) use depth 2 (`R9` §6.2).
-4. **LCC stays available as the alternative**: `lcc-full` (US government
-   work, `schemes/registry.json`) for call-number libraries, and the
-   currently bundled outline + LCSH scheme `lcc@2024` for classifier-only
-   placement.
+1. **The default is the bundled LCC outline with LCSH vocabulary,
+   `lcc@2024`** (`data/schemes/lcc/lcc-lcsh.json.gz`, US government work,
+   compiled into the binary).
+2. **Placement order**: LC call number from the catalogue when there is one,
+   then the classifier, then the review queue (`R9` §6.3).
+3. **FDC (`fdc` @ 0.06, CC0, depth 3) is the documented alternative**, and
+   `lcc-full` remains available for call-number libraries that want the
+   complete schedules.
 
-Why FDC and not LCC, given the evidence:
+Why LCC:
 
-- Dewey against LCC is a tie that depends on setting. Nothing in the metrics
-  separates them, so the choice is made on other grounds.
+- **It wins the rule.** Among the bundleable schemes (open, allowed in the
+  binary) `lcc-lcsh-placed` wins all 27 settings at the 0.90 floor, and at
+  every floor from 0.85 up (Evidence, "Winners by coverage floor"). FDC
+  places only 0.839 of the books, under the floor.
+- **Catalogue numbers cover every book.** LC call numbers exist for 100% of
+  the holdout's works against 91% with a Dewey number (`R9`), so the
+  catalogue-first step finds an LC number more often than a Dewey one.
+- **Switching later is cheap.** Placements are keyed by content id, not by
+  where a file sits, so moving to another scheme is a new id-to-class
+  rendering of the same items, not a re-filing by hand.
+- The Dewey/LCC metric comparison is a setting-dependent tie (Stability
+  verdict), so nothing in the metrics overrides the rule.
+
+### The considered alternative: FDC at depth 3
+
+The first version of this record chose FDC (`fdc` @ 0.06) filed to depth 3
+(main class, division, section: `8xx`, `82x`, `823`), with the full Dewey
+number kept as item metadata, catalogue Dewey first, LC call numbers through
+the measured crosswalk second, and depth 2 for libraries under about 2,000
+items (`R9` §6.2). Its reasons, which still hold as facts:
+
+- Dewey against LCC is a tie that depends on setting, so the choice was made
+  on other grounds.
 - FDC is CC0 with open captions that can ship in the binary; the Dewey
-  numbers themselves are not redistributed, and FDC supplies the open
-  captions for the same numbers.
+  numbers themselves are not redistributed, and FDC supplies open captions
+  for the same numbers.
 - Three-digit notation is shorter than LCC's average 7.6 characters
   (`R9` §6.1, `catalogue-books`).
 - Papers nest better under the FDC backbone than under LCC (`R9` §5.2).
-  LC call numbers are more available for books (100% of the holdout's works
-  against 91% with a Dewey number), which cuts the other way and is why LCC
-  remains a documented alternative.
 - Depth 3 beats depth 2 in 27/27 settings and is tied with the full number
   on J′ (above).
 
-Where this departs from the rule: the rule picks `lcc-lcsh-placed` when
-the classifier alone places everything. The decision ships FDC because the
-shipped pipeline is catalogue-first and the classifier is the fallback;
-the gold and pipeline comparisons are ties; and the rule's margin over
-FDC is a vocabulary margin that can be closed. This is a judgement, not a
-metric result, and `R9`'s own weakest-link caveat (the corrected metric
-rests on one annotator model) still applies.
+It departed from the rule on judgement: the shipped pipeline was to be
+catalogue-first, the gold and pipeline comparisons are ties, and the rule's
+margin over FDC is partly a vocabulary margin (LCSH lifts LCC's coverage from
+0.915 to 0.985; FDC has no search vocabulary yet). That judgement was not
+kept because the rule's result is the only one in this record that is not a
+tie, LC numbers are the more available catalogue numbers, and the choice is
+reversible at the cost of a re-render.
 
 ## Where the code stands
 
-The CLI default is the first compiled scheme, which is the bundled LCC
-outline with LCSH vocabulary: `crates/cli/src/wiring/mod.rs:108`
-(`schemes: vec![bundled_lcc_in(...)]`), data at `:62` (`LCC_GZ`), id at
-`:86` (`SchemeId::new("lcc", "2024")`), selection in
-`crates/cli/src/service/mod.rs:136-145` (`index`, first compiled). The
-test `crates/cli/tests/bundled.rs:12` pins `scheme:lcc@2024`. FDC is not
-compiled into the binary today.
+The CLI already follows the decision. The default is the first compiled
+scheme, the bundled LCC outline with LCSH vocabulary:
+`crates/cli/src/wiring/mod.rs` (`schemes: vec![bundled_lcc_in(...)]`, data
+in `LCC_GZ`, id `SchemeId::new("lcc", "2024")`), selection in
+`crates/cli/src/service/mod.rs` (`index`, first compiled). The test
+`crates/cli/tests/bundled.rs` pins `scheme:lcc@2024`. FDC is not compiled
+into the binary. Sources, license and rebuild of the bundled file:
+`docs/schemes/lcc-lcsh-sources.md`.
 
 ## What would overturn it
 
-- **Classifier-only operation.** If the CLI ships without catalogue
-  lookups, or most items have no number, the rule's answer applies:
-  `lcc@2024` (outline + LCSH) as default. The floor result (0.839 against
-  0.90) would flip only if FDC gained a search vocabulary that lifts
-  coverage to ≥ 0.90 with J′ no worse than `lcc-lcsh-placed` (+0.0014
-  [−0.0177, +0.0217] today).
-- **A stable LCC win.** A graph that is not built from embeddings (co-use,
-  citations, the owner's links) on which `lcc-gold` beats `ddc-section` in
-  every setting with CIs excluding zero, or a calibrated β ≥ 2 (`R9` §8).
-- **Owner shelf.** If locality of one physical shelf outweighs about 0.45
-  units of cost (`R9` §8, `locality-weight`), use LCC.
+- **FDC gains a search vocabulary** that lifts its placed coverage to at
+  least 0.90 with J′ no worse than `lcc-lcsh-placed` (+0.0014
+  [−0.0177, +0.0217] today); the rule would then compare them on equal
+  terms.
+- **A stable Dewey win.** A graph not built from embeddings (co-use,
+  citations, the owner's links) on which `ddc-section` beats `lcc-gold` in
+  every setting with CIs excluding zero.
+- **Mostly papers.** If the library is mostly papers rather than books, FDC's
+  better nesting of papers (`R9` §5.2) weighs more.
+- **Short shelf marks matter.** If the owner wants three-digit shelf marks
+  over LCC's longer notation.
 - **A semantic classifier** that reaches ≥ 0.85 main-class agreement at
   coverage ≥ 0.95 would re-open the classifier-only comparison on equal
   terms. The BGE-small shortlist tier does not reach that: it has coverage

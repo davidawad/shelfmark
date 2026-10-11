@@ -85,6 +85,7 @@ values.
 * Prior work was searched in `research/reports/8-prior-work-search.md`.
 * The survey table reports what each publisher states about licensing at the
   date the project's reports were written. It is not legal advice.
-* The default scheme of the tool that produced the placements is an open
-  decision (`docs/decisions/default-scheme.md`); the paper does not claim a
-  final choice.
+* The default scheme of the tool that produced the placements is the
+  bundled `lcc@2024`, LCC outline with LCSH vocabulary
+  (`docs/decisions/default-scheme.md`); the paper's results do not depend on
+  that choice.
