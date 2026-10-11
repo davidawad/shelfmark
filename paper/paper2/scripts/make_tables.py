@@ -372,7 +372,27 @@ def build():
         ],
         {"depth bound", "lambda", "J", "cost_norm", "nav (a=1)", "classes", "leaf classes", "root children", "median leaf"},
     )
+
+    # --- later results shared with Paper 1 (paper/common/extra_results.py):
+    # the independent-embedding rescoring, the false-join term and its
+    # validity check, and the 27-setting book comparison.
+    sys.path.insert(0, str(ROOT / "paper" / "common"))
+    import extra_results
+    xv, xt = extra_results.collect(ROOT)
+    v.update(xv)
+    for name in SHARED_TABLES:
+        tab = xt[name]
+        t[name] = md_table(tab["header"], [[str(c) for c in r] for r in tab["rows"]],
+                           set(tab["header"][1:]) - LEFT_SHARED.get(name, set()))
     return v, t
+
+
+# Shared tables Paper 2 prints, and their left-aligned columns besides the first.
+SHARED_TABLES = ["learned_edge", "learned_fj", "cross_fit", "validity_runs", "book_claims"]
+LEFT_SHARED = {
+    "learned_fj": {"model", "best other by J'", "best other by C + FJ"},
+    "book_claims": {"objective", "claimed", "verdict"},
+}
 
 
 PLACEHOLDER = re.compile(r"\{\{([A-Za-z0-9_:]+)\}\}")
