@@ -72,7 +72,6 @@ text matches); see `docs/research/README.md`.
 
 ## Open items before any submission
 
-- Repository location (omitted from section 9).
 - A similarity that is not an embedding (citations or subject headings) to
   score the scheme; Section 6.6 rescored it on two independent embedding
   models, which removes the circularity of the scoring graph but not of
