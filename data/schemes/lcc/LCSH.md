@@ -32,22 +32,26 @@ that it validates, and checks that it is `lcc.json` plus vocabulary.
 
 ## Rebuild
 
-The ingester and the enrichment step are the vocabulary spike's
-(`research/vocab`, outside this workspace; moving them into
-`tools/lcc-outline` is open work):
+One command, from the locked dump (see `docs/schemes/lcc-lcsh-sources.md`
+for every source, its sha256, the license and the known gaps):
 
 ```sh
-cd research/vocab && cargo build --release
-B=target/release/vocab-ingest
-$B lcsh --input subjects.madsrdf.nt.gz --out lcsh.tsv.gz --stats lcsh-stats.json
-$B enrich-scheme --scheme ../../data/schemes/lcc/lcc.json \
-  --table lcsh.tsv.gz --out lcc-lcsh.json --stats enrich-stats.json
+research/vocab/scripts/build-lcc-lcsh.sh /tmp/lcc-sources build   # writes lcc-lcsh.json.gz
+research/vocab/scripts/build-lcc-lcsh.sh /tmp/lcc-sources check   # fails if it is stale
 ```
 
-Then set the title to "Library of Congress Classification outline with LCSH
-vocabulary" and the source description to the one in the bundled file, write
-the document back as canonical JSON (`serde_json::to_vec` of the parsed
-`SchemeDoc`, no trailing newline), and compress it with `gzip -9n`.
+It downloads `subjects.madsrdf.nt.gz` into the cache when absent, refuses it
+unless its sha256 is the one `sources.lock.json` records, builds the
+`research/vocab` ingester (a standalone crate outside the cargo workspace),
+turns the dump into the heading table, folds the table into `lcc.json` with
+`vocab-ingest enrich-scheme --canonical true` (the bytes shelfmark hashes,
+with this file's title and source description), and gzips it with
+`gzip -9n`. Rebuilt and checked byte for byte on 2026-10-11.
+
+This is a subset of LCSH: 91,580 of the 513,470 active headings carry an
+LCC number. The rest have no number to place them by;
+`docs/schemes/lcc-lcsh-sources.md` gives the counts and the measured
+alternatives.
 
 Measured with `--alt true` (alternate and uninverted labels too, 250,859 terms,
 2.45 MB gzipped) the lexical profile scored subclass top-1 36.5% against 34.6%
