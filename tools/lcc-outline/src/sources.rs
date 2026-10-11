@@ -201,9 +201,20 @@ fn download(url: &str) -> Result<Vec<u8>, String> {
     Err(format!("fetch {url}: {last}"))
 }
 
-/// Read a locked file from `cache`, refusing one whose hash has changed.
-pub fn read(cache: &Path, locked: &Locked) -> Result<Vec<u8>, String> {
-    let path = cache.join(&locked.file);
+/// Where the id.loc.gov classification records are kept in git, under the
+/// data directory. id.loc.gov does not serve a record's JSON-LD byte for
+/// byte the same twice (two fetches a second apart differ in sha256), so a
+/// lock of fresh fetches could never be met again; the records are small
+/// (about 1 MB in all) and are committed instead.
+pub const RECORDS_DIR: &str = "sources";
+
+/// Read a locked file, refusing one whose hash has changed: an id.loc.gov
+/// record from `data`'s committed copy, anything else from `cache`.
+pub fn read(cache: &Path, data: &Path, locked: &Locked) -> Result<Vec<u8>, String> {
+    let path = match locked.role {
+        Role::IdRecord => data.join(RECORDS_DIR).join(&locked.file),
+        _ => cache.join(&locked.file),
+    };
     let bytes = std::fs::read(&path).map_err(|e| {
         format!(
             "{}: {e}; run `lcc-outline fetch` or copy the sources there",

@@ -61,8 +61,8 @@ fn run(args: Vec<String>) -> Result<(), String> {
     match cmd.as_str() {
         "fetch" => {
             let mut lock = sources::fetch(&cache)?;
-            let parsed = parse_outlines(&cache, &lock)?;
-            let listings = parse_listings(&cache, &lock)?;
+            let parsed = parse_outlines(&cache, &data, &lock)?;
+            let listings = parse_listings(&cache, &data, &lock)?;
             let mut names: Vec<String> = parsed
                 .entries
                 .iter()
@@ -70,7 +70,19 @@ fn run(args: Vec<String>) -> Result<(), String> {
                 .map(build::record_name)
                 .collect();
             names.extend(build::unlisted_prefixes(&listings, &parsed));
-            lock.sources.extend(sources::fetch_records(&cache, &names)?);
+            let records = sources::fetch_records(&cache, &names)?;
+            // Keep the fetched records with the lock (see `sources::RECORDS_DIR`).
+            let kept = data.join(sources::RECORDS_DIR).join("id-classification");
+            if kept.is_dir() {
+                std::fs::remove_dir_all(&kept).map_err(|e| format!("{}: {e}", kept.display()))?;
+            }
+            std::fs::create_dir_all(&kept).map_err(|e| format!("{}: {e}", kept.display()))?;
+            for r in &records {
+                let to = data.join(sources::RECORDS_DIR).join(&r.file);
+                std::fs::copy(cache.join(&r.file), &to)
+                    .map_err(|e| format!("{}: {e}", to.display()))?;
+            }
+            lock.sources.extend(records);
             std::fs::create_dir_all(&data).map_err(|e| format!("{}: {e}", data.display()))?;
             write(&data.join(LOCK), &(json_pretty(&lock)? + "\n"))
         }
@@ -100,10 +112,10 @@ fn run(args: Vec<String>) -> Result<(), String> {
 }
 
 /// Parse every locked class outline PDF, in lock order.
-fn parse_listings(cache: &Path, lock: &Lock) -> Result<Vec<lcco::Listing>, String> {
+fn parse_listings(cache: &Path, data: &Path, lock: &Lock) -> Result<Vec<lcco::Listing>, String> {
     let mut out = Vec::new();
     for locked in lock.sources.iter().filter(|l| l.role == Role::ClassOutline) {
-        let bytes = sources::read(cache, locked)?;
+        let bytes = sources::read(cache, data, locked)?;
         out.push(lcco::parse(
             &pdf::pages(&bytes).map_err(|e| format!("{}: {e}", locked.file))?,
         ));
@@ -112,10 +124,10 @@ fn parse_listings(cache: &Path, lock: &Lock) -> Result<Vec<lcco::Listing>, Strin
 }
 
 /// Parse every locked FreeLCC outline PDF, in lock order.
-fn parse_outlines(cache: &Path, lock: &Lock) -> Result<outline::Parsed, String> {
+fn parse_outlines(cache: &Path, data: &Path, lock: &Lock) -> Result<outline::Parsed, String> {
     let mut parsed = outline::Parsed::default();
     for locked in lock.sources.iter().filter(|l| l.role == Role::Outline) {
-        let bytes = sources::read(cache, locked)?;
+        let bytes = sources::read(cache, data, locked)?;
         let pages = pdf::pages(&bytes).map_err(|e| format!("{}: {e}", locked.file))?;
         outline::parse(&pages, &mut parsed);
     }
@@ -138,8 +150,8 @@ fn generate(cache: &Path, data: &Path) -> Result<(String, String), String> {
             .map_err(|e| format!("{}: {e}", lock_path.display()))?,
     )
     .map_err(|e| format!("{}: {e}", lock_path.display()))?;
-    let listings = parse_listings(cache, &lock)?;
-    let parsed = parse_outlines(cache, &lock)?;
+    let listings = parse_listings(cache, data, &lock)?;
+    let parsed = parse_outlines(cache, data, &lock)?;
     let mut records = BTreeMap::new();
     let mut headings = Vec::new();
     for locked in &lock.sources {
@@ -147,7 +159,7 @@ fn generate(cache: &Path, data: &Path) -> Result<(String, String), String> {
         match locked.role {
             Role::ClassOutline | Role::Outline => {}
             Role::Lcsh => {
-                headings.extend(lcsh::headings(&sources::read(cache, locked)?).map_err(ctx)?)
+                headings.extend(lcsh::headings(&sources::read(cache, data, locked)?).map_err(ctx)?)
             }
             Role::IdRecord => {
                 let name = locked
@@ -156,7 +168,7 @@ fn generate(cache: &Path, data: &Path) -> Result<(String, String), String> {
                     .next()
                     .unwrap_or_default()
                     .trim_end_matches(".json");
-                let bytes = sources::read(cache, locked)?;
+                let bytes = sources::read(cache, data, locked)?;
                 if let Some(label) = sources::record_label(&bytes, name) {
                     records.insert(name.to_string(), label);
                 }
