@@ -66,12 +66,19 @@ fn corrections_feed_eval_and_a_commit_sets_calibration() {
         .is_some_and(|b| b.len() == 10));
     assert_eq!(change["calibration"]["gold_count"], 2);
     // Profiles whose tiers are not built in (rerank always, shortlist
-    // without its feature) are reported as skipped rather than failing.
-    let skipped = if shortlist { 1 } else { 2 };
-    assert_eq!(
-        change["skipped_profiles"].as_array().unwrap().len(),
-        skipped
-    );
+    // without its feature) are reported as skipped rather than failing,
+    // and so is openlibrary, which sends requests, built in or not.
+    let skipped = if shortlist { 2 } else { 3 };
+    let list = change["skipped_profiles"].as_array().unwrap();
+    assert_eq!(list.len(), skipped);
+    let ol = list
+        .iter()
+        .find(|p| p["profile"] == "profile:openlibrary@2")
+        .unwrap();
+    assert!(ol["reason"]
+        .as_str()
+        .unwrap()
+        .contains("--profile openlibrary"));
     let st = data(call(&s, Verb::Status, json!({})));
     assert!(
         st["eval"].is_null() && st["calibration"].is_null(),

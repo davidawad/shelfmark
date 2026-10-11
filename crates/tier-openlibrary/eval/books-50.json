@@ -1,0 +1,508 @@
+{
+ "retrieved": "2026-10-10",
+ "source": "https://openlibrary.org/search.json (q=title author, limit=1)",
+ "license": "Open Library data, CC0 (https://openlibrary.org/developers/licensing)",
+ "books": [
+  {
+   "title": "Pride and Prejudice",
+   "authors": [
+    "Jane Austen"
+   ],
+   "expected_lc": "PR4034",
+   "expected_share": 0.716,
+   "record": "/works/OL66554W",
+   "record_title": "Pride and Prejudice"
+  },
+  {
+   "title": "Moby Dick",
+   "authors": [
+    "Herman Melville"
+   ],
+   "expected_lc": "PS2384",
+   "expected_share": 0.608,
+   "record": "/works/OL102749W",
+   "record_title": "Moby Dick"
+  },
+  {
+   "title": "Nineteen Eighty-Four",
+   "authors": [
+    "George Orwell"
+   ],
+   "expected_lc": "PR6029",
+   "expected_share": 0.825,
+   "record": "/works/OL1168083W",
+   "record_title": "Nineteen Eighty-Four"
+  },
+  {
+   "title": "The Great Gatsby",
+   "authors": [
+    "F. Scott Fitzgerald"
+   ],
+   "expected_lc": "PS3511",
+   "expected_share": 0.815,
+   "record": "/works/OL468431W",
+   "record_title": "The Great Gatsby"
+  },
+  {
+   "title": "To Kill a Mockingbird",
+   "authors": [
+    "Harper Lee"
+   ],
+   "expected_lc": "PS3562",
+   "expected_share": 0.865,
+   "record": "/works/OL3140822W",
+   "record_title": "To Kill a Mockingbird"
+  },
+  {
+   "title": "The Catcher in the Rye",
+   "authors": [
+    "J. D. Salinger"
+   ],
+   "expected_lc": "PS3537",
+   "expected_share": 0.75,
+   "record": "/works/OL3335245W",
+   "record_title": "The Catcher in the Rye"
+  },
+  {
+   "title": "Brave New World",
+   "authors": [
+    "Aldous Huxley"
+   ],
+   "expected_lc": "PR6015",
+   "expected_share": 0.78,
+   "record": "/works/OL64365W",
+   "record_title": "Brave New World"
+  },
+  {
+   "title": "Frankenstein",
+   "authors": [
+    "Mary Shelley"
+   ],
+   "expected_lc": "PR5397",
+   "expected_share": 0.686,
+   "record": "/works/OL450063W",
+   "record_title": "Frankenstein; or, The Modern Prometheus"
+  },
+  {
+   "title": "Dracula",
+   "authors": [
+    "Bram Stoker"
+   ],
+   "expected_lc": "PR6037",
+   "expected_share": 0.727,
+   "record": "/works/OL85892W",
+   "record_title": "Dracula"
+  },
+  {
+   "title": "War and Peace",
+   "authors": [
+    "Leo Tolstoy"
+   ],
+   "expected_lc": "PG3366",
+   "expected_share": 0.466,
+   "record": "/works/OL267171W",
+   "record_title": "War and Peace"
+  },
+  {
+   "title": "Crime and Punishment",
+   "authors": [
+    "Fyodor Dostoyevsky"
+   ],
+   "expected_lc": "PG3326",
+   "expected_share": 0.548,
+   "record": "/works/OL166894W",
+   "record_title": "Преступление и наказание"
+  },
+  {
+   "title": "On the Origin of Species",
+   "authors": [
+    "Charles Darwin"
+   ],
+   "expected_lc": "QH365",
+   "expected_share": 0.877,
+   "record": "/works/OL515051W",
+   "record_title": "On the origin of species by means of natural selection"
+  },
+  {
+   "title": "A Brief History of Time",
+   "authors": [
+    "Stephen Hawking"
+   ],
+   "expected_lc": "QB981",
+   "expected_share": 0.8,
+   "record": "/works/OL1892617W",
+   "record_title": "A Brief History of Time"
+  },
+  {
+   "title": "The Selfish Gene",
+   "authors": [
+    "Richard Dawkins"
+   ],
+   "expected_lc": "QH437",
+   "expected_share": 0.833,
+   "record": "/works/OL1966488W",
+   "record_title": "The Selfish Gene"
+  },
+  {
+   "title": "Silent Spring",
+   "authors": [
+    "Rachel Carson"
+   ],
+   "expected_lc": "QH545",
+   "expected_share": 0.667,
+   "record": "/works/OL1884862W",
+   "record_title": "Silent Spring"
+  },
+  {
+   "title": "The Structure of Scientific Revolutions",
+   "authors": [
+    "Thomas S. Kuhn"
+   ],
+   "expected_lc": "Q175",
+   "expected_share": 0.778,
+   "record": "/works/OL3259254W",
+   "record_title": "The Structure of Scientific Revolutions"
+  },
+  {
+   "title": "Cosmos",
+   "authors": [
+    "Carl Sagan"
+   ],
+   "expected_lc": "QB44.2",
+   "expected_share": 0.8,
+   "record": "/works/OL15829966W",
+   "record_title": "Cosmos"
+  },
+  {
+   "title": "The Double Helix",
+   "authors": [
+    "James D. Watson"
+   ],
+   "expected_lc": "QH450.2",
+   "expected_share": 0.364,
+   "record": "/works/OL2125469W",
+   "record_title": "The double helix"
+  },
+  {
+   "title": "Gödel, Escher, Bach",
+   "authors": [
+    "Douglas R. Hofstadter"
+   ],
+   "expected_lc": "QA9.8",
+   "expected_share": 0.571,
+   "record": "/works/OL716850W",
+   "record_title": "Gödel, Escher, Bach"
+  },
+  {
+   "title": "The Art of Computer Programming",
+   "authors": [
+    "Donald E. Knuth"
+   ],
+   "expected_lc": "QA76.6",
+   "expected_share": 0.8,
+   "record": "/works/OL257263W",
+   "record_title": "The art of computer programming"
+  },
+  {
+   "title": "Structure and Interpretation of Computer Programs",
+   "authors": [
+    "Harold Abelson"
+   ],
+   "expected_lc": "QA76.6",
+   "expected_share": 0.75,
+   "record": "/works/OL3267304W",
+   "record_title": "Structure and Interpretation of Computer Programs (SICP)"
+  },
+  {
+   "title": "The C Programming Language",
+   "authors": [
+    "Brian W. Kernighan"
+   ],
+   "expected_lc": "QA76.73",
+   "expected_share": 1.0,
+   "record": "/works/OL4617640W",
+   "record_title": "The C Programming Language"
+  },
+  {
+   "title": "Design Patterns",
+   "authors": [
+    "Erich Gamma"
+   ],
+   "expected_lc": "QA76.64",
+   "expected_share": 1.0,
+   "record": "/works/OL6030812W",
+   "record_title": "Design Patterns"
+  },
+  {
+   "title": "Introduction to Algorithms",
+   "authors": [
+    "Thomas H. Cormen"
+   ],
+   "expected_lc": "QA76.6",
+   "expected_share": 1.0,
+   "record": "/works/OL4781294W",
+   "record_title": "Introduction to Algorithms"
+  },
+  {
+   "title": "The Wealth of Nations",
+   "authors": [
+    "Adam Smith"
+   ],
+   "expected_lc": "HB161",
+   "expected_share": 0.86,
+   "record": "/works/OL76827W",
+   "record_title": "The Wealth of Nations"
+  },
+  {
+   "title": "The General Theory of Employment, Interest and Money",
+   "authors": [
+    "John Maynard Keynes"
+   ],
+   "expected_lc": "HB171",
+   "expected_share": 0.7,
+   "record": "/works/OL35951W",
+   "record_title": "The general theory of employment, interest and money"
+  },
+  {
+   "title": "Das Kapital",
+   "authors": [
+    "Karl Marx"
+   ],
+   "expected_lc": "HB501",
+   "expected_share": 0.808,
+   "record": "/works/OL628450W",
+   "record_title": "Das Kapital"
+  },
+  {
+   "title": "The Road to Serfdom",
+   "authors": [
+    "F. A. Hayek"
+   ],
+   "expected_lc": "HD82",
+   "expected_share": 0.812,
+   "record": "/works/OL1165001W",
+   "record_title": "The Road to Serfdom"
+  },
+  {
+   "title": "Thinking, Fast and Slow",
+   "authors": [
+    "Daniel Kahneman"
+   ],
+   "expected_lc": "BF441",
+   "expected_share": 0.8,
+   "record": "/works/OL15992072W",
+   "record_title": "Thinking, fast and slow"
+  },
+  {
+   "title": "Guns, Germs, and Steel",
+   "authors": [
+    "Jared Diamond"
+   ],
+   "expected_lc": "HM206",
+   "expected_share": 0.778,
+   "record": "/works/OL276558W",
+   "record_title": "Guns, Germs, and Steel"
+  },
+  {
+   "title": "The Rise and Fall of the Third Reich",
+   "authors": [
+    "William L. Shirer"
+   ],
+   "expected_lc": "DD256.5",
+   "expected_share": 1.0,
+   "record": "/works/OL47181W",
+   "record_title": "The Rise and Fall of the Third Reich"
+  },
+  {
+   "title": "The Guns of August",
+   "authors": [
+    "Barbara W. Tuchman"
+   ],
+   "expected_lc": "D530",
+   "expected_share": 0.933,
+   "record": "/works/OL3378527W",
+   "record_title": "The Guns of August"
+  },
+  {
+   "title": "The Republic",
+   "authors": [
+    "Plato"
+   ],
+   "expected_lc": "JC71",
+   "expected_share": 0.724,
+   "record": "/works/OL51831W",
+   "record_title": "πολιτεία"
+  },
+  {
+   "title": "Leviathan",
+   "authors": [
+    "Thomas Hobbes"
+   ],
+   "expected_lc": "JC153",
+   "expected_share": 0.953,
+   "record": "/works/OL653987W",
+   "record_title": "Leviathan"
+  },
+  {
+   "title": "Critique of Pure Reason",
+   "authors": [
+    "Immanuel Kant"
+   ],
+   "expected_lc": "B2778",
+   "expected_share": 0.726,
+   "record": "/works/OL99844W",
+   "record_title": "Kritik der reinen Vernunft"
+  },
+  {
+   "title": "Thus Spoke Zarathustra",
+   "authors": [
+    "Friedrich Nietzsche"
+   ],
+   "expected_lc": "B3313",
+   "expected_share": 0.938,
+   "record": "/works/OL98130W",
+   "record_title": "Also sprach Zarathustra"
+  },
+  {
+   "title": "The Prince",
+   "authors": [
+    "Niccolò Machiavelli"
+   ],
+   "expected_lc": "JC143",
+   "expected_share": 0.91,
+   "record": "/works/OL1089297W",
+   "record_title": "The Prince"
+  },
+  {
+   "title": "The Second Sex",
+   "authors": [
+    "Simone de Beauvoir"
+   ],
+   "expected_lc": "HQ1208",
+   "expected_share": 0.95,
+   "record": "/works/OL767941W",
+   "record_title": "Le Deuxième Sexe"
+  },
+  {
+   "title": "The Interpretation of Dreams",
+   "authors": [
+    "Sigmund Freud"
+   ],
+   "expected_lc": "BF1078",
+   "expected_share": 0.97,
+   "record": "/works/OL1069300W",
+   "record_title": "Die Traumdeutung"
+  },
+  {
+   "title": "The Feminine Mystique",
+   "authors": [
+    "Betty Friedan"
+   ],
+   "expected_lc": "HQ1420",
+   "expected_share": 0.471,
+   "record": "/works/OL2643698W",
+   "record_title": "The Feminine Mystique"
+  },
+  {
+   "title": "Democracy in America",
+   "authors": [
+    "Alexis de Tocqueville"
+   ],
+   "expected_lc": "JK216",
+   "expected_share": 0.947,
+   "record": "/works/OL278001W",
+   "record_title": "De la démocratie en Amérique"
+  },
+  {
+   "title": "The Souls of Black Folk",
+   "authors": [
+    "W. E. B. Du Bois"
+   ],
+   "expected_lc": "E185.6",
+   "expected_share": 0.588,
+   "record": "/works/OL28577W",
+   "record_title": "The Souls of Black Folk"
+  },
+  {
+   "title": "Walden",
+   "authors": [
+    "Henry David Thoreau"
+   ],
+   "expected_lc": "PS3048",
+   "expected_share": 0.914,
+   "record": "/works/OL55649W",
+   "record_title": "Walden"
+  },
+  {
+   "title": "Leaves of Grass",
+   "authors": [
+    "Walt Whitman"
+   ],
+   "expected_lc": "PS3201",
+   "expected_share": 0.627,
+   "record": "/works/OL16333W",
+   "record_title": "Leaves of Grass"
+  },
+  {
+   "title": "Hamlet",
+   "authors": [
+    "William Shakespeare"
+   ],
+   "expected_lc": "PR2807",
+   "expected_share": 0.656,
+   "record": "/works/OL9170454W",
+   "record_title": "Hamlet"
+  },
+  {
+   "title": "The Odyssey",
+   "authors": [
+    "Homer"
+   ],
+   "expected_lc": "PA4025",
+   "expected_share": 0.619,
+   "record": "/works/OL61982W",
+   "record_title": "Ὀδύσσεια"
+  },
+  {
+   "title": "Don Quixote",
+   "authors": [
+    "Miguel de Cervantes"
+   ],
+   "expected_lc": "PQ6329",
+   "expected_share": 0.401,
+   "record": "/works/OL503666W",
+   "record_title": "Don Quijote de la Mancha"
+  },
+  {
+   "title": "Joy of Cooking",
+   "authors": [
+    "Irma S. Rombauer"
+   ],
+   "expected_lc": "TX715",
+   "expected_share": 0.677,
+   "record": "/works/OL267968W",
+   "record_title": "Joy of Cooking"
+  },
+  {
+   "title": "The Elements of Style",
+   "authors": [
+    "William Strunk"
+   ],
+   "expected_lc": "PE1408",
+   "expected_share": 0.7,
+   "record": "/works/OL38285W",
+   "record_title": "The Elements of Style"
+  },
+  {
+   "title": "A People's History of the United States",
+   "authors": [
+    "Howard Zinn"
+   ],
+   "expected_lc": "E178",
+   "expected_share": 0.526,
+   "record": "/works/OL50283W",
+   "record_title": "A People's History of the United States"
+  }
+ ],
+ "method": "One free-text search per book (q=<title> <author>, limit=1, fields key,title,author_name,lcc); expected_lc is the most frequent class number among the top work's lcc call numbers whose letters are an LCC subclass; expected_share is that class number's share of them. The tier itself searches by title= and author= fields."
+}

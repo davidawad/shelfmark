@@ -23,6 +23,7 @@ yet built: the rerank tier and the FAST scheme.
 | Profile | Tiers | Build | Peak RSS | Per item |
 |---|---|---|---|---|
 | `lexical` | identifier, vocab, rules | default | ~100 MB | under 50 ms |
+| `openlibrary` | identifier, Open Library title+author lookup, vocab, rules | `--features openlibrary` (rustc 1.85+) | ~100 MB (estimate: lexical plus a few MB) | ~1 s per new lookup (paced); a cached one adds under 1 ms |
 | `shortlist` | lexical, then an embedding shortlist | `--features semantic-shortlist` | ~300-360 MB | ~50-100 ms more |
 | `rerank` | shortlist, then a cross-encoder | not available yet | | |
 
@@ -39,6 +40,47 @@ English stopwords, such as a class labelled `To`. Version 1 matched them,
 so one such class could take most placements. Labels with at least one
 other word, such as `History of the arts`, still match in full. Placements
 made under version 1 report as stale.
+
+### The `openlibrary` profile
+
+`openlibrary` runs the identifier tier, then looks the book up on
+[Open Library](https://openlibrary.org/dev/docs/api/search) by title and
+author, then falls back to the vocabulary and rules tiers. The lookup
+(`crates/tier-openlibrary`) sends
+`search.json?title=<title>&author=<first author's family name>`, picks
+the best match by normalized title and author similarity (threshold
+0.8), reads the matched work's LC call numbers (`lcc`, and raw
+`lc_classifications` when present; `ddc` is read but unused), and places
+each in the deepest class of the active LCC scheme (`lcc` or `lcc-full`)
+that covers it. A class's confidence is the match score scaled by its
+share of the work's call numbers, and its evidence names the Open
+Library work key and the call number.
+
+It is the only profile that sends network requests, so it never runs
+unless named: it is not recommended, and `eval` skips it unless given
+`--profile openlibrary`. It needs a build with the feature:
+
+```sh
+cargo build --release --features openlibrary
+shelfmark classify --profile openlibrary --title 'The Selfish Gene' --author 'Richard Dawkins'
+```
+
+Requests carry a User-Agent naming this repository, go out at most one
+a second, time out after 10 s, and are retried at most twice (timeouts,
+429, 5xx). Responses are cached in `<store>/cache/openlibrary/` with no
+expiry, so a repeated lookup sends nothing; delete the directory to
+refresh. When Open Library cannot be reached the tier is recorded
+`unavailable` and the cascade carries on with the local tiers. Open
+Library data is CC0.
+
+Measured on 50 well-known books, classifying from title and author alone
+into the bundled outline (list and method in
+[`crates/tier-openlibrary/eval/`](crates/tier-openlibrary/eval/)):
+
+| Profile | Class hit | Subclass hit | Decided (not flagged) |
+|---|---|---|---|
+| `lexical` | 0/50 (0%) | 3/50 (6%) | 0 |
+| `openlibrary` | 45/50 (90%) | 45/50 (90%) | 43, all correct |
 
 ## Scheme ports
 

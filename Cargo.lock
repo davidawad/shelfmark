@@ -2675,6 +2675,7 @@ dependencies = [
  "shelfmark-store",
  "shelfmark-tier-identifier",
  "shelfmark-tier-lexical",
+ "shelfmark-tier-openlibrary",
  "shelfmark-tier-shortlist",
  "tokio",
 ]
@@ -2789,6 +2790,20 @@ dependencies = [
  "serde_json",
  "shelfmark-core",
  "tempfile",
+]
+
+[[package]]
+name = "shelfmark-tier-openlibrary"
+version = "0.1.0"
+dependencies = [
+ "serde",
+ "serde_json",
+ "sha2",
+ "shelfmark-core",
+ "shelfmark-scheme",
+ "tempfile",
+ "unicode-normalization",
+ "ureq",
 ]
 
 [[package]]

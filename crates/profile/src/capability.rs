@@ -12,7 +12,7 @@ use serde::{Deserialize, Serialize};
 use shelfmark_core::tier::Profile;
 use shelfmark_core::ProfileId;
 
-use crate::builtin::tier_spec;
+use crate::builtin::{needs_network, tier_spec};
 
 /// A profile may plan on at most this share of total RAM, leaving the
 /// rest to the OS and the caller.
@@ -152,7 +152,7 @@ fn assess_one(profile: &Profile, cap: &Capability, runnable: &BTreeSet<String>) 
 /// Assess `profiles` (cheapest first, as [`crate::builtins`] returns
 /// them) against `cap`. `runnable` names the tiers the caller can run:
 /// registered and not reporting `tier_unavailable`. The recommendation is
-/// the last profile in the list that fits.
+/// the last profile in the list that fits and needs no network.
 pub fn assess(
     cap: &Capability,
     profiles: &[Profile],
@@ -164,9 +164,10 @@ pub fn assess(
         .collect();
     let recommended = assessed
         .iter()
+        .zip(profiles)
         .rev()
-        .find(|a| a.fits)
-        .map(|a| a.profile.clone());
+        .find(|(a, p)| a.fits && !needs_network(p))
+        .map(|(a, _)| a.profile.clone());
     Recommendation {
         capability: cap.clone(),
         recommended,

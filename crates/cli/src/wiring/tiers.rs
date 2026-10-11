@@ -1,6 +1,7 @@
 //! The tiers for a store directory: the lexical ones (U3, U4), plus the
-//! BGE-small `shortlist` tier when built with feature `semantic-shortlist`,
-//! and identifier parsing for request arguments.
+//! BGE-small `shortlist` tier when built with feature `semantic-shortlist`
+//! and the `openlibrary` tier when built with feature `openlibrary`, and
+//! identifier parsing for request arguments.
 
 use std::collections::BTreeMap;
 use std::path::{Path, PathBuf};
@@ -29,9 +30,11 @@ pub fn starter_rules() -> RulesConfig {
 }
 
 /// `identifier`, `vocab` and `rules` (the store's `rules.json`, else the
-/// bundled starter rules), and `shortlist` in a build with it. With a
-/// `cache` directory the vocab tier saves built matchers under `vocab/`
-/// and the shortlist tier its label vectors under `shortlist/`. A table or
+/// bundled starter rules), and `shortlist` and `openlibrary` in a build
+/// with them. With a `cache` directory the vocab tier saves built
+/// matchers under `vocab/`, the shortlist tier its label vectors under
+/// `shortlist/` and the openlibrary tier search responses under
+/// `openlibrary/`. A table or
 /// rules file that does not load leaves a tier that reports why on every
 /// run, so the error reaches the caller with its code instead of being
 /// dropped at startup.
@@ -60,9 +63,30 @@ pub fn registry(dir: &Path, cache: Option<PathBuf>) -> BTreeMap<String, Arc<dyn 
     ];
     tiers
         .into_iter()
+        .chain(openlibrary(cache.as_deref()))
         .chain(shortlist(cache))
         .map(|(n, t)| (n.to_string(), t))
         .collect()
+}
+
+/// The Open Library tier. It sends nothing until a run of the
+/// `openlibrary` profile asks it to.
+#[cfg(feature = "openlibrary")]
+fn openlibrary(cache: Option<&Path>) -> Option<(&'static str, Arc<dyn Tier>)> {
+    use shelfmark_tier_openlibrary::OpenLibraryTier;
+    Some((
+        OpenLibraryTier::NAME,
+        Arc::new(OpenLibraryTier::online(
+            cache.map(|c| c.join(OpenLibraryTier::NAME)),
+        )),
+    ))
+}
+
+/// This build has no Open Library tier; the `openlibrary` profile is
+/// listed but not runnable.
+#[cfg(not(feature = "openlibrary"))]
+fn openlibrary(_cache: Option<&Path>) -> Option<(&'static str, Arc<dyn Tier>)> {
+    None
 }
 
 /// The BGE-small shortlist tier. The model loads on the first run that

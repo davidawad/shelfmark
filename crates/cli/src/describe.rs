@@ -106,6 +106,7 @@ pub const VERBS: [VerbSpec; 16] = [
         "Place a Work into a scheme; appends a memoized machine claim with its trace",
         &[arg("text", "string", "the Work's text"),
           arg("title", "string", "title"),
+          arg("authors", "list", "author names; the openlibrary tier matches on them"),
           arg("file", "path", "a .txt, .md, .org, .html or (pdf feature) .pdf file; minted and ingested first"),
           arg("identifiers", "list", "isbn:, lccn:, doi:, arxiv: or domain: identifiers"),
           arg("url", "string", "source URL"),
@@ -213,6 +214,7 @@ fn flag_name(arg: &str) -> String {
     match arg {
         "identifiers" => "identifier".into(),
         "headings" => "heading".into(),
+        "authors" => "author".into(),
         other => other.replace('_', "-"),
     }
 }

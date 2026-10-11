@@ -1,7 +1,7 @@
 //! L2 profiles for shelfmark (R8-R10, plan U5 and PD4).
 //!
-//! - [`builtin`]: the declared profiles `lexical`, `shortlist` and
-//!   `rerank`, and what each built-in tier costs.
+//! - [`builtin`]: the declared profiles `lexical`, `openlibrary`,
+//!   `shortlist` and `rerank`, and what each built-in tier costs.
 //! - [`capability`]: what this machine has, and which profiles fit it.
 //! - [`semantic`]: the `shortlist` and `rerank` tier stubs.
 //! - [`builder`]: a profile plus a registry of tiers becomes a runnable

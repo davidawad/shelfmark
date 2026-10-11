@@ -1,0 +1,33 @@
+[package]
+name = "shelfmark-tier-openlibrary"
+description = "Open Library tier for shelfmark: title and author lookup in the Open Library search API, LC call number to scheme class"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+shelfmark-core.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+unicode-normalization.workspace = true
+# The real HTTPS transport (feature `http`), rustls only: no system
+# OpenSSL. The version is the one fastembed's model download already
+# locks.
+ureq = { version = "3.4", default-features = false, features = ["rustls"], optional = true }
+
+[dev-dependencies]
+shelfmark-core = { workspace = true, features = ["testkit"] }
+shelfmark-scheme = { path = "../scheme" }
+tempfile = "3"
+
+[features]
+# `UreqTransport`, the transport that talks to openlibrary.org. Without
+# it the tier only runs over a caller's transport (tests use the fixture
+# transport).
+http = ["dep:ureq"]
+
+[lints]
+workspace = true

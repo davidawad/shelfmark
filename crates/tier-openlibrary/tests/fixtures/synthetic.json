@@ -1,0 +1,8 @@
+{"numFound":5,"start":0,"docs":[
+{"key":"/works/OL1SYNW","title":"Dune","author_name":["Jane Elsewhere"],"lcc":["QH-0075.00000000.E4 2001"]},
+{"key":"/works/OL2SYNW","title":"Dune","subtitle":"a novel","author_name":["Frank Herbert"],"lcc":["PS-3558.00000000.E63 D8 1965","PS-3558.00000000.E63 D86 1990","PZ-0004.00000000.H5446 Du"],"ddc":["813.54"]},
+{"key":"/works/OL3SYNW","title":"Capital","subtitle":"a critique of political economy","author_name":["Karl Marx"],"lc_classifications":["HB501 .M37 1990"],"lcc":["HB-0501.00000000.M37 1990","HB-0501.00000000.M5 1906"],"ddc":["335.4"]},
+{"key":"/works/OL4SYNW","title":"Night Thoughts","author_name":["Edward Young"],"lcc":["[Fic]","823.6"],"ddc":["821.5"]},
+{"key":"/works/OL5SYNW","title":"Night Thoughts","author_name":["Edward Young"],"lcc":["PR-3782.00000000.N5 1975"]},
+{"key":"/works/OL6SYNW","title":"Kritik der reinen Vernunft","author_name":["Immanuel Kant"],"lcc":["B--2778.00000000.E5 1998","B--2779.00000000"],"editions":{"numFound":1,"docs":[{"key":"/books/OL7SYNM","title":"Critique of Pure Reason"}]}}
+]}

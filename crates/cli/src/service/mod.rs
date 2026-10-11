@@ -20,6 +20,7 @@ use shelfmark_core::tier::Profile;
 use shelfmark_core::{
     Envelope, Error, ErrorCode, ProfileId, Request, SchemeId, Service, Verb, WorkId,
 };
+use shelfmark_profile::builtin::needs_network;
 
 use crate::args::{bad, Args};
 use crate::describe;
@@ -182,12 +183,13 @@ impl Shelfmark {
         p.tiers.iter().all(|t| self.wiring.tiers.contains_key(t))
     }
 
-    /// The most capable runnable profile (R9), else the first declared.
+    /// The most capable runnable profile (R9) that sends no network
+    /// requests, else the first declared.
     fn recommended(&self) -> &Profile {
         self.wiring
             .profiles
             .iter()
-            .filter(|p| self.runnable(p))
+            .filter(|p| self.runnable(p) && !needs_network(p))
             .max_by_key(|p| p.tiers.len())
             .unwrap_or(&self.wiring.profiles[0])
     }

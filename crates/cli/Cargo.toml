@@ -23,11 +23,17 @@ shelfmark-naming = { path = "../naming" }
 shelfmark-eval = { path = "../eval" }
 # The BGE-small shortlist tier (feature `semantic-shortlist`).
 shelfmark-tier-shortlist = { path = "../tier-shortlist", optional = true }
+# The Open Library title+author tier (feature `openlibrary`).
+shelfmark-tier-openlibrary = { path = "../tier-openlibrary", optional = true }
 serde.workspace = true
 serde_json.workspace = true
 clap = { version = "4.5", features = ["derive", "env"] }
 # The bundled scheme ships gzipped (data/schemes/lcc/lcc-lcsh.json.gz).
 flate2 = "1"
+
+[[example]]
+name = "openlibrary_measure"
+required-features = ["openlibrary"]
 
 [dev-dependencies]
 shelfmark-core = { workspace = true, features = ["testkit"] }
@@ -40,6 +46,10 @@ pdf = ["shelfmark-identity/pdf"]
 # The `shortlist` tier: BGE-small-en-v1.5 int8 through fastembed and ONNX
 # Runtime, downloaded on first use (needs rustc 1.88+).
 semantic-shortlist = ["dep:shelfmark-tier-shortlist", "shelfmark-tier-shortlist/fastembed"]
+# The `openlibrary` tier: title+author lookup on openlibrary.org over
+# ureq and rustls (needs rustc 1.85+). Only the `openlibrary` profile
+# runs it, and only when asked for by name.
+openlibrary = ["dep:shelfmark-tier-openlibrary", "shelfmark-tier-openlibrary/http"]
 
 [lints]
 workspace = true

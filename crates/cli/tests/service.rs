@@ -39,6 +39,7 @@ fn describe_lists_every_verb_profile_noun_and_scheme() {
         profiles,
         [
             "profile:lexical@2",
+            "profile:openlibrary@2",
             "profile:shortlist@2",
             "profile:rerank@2"
         ]
