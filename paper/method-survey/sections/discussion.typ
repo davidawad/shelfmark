@@ -43,10 +43,11 @@ schemes, for four reasons that each have a number behind them.
 
 A scheme's rank on this metric is therefore a statement about a similarity
 graph, a classifier and an objective. It is not a statement about the
-scheme's quality in use. The tool that produced the placements has not fixed a
-default scheme on the strength of these numbers: the metrics do not separate
-Dewey from LCC, and the choice rests on openness, notation length and
-catalogue availability (@sec:books).
+scheme's quality in use. The default scheme follows a stated rule
+rather than a ranking: the LCC outline with LCSH vocabulary wins it in
+#v.x_def_wins of #v.x_def_settings book settings among the open schemes, and
+the win is partly a vocabulary effect (@sec:books). On librarian-assigned
+numbers the metrics do not separate Dewey from LCC.
 
 *Toward a fair comparison.* The benchmark design lays out controls. A coverage
 control, a second classifier tier, an embedding, $k$ and threshold sweep, item

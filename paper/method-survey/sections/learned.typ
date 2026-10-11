@@ -64,7 +64,9 @@ over any published scheme.
   so a new work is placed by exactly the geometry it is later scored on. This
   holds for the held-out rows and, more strongly, for the book holdout, where
   graph and insertion see only title embeddings. The classifier rows are the
-  comparison without it. A fair test needs a second, independent similarity.
+  comparison without it. Rescoring on graphs from two independent embedding
+  models (below) removes the circularity of the scoring graph, not of
+  filing.
 - _One corpus._ The scheme has seen only arXiv papers. Its top level splits
   computing from mathematics and the physical sciences, and it has no class
   for the humanities until insertion creates a weak one. Labels of inserted
@@ -92,6 +94,50 @@ settings: the sign matches in #v.x_learn_match under $J'$, with
 #v.x_learn_against significant reversals (@tab:claims). We use the fitted
 scheme as a reference for how low a tree can go on a graph, not as a
 candidate scheme.
+
+*Independent embeddings and false joins.* Rescored on graphs from the two
+other embedding models at $k$ = 10, 20 and 50, the fitted scheme still ranks
+first by skill in all #v.x_edge_conditions conditions, for the held-out split,
+the in-sample fit, the inserted book holdout and the classifier-placed run,
+with paired intervals of the margin above zero (@tab:edge). The tightest case
+is the held-out split on #v.x_edge_tight_cond, a margin of #v.x_edge_tight
+[#v.x_edge_tight_lo, #v.x_edge_tight_hi]. Under the corrected objective $J'$,
+against the best non-learned run of each universe on the false-join
+rescoring's graphs (@tab:learnedfj), it leads on the papers in
+#v.x_lfj_corpus_jp_ahead of #v.x_lfj_corpus_n graphs and on the title-only
+holdout in #v.x_lfj_holdout_jp_ahead of #v.x_lfj_holdout_n. On the
+#v.x_books_n books it leads in #v.x_lfj_books_jp_ahead of #v.x_lfj_books_n,
+ties in #v.x_lfj_books_jp_tie and is behind in #v.x_lfj_books_jp_behind; under
+the outside-mass form it is behind in #v.x_lfj_books_cfj_behind of
+#v.x_lfj_books_n. Its edge survives a change of embedding. On books it does
+not survive the false-join correction.
+
+#wide-table(
+  tbl(
+    learned-edge-header,
+    learned-edge,
+    align: (left, right, right, right, left),
+    mono-first: false,
+    size: 7pt,
+  ),
+  [The fitted scheme against the best other row in each of
+   #v.x_edge_conditions graph conditions. $J$ is the fitted objective.],
+  label: <tab:edge>,
+)
+
+#wide-table(
+  tbl(
+    learned-fj-header,
+    learned-fj,
+    align: (left, left, right, left, right, left, right),
+    mono-first: false,
+    size: 7pt,
+  ),
+  [Fitted scheme minus the best non-learned run under $J'$ and under
+   $C + "FJ"$, both at $beta = 1$, with paired 95% intervals over 1,000 item
+   draws. Negative means the fitted scheme is ahead.],
+  label: <tab:learnedfj>,
+)
 
 #col-table(
   tbl(

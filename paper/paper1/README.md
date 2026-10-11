@@ -2,8 +2,7 @@
 
 **Status: DRAFT, not submitted.** Nothing here has been submitted, posted or
 shared. The text is complete: every section is written, every number is
-generated, and no citation is unresolved. The author line is a placeholder
-(`AUTHOR TBD`).
+generated, and no citation is unresolved.
 
 Candidate venues: JASIST, Knowledge Organization, JCDL, TPDL.
 
@@ -31,11 +30,13 @@ Prior work was searched systematically in
   `profile:lexical@2`, after the stopword fix). Its `results.json` also
   holds the before/after comparison with `profile:lexical@1`, which the
   paper reports as a methods note.
-- Later results (Sections 5.6 to 5.11): `docs/validity/` (judge agreement and
+- Later results (Sections 5.6 to 5.12): `docs/validity/` (judge agreement and
   the false-join variants), `bench/results/2026-10-10-covered/`, `-embed/`,
-  `-semantic/`, `-learned/`, `2026-10-11-falsejoin/`, `-stability/` and
-  `-book-stability/`; the default-scheme decision is in
-  `docs/decisions/default-scheme.md`.
+  `-semantic/`, `-learned/`, `2026-10-11-falsejoin/` (including the paired
+  draws in `bootstrap/*.draws.json.gz`, from which the learned scheme's
+  $J'$ margins are computed), `-stability/` and `-book-stability/` (its
+  `bead_rule` block gives the default-scheme winners of Section 5.12); the
+  decision record is `docs/decisions/default-scheme.md`.
 - Corpus: `bench/corpus/corpus.jsonl`, `bench/corpus/holdout.jsonl`,
   `bench/corpus/holdout-books.jsonl`.
 - Background: `research/reports/1-4`, `research/benchmark/DESIGN.md`,
@@ -58,12 +59,22 @@ marker in the text. The script stops with an error on an unknown marker.
 It also asserts that the r2 and r3 runs reused the 2026-10-10 graphs and
 scheme files and that the corpus files match their recorded SHA-256.
 
-To render a PDF (not needed for the draft):
+`paper.pdf` is the rendered draft. To rebuild it, from `paper/paper1`:
 
 ```sh
-pandoc paper/paper1/paper.md --citeproc \
-  --bibliography paper/paper1/references.bib -o paper1.pdf
+pandoc paper.md --citeproc --bibliography references.bib --pdf-engine=xelatex \
+  -H ../common/pandoc.tex -V mainfont="STIX Two Text" -V mathfont="STIX Two Math" \
+  -V geometry:margin=1in -V fontsize=10pt -o paper.pdf
 ```
+
+## Pending
+
+- The semantic-tier rerun (`bench/results/2026-10-10-semantic/`, Section
+  5.8) is marked pending in `bench/results/README.md`; its numbers are
+  preliminary.
+- The full LCC and LCSH sources and a measured full bundled `lcc-lcsh` are
+  not yet in this draft; Section 5.12 uses the bundled outline with LCSH
+  vocabulary.
 
 To regenerate the underlying results, follow
 `bench/results/2026-10-10/REPRODUCE.md`, then

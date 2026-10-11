@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Values and tables shared by paper/paper1 and paper/method-survey.
+"""Values and tables shared by paper/paper1, paper/paper2 and paper/method-survey.
 
 Everything here is read from committed JSON under the repository root; no
 number is typed by hand. The two table scripts import `collect()` and render
@@ -20,6 +20,8 @@ Sources (all committed):
 * bench/results/2026-10-10-embed/       cross-fit of the learned scheme
 * bench/results/2026-10-10-semantic/    lexical vs shortlist tier
 * bench/results/2026-10-10-learned/     learned scheme
+* bench/results/2026-10-11-falsejoin/   false-join rescoring and its paired draws
+* bench/results/2026-10-11-book-stability/ bead_rule   default-scheme winners
 
 Standard library only.
 """
@@ -178,6 +180,12 @@ def _validity(root, V, T):
         rows.append([run, f"{_f2(g0['kappa'])} {_ci2(*g0['kappa_ci'])}",
                      f"{_f2(g1['kappa'])} {_ci2(*g1['kappa_ci'])}",
                      f"{g1['dkappa']:+.2f} [{g1['dkappa_ci'][0]:+.2f}, {g1['dkappa_ci'][1]:+.2f}]"])
+    g0, g1 = fj["groups"]["learned-placed"][ix["dasgupta"]], fj["groups"]["learned-placed"][ix["c+1fjs"]]
+    V["x_val_learned_k0"] = _f2(g0["kappa"])
+    V["x_val_learned_k1"] = _f2(g1["kappa"])
+    V["x_val_learned_dk"] = f"{g1['dkappa']:+.2f}"
+    V["x_val_learned_dk_lo"] = f"{g1['dkappa_ci'][0]:+.2f}"
+    V["x_val_learned_dk_hi"] = f"{g1['dkappa_ci'][1]:+.2f}"
     T["validity_runs"] = {
         "header": ["run", "kappa, C [95% CI]", "kappa, C + FJs [95% CI]", "change in kappa"],
         "rows": rows}
@@ -459,6 +467,146 @@ def _external(root, V, T):
         "rows": rows}
 
 
+def _default(root, V, T):
+    """The default-scheme rule (docs/decisions/default-scheme.md) on books."""
+    bs = _load(root / "bench/results/2026-10-11-book-stability/results.json")
+    floors = bs["bead_rule"]["books"]["floors"]
+    n = int(bs["claims"][0]["objectives"]["C"]["settings"])
+
+    def wins(d):
+        return ", ".join(f"`{r}` {c}" for r, c in sorted(d.items(), key=lambda x: (-x[1], x[0])))
+
+    T["default_floors"] = {
+        "header": ["coverage floor", "winner, all placed schemes (settings)",
+                   "winner, bundleable open schemes (settings)"],
+        "rows": [[f, wins(floors[f]["all"]), wins(floors[f]["bundleable"])]
+                 for f in sorted(floors)]}
+    b90 = floors["0.90"]["bundleable"]
+    assert len(b90) == 1, "the 0.90 bundleable winner is no longer unique"
+    (win, cnt), = b90.items()
+    V["x_def_floor"] = "0.90"
+    V["x_def_winner"] = win
+    V["x_def_wins"] = str(cnt)
+    V["x_def_settings"] = str(n)
+    a90 = floors["0.90"]["all"]
+    V["x_def_all_lcclcsh"] = str(a90.get("lcc-lcsh-placed", 0))
+    V["x_def_all_unesco"] = str(a90.get("unesco-thesaurus-placed", 0))
+    V["x_def_min_floor_unique"] = min(
+        f for f in floors if list(floors[f]["bundleable"]) == [win])
+    cov = bs["bead_rule"]["books"]["coverage"]
+    V["x_def_cov_unesco"] = _f3(cov["unesco-thesaurus-placed"])
+    V["x_def_cov_lcclcsh"] = _f3(cov["lcc-lcsh-placed"])
+    V["x_def_cov_fdc"] = _f3(cov["fdc-placed"])
+    V["x_def_cov_lcc"] = _f3(cov["lcc-placed"])
+
+
+EDGE_ROWS = [
+    ("split-heldout", "held out 20% (MiniLM fit, inserted)"),
+    ("corpus-own", "in sample (full MiniLM fit)"),
+    ("holdout-own", "500 holdout books, inserted"),
+    ("corpus-placed", "placed by lexical@2"),
+]
+
+
+def _learned_edge(root, V, T):
+    """The learned scheme's lead on graphs from two independent embedding models."""
+    e = _load(root / "bench/results/2026-10-10-embed/results.json")
+    edge = e["edge"]
+    rows = []
+    n_cond = None
+    for key, label in EDGE_ROWS:
+        c = edge[key]["conditions"]
+        n_cond = len(c)
+        tight = min(c, key=lambda k: c[k]["skill_margin_ci95"][0])
+        t = c[tight]
+        rows.append([label,
+                     f"{sum(1 for k in c if c[k]['learned_rank_by_skill'] == 1)} of {len(c)}",
+                     f"{sum(1 for k in c if c[k]['skill_margin_ci95'][0] > 0)} of {len(c)}",
+                     f"{sum(1 for k in c if c[k]['J_margin_ci95'][0] > 0)} of {len(c)}",
+                     f"{tight}: {t['skill_margin']:.3f} [{t['skill_margin_ci95'][0]:.3f}, "
+                     f"{t['skill_margin_ci95'][1]:.3f}]"])
+    T["learned_edge"] = {
+        "header": ["comparison", "learned first by skill", "skill margin CI > 0",
+                   "J margin CI > 0", "tightest condition: skill margin [95% CI]"],
+        "rows": rows}
+    V["x_edge_conditions"] = str(n_cond)
+    V["x_edge_all"] = "yes" if all(edge[k]["survives_every_condition"] for k, _ in EDGE_ROWS) else "no"
+    sh = edge["split-heldout"]["conditions"]
+    tight = min(sh, key=lambda k: sh[k]["skill_margin_ci95"][0])
+    V["x_edge_tight_cond"] = tight
+    V["x_edge_tight"] = _f3(sh[tight]["skill_margin"])
+    V["x_edge_tight_lo"] = _f3(sh[tight]["skill_margin_ci95"][0])
+    V["x_edge_tight_hi"] = _f3(sh[tight]["skill_margin_ci95"][1])
+    for emb in ("minilm", "bge-small", "nomic"):
+        tag = emb.replace("-", "")
+        s = sh[f"{emb}-k20"]
+        V[f"x_edge_margin_{tag}"] = _f3(s["skill_margin"])
+        V[f"x_edge_skill_{tag}"] = _f3(s["learned_skill"])
+
+
+FJ_UNIVERSE = {"books": "3,000 books", "corpus": "10,000 papers (in sample)",
+               "holdout": "500 holdout books (title only)"}
+
+
+def _learned_fj(root, V, T):
+    """The learned scheme under the corrected objective J' and the outside-mass C + FJ.
+
+    For each false-join condition, the learned scheme (MiniLM fit, own
+    insertion) is compared with the best non-learned run of the same
+    universe on the same 1,000 paired item draws. J' = C + FJs + 0.002 N as in
+    Section 3.7 of Paper 1; C + FJ is the outside-mass form at beta = 1.
+    """
+    fdir = root / "bench/results/2026-10-11-falsejoin"
+    fj = _load(fdir / "results.json")
+    lam = 0.002
+
+    def jp(c, s, n):
+        return c + s + lam * n
+
+    rows = []
+    tally = collections.defaultdict(lambda: collections.Counter())
+    for cond in fj["conditions"]:
+        import gzip
+        with gzip.open(fdir / "bootstrap" / f"{cond}.draws.json.gz", "rt", encoding="utf-8") as f:
+            draws = json.load(f)["runs"]
+        pts = {k.split("/", 1)[1]: v["point"] for k, v in fj["runs"].items()
+               if k.split("/", 1)[0] == cond}
+        others = [r for r in pts if not r.startswith("learned")]
+        cells = []
+        for kind in ("J'", "C+FJ"):
+            if kind == "J'":
+                pv = {r: jp(p["cost_norm"], p["fjs_norm"], p["nav_log_a1"]) for r, p in pts.items()}
+                dv = {r: [jp(c, s, n) for c, s, n in zip(d["cost_norm"], d["fjs_norm"], d["nav_log_a1"])]
+                      for r, d in draws.items()}
+            else:
+                pv = {r: p["cfj_b1"] for r, p in pts.items()}
+                dv = {r: [c + s for c, s in zip(d["cost_norm"], d["fj_norm"])] for r, d in draws.items()}
+            best = min(others, key=lambda r: pv[r])
+            diffs = sorted(a - b for a, b in zip(dv["learned-own"], dv[best]))
+            lo, hi = _percentile(diffs, 0.025), _percentile(diffs, 0.975)
+            d = pv["learned-own"] - pv[best]
+            verdict = "learned ahead" if hi < 0 else ("learned behind" if lo > 0 else "tie")
+            universe = cond.split("-", 1)[0]
+            tally[(universe, kind)][verdict] += 1
+            cells += [f"`{best}`", f"{d:+.3f} [{lo:+.3f}, {hi:+.3f}]"]
+        universe, rest = cond.split("-", 1)
+        model, k = rest.rsplit("-k", 1)
+        rows.append([FJ_UNIVERSE[universe], model, k] + cells)
+    T["learned_fj"] = {
+        "header": ["universe", "model", "k", "best other by J'", "J' learned - best [95% CI]",
+                   "best other by C + FJ", "C + FJ learned - best [95% CI]"],
+        "rows": rows}
+    for (universe, kind), c in tally.items():
+        tag = {"J'": "jp", "C+FJ": "cfj"}[kind]
+        for verdict, key in (("learned ahead", "ahead"), ("tie", "tie"), ("learned behind", "behind")):
+            V[f"x_lfj_{universe}_{tag}_{key}"] = str(c[verdict])
+        V[f"x_lfj_{universe}_n"] = str(sum(c.values()))
+    lam_check = _load(root / "bench/results/2026-10-11-book-stability/results.json")
+    # J' here must be the same objective as the book-stability run's J'.
+    pt = lam_check["points"]["books"]["minilm-k20-q00"]["learned-own"]
+    assert abs(pt["J'"] - (pt["C+FJs"] + lam * pt["nav_log_a1"])) < 1e-9, "J' definition drifted"
+
+
 def collect(root):
     root = Path(root)
     V, T = {}, {}
@@ -469,6 +617,9 @@ def collect(root):
     _covered(root, V, T)
     _semantic(root, V, T)
     _external(root, V, T)
+    _default(root, V, T)
+    _learned_edge(root, V, T)
+    _learned_fj(root, V, T)
     return V, T
 
 
