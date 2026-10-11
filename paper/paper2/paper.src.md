@@ -760,7 +760,7 @@ for the holdout insertion), and the stability guarantee of Section 4 is
 part of the release: a future version that grows by insertion keeps every
 code of this one.
 
-Repository location: not stated in this draft; it is to be given on release.
+Repository: https://github.com/davidawad/shelfmark (the scheme is in `schemes/learned/`).
 
 ## 10. Reproducibility
 
